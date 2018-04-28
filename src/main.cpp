@@ -1617,7 +1617,7 @@ int64_t GetBlockValue(int nHeight)
     if (Params().NetworkID() == CBaseChainParams::TESTNET) {
         if (nHeight <= Params().LAST_POW_BLOCK()) {
             nSubsidy = 125000 * COIN;
-        else if (nHeight <= 7000){ // For 0.3.0 testnet launch. TODO: Remove later
+        else if (nHeight <= 100){ // For 0.3.0 testnet launch. TODO: Remove later
             nSubsidy = 5 * COIN;
         } else {
             nSubsidy = 10 * COIN;
@@ -1626,7 +1626,7 @@ int64_t GetBlockValue(int nHeight)
 
     if (nHeight <= Params().LAST_POW_BLOCK()) {
         nSubsidy = 125000 * COIN;
-    } else if (nHeight <= 159999 && nHeight > Params().LAST_POW_BLOCK()) { //TODO: Might not be block 160000
+    } else if (nHeight <=  && nHeight > Params().LAST_POW_BLOCK()) { //TODO: Might not be block 160000
         nSubsidy = 5 * COIN;
     } else {
         nSubsidy = 10 * COIN;
@@ -1636,7 +1636,7 @@ int64_t GetBlockValue(int nHeight)
 
 int64_t GetMasternodePayment(int nHeight, int64_t blockValue, int nMasternodeCount)
 {
-    // Define MasternodePayment blockvalue 10 * 0.4 = 4 WSP each block for Masternode Holders
+    // Define MasternodePayment blockvalue 10 * 0.4 = 4 WSP each block, shared over Masternode Holders
     return blockValue * 0.4;
 }
 
