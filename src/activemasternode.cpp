@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2018 The Wispr developers
+// Copyright (c) 2017-2018 The Wispr developers
 
 #include "activemasternode.h"
 #include "addrman.h"
