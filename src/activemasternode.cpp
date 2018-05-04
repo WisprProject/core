@@ -1,3 +1,4 @@
+// Copyright (c) 2017-2018 The Wispr developers
 
 #include "activemasternode.h"
 #include "addrman.h"
@@ -8,7 +9,7 @@
 #include "spork.h"
 
 //
-// Bootup the Masternode, look for a 10000 Wispr input and register on the network
+// Bootup the Masternode, look for a 125000 Wispr input and register on the network
 //
 void CActiveMasternode::ManageStatus()
 {
