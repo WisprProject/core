@@ -27,10 +27,10 @@ jobs:
           command: export PATH=$(echo $PATH | tr ':' "\n" | sed '/\/opt\/python/d' | tr "\n" ":" | sed "s|::|:|g")
       - run:
           name: Update apt repo
-          command: apt-get update
+          command: sudo apt-get update
       - run:
           name: Install packages
-          command: apt-get install --no-install-recommends --no-upgrade -qq $PACKAGES
+          command: sudo apt-get install --no-install-recommends --no-upgrade -qq $PACKAGES
       - run:
           name: Unset
           command: unset CC; unset CXX
