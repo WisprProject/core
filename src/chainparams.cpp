@@ -89,60 +89,39 @@ public:
     {
         networkID = CBaseChainParams::MAIN;
         strNetworkID = "main";
-        /**
-         * The message start string is designed to be unlikely to occur in normal data.
-         * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
-         * a large 4-byte int at any alignment.
-         */
+        // The message start string is designed to be unlikely to occur in normal data.
+        // The characters are rarely used upper ASCII, not valid as UTF-8, and produce
+        // a large 4-byte int at any alignment.
         pchMessageStart[0] = 0x20;
         pchMessageStart[1] = 0x45;
         pchMessageStart[2] = 0x12;
         pchMessageStart[3] = 0x77;
-        vAlertPubKey = ParseHex("04a2b4f239f3f1f4439ef384d0e1927f42d1b33963400735fa0db35946816d2ddce9588dae345108f4ed295d7f2df826fe63bfa0ee7f3bde18805a8465386edb4c");
+        vAlertPubKey=ParseHex("04a2b4f239f3f1f4439ef384d0e1927f42d1b33963400735fa0db35946816d2ddce9588dae345108f4ed295d7f2df826fe63bfa0ee7f3bde18805a8465386edb4c");
         nDefaultPort = 17000;
-        bnProofOfWorkLimit = ~uint256(0) >> 20;
-        nMaxReorganizationDepth = 500;
-        nEnforceBlockUpgradeMajority = 750;
-        nRejectBlockOutdatedMajority = 950;
-        nToCheckBlockUpgradeMajority = 1000;
-        nMinerThreads = 0;
-        nTargetTimespan = 16 * 60;
-        nTargetSpacing = 64;
-        nLastPOWBlock = 450;
-        nMaturity = 100;
-        nMasternodeCountDrift = 20;
-        nModifierUpdateBlock = 615800;
-        nMaxMoneyOut = 120000000 * COIN;
+        nRPCPort = 17001;
+        bnProofOfWorkLimit = CBigNum(~uint256(0) >> 16);
 
-        /**
-         * Build the genesis block. Note that the output of the genesis coinbase cannot
-         * be spent as it did not originally exist in the database.
-         *
-         * CBlock(hash=00000ffd590b14, ver=1, hashPrevBlock=00000000000000, hashMerkleRoot=e0028e, nTime=1390095618, nBits=1e0ffff0, nNonce=28917698, vtx=1)
-         *   CTransaction(hash=e0028e, ver=1, vin.size=1, vout.size=1, nLockTime=0)
-         *     CTxIn(COutPoint(000000, -1), coinbase 04ffff001d01044c5957697265642030392f4a616e2f3230313420546865204772616e64204578706572696d656e7420476f6573204c6976653a204f76657273746f636b2e636f6d204973204e6f7720416363657074696e6720426974636f696e73)
-         *     CTxOut(nValue=50.00000000, scriptPubKey=0xA9037BAC7050C479B121CF)
-         *   vMerkleTree: e0028e
-         */
         const char* pszTimestamp = "I would rather be without a state than without a voice";
-        CMutableTransaction txNew;
-        txNew.vin.resize(1);
-        txNew.vout.resize(1);
-        txNew.vin[0].scriptSig = CScript() << 486604799 << CScriptNum(4) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
-        txNew.vout[0].nValue = 125000 * COIN;
-        txNew.vout[0].scriptPubKey = CScript() << ParseHex("0433f2952f9002c9088a19607e3d4a54d3d9dfe1cf5c78168b8ba6524fb19fc5d7d3202948e6b8b09e98c425875af6af78fd4f64ff07d97a9ae31ebda5162fbac3") << OP_CHECKSIG;
+        std::vector<CTxIn> vin;
+        std::vector<CTxOut> vout;
+
+        vin.resize(1);
+        vout.resize(1);
+        vin[0].scriptSig = CScript() << 0 << CBigNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
+        vout[0].nValue = 125000 * COIN;
+        vout[0].scriptPubKey = CScript() << ParseHex("0433f2952f9002c9088a19607e3d4a54d3d9dfe1cf5c78168b8ba6524fb19fc5d7d3202948e6b8b09e98c425875af6af78fd4f64ff07d97a9ae31ebda5162fbac3") << OP_CHECKSIG;
+
+        CTransaction txNew(1, 1513403825, vin, vout, 0);
         genesis.vtx.push_back(txNew);
         genesis.hashPrevBlock = 0;
         genesis.hashMerkleRoot = genesis.BuildMerkleTree();
         genesis.nVersion = 1;
-        genesis.nTime = 1513403825;
-        genesis.nBits = 0x1e0ffff0;
-        genesis.nNonce = 36156;
+        genesis.nTime    = 1513403825;
+        genesis.nBits    = bnProofOfWorkLimit.GetCompact();
+        genesis.nNonce   = 36156;
 
         hashGenesisBlock = genesis.GetHash();
-        cout << hashGenesisBlock.ToString();
-        cout << genesis.hashMerkleRoot.ToString();
-        LogPrint("genesis", "Merkle %u, hash: %s)\n", genesis.hashMerkleRoot.ToString(), hashGenesisBlock.ToString());
+
         assert(hashGenesisBlock == uint256("0x0000ec93e0a3fe0aafa3be7dafe1290f5fca039a4037dd5174bc3dd7a35d67f0"));
         assert(genesis.hashMerkleRoot == uint256("0xbcd0064f46daed0b3c1ccff16656a0da04b5509924118b7c13d21c81d62ec521"));
 
