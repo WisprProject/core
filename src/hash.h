@@ -18,6 +18,56 @@
 #include <openssl/ripemd.h>
 
 template<typename T1>
+/** A hasher class for Crave's 256-bit hash (double SHA-256). */
+class CHash256 {
+private:
+    CSHA256 sha;
+public:
+    static const size_t OUTPUT_SIZE = CSHA256::OUTPUT_SIZE;
+
+    void Finalize(unsigned char hash[OUTPUT_SIZE]) {
+        unsigned char buf[sha.OUTPUT_SIZE];
+        sha.Finalize(buf);
+        sha.Reset().Write(buf, sha.OUTPUT_SIZE).Finalize(hash);
+    }
+
+    CHash256& Write(const unsigned char *data, size_t len) {
+        sha.Write(data, len);
+        return *this;
+    }
+
+    CHash256& Reset() {
+        sha.Reset();
+        return *this;
+    }
+};
+
+/** A hasher class for Crave's 160-bit hash (SHA-256 + RIPEMD-160). */
+class CHash160 {
+private:
+    CSHA256 sha;
+public:
+    static const size_t OUTPUT_SIZE = CRIPEMD160::OUTPUT_SIZE;
+
+    void Finalize(unsigned char hash[OUTPUT_SIZE]) {
+        unsigned char buf[sha.OUTPUT_SIZE];
+        sha.Finalize(buf);
+        CRIPEMD160().Write(buf, sha.OUTPUT_SIZE).Finalize(hash);
+    }
+
+    CHash160& Write(const unsigned char *data, size_t len) {
+        sha.Write(data, len);
+        return *this;
+    }
+
+    CHash160& Reset() {
+        sha.Reset();
+        return *this;
+    }
+};
+
+
+template<typename T1>
 inline uint256 Hash(const T1 pbegin, const T1 pend)
 {
     static unsigned char pblank[1];
@@ -135,5 +185,5 @@ typedef struct
 int HMAC_SHA512_Init(HMAC_SHA512_CTX *pctx, const void *pkey, size_t len);
 int HMAC_SHA512_Update(HMAC_SHA512_CTX *pctx, const void *pdata, size_t len);
 int HMAC_SHA512_Final(unsigned char *pmd, HMAC_SHA512_CTX *pctx);
-
+void BIP32Hash(const unsigned char chainCode[32], unsigned int nChild, unsigned char header, const unsigned char data[32], unsigned char output[64]);
 #endif
