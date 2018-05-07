@@ -16,6 +16,8 @@
 #include <vector>
 #include <openssl/ripemd.h>
 
+using namespace std;
+
 /** A hasher class for Crave's 256-bit hash (double SHA-256). */
 class CHash256 {
 private:
