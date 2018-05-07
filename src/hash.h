@@ -7,7 +7,13 @@
 
 #include "uint256.h"
 #include "serialize.h"
-
+#include "crypto/ripemd160.h"
+#include "crypto/sha256.h"
+#include "version.h"
+#include <iomanip>
+#include <openssl/sha.h>
+#include <sstream>
+#include <vector>
 #include <openssl/sha.h>
 #include <openssl/ripemd.h>
 
