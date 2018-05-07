@@ -24,17 +24,14 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Enable sudo
-          command: apt-get install -y sudo
-      - run:
           name: Set PATH
           command: export PATH=$(echo $PATH | tr ':' "\n" | sed '/\/opt\/python/d' | tr "\n" ":" | sed "s|::|:|g")
       - run:
           name: Update apt repo
-          command: sudo apt-get update
+          command: apt-get update
       - run:
           name: Install packages
-          command: sudo apt-get install --no-install-recommends --no-upgrade -qq $PACKAGES
+          command: apt-get install --no-install-recommends --no-upgrade -qq $PACKAGES
       - run:
           name: Unset
           command: unset CC; unset CXX
