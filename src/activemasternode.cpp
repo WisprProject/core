@@ -137,18 +137,18 @@ void CActiveMasternode::ManageStatus()
 std::string CActiveMasternode::GetStatus()
 {
     switch (status) {
-    case ACTIVE_MASTERNODE_INITIAL:
-        return "Node just started, not yet activated";
-    case ACTIVE_MASTERNODE_SYNC_IN_PROCESS:
-        return "Sync in progress. Must wait until sync is complete to start Masternode";
-    case ACTIVE_MASTERNODE_INPUT_TOO_NEW:
-        return strprintf("Masternode input must have at least %d confirmations", MASTERNODE_MIN_CONFIRMATIONS);
-    case ACTIVE_MASTERNODE_NOT_CAPABLE:
-        return "Not capable masternode: " + notCapableReason;
-    case ACTIVE_MASTERNODE_STARTED:
-        return "Masternode successfully started";
-    default:
-        return "unknown";
+        case ACTIVE_MASTERNODE_INITIAL:
+            return "Node just started, not yet activated";
+        case ACTIVE_MASTERNODE_SYNC_IN_PROCESS:
+            return "Sync in progress. Must wait until sync is complete to start Masternode";
+        case ACTIVE_MASTERNODE_INPUT_TOO_NEW:
+            return strprintf("Masternode input must have at least %d confirmations", MASTERNODE_MIN_CONFIRMATIONS);
+        case ACTIVE_MASTERNODE_NOT_CAPABLE:
+            return "Not capable masternode: " + notCapableReason;
+        case ACTIVE_MASTERNODE_STARTED:
+            return "Masternode successfully started";
+        default:
+            return "unknown";
     }
 }
 
@@ -219,7 +219,7 @@ bool CActiveMasternode::SendMasternodePing(std::string& errorMessage)
         LogPrint("masternode", "dseep - relaying from active mn, %s \n", vin.ToString().c_str());
         LOCK(cs_vNodes);
         BOOST_FOREACH (CNode* pnode, vNodes)
-            pnode->PushMessage("dseep", vin, vchMasterNodeSignature, masterNodeSignatureTime, false);
+        pnode->PushMessage("dseep", vin, vchMasterNodeSignature, masterNodeSignatureTime, false);
 
         /*
          * END OF "REMOVE"
@@ -346,7 +346,7 @@ bool CActiveMasternode::Register(CTxIn vin, CService service, CKey keyCollateral
 
     LOCK(cs_vNodes);
     BOOST_FOREACH (CNode* pnode, vNodes)
-        pnode->PushMessage("dsee", vin, service, vchMasterNodeSignature, masterNodeSignatureTime, pubKeyCollateralAddress, pubKeyMasternode, -1, -1, masterNodeSignatureTime, PROTOCOL_VERSION, donationAddress, donationPercantage);
+    pnode->PushMessage("dsee", vin, service, vchMasterNodeSignature, masterNodeSignatureTime, pubKeyCollateralAddress, pubKeyMasternode, -1, -1, masterNodeSignatureTime, PROTOCOL_VERSION, donationAddress, donationPercantage);
 
     /*
      * END OF "REMOVE"
@@ -464,7 +464,7 @@ vector<COutput> CActiveMasternode::SelectCoinsMasternode()
     // Lock MN coins from masternode.conf back if they where temporary unlocked
     if (!confLockedCoins.empty()) {
         BOOST_FOREACH (COutPoint outpoint, confLockedCoins)
-            pwalletMain->LockCoin(outpoint);
+        pwalletMain->LockCoin(outpoint);
     }
 
     // Filter
