@@ -425,15 +425,8 @@ SOURCES += src/activemasternode.cpp \
            src/compat/glibcxx_sanity.cpp \
            src/compat/strnlen.cpp \
            src/crypto/aes_helper.c \
-           src/crypto/blake.c \
-           src/crypto/bmw.c \
-           src/crypto/echo.c \
-           src/crypto/groestl.c \
            src/crypto/hmac_sha256.cpp \
            src/crypto/hmac_sha512.cpp \
-           src/crypto/jh.c \
-           src/crypto/keccak.c \
-           src/crypto/luffa.c \
            src/crypto/rfc6979_hmac_sha256.cpp \
            src/crypto/ripemd160.cpp \
            src/crypto/sha1.cpp \
@@ -441,7 +434,6 @@ SOURCES += src/activemasternode.cpp \
            src/crypto/sha512.cpp \
            src/crypto/shavite.c \
            src/crypto/simd.c \
-           src/crypto/skein.c \
            src/json/json_spirit_reader.cpp \
            src/json/json_spirit_value.cpp \
            src/json/json_spirit_writer.cpp \
