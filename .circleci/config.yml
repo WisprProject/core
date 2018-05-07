@@ -36,7 +36,7 @@ jobs:
           command: unset CC; unset CXX
       - run:
           name: Mkdir
-          command: mkdir -p depends/SDKs depends/sdk-sources
+          command: mkdir -p depends/SDKs depends/sdk-sources && ls
       - run:
           name: Make libraries
           command: make $MAKEJOBS -C depends HOST=$HOST $DEP_OPTS
