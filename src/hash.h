@@ -14,10 +14,8 @@
 #include <openssl/sha.h>
 #include <sstream>
 #include <vector>
-#include <openssl/sha.h>
 #include <openssl/ripemd.h>
 
-template<typename T1>
 /** A hasher class for Crave's 256-bit hash (double SHA-256). */
 class CHash256 {
 private:
