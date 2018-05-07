@@ -1,0 +1,76 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: debian:stretch
+    enviroment:
+     MAKEJOBS: -j3
+     RUN_TESTS: false
+     CHECK_DOC: 0
+     CHECK_LOGPRINT: 0
+     BOOST_TEST_RANDOM: 1$TRAVIS_BUILD_ID
+     CCACHE_SIZE: 100M
+     CCACHE_TEMPDIR: /tmp/.ccache-temp
+     CCACHE_COMPRESS: 1
+     BASE_OUTDIR: /
+     SDK_URL: https://bitcoincore.org/depends-sources/sdks
+     WINEDEBUG: fixme-all
+     HOST: x86_64-unknown-linux-gnu
+     PACKAGES: "bc python3-zmq"
+     DEP_OPTS: "NO_QT=1 NO_UPNP=1 DEBUG=1"
+     RUN_TESTS: true
+     GOAL: "install"
+     BITCOIN_CONFIG: "--enable-zmq --enable-glibc-back-compat --enable-reduce-exports CPPFLAGS=-DDEBUG_LOCKORDER"
+    steps:
+      - checkout
+      - run:
+          name: Set PATH
+          command: export PATH=$(echo $PATH | tr ':' "\n" | sed '/\/opt\/python/d' | tr "\n" ":" | sed "s|::|:|g")
+      - run:
+          name: Update apt repo
+          command: sudo apt-get update
+      - run:
+          name: Install packages
+          command: sudo apt-get install --no-install-recommends --no-upgrade -qq $PACKAGES
+      - run:
+          name: Unset
+          command: unset CC; unset CXX
+      - run:
+          name: Mkdir
+          command: mkdir -p depends/SDKs depends/sdk-sources
+      - run:
+          name: Make libraries
+          command: make $MAKEJOBS -C depends HOST=$HOST $DEP_OPTS
+      - run:
+          name: Set outdir
+          command: OUTDIR=$BASE_OUTDIR/$HOST
+      - run:
+          name: Set config params
+          command: BITCOIN_CONFIG_ALL="--disable-dependency-tracking --prefix=$TRAVIS_BUILD_DIR/depends/$HOST --bindir=$OUTDIR/bin --libdir=$OUTDIR/lib"
+      - run:
+          name: set Cache
+          command: depends/$HOST/native/bin/ccache --max-size=$CCACHE_SIZE
+      - run:
+          name: Autogen
+          command: test -n "$USE_SHELL" && eval '"$USE_SHELL" -c "./autogen.sh"' || ./autogen.sh
+      - run:
+          name: Configure
+          command: ./configure --cache-file=config.cache $BITCOIN_CONFIG_ALL $BITCOIN_CONFIG || ( cat config.log && false)
+      - run:
+          name: Make direcotries
+          command: make distdir PACKAGE=bitcoin VERSION=$HOST
+      - run:
+          name: Enter directory
+          command: cd bitcoin-$HOST
+      - run:
+          name: Configure
+          command: ./configure --cache-file=../config.cache $BITCOIN_CONFIG_ALL $BITCOIN_CONFIG || ( cat config.log && false)
+      - run:
+          name: Compile
+          command: make $MAKEJOBS $GOAL || ( echo "Build failure. Verbose build follows." && make $GOAL V=1 ; false )
+      - run:
+          name: export libraries
+          command: export LD_LIBRARY_PATH=$TRAVIS_BUILD_DIR/depends/$HOST/lib
+      - run:
+          name: Run tests
+          command: make $MAKEJOBS check VERBOSE=1
