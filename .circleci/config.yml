@@ -39,7 +39,7 @@ jobs:
           command: mkdir -p depends/SDKs depends/sdk-sources && ls
       - run:
           name: Make libraries
-          command: make $MAKEJOBS -C depends HOST=$HOST $DEP_OPTS
+          command: make $MAKEJOBS -C depends HOST=x86_64-unknown-linux-gnu NO_QT=1 NO_UPNP=1 DEBUG=1
       - run:
           name: Set outdir
           command: OUTDIR=$BASE_OUTDIR/$HOST
