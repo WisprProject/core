@@ -14,7 +14,7 @@
 
 uint256 CBlockHeader::GetHash() const
 {
-    return HashQuark(BEGIN(nVersion), END(nNonce));
+    return Hash(BEGIN(nVersion), END(nNonce));
 }
 
 uint256 CBlock::BuildMerkleTree(bool* fMutated) const
