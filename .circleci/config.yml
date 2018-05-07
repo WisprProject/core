@@ -24,6 +24,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Enable sudo
+          command: apt-get install -y sudo
+      - run:
           name: Set PATH
           command: export PATH=$(echo $PATH | tr ':' "\n" | sed '/\/opt\/python/d' | tr "\n" ":" | sed "s|::|:|g")
       - run:
