@@ -349,6 +349,7 @@ static CUnitTestParams unitTestParams;
 
 static CChainParams* pCurrentParams = 0;
 
+
 CModifiableParams* ModifiableParams()
 {
     assert(pCurrentParams);
