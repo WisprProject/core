@@ -3,7 +3,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "crypter.h"
-
+#include "scrypt.h"
 #include "script/script.h"
 #include "script/standard.h"
 #include "util.h"
