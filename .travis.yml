@@ -42,6 +42,7 @@ install:
     - if [ "$PYZMQ" = "true" ]; then pip install pyzmq --user ; fi
     - if [ -n "$DPKG_ADD_ARCH" ]; then sudo dpkg --add-architecture "$DPKG_ADD_ARCH" ; fi
     - if [ -n "$PACKAGES" ]; then travis_retry sudo apt-get update; fi
+    - if [ -n "$PACKAGES" ]; then travis_retry sudo apt-get upgrade -y; fi
     - if [ -n "$PACKAGES" ]; then travis_retry sudo apt-get install --no-install-recommends --no-upgrade -qq $PACKAGES; fi
 before_script:
     - if [ "$CHECK_DOC" = 1 ]; then contrib/devtools/check-doc.py; fi
