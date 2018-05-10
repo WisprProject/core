@@ -176,12 +176,12 @@ public:
     explicit BitcoinCore();
 
 public slots:
-    void initialize();
+            void initialize();
     void shutdown();
     void restart(QStringList args);
 
-signals:
-    void initializeResult(int retval);
+    signals:
+            void initializeResult(int retval);
     void shutdownResult(int retval);
     void runawayException(const QString& message);
 
@@ -227,13 +227,13 @@ public:
     WId getMainWinId() const;
 
 public slots:
-    void initializeResult(int retval);
+            void initializeResult(int retval);
     void shutdownResult(int retval);
     /// Handle runaway exceptions. Shows a message box with the problem and quits the program.
     void handleRunawayException(const QString& message);
 
-signals:
-    void requestedInitialize();
+    signals:
+            void requestedInitialize();
     void requestedRestart(QStringList args);
     void requestedShutdown();
     void stopThread();
@@ -327,7 +327,7 @@ BitcoinApplication::BitcoinApplication(int& argc, char** argv) : QApplication(ar
                                                                  window(0),
                                                                  pollShutdownTimer(0),
 #ifdef ENABLE_WALLET
-                                                                 paymentServer(0),
+paymentServer(0),
                                                                  walletModel(0),
 #endif
                                                                  returnValue(0)
@@ -583,14 +583,14 @@ int main(int argc, char* argv[])
     /// - Do not call GetDataDir(true) before this step finishes
     if (!boost::filesystem::is_directory(GetDataDir(false))) {
         QMessageBox::critical(0, QObject::tr("PIVX Core"),
-            QObject::tr("Error: Specified data directory \"%1\" does not exist.").arg(QString::fromStdString(mapArgs["-datadir"])));
+                              QObject::tr("Error: Specified data directory \"%1\" does not exist.").arg(QString::fromStdString(mapArgs["-datadir"])));
         return 1;
     }
     try {
         ReadConfigFile(mapArgs, mapMultiArgs);
     } catch (std::exception& e) {
         QMessageBox::critical(0, QObject::tr("PIVX Core"),
-            QObject::tr("Error: Cannot parse configuration file: %1. Only use key=value syntax.").arg(e.what()));
+                              QObject::tr("Error: Cannot parse configuration file: %1. Only use key=value syntax.").arg(e.what()));
         return 0;
     }
 
@@ -647,7 +647,7 @@ int main(int argc, char* argv[])
     // Install qDebug() message handler to route to debug.log
     qInstallMsgHandler(DebugMessageHandler);
 #else
-#if defined(Q_OS_WIN)
+    #if defined(Q_OS_WIN)
     // Install global event filter for processing Windows session related Windows messages (WM_QUERYENDSESSION and WM_ENDSESSION)
     qApp->installNativeEventFilter(new WinShutdownMonitor());
 #endif
