@@ -20,6 +20,8 @@
 #include "pow.h"
 #include "primitives/block.h"
 #include "primitives/transaction.h"
+#include "primitives/zerocoin.h"
+#include "libzerocoin/CoinSpend.h"
 #include "script/script.h"
 #include "script/sigcache.h"
 #include "script/standard.h"
@@ -39,6 +41,8 @@
 #include <vector>
 
 #include <boost/unordered_map.hpp>
+
+
 
 class CBlockIndex;
 class CBlockTreeDB;
