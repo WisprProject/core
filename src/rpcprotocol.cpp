@@ -1,75 +1,129 @@
-//! HTTP status codes
-enum HTTPStatusCode {
-    HTTP_OK                    = 200,
-    HTTP_BAD_REQUEST           = 400,
-    HTTP_UNAUTHORIZED          = 401,
-    HTTP_FORBIDDEN             = 403,
-    HTTP_NOT_FOUND             = 404,
-    HTTP_BAD_METHOD            = 405,
-    HTTP_INTERNAL_SERVER_ERROR = 500,
-    HTTP_SERVICE_UNAVAILABLE   = 503,
-};
+// Copyright (c) 2010 Satoshi Nakamoto
+// Copyright (c) 2009-2014 The Bitcoin developers
+// Copyright (c) 2014-2015 The Dash developers
+// Copyright (c) 2015-2017 The PIVX developers
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-//! PIVX RPC error codes
-enum RPCErrorCode {
-    //! Standard JSON-RPC 2.0 errors
-            RPC_INVALID_REQUEST     = -32600,
-    RPC_METHOD_NOT_FOUND    = -32601,
-    RPC_INVALID_PARAMS      = -32602,
-    RPC_INTERNAL_ERROR      = -32603,
-    RPC_PARSE_ERROR         = -32700,
+#include "rpcprotocol.h"
 
-    //! General application defined errors
-            RPC_MISC_ERROR                      = -1, //! std::exception thrown in command handling
-    RPC_FORBIDDEN_BY_SAFE_MODE          = -2, //! Server is in safe mode, and command is not allowed in safe mode
-    RPC_TYPE_ERROR                      = -3, //! Unexpected type was passed as parameter
-    RPC_INVALID_ADDRESS_OR_KEY          = -5, //! Invalid address or key
-    RPC_OUT_OF_MEMORY                   = -7, //! Ran out of memory during operation
-    RPC_INVALID_PARAMETER               = -8, //! Invalid, missing or duplicate parameter
-    RPC_DATABASE_ERROR                  = -20, //! Database error
-    RPC_DESERIALIZATION_ERROR           = -22, //! Error parsing or validating structure in raw format
-    RPC_VERIFY_ERROR                    = -25, //! General error during transaction or block submission
-    RPC_VERIFY_REJECTED                 = -26, //! Transaction or block was rejected by network rules
-    RPC_VERIFY_ALREADY_IN_CHAIN         = -27, //! Transaction already in chain
-    RPC_IN_WARMUP                       = -28, //! Client still warming up
+#include "random.h"
+#include "tinyformat.h"
+#include "util.h"
+#include "utilstrencodings.h"
+#include "utiltime.h"
+#include "version.h"
 
-    //! Aliases for backward compatibility
-            RPC_TRANSACTION_ERROR               = RPC_VERIFY_ERROR,
-    RPC_TRANSACTION_REJECTED            = RPC_VERIFY_REJECTED,
-    RPC_TRANSACTION_ALREADY_IN_CHAIN    = RPC_VERIFY_ALREADY_IN_CHAIN,
+#include <stdint.h>
+#include <fstream>
 
-    //! P2P client errors
-            RPC_CLIENT_NOT_CONNECTED            = -9, //! PIVX is not connected
-    RPC_CLIENT_IN_INITIAL_DOWNLOAD      = -10, //! Still downloading initial blocks
-    RPC_CLIENT_NODE_ALREADY_ADDED       = -23, //! Node is already added
-    RPC_CLIENT_NODE_NOT_ADDED           = -24, //! Node has not been added before
-    RPC_CLIENT_NODE_NOT_CONNECTED       = -29, //! Node to disconnect not found in connected nodes
-    RPC_CLIENT_INVALID_IP_OR_SUBNET     = -30, //! Invalid IP/Subnet
+using namespace std;
 
-    //! Wallet errors
-            RPC_WALLET_ERROR                    = -4, //! Unspecified problem with wallet (key not found etc.)
-    RPC_WALLET_INSUFFICIENT_FUNDS       = -6, //! Not enough funds in wallet or account
-    RPC_WALLET_INVALID_ACCOUNT_NAME     = -11, //! Invalid account name
-    RPC_WALLET_KEYPOOL_RAN_OUT          = -12, //! Keypool ran out, call keypoolrefill first
-    RPC_WALLET_UNLOCK_NEEDED            = -13, //! Enter the wallet passphrase with walletpassphrase first
-    RPC_WALLET_PASSPHRASE_INCORRECT     = -14, //! The wallet passphrase entered was incorrect
-    RPC_WALLET_WRONG_ENC_STATE          = -15, //! Command given in wrong wallet encryption state (encrypting an encrypted wallet etc.)
-    RPC_WALLET_ENCRYPTION_FAILED        = -16, //! Failed to encrypt the wallet
-    RPC_WALLET_ALREADY_UNLOCKED         = -17, //! Wallet is already unlocked
-};
+/**
+ * JSON-RPC protocol.  PIVX speaks version 1.0 for maximum compatibility,
+ * but uses JSON-RPC 1.1/2.0 standards for parts of the 1.0 standard that were
+ * unspecified (HTTP errors and contents of 'error').
+ *
+ * 1.0 spec: http://json-rpc.org/wiki/specification
+ * 1.2 spec: http://jsonrpc.org/historical/json-rpc-over-http.html
+ * http://www.codeproject.com/KB/recipes/JSON_Spirit.aspx
+ */
 
-std::string JSONRPCRequest(const std::string& strMethod, const UniValue& params, const UniValue& id);
-UniValue JSONRPCReplyObj(const UniValue& result, const UniValue& error, const UniValue& id);
-std::string JSONRPCReply(const UniValue& result, const UniValue& error, const UniValue& id);
-UniValue JSONRPCError(int code, const std::string& message);
+string JSONRPCRequest(const string& strMethod, const UniValue& params, const UniValue& id)
+{
+    UniValue request(UniValue::VOBJ);
+    request.push_back(Pair("method", strMethod));
+    request.push_back(Pair("params", params));
+    request.push_back(Pair("id", id));
+    return request.write() + "\n";
+}
 
-/** Get name of RPC authentication cookie file */
-boost::filesystem::path GetAuthCookieFile();
-/** Generate a new RPC authentication cookie and write it to disk */
-bool GenerateAuthCookie(std::string *cookie_out);
-/** Read the RPC authentication cookie from disk */
-bool GetAuthCookie(std::string *cookie_out);
-/** Delete RPC authentication cookie from disk */
-void DeleteAuthCookie();
+UniValue JSONRPCReplyObj(const UniValue& result, const UniValue& error, const UniValue& id)
+{
+    UniValue reply(UniValue::VOBJ);
+    if (!error.isNull())
+        reply.push_back(Pair("result", NullUniValue));
+    else
+        reply.push_back(Pair("result", result));
+    reply.push_back(Pair("error", error));
+    reply.push_back(Pair("id", id));
+    return reply;
+}
 
-#endif // BITCOIN_RPCPROTOCOL_H
+string JSONRPCReply(const UniValue& result, const UniValue& error, const UniValue& id)
+{
+    UniValue reply = JSONRPCReplyObj(result, error, id);
+    return reply.write() + "\n";
+}
+
+UniValue JSONRPCError(int code, const string& message)
+{
+    UniValue error(UniValue::VOBJ);
+    error.push_back(Pair("code", code));
+    error.push_back(Pair("message", message));
+    return error;
+}
+
+/** Username used when cookie authentication is in use (arbitrary, only for
+ * recognizability in debugging/logging purposes)
+ */
+static const std::string COOKIEAUTH_USER = "__cookie__";
+/** Default name for auth cookie file */
+static const std::string COOKIEAUTH_FILE = ".cookie";
+
+boost::filesystem::path GetAuthCookieFile()
+{
+    boost::filesystem::path path(GetArg("-rpccookiefile", COOKIEAUTH_FILE));
+    if (!path.is_complete()) path = GetDataDir() / path;
+    return path;
+}
+
+bool GenerateAuthCookie(std::string *cookie_out)
+{
+    unsigned char rand_pwd[32];
+    GetRandBytes(rand_pwd, 32);
+    std::string cookie = COOKIEAUTH_USER + ":" + EncodeBase64(&rand_pwd[0],32);
+
+    /** the umask determines what permissions are used to create this file -
+     * these are set to 077 in init.cpp unless overridden with -sysperms.
+     */
+    std::ofstream file;
+    boost::filesystem::path filepath = GetAuthCookieFile();
+    file.open(filepath.string().c_str());
+    if (!file.is_open()) {
+        LogPrintf("Unable to open cookie authentication file %s for writing\n", filepath.string());
+        return false;
+    }
+    file << cookie;
+    file.close();
+    LogPrintf("Generated RPC authentication cookie %s\n", filepath.string());
+
+    if (cookie_out)
+        *cookie_out = cookie;
+    return true;
+}
+
+bool GetAuthCookie(std::string *cookie_out)
+{
+    std::ifstream file;
+    std::string cookie;
+    boost::filesystem::path filepath = GetAuthCookieFile();
+    file.open(filepath.string().c_str());
+    if (!file.is_open())
+        return false;
+    std::getline(file, cookie);
+    file.close();
+
+    if (cookie_out)
+        *cookie_out = cookie;
+    return true;
+}
+
+void DeleteAuthCookie()
+{
+    try {
+        boost::filesystem::remove(GetAuthCookieFile());
+    } catch (const boost::filesystem::filesystem_error& e) {
+        LogPrintf("%s: Unable to remove random auth cookie file: %s\n", __func__, e.what());
+    }
+}

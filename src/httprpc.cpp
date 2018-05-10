@@ -25,7 +25,7 @@ class HTTPRPCTimer : public RPCTimerBase
 {
 public:
     HTTPRPCTimer(struct event_base* eventBase, boost::function<void(void)>& func, int64_t millis) :
-        ev(eventBase, false, func)
+            ev(eventBase, false, func)
     {
         struct timeval tv;
         tv.tv_sec = millis/1000;
@@ -132,7 +132,7 @@ static bool HTTPReq_JSONRPC(HTTPRequest* req, const std::string &)
             // Send reply
             strReply = JSONRPCReply(result, NullUniValue, jreq.id);
 
-        // array of requests
+            // array of requests
         } else if (valRequest.isArray())
             strReply = JSONRPCExecBatch(valRequest.get_array());
         else
@@ -157,8 +157,8 @@ static bool InitRPCAuthentication()
         LogPrintf("No rpcpassword set - using random cookie authentication\n");
         if (!GenerateAuthCookie(&strRPCUserColonPass)) {
             uiInterface.ThreadSafeMessageBox(
-                _("Error: A fatal internal error occurred, see debug.log for details"), // Same message as AbortNode
-                "", CClientUIInterface::MSG_ERROR);
+                    _("Error: A fatal internal error occurred, see debug.log for details"), // Same message as AbortNode
+                    "", CClientUIInterface::MSG_ERROR);
             return false;
         }
     } else {
