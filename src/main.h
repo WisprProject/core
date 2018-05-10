@@ -346,6 +346,8 @@ void UpdateCoins(const CTransaction& tx, CValidationState& state, CCoinsViewCach
 
 /** Context-independent validity checks */
 bool CheckTransaction(const CTransaction& tx, CValidationState& state);
+libzerocoin::CoinSpend TxInToZerocoinSpend(const CTxIn& txin);
+
 
 /**
  * Check if transaction will be final in the next block to be created.
