@@ -1,5 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
+// Copyright (c) 2016-2018 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -75,14 +76,14 @@ public:
     size_t GetFeeSamples(std::vector<CFeeRate>& insertInto) const
     {
         BOOST_FOREACH (const CFeeRate& f, feeSamples)
-            insertInto.push_back(f);
+        insertInto.push_back(f);
         return feeSamples.size();
     }
     size_t PrioritySamples() const { return prioritySamples.size(); }
     size_t GetPrioritySamples(std::vector<double>& insertInto) const
     {
         BOOST_FOREACH (double d, prioritySamples)
-            insertInto.push_back(d);
+        insertInto.push_back(d);
         return prioritySamples.size();
     }
 
@@ -143,7 +144,7 @@ public:
             throw runtime_error("Corrupt priority value in estimates file.");
         if (feeSamples.size() + prioritySamples.size() > 0)
             LogPrint("estimatefee", "Read %d fee samples and %d priority samples\n",
-                feeSamples.size(), prioritySamples.size());
+                     feeSamples.size(), prioritySamples.size());
     }
 };
 
@@ -186,7 +187,7 @@ private:
             // don't know why they got confirmed.
         }
         LogPrint("estimatefee", "Seen TX confirm: %s : %s fee/%g priority, took %d blocks\n",
-            assignedTo, feeRate.ToString(), dPriority, nBlocksAgo);
+                 assignedTo, feeRate.ToString(), dPriority, nBlocksAgo);
     }
 
 public:
@@ -247,9 +248,9 @@ public:
         for (size_t i = 0; i < history.size(); i++) {
             if (history[i].FeeSamples() + history[i].PrioritySamples() > 0)
                 LogPrint("estimatefee", "estimates: for confirming within %d blocks based on %d/%d samples, fee=%s, prio=%g\n",
-                    i,
-                    history[i].FeeSamples(), history[i].PrioritySamples(),
-                    estimateFee(i + 1).ToString(), estimatePriority(i + 1));
+                         i,
+                         history[i].FeeSamples(), history[i].PrioritySamples(),
+                         estimateFee(i + 1).ToString(), estimatePriority(i + 1));
         }
     }
 
@@ -267,7 +268,7 @@ public:
             for (size_t i = 0; i < history.size(); i++)
                 history.at(i).GetFeeSamples(sortedFeeSamples);
             std::sort(sortedFeeSamples.begin(), sortedFeeSamples.end(),
-                std::greater<CFeeRate>());
+                      std::greater<CFeeRate>());
         }
         if (sortedFeeSamples.size() < 11) {
             // Eleven is Gavin's Favorite Number
@@ -300,7 +301,7 @@ public:
             for (size_t i = 0; i < history.size(); i++)
                 history.at(i).GetPrioritySamples(sortedPrioritySamples);
             std::sort(sortedPrioritySamples.begin(), sortedPrioritySamples.end(),
-                std::greater<double>());
+                      std::greater<double>());
         }
         if (sortedPrioritySamples.size() < 11)
             return -1.0;
@@ -410,8 +411,10 @@ bool CTxMemPool::addUnchecked(const uint256& hash, const CTxMemPoolEntry& entry)
     {
         mapTx[hash] = entry;
         const CTransaction& tx = mapTx[hash].GetTx();
-        for (unsigned int i = 0; i < tx.vin.size(); i++)
-            mapNextTx[tx.vin[i].prevout] = CInPoint(&tx, i);
+        if(!tx.IsZerocoinSpend()) {
+            for (unsigned int i = 0; i < tx.vin.size(); i++)
+                mapNextTx[tx.vin[i].prevout] = CInPoint(&tx, i);
+        }
         nTransactionsUpdated++;
         totalTxSize += entry.GetTxSize();
     }
@@ -453,7 +456,7 @@ void CTxMemPool::remove(const CTransaction& origTx, std::list<CTransaction>& rem
                 }
             }
             BOOST_FOREACH (const CTxIn& txin, tx.vin)
-                mapNextTx.erase(txin.prevout);
+            mapNextTx.erase(txin.prevout);
 
             removed.push_back(tx);
             totalTxSize -= mapTx[hash].GetTxSize();
@@ -476,7 +479,7 @@ void CTxMemPool::removeCoinbaseSpends(const CCoinsViewCache* pcoins, unsigned in
                 continue;
             const CCoins* coins = pcoins->AccessCoins(txin.prevout.hash);
             if (fSanityCheck) assert(coins);
-            if (!coins || ((coins->IsCoinBase() || coins->IsCoinStake()) && nMemPoolHeight - coins->nHeight < Params().COINBASE_MATURITY())) {
+            if (!coins || ((coins->IsCoinBase() || coins->IsCoinStake()) && nMemPoolHeight - coins->nHeight < (unsigned)Params().COINBASE_MATURITY())) {
                 transactionsToRemove.push_back(tx);
                 break;
             }
@@ -617,6 +620,15 @@ void CTxMemPool::queryHashes(vector<uint256>& vtxid)
     vtxid.reserve(mapTx.size());
     for (map<uint256, CTxMemPoolEntry>::iterator mi = mapTx.begin(); mi != mapTx.end(); ++mi)
         vtxid.push_back((*mi).first);
+}
+
+void CTxMemPool::getTransactions(std::set<uint256>& setTxid)
+{
+    setTxid.clear();
+
+    LOCK(cs);
+    for (map<uint256, CTxMemPoolEntry>::iterator mi = mapTx.begin(); mi != mapTx.end(); ++mi)
+        setTxid.insert((*mi).first);
 }
 
 bool CTxMemPool::lookup(uint256 hash, CTransaction& result) const
