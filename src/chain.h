@@ -1,5 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
+// Copyright (c) 2015-2017 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -11,6 +12,7 @@
 #include "tinyformat.h"
 #include "uint256.h"
 #include "util.h"
+#include "libzerocoin/Denominations.h"
 
 #include <vector>
 
@@ -61,33 +63,33 @@ struct CDiskBlockPos {
 
 enum BlockStatus {
     //! Unused.
-    BLOCK_VALID_UNKNOWN = 0,
+            BLOCK_VALID_UNKNOWN = 0,
 
     //! Parsed, version ok, hash satisfies claimed PoW, 1 <= vtx count <= max, timestamp not in future
-    BLOCK_VALID_HEADER = 1,
+            BLOCK_VALID_HEADER = 1,
 
     //! All parent headers found, difficulty matches, timestamp >= median previous, checkpoint. Implies all parents
     //! are also at least TREE.
-    BLOCK_VALID_TREE = 2,
+            BLOCK_VALID_TREE = 2,
 
     /**
      * Only first tx is coinbase, 2 <= coinbase input script length <= 100, transactions valid, no duplicate txids,
      * sigops, size, merkle root. Implies all parents are at least TREE but not necessarily TRANSACTIONS. When all
      * parent blocks also have TRANSACTIONS, CBlockIndex::nChainTx will be set.
      */
-    BLOCK_VALID_TRANSACTIONS = 3,
+            BLOCK_VALID_TRANSACTIONS = 3,
 
     //! Outputs do not overspend inputs, no double spends, coinbase output ok, immature coinbase spends, BIP30.
     //! Implies all parents are also at least CHAIN.
-    BLOCK_VALID_CHAIN = 4,
+            BLOCK_VALID_CHAIN = 4,
 
     //! Scripts & signatures ok. Implies all parents are also at least SCRIPTS.
-    BLOCK_VALID_SCRIPTS = 5,
+            BLOCK_VALID_SCRIPTS = 5,
 
     //! All validity bits.
-    BLOCK_VALID_MASK = BLOCK_VALID_HEADER | BLOCK_VALID_TREE | BLOCK_VALID_TRANSACTIONS |
-                       BLOCK_VALID_CHAIN |
-                       BLOCK_VALID_SCRIPTS,
+            BLOCK_VALID_MASK = BLOCK_VALID_HEADER | BLOCK_VALID_TREE | BLOCK_VALID_TRANSACTIONS |
+                               BLOCK_VALID_CHAIN |
+                               BLOCK_VALID_SCRIPTS,
 
     BLOCK_HAVE_DATA = 8,  //! full block available in blk*.dat
     BLOCK_HAVE_UNDO = 16, //! undo data available in rev*.dat
@@ -171,9 +173,14 @@ public:
     unsigned int nTime;
     unsigned int nBits;
     unsigned int nNonce;
+    uint256 nAccumulatorCheckpoint;
 
     //! (memory only) Sequential id assigned to distinguish order in which blocks are received.
     uint32_t nSequenceId;
+
+    //! zerocoin specific fields
+    std::map<libzerocoin::CoinDenomination, int64_t> mapZerocoinSupply;
+    std::vector<libzerocoin::CoinDenomination> vMintDenominationsInBlock;
 
     void SetNull()
     {
@@ -203,6 +210,12 @@ public:
         nTime = 0;
         nBits = 0;
         nNonce = 0;
+        nAccumulatorCheckpoint = 0;
+        // Start supply of each denomination with 0s
+        for (auto& denom : libzerocoin::zerocoinDenomList) {
+            mapZerocoinSupply.insert(make_pair(denom, 0));
+        }
+        vMintDenominationsInBlock.clear();
     }
 
     CBlockIndex()
@@ -219,6 +232,8 @@ public:
         nTime = block.nTime;
         nBits = block.nBits;
         nNonce = block.nNonce;
+        if(block.nVersion > 3)
+            nAccumulatorCheckpoint = block.nAccumulatorCheckpoint;
 
         //Proof of Stake
         bnChainTrust = uint256();
@@ -238,6 +253,7 @@ public:
             nStakeTime = 0;
         }
     }
+
 
     CDiskBlockPos GetBlockPos() const
     {
@@ -269,7 +285,22 @@ public:
         block.nTime = nTime;
         block.nBits = nBits;
         block.nNonce = nNonce;
+        block.nAccumulatorCheckpoint = nAccumulatorCheckpoint;
         return block;
+    }
+
+    int64_t GetZerocoinSupply() const
+    {
+        int64_t nTotal = 0;
+        for (auto& denom : libzerocoin::zerocoinDenomList) {
+            nTotal += libzerocoin::ZerocoinDenominationToAmount(denom) * mapZerocoinSupply.at(denom);
+        }
+        return nTotal;
+    }
+
+    bool MintedDenomination(libzerocoin::CoinDenomination denom) const
+    {
+        return std::find(vMintDenominationsInBlock.begin(), vMintDenominationsInBlock.end(), denom) != vMintDenominationsInBlock.end();
     }
 
     uint256 GetBlockHash() const
@@ -316,7 +347,7 @@ public:
     unsigned int GetStakeEntropyBit() const
     {
         unsigned int nEntropyBit = ((GetBlockHash().Get64()) & 1);
-        if (fDebug || GetBoolArg("-printstakemodifier", false))
+        if (GetBoolArg("-printstakemodifier", false))
             LogPrintf("GetStakeEntropyBit: nHeight=%u hashBlock=%s nEntropyBit=%u\n", nHeight, GetBlockHash().ToString().c_str(), nEntropyBit);
 
         return nEntropyBit;
@@ -344,7 +375,7 @@ public:
 
     /**
      * Returns true if there are nRequired or more blocks of minVersion or above
-     * in the last Params().ToCheckBlockUpgradeMajority() blocks, starting at pstart 
+     * in the last Params().ToCheckBlockUpgradeMajority() blocks, starting at pstart
      * and going backwards.
      */
     static bool IsSuperMajority(int minVersion, const CBlockIndex* pstart, unsigned int nRequired);
@@ -352,9 +383,9 @@ public:
     std::string ToString() const
     {
         return strprintf("CBlockIndex(pprev=%p, nHeight=%d, merkle=%s, hashBlock=%s)",
-            pprev, nHeight,
-            hashMerkleRoot.ToString(),
-            GetBlockHash().ToString());
+                         pprev, nHeight,
+                         hashMerkleRoot.ToString(),
+                         GetBlockHash().ToString());
     }
 
     //! Check whether this block index entry is valid up to the passed validity level.
@@ -446,6 +477,12 @@ public:
         READWRITE(nTime);
         READWRITE(nBits);
         READWRITE(nNonce);
+        if(this->nVersion > 3) {
+            READWRITE(nAccumulatorCheckpoint);
+            READWRITE(mapZerocoinSupply);
+            READWRITE(vMintDenominationsInBlock);
+        }
+
     }
 
     uint256 GetBlockHash() const
@@ -457,6 +494,7 @@ public:
         block.nTime = nTime;
         block.nBits = nBits;
         block.nNonce = nNonce;
+        block.nAccumulatorCheckpoint = nAccumulatorCheckpoint;
         return block.GetHash();
     }
 
@@ -466,8 +504,8 @@ public:
         std::string str = "CDiskBlockIndex(";
         str += CBlockIndex::ToString();
         str += strprintf("\n                hashBlock=%s, hashPrev=%s)",
-            GetBlockHash().ToString(),
-            hashPrev.ToString());
+                         GetBlockHash().ToString(),
+                         hashPrev.ToString());
         return str;
     }
 };
