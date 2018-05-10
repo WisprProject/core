@@ -1,5 +1,5 @@
-/* src/config/pivx-config.h.  Generated from pivx-config.h.in by configure.  */
-/* src/config/pivx-config.h.in.  Generated from configure.ac by autoheader.  */
+/* src/config/wispr-config.h.  Generated from wispr-config.h.in by configure.  */
+/* src/config/wispr-config.h.in.  Generated from configure.ac by autoheader.  */
 
 #ifndef PIV_CONFIG_H
 
