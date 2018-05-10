@@ -40,5 +40,7 @@ static const int MEMPOOL_GD_VERSION = 60002;
 //! "filter*" commands are disabled without NODE_BLOOM after and including this version
 static const int NO_BLOOM_VERSION = 70005;
 
+//! masternodes older than this proto version use old strMessage format for mnannounce
+static const int MIN_PEER_MNANNOUNCE = 70913;
 
 #endif // BITCOIN_VERSION_H
