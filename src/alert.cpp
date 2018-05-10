@@ -1,5 +1,6 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
+// Copyright (c) 2017 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -52,34 +53,34 @@ std::string CUnsignedAlert::ToString() const
         strSetCancel += strprintf("%d ", n);
     std::string strSetSubVer;
     BOOST_FOREACH (std::string str, setSubVer)
-        strSetSubVer += "\"" + str + "\" ";
+    strSetSubVer += "\"" + str + "\" ";
     return strprintf(
-        "CAlert(\n"
-        "    nVersion     = %d\n"
-        "    nRelayUntil  = %d\n"
-        "    nExpiration  = %d\n"
-        "    nID          = %d\n"
-        "    nCancel      = %d\n"
-        "    setCancel    = %s\n"
-        "    nMinVer      = %d\n"
-        "    nMaxVer      = %d\n"
-        "    setSubVer    = %s\n"
-        "    nPriority    = %d\n"
-        "    strComment   = \"%s\"\n"
-        "    strStatusBar = \"%s\"\n"
-        ")\n",
-        nVersion,
-        nRelayUntil,
-        nExpiration,
-        nID,
-        nCancel,
-        strSetCancel,
-        nMinVer,
-        nMaxVer,
-        strSetSubVer,
-        nPriority,
-        strComment,
-        strStatusBar);
+            "CAlert(\n"
+            "    nVersion     = %d\n"
+            "    nRelayUntil  = %d\n"
+            "    nExpiration  = %d\n"
+            "    nID          = %d\n"
+            "    nCancel      = %d\n"
+            "    setCancel    = %s\n"
+            "    nMinVer      = %d\n"
+            "    nMaxVer      = %d\n"
+            "    setSubVer    = %s\n"
+            "    nPriority    = %d\n"
+            "    strComment   = \"%s\"\n"
+            "    strStatusBar = \"%s\"\n"
+            ")\n",
+            nVersion,
+            nRelayUntil,
+            nExpiration,
+            nID,
+            nCancel,
+            strSetCancel,
+            nMinVer,
+            nMaxVer,
+            strSetSubVer,
+            nPriority,
+            strComment,
+            strStatusBar);
 }
 
 void CAlert::SetNull()
