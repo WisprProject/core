@@ -442,7 +442,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Buy WSP</string>
+      <string>Buy PIV</string>
      </property>
      <property name="icon">
       <iconset resource="../wispr.qrc">
@@ -512,7 +512,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>WSP</string>
+      <string>PIV</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_5">
@@ -1704,7 +1704,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>WSP</string>
+      <string>PIV</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="UnitsInputPIV">
@@ -1751,7 +1751,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Sell WSP</string>
+      <string>Sell PIV</string>
      </property>
      <property name="icon">
       <iconset resource="../wispr">
@@ -1777,7 +1777,7 @@
          </font>
         </property>
         <property name="text">
-         <string>WSP Available:</string>
+         <string>PIV Available:</string>
         </property>
        </widget>
       </item>
@@ -2221,7 +2221,7 @@
          </font>
         </property>
         <property name="text">
-         <string>WSP</string>
+         <string>PIV</string>
         </property>
        </widget>
       </item>
@@ -2762,7 +2762,7 @@
       </font>
      </property>
      <property name="text">
-      <string>WSP Balance:</string>
+      <string>PIV Balance:</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_12">
@@ -2813,7 +2813,7 @@
       </font>
      </property>
      <property name="text">
-      <string>WSP Available:</string>
+      <string>PIV Available:</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_14">
@@ -2832,7 +2832,7 @@
       </font>
      </property>
      <property name="text">
-      <string>WSP Pending:</string>
+      <string>PIV Pending:</string>
      </property>
     </widget>
     <widget class="QLabel" name="PIVPendingLabel">
@@ -2928,7 +2928,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Bittrex WSP Deposit Address:</string>
+      <string>Bittrex PIV Deposit Address:</string>
      </property>
     </widget>
     <widget class="QPushButton" name="GenDepositBTN">
@@ -2941,7 +2941,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Generate Pivx Deposit Address</string>
+      <string>Generate PIVX Deposit Address</string>
      </property>
      <property name="icon">
       <iconset resource="../wispr.qrc">

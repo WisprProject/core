@@ -274,7 +274,7 @@
 #define LT_OBJDIR ".libs/"
 
 /* Define to the address where bug reports for this package should be sent. */
-#define PACKAGE_BUGREPORT "www.pivx.org"
+#define PACKAGE_BUGREPORT "www.wispr.org"
 
 /* Define to the full name of this package. */
 #define PACKAGE_NAME "Pivx Core"
@@ -283,7 +283,7 @@
 #define PACKAGE_STRING "Pivx Core 2.3.1"
 
 /* Define to the one symbol short name of this package. */
-#define PACKAGE_TARNAME "pivx"
+#define PACKAGE_TARNAME "wispr"
 
 /* Define to the home page for this package. */
 #define PACKAGE_URL ""

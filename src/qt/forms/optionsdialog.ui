@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>576</width>
-    <height>417</height>
+    <height>442</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,10 +30,10 @@
        <item>
         <widget class="QCheckBox" name="bitcoinAtStartup">
          <property name="toolTip">
-          <string>Automatically start Wispr after logging in to the system.</string>
+          <string>Automatically start PIVX after logging in to the system.</string>
          </property>
          <property name="text">
-          <string>&amp;Start Wispr on system login</string>
+          <string>&amp;Start PIVX on system login</string>
          </property>
         </widget>
        </item>
@@ -118,7 +118,7 @@
         </layout>
        </item>
        <item>
-        <spacer name="verticalSpacer_Main">
+        <spacer name="verticalSpacer_2">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
@@ -131,69 +131,79 @@
         </spacer>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_4_Main">
+        <widget class="QCheckBox" name="checkBoxZeromintEnable">
+         <property name="toolTip">
+          <string>Enable automatic minting of PIV units to zPIV</string>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::LeftToRight</enum>
+         </property>
+         <property name="text">
+          <string>Enable zPIV Automint</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
          <item>
-          <widget class="QLabel" name="label">
+          <widget class="QLabel" name="percentage_label">
            <property name="toolTip">
-            <string>This setting determines the amount of individual masternodes that an input will be anonymized through.&lt;br/&gt;More rounds of anonymization gives a higher degree of privacy, but also costs more in fees.</string>
+            <string>Percentage of incoming PIV which get automatically converted to zPIV via Zerocoin Protocol (min: 10%)</string>
            </property>
            <property name="text">
-            <string>Obfuscation rounds to use</string>
+            <string>Percentage of autominted zPIV</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="obfuscationRounds">
+          <widget class="QSpinBox" name="zeromintPercentage">
            <property name="minimum">
-            <number>2</number>
+            <number>1</number>
            </property>
            <property name="maximum">
-            <number>8</number>
-           </property>
-           <property name="value">
-            <number>4</number>
+            <number>100</number>
            </property>
           </widget>
          </item>
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout">
+        <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0">
+         <property name="sizeConstraint">
+          <enum>QLayout::SetFixedSize</enum>
+         </property>
          <item>
-          <widget class="QLabel" name="label_2">
+          <widget class="QLabel" name="labelPreferredDenom">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
            <property name="toolTip">
-            <string>This amount acts as a threshold to turn off Obfuscation once it's reached.</string>
-           </property>
-           <property name="statusTip">
-            <string notr="true"/>
-           </property>
-           <property name="whatsThis">
-            <string notr="true"/>
-           </property>
-           <property name="accessibleName">
-            <string notr="true"/>
-           </property>
-           <property name="accessibleDescription">
-            <string notr="true"/>
+            <string>Wait with automatic conversion to Zerocoin until enough PIV for this denomination is available</string>
            </property>
            <property name="text">
-            <string>Amount of Wispr to keep anonymized</string>
+            <string>Preferred Automint zPIV Denomination</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="anonymizePivx">
-           <property name="minimum">
-            <number>100</number>
+          <widget class="QComboBox" name="preferredDenom">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>27</height>
+            </size>
            </property>
-           <property name="maximum">
-            <number>100000</number>
+           <property name="toolTip">
+            <string>Wait with automatic conversion to Zerocoin until enough PIV for this denomination is available</string>
            </property>
-           <property name="singleStep">
-            <number>100</number>
+           <property name="maxVisibleItems">
+            <number>9</number>
            </property>
-           <property name="value">
-            <number>1000</number>
+           <property name="maxCount">
+            <number>9</number>
            </property>
           </widget>
          </item>
@@ -206,6 +216,27 @@
        <string>W&amp;allet</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_Wallet">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2_Wallet">
+         <item>
+          <widget class="QLabel" name="labelStakeSplitThresholdText">
+           <property name="text">
+            <string>Stake split threshold:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="spinBoxStakeSplitThreshold">
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>999999</number>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
        <item>
         <widget class="QGroupBox" name="groupBox">
          <property name="title">
@@ -268,7 +299,7 @@
        <item>
         <widget class="QCheckBox" name="mapPortUpnp">
          <property name="toolTip">
-          <string>Automatically open the Wispr client port on the router. This only works when your router supports UPnP and it is enabled.</string>
+          <string>Automatically open the PIVX client port on the router. This only works when your router supports UPnP and it is enabled.</string>
          </property>
          <property name="text">
           <string>Map port using &amp;UPnP</string>
@@ -288,7 +319,7 @@
        <item>
         <widget class="QCheckBox" name="connectSocks">
          <property name="toolTip">
-          <string>Connect to the Wispr network through a SOCKS5 proxy.</string>
+          <string>Connect to the PIVX network through a SOCKS5 proxy.</string>
          </property>
          <property name="text">
           <string>&amp;Connect through SOCKS5 proxy (default proxy):</string>
@@ -454,7 +485,7 @@
          <item>
           <widget class="QValueComboBox" name="lang">
            <property name="toolTip">
-            <string>The user interface language can be set here. This setting will take effect after restarting Wispr.</string>
+            <string>The user interface language can be set here. This setting will take effect after restarting PIVX.</string>
            </property>
           </widget>
          </item>
@@ -547,6 +578,19 @@ https://www.transifex.com/wispr-project/wispr-project-translations</string>
           <widget class="QValueComboBox" name="digits"/>
          </item>
         </layout>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="checkBoxHideZeroBalances">
+         <property name="toolTip">
+          <string>Hide empty balances</string>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::LeftToRight</enum>
+         </property>
+         <property name="text">
+          <string>Hide empty balances</string>
+         </property>
+        </widget>
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_3_Display">
