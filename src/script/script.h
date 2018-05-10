@@ -32,7 +32,7 @@ std::vector<unsigned char> ToByteVector(const T& in)
 enum opcodetype
 {
     // push value
-            OP_0 = 0x00,
+    OP_0 = 0x00,
     OP_FALSE = OP_0,
     OP_PUSHDATA1 = 0x4c,
     OP_PUSHDATA2 = 0x4d,
@@ -58,7 +58,7 @@ enum opcodetype
     OP_16 = 0x60,
 
     // control
-            OP_NOP = 0x61,
+    OP_NOP = 0x61,
     OP_VER = 0x62,
     OP_IF = 0x63,
     OP_NOTIF = 0x64,
@@ -70,7 +70,7 @@ enum opcodetype
     OP_RETURN = 0x6a,
 
     // stack ops
-            OP_TOALTSTACK = 0x6b,
+    OP_TOALTSTACK = 0x6b,
     OP_FROMALTSTACK = 0x6c,
     OP_2DROP = 0x6d,
     OP_2DUP = 0x6e,
@@ -91,14 +91,14 @@ enum opcodetype
     OP_TUCK = 0x7d,
 
     // splice ops
-            OP_CAT = 0x7e,
+    OP_CAT = 0x7e,
     OP_SUBSTR = 0x7f,
     OP_LEFT = 0x80,
     OP_RIGHT = 0x81,
     OP_SIZE = 0x82,
 
     // bit logic
-            OP_INVERT = 0x83,
+    OP_INVERT = 0x83,
     OP_AND = 0x84,
     OP_OR = 0x85,
     OP_XOR = 0x86,
@@ -108,7 +108,7 @@ enum opcodetype
     OP_RESERVED2 = 0x8a,
 
     // numeric
-            OP_1ADD = 0x8b,
+    OP_1ADD = 0x8b,
     OP_1SUB = 0x8c,
     OP_2MUL = 0x8d,
     OP_2DIV = 0x8e,
@@ -140,7 +140,7 @@ enum opcodetype
     OP_WITHIN = 0xa5,
 
     // crypto
-            OP_RIPEMD160 = 0xa6,
+    OP_RIPEMD160 = 0xa6,
     OP_SHA1 = 0xa7,
     OP_SHA256 = 0xa8,
     OP_HASH160 = 0xa9,
@@ -152,7 +152,7 @@ enum opcodetype
     OP_CHECKMULTISIGVERIFY = 0xaf,
 
     // expansion
-            OP_NOP1 = 0xb0,
+    OP_NOP1 = 0xb0,
     OP_NOP2 = 0xb1,
     OP_NOP3 = 0xb2,
     OP_NOP4 = 0xb3,
@@ -164,11 +164,11 @@ enum opcodetype
     OP_NOP10 = 0xb9,
 
     // zerocoin
-            OP_ZEROCOINMINT = 0xc1,
+    OP_ZEROCOINMINT = 0xc1,
     OP_ZEROCOINSPEND = 0xc2,
 
     // template matching params
-            OP_SMALLINTEGER = 0xfa,
+    OP_SMALLINTEGER = 0xfa,
     OP_PUBKEYS = 0xfb,
     OP_PUBKEYHASH = 0xfd,
     OP_PUBKEY = 0xfe,
@@ -264,7 +264,7 @@ public:
     inline CScriptNum& operator+=( const int64_t& rhs)
     {
         assert(rhs == 0 || (rhs > 0 && m_value <= std::numeric_limits<int64_t>::max() - rhs) ||
-               (rhs < 0 && m_value >= std::numeric_limits<int64_t>::min() - rhs));
+                           (rhs < 0 && m_value >= std::numeric_limits<int64_t>::min() - rhs));
         m_value += rhs;
         return *this;
     }
@@ -272,7 +272,7 @@ public:
     inline CScriptNum& operator-=( const int64_t& rhs)
     {
         assert(rhs == 0 || (rhs > 0 && m_value >= std::numeric_limits<int64_t>::min() + rhs) ||
-               (rhs < 0 && m_value <= std::numeric_limits<int64_t>::max() + rhs));
+                           (rhs < 0 && m_value <= std::numeric_limits<int64_t>::max() + rhs));
         m_value -= rhs;
         return *this;
     }
@@ -329,19 +329,19 @@ public:
 private:
     static int64_t set_vch(const std::vector<unsigned char>& vch)
     {
-        if (vch.empty())
-            return 0;
+      if (vch.empty())
+          return 0;
 
-        int64_t result = 0;
-        for (size_t i = 0; i != vch.size(); ++i)
-            result |= static_cast<int64_t>(vch[i]) << 8*i;
+      int64_t result = 0;
+      for (size_t i = 0; i != vch.size(); ++i)
+          result |= static_cast<int64_t>(vch[i]) << 8*i;
 
-        // If the input vector's most significant byte is 0x80, remove it from
-        // the result's msb and return a negative.
-        if (vch.back() & 0x80)
-            return -((int64_t)(result & ~(0x80ULL << (8 * (vch.size() - 1)))));
+      // If the input vector's most significant byte is 0x80, remove it from
+      // the result's msb and return a negative.
+      if (vch.back() & 0x80)
+          return -((int64_t)(result & ~(0x80ULL << (8 * (vch.size() - 1)))));
 
-        return result;
+      return result;
     }
 
     int64_t m_value;
@@ -453,19 +453,19 @@ public:
 
     bool GetOp(iterator& pc, opcodetype& opcodeRet, std::vector<unsigned char>& vchRet)
     {
-        // Wrapper so it can be called with either iterator or const_iterator
-        const_iterator pc2 = pc;
-        bool fRet = GetOp2(pc2, opcodeRet, &vchRet);
-        pc = begin() + (pc2 - begin());
-        return fRet;
+         // Wrapper so it can be called with either iterator or const_iterator
+         const_iterator pc2 = pc;
+         bool fRet = GetOp2(pc2, opcodeRet, &vchRet);
+         pc = begin() + (pc2 - begin());
+         return fRet;
     }
 
     bool GetOp(iterator& pc, opcodetype& opcodeRet)
     {
-        const_iterator pc2 = pc;
-        bool fRet = GetOp2(pc2, opcodeRet, NULL);
-        pc = begin() + (pc2 - begin());
-        return fRet;
+         const_iterator pc2 = pc;
+         bool fRet = GetOp2(pc2, opcodeRet, NULL);
+         pc = begin() + (pc2 - begin());
+         return fRet;
     }
 
     bool GetOp(const_iterator& pc, opcodetype& opcodeRet, std::vector<unsigned char>& vchRet) const
