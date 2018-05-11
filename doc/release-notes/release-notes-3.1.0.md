@@ -1,8 +1,8 @@
-PIVX Core version *3.1.0* is now available from:  <https://github.com/pivx-project/pivx/releases>
+PIVX Core version *3.1.0* is now available from:  <https://github.com/wispr-project/wispr/releases>
 
 This is a new major version release, including various bug fixes and performance improvements, as well as updated translations.
 
-Please report bugs using the issue tracker at github: <https://github.com/pivx-project/pivx/issues>
+Please report bugs using the issue tracker at github: <https://github.com/wispr-project/wispr/issues>
 
 
 Mandatory Update
@@ -15,7 +15,7 @@ Users updating from a previous version after Tuesday, May 8, 2018 12:00:00 AM GM
 How to Upgrade
 ==============
 
-If you are running an older version, shut it down. Wait until it has completely shut down (which might take a few minutes for older versions), then run the installer (on Windows) or just copy over /Applications/PIVX-Qt (on Mac) or pivxd/pivx-qt (on Linux).
+If you are running an older version, shut it down. Wait until it has completely shut down (which might take a few minutes for older versions), then run the installer (on Windows) or just copy over /Applications/PIVX-Qt (on Mac) or wisprd/wispr-qt (on Linux).
 
 
 Compatibility
@@ -97,7 +97,7 @@ The overview tab has been simplified greatly to display only balances that are a
 ### Wallet Options
 
 There have been a number of changes to the tasks that you are able to perform from the wallet options. Users will now have the ability to do the following: 
--	Enable and disable the auto zPIV minting feature. This is enabled by default and the enablezeromint=0 setting in the pivx.conf file will overwrite the GUI option.
+-	Enable and disable the auto zPIV minting feature. This is enabled by default and the enablezeromint=0 setting in the wispr.conf file will overwrite the GUI option.
 -	The percentage of autominted zPIV can now be set from 1 to 100, changed from 10 – 100.
 -	The stake split threshold can now be set VIA the wallet options. This setting is an advanced feature for those wishing to remain staking regular PIV.
 -	“Unlock for staking and anonymization only” is now selected by default when unlocking the wallet from the User Interface
@@ -113,7 +113,7 @@ Backup to external devices / locations
 
 ### Summary
 
- The PIVX wallet can now have user selected directories for automatic backups of the wallet data file (wallet.dat). This can be set by adding the following lines to the pivx.conf file, found in the PIVX data directory.
+ The PIVX wallet can now have user selected directories for automatic backups of the wallet data file (wallet.dat). This can be set by adding the following lines to the wispr.conf file, found in the PIVX data directory.
 - backuppath = <directory / full path>
 - zpivbackuppath = <directory / full path>
 - custombackupthreshold = <backup limit>
@@ -176,7 +176,7 @@ The PIVX client peer bans now have additional RPC commands to manage peers. Peer
 
 When no `-rpcpassword` is specified, the daemon now uses a special 'cookie' file for authentication. This file is generated with random content when the daemon starts, and deleted when it exits. Its contents are used as authentication token. Read access to this file controls who can access through RPC. By default it is stored in the data directory but its location can be overridden with the option `-rpccookiefile`.
 This is similar to Tor's CookieAuthentication: see https://www.torproject.org/docs/tor-manual.html.en 
-This allows running pivxd without having to do any manual configuration.
+This allows running wisprd without having to do any manual configuration.
 
 
 ### New RPC command
@@ -348,7 +348,7 @@ Detailed release notes follow. This overview includes changes that affect behavi
 ### RPC/REST
  - #562 `772160b1b` [Wallet/RPC] Add argument to mint zerocoin from specific UTXO (warrows)
  - #539 `b6a02e9d6` [RPC] Allow watchonly coins to be shown for listunspent (blondfrogs)
- - #543 `e4522ff07` [RPC] Segfault pivx-cli getinfo while loading block index (Mrs-X)
+ - #543 `e4522ff07` [RPC] Segfault wispr-cli getinfo while loading block index (Mrs-X)
  - #524 `2541b5001` [RPC] Add blocksizenotify command (Mrs-X)
  - #495 `4946224c1` [RPC] Show script verification errors in signrawtransaction result (Fuzzbawls)
  - #468 `00b8b8e72` [RPC/REST] Migrate to libevent based httpd server (Fuzzbawls)
@@ -405,4 +405,4 @@ Thanks to everyone who directly contributed to this release:
 - PeterL73
 - Anthony Posselli
 
-As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/pivx-project-translations/), the QA team during Testing and the Node hosts supporting our Testnet.
+As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/wispr-project-translations/), the QA team during Testing and the Node hosts supporting our Testnet.
