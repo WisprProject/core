@@ -1858,7 +1858,7 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
     }
 
 // XX42 Remove/refactor code below. Until then provide safe defaults
-    nAnonymizePivxAmount = 2;
+    nAnonymizeWisprAmount = 2;
 
 //    nLiquidityProvider = GetArg("-liquidityprovider", 0); //0-100
 //    if (nLiquidityProvider != 0) {
@@ -1867,9 +1867,9 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
 //        nZeromintPercentage = 99999;
 //    }
 //
-//    nAnonymizePivxAmount = GetArg("-anonymizewispramount", 0);
-//    if (nAnonymizePivxAmount > 999999) nAnonymizePivxAmount = 999999;
-//    if (nAnonymizePivxAmount < 2) nAnonymizePivxAmount = 2;
+//    nAnonymizeWisprAmount = GetArg("-anonymizewispramount", 0);
+//    if (nAnonymizeWisprAmount > 999999) nAnonymizeWisprAmount = 999999;
+//    if (nAnonymizeWisprAmount < 2) nAnonymizeWisprAmount = 2;
 
     fEnableSwiftTX = GetBoolArg("-enableswifttx", fEnableSwiftTX);
     nSwiftTXDepth = GetArg("-swifttxdepth", nSwiftTXDepth);
@@ -1883,7 +1883,7 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
 
     LogPrintf("fLiteMode %d\n", fLiteMode);
     LogPrintf("nSwiftTXDepth %d\n", nSwiftTXDepth);
-    LogPrintf("Anonymize PIVX Amount %d\n", nAnonymizePivxAmount);
+    LogPrintf("Anonymize PIVX Amount %d\n", nAnonymizeWisprAmount);
     LogPrintf("Budget Mode %s\n", strBudgetMode.c_str());
 
     /* Denominations

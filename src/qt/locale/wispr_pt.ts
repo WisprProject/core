@@ -239,8 +239,8 @@
         <translation>Encriptar com &amp;BIP 38</translation>
     </message>
     <message>
-        <source>Enter a Pivx Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</source>
-        <translation>Digite um endereço Pivx que você gostaria de criptografar usando BIP 38. Digite uma frase secreta na caixa do meio. Pressione criptografar para calcular a chave privada criptografada.</translation>
+        <source>Enter a Wispr Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</source>
+        <translation>Digite um endereço Wispr que você gostaria de criptografar usando BIP 38. Digite uma frase secreta na caixa do meio. Pressione criptografar para calcular a chave privada criptografada.</translation>
     </message>
     <message>
         <source>Address:</source>

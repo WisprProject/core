@@ -277,10 +277,10 @@
 #define PACKAGE_BUGREPORT "www.wispr.org"
 
 /* Define to the full name of this package. */
-#define PACKAGE_NAME "Pivx Core"
+#define PACKAGE_NAME "Wispr Core"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "Pivx Core 2.3.1"
+#define PACKAGE_STRING "Wispr Core 2.3.1"
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "wispr"

@@ -84,7 +84,7 @@ UniValue getnewaddress(const UniValue& params, bool fHelp)
     if (fHelp || params.size() > 1)
         throw runtime_error(
             "getnewaddress ( \"account\" )\n"
-            "\nReturns a new PIVX address for receiving payments.\n"
+            "\nReturns a new WISPR address for receiving payments.\n"
             "If 'account' is specified (recommended), it is added to the address book \n"
             "so payments received with the address will be credited to 'account'.\n"
 

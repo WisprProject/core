@@ -10,7 +10,7 @@
 
 /**
  * CBaseChainParams defines the base parameters (shared between wispr-cli and wisprd)
- * of a given instance of the Pivx system.
+ * of a given instance of the Wispr system.
  */
 class CBaseChainParams
 {

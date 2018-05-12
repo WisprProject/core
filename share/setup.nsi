@@ -1,4 +1,4 @@
-Name "Pivx Core (-bit)"
+Name "Wispr Core (-bit)"
 
 RequestExecutionLevel highest
 SetCompressor /SOLID lzma
@@ -6,7 +6,7 @@ SetCompressor /SOLID lzma
 # General Symbol Definitions
 !define REGKEY "SOFTWARE\$(^Name)"
 !define VERSION 2.3.1
-!define COMPANY "Pivx Core project"
+!define COMPANY "Wispr Core project"
 !define URL https://www.wispr.org
 
 # MUI Symbol Definitions
@@ -19,7 +19,7 @@ SetCompressor /SOLID lzma
 !define MUI_STARTMENUPAGE_REGISTRY_ROOT HKLM
 !define MUI_STARTMENUPAGE_REGISTRY_KEY ${REGKEY}
 !define MUI_STARTMENUPAGE_REGISTRY_VALUENAME StartMenuGroup
-!define MUI_STARTMENUPAGE_DEFAULTFOLDER "Pivx Core"
+!define MUI_STARTMENUPAGE_DEFAULTFOLDER "Wispr Core"
 !define MUI_FINISHPAGE_RUN $INSTDIR\wispr-qt.exe
 !define MUI_UNICON "${NSISDIR}\Contrib\Graphics\Icons\modern-uninstall.ico"
 !define MUI_UNWELCOMEFINISHPAGE_BITMAP "/media/sf_Documents/PIVX-2.3.1/share/pixmaps/nsis-wizard.bmp"
@@ -50,16 +50,16 @@ Var StartMenuGroup
 # Installer attributes
 OutFile /media/sf_Documents/PIVX-2.3.1/wispr-${VERSION}-win-setup.exe
 !if "" == "64"
-InstallDir $PROGRAMFILES64\Pivx
+InstallDir $PROGRAMFILES64\Wispr
 !else
-InstallDir $PROGRAMFILES\Pivx
+InstallDir $PROGRAMFILES\Wispr
 !endif
 CRCCheck on
 XPStyle on
 BrandingText " "
 ShowInstDetails show
 VIProductVersion ${VERSION}.0
-VIAddVersionKey ProductName "Pivx Core"
+VIAddVersionKey ProductName "Wispr Core"
 VIAddVersionKey ProductVersion "${VERSION}"
 VIAddVersionKey CompanyName "${COMPANY}"
 VIAddVersionKey CompanyWebsite "${URL}"
@@ -107,7 +107,7 @@ Section -post SEC0001
     WriteRegDWORD HKCU "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" NoModify 1
     WriteRegDWORD HKCU "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" NoRepair 1
     WriteRegStr HKCR "wispr" "URL Protocol" ""
-    WriteRegStr HKCR "wispr" "" "URL:Pivx"
+    WriteRegStr HKCR "wispr" "" "URL:Wispr"
     WriteRegStr HKCR "wispr\DefaultIcon" "" $INSTDIR\wispr-qt.exe
     WriteRegStr HKCR "wispr\shell\open\command" "" '"$INSTDIR\wispr-qt.exe" "%1"'
 SectionEnd
@@ -139,7 +139,7 @@ Section -un.post UNSEC0001
     DeleteRegKey HKCU "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)"
     Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\Uninstall $(^Name).lnk"
     Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\$(^Name).lnk"
-    Delete /REBOOTOK "$SMSTARTUP\Pivx.lnk"
+    Delete /REBOOTOK "$SMSTARTUP\Wispr.lnk"
     Delete /REBOOTOK $INSTDIR\uninstall.exe
     Delete /REBOOTOK $INSTDIR\debug.log
     Delete /REBOOTOK $INSTDIR\db.log
