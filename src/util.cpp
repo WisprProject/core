@@ -232,7 +232,7 @@ bool LogAcceptCategory(const char *category) {
             const vector <string> &categories = mapMultiArgs["-debug"];
             ptrCategory.reset(new set<string>(categories.begin(), categories.end()));
             // thread_specific_ptr automatically deletes the set when the thread ends.
-            // "wispr" is a composite category enabling all PIVX-related debug output
+            // "wispr" is a composite category enabling all WISPR-related debug output
             if (ptrCategory->count(string("wispr"))) {
                 ptrCategory->insert(string("obfuscation"));
                 ptrCategory->insert(string("swiftx"));

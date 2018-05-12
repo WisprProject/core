@@ -10,11 +10,11 @@ SetCompressor /SOLID lzma
 !define URL https://www.wispr.org
 
 # MUI Symbol Definitions
-!define MUI_ICON "/media/sf_Documents/PIVX-2.3.1/share/pixmaps/bitcoin.ico"
-!define MUI_WELCOMEFINISHPAGE_BITMAP "/media/sf_Documents/PIVX-2.3.1/share/pixmaps/nsis-wizard.bmp"
+!define MUI_ICON "/media/sf_Documents/WISPR-2.3.1/share/pixmaps/bitcoin.ico"
+!define MUI_WELCOMEFINISHPAGE_BITMAP "/media/sf_Documents/WISPR-2.3.1/share/pixmaps/nsis-wizard.bmp"
 !define MUI_HEADERIMAGE
 !define MUI_HEADERIMAGE_RIGHT
-!define MUI_HEADERIMAGE_BITMAP "/media/sf_Documents/PIVX-2.3.1/share/pixmaps/nsis-header.bmp"
+!define MUI_HEADERIMAGE_BITMAP "/media/sf_Documents/WISPR-2.3.1/share/pixmaps/nsis-header.bmp"
 !define MUI_FINISHPAGE_NOAUTOCLOSE
 !define MUI_STARTMENUPAGE_REGISTRY_ROOT HKLM
 !define MUI_STARTMENUPAGE_REGISTRY_KEY ${REGKEY}
@@ -22,7 +22,7 @@ SetCompressor /SOLID lzma
 !define MUI_STARTMENUPAGE_DEFAULTFOLDER "Wispr Core"
 !define MUI_FINISHPAGE_RUN $INSTDIR\wispr-qt.exe
 !define MUI_UNICON "${NSISDIR}\Contrib\Graphics\Icons\modern-uninstall.ico"
-!define MUI_UNWELCOMEFINISHPAGE_BITMAP "/media/sf_Documents/PIVX-2.3.1/share/pixmaps/nsis-wizard.bmp"
+!define MUI_UNWELCOMEFINISHPAGE_BITMAP "/media/sf_Documents/WISPR-2.3.1/share/pixmaps/nsis-wizard.bmp"
 !define MUI_UNFINISHPAGE_NOAUTOCLOSE
 
 # Included files
@@ -48,7 +48,7 @@ Var StartMenuGroup
 !insertmacro MUI_LANGUAGE English
 
 # Installer attributes
-OutFile /media/sf_Documents/PIVX-2.3.1/wispr-${VERSION}-win-setup.exe
+OutFile /media/sf_Documents/WISPR-2.3.1/wispr-${VERSION}-win-setup.exe
 !if "" == "64"
 InstallDir $PROGRAMFILES64\Wispr
 !else
@@ -73,14 +73,14 @@ ShowUninstDetails show
 Section -Main SEC0000
     SetOutPath $INSTDIR
     SetOverwrite on
-    File /media/sf_Documents/PIVX-2.3.1/release/wispr-qt.exe
-    File /oname=COPYING.txt /media/sf_Documents/PIVX-2.3.1/COPYING
-    File /oname=readme.txt /media/sf_Documents/PIVX-2.3.1/doc/README_windows.txt
+    File /media/sf_Documents/WISPR-2.3.1/release/wispr-qt.exe
+    File /oname=COPYING.txt /media/sf_Documents/WISPR-2.3.1/COPYING
+    File /oname=readme.txt /media/sf_Documents/WISPR-2.3.1/doc/README_windows.txt
     SetOutPath $INSTDIR\daemon
-    File /media/sf_Documents/PIVX-2.3.1/release/wisprd.exe
-    File /media/sf_Documents/PIVX-2.3.1/release/wispr-cli.exe
+    File /media/sf_Documents/WISPR-2.3.1/release/wisprd.exe
+    File /media/sf_Documents/WISPR-2.3.1/release/wispr-cli.exe
     SetOutPath $INSTDIR\doc
-    File /r /media/sf_Documents/PIVX-2.3.1/doc\*.*
+    File /r /media/sf_Documents/WISPR-2.3.1/doc\*.*
     SetOutPath $INSTDIR
     WriteRegStr HKCU "${REGKEY}\Components" Main 1
 
