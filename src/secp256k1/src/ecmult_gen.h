@@ -11,7 +11,6 @@
 #include "group.h"
 
 static void secp256k1_ecmult_gen_start(void);
-
 static void secp256k1_ecmult_gen_stop(void);
 
 /** Multiply with the generator: R = a*G */

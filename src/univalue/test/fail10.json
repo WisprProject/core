@@ -1,3 +1,1 @@
-{
-  "Extra value after close": true
-} "misplaced quoted value"
+{"Extra value after close": true} "misplaced quoted value"

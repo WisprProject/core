@@ -1,3 +1,1 @@
-{
-  unquoted_key: "keys must be quoted"
-}
+{unquoted_key: "keys must be quoted"}

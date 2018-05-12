@@ -22,7 +22,6 @@
 #endif
 
 static void secp256k1_scalar_start(void);
-
 static void secp256k1_scalar_stop(void);
 
 /** Clear a scalar to prevent the leak of sensitive data. */
@@ -41,7 +40,7 @@ static void secp256k1_scalar_set_b32(secp256k1_scalar_t *r, const unsigned char 
 static void secp256k1_scalar_set_int(secp256k1_scalar_t *r, unsigned int v);
 
 /** Convert a scalar to a byte array. */
-static void secp256k1_scalar_get_b32(unsigned char *bin, const secp256k1_scalar_t *a);
+static void secp256k1_scalar_get_b32(unsigned char *bin, const secp256k1_scalar_t* a);
 
 /** Add two scalars together (modulo the group order). Returns whether it overflowed. */
 static int secp256k1_scalar_add(secp256k1_scalar_t *r, const secp256k1_scalar_t *a, const secp256k1_scalar_t *b);
@@ -74,13 +73,11 @@ static int secp256k1_scalar_is_one(const secp256k1_scalar_t *a);
 static int secp256k1_scalar_is_high(const secp256k1_scalar_t *a);
 
 #ifndef USE_NUM_NONE
-
 /** Convert a scalar to a number. */
 static void secp256k1_scalar_get_num(secp256k1_num_t *r, const secp256k1_scalar_t *a);
 
 /** Get the order of the group as a number. */
 static void secp256k1_scalar_order_get_num(secp256k1_num_t *r);
-
 #endif
 
 /** Compare two scalars. */
@@ -94,8 +91,6 @@ static void secp256k1_scalar_split_lambda_var(secp256k1_scalar_t *r1, secp256k1_
 #endif
 
 /** Multiply a and b (without taking the modulus!), divide by 2**shift, and round to the nearest integer. Shift must be at least 256. */
-static void
-secp256k1_scalar_mul_shift_var(secp256k1_scalar_t *r, const secp256k1_scalar_t *a, const secp256k1_scalar_t *b,
-                               unsigned int shift);
+static void secp256k1_scalar_mul_shift_var(secp256k1_scalar_t *r, const secp256k1_scalar_t *a, const secp256k1_scalar_t *b, unsigned int shift);
 
 #endif

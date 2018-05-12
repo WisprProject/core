@@ -33,7 +33,6 @@
  */
 
 static void secp256k1_fe_inner_start(void) {}
-
 static void secp256k1_fe_inner_stop(void) {}
 
 #ifdef VERIFY
@@ -55,52 +54,38 @@ static void secp256k1_fe_verify(const secp256k1_fe_t *a) {
     VERIFY_CHECK(r == 1);
 }
 #else
-
 static void secp256k1_fe_verify(const secp256k1_fe_t *a) {
-    (void) a;
+    (void)a;
 }
-
 #endif
 
 static void secp256k1_fe_normalize(secp256k1_fe_t *r) {
     uint64_t t0 = r->n[0], t1 = r->n[1], t2 = r->n[2], t3 = r->n[3], t4 = r->n[4];
 
     /* Reduce t4 at the start so there will be at most a single carry from the first pass */
-    uint64_t x = t4 >> 48;
-    t4 &= 0x0FFFFFFFFFFFFULL;
+    uint64_t x = t4 >> 48; t4 &= 0x0FFFFFFFFFFFFULL;
     uint64_t m;
 
     /* The first pass ensures the magnitude is 1, ... */
     t0 += x * 0x1000003D1ULL;
-    t1 += (t0 >> 52);
-    t0 &= 0xFFFFFFFFFFFFFULL;
-    t2 += (t1 >> 52);
-    t1 &= 0xFFFFFFFFFFFFFULL;
-    m = t1;
-    t3 += (t2 >> 52);
-    t2 &= 0xFFFFFFFFFFFFFULL;
-    m &= t2;
-    t4 += (t3 >> 52);
-    t3 &= 0xFFFFFFFFFFFFFULL;
-    m &= t3;
+    t1 += (t0 >> 52); t0 &= 0xFFFFFFFFFFFFFULL;
+    t2 += (t1 >> 52); t1 &= 0xFFFFFFFFFFFFFULL; m = t1;
+    t3 += (t2 >> 52); t2 &= 0xFFFFFFFFFFFFFULL; m &= t2;
+    t4 += (t3 >> 52); t3 &= 0xFFFFFFFFFFFFFULL; m &= t3;
 
     /* ... except for a possible carry at bit 48 of t4 (i.e. bit 256 of the field element) */
     VERIFY_CHECK(t4 >> 49 == 0);
 
     /* At most a single final reduction is needed; check if the value is >= the field characteristic */
     x = (t4 >> 48) | ((t4 == 0x0FFFFFFFFFFFFULL) & (m == 0xFFFFFFFFFFFFFULL)
-                      & (t0 >= 0xFFFFEFFFFFC2FULL));
+        & (t0 >= 0xFFFFEFFFFFC2FULL));
 
     /* Apply the final reduction (for constant-time behaviour, we do it always) */
     t0 += x * 0x1000003D1ULL;
-    t1 += (t0 >> 52);
-    t0 &= 0xFFFFFFFFFFFFFULL;
-    t2 += (t1 >> 52);
-    t1 &= 0xFFFFFFFFFFFFFULL;
-    t3 += (t2 >> 52);
-    t2 &= 0xFFFFFFFFFFFFFULL;
-    t4 += (t3 >> 52);
-    t3 &= 0xFFFFFFFFFFFFFULL;
+    t1 += (t0 >> 52); t0 &= 0xFFFFFFFFFFFFFULL;
+    t2 += (t1 >> 52); t1 &= 0xFFFFFFFFFFFFFULL;
+    t3 += (t2 >> 52); t2 &= 0xFFFFFFFFFFFFFULL;
+    t4 += (t3 >> 52); t3 &= 0xFFFFFFFFFFFFFULL;
 
     /* If t4 didn't carry to bit 48 already, then it should have after any final reduction */
     VERIFY_CHECK(t4 >> 48 == x);
@@ -108,11 +93,7 @@ static void secp256k1_fe_normalize(secp256k1_fe_t *r) {
     /* Mask off the possible multiple of 2^256 from the final reduction */
     t4 &= 0x0FFFFFFFFFFFFULL;
 
-    r->n[0] = t0;
-    r->n[1] = t1;
-    r->n[2] = t2;
-    r->n[3] = t3;
-    r->n[4] = t4;
+    r->n[0] = t0; r->n[1] = t1; r->n[2] = t2; r->n[3] = t3; r->n[4] = t4;
 
 #ifdef VERIFY
     r->magnitude = 1;
@@ -153,7 +134,7 @@ SECP256K1_INLINE static void secp256k1_fe_clear(secp256k1_fe_t *a) {
     a->magnitude = 0;
     a->normalized = 1;
 #endif
-    for (int i = 0; i < 5; i++) {
+    for (int i=0; i<5; i++) {
         a->n[i] = 0;
     }
 }
@@ -166,7 +147,7 @@ SECP256K1_INLINE static int secp256k1_fe_equal(const secp256k1_fe_t *a, const se
     secp256k1_fe_verify(b);
 #endif
     const uint64_t *t = a->n, *u = b->n;
-    return ((t[0] ^ u[0]) | (t[1] ^ u[1]) | (t[2] ^ u[2]) | (t[3] ^ u[3]) | (t[4] ^ u[4])) == 0;
+    return ((t[0]^u[0]) | (t[1]^u[1]) | (t[2]^u[2]) | (t[3]^u[3]) | (t[4]^u[4])) == 0;
 }
 
 static int secp256k1_fe_cmp_var(const secp256k1_fe_t *a, const secp256k1_fe_t *b) {
@@ -185,15 +166,14 @@ static int secp256k1_fe_cmp_var(const secp256k1_fe_t *a, const secp256k1_fe_t *b
 
 static int secp256k1_fe_set_b32(secp256k1_fe_t *r, const unsigned char *a) {
     r->n[0] = r->n[1] = r->n[2] = r->n[3] = r->n[4] = 0;
-    for (int i = 0; i < 32; i++) {
-        for (int j = 0; j < 2; j++) {
-            int limb = (8 * i + 4 * j) / 52;
-            int shift = (8 * i + 4 * j) % 52;
-            r->n[limb] |= (uint64_t)((a[31 - i] >> (4 * j)) & 0xF) << shift;
+    for (int i=0; i<32; i++) {
+        for (int j=0; j<2; j++) {
+            int limb = (8*i+4*j)/52;
+            int shift = (8*i+4*j)%52;
+            r->n[limb] |= (uint64_t)((a[31-i] >> (4*j)) & 0xF) << shift;
         }
     }
-    if (r->n[4] == 0x0FFFFFFFFFFFFULL && (r->n[3] & r->n[2] & r->n[1]) == 0xFFFFFFFFFFFFFULL &&
-        r->n[0] >= 0xFFFFEFFFFFC2FULL) {
+    if (r->n[4] == 0x0FFFFFFFFFFFFULL && (r->n[3] & r->n[2] & r->n[1]) == 0xFFFFFFFFFFFFFULL && r->n[0] >= 0xFFFFEFFFFFC2FULL) {
         return 0;
     }
 #ifdef VERIFY
@@ -210,14 +190,14 @@ static void secp256k1_fe_get_b32(unsigned char *r, const secp256k1_fe_t *a) {
     VERIFY_CHECK(a->normalized);
     secp256k1_fe_verify(a);
 #endif
-    for (int i = 0; i < 32; i++) {
+    for (int i=0; i<32; i++) {
         int c = 0;
-        for (int j = 0; j < 2; j++) {
-            int limb = (8 * i + 4 * j) / 52;
-            int shift = (8 * i + 4 * j) % 52;
+        for (int j=0; j<2; j++) {
+            int limb = (8*i+4*j)/52;
+            int shift = (8*i+4*j)%52;
             c |= ((a->n[limb] >> shift) & 0xF) << (4 * j);
         }
-        r[31 - i] = c;
+        r[31-i] = c;
     }
 }
 
@@ -267,7 +247,7 @@ SECP256K1_INLINE static void secp256k1_fe_add(secp256k1_fe_t *r, const secp256k1
 #endif
 }
 
-static void secp256k1_fe_mul(secp256k1_fe_t *r, const secp256k1_fe_t *a, const secp256k1_fe_t *SECP256K1_RESTRICT b) {
+static void secp256k1_fe_mul(secp256k1_fe_t *r, const secp256k1_fe_t *a, const secp256k1_fe_t * SECP256K1_RESTRICT b) {
 #ifdef VERIFY
     VERIFY_CHECK(a->magnitude <= 8);
     VERIFY_CHECK(b->magnitude <= 8);
@@ -297,7 +277,7 @@ static void secp256k1_fe_sqr(secp256k1_fe_t *r, const secp256k1_fe_t *a) {
 }
 
 static void secp256k1_fe_cmov(secp256k1_fe_t *r, const secp256k1_fe_t *a, int flag) {
-    uint64_t mask0 = flag + ~((uint64_t) 0), mask1 = ~mask0;
+    uint64_t mask0 = flag + ~((uint64_t)0), mask1 = ~mask0;
     r->n[0] = (r->n[0] & mask0) | (a->n[0] & mask1);
     r->n[1] = (r->n[1] & mask0) | (a->n[1] & mask1);
     r->n[2] = (r->n[2] & mask0) | (a->n[2] & mask1);

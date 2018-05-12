@@ -10,7 +10,8 @@
 
 using namespace std;
 
-int main(int argc, char *argv[]) {
+int main (int argc, char *argv[])
+{
     UniValue val;
     if (val.read(string(istreambuf_iterator<char>(cin),
                         istreambuf_iterator<char>()))) {
