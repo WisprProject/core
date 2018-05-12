@@ -43,11 +43,16 @@ struct TestingSetup {
         bitdb.MakeMock();
 #endif
         pathTemp = GetTempPath() / strprintf("test_wispr_%lu_%i", (unsigned long) GetTime(), (int) (GetRand(100000)));
+        cout << "Create Directories...\n";
         boost::filesystem::create_directories(pathTemp);
         mapArgs["-datadir"] = pathTemp.string();
+        cout << "Create BlockTreeDB...\n";
         pblocktree = new CBlockTreeDB(1 << 20, true);
+        cout << "Create CoinsViewDB...\n";
         pcoinsdbview = new CCoinsViewDB(1 << 23, true);
+        cout << "Create CoinsViewCache...\n";
         pcoinsTip = new CCoinsViewCache(pcoinsdbview);
+        cout << "Init block index...\n";
         InitBlockIndex();
 #ifdef ENABLE_WALLET
         bool fFirstRun;
@@ -56,11 +61,13 @@ struct TestingSetup {
         RegisterValidationInterface(pwalletMain);
 #endif
         nScriptCheckThreads = 3;
+        cout << "Create threads...\n";
         for (int i = 0; i < nScriptCheckThreads - 1; i++)
             threadGroup.create_thread(&ThreadScriptCheck);
         RegisterNodeSignals(GetNodeSignals());
     }
     ~TestingSetup() {
+        cout << "Testing Setup...\n";
         threadGroup.interrupt_all();
         threadGroup.join_all();
         UnregisterNodeSignals(GetNodeSignals());
