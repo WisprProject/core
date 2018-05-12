@@ -56,8 +56,11 @@ struct TestingSetup {
         InitBlockIndex();
 #ifdef ENABLE_WALLET
         bool fFirstRun;
+        cout << "Create wallet...\n";
         pwalletMain = new CWallet("wallet.dat");
+        cout << "Load wallet...\n";
         pwalletMain->LoadWallet(fFirstRun);
+        cout << "Register validation interface...\n";
         RegisterValidationInterface(pwalletMain);
 #endif
         nScriptCheckThreads = 3;
