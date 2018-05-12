@@ -19,7 +19,6 @@ from util import *
 import os
 import shutil
 
-
 # Create one-input, one-output, no-fee transaction:
 class MempoolSpendCoinbaseTest(BitcoinTestFramework):
 
@@ -31,8 +30,8 @@ class MempoolSpendCoinbaseTest(BitcoinTestFramework):
         self.is_network_split = False
 
     def create_tx(self, from_txid, to_address, amount):
-        inputs = [{"txid": from_txid, "vout": 0}]
-        outputs = {to_address: amount}
+        inputs = [{ "txid" : from_txid, "vout" : 0}]
+        outputs = { to_address : amount }
         rawtx = self.nodes[0].createrawtransaction(inputs, outputs)
         signresult = self.nodes[0].signrawtransaction(rawtx)
         assert_equal(signresult["complete"], True)
@@ -46,9 +45,9 @@ class MempoolSpendCoinbaseTest(BitcoinTestFramework):
         # Coinbase at height chain_height-100+1 ok in mempool, should
         # get mined. Coinbase at height chain_height-100+2 is
         # is too immature to spend.
-        b = [self.nodes[0].getblockhash(n) for n in range(101, 103)]
-        coinbase_txids = [self.nodes[0].getblock(h)['tx'][0] for h in b]
-        spends_raw = [self.create_tx(txid, node0_address, 50) for txid in coinbase_txids]
+        b = [ self.nodes[0].getblockhash(n) for n in range(101, 103) ]
+        coinbase_txids = [ self.nodes[0].getblock(h)['tx'][0] for h in b ]
+        spends_raw = [ self.create_tx(txid, node0_address, 50) for txid in coinbase_txids ]
 
         spend_101_id = self.nodes[0].sendrawtransaction(spends_raw[0])
 
@@ -56,7 +55,7 @@ class MempoolSpendCoinbaseTest(BitcoinTestFramework):
         assert_raises(JSONRPCException, self.nodes[0].sendrawtransaction, spends_raw[1])
 
         # mempool should have just spend_101:
-        assert_equal(self.nodes[0].getrawmempool(), [spend_101_id])
+        assert_equal(self.nodes[0].getrawmempool(), [ spend_101_id ])
 
         # mine a block, spend_101 should get confirmed
         self.nodes[0].setgenerate(True, 1)
@@ -64,8 +63,7 @@ class MempoolSpendCoinbaseTest(BitcoinTestFramework):
 
         # ... and now height 102 can be spent:
         spend_102_id = self.nodes[0].sendrawtransaction(spends_raw[1])
-        assert_equal(self.nodes[0].getrawmempool(), [spend_102_id])
-
+        assert_equal(self.nodes[0].getrawmempool(), [ spend_102_id ])
 
 if __name__ == '__main__':
     MempoolSpendCoinbaseTest().main()

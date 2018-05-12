@@ -13,7 +13,6 @@ from util import *
 import os
 import shutil
 
-
 class BIP66Test(BitcoinTestFramework):
 
     def setup_network(self):
@@ -86,7 +85,6 @@ class BIP66Test(BitcoinTestFramework):
         self.sync_all()
         if (self.nodes[0].getblockcount() != cnt + 1052):
             raise AssertionError("Failed to mine a version=3 block")
-
 
 if __name__ == '__main__':
     BIP66Test().main()

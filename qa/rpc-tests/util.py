@@ -10,7 +10,6 @@
 # Add python-bitcoinrpc to module search path:
 import os
 import sys
-
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), "python-bitcoinrpc"))
 
 from decimal import Decimal, ROUND_DOWN
@@ -24,33 +23,27 @@ import re
 from bitcoinrpc.authproxy import AuthServiceProxy, JSONRPCException
 from util import *
 
-
 def p2p_port(n):
-    return 11000 + n + os.getpid() % 999
-
-
+    return 11000 + n + os.getpid()%999
 def rpc_port(n):
-    return 12000 + n + os.getpid() % 999
-
+    return 12000 + n + os.getpid()%999
 
 def check_json_precision():
     """Make sure json library being used does not lose precision converting BTC values"""
     n = Decimal("20000000.00000003")
-    satoshis = int(json.loads(json.dumps(float(n))) * 1.0e8)
+    satoshis = int(json.loads(json.dumps(float(n)))*1.0e8)
     if satoshis != 2000000000000003:
         raise RuntimeError("JSON encode/decode loses precision")
-
 
 def sync_blocks(rpc_connections):
     """
     Wait until everybody has the same block count
     """
     while True:
-        counts = [x.getblockcount() for x in rpc_connections]
-        if counts == [counts[0]] * len(counts):
+        counts = [ x.getblockcount() for x in rpc_connections ]
+        if counts == [ counts[0] ]*len(counts):
             break
         time.sleep(1)
-
 
 def sync_mempools(rpc_connections):
     """
@@ -62,54 +55,51 @@ def sync_mempools(rpc_connections):
         num_match = 1
         for i in range(1, len(rpc_connections)):
             if set(rpc_connections[i].getrawmempool()) == pool:
-                num_match = num_match + 1
+                num_match = num_match+1
         if num_match == len(rpc_connections):
             break
         time.sleep(1)
 
-
 bitcoind_processes = {}
 
-
 def initialize_datadir(dirname, n):
-    datadir = os.path.join(dirname, "node" + str(n))
+    datadir = os.path.join(dirname, "node"+str(n))
     if not os.path.isdir(datadir):
         os.makedirs(datadir)
-    with open(os.path.join(datadir, "wispr.conf"), 'w') as f:
+    with open(os.path.join(datadir, "pivx.conf"), 'w') as f:
         f.write("regtest=1\n");
         f.write("rpcuser=rt\n");
         f.write("rpcpassword=rt\n");
-        f.write("port=" + str(p2p_port(n)) + "\n");
-        f.write("rpcport=" + str(rpc_port(n)) + "\n");
+        f.write("port="+str(p2p_port(n))+"\n");
+        f.write("rpcport="+str(rpc_port(n))+"\n");
     return datadir
-
 
 def initialize_chain(test_dir):
     """
     Create (or copy from cache) a 200-block-long chain and
     4 wallets.
-    wisprd and wispr-cli must be in search path.
+    pivxd and pivx-cli must be in search path.
     """
 
     if not os.path.isdir(os.path.join("cache", "node0")):
         devnull = open("/dev/null", "w+")
-        # Create cache directories, run wisprd:
+        # Create cache directories, run pivxd:
         for i in range(4):
-            datadir = initialize_datadir("cache", i)
-            args = [os.getenv("BITCOIND", "wisprd"), "-keypool=1", "-datadir=" + datadir, "-discover=0"]
+            datadir=initialize_datadir("cache", i)
+            args = [ os.getenv("BITCOIND", "pivxd"), "-keypool=1", "-datadir="+datadir, "-discover=0" ]
             if i > 0:
-                args.append("-connect=127.0.0.1:" + str(p2p_port(0)))
+                args.append("-connect=127.0.0.1:"+str(p2p_port(0)))
             bitcoind_processes[i] = subprocess.Popen(args)
-            subprocess.check_call([os.getenv("BITCOINCLI", "wispr-cli"), "-datadir=" + datadir,
-                                   "-rpcwait", "getblockcount"], stdout=devnull)
+            subprocess.check_call([ os.getenv("BITCOINCLI", "pivx-cli"), "-datadir="+datadir,
+                                    "-rpcwait", "getblockcount"], stdout=devnull)
         devnull.close()
         rpcs = []
         for i in range(4):
             try:
-                url = "http://rt:rt@127.0.0.1:%d" % (rpc_port(i),)
+                url = "http://rt:rt@127.0.0.1:%d"%(rpc_port(i),)
                 rpcs.append(AuthServiceProxy(url))
             except:
-                sys.stderr.write("Error connecting to " + url + "\n")
+                sys.stderr.write("Error connecting to "+url+"\n")
                 sys.exit(1)
 
         # Create a 200-block-long chain; each of the 4 nodes
@@ -122,7 +112,7 @@ def initialize_chain(test_dir):
                 for j in range(25):
                     set_node_times(rpcs, block_time)
                     rpcs[peer].setgenerate(True, 1)
-                    block_time += 10 * 60
+                    block_time += 10*60
                 # Must sync before next peer starts generating blocks
                 sync_blocks(rpcs)
 
@@ -136,11 +126,10 @@ def initialize_chain(test_dir):
             os.remove(log_filename("cache", i, "fee_estimates.dat"))
 
     for i in range(4):
-        from_dir = os.path.join("cache", "node" + str(i))
-        to_dir = os.path.join(test_dir, "node" + str(i))
+        from_dir = os.path.join("cache", "node"+str(i))
+        to_dir = os.path.join(test_dir,  "node"+str(i))
         shutil.copytree(from_dir, to_dir)
-        initialize_datadir(test_dir, i)  # Overwrite port/rpcport in wispr.conf
-
+        initialize_datadir(test_dir, i) # Overwrite port/rpcport in pivx.conf
 
 def initialize_chain_clean(test_dir, num_nodes):
     """
@@ -148,7 +137,7 @@ def initialize_chain_clean(test_dir, num_nodes):
     Useful if a test case wants complete control over initialization.
     """
     for i in range(num_nodes):
-        datadir = initialize_datadir(test_dir, i)
+        datadir=initialize_datadir(test_dir, i)
 
 
 def _rpchost_to_args(rpchost):
@@ -163,7 +152,7 @@ def _rpchost_to_args(rpchost):
     rpcconnect = match.group(1)
     rpcport = match.group(2)
 
-    if rpcconnect.startswith('['):  # remove IPv6 [...] wrapping
+    if rpcconnect.startswith('['): # remove IPv6 [...] wrapping
         rpcconnect = rpcconnect[1:-1]
 
     rv = ['-rpcconnect=' + rpcconnect]
@@ -171,54 +160,47 @@ def _rpchost_to_args(rpchost):
         rv += ['-rpcport=' + rpcport]
     return rv
 
-
 def start_node(i, dirname, extra_args=None, rpchost=None):
     """
-    Start a wisprd and return RPC connection to it
+    Start a pivxd and return RPC connection to it
     """
-    datadir = os.path.join(dirname, "node" + str(i))
-    args = [os.getenv("BITCOIND", "wisprd"), "-datadir=" + datadir, "-keypool=1", "-discover=0", "-rest"]
+    datadir = os.path.join(dirname, "node"+str(i))
+    args = [ os.getenv("BITCOIND", "pivxd"), "-datadir="+datadir, "-keypool=1", "-discover=0", "-rest" ]
     if extra_args is not None: args.extend(extra_args)
     bitcoind_processes[i] = subprocess.Popen(args)
     devnull = open("/dev/null", "w+")
-    subprocess.check_call([os.getenv("BITCOINCLI", "wispr-cli"), "-datadir=" + datadir] +
-                          _rpchost_to_args(rpchost) +
+    subprocess.check_call([ os.getenv("BITCOINCLI", "pivx-cli"), "-datadir="+datadir] +
+                          _rpchost_to_args(rpchost)  +
                           ["-rpcwait", "getblockcount"], stdout=devnull)
     devnull.close()
     url = "http://rt:rt@%s:%d" % (rpchost or '127.0.0.1', rpc_port(i))
     proxy = AuthServiceProxy(url)
-    proxy.url = url  # store URL on proxy for info
+    proxy.url = url # store URL on proxy for info
     return proxy
-
 
 def start_nodes(num_nodes, dirname, extra_args=None, rpchost=None):
     """
-    Start multiple wisprds, return RPC connections to them
+    Start multiple pivxds, return RPC connections to them
     """
-    if extra_args is None: extra_args = [None for i in range(num_nodes)]
-    return [start_node(i, dirname, extra_args[i], rpchost) for i in range(num_nodes)]
-
+    if extra_args is None: extra_args = [ None for i in range(num_nodes) ]
+    return [ start_node(i, dirname, extra_args[i], rpchost) for i in range(num_nodes) ]
 
 def log_filename(dirname, n_node, logname):
-    return os.path.join(dirname, "node" + str(n_node), "regtest", logname)
-
+    return os.path.join(dirname, "node"+str(n_node), "regtest", logname)
 
 def stop_node(node, i):
     node.stop()
     bitcoind_processes[i].wait()
     del bitcoind_processes[i]
 
-
 def stop_nodes(nodes):
     for node in nodes:
         node.stop()
-    del nodes[:]  # Emptying array closes connections as a side effect
-
+    del nodes[:] # Emptying array closes connections as a side effect
 
 def set_node_times(nodes, t):
     for node in nodes:
         node.setmocktime(t)
-
 
 def wait_bitcoinds():
     # Wait for all bitcoinds to cleanly exit
@@ -226,20 +208,17 @@ def wait_bitcoinds():
         bitcoind.wait()
     bitcoind_processes.clear()
 
-
 def connect_nodes(from_connection, node_num):
-    ip_port = "127.0.0.1:" + str(p2p_port(node_num))
+    ip_port = "127.0.0.1:"+str(p2p_port(node_num))
     from_connection.addnode(ip_port, "onetry")
     # poll until version handshake complete to avoid race conditions
     # with transaction relaying
     while any(peer['version'] == 0 for peer in from_connection.getpeerinfo()):
         time.sleep(0.1)
 
-
 def connect_nodes_bi(nodes, a, b):
     connect_nodes(nodes[a], b)
     connect_nodes(nodes[b], a)
-
 
 def find_output(node, txid, amount):
     """
@@ -250,14 +229,14 @@ def find_output(node, txid, amount):
     for i in range(len(txdata["vout"])):
         if txdata["vout"][i]["value"] == amount:
             return i
-    raise RuntimeError("find_output txid %s : %s not found" % (txid, str(amount)))
+    raise RuntimeError("find_output txid %s : %s not found"%(txid,str(amount)))
 
 
 def gather_inputs(from_node, amount_needed, confirmations_required=1):
     """
     Return a random set of unspent txouts that are enough to pay amount_needed
     """
-    assert (confirmations_required >= 0)
+    assert(confirmations_required >=0)
     utxo = from_node.listunspent(confirmations_required)
     random.shuffle(utxo)
     inputs = []
@@ -265,29 +244,27 @@ def gather_inputs(from_node, amount_needed, confirmations_required=1):
     while total_in < amount_needed and len(utxo) > 0:
         t = utxo.pop()
         total_in += t["amount"]
-        inputs.append({"txid": t["txid"], "vout": t["vout"], "address": t["address"]})
+        inputs.append({ "txid" : t["txid"], "vout" : t["vout"], "address" : t["address"] } )
     if total_in < amount_needed:
-        raise RuntimeError("Insufficient funds: need %d, have %d" % (amount_needed, total_in))
+        raise RuntimeError("Insufficient funds: need %d, have %d"%(amount_needed, total_in))
     return (total_in, inputs)
-
 
 def make_change(from_node, amount_in, amount_out, fee):
     """
     Create change output(s), return them
     """
     outputs = {}
-    amount = amount_out + fee
+    amount = amount_out+fee
     change = amount_in - amount
-    if change > amount * 2:
+    if change > amount*2:
         # Create an extra change output to break up big inputs
         change_address = from_node.getnewaddress()
         # Split change in two, being careful of rounding:
-        outputs[change_address] = Decimal(change / 2).quantize(Decimal('0.00000001'), rounding=ROUND_DOWN)
+        outputs[change_address] = Decimal(change/2).quantize(Decimal('0.00000001'), rounding=ROUND_DOWN)
         change = amount_in - amount - outputs[change_address]
     if change > 0:
         outputs[from_node.getnewaddress()] = change
     return outputs
-
 
 def send_zeropri_transaction(from_node, to_node, amount, fee):
     """
@@ -299,26 +276,25 @@ def send_zeropri_transaction(from_node, to_node, amount, fee):
 
     # Create a send-to-self with confirmed inputs:
     self_address = from_node.getnewaddress()
-    (total_in, inputs) = gather_inputs(from_node, amount + fee * 2)
-    outputs = make_change(from_node, total_in, amount + fee, fee)
-    outputs[self_address] = float(amount + fee)
+    (total_in, inputs) = gather_inputs(from_node, amount+fee*2)
+    outputs = make_change(from_node, total_in, amount+fee, fee)
+    outputs[self_address] = float(amount+fee)
 
     self_rawtx = from_node.createrawtransaction(inputs, outputs)
     self_signresult = from_node.signrawtransaction(self_rawtx)
     self_txid = from_node.sendrawtransaction(self_signresult["hex"], True)
 
-    vout = find_output(from_node, self_txid, amount + fee)
+    vout = find_output(from_node, self_txid, amount+fee)
     # Now immediately spend the output to create a 1-input, 1-output
     # zero-priority transaction:
-    inputs = [{"txid": self_txid, "vout": vout}]
-    outputs = {to_node.getnewaddress(): float(amount)}
+    inputs = [ { "txid" : self_txid, "vout" : vout } ]
+    outputs = { to_node.getnewaddress() : float(amount) }
 
     rawtx = from_node.createrawtransaction(inputs, outputs)
     signresult = from_node.signrawtransaction(rawtx)
     txid = from_node.sendrawtransaction(signresult["hex"], True)
 
     return (txid, signresult["hex"])
-
 
 def random_zeropri_transaction(nodes, amount, min_fee, fee_increment, fee_variants):
     """
@@ -327,10 +303,9 @@ def random_zeropri_transaction(nodes, amount, min_fee, fee_increment, fee_varian
     """
     from_node = random.choice(nodes)
     to_node = random.choice(nodes)
-    fee = min_fee + fee_increment * random.randint(0, fee_variants)
+    fee = min_fee + fee_increment*random.randint(0,fee_variants)
     (txid, txhex) = send_zeropri_transaction(from_node, to_node, amount, fee)
     return (txid, txhex, fee)
-
 
 def random_transaction(nodes, amount, min_fee, fee_increment, fee_variants):
     """
@@ -339,9 +314,9 @@ def random_transaction(nodes, amount, min_fee, fee_increment, fee_variants):
     """
     from_node = random.choice(nodes)
     to_node = random.choice(nodes)
-    fee = min_fee + fee_increment * random.randint(0, fee_variants)
+    fee = min_fee + fee_increment*random.randint(0,fee_variants)
 
-    (total_in, inputs) = gather_inputs(from_node, amount + fee)
+    (total_in, inputs) = gather_inputs(from_node, amount+fee)
     outputs = make_change(from_node, total_in, amount, fee)
     outputs[to_node.getnewaddress()] = float(amount)
 
@@ -351,16 +326,13 @@ def random_transaction(nodes, amount, min_fee, fee_increment, fee_variants):
 
     return (txid, signresult["hex"], fee)
 
-
 def assert_equal(thing1, thing2):
     if thing1 != thing2:
-        raise AssertionError("%s != %s" % (str(thing1), str(thing2)))
-
+        raise AssertionError("%s != %s"%(str(thing1),str(thing2)))
 
 def assert_greater_than(thing1, thing2):
     if thing1 <= thing2:
-        raise AssertionError("%s <= %s" % (str(thing1), str(thing2)))
-
+        raise AssertionError("%s <= %s"%(str(thing1),str(thing2)))
 
 def assert_raises(exc, fun, *args, **kwds):
     try:
@@ -368,6 +340,6 @@ def assert_raises(exc, fun, *args, **kwds):
     except exc:
         pass
     except Exception as e:
-        raise AssertionError("Unexpected exception raised: " + type(e).__name__)
+        raise AssertionError("Unexpected exception raised: "+type(e).__name__)
     else:
         raise AssertionError("No exception raised")

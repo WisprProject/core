@@ -8,7 +8,6 @@
 # Add python-bitcoinrpc to module search path:
 import os
 import sys
-
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), "python-bitcoinrpc"))
 
 import shutil
@@ -25,19 +24,19 @@ class BitcoinTestFramework(object):
     def run_test(self):
         for node in self.nodes:
             assert_equal(node.getblockcount(), 200)
-            assert_equal(node.getbalance(), 25 * 50)
+            assert_equal(node.getbalance(), 25*50)
 
     def add_options(self, parser):
         pass
 
     def setup_chain(self):
-        print("Initializing test directory " + self.options.tmpdir)
+        print("Initializing test directory "+self.options.tmpdir)
         initialize_chain(self.options.tmpdir)
 
     def setup_nodes(self):
         return start_nodes(4, self.options.tmpdir)
 
-    def setup_network(self, split=False):
+    def setup_network(self, split = False):
         self.nodes = self.setup_nodes()
 
         # Connect the nodes as a "chain".  This allows us
@@ -103,7 +102,7 @@ class BitcoinTestFramework(object):
             import logging
             logging.basicConfig(level=logging.DEBUG)
 
-        os.environ['PATH'] = self.options.srcdir + ":" + os.environ['PATH']
+        os.environ['PATH'] = self.options.srcdir+":"+os.environ['PATH']
 
         check_json_precision()
 
@@ -120,13 +119,13 @@ class BitcoinTestFramework(object):
             success = True
 
         except JSONRPCException as e:
-            print("JSONRPC error: " + e.error['message'])
+            print("JSONRPC error: "+e.error['message'])
             traceback.print_tb(sys.exc_info()[2])
         except AssertionError as e:
-            print("Assertion failed: " + e.message)
+            print("Assertion failed: "+e.message)
             traceback.print_tb(sys.exc_info()[2])
         except Exception as e:
-            print("Unexpected exception caught during testing: " + str(e))
+            print("Unexpected exception caught during testing: "+str(e))
             traceback.print_tb(sys.exc_info()[2])
 
         if not self.options.nocleanup:

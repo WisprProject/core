@@ -37,14 +37,12 @@ from test_framework import BitcoinTestFramework
 from util import *
 from random import randint
 import logging
-
 logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
-
 
 class WalletBackupTest(BitcoinTestFramework):
 
     def setup_chain(self):
-        logging.info("Initializing test directory " + self.options.tmpdir)
+        logging.info("Initializing test directory "+self.options.tmpdir)
         initialize_chain_clean(self.options.tmpdir, 4)
 
     # This mirrors how the network was setup in the bash test
@@ -56,12 +54,12 @@ class WalletBackupTest(BitcoinTestFramework):
         connect_nodes(self.nodes[1], 3)
         connect_nodes(self.nodes[2], 3)
         connect_nodes(self.nodes[2], 0)
-        self.is_network_split = False
+        self.is_network_split=False
         self.sync_all()
 
     def one_send(self, from_node, to_address):
-        if (randint(1, 2) == 1):
-            amount = Decimal(randint(1, 10)) / Decimal(10)
+        if (randint(1,2) == 1):
+            amount = Decimal(randint(1,10)) / Decimal(10)
             self.nodes[from_node].sendtoaddress(to_address, amount)
 
     def do_one_round(self):
@@ -177,7 +175,7 @@ class WalletBackupTest(BitcoinTestFramework):
         self.stop_three()
         self.erase_three()
 
-        # start node2 with no chain
+        #start node2 with no chain
         shutil.rmtree(self.options.tmpdir + "/node2/regtest/blocks")
         shutil.rmtree(self.options.tmpdir + "/node2/regtest/chainstate")
 

@@ -8,7 +8,6 @@
 # Add python-bitcoinrpc to module search path:
 import os
 import sys
-
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), "python-bitcoinrpc"))
 
 import json
@@ -30,18 +29,17 @@ def check_array_result(object_array, to_match, expected):
     num_matched = 0
     for item in object_array:
         all_match = True
-        for key, value in to_match.items():
+        for key,value in to_match.items():
             if item[key] != value:
                 all_match = False
         if not all_match:
             continue
-        for key, value in expected.items():
+        for key,value in expected.items():
             if item[key] != value:
-                raise AssertionError("%s : expected %s=%s" % (str(item), str(key), str(value)))
-            num_matched = num_matched + 1
+                raise AssertionError("%s : expected %s=%s"%(str(item), str(key), str(value)))
+            num_matched = num_matched+1
     if num_matched == 0:
-        raise AssertionError("No objects matched %s" % (str(to_match)))
-
+        raise AssertionError("No objects matched %s"%(str(to_match)))
 
 def run_test(nodes, tmpdir):
     # Encrypt wallet and wait to terminate
@@ -54,8 +52,8 @@ def run_test(nodes, tmpdir):
     try:
         addr = nodes[0].getnewaddress()
         raise AssertionError('Keypool should be exhausted after one address')
-    except JSONRPCException, e:
-        assert (e.error['code'] == -12)
+    except JSONRPCException,e:
+        assert(e.error['code']==-12)
 
     # put three new keys in the keypool
     nodes[0].walletpassphrase('test', 12000)
@@ -69,13 +67,13 @@ def run_test(nodes, tmpdir):
     addr.add(nodes[0].getrawchangeaddress())
     addr.add(nodes[0].getrawchangeaddress())
     # assert that four unique addresses were returned
-    assert (len(addr) == 4)
+    assert(len(addr) == 4)
     # the next one should fail
     try:
         addr = nodes[0].getrawchangeaddress()
         raise AssertionError('Keypool should be exhausted after three addresses')
-    except JSONRPCException, e:
-        assert (e.error['code'] == -12)
+    except JSONRPCException,e:
+        assert(e.error['code']==-12)
 
 
 def main():
@@ -90,14 +88,14 @@ def main():
                       help="Root directory for datadirs")
     (options, args) = parser.parse_args()
 
-    os.environ['PATH'] = options.srcdir + ":" + os.environ['PATH']
+    os.environ['PATH'] = options.srcdir+":"+os.environ['PATH']
 
     check_json_precision()
 
     success = False
     nodes = []
     try:
-        print("Initializing test directory " + options.tmpdir)
+        print("Initializing test directory "+options.tmpdir)
         if not os.path.isdir(options.tmpdir):
             os.makedirs(options.tmpdir)
         initialize_chain(options.tmpdir)
@@ -109,12 +107,12 @@ def main():
         success = True
 
     except AssertionError as e:
-        print("Assertion failed: " + e.message)
+        print("Assertion failed: "+e.message)
     except JSONRPCException as e:
-        print("JSONRPC error: " + e.error['message'])
+        print("JSONRPC error: "+e.error['message'])
         traceback.print_tb(sys.exc_info()[2])
     except Exception as e:
-        print("Unexpected exception caught during testing: " + str(sys.exc_info()[0]))
+        print("Unexpected exception caught during testing: "+str(sys.exc_info()[0]))
         traceback.print_tb(sys.exc_info()[2])
 
     if not options.nocleanup:
@@ -129,7 +127,6 @@ def main():
     else:
         print("Failed")
         sys.exit(1)
-
 
 if __name__ == '__main__':
     main()

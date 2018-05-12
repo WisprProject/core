@@ -8,17 +8,14 @@ from __future__ import print_function, division, unicode_literals
 import socket, threading, Queue
 import traceback, sys
 
-
 ### Protocol constants
 class Command:
     CONNECT = 0x01
-
 
 class AddressType:
     IPV4 = 0x01
     DOMAINNAME = 0x03
     IPV6 = 0x04
-
 
 ### Utility functions
 def recvall(s, n):
@@ -32,33 +29,26 @@ def recvall(s, n):
         n -= len(d)
     return rv
 
-
 ### Implementation classes
 class Socks5Configuration(object):
     '''Proxy configuration'''
-
     def __init__(self):
-        self.addr = None  # Bind address (must be set)
-        self.af = socket.AF_INET  # Bind address family
+        self.addr = None # Bind address (must be set)
+        self.af = socket.AF_INET # Bind address family
         self.unauth = False  # Support unauthenticated
         self.auth = False  # Support authentication
 
-
 class Socks5Command(object):
     '''Information about an incoming socks5 command'''
-
     def __init__(self, cmd, atyp, addr, port, username, password):
-        self.cmd = cmd  # Command (one of Command.*)
-        self.atyp = atyp  # Address type (one of AddressType.*)
-        self.addr = addr  # Address
-        self.port = port  # Port to connect to
+        self.cmd = cmd # Command (one of Command.*)
+        self.atyp = atyp # Address type (one of AddressType.*)
+        self.addr = addr # Address
+        self.port = port # Port to connect to
         self.username = username
         self.password = password
-
     def __repr__(self):
-        return 'Socks5Command(%s,%s,%s,%s,%s,%s)' % (
-            self.cmd, self.atyp, self.addr, self.port, self.username, self.password)
-
+        return 'Socks5Command(%s,%s,%s,%s,%s,%s)' % (self.cmd, self.atyp, self.addr, self.port, self.username, self.password)
 
 class Socks5Connection(object):
     def __init__(self, serv, conn, peer):
@@ -80,9 +70,9 @@ class Socks5Connection(object):
             methods = bytearray(recvall(self.conn, nmethods))
             method = None
             if 0x02 in methods and self.serv.conf.auth:
-                method = 0x02  # username/password
+                method = 0x02 # username/password
             elif 0x00 in methods and self.serv.conf.unauth:
-                method = 0x00  # unauthenticated
+                method = 0x00 # unauthenticated
             if method is None:
                 raise IOError('No supported authentication method was offered')
             # Send response
@@ -102,7 +92,7 @@ class Socks5Connection(object):
                 self.conn.sendall(bytearray([0x01, 0x00]))
 
             # Read connect request
-            (ver, cmd, rsv, atyp) = recvall(self.conn, 4)
+            (ver,cmd,rsv,atyp) = recvall(self.conn, 4)
             if ver != 0x05:
                 raise IOError('Invalid socks version %i in connect request' % ver)
             if cmd != Command.CONNECT:
@@ -117,7 +107,7 @@ class Socks5Connection(object):
                 addr = recvall(self.conn, 16)
             else:
                 raise IOError('Unknown address type %i' % atyp)
-            port_hi, port_lo = recvall(self.conn, 2)
+            port_hi,port_lo = recvall(self.conn, 2)
             port = (port_hi << 8) | port_lo
 
             # Send dummy response
@@ -127,12 +117,11 @@ class Socks5Connection(object):
             self.serv.queue.put(cmdin)
             print('Proxy: ', cmdin)
             # Fall through to disconnect
-        except Exception, e:
+        except Exception,e:
             traceback.print_exc(file=sys.stderr)
             self.serv.queue.put(e)
         finally:
             self.conn.close()
-
 
 class Socks5Server(object):
     def __init__(self, conf):
@@ -143,7 +132,7 @@ class Socks5Server(object):
         self.s.listen(5)
         self.running = False
         self.thread = None
-        self.queue = Queue.Queue()  # report connections and exceptions to client
+        self.queue = Queue.Queue() # report connections and exceptions to client
 
     def run(self):
         while self.running:
@@ -155,7 +144,7 @@ class Socks5Server(object):
                 thread.start()
 
     def start(self):
-        assert (not self.running)
+        assert(not self.running)
         self.running = True
         self.thread = threading.Thread(None, self.run)
         self.thread.daemon = True
