@@ -26,12 +26,10 @@ CWallet *pwalletMain;
 extern bool fPrintToConsole;
 
 extern void noui_connect();
-
 struct TestingSetup {
     CCoinsViewDB *pcoinsdbview;
     boost::filesystem::path pathTemp;
     boost::thread_group threadGroup;
-    cout << "Starting testing setup...\n";
     TestingSetup() {
         SetupEnvironment();
         cout << "Finished setup environment...\n";
@@ -62,7 +60,6 @@ struct TestingSetup {
             threadGroup.create_thread(&ThreadScriptCheck);
         RegisterNodeSignals(GetNodeSignals());
     }
-
     ~TestingSetup() {
         threadGroup.interrupt_all();
         threadGroup.join_all();
