@@ -1,5 +1,5 @@
 [
-  { "exec": "././wispr-tx",
+  { "exec": "./wispr-tx",
     "args": ["-create"],
     "output_cmp": "blanktx.hex"
   },
