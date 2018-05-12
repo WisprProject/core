@@ -2898,7 +2898,7 @@ static CCheckQueue<CScriptCheck> scriptcheckqueue(128);
 
 void ThreadScriptCheck()
 {
-    RenameThread("pivx-scriptch");
+    RenameThread("wispr-scriptch");
     scriptcheckqueue.Thread();
 }
 
