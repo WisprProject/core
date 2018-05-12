@@ -31,9 +31,8 @@ struct TestingSetup {
     CCoinsViewDB *pcoinsdbview;
     boost::filesystem::path pathTemp;
     boost::thread_group threadGroup;
-
+    std:cout << "Starting testing setup...\n";
     TestingSetup() {
-        cout << "Starting testing setup...\n";
         SetupEnvironment();
         cout << "Finished setup environment...\n";
         fPrintToDebugLog = false; // don't want to write to debug.log file
