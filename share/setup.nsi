@@ -7,7 +7,7 @@ SetCompressor /SOLID lzma
 !define REGKEY "SOFTWARE\$(^Name)"
 !define VERSION 2.3.1
 !define COMPANY "Wispr Core project"
-!define URL https://www.wispr.org
+!define URL https://www.wispr.tech
 
 # MUI Symbol Definitions
 !define MUI_ICON "/media/sf_Documents/WISPR-2.3.1/share/pixmaps/bitcoin.ico"

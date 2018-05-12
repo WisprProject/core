@@ -7,7 +7,7 @@ architectures:
 packages:
 - "faketime"
 remotes:
-- "url": "https://github.com/wispr-project/wispr-detached-sigs.git"
+- "url": "https://github.com/WisprProject/core-detached-sigs.git"
   "dir": "signature"
 files:
 - "wispr-osx-unsigned.tar.gz"

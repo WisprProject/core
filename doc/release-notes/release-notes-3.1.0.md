@@ -1,8 +1,8 @@
-PIVX Core version *3.1.0* is now available from:  <https://github.com/wispr-project/wispr/releases>
+PIVX Core version *3.1.0* is now available from:  <https://github.com/WisprProject/core/releases>
 
 This is a new major version release, including various bug fixes and performance improvements, as well as updated translations.
 
-Please report bugs using the issue tracker at github: <https://github.com/wispr-project/wispr/issues>
+Please report bugs using the issue tracker at github: <https://github.com/WisprProject/core/issues>
 
 
 Mandatory Update

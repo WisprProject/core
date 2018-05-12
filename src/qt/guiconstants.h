@@ -51,7 +51,7 @@ static const int MAX_URI_LENGTH = 255;
 #define SPINNER_FRAMES 35
 
 #define QAPP_ORG_NAME "PIVX"
-#define QAPP_ORG_DOMAIN "wispr.org"
+#define QAPP_ORG_DOMAIN "wispr.tech"
 #define QAPP_APP_NAME_DEFAULT "WISPR-Qt"
 #define QAPP_APP_NAME_TESTNET "WISPR-Qt-testnet"
 
