@@ -5208,10 +5208,12 @@ bool LoadBlockIndex(string& strError)
 bool InitBlockIndex()
 {
     LOCK(cs_main);
+    cout << "main locked...\n";
     // Check whether we're already initialized
     if (chainActive.Genesis() != NULL)
         return true;
 
+    cout << "Use settings for txindex...\n";
     // Use the provided setting for -txindex in the new database
     fTxIndex = GetBoolArg("-txindex", true);
     pblocktree->WriteFlag("txindex", fTxIndex);
