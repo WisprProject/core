@@ -1,4 +1,5 @@
 .gitignore
+.idea/
 *.sublime-project
 *.sublime-workspace
 todo.txt
