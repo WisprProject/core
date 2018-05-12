@@ -37,7 +37,7 @@ map<uint256, CObfuscationBroadcastTx> mapObfuscationBroadcastTxes;
 // Keep track of the active Masternode
 CActiveMasternode activeMasternode;
 
-/* *** BEGIN OBFUSCATION MAGIC - WSP **********
+/* *** BEGIN OBFUSCATION MAGIC - PIV **********
     Copyright (c) 2014-2015, Dash Developers
         eduffield - evan@dashpay.io
         udjinm6   - udjinm6@dashpay.io
@@ -777,9 +777,9 @@ void CObfuscationPool::ChargeRandomFees()
 
                 Being that Obfuscation has "no fees" we need to have some kind of cost associated
                 with using it to stop abuse. Otherwise it could serve as an attack vector and
-                allow endless transaction that would bloat Wispr and make it unusable. To
+                allow endless transaction that would bloat PIVX and make it unusable. To
                 stop these kinds of attacks 1 in 10 successful transactions are charged. This
-                adds up to a cost of 0.001 WSP per transaction on average.
+                adds up to a cost of 0.001 PIV per transaction on average.
             */
             if (r <= 10) {
                 LogPrintf("CObfuscationPool::ChargeRandomFees -- charging random fees. %u\n", i);
@@ -2174,10 +2174,13 @@ bool CObfuScationSigner::VerifyMessage(CPubKey pubkey, vector<unsigned char>& vc
         return false;
     }
 
-    if (fDebug && pubkey2.GetID() != pubkey.GetID())
-        LogPrintf("CObfuScationSigner::VerifyMessage -- keys don't match: %s %s\n", pubkey2.GetID().ToString(), pubkey.GetID().ToString());
+    if (pubkey2.GetID() != pubkey.GetID()) {
+        errorMessage = strprintf("keys don't match - input: %s, recovered: %s, sig: %s\n",
+                pubkey.GetID().ToString(), pubkey2.GetID().ToString(), EncodeBase64(&vchSig[0], vchSig.size()));
+        return false;
+    }
 
-    return (pubkey2.GetID() == pubkey.GetID());
+    return true;
 }
 
 bool CObfuscationQueue::Sign()
@@ -2322,3 +2325,4 @@ void ThreadCheckObfuScationPool()
         }
     }
 }
+
