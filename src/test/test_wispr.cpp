@@ -33,10 +33,14 @@ struct TestingSetup {
     boost::thread_group threadGroup;
 
     TestingSetup() {
+        cout << "Starting testing setup...\n";
         SetupEnvironment();
+        cout << "Finished setup environment...\n";
         fPrintToDebugLog = false; // don't want to write to debug.log file
         fCheckBlockIndex = true;
+        cout << "Select params...\n";
         SelectParams(CBaseChainParams::UNITTEST);
+        cout << "Connect noui...\n";
         noui_connect();
 #ifdef ENABLE_WALLET
         bitdb.MakeMock();
