@@ -1,4 +1,5 @@
 // Copyright (c) 2014 The Bitcoin developers
+// Copyright (c) 2017 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -12,7 +13,8 @@
  * CBaseChainParams defines the base parameters (shared between wispr-cli and wisprd)
  * of a given instance of the Wispr system.
  */
-class CBaseChainParams {
+class CBaseChainParams
+{
 public:
     enum Network {
         MAIN,
@@ -23,8 +25,7 @@ public:
         MAX_NETWORK_TYPES
     };
 
-    const std::string &DataDir() const { return strDataDir; }
-
+    const std::string& DataDir() const { return strDataDir; }
     int RPCPort() const { return nRPCPort; }
 
 protected:
@@ -39,7 +40,7 @@ protected:
  * Return the currently selected parameters. This won't change after app startup
  * outside of the unit tests.
  */
-const CBaseChainParams &BaseParams();
+const CBaseChainParams& BaseParams();
 
 /** Sets the params returned by Params() to those for the given network. */
 void SelectBaseParams(CBaseChainParams::Network network);
