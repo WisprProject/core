@@ -1,5 +1,6 @@
 .gitignore
 .idea/
+CMakeLists.txt
 *.sublime-project
 *.sublime-workspace
 todo.txt
