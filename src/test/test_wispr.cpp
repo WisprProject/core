@@ -31,7 +31,7 @@ struct TestingSetup {
     CCoinsViewDB *pcoinsdbview;
     boost::filesystem::path pathTemp;
     boost::thread_group threadGroup;
-    std:cout << "Starting testing setup...\n";
+    cout << "Starting testing setup...\n";
     TestingSetup() {
         SetupEnvironment();
         cout << "Finished setup environment...\n";
