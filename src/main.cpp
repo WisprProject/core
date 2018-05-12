@@ -5217,6 +5217,7 @@ bool InitBlockIndex()
     // Use the provided setting for -txindex in the new database
     fTxIndex = GetBoolArg("-txindex", true);
     pblocktree->WriteFlag("txindex", fTxIndex);
+    cout << "Initializing database...\n";
     LogPrintf("Initializing databases...\n");
 
     // Only add the genesis block if not reindexing (in which case we reuse the one already on disk)
@@ -5224,6 +5225,7 @@ bool InitBlockIndex()
         try {
             CBlock& block = const_cast<CBlock&>(Params().GenesisBlock());
             // Start new block file
+            cout << "Start new block file...\n";
             unsigned int nBlockSize = ::GetSerializeSize(block, SER_DISK, CLIENT_VERSION);
             CDiskBlockPos blockPos;
             CValidationState state;
@@ -5237,6 +5239,7 @@ bool InitBlockIndex()
             if (!ActivateBestChain(state, &block))
                 return error("LoadBlockIndex() : genesis block cannot be activated");
             // Force a chainstate write so that when we VerifyDB in a moment, it doesnt check stale data
+            cout << "Force a chainstate write...\n";
             return FlushStateToDisk(state, FLUSH_STATE_ALWAYS);
         } catch (std::runtime_error& e) {
             return error("LoadBlockIndex() : failed to initialize block database: %s", e.what());
