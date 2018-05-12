@@ -11,10 +11,10 @@
 
 class uint256;
 
-namespace eccrypto
-{
-bool Check(const unsigned char* vch);
-bool CheckSignatureElement(const unsigned char* vch, int len, bool half);
+namespace eccrypto {
+    bool Check(const unsigned char *vch);
+
+    bool CheckSignatureElement(const unsigned char *vch, int len, bool half);
 
 } // eccrypto namespace
 

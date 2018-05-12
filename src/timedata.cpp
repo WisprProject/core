@@ -25,34 +25,31 @@ static int64_t nTimeOffset = 0;
  *  - Median of other nodes clocks
  *  - The user (asking the user to fix the system clock if the first two disagree)
  */
-int64_t GetTimeOffset()
-{
+int64_t GetTimeOffset() {
     LOCK(cs_nTimeOffset);
     return nTimeOffset;
 }
 
-int64_t GetAdjustedTime()
-{
+int64_t GetAdjustedTime() {
     return GetTime() + GetTimeOffset();
 }
 
-static int64_t abs64(int64_t n)
-{
+static int64_t abs64(int64_t n) {
     return (n >= 0 ? n : -n);
 }
 
-void AddTimeData(const CNetAddr& ip, int64_t nOffsetSample)
-{
+void AddTimeData(const CNetAddr &ip, int64_t nOffsetSample) {
     LOCK(cs_nTimeOffset);
     // Ignore duplicates
-    static set<CNetAddr> setKnown;
+    static set <CNetAddr> setKnown;
     if (!setKnown.insert(ip).second)
         return;
 
     // Add data
     static CMedianFilter<int64_t> vTimeOffsets(200, 0);
     vTimeOffsets.input(nOffsetSample);
-    LogPrintf("Added time data, samples %d, offset %+d (%+d minutes)\n", vTimeOffsets.size(), nOffsetSample, nOffsetSample / 60);
+    LogPrintf("Added time data, samples %d, offset %+d (%+d minutes)\n", vTimeOffsets.size(), nOffsetSample,
+              nOffsetSample / 60);
 
     // There is a known issue here (see issue #4521):
     //
@@ -73,7 +70,7 @@ void AddTimeData(const CNetAddr& ip, int64_t nOffsetSample)
     //
     if (vTimeOffsets.size() >= 5 && vTimeOffsets.size() % 2 == 1) {
         int64_t nMedian = vTimeOffsets.median();
-        std::vector<int64_t> vSorted = vTimeOffsets.sorted();
+        std::vector <int64_t> vSorted = vTimeOffsets.sorted();
         // Only let other nodes change our time by so much
         if (abs64(nMedian) < 70 * 60) {
             nTimeOffset = nMedian;
@@ -84,13 +81,15 @@ void AddTimeData(const CNetAddr& ip, int64_t nOffsetSample)
             if (!fDone) {
                 // If nobody has a time different than ours but within 5 minutes of ours, give a warning
                 bool fMatch = false;
-                BOOST_FOREACH (int64_t nOffset, vSorted)
-                    if (nOffset != 0 && abs64(nOffset) < 5 * 60)
-                        fMatch = true;
+                BOOST_FOREACH(int64_t
+                nOffset, vSorted)
+                if (nOffset != 0 && abs64(nOffset) < 5 * 60)
+                    fMatch = true;
 
                 if (!fMatch) {
                     fDone = true;
-                    string strMessage = _("Warning: Please check that your computer's date and time are correct! If your clock is wrong Wispr Core will not work properly.");
+                    string strMessage = _(
+                            "Warning: Please check that your computer's date and time are correct! If your clock is wrong Wispr Core will not work properly.");
                     strMiscWarning = strMessage;
                     LogPrintf("*** %s\n", strMessage);
                     uiInterface.ThreadSafeMessageBox(strMessage, "", CClientUIInterface::MSG_WARNING);
@@ -98,8 +97,9 @@ void AddTimeData(const CNetAddr& ip, int64_t nOffsetSample)
             }
         }
         if (fDebug) {
-            BOOST_FOREACH (int64_t n, vSorted)
-                LogPrintf("%+d  ", n);
+            BOOST_FOREACH(int64_t
+            n, vSorted)
+            LogPrintf("%+d  ", n);
             LogPrintf("|  ");
         }
         LogPrintf("nTimeOffset = %+d  (%+d minutes)\n", nTimeOffset, nTimeOffset / 60);

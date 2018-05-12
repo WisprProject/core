@@ -11,33 +11,36 @@
 
 namespace leveldb {
 
-struct BlockContents;
-class Comparator;
+    struct BlockContents;
 
-class Block {
- public:
-  // Initialize the block with the specified contents.
-  explicit Block(const BlockContents& contents);
+    class Comparator;
 
-  ~Block();
+    class Block {
+    public:
+        // Initialize the block with the specified contents.
+        explicit Block(const BlockContents &contents);
 
-  size_t size() const { return size_; }
-  Iterator* NewIterator(const Comparator* comparator);
+        ~Block();
 
- private:
-  uint32_t NumRestarts() const;
+        size_t size() const { return size_; }
 
-  const char* data_;
-  size_t size_;
-  uint32_t restart_offset_;     // Offset in data_ of restart array
-  bool owned_;                  // Block owns data_[]
+        Iterator *NewIterator(const Comparator *comparator);
 
-  // No copying allowed
-  Block(const Block&);
-  void operator=(const Block&);
+    private:
+        uint32_t NumRestarts() const;
 
-  class Iter;
-};
+        const char *data_;
+        size_t size_;
+        uint32_t restart_offset_;     // Offset in data_ of restart array
+        bool owned_;                  // Block owns data_[]
+
+        // No copying allowed
+        Block(const Block &);
+
+        void operator=(const Block &);
+
+        class Iter;
+    };
 
 }  // namespace leveldb
 

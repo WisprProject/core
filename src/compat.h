@@ -33,6 +33,7 @@
 #include <windows.h>
 #include <ws2tcpip.h>
 #else
+
 #include <arpa/inet.h>
 #include <ifaddrs.h>
 #include <limits.h>
@@ -44,13 +45,16 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <unistd.h>
+
 #endif
 
 #ifdef WIN32
 #define MSG_DONTWAIT 0
 #else
 typedef u_int SOCKET;
+
 #include "errno.h"
+
 #define WSAGetLastError() errno
 #define WSAEINVAL EINVAL
 #define WSAEALREADY EALREADY
@@ -90,11 +94,12 @@ typedef u_int SOCKET;
 #endif
 
 #if HAVE_DECL_STRNLEN == 0
-size_t strnlen( const char *start, size_t max_len);
+
+size_t strnlen(const char *start, size_t max_len);
+
 #endif // HAVE_DECL_STRNLEN
 
-bool static inline IsSelectableSocket(SOCKET s)
-{
+bool static inline IsSelectableSocket(SOCKET s) {
 #ifdef WIN32
     return true;
 #else

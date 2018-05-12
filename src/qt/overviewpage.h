@@ -11,13 +11,15 @@
 #include <QWidget>
 
 class ClientModel;
+
 class TransactionFilterProxy;
+
 class TxViewDelegate;
+
 class WalletModel;
 
-namespace Ui
-{
-class OverviewPage;
+namespace Ui {
+    class OverviewPage;
 }
 
 QT_BEGIN_NAMESPACE
@@ -25,31 +27,39 @@ class QModelIndex;
 QT_END_NAMESPACE
 
 /** Overview ("home") page widget */
-class OverviewPage : public QWidget
-{
+class OverviewPage : public QWidget {
     Q_OBJECT
 
 public:
-    explicit OverviewPage(QWidget* parent = 0);
+    explicit OverviewPage(QWidget *parent = 0);
+
     ~OverviewPage();
 
-    void setClientModel(ClientModel* clientModel);
-    void setWalletModel(WalletModel* walletModel);
+    void setClientModel(ClientModel *clientModel);
+
+    void setWalletModel(WalletModel *walletModel);
+
     void showOutOfSyncWarning(bool fShow);
 
-public slots:
-    void setBalance(const CAmount& balance, const CAmount& unconfirmedBalance, const CAmount& immatureBalance, 
-                    const CAmount& zerocoinBalance, const CAmount& unconfirmedZerocoinBalance, const CAmount& immatureZerocoinBalance,
-                    const CAmount& watchOnlyBalance, const CAmount& watchUnconfBalance, const CAmount& watchImmatureBalance);
+public
+    slots:
+            void
 
-signals:
-    void transactionClicked(const QModelIndex& index);
+    setBalance(const CAmount &balance, const CAmount &unconfirmedBalance, const CAmount &immatureBalance,
+               const CAmount &zerocoinBalance, const CAmount &unconfirmedZerocoinBalance,
+               const CAmount &immatureZerocoinBalance,
+               const CAmount &watchOnlyBalance, const CAmount &watchUnconfBalance, const CAmount &watchImmatureBalance);
+
+    signals:
+            void
+
+    transactionClicked(const QModelIndex &index);
 
 private:
-    QTimer* timer;
-    Ui::OverviewPage* ui;
-    ClientModel* clientModel;
-    WalletModel* walletModel;
+    QTimer *timer;
+    Ui::OverviewPage *ui;
+    ClientModel *clientModel;
+    WalletModel *walletModel;
     CAmount currentBalance;
     CAmount currentUnconfirmedBalance;
     CAmount currentImmatureBalance;
@@ -60,15 +70,23 @@ private:
     CAmount currentWatchUnconfBalance;
     CAmount currentWatchImmatureBalance;
     int nDisplayUnit;
-    void getPercentage(CAmount nTotalBalance, CAmount nZerocoinBalance, QString& sPIVPercentage, QString& szPIVPercentage);
 
-    TxViewDelegate* txdelegate;
-    TransactionFilterProxy* filter;
+    void
+    getPercentage(CAmount nTotalBalance, CAmount nZerocoinBalance, QString &sPIVPercentage, QString &szPIVPercentage);
 
-private slots:
-    void updateDisplayUnit();
-    void handleTransactionClicked(const QModelIndex& index);
-    void updateAlerts(const QString& warnings);
+    TxViewDelegate *txdelegate;
+    TransactionFilterProxy *filter;
+
+private
+    slots:
+            void
+
+    updateDisplayUnit();
+
+    void handleTransactionClicked(const QModelIndex &index);
+
+    void updateAlerts(const QString &warnings);
+
     void updateWatchOnlyLabels(bool showWatchOnly);
 };
 

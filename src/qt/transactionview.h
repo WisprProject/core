@@ -12,31 +12,40 @@
 #include <QWidget>
 
 class TransactionFilterProxy;
+
 class WalletModel;
 
 QT_BEGIN_NAMESPACE
 class QComboBox;
+
 class QDateTimeEdit;
+
 class QFrame;
+
 class QItemSelectionModel;
+
 class QLineEdit;
+
 class QMenu;
+
 class QModelIndex;
+
 class QSignalMapper;
+
 class QTableView;
+
 QT_END_NAMESPACE
 
 /** Widget showing the transaction list for a wallet, including a filter row.
     Using the filter row, the user can view or export a subset of the transactions.
   */
-class TransactionView : public QWidget
-{
+class TransactionView : public QWidget {
     Q_OBJECT
 
 public:
-    explicit TransactionView(QWidget* parent = 0);
+    explicit TransactionView(QWidget *parent = 0);
 
-    void setModel(WalletModel* model);
+    void setModel(WalletModel *model);
 
     // Date ranges for filter
     enum DateEnum {
@@ -59,59 +68,83 @@ public:
     };
 
 private:
-    WalletModel* model;
-    TransactionFilterProxy* transactionProxyModel;
-    QTableView* transactionView;
-    QComboBox* dateWidget;
-    QComboBox* typeWidget;
-    QComboBox* watchOnlyWidget;
-    QLineEdit* addressWidget;
-    QLineEdit* amountWidget;
+    WalletModel *model;
+    TransactionFilterProxy *transactionProxyModel;
+    QTableView *transactionView;
+    QComboBox *dateWidget;
+    QComboBox *typeWidget;
+    QComboBox *watchOnlyWidget;
+    QLineEdit *addressWidget;
+    QLineEdit *amountWidget;
 
-    QMenu* contextMenu;
-    QSignalMapper* mapperThirdPartyTxUrls;
+    QMenu *contextMenu;
+    QSignalMapper *mapperThirdPartyTxUrls;
 
-    QFrame* dateRangeWidget;
-    QDateTimeEdit* dateFrom;
-    QDateTimeEdit* dateTo;
+    QFrame *dateRangeWidget;
+    QDateTimeEdit *dateFrom;
+    QDateTimeEdit *dateTo;
 
-    QWidget* createDateRangeWidget();
+    QWidget *createDateRangeWidget();
 
-    GUIUtil::TableViewLastColumnResizingFixer* columnResizingFixer;
+    GUIUtil::TableViewLastColumnResizingFixer *columnResizingFixer;
 
-    virtual void resizeEvent(QResizeEvent* event);
+    virtual void resizeEvent(QResizeEvent *event);
 
-    bool eventFilter(QObject* obj, QEvent* event);
+    bool eventFilter(QObject *obj, QEvent *event);
 
-private slots:
-    void contextualMenu(const QPoint&);
+private
+    slots:
+            void
+
+    contextualMenu(const QPoint &);
+
     void dateRangeChanged();
+
     void showDetails();
+
     void copyAddress();
+
     void editLabel();
+
     void copyLabel();
+
     void copyAmount();
+
     void copyTxID();
+
     void openThirdPartyTxUrl(QString url);
+
     void updateWatchOnlyColumn(bool fHaveWatchOnly);
 
-signals:
-    void doubleClicked(const QModelIndex&);
+    signals:
+            void
+
+    doubleClicked(const QModelIndex &);
 
     /**  Fired when a message should be reported to the user */
-    void message(const QString& title, const QString& message, unsigned int style);
+    void message(const QString &title, const QString &message, unsigned int style);
 
     /** Send computed sum back to wallet-view */
     void trxAmount(QString amount);
 
-public slots:
-    void chooseDate(int idx);
+public
+    slots:
+            void
+
+    chooseDate(int idx);
+
     void chooseType(int idx);
+
     void chooseWatchonly(int idx);
-    void changedPrefix(const QString& prefix);
-    void changedAmount(const QString& amount);
+
+    void changedPrefix(const QString &prefix);
+
+    void changedAmount(const QString &amount);
+
     void exportClicked();
-    void focusTransaction(const QModelIndex&);
+
+    void focusTransaction(const QModelIndex &);
+
     void computeSum();
 };
 

@@ -13,8 +13,8 @@ from util import *
 import os
 import shutil
 
-class ForkNotifyTest(BitcoinTestFramework):
 
+class ForkNotifyTest(BitcoinTestFramework):
     alert_filename = None  # Set by setup_network
 
     def setup_network(self):
@@ -23,10 +23,10 @@ class ForkNotifyTest(BitcoinTestFramework):
         with open(self.alert_filename, 'w') as f:
             pass  # Just open then close to create zero-length file
         self.nodes.append(start_node(0, self.options.tmpdir,
-                            ["-blockversion=2", "-alertnotify=echo %s >> \"" + self.alert_filename + "\""]))
+                                     ["-blockversion=2", "-alertnotify=echo %s >> \"" + self.alert_filename + "\""]))
         # Node1 mines block.version=211 blocks
         self.nodes.append(start_node(1, self.options.tmpdir,
-                                ["-blockversion=211"]))
+                                     ["-blockversion=211"]))
         connect_nodes(self.nodes[1], 0)
 
         self.is_network_split = False
@@ -59,6 +59,7 @@ class ForkNotifyTest(BitcoinTestFramework):
 
         if alert_text != alert_text2:
             raise AssertionError("-alertnotify excessive warning of up-version blocks")
+
 
 if __name__ == '__main__':
     ForkNotifyTest().main()

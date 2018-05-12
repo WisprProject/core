@@ -21,21 +21,20 @@
 
 using namespace std;
 
-class SSLVerifyError : public std::runtime_error
-{
+class SSLVerifyError : public std::runtime_error {
 public:
     SSLVerifyError(std::string err) : std::runtime_error(err) {}
 };
 
-bool PaymentRequestPlus::parse(const QByteArray& data)
-{
+bool PaymentRequestPlus::parse(const QByteArray &data) {
     bool parseOK = paymentRequest.ParseFromArray(data.data(), data.size());
     if (!parseOK) {
         qWarning() << "PaymentRequestPlus::parse : Error parsing payment request";
         return false;
     }
     if (paymentRequest.payment_details_version() > 1) {
-        qWarning() << "PaymentRequestPlus::parse : Received up-version payment details, version=" << paymentRequest.payment_details_version();
+        qWarning() << "PaymentRequestPlus::parse : Received up-version payment details, version="
+                   << paymentRequest.payment_details_version();
         return false;
     }
 
@@ -48,24 +47,20 @@ bool PaymentRequestPlus::parse(const QByteArray& data)
     return true;
 }
 
-bool PaymentRequestPlus::SerializeToString(string* output) const
-{
+bool PaymentRequestPlus::SerializeToString(string *output) const {
     return paymentRequest.SerializeToString(output);
 }
 
-bool PaymentRequestPlus::IsInitialized() const
-{
+bool PaymentRequestPlus::IsInitialized() const {
     return paymentRequest.IsInitialized();
 }
 
-QString PaymentRequestPlus::getPKIType() const
-{
+QString PaymentRequestPlus::getPKIType() const {
     if (!IsInitialized()) return QString("none");
     return QString::fromStdString(paymentRequest.pki_type());
 }
 
-bool PaymentRequestPlus::getMerchant(X509_STORE* certStore, QString& merchant) const
-{
+bool PaymentRequestPlus::getMerchant(X509_STORE *certStore, QString &merchant) const {
     merchant.clear();
 
     if (!IsInitialized())
@@ -73,7 +68,7 @@ bool PaymentRequestPlus::getMerchant(X509_STORE* certStore, QString& merchant) c
 
     // One day we'll support more PKI types, but just
     // x509 for now:
-    const EVP_MD* digestAlgorithm = NULL;
+    const EVP_MD *digestAlgorithm = NULL;
     if (paymentRequest.pki_type() == "x509+sha256") {
         digestAlgorithm = EVP_sha256();
     } else if (paymentRequest.pki_type() == "x509+sha1") {
@@ -82,7 +77,8 @@ bool PaymentRequestPlus::getMerchant(X509_STORE* certStore, QString& merchant) c
         qWarning() << "PaymentRequestPlus::getMerchant : Payment request: pki_type == none";
         return false;
     } else {
-        qWarning() << "PaymentRequestPlus::getMerchant : Payment request: unknown pki_type " << QString::fromStdString(paymentRequest.pki_type());
+        qWarning() << "PaymentRequestPlus::getMerchant : Payment request: unknown pki_type "
+                   << QString::fromStdString(paymentRequest.pki_type());
         return false;
     }
 
@@ -92,13 +88,14 @@ bool PaymentRequestPlus::getMerchant(X509_STORE* certStore, QString& merchant) c
         return false;
     }
 
-    std::vector<X509*> certs;
+    std::vector < X509 * > certs;
     const QDateTime currentTime = QDateTime::currentDateTime();
     for (int i = 0; i < certChain.certificate_size(); i++) {
         QByteArray certData(certChain.certificate(i).data(), certChain.certificate(i).size());
         QSslCertificate qCert(certData, QSsl::Der);
         if (currentTime < qCert.effectiveDate() || currentTime > qCert.expiryDate()) {
-            qWarning() << "PaymentRequestPlus::getMerchant : Payment request: certificate expired or not yet active: " << qCert;
+            qWarning() << "PaymentRequestPlus::getMerchant : Payment request: certificate expired or not yet active: "
+                       << qCert;
             return false;
         }
 #if QT_VERSION >= 0x050000
@@ -107,8 +104,8 @@ bool PaymentRequestPlus::getMerchant(X509_STORE* certStore, QString& merchant) c
             return false;
         }
 #endif
-        const unsigned char* data = (const unsigned char*)certChain.certificate(i).data();
-        X509* cert = d2i_X509(NULL, &data, certChain.certificate(i).size());
+        const unsigned char *data = (const unsigned char *) certChain.certificate(i).data();
+        X509 *cert = d2i_X509(NULL, &data, certChain.certificate(i).size());
         if (cert)
             certs.push_back(cert);
     }
@@ -119,21 +116,21 @@ bool PaymentRequestPlus::getMerchant(X509_STORE* certStore, QString& merchant) c
 
     // The first cert is the signing cert, the rest are untrusted certs that chain
     // to a valid root authority. OpenSSL needs them separately.
-    STACK_OF(X509)* chain = sk_X509_new_null();
+    STACK_OF(X509) * chain = sk_X509_new_null();
     for (int i = certs.size() - 1; i > 0; i--) {
         sk_X509_push(chain, certs[i]);
     }
-    X509* signing_cert = certs[0];
+    X509 *signing_cert = certs[0];
 
     // Now create a "store context", which is a single use object for checking,
     // load the signing cert into it and verify.
-    X509_STORE_CTX* store_ctx = X509_STORE_CTX_new();
+    X509_STORE_CTX *store_ctx = X509_STORE_CTX_new();
     if (!store_ctx) {
         qWarning() << "PaymentRequestPlus::getMerchant : Payment request: error creating X509_STORE_CTX";
         return false;
     }
 
-    char* website = NULL;
+    char *website = NULL;
     bool fResult = true;
     try {
         if (!X509_STORE_CTX_init(store_ctx, certStore, signing_cert, chain)) {
@@ -147,7 +144,7 @@ bool PaymentRequestPlus::getMerchant(X509_STORE* certStore, QString& merchant) c
             int error = X509_STORE_CTX_get_error(store_ctx);
             throw SSLVerifyError(X509_verify_cert_error_string(error));
         }
-        X509_NAME* certname = X509_get_subject_name(signing_cert);
+        X509_NAME *certname = X509_get_subject_name(signing_cert);
 
         // Valid cert; check signature:
         payments::PaymentRequest rcopy(paymentRequest); // Copy
@@ -163,11 +160,12 @@ bool PaymentRequestPlus::getMerchant(X509_STORE* certStore, QString& merchant) c
         EVP_MD_CTX *ctx;
         ctx = &_ctx;
 #endif
-        EVP_PKEY* pubkey = X509_get_pubkey(signing_cert);
+        EVP_PKEY *pubkey = X509_get_pubkey(signing_cert);
         EVP_MD_CTX_init(ctx);
         if (!EVP_VerifyInit_ex(ctx, digestAlgorithm, NULL) ||
             !EVP_VerifyUpdate(ctx, data_to_verify.data(), data_to_verify.size()) ||
-            !EVP_VerifyFinal(ctx, (const unsigned char*)paymentRequest.signature().data(), paymentRequest.signature().size(), pubkey)) {
+            !EVP_VerifyFinal(ctx, (const unsigned char *) paymentRequest.signature().data(),
+                             paymentRequest.signature().size(), pubkey)) {
             throw SSLVerifyError("Bad signature, invalid PaymentRequest.");
         }
 #if OPENSSL_VERSION_NUMBER >= 0x10100000L
@@ -183,7 +181,7 @@ bool PaymentRequestPlus::getMerchant(X509_STORE* certStore, QString& merchant) c
             throw SSLVerifyError("Bad certificate, missing common name.");
         }
         // TODO: detect EV certificates and set merchant = business name instead of unfriendly NID_commonName ?
-    } catch (SSLVerifyError& err) {
+    } catch (SSLVerifyError &err) {
         fResult = false;
         qWarning() << "PaymentRequestPlus::getMerchant : SSL error: " << err.what();
     }
@@ -197,11 +195,10 @@ bool PaymentRequestPlus::getMerchant(X509_STORE* certStore, QString& merchant) c
     return fResult;
 }
 
-QList<std::pair<CScript, CAmount> > PaymentRequestPlus::getPayTo() const
-{
-    QList<std::pair<CScript, CAmount> > result;
+QList <std::pair<CScript, CAmount>> PaymentRequestPlus::getPayTo() const {
+    QList <std::pair<CScript, CAmount>> result;
     for (int i = 0; i < details.outputs_size(); i++) {
-        const unsigned char* scriptStr = (const unsigned char*)details.outputs(i).script().data();
+        const unsigned char *scriptStr = (const unsigned char *) details.outputs(i).script().data();
         CScript s(scriptStr, scriptStr + details.outputs(i).script().size());
 
         result.append(make_pair(s, details.outputs(i).amount()));

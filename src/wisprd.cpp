@@ -42,8 +42,7 @@
 
 static bool fDaemon;
 
-void WaitForShutdown(boost::thread_group* threadGroup)
-{
+void WaitForShutdown(boost::thread_group *threadGroup) {
     bool fShutdown = ShutdownRequested();
     // Tell the main threads to shutdown.
     while (!fShutdown) {
@@ -60,8 +59,7 @@ void WaitForShutdown(boost::thread_group* threadGroup)
 //
 // Start
 //
-bool AppInit(int argc, char* argv[])
-{
+bool AppInit(int argc, char *argv[]) {
     boost::thread_group threadGroup;
     CScheduler scheduler;
 
@@ -97,7 +95,7 @@ bool AppInit(int argc, char* argv[])
         }
         try {
             ReadConfigFile(mapArgs, mapMultiArgs);
-        } catch (std::exception& e) {
+        } catch (std::exception &e) {
             fprintf(stderr, "Error reading configuration file: %s\n", e.what());
             return false;
         }
@@ -121,7 +119,8 @@ bool AppInit(int argc, char* argv[])
                 fCommandLine = true;
 
         if (fCommandLine) {
-            fprintf(stderr, "Error: There is no RPC client functionality in wisprd anymore. Use the wispr-cli utility instead.\n");
+            fprintf(stderr,
+                    "Error: There is no RPC client functionality in wisprd anymore. Use the wispr-cli utility instead.\n");
             exit(1);
         }
 #ifndef WIN32
@@ -149,7 +148,7 @@ bool AppInit(int argc, char* argv[])
         SoftSetBoolArg("-server", true);
 
         fRet = AppInit2(threadGroup, scheduler);
-    } catch (std::exception& e) {
+    } catch (std::exception &e) {
         PrintExceptionContinue(&e, "AppInit()");
     } catch (...) {
         PrintExceptionContinue(NULL, "AppInit()");
@@ -168,8 +167,7 @@ bool AppInit(int argc, char* argv[])
     return fRet;
 }
 
-int main(int argc, char* argv[])
-{
+int main(int argc, char *argv[]) {
     SetupEnvironment();
 
     // Connect wisprd signal handlers

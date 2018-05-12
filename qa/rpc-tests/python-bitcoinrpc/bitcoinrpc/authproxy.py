@@ -1,4 +1,3 @@
-
 """
   Copyright 2011 Jeff Garzik
 
@@ -42,6 +41,7 @@ import base64
 import decimal
 import json
 import logging
+
 try:
     import urllib.parse as urlparse
 except ImportError:
@@ -53,6 +53,7 @@ HTTP_TIMEOUT = 30
 
 log = logging.getLogger("BitcoinRPC")
 
+
 class JSONRPCException(Exception):
     def __init__(self, rpc_error):
         Exception.__init__(self)
@@ -63,6 +64,7 @@ def EncodeDecimal(o):
     if isinstance(o, decimal.Decimal):
         return round(o, 8)
     raise TypeError(repr(o) + " is not JSON serializable")
+
 
 class AuthServiceProxy(object):
     __id_count = 0
@@ -109,8 +111,8 @@ class AuthServiceProxy(object):
     def __call__(self, *args):
         AuthServiceProxy.__id_count += 1
 
-        log.debug("-%s-> %s %s"%(AuthServiceProxy.__id_count, self.__service_name,
-                                 json.dumps(args, default=EncodeDecimal)))
+        log.debug("-%s-> %s %s" % (AuthServiceProxy.__id_count, self.__service_name,
+                                   json.dumps(args, default=EncodeDecimal)))
         postdata = json.dumps({'version': '1.1',
                                'method': self.__service_name,
                                'params': args,
@@ -132,7 +134,7 @@ class AuthServiceProxy(object):
 
     def _batch(self, rpc_call_list):
         postdata = json.dumps(list(rpc_call_list), default=EncodeDecimal)
-        log.debug("--> "+postdata)
+        log.debug("--> " + postdata)
         self.__conn.request('POST', self.__url.path, postdata,
                             {'Host': self.__url.hostname,
                              'User-Agent': USER_AGENT,
@@ -150,7 +152,7 @@ class AuthServiceProxy(object):
         responsedata = http_response.read().decode('utf8')
         response = json.loads(responsedata, parse_float=decimal.Decimal)
         if "error" in response and response["error"] is None:
-            log.debug("<-%s- %s"%(response["id"], json.dumps(response["result"], default=EncodeDecimal)))
+            log.debug("<-%s- %s" % (response["id"], json.dumps(response["result"], default=EncodeDecimal)))
         else:
-            log.debug("<-- "+responsedata)
+            log.debug("<-- " + responsedata)
         return response

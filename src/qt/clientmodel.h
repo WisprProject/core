@@ -11,16 +11,22 @@
 #include <QDateTime>
 
 class AddressTableModel;
+
 class BanTableModel;
+
 class OptionsModel;
+
 class PeerTableModel;
+
 class TransactionTableModel;
 
 class CWallet;
 
 QT_BEGIN_NAMESPACE
 class QDateTime;
+
 class QTimer;
+
 QT_END_NAMESPACE
 
 enum BlockSource {
@@ -38,46 +44,59 @@ enum NumConnections {
 };
 
 /** Model for PIVX network client. */
-class ClientModel : public QObject
-{
+class ClientModel : public QObject {
     Q_OBJECT
 
 public:
-    explicit ClientModel(OptionsModel* optionsModel, QObject* parent = 0);
+    explicit ClientModel(OptionsModel *optionsModel, QObject *parent = 0);
+
     ~ClientModel();
 
-    OptionsModel* getOptionsModel();
-    PeerTableModel* getPeerTableModel();
+    OptionsModel *getOptionsModel();
+
+    PeerTableModel *getPeerTableModel();
+
     BanTableModel *getBanTableModel();
 
     //! Return number of connections, default is in- and outbound (total)
     int getNumConnections(unsigned int flags = CONNECTIONS_ALL) const;
+
     QString getMasternodeCountString() const;
+
     int getNumBlocks() const;
+
     int getNumBlocksAtStartup();
 
     quint64 getTotalBytesRecv() const;
+
     quint64 getTotalBytesSent() const;
 
     double getVerificationProgress() const;
+
     QDateTime getLastBlockDate() const;
 
     //! Return true if core is doing initial block download
     bool inInitialBlockDownload() const;
+
     //! Return true if core is importing blocks
     enum BlockSource getBlockSource() const;
+
     //! Return warnings to be displayed in status bar
     QString getStatusBarWarnings() const;
 
     QString formatFullVersion() const;
+
     QString formatBuildDate() const;
+
     bool isReleaseVersion() const;
+
     QString clientName() const;
+
     QString formatClientStartupTime() const;
 
 private:
-    OptionsModel* optionsModel;
-    PeerTableModel* peerTableModel;
+    OptionsModel *optionsModel;
+    PeerTableModel *peerTableModel;
     BanTableModel *banTableModel;
 
     int cachedNumBlocks;
@@ -87,30 +106,44 @@ private:
 
     int numBlocksAtStartup;
 
-    QTimer* pollTimer;
-    QTimer* pollMnTimer;
+    QTimer *pollTimer;
+    QTimer *pollMnTimer;
 
     void subscribeToCoreSignals();
+
     void unsubscribeFromCoreSignals();
 
-signals:
-    void numConnectionsChanged(int count);
+    signals:
+            void
+
+    numConnectionsChanged(int count);
+
     void numBlocksChanged(int count);
-    void strMasternodesChanged(const QString& strMasternodes);
-    void alertsChanged(const QString& warnings);
+
+    void strMasternodesChanged(const QString &strMasternodes);
+
+    void alertsChanged(const QString &warnings);
+
     void bytesChanged(quint64 totalBytesIn, quint64 totalBytesOut);
 
     //! Fired when a message should be reported to the user
-    void message(const QString& title, const QString& message, unsigned int style);
+    void message(const QString &title, const QString &message, unsigned int style);
 
     // Show progress dialog e.g. for verifychain
-    void showProgress(const QString& title, int nProgress);
+    void showProgress(const QString &title, int nProgress);
 
-public slots:
-    void updateTimer();
+public
+    slots:
+            void
+
+    updateTimer();
+
     void updateMnTimer();
+
     void updateNumConnections(int numConnections);
-    void updateAlert(const QString& hash, int status);
+
+    void updateAlert(const QString &hash, int status);
+
     void updateBanlist();
 };
 

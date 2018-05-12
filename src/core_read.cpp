@@ -25,11 +25,10 @@ using namespace boost;
 using namespace boost::algorithm;
 using namespace std;
 
-CScript ParseScript(std::string s)
-{
+CScript ParseScript(std::string s) {
     CScript result;
 
-    static map<string, opcodetype> mapOpNames;
+    static map <string, opcodetype> mapOpNames;
 
     if (mapOpNames.empty()) {
         for (int op = 0; op <= OP_ZEROCOINSPEND; op++) {
@@ -37,18 +36,18 @@ CScript ParseScript(std::string s)
             if (op < OP_NOP && op != OP_RESERVED)
                 continue;
 
-            const char* name = GetOpName((opcodetype)op);
+            const char *name = GetOpName((opcodetype) op);
             if (strcmp(name, "OP_UNKNOWN") == 0)
                 continue;
             string strName(name);
-            mapOpNames[strName] = (opcodetype)op;
+            mapOpNames[strName] = (opcodetype) op;
             // Convenience: OP_ADD and just ADD are both recognized:
             replace_first(strName, "OP_", "");
-            mapOpNames[strName] = (opcodetype)op;
+            mapOpNames[strName] = (opcodetype) op;
         }
     }
 
-    vector<string> words;
+    vector <string> words;
     split(words, s, is_any_of(" \t\n"), token_compress_on);
 
     for (std::vector<std::string>::const_iterator w = words.begin(); w != words.end(); ++w) {
@@ -79,8 +78,7 @@ CScript ParseScript(std::string s)
     return result;
 }
 
-bool DecodeHexTx(CTransaction& tx, const std::string& strHexTx)
-{
+bool DecodeHexTx(CTransaction &tx, const std::string &strHexTx) {
     if (!IsHex(strHexTx))
         return false;
 
@@ -88,15 +86,14 @@ bool DecodeHexTx(CTransaction& tx, const std::string& strHexTx)
     CDataStream ssData(txData, SER_NETWORK, PROTOCOL_VERSION);
     try {
         ssData >> tx;
-    } catch (const std::exception&) {
+    } catch (const std::exception &) {
         return false;
     }
 
     return true;
 }
 
-bool DecodeHexBlk(CBlock& block, const std::string& strHexBlk)
-{
+bool DecodeHexBlk(CBlock &block, const std::string &strHexBlk) {
     if (!IsHex(strHexBlk))
         return false;
 
@@ -104,23 +101,21 @@ bool DecodeHexBlk(CBlock& block, const std::string& strHexBlk)
     CDataStream ssBlock(blockData, SER_NETWORK, PROTOCOL_VERSION);
     try {
         ssBlock >> block;
-    } catch (const std::exception&) {
+    } catch (const std::exception &) {
         return false;
     }
 
     return true;
 }
 
-uint256 ParseHashUV(const UniValue& v, const string& strName)
-{
+uint256 ParseHashUV(const UniValue &v, const string &strName) {
     string strHex;
     if (v.isStr())
         strHex = v.getValStr();
     return ParseHashStr(strHex, strName); // Note: ParseHashStr("") throws a runtime_error
 }
 
-uint256 ParseHashStr(const std::string& strHex, const std::string& strName)
-{
+uint256 ParseHashStr(const std::string &strHex, const std::string &strName) {
     if (!IsHex(strHex)) // Note: IsHex("") is false
         throw runtime_error(strName + " must be hexadecimal string (not '" + strHex + "')");
 
@@ -129,8 +124,7 @@ uint256 ParseHashStr(const std::string& strHex, const std::string& strName)
     return result;
 }
 
-vector<unsigned char> ParseHexUV(const UniValue& v, const string& strName)
-{
+vector<unsigned char> ParseHexUV(const UniValue &v, const string &strName) {
     string strHex;
     if (v.isStr())
         strHex = v.getValStr();

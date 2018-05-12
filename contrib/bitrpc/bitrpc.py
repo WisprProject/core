@@ -13,7 +13,7 @@ rpcpass = ""
 if rpcpass == "":
     access = ServiceProxy("http://127.0.0.1:17001")
 else:
-    access = ServiceProxy("http://"+rpcuser+":"+rpcpass+"@127.0.0.1:17001")
+    access = ServiceProxy("http://" + rpcuser + ":" + rpcpass + "@127.0.0.1:17001")
 cmd = sys.argv[1].lower()
 
 if cmd == "backupwallet":
@@ -22,7 +22,7 @@ if cmd == "backupwallet":
         print access.backupwallet(path)
     except:
         print "\n---An error occurred---\n"
-        
+
 elif cmd == "encryptwallet":
     try:
         pwd = getpass.getpass(prompt="Enter passphrase: ")
@@ -255,9 +255,9 @@ elif cmd == "sendmany":
         mc = raw_input("Minimum confirmations (optional): ")
         comment = raw_input("Comment (optional): ")
         try:
-            print access.sendmany(frm,to,mc,comment)
+            print access.sendmany(frm, to, mc, comment)
         except:
-            print access.sendmany(frm,to)
+            print access.sendmany(frm, to)
     except:
         print "\n---An error occurred---\n"
 
@@ -268,9 +268,9 @@ elif cmd == "sendtoaddress":
         comment = raw_input("Comment (optional): ")
         commentto = raw_input("Comment-to (optional): ")
         try:
-            print access.sendtoaddress(to,amt,comment,commentto)
+            print access.sendtoaddress(to, amt, comment, commentto)
         except:
-            print access.sendtoaddress(to,amt)
+            print access.sendtoaddress(to, amt)
     except:
         print "\n---An error occurred---\n"
 
@@ -278,13 +278,13 @@ elif cmd == "setaccount":
     try:
         addr = raw_input("Address: ")
         acct = raw_input("Account:")
-        print access.setaccount(addr,acct)
+        print access.setaccount(addr, acct)
     except:
         print "\n---An error occurred---\n"
 
 elif cmd == "setgenerate":
     try:
-        gen= raw_input("Generate? (true/false): ")
+        gen = raw_input("Generate? (true/false): ")
         cpus = raw_input("Max processors/cores (-1 for unlimited, optional):")
         try:
             print access.setgenerate(gen, cpus)

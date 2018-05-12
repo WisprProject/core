@@ -25,35 +25,34 @@
 #include <primitives/deterministicmint.h>
 #include <accumulators.h>
 
-PrivacyDialog::PrivacyDialog(QWidget* parent) : QDialog(parent),
-                                                          ui(new Ui::PrivacyDialog),
-                                                          walletModel(0),
-                                                          currentBalance(-1)
-{
+PrivacyDialog::PrivacyDialog(QWidget *parent) : QDialog(parent),
+                                                ui(new Ui::PrivacyDialog),
+                                                walletModel(0),
+                                                currentBalance(-1) {
     nDisplayUnit = 0; // just make sure it's not unitialized
     ui->setupUi(this);
 
     // "Spending 999999 zPIV ought to be enough for anybody." - Bill Gates, 2017
-    ui->zPIVpayAmount->setValidator( new QDoubleValidator(0.0, 21000000.0, 20, this) );
-    ui->labelMintAmountValue->setValidator( new QIntValidator(0, 999999, this) );
+    ui->zPIVpayAmount->setValidator(new QDoubleValidator(0.0, 21000000.0, 20, this));
+    ui->labelMintAmountValue->setValidator(new QIntValidator(0, 999999, this));
 
     // Default texts for (mini-) coincontrol
-    ui->labelCoinControlQuantity->setText (tr("Coins automatically selected"));
-    ui->labelCoinControlAmount->setText (tr("Coins automatically selected"));
+    ui->labelCoinControlQuantity->setText(tr("Coins automatically selected"));
+    ui->labelCoinControlAmount->setText(tr("Coins automatically selected"));
     ui->labelzPIVSyncStatus->setText("(" + tr("out of sync") + ")");
 
     // Sunken frame for minting messages
     ui->TEMintStatus->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
-    ui->TEMintStatus->setLineWidth (2);
-    ui->TEMintStatus->setMidLineWidth (2);
+    ui->TEMintStatus->setLineWidth(2);
+    ui->TEMintStatus->setMidLineWidth(2);
     ui->TEMintStatus->setPlainText(tr("Mint Status: Okay"));
 
     // Coin Control signals
     connect(ui->pushButtonCoinControl, SIGNAL(clicked()), this, SLOT(coinControlButtonClicked()));
 
     // Coin Control: clipboard actions
-    QAction* clipboardQuantityAction = new QAction(tr("Copy quantity"), this);
-    QAction* clipboardAmountAction = new QAction(tr("Copy amount"), this);
+    QAction *clipboardQuantityAction = new QAction(tr("Copy quantity"), this);
+    QAction *clipboardAmountAction = new QAction(tr("Copy amount"), this);
     connect(clipboardQuantityAction, SIGNAL(triggered()), this, SLOT(coinControlClipboardQuantity()));
     connect(clipboardAmountAction, SIGNAL(triggered()), this, SLOT(coinControlClipboardAmount()));
     ui->labelCoinControlQuantity->addAction(clipboardQuantityAction);
@@ -81,22 +80,20 @@ PrivacyDialog::PrivacyDialog(QWidget* parent) : QDialog(parent),
     ui->labelZsupplyText500->setText(tr("Denom. <b>500</b>:"));
     ui->labelZsupplyText1000->setText(tr("Denom. <b>1000</b>:"));
     ui->labelZsupplyText5000->setText(tr("Denom. <b>5000</b>:"));
-    
+
     // PIVX settings
     QSettings settings;
-    if (!settings.contains("nSecurityLevel")){
+    if (!settings.contains("nSecurityLevel")) {
         nSecurityLevel = 42;
         settings.setValue("nSecurityLevel", nSecurityLevel);
-    }
-    else{
+    } else {
         nSecurityLevel = settings.value("nSecurityLevel").toInt();
     }
 
-    if (!settings.contains("fMinimizeChange")){
+    if (!settings.contains("fMinimizeChange")) {
         fMinimizeChange = false;
         settings.setValue("fMinimizeChange", fMinimizeChange);
-    }
-    else{
+    } else {
         fMinimizeChange = settings.value("fMinimizeChange").toBool();
     }
     ui->checkBoxMinimizeChange->setChecked(fMinimizeChange);
@@ -112,37 +109,39 @@ PrivacyDialog::PrivacyDialog(QWidget* parent) : QDialog(parent),
     updateSPORK16Status();
 }
 
-PrivacyDialog::~PrivacyDialog()
-{
+PrivacyDialog::~PrivacyDialog() {
     delete ui;
 }
 
-void PrivacyDialog::setModel(WalletModel* walletModel)
-{
+void PrivacyDialog::setModel(WalletModel *walletModel) {
     this->walletModel = walletModel;
 
     if (walletModel && walletModel->getOptionsModel()) {
         // Keep up to date with wallet
         setBalance(walletModel->getBalance(), walletModel->getUnconfirmedBalance(), walletModel->getImmatureBalance(),
-                   walletModel->getZerocoinBalance(), walletModel->getUnconfirmedZerocoinBalance(), walletModel->getImmatureZerocoinBalance(),
-                   walletModel->getWatchBalance(), walletModel->getWatchUnconfirmedBalance(), walletModel->getWatchImmatureBalance());
+                   walletModel->getZerocoinBalance(), walletModel->getUnconfirmedZerocoinBalance(),
+                   walletModel->getImmatureZerocoinBalance(),
+                   walletModel->getWatchBalance(), walletModel->getWatchUnconfirmedBalance(),
+                   walletModel->getWatchImmatureBalance());
 
-        connect(walletModel, SIGNAL(balanceChanged(CAmount, CAmount, CAmount, CAmount, CAmount, CAmount, CAmount, CAmount, CAmount)), this,
-                               SLOT(setBalance(CAmount, CAmount, CAmount, CAmount, CAmount, CAmount, CAmount, CAmount, CAmount)));
-        connect(walletModel->getOptionsModel(), SIGNAL(zeromintEnableChanged(bool)), this, SLOT(updateAutomintStatus()));
-        connect(walletModel->getOptionsModel(), SIGNAL(zeromintPercentageChanged(int)), this, SLOT(updateAutomintStatus()));
+        connect(walletModel,
+                SIGNAL(balanceChanged(CAmount, CAmount, CAmount, CAmount, CAmount, CAmount, CAmount, CAmount, CAmount)),
+                this,
+                SLOT(setBalance(CAmount, CAmount, CAmount, CAmount, CAmount, CAmount, CAmount, CAmount, CAmount)));
+        connect(walletModel->getOptionsModel(), SIGNAL(zeromintEnableChanged(bool)), this,
+                SLOT(updateAutomintStatus()));
+        connect(walletModel->getOptionsModel(), SIGNAL(zeromintPercentageChanged(int)), this,
+                SLOT(updateAutomintStatus()));
         ui->securityLevel->setValue(nSecurityLevel);
     }
 }
 
-void PrivacyDialog::on_pasteButton_clicked()
-{
+void PrivacyDialog::on_pasteButton_clicked() {
     // Paste text from clipboard into recipient field
     ui->payTo->setText(QApplication::clipboard()->text());
 }
 
-void PrivacyDialog::on_addressBookButton_clicked()
-{
+void PrivacyDialog::on_addressBookButton_clicked() {
     if (!walletModel || !walletModel->getOptionsModel())
         return;
 
@@ -154,12 +153,11 @@ void PrivacyDialog::on_addressBookButton_clicked()
     }
 }
 
-void PrivacyDialog::on_pushButtonMintzPIV_clicked()
-{
+void PrivacyDialog::on_pushButtonMintzPIV_clicked() {
     if (!walletModel || !walletModel->getOptionsModel())
         return;
 
-    if(GetAdjustedTime() > GetSporkValue(SPORK_16_ZEROCOIN_MAINTENANCE_MODE)) {
+    if (GetAdjustedTime() > GetSporkValue(SPORK_16_ZEROCOIN_MAINTENANCE_MODE)) {
         QMessageBox::information(this, tr("Mint Zerocoin"),
                                  tr("zPIV is currently undergoing maintenance."), QMessageBox::Ok,
                                  QMessageBox::Ok);
@@ -175,7 +173,8 @@ void PrivacyDialog::on_pushButtonMintzPIV_clicked()
         WalletModel::UnlockContext ctx(walletModel->requestUnlock(AskPassphraseDialog::Context::Mint_zPIV, true));
         if (!ctx.isValid()) {
             // Unlock wallet was cancelled
-            ui->TEMintStatus->setPlainText(tr("Error: Your wallet is locked. Please enter the wallet passphrase first."));
+            ui->TEMintStatus->setPlainText(
+                    tr("Error: Your wallet is locked. Please enter the wallet passphrase first."));
             return;
         }
     }
@@ -184,34 +183,34 @@ void PrivacyDialog::on_pushButtonMintzPIV_clicked()
     CAmount nAmount = sAmount.toInt() * COIN;
 
     // Minting amount must be > 0
-    if(nAmount <= 0){
+    if (nAmount <= 0) {
         ui->TEMintStatus->setPlainText(tr("Message: Enter an amount > 0."));
         return;
     }
 
     ui->TEMintStatus->setPlainText(tr("Minting ") + ui->labelMintAmountValue->text() + " zPIV...");
-    ui->TEMintStatus->repaint ();
+    ui->TEMintStatus->repaint();
 
     int64_t nTime = GetTimeMillis();
 
     CWalletTx wtx;
-    vector<CDeterministicMint> vMints;
+    vector <CDeterministicMint> vMints;
     string strError = pwalletMain->MintZerocoin(nAmount, wtx, vMints, CoinControlDialog::coinControl);
 
     // Return if something went wrong during minting
-    if (strError != ""){
+    if (strError != "") {
         ui->TEMintStatus->setPlainText(QString::fromStdString(strError));
         return;
     }
 
-    double fDuration = (double)(GetTimeMillis() - nTime)/1000.0;
+    double fDuration = (double) (GetTimeMillis() - nTime) / 1000.0;
 
     // Minting successfully finished. Show some stats for entertainment.
     QString strStatsHeader = tr("Successfully minted ") + ui->labelMintAmountValue->text() + tr(" zPIV in ") +
                              QString::number(fDuration) + tr(" sec. Used denominations:\n");
 
     // Clear amount to avoid double spending when accidentally clicking twice
-    ui->labelMintAmountValue->setText ("0");
+    ui->labelMintAmountValue->setText("0");
 
     QString strStats = "";
     ui->TEMintStatus->setPlainText(strStatsHeader);
@@ -220,57 +219,63 @@ void PrivacyDialog::on_pushButtonMintzPIV_clicked()
         boost::this_thread::sleep(boost::posix_time::milliseconds(100));
         strStats = strStats + QString::number(dMint.GetDenomination()) + " ";
         ui->TEMintStatus->setPlainText(strStatsHeader + strStats);
-        ui->TEMintStatus->repaint ();
+        ui->TEMintStatus->repaint();
 
     }
 
-    ui->TEMintStatus->verticalScrollBar()->setValue(ui->TEMintStatus->verticalScrollBar()->maximum()); // Automatically scroll to end of text
+    ui->TEMintStatus->verticalScrollBar()->setValue(
+            ui->TEMintStatus->verticalScrollBar()->maximum()); // Automatically scroll to end of text
 
     // Available balance isn't always updated, so force it.
     setBalance(walletModel->getBalance(), walletModel->getUnconfirmedBalance(), walletModel->getImmatureBalance(),
-               walletModel->getZerocoinBalance(), walletModel->getUnconfirmedZerocoinBalance(), walletModel->getImmatureZerocoinBalance(),
-               walletModel->getWatchBalance(), walletModel->getWatchUnconfirmedBalance(), walletModel->getWatchImmatureBalance());
+               walletModel->getZerocoinBalance(), walletModel->getUnconfirmedZerocoinBalance(),
+               walletModel->getImmatureZerocoinBalance(),
+               walletModel->getWatchBalance(), walletModel->getWatchUnconfirmedBalance(),
+               walletModel->getWatchImmatureBalance());
     coinControlUpdateLabels();
 
     return;
 }
 
-void PrivacyDialog::on_pushButtonMintReset_clicked()
-{
-    ui->TEMintStatus->setPlainText(tr("Starting ResetMintZerocoin: rescanning complete blockchain, this will need up to 30 minutes depending on your hardware. \nPlease be patient..."));
-    ui->TEMintStatus->repaint ();
+void PrivacyDialog::on_pushButtonMintReset_clicked() {
+    ui->TEMintStatus->setPlainText(
+            tr("Starting ResetMintZerocoin: rescanning complete blockchain, this will need up to 30 minutes depending on your hardware. \nPlease be patient..."));
+    ui->TEMintStatus->repaint();
 
     int64_t nTime = GetTimeMillis();
     string strResetMintResult = pwalletMain->ResetMintZerocoin();
-    double fDuration = (double)(GetTimeMillis() - nTime)/1000.0;
-    ui->TEMintStatus->setPlainText(QString::fromStdString(strResetMintResult) + tr("Duration: ") + QString::number(fDuration) + tr(" sec.\n"));
-    ui->TEMintStatus->repaint ();
-    ui->TEMintStatus->verticalScrollBar()->setValue(ui->TEMintStatus->verticalScrollBar()->maximum()); // Automatically scroll to end of text
+    double fDuration = (double) (GetTimeMillis() - nTime) / 1000.0;
+    ui->TEMintStatus->setPlainText(
+            QString::fromStdString(strResetMintResult) + tr("Duration: ") + QString::number(fDuration) + tr(" sec.\n"));
+    ui->TEMintStatus->repaint();
+    ui->TEMintStatus->verticalScrollBar()->setValue(
+            ui->TEMintStatus->verticalScrollBar()->maximum()); // Automatically scroll to end of text
 
     return;
 }
 
-void PrivacyDialog::on_pushButtonSpentReset_clicked()
-{
+void PrivacyDialog::on_pushButtonSpentReset_clicked() {
     ui->TEMintStatus->setPlainText(tr("Starting ResetSpentZerocoin: "));
-    ui->TEMintStatus->repaint ();
+    ui->TEMintStatus->repaint();
     int64_t nTime = GetTimeMillis();
     string strResetSpentResult = pwalletMain->ResetSpentZerocoin();
-    double fDuration = (double)(GetTimeMillis() - nTime)/1000.0;
-    ui->TEMintStatus->setPlainText(QString::fromStdString(strResetSpentResult) + tr("Duration: ") + QString::number(fDuration) + tr(" sec.\n"));
-    ui->TEMintStatus->repaint ();
-    ui->TEMintStatus->verticalScrollBar()->setValue(ui->TEMintStatus->verticalScrollBar()->maximum()); // Automatically scroll to end of text
+    double fDuration = (double) (GetTimeMillis() - nTime) / 1000.0;
+    ui->TEMintStatus->setPlainText(
+            QString::fromStdString(strResetSpentResult) + tr("Duration: ") + QString::number(fDuration) +
+            tr(" sec.\n"));
+    ui->TEMintStatus->repaint();
+    ui->TEMintStatus->verticalScrollBar()->setValue(
+            ui->TEMintStatus->verticalScrollBar()->maximum()); // Automatically scroll to end of text
 
     return;
 }
 
-void PrivacyDialog::on_pushButtonSpendzPIV_clicked()
-{
+void PrivacyDialog::on_pushButtonSpendzPIV_clicked() {
 
     if (!walletModel || !walletModel->getOptionsModel() || !pwalletMain)
         return;
 
-    if(GetAdjustedTime() > GetSporkValue(SPORK_16_ZEROCOIN_MAINTENANCE_MODE)) {
+    if (GetAdjustedTime() > GetSporkValue(SPORK_16_ZEROCOIN_MAINTENANCE_MODE)) {
         QMessageBox::information(this, tr("Mint Zerocoin"),
                                  tr("zPIV is currently undergoing maintenance."), QMessageBox::Ok, QMessageBox::Ok);
         return;
@@ -292,39 +297,36 @@ void PrivacyDialog::on_pushButtonSpendzPIV_clicked()
     sendzPIV();
 }
 
-void PrivacyDialog::on_pushButtonZPivControl_clicked()
-{
+void PrivacyDialog::on_pushButtonZPivControl_clicked() {
     if (!walletModel || !walletModel->getOptionsModel())
         return;
 
-    ZPivControlDialog* zPivControl = new ZPivControlDialog(this);
+    ZPivControlDialog *zPivControl = new ZPivControlDialog(this);
     zPivControl->setModel(walletModel);
     zPivControl->exec();
 }
 
-void PrivacyDialog::setZPivControlLabels(int64_t nAmount, int nQuantity)
-{
+void PrivacyDialog::setZPivControlLabels(int64_t nAmount, int nQuantity) {
     ui->labelzPivSelected_int->setText(QString::number(nAmount));
     ui->labelQuantitySelected_int->setText(QString::number(nQuantity));
 }
 
-static inline int64_t roundint64(double d)
-{
+static inline int64_t roundint64(double d) {
     return (int64_t)(d > 0 ? d + 0.5 : d - 0.5);
 }
 
-void PrivacyDialog::sendzPIV()
-{
+void PrivacyDialog::sendzPIV() {
     QSettings settings;
 
     // Handle 'Pay To' address options
     CBitcoinAddress address(ui->payTo->text().toStdString());
-    if(ui->payTo->text().isEmpty()){
-        QMessageBox::information(this, tr("Spend Zerocoin"), tr("No 'Pay To' address provided, creating local payment"), QMessageBox::Ok, QMessageBox::Ok);
-    }
-    else{
+    if (ui->payTo->text().isEmpty()) {
+        QMessageBox::information(this, tr("Spend Zerocoin"), tr("No 'Pay To' address provided, creating local payment"),
+                                 QMessageBox::Ok, QMessageBox::Ok);
+    } else {
         if (!address.IsValid()) {
-            QMessageBox::warning(this, tr("Spend Zerocoin"), tr("Invalid Wispr Address"), QMessageBox::Ok, QMessageBox::Ok);
+            QMessageBox::warning(this, tr("Spend Zerocoin"), tr("Invalid Wispr Address"), QMessageBox::Ok,
+                                 QMessageBox::Ok);
             ui->payTo->setFocus();
             return;
         }
@@ -332,7 +334,7 @@ void PrivacyDialog::sendzPIV()
 
     // Double is allowed now
     double dAmount = ui->zPIVpayAmount->text().toDouble();
-    CAmount nAmount = roundint64(dAmount* COIN);
+    CAmount nAmount = roundint64(dAmount * COIN);
 
     // Check amount validity
     if (!MoneyRange(nAmount) || nAmount <= 0.0) {
@@ -352,16 +354,17 @@ void PrivacyDialog::sendzPIV()
     bool fWholeNumber = floor(dAmount) == dAmount;
     double dzFee = 0.0;
 
-    if(!fWholeNumber)
+    if (!fWholeNumber)
         dzFee = 1.0 - (dAmount - floor(dAmount));
 
-    if(!fWholeNumber && fMintChange){
+    if (!fWholeNumber && fMintChange) {
         QString strFeeWarning = "You've entered an amount with fractional digits and want the change to be converted to Zerocoin.<br /><br /><b>";
-        strFeeWarning += QString::number(dzFee, 'f', 8) + " PIV </b>will be added to the standard transaction fees!<br />";
+        strFeeWarning +=
+                QString::number(dzFee, 'f', 8) + " PIV </b>will be added to the standard transaction fees!<br />";
         QMessageBox::StandardButton retval = QMessageBox::question(this, tr("Confirm additional Fees"),
-            strFeeWarning,
-            QMessageBox::Yes | QMessageBox::Cancel,
-            QMessageBox::Cancel);
+                                                                   strFeeWarning,
+                                                                   QMessageBox::Yes | QMessageBox::Cancel,
+                                                                   QMessageBox::Cancel);
 
         if (retval != QMessageBox::Yes) {
             // Sending canceled
@@ -378,7 +381,7 @@ void PrivacyDialog::sendzPIV()
 
     // Add address info if available
     QString strAddressLabel = "";
-    if(!ui->payTo->text().isEmpty() && !ui->addAsLabel->text().isEmpty()){
+    if (!ui->payTo->text().isEmpty() && !ui->addAsLabel->text().isEmpty()) {
         strAddressLabel = "<br />(" + ui->addAsLabel->text() + ") ";
     }
 
@@ -387,7 +390,7 @@ void PrivacyDialog::sendzPIV()
     QString strAmount = "<b>" + QString::number(dAmount, 'f', 8) + " zPIV</b>";
     QString strAddress = tr(" to address ") + QString::fromStdString(address.ToString()) + strAddressLabel + " <br />";
 
-    if(ui->payTo->text().isEmpty()){
+    if (ui->payTo->text().isEmpty()) {
         // No address provided => send to local address
         strAddress = tr(" to a newly generated (unused and therefore anonymous) local address <br />");
     }
@@ -397,9 +400,9 @@ void PrivacyDialog::sendzPIV()
 
     // Display message box
     QMessageBox::StandardButton retval = QMessageBox::question(this, tr("Confirm send coins"),
-        strQuestionString,
-        QMessageBox::Yes | QMessageBox::Cancel,
-        QMessageBox::Cancel);
+                                                               strQuestionString,
+                                                               QMessageBox::Yes | QMessageBox::Cancel,
+                                                               QMessageBox::Cancel);
 
     if (retval != QMessageBox::Yes) {
         // Sending canceled
@@ -407,20 +410,23 @@ void PrivacyDialog::sendzPIV()
     }
 
     int64_t nTime = GetTimeMillis();
-    ui->TEMintStatus->setPlainText(tr("Spending Zerocoin.\nComputationally expensive, might need several minutes depending on the selected Security Level and your hardware. \nPlease be patient..."));
+    ui->TEMintStatus->setPlainText(
+            tr("Spending Zerocoin.\nComputationally expensive, might need several minutes depending on the selected Security Level and your hardware. \nPlease be patient..."));
     ui->TEMintStatus->repaint();
 
     // use mints from zPIV selector if applicable
-    vector<CMintMeta> vMintsToFetch;
-    vector<CZerocoinMint> vMintsSelected;
+    vector <CMintMeta> vMintsToFetch;
+    vector <CZerocoinMint> vMintsSelected;
     if (!ZPivControlDialog::setSelectedMints.empty()) {
         vMintsToFetch = ZPivControlDialog::GetSelectedMints();
 
-        for (auto& meta : vMintsToFetch) {
+        for (auto &meta : vMintsToFetch) {
             if (meta.nVersion < libzerocoin::PrivateCoin::PUBKEY_VERSION) {
                 //version 1 coins have to use full security level to successfully spend.
                 if (nSecurityLevel < 100) {
-                    QMessageBox::warning(this, tr("Spend Zerocoin"), tr("Version 1 zPIV require a security level of 100 to successfully spend."), QMessageBox::Ok, QMessageBox::Ok);
+                    QMessageBox::warning(this, tr("Spend Zerocoin"),
+                                         tr("Version 1 zPIV require a security level of 100 to successfully spend."),
+                                         QMessageBox::Ok, QMessageBox::Ok);
                     ui->TEMintStatus->setPlainText(tr("Failed to spend zPIV"));
                     ui->TEMintStatus->repaint();
                     return;
@@ -440,19 +446,22 @@ void PrivacyDialog::sendzPIV()
     CWalletTx wtxNew;
     CZerocoinSpendReceipt receipt;
     bool fSuccess = false;
-    if(ui->payTo->text().isEmpty()){
+    if (ui->payTo->text().isEmpty()) {
         // Spend to newly generated local address
-        fSuccess = pwalletMain->SpendZerocoin(nAmount, nSecurityLevel, wtxNew, receipt, vMintsSelected, fMintChange, fMinimizeChange);
-    }
-    else {
+        fSuccess = pwalletMain->SpendZerocoin(nAmount, nSecurityLevel, wtxNew, receipt, vMintsSelected, fMintChange,
+                                              fMinimizeChange);
+    } else {
         // Spend to supplied destination address
-        fSuccess = pwalletMain->SpendZerocoin(nAmount, nSecurityLevel, wtxNew, receipt, vMintsSelected, fMintChange, fMinimizeChange, &address);
+        fSuccess = pwalletMain->SpendZerocoin(nAmount, nSecurityLevel, wtxNew, receipt, vMintsSelected, fMintChange,
+                                              fMinimizeChange, &address);
     }
 
     // Display errors during spend
     if (!fSuccess) {
         if (receipt.GetStatus() == ZPIV_SPEND_V1_SEC_LEVEL) {
-            QMessageBox::warning(this, tr("Spend Zerocoin"), tr("Version 1 zPIV require a security level of 100 to successfully spend."), QMessageBox::Ok, QMessageBox::Ok);
+            QMessageBox::warning(this, tr("Spend Zerocoin"),
+                                 tr("Version 1 zPIV require a security level of 100 to successfully spend."),
+                                 QMessageBox::Ok, QMessageBox::Ok);
             ui->TEMintStatus->setPlainText(tr("Failed to spend zPIV"));
             ui->TEMintStatus->repaint();
             return;
@@ -461,18 +470,27 @@ void PrivacyDialog::sendzPIV()
         int nNeededSpends = receipt.GetNeededSpends(); // Number of spends we would need for this transaction
         const int nMaxSpends = Params().Zerocoin_MaxSpendsPerTransaction(); // Maximum possible spends for one zPIV transaction
         if (nNeededSpends > nMaxSpends) {
-            QString strStatusMessage = tr("Too much inputs (") + QString::number(nNeededSpends, 10) + tr(") needed. \nMaximum allowed: ") + QString::number(nMaxSpends, 10);
-            strStatusMessage += tr("\nEither mint higher denominations (so fewer inputs are needed) or reduce the amount to spend.");
-            QMessageBox::warning(this, tr("Spend Zerocoin"), strStatusMessage.toStdString().c_str(), QMessageBox::Ok, QMessageBox::Ok);
-            ui->TEMintStatus->setPlainText(tr("Spend Zerocoin failed with status = ") +QString::number(receipt.GetStatus(), 10) + "\n" + "Message: " + QString::fromStdString(strStatusMessage.toStdString()));
-        }
-        else {
-            QMessageBox::warning(this, tr("Spend Zerocoin"), receipt.GetStatusMessage().c_str(), QMessageBox::Ok, QMessageBox::Ok);
-            ui->TEMintStatus->setPlainText(tr("Spend Zerocoin failed with status = ") +QString::number(receipt.GetStatus(), 10) + "\n" + "Message: " + QString::fromStdString(receipt.GetStatusMessage()));
+            QString strStatusMessage =
+                    tr("Too much inputs (") + QString::number(nNeededSpends, 10) + tr(") needed. \nMaximum allowed: ") +
+                    QString::number(nMaxSpends, 10);
+            strStatusMessage += tr(
+                    "\nEither mint higher denominations (so fewer inputs are needed) or reduce the amount to spend.");
+            QMessageBox::warning(this, tr("Spend Zerocoin"), strStatusMessage.toStdString().c_str(), QMessageBox::Ok,
+                                 QMessageBox::Ok);
+            ui->TEMintStatus->setPlainText(
+                    tr("Spend Zerocoin failed with status = ") + QString::number(receipt.GetStatus(), 10) + "\n" +
+                    "Message: " + QString::fromStdString(strStatusMessage.toStdString()));
+        } else {
+            QMessageBox::warning(this, tr("Spend Zerocoin"), receipt.GetStatusMessage().c_str(), QMessageBox::Ok,
+                                 QMessageBox::Ok);
+            ui->TEMintStatus->setPlainText(
+                    tr("Spend Zerocoin failed with status = ") + QString::number(receipt.GetStatus(), 10) + "\n" +
+                    "Message: " + QString::fromStdString(receipt.GetStatusMessage()));
         }
         ui->zPIVpayAmount->setFocus();
         ui->TEMintStatus->repaint();
-        ui->TEMintStatus->verticalScrollBar()->setValue(ui->TEMintStatus->verticalScrollBar()->maximum()); // Automatically scroll to end of text
+        ui->TEMintStatus->verticalScrollBar()->setValue(
+                ui->TEMintStatus->verticalScrollBar()->maximum()); // Automatically scroll to end of text
         return;
     }
 
@@ -504,55 +522,52 @@ void PrivacyDialog::sendzPIV()
     }
 
     CAmount nValueOut = 0;
-    for (const CTxOut& txout: wtxNew.vout) {
+    for (const CTxOut &txout: wtxNew.vout) {
         strStats += tr("value out: ") + FormatMoney(txout.nValue).c_str() + " Piv, ";
         nValueOut += txout.nValue;
 
         strStats += tr("address: ");
         CTxDestination dest;
-        if(txout.scriptPubKey.IsZerocoinMint())
+        if (txout.scriptPubKey.IsZerocoinMint())
             strStats += tr("zPIV Mint");
-        else if(ExtractDestination(txout.scriptPubKey, dest))
+        else if (ExtractDestination(txout.scriptPubKey, dest))
             strStats += tr(CBitcoinAddress(dest).ToString().c_str());
         strStats += "\n";
     }
-    double fDuration = (double)(GetTimeMillis() - nTime)/1000.0;
+    double fDuration = (double) (GetTimeMillis() - nTime) / 1000.0;
     strStats += tr("Duration: ") + QString::number(fDuration) + tr(" sec.\n");
     strStats += tr("Sending successful, return code: ") + QString::number(receipt.GetStatus()) + "\n";
 
     QString strReturn;
     strReturn += tr("txid: ") + wtxNew.GetHash().ToString().c_str() + "\n";
-    strReturn += tr("fee: ") + QString::fromStdString(FormatMoney(nValueIn-nValueOut)) + "\n";
+    strReturn += tr("fee: ") + QString::fromStdString(FormatMoney(nValueIn - nValueOut)) + "\n";
     strReturn += strStats;
 
     // Clear amount to avoid double spending when accidentally clicking twice
-    ui->zPIVpayAmount->setText ("0");
+    ui->zPIVpayAmount->setText("0");
 
     ui->TEMintStatus->setPlainText(strReturn);
     ui->TEMintStatus->repaint();
-    ui->TEMintStatus->verticalScrollBar()->setValue(ui->TEMintStatus->verticalScrollBar()->maximum()); // Automatically scroll to end of text
+    ui->TEMintStatus->verticalScrollBar()->setValue(
+            ui->TEMintStatus->verticalScrollBar()->maximum()); // Automatically scroll to end of text
 }
 
-void PrivacyDialog::on_payTo_textChanged(const QString& address)
-{
+void PrivacyDialog::on_payTo_textChanged(const QString &address) {
     updateLabel(address);
 }
 
 // Coin Control: copy label "Quantity" to clipboard
-void PrivacyDialog::coinControlClipboardQuantity()
-{
+void PrivacyDialog::coinControlClipboardQuantity() {
     GUIUtil::setClipboard(ui->labelCoinControlQuantity->text());
 }
 
 // Coin Control: copy label "Amount" to clipboard
-void PrivacyDialog::coinControlClipboardAmount()
-{
+void PrivacyDialog::coinControlClipboardAmount() {
     GUIUtil::setClipboard(ui->labelCoinControlAmount->text().left(ui->labelCoinControlAmount->text().indexOf(" ")));
 }
 
 // Coin Control: button inputs -> show actual coin control dialog
-void PrivacyDialog::coinControlButtonClicked()
-{
+void PrivacyDialog::coinControlButtonClicked() {
     if (!walletModel || !walletModel->getOptionsModel())
         return;
 
@@ -563,25 +578,23 @@ void PrivacyDialog::coinControlButtonClicked()
 }
 
 // Coin Control: update labels
-void PrivacyDialog::coinControlUpdateLabels()
-{
+void PrivacyDialog::coinControlUpdateLabels() {
     if (!walletModel || !walletModel->getOptionsModel() || !walletModel->getOptionsModel()->getCoinControlFeatures())
         return;
 
-     // set pay amounts
+    // set pay amounts
     CoinControlDialog::payAmounts.clear();
 
     if (CoinControlDialog::coinControl->HasSelected()) {
         // Actual coin control calculation
         CoinControlDialog::updateLabels(walletModel, this);
     } else {
-        ui->labelCoinControlQuantity->setText (tr("Coins automatically selected"));
-        ui->labelCoinControlAmount->setText (tr("Coins automatically selected"));
+        ui->labelCoinControlQuantity->setText(tr("Coins automatically selected"));
+        ui->labelCoinControlAmount->setText(tr("Coins automatically selected"));
     }
 }
 
-bool PrivacyDialog::updateLabel(const QString& address)
-{
+bool PrivacyDialog::updateLabel(const QString &address) {
     if (!walletModel)
         return false;
 
@@ -595,10 +608,12 @@ bool PrivacyDialog::updateLabel(const QString& address)
     return false;
 }
 
-void PrivacyDialog::setBalance(const CAmount& balance, const CAmount& unconfirmedBalance, const CAmount& immatureBalance,
-                               const CAmount& zerocoinBalance, const CAmount& unconfirmedZerocoinBalance, const CAmount& immatureZerocoinBalance,
-                               const CAmount& watchOnlyBalance, const CAmount& watchUnconfBalance, const CAmount& watchImmatureBalance)
-{
+void
+PrivacyDialog::setBalance(const CAmount &balance, const CAmount &unconfirmedBalance, const CAmount &immatureBalance,
+                          const CAmount &zerocoinBalance, const CAmount &unconfirmedZerocoinBalance,
+                          const CAmount &immatureZerocoinBalance,
+                          const CAmount &watchOnlyBalance, const CAmount &watchUnconfBalance,
+                          const CAmount &watchImmatureBalance) {
     currentBalance = balance;
     currentUnconfirmedBalance = unconfirmedBalance;
     currentImmatureBalance = immatureBalance;
@@ -609,18 +624,18 @@ void PrivacyDialog::setBalance(const CAmount& balance, const CAmount& unconfirme
     currentWatchUnconfBalance = watchUnconfBalance;
     currentWatchImmatureBalance = watchImmatureBalance;
 
-    std::map<libzerocoin::CoinDenomination, CAmount> mapDenomBalances;
+    std::map <libzerocoin::CoinDenomination, CAmount> mapDenomBalances;
     std::map<libzerocoin::CoinDenomination, int> mapUnconfirmed;
     std::map<libzerocoin::CoinDenomination, int> mapImmature;
-    for (const auto& denom : libzerocoin::zerocoinDenomList){
+    for (const auto &denom : libzerocoin::zerocoinDenomList) {
         mapDenomBalances.insert(make_pair(denom, 0));
         mapUnconfirmed.insert(make_pair(denom, 0));
         mapImmature.insert(make_pair(denom, 0));
     }
 
-    std::vector<CMintMeta> vMints = pwalletMain->zpivTracker->GetMints(false);
+    std::vector <CMintMeta> vMints = pwalletMain->zpivTracker->GetMints(false);
     map<libzerocoin::CoinDenomination, int> mapMaturityHeights = GetMintMaturityHeight();
-    for (auto& meta : vMints){
+    for (auto &meta : vMints) {
         // All denominations
         mapDenomBalances.at(meta.denom)++;
 
@@ -642,7 +657,7 @@ void PrivacyDialog::setBalance(const CAmount& balance, const CAmount& unconfirme
     int64_t nImmature = 0;
     QString strDenomStats, strUnconfirmed = "";
 
-    for (const auto& denom : libzerocoin::zerocoinDenomList) {
+    for (const auto &denom : libzerocoin::zerocoinDenomList) {
         nCoins = libzerocoin::ZerocoinDenominationToInt(denom);
         nSumPerCoin = nCoins * mapDenomBalances.at(denom);
         nUnconfirmed = mapUnconfirmed.at(denom);
@@ -652,10 +667,10 @@ void PrivacyDialog::setBalance(const CAmount& balance, const CAmount& unconfirme
         if (nUnconfirmed) {
             strUnconfirmed += QString::number(nUnconfirmed) + QString(" unconf. ");
         }
-        if(nImmature) {
+        if (nImmature) {
             strUnconfirmed += QString::number(nImmature) + QString(" immature ");
         }
-        if(nImmature || nUnconfirmed) {
+        if (nImmature || nUnconfirmed) {
             strUnconfirmed = QString("( ") + strUnconfirmed + QString(") ");
         }
 
@@ -699,9 +714,11 @@ void PrivacyDialog::setBalance(const CAmount& balance, const CAmount& unconfirme
         nLockedBalance = walletModel->getLockedBalance();
     }
 
-    ui->labelzAvailableAmount->setText(QString::number(zerocoinBalance/COIN) + QString(" zPIV "));
-    ui->labelzAvailableAmount_2->setText(QString::number(matureZerocoinBalance/COIN) + QString(" zPIV "));
-    ui->labelzPIVAmountValue->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, balance - immatureBalance - nLockedBalance, false, BitcoinUnits::separatorAlways));
+    ui->labelzAvailableAmount->setText(QString::number(zerocoinBalance / COIN) + QString(" zPIV "));
+    ui->labelzAvailableAmount_2->setText(QString::number(matureZerocoinBalance / COIN) + QString(" zPIV "));
+    ui->labelzPIVAmountValue->setText(
+            BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, balance - immatureBalance - nLockedBalance, false,
+                                            BitcoinUnits::separatorAlways));
 
     // Display AutoMint status
     updateAutomintStatus();
@@ -710,11 +727,12 @@ void PrivacyDialog::setBalance(const CAmount& balance, const CAmount& unconfirme
     updateSPORK16Status();
 
     // Display global supply
-    ui->labelZsupplyAmount->setText(QString::number(chainActive.Tip()->GetZerocoinSupply()/COIN) + QString(" <b>zPIV </b> "));
+    ui->labelZsupplyAmount->setText(
+            QString::number(chainActive.Tip()->GetZerocoinSupply() / COIN) + QString(" <b>zPIV </b> "));
     for (auto denom : libzerocoin::zerocoinDenomList) {
         int64_t nSupply = chainActive.Tip()->mapZerocoinSupply.at(denom);
         QString strSupply = QString::number(nSupply) + " x " + QString::number(denom) + " = <b>" +
-                            QString::number(nSupply*denom) + " zPIV </b> ";
+                            QString::number(nSupply * denom) + " zPIV </b> ";
         switch (denom) {
             case libzerocoin::CoinDenomination::ZQ_ONE:
                 ui->labelZsupplyAmount1->setText(strSupply);
@@ -747,8 +765,7 @@ void PrivacyDialog::setBalance(const CAmount& balance, const CAmount& unconfirme
     }
 }
 
-void PrivacyDialog::updateDisplayUnit()
-{
+void PrivacyDialog::updateDisplayUnit() {
     if (walletModel && walletModel->getOptionsModel()) {
         nDisplayUnit = walletModel->getOptionsModel()->getDisplayUnit();
         if (currentBalance != -1)
@@ -758,13 +775,11 @@ void PrivacyDialog::updateDisplayUnit()
     }
 }
 
-void PrivacyDialog::showOutOfSyncWarning(bool fShow)
-{
+void PrivacyDialog::showOutOfSyncWarning(bool fShow) {
     ui->labelzPIVSyncStatus->setVisible(fShow);
 }
 
-void PrivacyDialog::keyPressEvent(QKeyEvent* event)
-{
+void PrivacyDialog::keyPressEvent(QKeyEvent *event) {
     if (event->key() != Qt::Key_Escape) // press esc -> ignore
     {
         this->QDialog::keyPressEvent(event);
@@ -773,25 +788,23 @@ void PrivacyDialog::keyPressEvent(QKeyEvent* event)
     }
 }
 
-void PrivacyDialog::updateAutomintStatus()
-{
+void PrivacyDialog::updateAutomintStatus() {
     QString strAutomintStatus = tr("AutoMint Status:");
 
-    if (pwalletMain->isZeromintEnabled ()) {
-       strAutomintStatus += tr(" <b>enabled</b>.");
-    }
-    else {
-       strAutomintStatus += tr(" <b>disabled</b>.");
+    if (pwalletMain->isZeromintEnabled()) {
+        strAutomintStatus += tr(" <b>enabled</b>.");
+    } else {
+        strAutomintStatus += tr(" <b>disabled</b>.");
     }
 
-    strAutomintStatus += tr(" Configured target percentage: <b>") + QString::number(pwalletMain->getZeromintPercentage()) + "%</b>";
+    strAutomintStatus +=
+            tr(" Configured target percentage: <b>") + QString::number(pwalletMain->getZeromintPercentage()) + "%</b>";
     ui->label_AutoMintStatus->setText(strAutomintStatus);
 }
 
-void PrivacyDialog::updateSPORK16Status()
-{
+void PrivacyDialog::updateSPORK16Status() {
     // Update/enable labels, buttons and tooltips depending on the current SPORK_16 status
-    bool fButtonsEnabled =  ui->pushButtonMintzPIV->isEnabled();
+    bool fButtonsEnabled = ui->pushButtonMintzPIV->isEnabled();
     bool fMaintenanceMode = GetAdjustedTime() > GetSporkValue(SPORK_16_ZEROCOIN_MAINTENANCE_MODE);
     if (fMaintenanceMode && fButtonsEnabled) {
         // Mint zPIV
@@ -808,6 +821,7 @@ void PrivacyDialog::updateSPORK16Status()
 
         // Spend zPIV
         ui->pushButtonSpendzPIV->setEnabled(true);
-        ui->pushButtonSpendzPIV->setToolTip(tr("Spend Zerocoin. Without 'Pay To:' address creates payments to yourself."));
+        ui->pushButtonSpendzPIV->setToolTip(
+                tr("Spend Zerocoin. Without 'Pay To:' address creates payments to yourself."));
     }
 }

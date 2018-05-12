@@ -14,7 +14,9 @@
 #include <boost/signals2/signal.hpp>
 
 class CBasicKeyStore;
+
 class CWallet;
+
 class uint256;
 
 /** General change type (added, updated, removed). */
@@ -25,8 +27,7 @@ enum ChangeType {
 };
 
 /** Signals for UI communication. */
-class CClientUIInterface
-{
+class CClientUIInterface {
 public:
     /** Flags for CClientUIInterface::ThreadSafeMessageBox */
     enum MessageBoxFlags {
@@ -77,13 +78,14 @@ public:
     };
 
     /** Show message box. */
-    boost::signals2::signal<bool(const std::string& message, const std::string& caption, unsigned int style), boost::signals2::last_value<bool> > ThreadSafeMessageBox;
+    boost::signals2::signal<bool(const std::string &message, const std::string &caption,
+                                 unsigned int style), boost::signals2::last_value<bool> > ThreadSafeMessageBox;
 
     /** Progress message during initialization. */
-    boost::signals2::signal<void(const std::string& message)> InitMessage;
+    boost::signals2::signal<void(const std::string &message)> InitMessage;
 
     /** Translate a message to the native language of the user. */
-    boost::signals2::signal<std::string(const char* psz)> Translate;
+    boost::signals2::signal<std::string(const char *psz)> Translate;
 
     /** Number of network connections changed. */
     boost::signals2::signal<void(int newNumConnections)> NotifyNumConnectionsChanged;
@@ -92,22 +94,22 @@ public:
      * New, updated or cancelled alert.
      * @note called with lock cs_mapAlerts held.
      */
-    boost::signals2::signal<void(const uint256& hash, ChangeType status)> NotifyAlertChanged;
+    boost::signals2::signal<void(const uint256 &hash, ChangeType status)> NotifyAlertChanged;
 
     /** A wallet has been loaded. */
-    boost::signals2::signal<void(CWallet* wallet)> LoadWallet;
+    boost::signals2::signal<void(CWallet *wallet)> LoadWallet;
 
     /** Show progress e.g. for verifychain */
-    boost::signals2::signal<void(const std::string& title, int nProgress)> ShowProgress;
+    boost::signals2::signal<void(const std::string &title, int nProgress)> ShowProgress;
 
     /** New block has been accepted */
-    boost::signals2::signal<void(const uint256& hash)> NotifyBlockTip;
+    boost::signals2::signal<void(const uint256 &hash)> NotifyBlockTip;
 
     /** New block has been accepted and is over a certain size */
-    boost::signals2::signal<void(int size, const uint256& hash)> NotifyBlockSize;
+    boost::signals2::signal<void(int size, const uint256 &hash)> NotifyBlockSize;
 
     /** Banlist did change. */
-    boost::signals2::signal<void (void)> BannedListChanged;
+    boost::signals2::signal<void(void)> BannedListChanged;
 };
 
 extern CClientUIInterface uiInterface;
@@ -116,9 +118,8 @@ extern CClientUIInterface uiInterface;
  * Translation function: Call Translate signal on UI interface, which returns a boost::optional result.
  * If no translation slot is registered, nothing is returned, and simply return the input.
  */
-inline std::string _(const char* psz)
-{
-    boost::optional<std::string> rv = uiInterface.Translate(psz);
+inline std::string _(const char *psz) {
+    boost::optional <std::string> rv = uiInterface.Translate(psz);
     return rv ? (*rv) : psz;
 }
 

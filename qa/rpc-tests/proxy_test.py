@@ -10,6 +10,7 @@ import time, os
 from socks5 import Socks5Configuration, Socks5Command, Socks5Server, AddressType
 from test_framework import BitcoinTestFramework
 from util import *
+
 '''
 Test plan:
 - Start bitcoind's with different proxy configurations
@@ -33,6 +34,7 @@ addnode connect to IPv6
 addnode connect to onion
 addnode connect to generic DNS name
 '''
+
 
 class ProxyTest(BitcoinTestFramework):
     def __init__(self):
@@ -65,18 +67,19 @@ class ProxyTest(BitcoinTestFramework):
         # Note: proxies are not used to connect to local nodes
         # this is because the proxy to use is based on CService.GetNetwork(), which return NET_UNROUTABLE for localhost
         return start_nodes(4, self.options.tmpdir, extra_args=[
-            ['-listen', '-debug=net', '-debug=proxy', '-proxy=%s:%i' % (self.conf1.addr),'-proxyrandomize=1'],
-            ['-listen', '-debug=net', '-debug=proxy', '-proxy=%s:%i' % (self.conf1.addr),'-onion=%s:%i' % (self.conf2.addr),'-proxyrandomize=0'],
-            ['-listen', '-debug=net', '-debug=proxy', '-proxy=%s:%i' % (self.conf2.addr),'-proxyrandomize=1'],
-            ['-listen', '-debug=net', '-debug=proxy', '-proxy=[%s]:%i' % (self.conf3.addr),'-proxyrandomize=0']
-            ])
+            ['-listen', '-debug=net', '-debug=proxy', '-proxy=%s:%i' % (self.conf1.addr), '-proxyrandomize=1'],
+            ['-listen', '-debug=net', '-debug=proxy', '-proxy=%s:%i' % (self.conf1.addr),
+             '-onion=%s:%i' % (self.conf2.addr), '-proxyrandomize=0'],
+            ['-listen', '-debug=net', '-debug=proxy', '-proxy=%s:%i' % (self.conf2.addr), '-proxyrandomize=1'],
+            ['-listen', '-debug=net', '-debug=proxy', '-proxy=[%s]:%i' % (self.conf3.addr), '-proxyrandomize=0']
+        ])
 
     def node_test(self, node, proxies, auth):
         rv = []
         # Test: outgoing IPv4 connection through node
         node.addnode("15.61.23.23:1234", "onetry")
         cmd = proxies[0].queue.get()
-        assert(isinstance(cmd, Socks5Command))
+        assert (isinstance(cmd, Socks5Command))
         # Note: bitcoind's SOCKS5 implementation only sends atyp DOMAINNAME, even if connecting directly to IPv4/IPv6
         assert_equal(cmd.atyp, AddressType.DOMAINNAME)
         assert_equal(cmd.addr, "15.61.23.23")
@@ -89,7 +92,7 @@ class ProxyTest(BitcoinTestFramework):
         # Test: outgoing IPv6 connection through node
         node.addnode("[1233:3432:2434:2343:3234:2345:6546:4534]:5443", "onetry")
         cmd = proxies[1].queue.get()
-        assert(isinstance(cmd, Socks5Command))
+        assert (isinstance(cmd, Socks5Command))
         # Note: bitcoind's SOCKS5 implementation only sends atyp DOMAINNAME, even if connecting directly to IPv4/IPv6
         assert_equal(cmd.atyp, AddressType.DOMAINNAME)
         assert_equal(cmd.addr, "1233:3432:2434:2343:3234:2345:6546:4534")
@@ -102,7 +105,7 @@ class ProxyTest(BitcoinTestFramework):
         # Test: outgoing onion connection through node
         node.addnode("wisprvj7kcklujarx.onion:51472", "onetry")
         cmd = proxies[2].queue.get()
-        assert(isinstance(cmd, Socks5Command))
+        assert (isinstance(cmd, Socks5Command))
         assert_equal(cmd.atyp, AddressType.DOMAINNAME)
         assert_equal(cmd.addr, "wisprvj7kcklujarx.onion")
         assert_equal(cmd.port, 51472)
@@ -114,7 +117,7 @@ class ProxyTest(BitcoinTestFramework):
         # Test: outgoing DNS name connection through node
         node.addnode("node.noumenon:8333", "onetry")
         cmd = proxies[3].queue.get()
-        assert(isinstance(cmd, Socks5Command))
+        assert (isinstance(cmd, Socks5Command))
         assert_equal(cmd.atyp, AddressType.DOMAINNAME)
         assert_equal(cmd.addr, "node.noumenon")
         assert_equal(cmd.port, 8333)
@@ -135,11 +138,12 @@ class ProxyTest(BitcoinTestFramework):
         # -proxy plus -onion, -proxyrandomize
         rv = self.node_test(self.nodes[2], [self.serv2, self.serv2, self.serv2, self.serv2], True)
         # Check that credentials as used for -proxyrandomize connections are unique
-        credentials = set((x.username,x.password) for x in rv)
+        credentials = set((x.username, x.password) for x in rv)
         assert_equal(len(credentials), 4)
 
         # proxy on IPv6 localhost
         self.node_test(self.nodes[3], [self.serv3, self.serv3, self.serv3, self.serv3], False)
+
 
 if __name__ == '__main__':
     ProxyTest().main()

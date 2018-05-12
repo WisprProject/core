@@ -14,9 +14,9 @@ from util import *
 import os
 import shutil
 
+
 # Create one-input, one-output, no-fee transaction:
 class MempoolCoinbaseTest(BitcoinTestFramework):
-
     alert_filename = None  # Set by setup_network
 
     def setup_network(self):
@@ -29,8 +29,8 @@ class MempoolCoinbaseTest(BitcoinTestFramework):
         self.sync_all
 
     def create_tx(self, from_txid, to_address, amount):
-        inputs = [{ "txid" : from_txid, "vout" : 0}]
-        outputs = { to_address : amount }
+        inputs = [{"txid": from_txid, "vout": 0}]
+        outputs = {to_address: amount}
         rawtx = self.nodes[0].createrawtransaction(inputs, outputs)
         signresult = self.nodes[0].signrawtransaction(rawtx)
         assert_equal(signresult["complete"], True)
@@ -53,8 +53,8 @@ class MempoolCoinbaseTest(BitcoinTestFramework):
         # 3. Indirect (coinbase and child both in chain) : spend_103 and spend_103_1
         # Use invalidatblock to make all of the above coinbase spends invalid (immature coinbase),
         # and make sure the mempool code behaves correctly.
-        b = [ self.nodes[0].getblockhash(n) for n in range(102, 105) ]
-        coinbase_txids = [ self.nodes[0].getblock(h)['tx'][0] for h in b ]
+        b = [self.nodes[0].getblockhash(n) for n in range(102, 105)]
+        coinbase_txids = [self.nodes[0].getblock(h)['tx'][0] for h in b]
         spend_101_raw = self.create_tx(coinbase_txids[0], node1_address, 50)
         spend_102_raw = self.create_tx(coinbase_txids[1], node0_address, 50)
         spend_103_raw = self.create_tx(coinbase_txids[2], node0_address, 50)
@@ -78,7 +78,7 @@ class MempoolCoinbaseTest(BitcoinTestFramework):
 
         self.sync_all()
 
-        assert_equal(set(self.nodes[0].getrawmempool()), set([ spend_101_id, spend_102_1_id ]))
+        assert_equal(set(self.nodes[0].getrawmempool()), set([spend_101_id, spend_102_1_id]))
 
         # Use invalidateblock to re-org back and make all those coinbase spends
         # immature/invalid:
@@ -89,6 +89,7 @@ class MempoolCoinbaseTest(BitcoinTestFramework):
 
         # mempool should be empty.
         assert_equal(set(self.nodes[0].getrawmempool()), set())
+
 
 if __name__ == '__main__':
     MempoolCoinbaseTest().main()

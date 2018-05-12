@@ -78,114 +78,113 @@
 }
 #endif
 
-struct ReadAlerts
-{
-    ReadAlerts()
-    {
-        std::vector<unsigned char> vch(alert_tests::alertTests, alert_tests::alertTests + sizeof(alert_tests::alertTests));
+struct ReadAlerts {
+    ReadAlerts() {
+        std::vector<unsigned char> vch(alert_tests::alertTests,
+                                       alert_tests::alertTests + sizeof(alert_tests::alertTests));
         CDataStream stream(vch, SER_DISK, CLIENT_VERSION);
         try {
-            while (!stream.eof())
-            {
+            while (!stream.eof()) {
                 CAlert alert;
                 stream >> alert;
                 alerts.push_back(alert);
             }
         }
-        catch (std::exception) { }
+        catch (std::exception) {}
     }
-    ~ReadAlerts() { }
 
-    static std::vector<std::string> read_lines(boost::filesystem::path filepath)
-    {
-        std::vector<std::string> result;
+    ~ReadAlerts() {}
+
+    static std::vector <std::string> read_lines(boost::filesystem::path filepath) {
+        std::vector <std::string> result;
 
         std::ifstream f(filepath.string().c_str());
         std::string line;
-        while (std::getline(f,line))
+        while (std::getline(f, line))
             result.push_back(line);
 
         return result;
     }
 
-    std::vector<CAlert> alerts;
+    std::vector <CAlert> alerts;
 };
 
-BOOST_FIXTURE_TEST_SUITE(Alert_tests, ReadAlerts)
+BOOST_FIXTURE_TEST_SUITE(Alert_tests, ReadAlerts
+)
 
 
 BOOST_AUTO_TEST_CASE(AlertApplies)
-{
-    SetMockTime(11);
+        {
+                SetMockTime(11);
 
-    BOOST_FOREACH(const CAlert& alert, alerts)
-    {
-        BOOST_CHECK(alert.CheckSignature());
-    }
+        BOOST_FOREACH(const CAlert& alert, alerts)
+        {
+            BOOST_CHECK(alert.CheckSignature());
+        }
 
-    BOOST_CHECK(alerts.size() >= 3);
+        BOOST_CHECK(alerts.size() >= 3);
 
-    // Matches:
-    BOOST_CHECK(alerts[0].AppliesTo(1, ""));
-    BOOST_CHECK(alerts[0].AppliesTo(999001, ""));
-    BOOST_CHECK(alerts[0].AppliesTo(1, "/Satoshi:11.11.11/"));
+        // Matches:
+        BOOST_CHECK(alerts[0].AppliesTo(1, ""));
+        BOOST_CHECK(alerts[0].AppliesTo(999001, ""));
+        BOOST_CHECK(alerts[0].AppliesTo(1, "/Satoshi:11.11.11/"));
 
-    BOOST_CHECK(alerts[1].AppliesTo(1, "/Satoshi:0.1.0/"));
-    BOOST_CHECK(alerts[1].AppliesTo(999001, "/Satoshi:0.1.0/"));
+        BOOST_CHECK(alerts[1].AppliesTo(1, "/Satoshi:0.1.0/"));
+        BOOST_CHECK(alerts[1].AppliesTo(999001, "/Satoshi:0.1.0/"));
 
-    BOOST_CHECK(alerts[2].AppliesTo(1, "/Satoshi:0.1.0/"));
-    BOOST_CHECK(alerts[2].AppliesTo(1, "/Satoshi:0.2.0/"));
+        BOOST_CHECK(alerts[2].AppliesTo(1, "/Satoshi:0.1.0/"));
+        BOOST_CHECK(alerts[2].AppliesTo(1, "/Satoshi:0.2.0/"));
 
-    // Don't match:
-    BOOST_CHECK(!alerts[0].AppliesTo(-1, ""));
-    BOOST_CHECK(!alerts[0].AppliesTo(999002, ""));
+        // Don't match:
+        BOOST_CHECK(!alerts[0].AppliesTo(-1, ""));
+        BOOST_CHECK(!alerts[0].AppliesTo(999002, ""));
 
-    BOOST_CHECK(!alerts[1].AppliesTo(1, ""));
-    BOOST_CHECK(!alerts[1].AppliesTo(1, "Satoshi:0.1.0"));
-    BOOST_CHECK(!alerts[1].AppliesTo(1, "/Satoshi:0.1.0"));
-    BOOST_CHECK(!alerts[1].AppliesTo(1, "Satoshi:0.1.0/"));
-    BOOST_CHECK(!alerts[1].AppliesTo(-1, "/Satoshi:0.1.0/"));
-    BOOST_CHECK(!alerts[1].AppliesTo(999002, "/Satoshi:0.1.0/"));
-    BOOST_CHECK(!alerts[1].AppliesTo(1, "/Satoshi:0.2.0/"));
+        BOOST_CHECK(!alerts[1].AppliesTo(1, ""));
+        BOOST_CHECK(!alerts[1].AppliesTo(1, "Satoshi:0.1.0"));
+        BOOST_CHECK(!alerts[1].AppliesTo(1, "/Satoshi:0.1.0"));
+        BOOST_CHECK(!alerts[1].AppliesTo(1, "Satoshi:0.1.0/"));
+        BOOST_CHECK(!alerts[1].AppliesTo(-1, "/Satoshi:0.1.0/"));
+        BOOST_CHECK(!alerts[1].AppliesTo(999002, "/Satoshi:0.1.0/"));
+        BOOST_CHECK(!alerts[1].AppliesTo(1, "/Satoshi:0.2.0/"));
 
-    BOOST_CHECK(!alerts[2].AppliesTo(1, "/Satoshi:0.3.0/"));
+        BOOST_CHECK(!alerts[2].AppliesTo(1, "/Satoshi:0.3.0/"));
 
-    SetMockTime(0);
-}
+        SetMockTime(0);
+        }
 
 
 BOOST_AUTO_TEST_CASE(AlertNotify)
-{
-    SetMockTime(11);
+        {
+                SetMockTime(11);
 
-    boost::filesystem::path temp = GetTempPath() / "alertnotify.txt";
-    boost::filesystem::remove(temp);
+        boost::filesystem::path temp = GetTempPath() / "alertnotify.txt";
+        boost::filesystem::remove(temp);
 
-    mapArgs["-alertnotify"] = std::string("echo %s >> ") + temp.string();
+        mapArgs["-alertnotify"] = std::string("echo %s >> ") + temp.string();
 
-    BOOST_FOREACH(CAlert alert, alerts)
+        BOOST_FOREACH(CAlert alert, alerts)
         alert.ProcessAlert(false);
 
-    std::vector<std::string> r = read_lines(temp);
-    BOOST_CHECK_EQUAL(r.size(), 4u);
+        std::vector<std::string> r = read_lines(temp);
+        BOOST_CHECK_EQUAL(r.size(), 4u);
 
 // Windows built-in echo semantics are different than posixy shells. Quotes and
 // whitespace are printed literally.
 
 #ifndef WIN32
-    BOOST_CHECK_EQUAL(r[0], "Alert 1");
-    BOOST_CHECK_EQUAL(r[1], "Alert 2, cancels 1");
-    BOOST_CHECK_EQUAL(r[2], "Alert 2, cancels 1");
-    BOOST_CHECK_EQUAL(r[3], "Evil Alert; /bin/ls; echo "); // single-quotes should be removed
+        BOOST_CHECK_EQUAL(r[0], "Alert 1");
+        BOOST_CHECK_EQUAL(r[1], "Alert 2, cancels 1");
+        BOOST_CHECK_EQUAL(r[2], "Alert 2, cancels 1");
+        BOOST_CHECK_EQUAL(r[3], "Evil Alert; /bin/ls; echo "); // single-quotes should be removed
 #else
-    BOOST_CHECK_EQUAL(r[0], "'Alert 1' ");
-    BOOST_CHECK_EQUAL(r[1], "'Alert 2, cancels 1' ");
-    BOOST_CHECK_EQUAL(r[2], "'Alert 2, cancels 1' ");
-    BOOST_CHECK_EQUAL(r[3], "'Evil Alert; /bin/ls; echo ' ");
+        BOOST_CHECK_EQUAL(r[0], "'Alert 1' ");
+        BOOST_CHECK_EQUAL(r[1], "'Alert 2, cancels 1' ");
+        BOOST_CHECK_EQUAL(r[2], "'Alert 2, cancels 1' ");
+        BOOST_CHECK_EQUAL(r[3], "'Evil Alert; /bin/ls; echo ' ");
 #endif
-    boost::filesystem::remove(temp);
+        boost::filesystem::remove(temp);
 
-    SetMockTime(0);
-}
+        SetMockTime(0);
+        }
 
 BOOST_AUTO_TEST_SUITE_END()

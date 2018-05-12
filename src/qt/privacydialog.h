@@ -17,11 +17,11 @@
 #include <QVariant>
 
 class OptionsModel;
+
 class WalletModel;
 
-namespace Ui
-{
-class PrivacyDialog;
+namespace Ui {
+    class PrivacyDialog;
 }
 
 QT_BEGIN_NAMESPACE
@@ -29,8 +29,7 @@ class QModelIndex;
 QT_END_NAMESPACE
 
 /** Dialog for requesting payment of bitcoins */
-class PrivacyDialog : public QDialog
-{
+class PrivacyDialog : public QDialog {
     Q_OBJECT
 
 public:
@@ -41,26 +40,34 @@ public:
         MINIMUM_COLUMN_WIDTH = 130
     };
 
-    explicit PrivacyDialog(QWidget* parent = 0);
+    explicit PrivacyDialog(QWidget *parent = 0);
+
     ~PrivacyDialog();
 
-    void setModel(WalletModel* model);
+    void setModel(WalletModel *model);
+
     void showOutOfSyncWarning(bool fShow);
+
     void setZPivControlLabels(int64_t nAmount, int nQuantity);
 
-public slots:
-    void setBalance(const CAmount& balance, const CAmount& unconfirmedBalance, const CAmount& immatureBalance, 
-                    const CAmount& zerocoinBalance, const CAmount& unconfirmedZerocoinBalance, const CAmount& immatureZerocoinBalance,
-                    const CAmount& watchOnlyBalance, const CAmount& watchUnconfBalance, const CAmount& watchImmatureBalance);
+public
+    slots:
+            void
+
+    setBalance(const CAmount &balance, const CAmount &unconfirmedBalance, const CAmount &immatureBalance,
+               const CAmount &zerocoinBalance, const CAmount &unconfirmedZerocoinBalance,
+               const CAmount &immatureZerocoinBalance,
+               const CAmount &watchOnlyBalance, const CAmount &watchUnconfBalance, const CAmount &watchImmatureBalance);
+
 protected:
-    virtual void keyPressEvent(QKeyEvent* event);
+    virtual void keyPressEvent(QKeyEvent *event);
 
 private:
-    Ui::PrivacyDialog* ui;
-    QTimer* timer;
-    GUIUtil::TableViewLastColumnResizingFixer* columnResizingFixer;
-    WalletModel* walletModel;
-    QMenu* contextMenu;
+    Ui::PrivacyDialog *ui;
+    QTimer *timer;
+    GUIUtil::TableViewLastColumnResizingFixer *columnResizingFixer;
+    WalletModel *walletModel;
+    QMenu *contextMenu;
     CAmount currentBalance;
     CAmount currentUnconfirmedBalance;
     CAmount currentImmatureBalance;
@@ -70,24 +77,33 @@ private:
     CAmount currentWatchOnlyBalance;
     CAmount currentWatchUnconfBalance;
     CAmount currentWatchImmatureBalance;
-    
+
     int nSecurityLevel = 0;
     bool fMinimizeChange = false;
 
     int nDisplayUnit;
-    bool updateLabel(const QString& address);
+
+    bool updateLabel(const QString &address);
+
     void sendzPIV();
 
-private slots:
-    void on_payTo_textChanged(const QString& address);
+private
+    slots:
+            void
+
+    on_payTo_textChanged(const QString &address);
+
     void on_addressBookButton_clicked();
+
 //    void coinControlFeatureChanged(bool);
     void coinControlButtonClicked();
+
 //    void coinControlChangeChecked(int);
 //    void coinControlChangeEdited(const QString&);
     void coinControlUpdateLabels();
 
     void coinControlClipboardQuantity();
+
     void coinControlClipboardAmount();
 //    void coinControlClipboardFee();
 //    void coinControlClipboardAfterFee();
@@ -97,13 +113,21 @@ private slots:
 //    void coinControlClipboardChange();
 
     void on_pushButtonMintzPIV_clicked();
+
     void on_pushButtonMintReset_clicked();
+
     void on_pushButtonSpentReset_clicked();
+
     void on_pushButtonSpendzPIV_clicked();
+
     void on_pushButtonZPivControl_clicked();
+
     void on_pasteButton_clicked();
+
     void updateDisplayUnit();
+
     void updateAutomintStatus();
+
     void updateSPORK16Status();
 };
 

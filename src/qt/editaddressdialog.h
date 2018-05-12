@@ -10,9 +10,8 @@
 
 class AddressTableModel;
 
-namespace Ui
-{
-class EditAddressDialog;
+namespace Ui {
+    class EditAddressDialog;
 }
 
 QT_BEGIN_NAMESPACE
@@ -21,8 +20,7 @@ QT_END_NAMESPACE
 
 /** Dialog for editing an address and associated information.
  */
-class EditAddressDialog : public QDialog
-{
+class EditAddressDialog : public QDialog {
     Q_OBJECT
 
 public:
@@ -33,25 +31,31 @@ public:
         EditSendingAddress
     };
 
-    explicit EditAddressDialog(Mode mode, QWidget* parent);
+    explicit EditAddressDialog(Mode mode, QWidget *parent);
+
     ~EditAddressDialog();
 
-    void setModel(AddressTableModel* model);
+    void setModel(AddressTableModel *model);
+
     void loadRow(int row);
 
     QString getAddress() const;
-    void setAddress(const QString& address);
 
-public slots:
-    void accept();
+    void setAddress(const QString &address);
+
+public
+    slots:
+            void
+
+    accept();
 
 private:
     bool saveCurrentRow();
 
-    Ui::EditAddressDialog* ui;
-    QDataWidgetMapper* mapper;
+    Ui::EditAddressDialog *ui;
+    QDataWidgetMapper *mapper;
     Mode mode;
-    AddressTableModel* model;
+    AddressTableModel *model;
 
     QString address;
 };

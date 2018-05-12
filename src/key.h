@@ -34,8 +34,7 @@ struct CExtPubKey;
 typedef std::vector<unsigned char, secure_allocator<unsigned char> > CPrivKey;
 
 /** An encapsulated private key. */
-class CKey
-{
+class CKey {
 private:
     //! Whether this private key is valid. We check for correctness when modifying the key
     //! data, so fValid should always correspond to the actual state.
@@ -48,44 +47,39 @@ private:
     unsigned char vch[32];
 
     //! Check whether the 32-byte array pointed to be vch is valid keydata.
-    bool static Check(const unsigned char* vch);
+    bool static Check(const unsigned char *vch);
 
 public:
     //! Construct an invalid private key.
-    CKey() : fValid(false), fCompressed(false)
-    {
+    CKey() : fValid(false), fCompressed(false) {
         LockObject(vch);
     }
 
     //! Copy constructor. This is necessary because of memlocking.
-    CKey(const CKey& secret) : fValid(secret.fValid), fCompressed(secret.fCompressed)
-    {
+    CKey(const CKey &secret) : fValid(secret.fValid), fCompressed(secret.fCompressed) {
         LockObject(vch);
         memcpy(vch, secret.vch, sizeof(vch));
     }
 
     //! Destructor (again necessary because of memlocking).
-    ~CKey()
-    {
+    ~CKey() {
         UnlockObject(vch);
     }
 
-    friend bool operator==(const CKey& a, const CKey& b)
-    {
+    friend bool operator==(const CKey &a, const CKey &b) {
         return a.fCompressed == b.fCompressed && a.size() == b.size() &&
                memcmp(&a.vch[0], &b.vch[0], a.size()) == 0;
     }
 
     //! Initialize using begin and end iterators to byte data.
-    template <typename T>
-    void Set(const T pbegin, const T pend, bool fCompressedIn)
-    {
+    template<typename T>
+    void Set(const T pbegin, const T pend, bool fCompressedIn) {
         if (pend - pbegin != 32) {
             fValid = false;
             return;
         }
         if (Check(&pbegin[0])) {
-            memcpy(vch, (unsigned char*)&pbegin[0], 32);
+            memcpy(vch, (unsigned char *) &pbegin[0], 32);
             fValid = true;
             fCompressed = fCompressedIn;
         } else {
@@ -95,8 +89,10 @@ public:
 
     //! Simple read-only vector-like interface.
     unsigned int size() const { return (fValid ? 32 : 0); }
-    const unsigned char* begin() const { return vch; }
-    const unsigned char* end() const { return vch + size(); }
+
+    const unsigned char *begin() const { return vch; }
+
+    const unsigned char *end() const { return vch + size(); }
 
     //! Check whether this private key is valid.
     bool IsValid() const { return fValid; }
@@ -105,7 +101,7 @@ public:
     bool IsCompressed() const { return fCompressed; }
 
     //! Initialize from a CPrivKey (serialized OpenSSL private key data).
-    bool SetPrivKey(const CPrivKey& vchPrivKey, bool fCompressed);
+    bool SetPrivKey(const CPrivKey &vchPrivKey, bool fCompressed);
 
     //! Generate a new private key using a cryptographic PRNG.
     void MakeNewKey(bool fCompressed);
@@ -129,7 +125,7 @@ public:
      * The test_case parameter tweaks the deterministic nonce, and is only for
      * testing. It should be zero for normal use.
      */
-    bool Sign(const uint256& hash, std::vector<unsigned char>& vchSig, uint32_t test_case = 0) const;
+    bool Sign(const uint256 &hash, std::vector<unsigned char> &vchSig, uint32_t test_case = 0) const;
 
     /**
      * Create a compact signature (65 bytes), which allows reconstructing the used public key.
@@ -138,22 +134,22 @@ public:
      *                  0x1D = second key with even y, 0x1E = second key with odd y,
      *                  add 0x04 for compressed keys.
      */
-    bool SignCompact(const uint256& hash, std::vector<unsigned char>& vchSig) const;
+    bool SignCompact(const uint256 &hash, std::vector<unsigned char> &vchSig) const;
 
     //! Derive BIP32 child key.
-    bool Derive(CKey& keyChild, unsigned char ccChild[32], unsigned int nChild, const unsigned char cc[32]) const;
+    bool Derive(CKey &keyChild, unsigned char ccChild[32], unsigned int nChild, const unsigned char cc[32]) const;
 
     /**
      * Verify thoroughly whether a private key and a public key match.
      * This is done using a different mechanism than just regenerating it.
      */
-    bool VerifyPubKey(const CPubKey& vchPubKey) const;
+    bool VerifyPubKey(const CPubKey &vchPubKey) const;
 
     //! Load private key and check that public key matches.
-    bool Load(CPrivKey& privkey, CPubKey& vchPubKey, bool fSkipCheck);
+    bool Load(CPrivKey &privkey, CPubKey &vchPubKey, bool fSkipCheck);
 
     //! Check whether an element of a signature (r or s) is valid.
-    static bool CheckSignatureElement(const unsigned char* vch, int len, bool half);
+    static bool CheckSignatureElement(const unsigned char *vch, int len, bool half);
 };
 
 struct CExtKey {
@@ -163,17 +159,21 @@ struct CExtKey {
     unsigned char vchChainCode[32];
     CKey key;
 
-    friend bool operator==(const CExtKey& a, const CExtKey& b)
-    {
-        return a.nDepth == b.nDepth && memcmp(&a.vchFingerprint[0], &b.vchFingerprint[0], 4) == 0 && a.nChild == b.nChild &&
+    friend bool operator==(const CExtKey &a, const CExtKey &b) {
+        return a.nDepth == b.nDepth && memcmp(&a.vchFingerprint[0], &b.vchFingerprint[0], 4) == 0 &&
+               a.nChild == b.nChild &&
                memcmp(&a.vchChainCode[0], &b.vchChainCode[0], 32) == 0 && a.key == b.key;
     }
 
     void Encode(unsigned char code[74]) const;
+
     void Decode(const unsigned char code[74]);
-    bool Derive(CExtKey& out, unsigned int nChild) const;
+
+    bool Derive(CExtKey &out, unsigned int nChild) const;
+
     CExtPubKey Neuter() const;
-    void SetMaster(const unsigned char* seed, unsigned int nSeedLen);
+
+    void SetMaster(const unsigned char *seed, unsigned int nSeedLen);
 };
 
 /** Check that required EC support is available at runtime */

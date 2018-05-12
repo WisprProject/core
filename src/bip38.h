@@ -20,20 +20,21 @@
  * 6) Encrypted Part 2 - 16 bytes - 32 chars - strKey[46..77]
  */
 
-void DecryptAES(uint256 encryptedIn, uint256 decryptionKey, uint256& output);
+void DecryptAES(uint256 encryptedIn, uint256 decryptionKey, uint256 &output);
 
-void ComputePreFactor(std::string strPassphrase, std::string strSalt, uint256& prefactor);
+void ComputePreFactor(std::string strPassphrase, std::string strSalt, uint256 &prefactor);
 
-void ComputePassfactor(std::string ownersalt, uint256 prefactor, uint256& passfactor);
+void ComputePassfactor(std::string ownersalt, uint256 prefactor, uint256 &passfactor);
 
-bool ComputePasspoint(uint256 passfactor, CPubKey& passpoint);
+bool ComputePasspoint(uint256 passfactor, CPubKey &passpoint);
 
-void ComputeSeedBPass(CPubKey passpoint, std::string strAddressHash, std::string strOwnerSalt, uint512& seedBPass);
+void ComputeSeedBPass(CPubKey passpoint, std::string strAddressHash, std::string strOwnerSalt, uint512 &seedBPass);
 
-void ComputeFactorB(uint256 seedB, uint256& factorB);
+void ComputeFactorB(uint256 seedB, uint256 &factorB);
 
 std::string BIP38_Encrypt(std::string strAddress, std::string strPassphrase, uint256 privKey, bool fCompressed);
-bool BIP38_Decrypt(std::string strPassphrase, std::string strEncryptedKey, uint256& privKey, bool& fCompressed);
+
+bool BIP38_Decrypt(std::string strPassphrase, std::string strEncryptedKey, uint256 &privKey, bool &fCompressed);
 
 std::string AddressToBip38Hash(std::string address);
 

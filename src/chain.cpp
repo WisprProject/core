@@ -11,8 +11,7 @@ using namespace std;
 /**
  * CChain implementation
  */
-void CChain::SetTip(CBlockIndex* pindex)
-{
+void CChain::SetTip(CBlockIndex *pindex) {
     if (pindex == NULL) {
         vChain.clear();
         return;
@@ -24,10 +23,9 @@ void CChain::SetTip(CBlockIndex* pindex)
     }
 }
 
-CBlockLocator CChain::GetLocator(const CBlockIndex* pindex) const
-{
+CBlockLocator CChain::GetLocator(const CBlockIndex *pindex) const {
     int nStep = 1;
-    std::vector<uint256> vHave;
+    std::vector <uint256> vHave;
     vHave.reserve(32);
 
     if (!pindex)
@@ -53,8 +51,7 @@ CBlockLocator CChain::GetLocator(const CBlockIndex* pindex) const
     return CBlockLocator(vHave);
 }
 
-const CBlockIndex* CChain::FindFork(const CBlockIndex* pindex) const
-{
+const CBlockIndex *CChain::FindFork(const CBlockIndex *pindex) const {
     if (pindex->nHeight > Height())
         pindex = pindex->GetAncestor(Height());
     while (pindex && !Contains(pindex))
@@ -62,8 +59,7 @@ const CBlockIndex* CChain::FindFork(const CBlockIndex* pindex) const
     return pindex;
 }
 
-uint256 CBlockIndex::GetBlockTrust() const
-{
+uint256 CBlockIndex::GetBlockTrust() const {
     uint256 bnTarget;
     bnTarget.SetCompact(nBits);
     if (bnTarget <= 0)

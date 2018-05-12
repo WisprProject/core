@@ -6,24 +6,20 @@
 #include "invalid_outpoints.json.h"
 #include "invalid_serials.json.h"
 
-namespace invalid_out
-{
-    std::set<CBigNum> setInvalidSerials;
-    std::set<COutPoint> setInvalidOutPoints;
+namespace invalid_out {
+    std::set <CBigNum> setInvalidSerials;
+    std::set <COutPoint> setInvalidOutPoints;
 
-    UniValue read_json(const std::string& jsondata)
-    {
+    UniValue read_json(const std::string &jsondata) {
         UniValue v;
 
-        if (!v.read(jsondata) || !v.isArray())
-        {
+        if (!v.read(jsondata) || !v.isArray()) {
             return UniValue(UniValue::VARR);
         }
         return v.get_array();
     }
 
-    bool LoadOutpoints()
-    {
+    bool LoadOutpoints() {
         UniValue v = read_json(LoadInvalidOutPoints());
 
         if (v.empty())
@@ -52,8 +48,7 @@ namespace invalid_out
         return true;
     }
 
-    bool LoadSerials()
-    {
+    bool LoadSerials() {
         UniValue v = read_json(LoadInvalidSerials());
 
         if (v.empty())
@@ -77,13 +72,11 @@ namespace invalid_out
         return true;
     }
 
-    bool ContainsOutPoint(const COutPoint& out)
-    {
+    bool ContainsOutPoint(const COutPoint &out) {
         return static_cast<bool>(setInvalidOutPoints.count(out));
     }
 
-    bool ContainsSerial(const CBigNum& bnSerial)
-    {
+    bool ContainsSerial(const CBigNum &bnSerial) {
         return static_cast<bool>(setInvalidSerials.count(bnSerial));
     }
 }

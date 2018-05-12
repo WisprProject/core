@@ -1,4 +1,5 @@
-<!DOCTYPE RCC><RCC version="1.0">
+<!DOCTYPE RCC>
+<RCC version="1.0">
     <qresource prefix="/translations">
         <file alias="bg">locale/wispr_bg.qm</file>
         <file alias="ca">locale/wispr_ca.qm</file>

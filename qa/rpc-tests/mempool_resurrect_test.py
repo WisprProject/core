@@ -14,6 +14,7 @@ from util import *
 import os
 import shutil
 
+
 # Create one-input, one-output, no-fee transaction:
 class MempoolCoinbaseTest(BitcoinTestFramework):
 
@@ -25,8 +26,8 @@ class MempoolCoinbaseTest(BitcoinTestFramework):
         self.is_network_split = False
 
     def create_tx(self, from_txid, to_address, amount):
-        inputs = [{ "txid" : from_txid, "vout" : 0}]
-        outputs = { to_address : amount }
+        inputs = [{"txid": from_txid, "vout": 0}]
+        outputs = {to_address: amount}
         rawtx = self.nodes[0].createrawtransaction(inputs, outputs)
         signresult = self.nodes[0].signrawtransaction(rawtx)
         assert_equal(signresult["complete"], True)
@@ -45,24 +46,24 @@ class MempoolCoinbaseTest(BitcoinTestFramework):
         # Mine a new block
         # ... make sure all the transactions are confirmed again.
 
-        b = [ self.nodes[0].getblockhash(n) for n in range(1, 4) ]
-        coinbase_txids = [ self.nodes[0].getblock(h)['tx'][0] for h in b ]
-        spends1_raw = [ self.create_tx(txid, node0_address, 50) for txid in coinbase_txids ]
-        spends1_id = [ self.nodes[0].sendrawtransaction(tx) for tx in spends1_raw ]
+        b = [self.nodes[0].getblockhash(n) for n in range(1, 4)]
+        coinbase_txids = [self.nodes[0].getblock(h)['tx'][0] for h in b]
+        spends1_raw = [self.create_tx(txid, node0_address, 50) for txid in coinbase_txids]
+        spends1_id = [self.nodes[0].sendrawtransaction(tx) for tx in spends1_raw]
 
         blocks = []
         blocks.extend(self.nodes[0].setgenerate(True, 1))
 
-        spends2_raw = [ self.create_tx(txid, node0_address, 49.99) for txid in spends1_id ]
-        spends2_id = [ self.nodes[0].sendrawtransaction(tx) for tx in spends2_raw ]
+        spends2_raw = [self.create_tx(txid, node0_address, 49.99) for txid in spends1_id]
+        spends2_id = [self.nodes[0].sendrawtransaction(tx) for tx in spends2_raw]
 
         blocks.extend(self.nodes[0].setgenerate(True, 1))
 
         # mempool should be empty, all txns confirmed
         assert_equal(set(self.nodes[0].getrawmempool()), set())
-        for txid in spends1_id+spends2_id:
+        for txid in spends1_id + spends2_id:
             tx = self.nodes[0].gettransaction(txid)
-            assert(tx["confirmations"] > 0)
+            assert (tx["confirmations"] > 0)
 
         # Use invalidateblock to re-org back; all transactions should
         # end up unconfirmed and back in the mempool
@@ -70,18 +71,18 @@ class MempoolCoinbaseTest(BitcoinTestFramework):
             node.invalidateblock(blocks[0])
 
         # mempool should be empty, all txns confirmed
-        assert_equal(set(self.nodes[0].getrawmempool()), set(spends1_id+spends2_id))
-        for txid in spends1_id+spends2_id:
+        assert_equal(set(self.nodes[0].getrawmempool()), set(spends1_id + spends2_id))
+        for txid in spends1_id + spends2_id:
             tx = self.nodes[0].gettransaction(txid)
-            assert(tx["confirmations"] == 0)
+            assert (tx["confirmations"] == 0)
 
         # Generate another block, they should all get mined
         self.nodes[0].setgenerate(True, 1)
         # mempool should be empty, all txns confirmed
         assert_equal(set(self.nodes[0].getrawmempool()), set())
-        for txid in spends1_id+spends2_id:
+        for txid in spends1_id + spends2_id:
             tx = self.nodes[0].gettransaction(txid)
-            assert(tx["confirmations"] > 0)
+            assert (tx["confirmations"] > 0)
 
 
 if __name__ == '__main__':

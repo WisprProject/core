@@ -23,14 +23,16 @@ import sys
 import time
 from jsonrpc import ServiceProxy, json
 
-BASE_FEE=Decimal("0.001")
+BASE_FEE = Decimal("0.001")
+
 
 def check_json_precision():
     """Make sure json library being used does not lose precision converting BTC values"""
     n = Decimal("20000000.00000003")
-    satoshis = int(json.loads(json.dumps(float(n)))*1.0e8)
+    satoshis = int(json.loads(json.dumps(float(n))) * 1.0e8)
     if satoshis != 2000000000000003:
         raise RuntimeError("JSON encode/decode loses precision")
+
 
 def determine_db_dir():
     """Return the default location of the wispr data directory"""
@@ -40,6 +42,7 @@ def determine_db_dir():
         return os.path.join(os.environ['APPDATA'], "Wispr")
     return os.path.expanduser("~/.wispr")
 
+
 def read_bitcoin_config(dbdir):
     """Read the wispr.conf file from dbdir, returns dictionary of settings"""
     from ConfigParser import SafeConfigParser
@@ -48,19 +51,23 @@ def read_bitcoin_config(dbdir):
         def __init__(self, fp):
             self.fp = fp
             self.sechead = '[all]\n'
+
         def readline(self):
             if self.sechead:
-                try: return self.sechead
-                finally: self.sechead = None
+                try:
+                    return self.sechead
+                finally:
+                    self.sechead = None
             else:
                 s = self.fp.readline()
                 if s.find('#') != -1:
-                    s = s[0:s.find('#')].strip() +"\n"
+                    s = s[0:s.find('#')].strip() + "\n"
                 return s
 
     config_parser = SafeConfigParser()
     config_parser.readfp(FakeSecHead(open(os.path.join(dbdir, "wispr.conf"))))
     return dict(config_parser.items("all"))
+
 
 def connect_JSON(config):
     """Connect to a wispr JSON-RPC server"""
@@ -68,23 +75,24 @@ def connect_JSON(config):
     testnet = (int(testnet) > 0)  # 0/1 in config file, convert to True/False
     if not 'rpcport' in config:
         config['rpcport'] = 17003 if testnet else 17001
-    connect = "http://%s:%s@127.0.0.1:%s"%(config['rpcuser'], config['rpcpassword'], config['rpcport'])
+    connect = "http://%s:%s@127.0.0.1:%s" % (config['rpcuser'], config['rpcpassword'], config['rpcport'])
     try:
         result = ServiceProxy(connect)
         # ServiceProxy is lazy-connect, so send an RPC command mostly to catch connection errors,
         # but also make sure the wisprd we're talking to is/isn't testnet:
         if result.getmininginfo()['testnet'] != testnet:
-            sys.stderr.write("RPC server at "+connect+" testnet setting mismatch\n")
+            sys.stderr.write("RPC server at " + connect + " testnet setting mismatch\n")
             sys.exit(1)
         return result
     except:
-        sys.stderr.write("Error connecting to RPC server at "+connect+"\n")
+        sys.stderr.write("Error connecting to RPC server at " + connect + "\n")
         sys.exit(1)
+
 
 def unlock_wallet(wisprd):
     info = wisprd.getinfo()
     if 'unlocked_until' not in info:
-        return True # wallet is not encrypted
+        return True  # wallet is not encrypted
     t = int(info['unlocked_until'])
     if t <= time.time():
         try:
@@ -95,6 +103,7 @@ def unlock_wallet(wisprd):
 
     info = wisprd.getinfo()
     return int(info['unlocked_until']) > time.time()
+
 
 def list_available(wisprd):
     address_summary = dict()
@@ -121,12 +130,13 @@ def list_available(wisprd):
             address_summary[address]["outputs"].append(output)
         else:
             address_summary[address] = {
-                "total" : vout["value"],
-                "outputs" : [output],
-                "account" : address_to_account.get(address, "")
-                }
+                "total": vout["value"],
+                "outputs": [output],
+                "account": address_to_account.get(address, "")
+            }
 
     return address_summary
+
 
 def select_coins(needed, inputs):
     # Feel free to improve this, this is good enough for my simple needs:
@@ -134,16 +144,17 @@ def select_coins(needed, inputs):
     have = Decimal("0.0")
     n = 0
     while have < needed and n < len(inputs):
-        outputs.append({ "txid":inputs[n]["txid"], "vout":inputs[n]["vout"]})
+        outputs.append({"txid": inputs[n]["txid"], "vout": inputs[n]["vout"]})
         have += inputs[n]["amount"]
         n += 1
-    return (outputs, have-needed)
+    return (outputs, have - needed)
+
 
 def create_tx(wisprd, fromaddresses, toaddress, amount, fee):
     all_coins = list_available(wisprd)
 
     total_available = Decimal("0.0")
-    needed = amount+fee
+    needed = amount + fee
     potential_inputs = []
     for addr in fromaddresses:
         if addr not in all_coins:
@@ -152,7 +163,7 @@ def create_tx(wisprd, fromaddresses, toaddress, amount, fee):
         total_available += all_coins[addr]["total"]
 
     if total_available < needed:
-        sys.stderr.write("Error, only %f BTC available, need %f\n"%(total_available, needed));
+        sys.stderr.write("Error, only %f BTC available, need %f\n" % (total_available, needed));
         sys.exit(1)
 
     #
@@ -161,7 +172,7 @@ def create_tx(wisprd, fromaddresses, toaddress, amount, fee):
     # Instead of wrestling with getting json.dumps() (used by jsonrpc) to encode
     # Decimals, I'm casting amounts to float before sending them to wisprd.
     #
-    outputs = { toaddress : float(amount) }
+    outputs = {toaddress: float(amount)}
     (inputs, change_amount) = select_coins(needed, potential_inputs)
     if change_amount > BASE_FEE:  # don't bother with zero or tiny change
         change_address = fromaddresses[-1]
@@ -179,6 +190,7 @@ def create_tx(wisprd, fromaddresses, toaddress, amount, fee):
 
     return txdata
 
+
 def compute_amount_in(wisprd, txinfo):
     result = Decimal("0.0")
     for vin in txinfo['vin']:
@@ -187,24 +199,27 @@ def compute_amount_in(wisprd, txinfo):
         result = result + vout['value']
     return result
 
+
 def compute_amount_out(txinfo):
     result = Decimal("0.0")
     for vout in txinfo['vout']:
         result = result + vout['value']
     return result
 
+
 def sanity_test_fee(wisprd, txdata_hex, max_fee):
     class FeeError(RuntimeError):
         pass
+
     try:
         txinfo = wisprd.decoderawtransaction(txdata_hex)
         total_in = compute_amount_in(wisprd, txinfo)
         total_out = compute_amount_out(txinfo)
-        if total_in-total_out > max_fee:
-            raise FeeError("Rejecting transaction, unreasonable fee of "+str(total_in-total_out))
+        if total_in - total_out > max_fee:
+            raise FeeError("Rejecting transaction, unreasonable fee of " + str(total_in - total_out))
 
-        tx_size = len(txdata_hex)/2
-        kb = tx_size/1000  # integer division rounds down
+        tx_size = len(txdata_hex) / 2
+        kb = tx_size / 1000  # integer division rounds down
         if kb > 1 and fee < BASE_FEE:
             raise FeeError("Rejecting no-fee transaction, larger than 1000 bytes")
         if total_in < 0.01 and fee < BASE_FEE:
@@ -213,8 +228,9 @@ def sanity_test_fee(wisprd, txdata_hex, max_fee):
         # warn if this is a very-low-priority transaction
 
     except FeeError as err:
-        sys.stderr.write((str(err)+"\n"))
+        sys.stderr.write((str(err) + "\n"))
         sys.exit(1)
+
 
 def main():
     import optparse
@@ -244,24 +260,25 @@ def main():
 
     if options.amount is None:
         address_summary = list_available(wisprd)
-        for address,info in address_summary.iteritems():
+        for address, info in address_summary.iteritems():
             n_transactions = len(info['outputs'])
             if n_transactions > 1:
-                print("%s %.8f %s (%d transactions)"%(address, info['total'], info['account'], n_transactions))
+                print("%s %.8f %s (%d transactions)" % (address, info['total'], info['account'], n_transactions))
             else:
-                print("%s %.8f %s"%(address, info['total'], info['account']))
+                print("%s %.8f %s" % (address, info['total'], info['account']))
     else:
         fee = Decimal(options.fee)
         amount = Decimal(options.amount)
         while unlock_wallet(wisprd) == False:
-            pass # Keep asking for passphrase until they get it right
+            pass  # Keep asking for passphrase until they get it right
         txdata = create_tx(wisprd, options.fromaddresses.split(","), options.to, amount, fee)
-        sanity_test_fee(wisprd, txdata, amount*Decimal("0.01"))
+        sanity_test_fee(wisprd, txdata, amount * Decimal("0.01"))
         if options.dry_run:
             print(txdata)
         else:
             txid = wisprd.sendrawtransaction(txdata)
             print(txid)
+
 
 if __name__ == '__main__':
     main()

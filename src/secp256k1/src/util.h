@@ -28,7 +28,7 @@
 #endif
 
 #ifndef HAVE_BUILTIN_EXPECT
-#define EXPECT(x,c) __builtin_expect((x),(c))
+#define EXPECT(x, c) __builtin_expect((x),(c))
 #else
 #define EXPECT(x,c) (x)
 #endif
@@ -65,8 +65,8 @@
 #if defined(SECP256K1_BUILD) && defined(VERIFY)
 # define SECP256K1_RESTRICT
 #else
-# if (!defined(__STDC_VERSION__) || (__STDC_VERSION__ < 199901L) )
-#  if SECP256K1_GNUC_PREREQ(3,0)
+# if (!defined(__STDC_VERSION__) || (__STDC_VERSION__ < 199901L))
+#  if SECP256K1_GNUC_PREREQ(3, 0)
 #   define SECP256K1_RESTRICT __restrict__
 #  elif (defined(_MSC_VER) && _MSC_VER >= 1400)
 #   define SECP256K1_RESTRICT __restrict

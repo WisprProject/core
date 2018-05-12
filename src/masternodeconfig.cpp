@@ -11,20 +11,19 @@
 
 CMasternodeConfig masternodeConfig;
 
-void CMasternodeConfig::add(std::string alias, std::string ip, std::string privKey, std::string txHash, std::string outputIndex)
-{
+void CMasternodeConfig::add(std::string alias, std::string ip, std::string privKey, std::string txHash,
+                            std::string outputIndex) {
     CMasternodeEntry cme(alias, ip, privKey, txHash, outputIndex);
     entries.push_back(cme);
 }
 
-bool CMasternodeConfig::read(std::string& strErr)
-{
+bool CMasternodeConfig::read(std::string &strErr) {
     int linenumber = 1;
     boost::filesystem::path pathMasternodeConfigFile = GetMasternodeConfigFile();
     boost::filesystem::ifstream streamConfig(pathMasternodeConfigFile);
 
     if (!streamConfig.good()) {
-        FILE* configFile = fopen(pathMasternodeConfigFile.string().c_str(), "a");
+        FILE *configFile = fopen(pathMasternodeConfigFile.string().c_str(), "a");
         if (configFile != NULL) {
             std::string strHeader = "# Masternode config file\n"
                                     "# Format: alias IP:port masternodeprivkey collateral_output_txid collateral_output_index\n"
@@ -61,8 +60,8 @@ bool CMasternodeConfig::read(std::string& strErr)
         int port = 0;
         std::string hostname = "";
         SplitHostPort(ip, port, hostname);
-        if(port == 0 || hostname == "") {
-            strErr = _("Failed to parse host:port string") + "\n"+
+        if (port == 0 || hostname == "") {
+            strErr = _("Failed to parse host:port string") + "\n" +
                      strprintf(_("Line: %d"), linenumber) + "\n\"" + line + "\"";
             streamConfig.close();
             return false;
@@ -92,8 +91,7 @@ bool CMasternodeConfig::read(std::string& strErr)
     return true;
 }
 
-bool CMasternodeConfig::CMasternodeEntry::castOutputIndex(int &n)
-{
+bool CMasternodeConfig::CMasternodeEntry::castOutputIndex(int &n) {
     try {
         n = std::stoi(outputIndex);
     } catch (const std::exception e) {

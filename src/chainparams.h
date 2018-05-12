@@ -21,7 +21,8 @@ typedef unsigned char MessageStartChars[MESSAGE_START_SIZE];
 
 struct CDNSSeedData {
     std::string name, host;
-    CDNSSeedData(const std::string& strName, const std::string& strHost) : name(strName), host(strHost) {}
+
+    CDNSSeedData(const std::string &strName, const std::string &strHost) : name(strName), host(strHost) {}
 };
 
 /**
@@ -31,8 +32,7 @@ struct CDNSSeedData {
  * a regression test mode which is intended for private networks only. It has
  * minimal difficulty to ensure that blocks can be found instantly.
  */
-class CChainParams
-{
+class CChainParams {
 public:
     enum Base58Type {
         PUBKEY_ADDRESS,
@@ -45,85 +45,139 @@ public:
         MAX_BASE58_TYPES
     };
 
-    const uint256& HashGenesisBlock() const { return hashGenesisBlock; }
-    const MessageStartChars& MessageStart() const { return pchMessageStart; }
-    const std::vector<unsigned char>& AlertKey() const { return vAlertPubKey; }
+    const uint256 &HashGenesisBlock() const { return hashGenesisBlock; }
+
+    const MessageStartChars &MessageStart() const { return pchMessageStart; }
+
+    const std::vector<unsigned char> &AlertKey() const { return vAlertPubKey; }
+
     int GetDefaultPort() const { return nDefaultPort; }
-    const uint256& ProofOfWorkLimit() const { return bnProofOfWorkLimit; }
+
+    const uint256 &ProofOfWorkLimit() const { return bnProofOfWorkLimit; }
+
     int SubsidyHalvingInterval() const { return nSubsidyHalvingInterval; }
+
     /** Used to check majorities for block version upgrade */
     int EnforceBlockUpgradeMajority() const { return nEnforceBlockUpgradeMajority; }
+
     int RejectBlockOutdatedMajority() const { return nRejectBlockOutdatedMajority; }
+
     int ToCheckBlockUpgradeMajority() const { return nToCheckBlockUpgradeMajority; }
+
     int MaxReorganizationDepth() const { return nMaxReorganizationDepth; }
 
     /** Used if GenerateBitcoins is called with a negative number of threads */
     int DefaultMinerThreads() const { return nMinerThreads; }
-    const CBlock& GenesisBlock() const { return genesis; }
+
+    const CBlock &GenesisBlock() const { return genesis; }
+
     /** Make miner wait to have peers to avoid wasting work */
     bool MiningRequiresPeers() const { return fMiningRequiresPeers; }
+
     /** Headers first syncing is disabled */
     bool HeadersFirstSyncingActive() const { return fHeadersFirstSyncingActive; };
+
     /** Default value for -checkmempool and -checkblockindex argument */
     bool DefaultConsistencyChecks() const { return fDefaultConsistencyChecks; }
+
     /** Allow mining of a min-difficulty block */
     bool AllowMinDifficultyBlocks() const { return fAllowMinDifficultyBlocks; }
+
     /** Skip proof-of-work check: allow mining of any difficulty block */
     bool SkipProofOfWorkCheck() const { return fSkipProofOfWorkCheck; }
+
     /** Make standard checks */
     bool RequireStandard() const { return fRequireStandard; }
+
     int64_t TargetTimespan() const { return nTargetTimespan; }
+
     int64_t TargetSpacing() const { return nTargetSpacing; }
+
     int64_t Interval() const { return nTargetTimespan / nTargetSpacing; }
+
     int COINBASE_MATURITY() const { return nMaturity; }
+
     CAmount MaxMoneyOut() const { return nMaxMoneyOut; }
+
     /** The masternode count that we will allow the see-saw reward payments to be off by */
     int MasternodeCountDrift() const { return nMasternodeCountDrift; }
+
     /** Make miner stop after a block is found. In RPC, don't return until nGenProcLimit blocks are generated */
     bool MineBlocksOnDemand() const { return fMineBlocksOnDemand; }
+
     /** In the future use NetworkIDString() for RPC fields */
     bool TestnetToBeDeprecatedFieldRPC() const { return fTestnetToBeDeprecatedFieldRPC; }
+
     /** Return the BIP70 network string (main, test or regtest) */
     std::string NetworkIDString() const { return strNetworkID; }
-    const std::vector<CDNSSeedData>& DNSSeeds() const { return vSeeds; }
-    const std::vector<unsigned char>& Base58Prefix(Base58Type type) const { return base58Prefixes[type]; }
-    const std::vector<CAddress>& FixedSeeds() const { return vFixedSeeds; }
-    virtual const Checkpoints::CCheckpointData& Checkpoints() const = 0;
+
+    const std::vector <CDNSSeedData> &DNSSeeds() const { return vSeeds; }
+
+    const std::vector<unsigned char> &Base58Prefix(Base58Type type) const { return base58Prefixes[type]; }
+
+    const std::vector <CAddress> &FixedSeeds() const { return vFixedSeeds; }
+
+    virtual const Checkpoints::CCheckpointData &Checkpoints() const = 0;
+
     int PoolMaxTransactions() const { return nPoolMaxTransactions; }
 
     /** Spork key and Masternode Handling **/
     std::string SporkKey() const { return strSporkKey; }
+
     std::string SporkKeyOld() const { return strSporkKeyOld; }
+
     int64_t NewSporkStart() const { return nEnforceNewSporkKey; }
+
     int64_t RejectOldSporkKey() const { return nRejectOldSporkKey; }
+
     std::string ObfuscationPoolDummyAddress() const { return strObfuscationPoolDummyAddress; }
+
     int64_t StartMasternodePayments() const { return nStartMasternodePayments; }
+
     int64_t Budget_Fee_Confirmations() const { return nBudget_Fee_Confirmations; }
 
     CBaseChainParams::Network NetworkID() const { return networkID; }
 
     /** Zerocoin **/
     std::string Zerocoin_Modulus() const { return zerocoinModulus; }
-    libzerocoin::ZerocoinParams* Zerocoin_Params(bool useModulusV1) const;
+
+    libzerocoin::ZerocoinParams *Zerocoin_Params(bool useModulusV1) const;
+
     int Zerocoin_MaxSpendsPerTransaction() const { return nMaxZerocoinSpendsPerTransaction; }
+
     CAmount Zerocoin_MintFee() const { return nMinZerocoinMintFee; }
+
     int Zerocoin_MintRequiredConfirmations() const { return nMintRequiredConfirmations; }
+
     int Zerocoin_RequiredAccumulation() const { return nRequiredAccumulation; }
+
     int Zerocoin_DefaultSpendSecurity() const { return nDefaultSecurityLevel; }
+
     int Zerocoin_HeaderVersion() const { return nZerocoinHeaderVersion; }
+
     int Zerocoin_RequiredStakeDepth() const { return nZerocoinRequiredStakeDepth; }
 
     /** Height or Time Based Activations **/
     int ModifierUpgradeBlock() const { return nModifierUpdateBlock; }
+
     int LAST_POW_BLOCK() const { return nLastPOWBlock; }
+
     int Zerocoin_StartHeight() const { return nZerocoinStartHeight; }
+
     int Zerocoin_Block_EnforceSerialRange() const { return nBlockEnforceSerialRange; }
+
     int Zerocoin_Block_RecalculateAccumulators() const { return nBlockRecalculateAccumulators; }
+
     int Zerocoin_Block_FirstFraudulent() const { return nBlockFirstFraudulent; }
+
     int Zerocoin_Block_LastGoodCheckpoint() const { return nBlockLastGoodCheckpoint; }
+
     int Zerocoin_StartTime() const { return nZerocoinStartTime; }
+
     int Block_Enforce_Invalid() const { return nBlockEnforceInvalidUTXO; }
+
     int Zerocoin_Block_V2_Start() const { return nBlockZerocoinV2; }
+
     CAmount InvalidAmountFiltered() const { return nInvalidAmountFiltered; };
 
 protected:
@@ -148,12 +202,12 @@ protected:
     int nModifierUpdateBlock;
     CAmount nMaxMoneyOut;
     int nMinerThreads;
-    std::vector<CDNSSeedData> vSeeds;
+    std::vector <CDNSSeedData> vSeeds;
     std::vector<unsigned char> base58Prefixes[MAX_BASE58_TYPES];
     CBaseChainParams::Network networkID;
     std::string strNetworkID;
     CBlock genesis;
-    std::vector<CAddress> vFixedSeeds;
+    std::vector <CAddress> vFixedSeeds;
     bool fMiningRequiresPeers;
     bool fAllowMinDifficultyBlocks;
     bool fDefaultConsistencyChecks;
@@ -196,16 +250,21 @@ protected:
  * values after finalization.
  */
 
-class CModifiableParams
-{
+class CModifiableParams {
 public:
     //! Published setters to allow changing values in unit test cases
     virtual void setSubsidyHalvingInterval(int anSubsidyHalvingInterval) = 0;
+
     virtual void setEnforceBlockUpgradeMajority(int anEnforceBlockUpgradeMajority) = 0;
+
     virtual void setRejectBlockOutdatedMajority(int anRejectBlockOutdatedMajority) = 0;
+
     virtual void setToCheckBlockUpgradeMajority(int anToCheckBlockUpgradeMajority) = 0;
+
     virtual void setDefaultConsistencyChecks(bool aDefaultConsistencyChecks) = 0;
+
     virtual void setAllowMinDifficultyBlocks(bool aAllowMinDifficultyBlocks) = 0;
+
     virtual void setSkipProofOfWorkCheck(bool aSkipProofOfWorkCheck) = 0;
 };
 
@@ -214,13 +273,13 @@ public:
  * Return the currently selected parameters. This won't change after app startup
  * outside of the unit tests.
  */
-const CChainParams& Params();
+const CChainParams &Params();
 
 /** Return parameters for the given network. */
-CChainParams& Params(CBaseChainParams::Network network);
+CChainParams &Params(CBaseChainParams::Network network);
 
 /** Get modifiable network parameters (UNITTEST only) */
-CModifiableParams* ModifiableParams();
+CModifiableParams *ModifiableParams();
 
 /** Sets the params returned by Params() to those for the given network. */
 void SelectParams(CBaseChainParams::Network network);

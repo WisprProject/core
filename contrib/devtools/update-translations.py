@@ -32,16 +32,19 @@ LOCALE_DIR = 'src/qt/locale'
 # Minimum number of messages for translation to be considered at all
 MIN_NUM_MESSAGES = 10
 
+
 def check_at_repository_root():
     if not os.path.exists('.git'):
         print('No .git directory found')
         print('Execute this script at the root of the repository', file=sys.stderr)
         exit(1)
 
+
 def fetch_all_translations():
     if subprocess.call([TX, 'pull', '-f', '-a']):
         print('Error while fetching translations', file=sys.stderr)
         exit(1)
+
 
 def find_format_specifiers(s):
     '''Find all format specifiers in a string.'''
@@ -52,18 +55,19 @@ def find_format_specifiers(s):
         if percent < 0:
             break
         try:
-            specifiers.append(s[percent+1])
+            specifiers.append(s[percent + 1])
         except:
             print('Failed to get specifier')
-        pos = percent+2
+        pos = percent + 2
     return specifiers
+
 
 def split_format_specifiers(specifiers):
     '''Split format specifiers between numeric (Qt) and others (strprintf)'''
     numeric = []
     other = []
     for s in specifiers:
-        if s in {'1','2','3','4','5','6','7','8','9'}:
+        if s in {'1', '2', '3', '4', '5', '6', '7', '8', '9'}:
             numeric.append(s)
         else:
             other.append(s)
@@ -77,21 +81,24 @@ def split_format_specifiers(specifiers):
         other = []
 
     # numeric (Qt) can be present in any order, others (strprintf) must be in specified order
-    return set(numeric),other
+    return set(numeric), other
+
 
 def sanitize_string(s):
     '''Sanitize string for printing'''
-    return s.replace('\n',' ')
+    return s.replace('\n', ' ')
+
 
 def check_format_specifiers(source, translation, errors, numerus):
     source_f = split_format_specifiers(find_format_specifiers(source))
     # assert that no source messages contain both Qt and strprintf format specifiers
     # if this fails, go change the source as this is hacky and confusing!
-    assert(not(source_f[0] and source_f[1]))
+    assert (not (source_f[0] and source_f[1]))
     try:
         translation_f = split_format_specifiers(find_format_specifiers(translation))
     except IndexError:
-        errors.append("Parse error in translation for '%s': '%s'" % (sanitize_string(source), sanitize_string(translation)))
+        errors.append(
+            "Parse error in translation for '%s': '%s'" % (sanitize_string(source), sanitize_string(translation)))
         return False
     else:
         if source_f != translation_f:
@@ -102,29 +109,37 @@ def check_format_specifiers(source, translation, errors, numerus):
             return False
     return True
 
+
 def all_ts_files(suffix=''):
     for filename in os.listdir(LOCALE_DIR):
         # process only language files, and do not process source language
-        if not filename.endswith('.ts'+suffix) or filename == SOURCE_LANG+suffix:
+        if not filename.endswith('.ts' + suffix) or filename == SOURCE_LANG + suffix:
             continue
-        if suffix: # remove provided suffix
+        if suffix:  # remove provided suffix
             filename = filename[0:-len(suffix)]
         filepath = os.path.join(LOCALE_DIR, filename)
-        yield(filename, filepath)
+        yield (filename, filepath)
+
 
 FIX_RE = re.compile(b'[\x00-\x09\x0b\x0c\x0e-\x1f]')
+
+
 def remove_invalid_characters(s):
     '''Remove invalid characters from translation string'''
     return FIX_RE.sub(b'', s)
 
+
 # Override cdata escape function to make our output match Qt's (optional, just for cleaner diffs for
 # comparison, disable by default)
 _orig_escape_cdata = None
+
+
 def escape_cdata(text):
     text = _orig_escape_cdata(text)
     text = text.replace("'", '&apos;')
     text = text.replace('"', '&quot;')
     return text
+
 
 def postprocess_translations(reduce_diff_hacks=False):
     print('Checking and postprocessing...')
@@ -134,13 +149,14 @@ def postprocess_translations(reduce_diff_hacks=False):
         _orig_escape_cdata = ET._escape_cdata
         ET._escape_cdata = escape_cdata
 
-    for (filename,filepath) in all_ts_files():
-        os.rename(filepath, filepath+'.orig')
+    for (filename, filepath) in all_ts_files():
+        os.rename(filepath, filepath + '.orig')
 
     have_errors = False
-    for (filename,filepath) in all_ts_files('.orig'):
+    for (filename, filepath) in all_ts_files('.orig'):
         # pre-fixups to cope with transifex output
-        parser = ET.XMLParser(encoding='utf-8') # need to override encoding because 'utf8' is not understood only 'utf-8'
+        parser = ET.XMLParser(
+            encoding='utf-8')  # need to override encoding because 'utf8' is not understood only 'utf-8'
         with open(filepath + '.orig', 'rb') as f:
             data = f.read()
         # remove control characters; this must be done over the entire file otherwise the XML parser will fail
@@ -169,7 +185,7 @@ def postprocess_translations(reduce_diff_hacks=False):
                     for error in errors:
                         print('%s: %s' % (filename, error))
 
-                    if not valid: # set type to unfinished and clear string if invalid
+                    if not valid:  # set type to unfinished and clear string if invalid
                         translation_node.clear()
                         translation_node.set('type', 'unfinished')
                         have_errors = True
@@ -203,6 +219,7 @@ def postprocess_translations(reduce_diff_hacks=False):
         else:
             tree.write(filepath, encoding='utf-8')
     return have_errors
+
 
 if __name__ == '__main__':
     check_at_repository_root()

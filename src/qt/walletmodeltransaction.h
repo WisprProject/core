@@ -12,33 +12,38 @@
 class SendCoinsRecipient;
 
 class CReserveKey;
+
 class CWallet;
+
 class CWalletTx;
 
 /** Data model for a walletmodel transaction. */
-class WalletModelTransaction
-{
+class WalletModelTransaction {
 public:
-    explicit WalletModelTransaction(const QList<SendCoinsRecipient>& recipients);
+    explicit WalletModelTransaction(const QList <SendCoinsRecipient> &recipients);
+
     ~WalletModelTransaction();
 
-    QList<SendCoinsRecipient> getRecipients();
+    QList <SendCoinsRecipient> getRecipients();
 
-    CWalletTx* getTransaction();
+    CWalletTx *getTransaction();
+
     unsigned int getTransactionSize();
 
-    void setTransactionFee(const CAmount& newFee);
+    void setTransactionFee(const CAmount &newFee);
+
     CAmount getTransactionFee();
 
     CAmount getTotalTransactionAmount();
 
-    void newPossibleKeyChange(CWallet* wallet);
-    CReserveKey* getPossibleKeyChange();
+    void newPossibleKeyChange(CWallet *wallet);
+
+    CReserveKey *getPossibleKeyChange();
 
 private:
-    const QList<SendCoinsRecipient> recipients;
-    CWalletTx* walletTransaction;
-    CReserveKey* keyChange;
+    const QList <SendCoinsRecipient> recipients;
+    CWalletTx *walletTransaction;
+    CReserveKey *keyChange;
     CAmount fee;
 };
 

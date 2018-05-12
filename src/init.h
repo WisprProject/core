@@ -10,24 +10,30 @@
 #include <string>
 
 class CScheduler;
+
 class CWallet;
+
 class CzPIVWallet;
 
-namespace boost
-{
+namespace boost {
     class thread_group;
 } // namespace boost
 
-extern CWallet* pwalletMain;
-extern CzPIVWallet* zwalletMain;
+extern CWallet *pwalletMain;
+extern CzPIVWallet *zwalletMain;
 
 void StartShutdown();
+
 bool ShutdownRequested();
+
 /** Interrupt threads */
-void Interrupt(boost::thread_group& threadGroup);
+void Interrupt(boost::thread_group &threadGroup);
+
 void Shutdown();
+
 void PrepareShutdown();
-bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler);
+
+bool AppInit2(boost::thread_group &threadGroup, CScheduler &scheduler);
 
 /** The help message mode determines what help message to show */
 enum HelpMessageMode {
@@ -37,6 +43,7 @@ enum HelpMessageMode {
 
 /** Help for options shared between UI and daemon (for -help) */
 std::string HelpMessage(HelpMessageMode mode);
+
 /** Returns licensing information (for -version) */
 std::string LicenseInfo();
 

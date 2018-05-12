@@ -10,6 +10,7 @@
 #include "txdb.h"
 #include "ui_interface.h"
 #include "util.h"
+
 #ifdef ENABLE_WALLET
 #include "db.h"
 #include "wallet.h"
@@ -20,9 +21,10 @@
 #include <boost/thread.hpp>
 
 CClientUIInterface uiInterface;
-CWallet* pwalletMain;
+CWallet *pwalletMain;
 
 extern bool fPrintToConsole;
+
 extern void noui_connect();
 
 struct TestingSetup {
@@ -39,7 +41,7 @@ struct TestingSetup {
 #ifdef ENABLE_WALLET
         bitdb.MakeMock();
 #endif
-        pathTemp = GetTempPath() / strprintf("test_wispr_%lu_%i", (unsigned long)GetTime(), (int)(GetRand(100000)));
+        pathTemp = GetTempPath() / strprintf("test_wispr_%lu_%i", (unsigned long) GetTime(), (int) (GetRand(100000)));
         boost::filesystem::create_directories(pathTemp);
         mapArgs["-datadir"] = pathTemp.string();
         pblocktree = new CBlockTreeDB(1 << 20, true);
@@ -53,12 +55,12 @@ struct TestingSetup {
         RegisterValidationInterface(pwalletMain);
 #endif
         nScriptCheckThreads = 3;
-        for (int i=0; i < nScriptCheckThreads-1; i++)
+        for (int i = 0; i < nScriptCheckThreads - 1; i++)
             threadGroup.create_thread(&ThreadScriptCheck);
         RegisterNodeSignals(GetNodeSignals());
     }
-    ~TestingSetup()
-    {
+
+    ~TestingSetup() {
         threadGroup.interrupt_all();
         threadGroup.join_all();
         UnregisterNodeSignals(GetNodeSignals());
@@ -78,17 +80,14 @@ struct TestingSetup {
 
 BOOST_GLOBAL_FIXTURE(TestingSetup);
 
-void Shutdown(void* parg)
-{
-  exit(0);
+void Shutdown(void *parg) {
+    exit(0);
 }
 
-void StartShutdown()
-{
-  exit(0);
+void StartShutdown() {
+    exit(0);
 }
 
-bool ShutdownRequested()
-{
-  return false;
+bool ShutdownRequested() {
+    return false;
 }

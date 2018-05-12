@@ -16,24 +16,21 @@ class CNetAddr;
  * Median filter over a stream of values.
  * Returns the median of the last N numbers
  */
-template <typename T>
-class CMedianFilter
-{
+template<typename T>
+class CMedianFilter {
 private:
-    std::vector<T> vValues;
-    std::vector<T> vSorted;
+    std::vector <T> vValues;
+    std::vector <T> vSorted;
     unsigned int nSize;
 
 public:
-    CMedianFilter(unsigned int size, T initial_value) : nSize(size)
-    {
+    CMedianFilter(unsigned int size, T initial_value) : nSize(size) {
         vValues.reserve(size);
         vValues.push_back(initial_value);
         vSorted = vValues;
     }
 
-    void input(T value)
-    {
+    void input(T value) {
         if (vValues.size() == nSize) {
             vValues.erase(vValues.begin());
         }
@@ -44,8 +41,7 @@ public:
         std::sort(vSorted.begin(), vSorted.end());
     }
 
-    T median() const
-    {
+    T median() const {
         int size = vSorted.size();
         assert(size > 0);
         if (size & 1) // Odd number of elements
@@ -57,20 +53,20 @@ public:
         }
     }
 
-    int size() const
-    {
+    int size() const {
         return vValues.size();
     }
 
-    std::vector<T> sorted() const
-    {
+    std::vector <T> sorted() const {
         return vSorted;
     }
 };
 
 /** Functions to keep track of adjusted P2P time */
 int64_t GetTimeOffset();
+
 int64_t GetAdjustedTime();
-void AddTimeData(const CNetAddr& ip, int64_t nTime);
+
+void AddTimeData(const CNetAddr &ip, int64_t nTime);
 
 #endif // BITCOIN_TIMEDATA_H

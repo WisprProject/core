@@ -20,14 +20,14 @@
 #define MASTERNODE_SYNC_THRESHOLD 2
 
 class CMasternodeSync;
+
 extern CMasternodeSync masternodeSync;
 
 //
 // CMasternodeSync : Sync masternode assets in stages
 //
 
-class CMasternodeSync
-{
+class CMasternodeSync {
 public:
     std::map<uint256, int> mapSeenSyncMNB;
     std::map<uint256, int> mapSeenSyncMNW;
@@ -60,19 +60,31 @@ public:
     CMasternodeSync();
 
     void AddedMasternodeList(uint256 hash);
+
     void AddedMasternodeWinner(uint256 hash);
+
     void AddedBudgetItem(uint256 hash);
+
     void GetNextAsset();
+
     std::string GetSyncStatus();
-    void ProcessMessage(CNode* pfrom, std::string& strCommand, CDataStream& vRecv);
+
+    void ProcessMessage(CNode *pfrom, std::string &strCommand, CDataStream &vRecv);
+
     bool IsBudgetFinEmpty();
+
     bool IsBudgetPropEmpty();
 
     void Reset();
+
     void Process();
+
     bool IsSynced();
+
     bool IsBlockchainSynced();
+
     bool IsMasternodeListSynced() { return RequestedMasternodeAssets > MASTERNODE_SYNC_LIST; }
+
     void ClearFulfilledRequest();
 };
 

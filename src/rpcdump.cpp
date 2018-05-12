@@ -31,16 +31,14 @@ using namespace std;
 
 void EnsureWalletIsUnlocked(bool fAllowAnonOnly);
 
-std::string static EncodeDumpTime(int64_t nTime)
-{
+std::string static EncodeDumpTime(int64_t nTime) {
     return DateTimeStrFormat("%Y-%m-%dT%H:%M:%SZ", nTime);
 }
 
-int64_t static DecodeDumpTime(const std::string& str)
-{
+int64_t static DecodeDumpTime(const std::string &str) {
     static const boost::posix_time::ptime epoch = boost::posix_time::from_time_t(0);
     static const std::locale loc(std::locale::classic(),
-        new boost::posix_time::time_input_facet("%Y-%m-%dT%H:%M:%SZ"));
+                                 new boost::posix_time::time_input_facet("%Y-%m-%dT%H:%M:%SZ"));
     std::istringstream iss(str);
     iss.imbue(loc);
     boost::posix_time::ptime ptime(boost::date_time::not_a_date_time);
@@ -50,10 +48,10 @@ int64_t static DecodeDumpTime(const std::string& str)
     return (ptime - epoch).total_seconds();
 }
 
-std::string static EncodeDumpString(const std::string& str)
-{
+std::string static EncodeDumpString(const std::string &str) {
     std::stringstream ret;
-    BOOST_FOREACH (unsigned char c, str) {
+    BOOST_FOREACH(unsigned char
+    c, str) {
         if (c <= 32 || c >= 128 || c == '%') {
             ret << '%' << HexStr(&c, &c + 1);
         } else {
@@ -63,8 +61,7 @@ std::string static EncodeDumpString(const std::string& str)
     return ret.str();
 }
 
-std::string DecodeDumpString(const std::string& str)
-{
+std::string DecodeDumpString(const std::string &str) {
     std::stringstream ret;
     for (unsigned int pos = 0; pos < str.length(); pos++) {
         unsigned char c = str[pos];
@@ -78,30 +75,29 @@ std::string DecodeDumpString(const std::string& str)
     return ret.str();
 }
 
-UniValue importprivkey(const UniValue& params, bool fHelp)
-{
+UniValue importprivkey(const UniValue &params, bool fHelp) {
     if (fHelp || params.size() < 1 || params.size() > 3)
         throw runtime_error(
-            "importprivkey \"wisprprivkey\" ( \"label\" rescan )\n"
-            "\nAdds a private key (as returned by dumpprivkey) to your wallet.\n" +
-            HelpRequiringPassphrase() + "\n"
+                "importprivkey \"wisprprivkey\" ( \"label\" rescan )\n"
+                "\nAdds a private key (as returned by dumpprivkey) to your wallet.\n" +
+                HelpRequiringPassphrase() + "\n"
 
-            "\nArguments:\n"
-            "1. \"wisprprivkey\"   (string, required) The private key (see dumpprivkey)\n"
-            "2. \"label\"            (string, optional, default=\"\") An optional label\n"
-            "3. rescan               (boolean, optional, default=true) Rescan the wallet for transactions\n"
+                                            "\nArguments:\n"
+                                            "1. \"wisprprivkey\"   (string, required) The private key (see dumpprivkey)\n"
+                                            "2. \"label\"            (string, optional, default=\"\") An optional label\n"
+                                            "3. rescan               (boolean, optional, default=true) Rescan the wallet for transactions\n"
 
-            "\nNote: This call can take minutes to complete if rescan is true.\n"
+                                            "\nNote: This call can take minutes to complete if rescan is true.\n"
 
-            "\nExamples:\n"
-            "\nDump a private key\n" +
-            HelpExampleCli("dumpprivkey", "\"myaddress\"") +
-            "\nImport the private key with rescan\n" +
-            HelpExampleCli("importprivkey", "\"mykey\"") +
-            "\nImport using a label and without rescan\n" +
-            HelpExampleCli("importprivkey", "\"mykey\" \"testing\" false") +
-            "\nAs a JSON-RPC call\n" +
-            HelpExampleRpc("importprivkey", "\"mykey\", \"testing\", false"));
+                                            "\nExamples:\n"
+                                            "\nDump a private key\n" +
+                HelpExampleCli("dumpprivkey", "\"myaddress\"") +
+                "\nImport the private key with rescan\n" +
+                HelpExampleCli("importprivkey", "\"mykey\"") +
+                "\nImport using a label and without rescan\n" +
+                HelpExampleCli("importprivkey", "\"mykey\" \"testing\" false") +
+                "\nAs a JSON-RPC call\n" +
+                HelpExampleRpc("importprivkey", "\"mykey\", \"testing\", false"));
 
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
@@ -152,27 +148,26 @@ UniValue importprivkey(const UniValue& params, bool fHelp)
     return NullUniValue;
 }
 
-UniValue importaddress(const UniValue& params, bool fHelp)
-{
+UniValue importaddress(const UniValue &params, bool fHelp) {
     if (fHelp || params.size() < 1 || params.size() > 3)
         throw runtime_error(
-            "importaddress \"address\" ( \"label\" rescan )\n"
-            "\nAdds an address or script (in hex) that can be watched as if it were in your wallet but cannot be used to spend.\n"
+                "importaddress \"address\" ( \"label\" rescan )\n"
+                "\nAdds an address or script (in hex) that can be watched as if it were in your wallet but cannot be used to spend.\n"
 
-            "\nArguments:\n"
-            "1. \"address\"          (string, required) The address\n"
-            "2. \"label\"            (string, optional, default=\"\") An optional label\n"
-            "3. rescan               (boolean, optional, default=true) Rescan the wallet for transactions\n"
+                "\nArguments:\n"
+                "1. \"address\"          (string, required) The address\n"
+                "2. \"label\"            (string, optional, default=\"\") An optional label\n"
+                "3. rescan               (boolean, optional, default=true) Rescan the wallet for transactions\n"
 
-            "\nNote: This call can take minutes to complete if rescan is true.\n"
+                "\nNote: This call can take minutes to complete if rescan is true.\n"
 
-            "\nExamples:\n"
-            "\nImport an address with rescan\n" +
-            HelpExampleCli("importaddress", "\"myaddress\"") +
-            "\nImport using a label without rescan\n" +
-            HelpExampleCli("importaddress", "\"myaddress\" \"testing\" false") +
-            "\nAs a JSON-RPC call\n" +
-            HelpExampleRpc("importaddress", "\"myaddress\", \"testing\", false"));
+                "\nExamples:\n"
+                "\nImport an address with rescan\n" +
+                HelpExampleCli("importaddress", "\"myaddress\"") +
+                "\nImport using a label without rescan\n" +
+                HelpExampleCli("importaddress", "\"myaddress\" \"testing\" false") +
+                "\nAs a JSON-RPC call\n" +
+                HelpExampleRpc("importaddress", "\"myaddress\", \"testing\", false"));
 
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
@@ -199,7 +194,8 @@ UniValue importaddress(const UniValue& params, bool fHelp)
 
     {
         if (::IsMine(*pwalletMain, script) == ISMINE_SPENDABLE)
-            throw JSONRPCError(RPC_WALLET_ERROR, "The wallet already contains the private key for this address or script");
+            throw JSONRPCError(RPC_WALLET_ERROR,
+                               "The wallet already contains the private key for this address or script");
 
         // add to address book or update label
         if (address.IsValid())
@@ -223,24 +219,23 @@ UniValue importaddress(const UniValue& params, bool fHelp)
     return NullUniValue;
 }
 
-UniValue importwallet(const UniValue& params, bool fHelp)
-{
+UniValue importwallet(const UniValue &params, bool fHelp) {
     if (fHelp || params.size() != 1)
         throw runtime_error(
-            "importwallet \"filename\"\n"
-            "\nImports keys from a wallet dump file (see dumpwallet).\n" +
-            HelpRequiringPassphrase() + "\n"
+                "importwallet \"filename\"\n"
+                "\nImports keys from a wallet dump file (see dumpwallet).\n" +
+                HelpRequiringPassphrase() + "\n"
 
-            "\nArguments:\n"
-            "1. \"filename\"    (string, required) The wallet file\n"
+                                            "\nArguments:\n"
+                                            "1. \"filename\"    (string, required) The wallet file\n"
 
-            "\nExamples:\n"
-            "\nDump the wallet\n" +
-            HelpExampleCli("dumpwallet", "\"test\"") +
-            "\nImport the wallet\n" +
-            HelpExampleCli("importwallet", "\"test\"") +
-            "\nImport using the json rpc call\n" +
-            HelpExampleRpc("importwallet", "\"test\""));
+                                            "\nExamples:\n"
+                                            "\nDump the wallet\n" +
+                HelpExampleCli("dumpwallet", "\"test\"") +
+                "\nImport the wallet\n" +
+                HelpExampleCli("importwallet", "\"test\"") +
+                "\nImport using the json rpc call\n" +
+                HelpExampleRpc("importwallet", "\"test\""));
 
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
@@ -255,18 +250,19 @@ UniValue importwallet(const UniValue& params, bool fHelp)
 
     bool fGood = true;
 
-    int64_t nFilesize = std::max((int64_t)1, (int64_t)file.tellg());
+    int64_t nFilesize = std::max((int64_t) 1, (int64_t) file.tellg());
     file.seekg(0, file.beg);
 
     pwalletMain->ShowProgress(_("Importing..."), 0); // show progress dialog in GUI
     while (file.good()) {
-        pwalletMain->ShowProgress("", std::max(1, std::min(99, (int)(((double)file.tellg() / (double)nFilesize) * 100))));
+        pwalletMain->ShowProgress("", std::max(1, std::min(99, (int) (((double) file.tellg() / (double) nFilesize) *
+                                                                      100))));
         std::string line;
         std::getline(file, line);
         if (line.empty() || line[0] == '#')
             continue;
 
-        std::vector<std::string> vstr;
+        std::vector <std::string> vstr;
         boost::split(vstr, line, boost::is_any_of(" "));
         if (vstr.size() < 2)
             continue;
@@ -309,7 +305,7 @@ UniValue importwallet(const UniValue& params, bool fHelp)
     file.close();
     pwalletMain->ShowProgress("", 100); // hide progress dialog in GUI
 
-    CBlockIndex* pindex = chainActive.Tip();
+    CBlockIndex *pindex = chainActive.Tip();
     while (pindex && pindex->pprev && pindex->GetBlockTime() > nTimeBegin - 7200)
         pindex = pindex->pprev;
 
@@ -326,23 +322,23 @@ UniValue importwallet(const UniValue& params, bool fHelp)
     return NullUniValue;
 }
 
-UniValue dumpprivkey(const UniValue& params, bool fHelp)
-{
+UniValue dumpprivkey(const UniValue &params, bool fHelp) {
     if (fHelp || params.size() != 1)
         throw runtime_error(
-            "dumpprivkey \"wispraddress\"\n"
-            "\nReveals the private key corresponding to 'wispraddress'.\n"
-            "Then the importprivkey can be used with this output\n" +
-            HelpRequiringPassphrase() + "\n"
+                "dumpprivkey \"wispraddress\"\n"
+                "\nReveals the private key corresponding to 'wispraddress'.\n"
+                "Then the importprivkey can be used with this output\n" +
+                HelpRequiringPassphrase() + "\n"
 
-            "\nArguments:\n"
-            "1. \"wispraddress\"   (string, required) The wispr address for the private key\n"
+                                            "\nArguments:\n"
+                                            "1. \"wispraddress\"   (string, required) The wispr address for the private key\n"
 
-            "\nResult:\n"
-            "\"key\"                (string) The private key\n"
+                                            "\nResult:\n"
+                                            "\"key\"                (string) The private key\n"
 
-            "\nExamples:\n" +
-            HelpExampleCli("dumpprivkey", "\"myaddress\"") + HelpExampleCli("importprivkey", "\"mykey\"") + HelpExampleRpc("dumpprivkey", "\"myaddress\""));
+                                            "\nExamples:\n" +
+                HelpExampleCli("dumpprivkey", "\"myaddress\"") + HelpExampleCli("importprivkey", "\"mykey\"") +
+                HelpExampleRpc("dumpprivkey", "\"myaddress\""));
 
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
@@ -362,19 +358,18 @@ UniValue dumpprivkey(const UniValue& params, bool fHelp)
 }
 
 
-UniValue dumpwallet(const UniValue& params, bool fHelp)
-{
+UniValue dumpwallet(const UniValue &params, bool fHelp) {
     if (fHelp || params.size() != 1)
         throw runtime_error(
-            "dumpwallet \"filename\"\n"
-            "\nDumps all wallet keys in a human-readable format.\n" +
-            HelpRequiringPassphrase() + "\n"
+                "dumpwallet \"filename\"\n"
+                "\nDumps all wallet keys in a human-readable format.\n" +
+                HelpRequiringPassphrase() + "\n"
 
-            "\nArguments:\n"
-            "1. \"filename\"    (string, required) The filename\n"
+                                            "\nArguments:\n"
+                                            "1. \"filename\"    (string, required) The filename\n"
 
-            "\nExamples:\n" +
-            HelpExampleCli("dumpwallet", "\"test\"") + HelpExampleRpc("dumpwallet", "\"test\""));
+                                            "\nExamples:\n" +
+                HelpExampleCli("dumpwallet", "\"test\"") + HelpExampleRpc("dumpwallet", "\"test\""));
 
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
@@ -385,13 +380,13 @@ UniValue dumpwallet(const UniValue& params, bool fHelp)
     if (!file.is_open())
         throw JSONRPCError(RPC_INVALID_PARAMETER, "Cannot open wallet dump file");
 
-    std::map<CKeyID, int64_t> mapKeyBirth;
-    std::set<CKeyID> setKeyPool;
+    std::map <CKeyID, int64_t> mapKeyBirth;
+    std::set <CKeyID> setKeyPool;
     pwalletMain->GetKeyBirthTimes(mapKeyBirth);
     pwalletMain->GetAllReserveKeys(setKeyPool);
 
     // sort time/key pairs
-    std::vector<std::pair<int64_t, CKeyID> > vKeyBirth;
+    std::vector <std::pair<int64_t, CKeyID>> vKeyBirth;
     for (std::map<CKeyID, int64_t>::const_iterator it = mapKeyBirth.begin(); it != mapKeyBirth.end(); it++) {
         vKeyBirth.push_back(std::make_pair(it->second, it->first));
     }
@@ -401,17 +396,20 @@ UniValue dumpwallet(const UniValue& params, bool fHelp)
     // produce output
     file << strprintf("# Wallet dump created by PIVX %s (%s)\n", CLIENT_BUILD, CLIENT_DATE);
     file << strprintf("# * Created on %s\n", EncodeDumpTime(GetTime()));
-    file << strprintf("# * Best block at time of backup was %i (%s),\n", chainActive.Height(), chainActive.Tip()->GetBlockHash().ToString());
+    file << strprintf("# * Best block at time of backup was %i (%s),\n", chainActive.Height(),
+                      chainActive.Tip()->GetBlockHash().ToString());
     file << strprintf("#   mined on %s\n", EncodeDumpTime(chainActive.Tip()->GetBlockTime()));
     file << "\n";
-    for (std::vector<std::pair<int64_t, CKeyID> >::const_iterator it = vKeyBirth.begin(); it != vKeyBirth.end(); it++) {
-        const CKeyID& keyid = it->second;
+    for (std::vector < std::pair < int64_t, CKeyID > > ::const_iterator it = vKeyBirth.begin(); it != vKeyBirth.end();
+    it++) {
+        const CKeyID &keyid = it->second;
         std::string strTime = EncodeDumpTime(it->first);
         std::string strAddr = CBitcoinAddress(keyid).ToString();
         CKey key;
         if (pwalletMain->GetKey(keyid, key)) {
             if (pwalletMain->mapAddressBook.count(keyid)) {
-                file << strprintf("%s %s label=%s # addr=%s\n", CBitcoinSecret(key).ToString(), strTime, EncodeDumpString(pwalletMain->mapAddressBook[keyid].name), strAddr);
+                file << strprintf("%s %s label=%s # addr=%s\n", CBitcoinSecret(key).ToString(), strTime,
+                                  EncodeDumpString(pwalletMain->mapAddressBook[keyid].name), strAddr);
             } else if (setKeyPool.count(keyid)) {
                 file << strprintf("%s %s reserve=1 # addr=%s\n", CBitcoinSecret(key).ToString(), strTime, strAddr);
             } else {
@@ -425,24 +423,23 @@ UniValue dumpwallet(const UniValue& params, bool fHelp)
     return NullUniValue;
 }
 
-UniValue bip38encrypt(const UniValue& params, bool fHelp)
-{
+UniValue bip38encrypt(const UniValue &params, bool fHelp) {
     if (fHelp || params.size() != 2)
         throw runtime_error(
-            "bip38encrypt \"wispraddress\" \"passphrase\"\n"
-            "\nEncrypts a private key corresponding to 'wispraddress'.\n" +
-            HelpRequiringPassphrase() + "\n"
+                "bip38encrypt \"wispraddress\" \"passphrase\"\n"
+                "\nEncrypts a private key corresponding to 'wispraddress'.\n" +
+                HelpRequiringPassphrase() + "\n"
 
-            "\nArguments:\n"
-            "1. \"wispraddress\"   (string, required) The wispr address for the private key (you must hold the key already)\n"
-            "2. \"passphrase\"   (string, required) The passphrase you want the private key to be encrypted with - Valid special chars: !#$%&'()*+,-./:;<=>?`{|}~ \n"
+                                            "\nArguments:\n"
+                                            "1. \"wispraddress\"   (string, required) The wispr address for the private key (you must hold the key already)\n"
+                                            "2. \"passphrase\"   (string, required) The passphrase you want the private key to be encrypted with - Valid special chars: !#$%&'()*+,-./:;<=>?`{|}~ \n"
 
-            "\nResult:\n"
-            "\"key\"                (string) The encrypted private key\n"
+                                            "\nResult:\n"
+                                            "\"key\"                (string) The encrypted private key\n"
 
-            "\nExamples:\n" +
-            HelpExampleCli("bip38encrypt", "\"DMJRSsuU9zfyrvxVaAEFQqK4MxZg6vgeS6\" \"mypasphrase\"") +
-            HelpExampleRpc("bip38encrypt", "\"DMJRSsuU9zfyrvxVaAEFQqK4MxZg6vgeS6\" \"mypasphrase\""));
+                                            "\nExamples:\n" +
+                HelpExampleCli("bip38encrypt", "\"DMJRSsuU9zfyrvxVaAEFQqK4MxZg6vgeS6\" \"mypasphrase\"") +
+                HelpExampleRpc("bip38encrypt", "\"DMJRSsuU9zfyrvxVaAEFQqK4MxZg6vgeS6\" \"mypasphrase\""));
 
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
@@ -471,24 +468,23 @@ UniValue bip38encrypt(const UniValue& params, bool fHelp)
     return result;
 }
 
-UniValue bip38decrypt(const UniValue& params, bool fHelp)
-{
+UniValue bip38decrypt(const UniValue &params, bool fHelp) {
     if (fHelp || params.size() != 2)
         throw runtime_error(
-            "bip38decrypt \"wispraddress\" \"passphrase\"\n"
-            "\nDecrypts and then imports password protected private key.\n" +
-            HelpRequiringPassphrase() + "\n"
+                "bip38decrypt \"wispraddress\" \"passphrase\"\n"
+                "\nDecrypts and then imports password protected private key.\n" +
+                HelpRequiringPassphrase() + "\n"
 
-            "\nArguments:\n"
-            "1. \"encryptedkey\"   (string, required) The encrypted private key\n"
-            "2. \"passphrase\"   (string, required) The passphrase you want the private key to be encrypted with\n"
+                                            "\nArguments:\n"
+                                            "1. \"encryptedkey\"   (string, required) The encrypted private key\n"
+                                            "2. \"passphrase\"   (string, required) The passphrase you want the private key to be encrypted with\n"
 
-            "\nResult:\n"
-            "\"key\"                (string) The decrypted private key\n"
+                                            "\nResult:\n"
+                                            "\"key\"                (string) The decrypted private key\n"
 
-            "\nExamples:\n" +
-            HelpExampleCli("bip38decrypt", "\"encryptedkey\" \"mypassphrase\"") +
-            HelpExampleRpc("bip38decrypt", "\"encryptedkey\" \"mypassphrase\""));
+                                            "\nExamples:\n" +
+                HelpExampleCli("bip38decrypt", "\"encryptedkey\" \"mypassphrase\"") +
+                HelpExampleRpc("bip38decrypt", "\"encryptedkey\" \"mypassphrase\""));
 
     LOCK2(cs_main, pwalletMain->cs_wallet);
 

@@ -40,14 +40,14 @@ static void secp256k1_scalar_start(void) {
         return;
 
     /* Allocate. */
-    secp256k1_scalar_consts_t *ret = (secp256k1_scalar_consts_t*)malloc(sizeof(secp256k1_scalar_consts_t));
+    secp256k1_scalar_consts_t *ret = (secp256k1_scalar_consts_t *) malloc(sizeof(secp256k1_scalar_consts_t));
 
 #ifndef USE_NUM_NONE
     static const unsigned char secp256k1_scalar_consts_order[] = {
-        0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,
-        0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFE,
-        0xBA,0xAE,0xDC,0xE6,0xAF,0x48,0xA0,0x3B,
-        0xBF,0xD2,0x5E,0x8C,0xD0,0x36,0x41,0x41
+            0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
+            0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFE,
+            0xBA, 0xAE, 0xDC, 0xE6, 0xAF, 0x48, 0xA0, 0x3B,
+            0xBF, 0xD2, 0x5E, 0x8C, 0xD0, 0x36, 0x41, 0x41
     };
     secp256k1_num_set_bin(&ret->order, secp256k1_scalar_consts_order, sizeof(secp256k1_scalar_consts_order));
 #endif
@@ -134,12 +134,13 @@ static void secp256k1_scalar_stop(void) {
     if (secp256k1_scalar_consts == NULL)
         return;
 
-    secp256k1_scalar_consts_t *c = (secp256k1_scalar_consts_t*)secp256k1_scalar_consts;
+    secp256k1_scalar_consts_t *c = (secp256k1_scalar_consts_t *) secp256k1_scalar_consts;
     secp256k1_scalar_consts = NULL;
     free(c);
 }
 
 #ifndef USE_NUM_NONE
+
 static void secp256k1_scalar_get_num(secp256k1_num_t *r, const secp256k1_scalar_t *a) {
     unsigned char c[32];
     secp256k1_scalar_get_b32(c, a);
@@ -149,155 +150,156 @@ static void secp256k1_scalar_get_num(secp256k1_num_t *r, const secp256k1_scalar_
 static void secp256k1_scalar_order_get_num(secp256k1_num_t *r) {
     *r = secp256k1_scalar_consts->order;
 }
+
 #endif
 
 static void secp256k1_scalar_inverse(secp256k1_scalar_t *r, const secp256k1_scalar_t *x) {
     /* First compute x ^ (2^N - 1) for some values of N. */
     secp256k1_scalar_t x2, x3, x4, x6, x7, x8, x15, x30, x60, x120, x127;
 
-    secp256k1_scalar_sqr(&x2,  x);
-    secp256k1_scalar_mul(&x2, &x2,  x);
+    secp256k1_scalar_sqr(&x2, x);
+    secp256k1_scalar_mul(&x2, &x2, x);
 
     secp256k1_scalar_sqr(&x3, &x2);
-    secp256k1_scalar_mul(&x3, &x3,  x);
+    secp256k1_scalar_mul(&x3, &x3, x);
 
     secp256k1_scalar_sqr(&x4, &x3);
-    secp256k1_scalar_mul(&x4, &x4,  x);
+    secp256k1_scalar_mul(&x4, &x4, x);
 
     secp256k1_scalar_sqr(&x6, &x4);
     secp256k1_scalar_sqr(&x6, &x6);
     secp256k1_scalar_mul(&x6, &x6, &x2);
 
     secp256k1_scalar_sqr(&x7, &x6);
-    secp256k1_scalar_mul(&x7, &x7,  x);
+    secp256k1_scalar_mul(&x7, &x7, x);
 
     secp256k1_scalar_sqr(&x8, &x7);
-    secp256k1_scalar_mul(&x8, &x8,  x);
+    secp256k1_scalar_mul(&x8, &x8, x);
 
     secp256k1_scalar_sqr(&x15, &x8);
-    for (int i=0; i<6; i++)
+    for (int i = 0; i < 6; i++)
         secp256k1_scalar_sqr(&x15, &x15);
     secp256k1_scalar_mul(&x15, &x15, &x7);
 
     secp256k1_scalar_sqr(&x30, &x15);
-    for (int i=0; i<14; i++)
+    for (int i = 0; i < 14; i++)
         secp256k1_scalar_sqr(&x30, &x30);
     secp256k1_scalar_mul(&x30, &x30, &x15);
 
     secp256k1_scalar_sqr(&x60, &x30);
-    for (int i=0; i<29; i++)
+    for (int i = 0; i < 29; i++)
         secp256k1_scalar_sqr(&x60, &x60);
     secp256k1_scalar_mul(&x60, &x60, &x30);
 
     secp256k1_scalar_sqr(&x120, &x60);
-    for (int i=0; i<59; i++)
+    for (int i = 0; i < 59; i++)
         secp256k1_scalar_sqr(&x120, &x120);
     secp256k1_scalar_mul(&x120, &x120, &x60);
 
     secp256k1_scalar_sqr(&x127, &x120);
-    for (int i=0; i<6; i++)
+    for (int i = 0; i < 6; i++)
         secp256k1_scalar_sqr(&x127, &x127);
     secp256k1_scalar_mul(&x127, &x127, &x7);
 
     /* Then accumulate the final result (t starts at x127). */
     secp256k1_scalar_t *t = &x127;
-    for (int i=0; i<2; i++) /* 0 */
+    for (int i = 0; i < 2; i++) /* 0 */
         secp256k1_scalar_sqr(t, t);
     secp256k1_scalar_mul(t, t, x); /* 1 */
-    for (int i=0; i<4; i++) /* 0 */
+    for (int i = 0; i < 4; i++) /* 0 */
         secp256k1_scalar_sqr(t, t);
     secp256k1_scalar_mul(t, t, &x3); /* 111 */
-    for (int i=0; i<2; i++) /* 0 */
+    for (int i = 0; i < 2; i++) /* 0 */
         secp256k1_scalar_sqr(t, t);
     secp256k1_scalar_mul(t, t, x); /* 1 */
-    for (int i=0; i<2; i++) /* 0 */
+    for (int i = 0; i < 2; i++) /* 0 */
         secp256k1_scalar_sqr(t, t);
     secp256k1_scalar_mul(t, t, x); /* 1 */
-    for (int i=0; i<2; i++) /* 0 */
+    for (int i = 0; i < 2; i++) /* 0 */
         secp256k1_scalar_sqr(t, t);
     secp256k1_scalar_mul(t, t, x); /* 1 */
-    for (int i=0; i<4; i++) /* 0 */
+    for (int i = 0; i < 4; i++) /* 0 */
         secp256k1_scalar_sqr(t, t);
     secp256k1_scalar_mul(t, t, &x3); /* 111 */
-    for (int i=0; i<3; i++) /* 0 */
+    for (int i = 0; i < 3; i++) /* 0 */
         secp256k1_scalar_sqr(t, t);
     secp256k1_scalar_mul(t, t, &x2); /* 11 */
-    for (int i=0; i<4; i++) /* 0 */
+    for (int i = 0; i < 4; i++) /* 0 */
         secp256k1_scalar_sqr(t, t);
     secp256k1_scalar_mul(t, t, &x3); /* 111 */
-    for (int i=0; i<5; i++) /* 00 */
+    for (int i = 0; i < 5; i++) /* 00 */
         secp256k1_scalar_sqr(t, t);
     secp256k1_scalar_mul(t, t, &x3); /* 111 */
-    for (int i=0; i<4; i++) /* 00 */
+    for (int i = 0; i < 4; i++) /* 00 */
         secp256k1_scalar_sqr(t, t);
     secp256k1_scalar_mul(t, t, &x2); /* 11 */
-    for (int i=0; i<2; i++) /* 0 */
+    for (int i = 0; i < 2; i++) /* 0 */
         secp256k1_scalar_sqr(t, t);
     secp256k1_scalar_mul(t, t, x); /* 1 */
-    for (int i=0; i<2; i++) /* 0 */
+    for (int i = 0; i < 2; i++) /* 0 */
         secp256k1_scalar_sqr(t, t);
     secp256k1_scalar_mul(t, t, x); /* 1 */
-    for (int i=0; i<5; i++) /* 0 */
+    for (int i = 0; i < 5; i++) /* 0 */
         secp256k1_scalar_sqr(t, t);
     secp256k1_scalar_mul(t, t, &x4); /* 1111 */
-    for (int i=0; i<2; i++) /* 0 */
+    for (int i = 0; i < 2; i++) /* 0 */
         secp256k1_scalar_sqr(t, t);
     secp256k1_scalar_mul(t, t, x); /* 1 */
-    for (int i=0; i<3; i++) /* 00 */
+    for (int i = 0; i < 3; i++) /* 00 */
         secp256k1_scalar_sqr(t, t);
     secp256k1_scalar_mul(t, t, x); /* 1 */
-    for (int i=0; i<4; i++) /* 000 */
+    for (int i = 0; i < 4; i++) /* 000 */
         secp256k1_scalar_sqr(t, t);
     secp256k1_scalar_mul(t, t, x); /* 1 */
-    for (int i=0; i<2; i++) /* 0 */
+    for (int i = 0; i < 2; i++) /* 0 */
         secp256k1_scalar_sqr(t, t);
     secp256k1_scalar_mul(t, t, x); /* 1 */
-    for (int i=0; i<10; i++) /* 0000000 */
+    for (int i = 0; i < 10; i++) /* 0000000 */
         secp256k1_scalar_sqr(t, t);
     secp256k1_scalar_mul(t, t, &x3); /* 111 */
-    for (int i=0; i<4; i++) /* 0 */
+    for (int i = 0; i < 4; i++) /* 0 */
         secp256k1_scalar_sqr(t, t);
     secp256k1_scalar_mul(t, t, &x3); /* 111 */
-    for (int i=0; i<9; i++) /* 0 */
+    for (int i = 0; i < 9; i++) /* 0 */
         secp256k1_scalar_sqr(t, t);
     secp256k1_scalar_mul(t, t, &x8); /* 11111111 */
-    for (int i=0; i<2; i++) /* 0 */
+    for (int i = 0; i < 2; i++) /* 0 */
         secp256k1_scalar_sqr(t, t);
     secp256k1_scalar_mul(t, t, x); /* 1 */
-    for (int i=0; i<3; i++) /* 00 */
+    for (int i = 0; i < 3; i++) /* 00 */
         secp256k1_scalar_sqr(t, t);
     secp256k1_scalar_mul(t, t, x); /* 1 */
-    for (int i=0; i<3; i++) /* 00 */
+    for (int i = 0; i < 3; i++) /* 00 */
         secp256k1_scalar_sqr(t, t);
     secp256k1_scalar_mul(t, t, x); /* 1 */
-    for (int i=0; i<5; i++) /* 0 */
+    for (int i = 0; i < 5; i++) /* 0 */
         secp256k1_scalar_sqr(t, t);
     secp256k1_scalar_mul(t, t, &x4); /* 1111 */
-    for (int i=0; i<2; i++) /* 0 */
+    for (int i = 0; i < 2; i++) /* 0 */
         secp256k1_scalar_sqr(t, t);
     secp256k1_scalar_mul(t, t, x); /* 1 */
-    for (int i=0; i<5; i++) /* 000 */
+    for (int i = 0; i < 5; i++) /* 000 */
         secp256k1_scalar_sqr(t, t);
     secp256k1_scalar_mul(t, t, &x2); /* 11 */
-    for (int i=0; i<4; i++) /* 00 */
+    for (int i = 0; i < 4; i++) /* 00 */
         secp256k1_scalar_sqr(t, t);
     secp256k1_scalar_mul(t, t, &x2); /* 11 */
-    for (int i=0; i<2; i++) /* 0 */
+    for (int i = 0; i < 2; i++) /* 0 */
         secp256k1_scalar_sqr(t, t);
     secp256k1_scalar_mul(t, t, x); /* 1 */
-    for (int i=0; i<8; i++) /* 000000 */
+    for (int i = 0; i < 8; i++) /* 000000 */
         secp256k1_scalar_sqr(t, t);
     secp256k1_scalar_mul(t, t, &x2); /* 11 */
-    for (int i=0; i<3; i++) /* 0 */
+    for (int i = 0; i < 3; i++) /* 0 */
         secp256k1_scalar_sqr(t, t);
     secp256k1_scalar_mul(t, t, &x2); /* 11 */
-    for (int i=0; i<3; i++) /* 00 */
+    for (int i = 0; i < 3; i++) /* 00 */
         secp256k1_scalar_sqr(t, t);
     secp256k1_scalar_mul(t, t, x); /* 1 */
-    for (int i=0; i<6; i++) /* 00000 */
+    for (int i = 0; i < 6; i++) /* 00000 */
         secp256k1_scalar_sqr(t, t);
     secp256k1_scalar_mul(t, t, x); /* 1 */
-    for (int i=0; i<8; i++) /* 00 */
+    for (int i = 0; i < 8; i++) /* 00 */
         secp256k1_scalar_sqr(t, t);
     secp256k1_scalar_mul(r, t, &x6); /* 111111 */
 }

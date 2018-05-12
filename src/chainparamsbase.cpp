@@ -16,91 +16,84 @@ using namespace boost::assign;
 /**
  * Main network
  */
-class CBaseMainParams : public CBaseChainParams
-{
+class CBaseMainParams : public CBaseChainParams {
 public:
-    CBaseMainParams()
-    {
+    CBaseMainParams() {
         networkID = CBaseChainParams::MAIN;
         nRPCPort = 17001;
     }
 };
+
 static CBaseMainParams mainParams;
 
 /**
  * Testnet (v3)
  */
-class CBaseTestNetParams : public CBaseMainParams
-{
+class CBaseTestNetParams : public CBaseMainParams {
 public:
-    CBaseTestNetParams()
-    {
+    CBaseTestNetParams() {
         networkID = CBaseChainParams::TESTNET;
         nRPCPort = 17003;
         strDataDir = "testnet";
     }
 };
+
 static CBaseTestNetParams testNetParams;
 
 /*
  * Regression test
  */
-class CBaseRegTestParams : public CBaseTestNetParams
-{
+class CBaseRegTestParams : public CBaseTestNetParams {
 public:
-    CBaseRegTestParams()
-    {
+    CBaseRegTestParams() {
         networkID = CBaseChainParams::REGTEST;
         strDataDir = "regtest";
     }
 };
+
 static CBaseRegTestParams regTestParams;
 
 /*
  * Unit test
  */
-class CBaseUnitTestParams : public CBaseMainParams
-{
+class CBaseUnitTestParams : public CBaseMainParams {
 public:
-    CBaseUnitTestParams()
-    {
+    CBaseUnitTestParams() {
         networkID = CBaseChainParams::UNITTEST;
         strDataDir = "unittest";
     }
 };
+
 static CBaseUnitTestParams unitTestParams;
 
-static CBaseChainParams* pCurrentBaseParams = 0;
+static CBaseChainParams *pCurrentBaseParams = 0;
 
-const CBaseChainParams& BaseParams()
-{
+const CBaseChainParams &BaseParams() {
     assert(pCurrentBaseParams);
     return *pCurrentBaseParams;
 }
 
-void SelectBaseParams(CBaseChainParams::Network network)
-{
+void SelectBaseParams(CBaseChainParams::Network network) {
     switch (network) {
-    case CBaseChainParams::MAIN:
-        pCurrentBaseParams = &mainParams;
-        break;
-    case CBaseChainParams::TESTNET:
-        pCurrentBaseParams = &testNetParams;
-        break;
-    case CBaseChainParams::REGTEST:
-        pCurrentBaseParams = &regTestParams;
-        break;
-    case CBaseChainParams::UNITTEST:
-        pCurrentBaseParams = &unitTestParams;
-        break;
-    default:
-        assert(false && "Unimplemented network");
-        return;
+        case CBaseChainParams::MAIN:
+            pCurrentBaseParams = &mainParams;
+            break;
+        case CBaseChainParams::TESTNET:
+            pCurrentBaseParams = &testNetParams;
+            break;
+        case CBaseChainParams::REGTEST:
+            pCurrentBaseParams = &regTestParams;
+            break;
+        case CBaseChainParams::UNITTEST:
+            pCurrentBaseParams = &unitTestParams;
+            break;
+        default:
+            assert(false && "Unimplemented network");
+            return;
     }
 }
 
-CBaseChainParams::Network NetworkIdFromCommandLine()
-{
+CBaseChainParams::Network NetworkIdFromCommandLine() {
     bool fRegTest = GetBoolArg("-regtest", false);
     bool fTestNet = GetBoolArg("-testnet", false);
 
@@ -113,8 +106,7 @@ CBaseChainParams::Network NetworkIdFromCommandLine()
     return CBaseChainParams::MAIN;
 }
 
-bool SelectBaseParamsFromCommandLine()
-{
+bool SelectBaseParamsFromCommandLine() {
     CBaseChainParams::Network network = NetworkIdFromCommandLine();
     if (network == CBaseChainParams::MAX_NETWORK_TYPES)
         return false;
@@ -123,7 +115,6 @@ bool SelectBaseParamsFromCommandLine()
     return true;
 }
 
-bool AreBaseParamsConfigured()
-{
+bool AreBaseParamsConfigured() {
     return pCurrentBaseParams != NULL;
 }

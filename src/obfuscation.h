@@ -14,12 +14,19 @@
 #include "sync.h"
 
 class CTxIn;
+
 class CObfuscationPool;
+
 class CObfuScationSigner;
+
 class CMasterNodeVote;
+
 class CBitcoinAddress;
+
 class CObfuscationQueue;
+
 class CObfuscationBroadcastTx;
+
 class CActiveMasternode;
 
 // pool states for mixing
@@ -51,21 +58,19 @@ static const CAmount OBFUSCATION_POOL_MAX = (99999.99 * COIN);
 
 extern CObfuscationPool obfuScationPool;
 extern CObfuScationSigner obfuScationSigner;
-extern std::vector<CObfuscationQueue> vecObfuscationQueue;
+extern std::vector <CObfuscationQueue> vecObfuscationQueue;
 extern std::string strMasterNodePrivKey;
-extern map<uint256, CObfuscationBroadcastTx> mapObfuscationBroadcastTxes;
+extern map <uint256, CObfuscationBroadcastTx> mapObfuscationBroadcastTxes;
 extern CActiveMasternode activeMasternode;
 
 /** Holds an Obfuscation input
  */
-class CTxDSIn : public CTxIn
-{
+class CTxDSIn : public CTxIn {
 public:
     bool fHasSig;   // flag to indicate if signed
     int nSentTimes; //times we've sent this anonymously
 
-    CTxDSIn(const CTxIn& in)
-    {
+    CTxDSIn(const CTxIn &in) {
         prevout = in.prevout;
         scriptSig = in.scriptSig;
         prevPubKey = in.prevPubKey;
@@ -77,13 +82,11 @@ public:
 
 /** Holds an Obfuscation output
  */
-class CTxDSOut : public CTxOut
-{
+class CTxDSOut : public CTxOut {
 public:
     int nSentTimes; //times we've sent this anonymously
 
-    CTxDSOut(const CTxOut& out)
-    {
+    CTxDSOut(const CTxOut &out) {
         nValue = out.nValue;
         nRounds = out.nRounds;
         scriptPubKey = out.scriptPubKey;
@@ -92,36 +95,36 @@ public:
 };
 
 // A clients transaction in the obfuscation pool
-class CObfuScationEntry
-{
+class CObfuScationEntry {
 public:
     bool isSet;
-    std::vector<CTxDSIn> sev;
-    std::vector<CTxDSOut> vout;
+    std::vector <CTxDSIn> sev;
+    std::vector <CTxDSOut> vout;
     CAmount amount;
     CTransaction collateral;
     CTransaction txSupporting;
     int64_t addedTime; // time in UTC milliseconds
 
-    CObfuScationEntry()
-    {
+    CObfuScationEntry() {
         isSet = false;
         collateral = CTransaction();
         amount = 0;
     }
 
     /// Add entries to use for Obfuscation
-    bool Add(const std::vector<CTxIn> vinIn, int64_t amountIn, const CTransaction collateralIn, const std::vector<CTxOut> voutIn)
-    {
+    bool Add(const std::vector <CTxIn> vinIn, int64_t amountIn, const CTransaction collateralIn,
+             const std::vector <CTxOut> voutIn) {
         if (isSet) {
             return false;
         }
 
-        BOOST_FOREACH (const CTxIn& in, vinIn)
-            sev.push_back(in);
+        BOOST_FOREACH(
+        const CTxIn &in, vinIn)
+        sev.push_back(in);
 
-        BOOST_FOREACH (const CTxOut& out, voutIn)
-            vout.push_back(out);
+        BOOST_FOREACH(
+        const CTxOut &out, voutIn)
+        vout.push_back(out);
 
         amount = amountIn;
         collateral = collateralIn;
@@ -131,9 +134,9 @@ public:
         return true;
     }
 
-    bool AddSig(const CTxIn& vin)
-    {
-        BOOST_FOREACH (CTxDSIn& s, sev) {
+    bool AddSig(const CTxIn &vin) {
+        BOOST_FOREACH(CTxDSIn & s, sev)
+        {
             if (s.prevout == vin.prevout && s.nSequence == vin.nSequence) {
                 if (s.fHasSig) {
                     return false;
@@ -149,8 +152,7 @@ public:
         return false;
     }
 
-    bool IsExpired()
-    {
+    bool IsExpired() {
         return (GetTime() - addedTime) > OBFUSCATION_QUEUE_TIMEOUT; // 120 seconds
     }
 };
@@ -159,8 +161,7 @@ public:
 /**
  * A currently inprogress Obfuscation merge and denomination information
  */
-class CObfuscationQueue
-{
+class CObfuscationQueue {
 public:
     CTxIn vin;
     int64_t time;
@@ -168,8 +169,7 @@ public:
     bool ready; //ready for submit
     std::vector<unsigned char> vchSig;
 
-    CObfuscationQueue()
-    {
+    CObfuscationQueue() {
         nDenom = 0;
         vin = CTxIn();
         time = 0;
@@ -179,9 +179,8 @@ public:
 
     ADD_SERIALIZE_METHODS;
 
-    template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
-    {
+    template<typename Stream, typename Operation>
+    inline void SerializationOp(Stream &s, Operation ser_action, int nType, int nVersion) {
         READWRITE(nDenom);
         READWRITE(vin);
         READWRITE(time);
@@ -189,9 +188,8 @@ public:
         READWRITE(vchSig);
     }
 
-    bool GetAddress(CService& addr)
-    {
-        CMasternode* pmn = mnodeman.Find(vin);
+    bool GetAddress(CService &addr) {
+        CMasternode *pmn = mnodeman.Find(vin);
         if (pmn != NULL) {
             addr = pmn->addr;
             return true;
@@ -200,9 +198,8 @@ public:
     }
 
     /// Get the protocol version
-    bool GetProtocolVersion(int& protocolVersion)
-    {
-        CMasternode* pmn = mnodeman.Find(vin);
+    bool GetProtocolVersion(int &protocolVersion) {
+        CMasternode *pmn = mnodeman.Find(vin);
         if (pmn != NULL) {
             protocolVersion = pmn->protocolVersion;
             return true;
@@ -222,8 +219,7 @@ public:
     bool Relay();
 
     /// Is this Obfuscation expired?
-    bool IsExpired()
-    {
+    bool IsExpired() {
         return (GetTime() - time) > OBFUSCATION_QUEUE_TIMEOUT; // 120 seconds
     }
 
@@ -233,8 +229,7 @@ public:
 
 /** Helper class to store Obfuscation transaction (tx) information.
  */
-class CObfuscationBroadcastTx
-{
+class CObfuscationBroadcastTx {
 public:
     CTransaction tx;
     CTxIn vin;
@@ -244,29 +239,32 @@ public:
 
 /** Helper object for signing and checking signatures
  */
-class CObfuScationSigner
-{
+class CObfuScationSigner {
 public:
     /// Is the inputs associated with this public key? (and there is 10000 PIV - checking if valid masternode)
-    bool IsVinAssociatedWithPubkey(CTxIn& vin, CPubKey& pubkey);
+    bool IsVinAssociatedWithPubkey(CTxIn &vin, CPubKey &pubkey);
+
     /// Set the private/public key values, returns true if successful
-    bool GetKeysFromSecret(std::string strSecret, CKey& keyRet, CPubKey& pubkeyRet);
+    bool GetKeysFromSecret(std::string strSecret, CKey &keyRet, CPubKey &pubkeyRet);
+
     /// Set the private/public key values, returns true if successful
-    bool SetKey(std::string strSecret, std::string& errorMessage, CKey& key, CPubKey& pubkey);
+    bool SetKey(std::string strSecret, std::string &errorMessage, CKey &key, CPubKey &pubkey);
+
     /// Sign the message, returns true if successful
-    bool SignMessage(std::string strMessage, std::string& errorMessage, std::vector<unsigned char>& vchSig, CKey key);
+    bool SignMessage(std::string strMessage, std::string &errorMessage, std::vector<unsigned char> &vchSig, CKey key);
+
     /// Verify the message, returns true if succcessful
-    bool VerifyMessage(CPubKey pubkey, std::vector<unsigned char>& vchSig, std::string strMessage, std::string& errorMessage);
+    bool VerifyMessage(CPubKey pubkey, std::vector<unsigned char> &vchSig, std::string strMessage,
+                       std::string &errorMessage);
 };
 
 /** Used to keep track of current status of Obfuscation pool
  */
-class CObfuscationPool
-{
+class CObfuscationPool {
 private:
     mutable CCriticalSection cs_obfuscation;
 
-    std::vector<CObfuScationEntry> entries; // Masternode/clients entries
+    std::vector <CObfuScationEntry> entries; // Masternode/clients entries
     CMutableTransaction finalTransaction;   // the finalized transaction ready for signing
 
     int64_t lastTimeChanged; // last time the 'state' changed, in UTC milliseconds
@@ -276,7 +274,7 @@ private:
     unsigned int lastEntryAccepted;
     unsigned int countEntriesAccepted;
 
-    std::vector<CTxIn> lockedCoins;
+    std::vector <CTxIn> lockedCoins;
 
     std::string lastMessage;
     bool unitTest;
@@ -285,7 +283,7 @@ private:
 
     int sessionUsers;            //N Users have said they'll join
     bool sessionFoundMasternode; //If we've found a compatible Masternode
-    std::vector<CTransaction> vecSessionCollateral;
+    std::vector <CTransaction> vecSessionCollateral;
 
     int cachedLastSuccess;
 
@@ -326,12 +324,11 @@ public:
     // where collateral should be made out to
     CScript collateralPubKey;
 
-    CMasternode* pSubmittedToMasternode;
+    CMasternode *pSubmittedToMasternode;
     int sessionDenom;    //Users must submit an denom matching this
     int cachedNumBlocks; //used for the overview screen
 
-    CObfuscationPool()
-    {
+    CObfuscationPool() {
         /* Obfuscation uses collateral addresses to trust parties entering the pool
             to behave themselves. If they don't it takes their money. */
 
@@ -360,56 +357,50 @@ public:
      *        dssub    | Obfuscation Subscribe To
      * \param vRecv
      */
-    void ProcessMessageObfuscation(CNode* pfrom, std::string& strCommand, CDataStream& vRecv);
+    void ProcessMessageObfuscation(CNode *pfrom, std::string &strCommand, CDataStream &vRecv);
 
-    void InitCollateralAddress()
-    {
+    void InitCollateralAddress() {
         SetCollateralAddress(Params().ObfuscationPoolDummyAddress());
     }
 
-    void SetMinBlockSpacing(int minBlockSpacingIn)
-    {
+    void SetMinBlockSpacing(int minBlockSpacingIn) {
         minBlockSpacing = minBlockSpacingIn;
     }
 
     bool SetCollateralAddress(std::string strAddress);
+
     void Reset();
+
     void SetNull();
 
     void UnlockCoins();
 
-    bool IsNull() const
-    {
+    bool IsNull() const {
         return state == POOL_STATUS_ACCEPTING_ENTRIES && entries.empty();
     }
 
-    int GetState() const
-    {
+    int GetState() const {
         return state;
     }
 
     std::string GetStatus();
 
-    int GetEntriesCount() const
-    {
+    int GetEntriesCount() const {
         return entries.size();
     }
 
     /// Get the time the last entry was accepted (time in UTC milliseconds)
-    int GetLastEntryAccepted() const
-    {
+    int GetLastEntryAccepted() const {
         return lastEntryAccepted;
     }
 
     /// Get the count of the accepted entries
-    int GetCountEntriesAccepted() const
-    {
+    int GetCountEntriesAccepted() const {
         return countEntriesAccepted;
     }
 
     // Set the 'state' value, with some logging and capturing when the state changed
-    void UpdateState(unsigned int newState)
-    {
+    void UpdateState(unsigned int newState) {
         if (fMasterNode && (newState == POOL_STATUS_ERROR || newState == POOL_STATUS_SUCCESS)) {
             // LogPrint("obfuscation", "CObfuscationPool::UpdateState() - Can't set state to ERROR or SUCCESS as a Masternode. \n");
             return;
@@ -419,83 +410,102 @@ public:
         if (state != newState) {
             lastTimeChanged = GetTimeMillis();
             if (fMasterNode) {
-                RelayStatus(obfuScationPool.sessionID, obfuScationPool.GetState(), obfuScationPool.GetEntriesCount(), MASTERNODE_RESET);
+                RelayStatus(obfuScationPool.sessionID, obfuScationPool.GetState(), obfuScationPool.GetEntriesCount(),
+                            MASTERNODE_RESET);
             }
         }
         state = newState;
     }
 
     /// Get the maximum number of transactions for the pool
-    int GetMaxPoolTransactions()
-    {
+    int GetMaxPoolTransactions() {
         return Params().PoolMaxTransactions();
     }
 
     /// Do we have enough users to take entries?
-    bool IsSessionReady()
-    {
+    bool IsSessionReady() {
         return sessionUsers >= GetMaxPoolTransactions();
     }
 
     /// Are these outputs compatible with other client in the pool?
-    bool IsCompatibleWithEntries(std::vector<CTxOut>& vout);
+    bool IsCompatibleWithEntries(std::vector <CTxOut> &vout);
 
     /// Is this amount compatible with other client in the pool?
-    bool IsCompatibleWithSession(CAmount nAmount, CTransaction txCollateral, int& errorID);
+    bool IsCompatibleWithSession(CAmount nAmount, CTransaction txCollateral, int &errorID);
 
     /// Passively run Obfuscation in the background according to the configuration in settings (only for QT)
     bool DoAutomaticDenominating(bool fDryRun = false);
+
     bool PrepareObfuscationDenominate();
 
     /// Check for process in Obfuscation
     void Check();
+
     void CheckFinalTransaction();
+
     /// Charge fees to bad actors (Charge clients a fee if they're abusive)
     void ChargeFees();
+
     /// Rarely charge fees to pay miners
     void ChargeRandomFees();
+
     void CheckTimeout();
+
     void CheckForCompleteQueue();
+
     /// Check to make sure a signature matches an input in the pool
-    bool SignatureValid(const CScript& newSig, const CTxIn& newVin);
+    bool SignatureValid(const CScript &newSig, const CTxIn &newVin);
+
     /// If the collateral is valid given by a client
-    bool IsCollateralValid(const CTransaction& txCollateral);
+    bool IsCollateralValid(const CTransaction &txCollateral);
+
     /// Add a clients entry to the pool
-    bool AddEntry(const std::vector<CTxIn>& newInput, const CAmount& nAmount, const CTransaction& txCollateral, const std::vector<CTxOut>& newOutput, int& errorID);
+    bool AddEntry(const std::vector <CTxIn> &newInput, const CAmount &nAmount, const CTransaction &txCollateral,
+                  const std::vector <CTxOut> &newOutput, int &errorID);
+
     /// Add signature to a vin
-    bool AddScriptSig(const CTxIn& newVin);
+    bool AddScriptSig(const CTxIn &newVin);
+
     /// Check that all inputs are signed. (Are all inputs signed?)
     bool SignaturesComplete();
+
     /// As a client, send a transaction to a Masternode to start the denomination process
-    void SendObfuscationDenominate(std::vector<CTxIn>& vin, std::vector<CTxOut>& vout, CAmount amount);
+    void SendObfuscationDenominate(std::vector <CTxIn> &vin, std::vector <CTxOut> &vout, CAmount amount);
+
     /// Get Masternode updates about the progress of Obfuscation
-    bool StatusUpdate(int newState, int newEntriesCount, int newAccepted, int& errorID, int newSessionID = 0);
+    bool StatusUpdate(int newState, int newEntriesCount, int newAccepted, int &errorID, int newSessionID = 0);
 
     /// As a client, check and sign the final transaction
-    bool SignFinalTransaction(CTransaction& finalTransactionNew, CNode* node);
+    bool SignFinalTransaction(CTransaction &finalTransactionNew, CNode *node);
 
     /// Get the last valid block hash for a given modulus
-    bool GetLastValidBlockHash(uint256& hash, int mod = 1, int nBlockHeight = 0);
+    bool GetLastValidBlockHash(uint256 &hash, int mod = 1, int nBlockHeight = 0);
+
     /// Process a new block
     void NewBlock();
+
     void CompletedTransaction(bool error, int errorID);
+
     void ClearLastMessage();
+
     /// Used for liquidity providers
     bool SendRandomPaymentToSelf();
 
     /// Split up large inputs or make fee sized inputs
     bool MakeCollateralAmounts();
+
     bool CreateDenominated(CAmount nTotalValue);
 
     /// Get the denominations for a list of outputs (returns a bitshifted integer)
-    int GetDenominations(const std::vector<CTxOut>& vout, bool fSingleRandomDenom = false);
-    int GetDenominations(const std::vector<CTxDSOut>& vout);
+    int GetDenominations(const std::vector <CTxOut> &vout, bool fSingleRandomDenom = false);
 
-    void GetDenominationsToString(int nDenom, std::string& strDenom);
+    int GetDenominations(const std::vector <CTxDSOut> &vout);
+
+    void GetDenominationsToString(int nDenom, std::string &strDenom);
 
     /// Get the denominations for a specific amount of wispr.
     int GetDenominationsByAmount(CAmount nAmount, int nDenomTarget = 0); // is not used anymore?
-    int GetDenominationsByAmounts(std::vector<CAmount>& vecAmount);
+    int GetDenominationsByAmounts(std::vector <CAmount> &vecAmount);
 
     std::string GetMessageByID(int messageID);
 
@@ -503,11 +513,18 @@ public:
     // Relay Obfuscation Messages
     //
 
-    void RelayFinalTransaction(const int sessionID, const CTransaction& txNew);
-    void RelaySignaturesAnon(std::vector<CTxIn>& vin);
-    void RelayInAnon(std::vector<CTxIn>& vin, std::vector<CTxOut>& vout);
-    void RelayIn(const std::vector<CTxDSIn>& vin, const CAmount& nAmount, const CTransaction& txCollateral, const std::vector<CTxDSOut>& vout);
-    void RelayStatus(const int sessionID, const int newState, const int newEntriesCount, const int newAccepted, const int errorID = MSG_NOERR);
+    void RelayFinalTransaction(const int sessionID, const CTransaction &txNew);
+
+    void RelaySignaturesAnon(std::vector <CTxIn> &vin);
+
+    void RelayInAnon(std::vector <CTxIn> &vin, std::vector <CTxOut> &vout);
+
+    void RelayIn(const std::vector <CTxDSIn> &vin, const CAmount &nAmount, const CTransaction &txCollateral,
+                 const std::vector <CTxDSOut> &vout);
+
+    void RelayStatus(const int sessionID, const int newState, const int newEntriesCount, const int newAccepted,
+                     const int errorID = MSG_NOERR);
+
     void RelayCompletedTransaction(const int sessionID, const bool error, const int errorID);
 };
 
