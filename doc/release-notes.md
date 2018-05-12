@@ -94,7 +94,7 @@ Result: (for other sets):
 
 Examples:
 > wispr-cli masternodestart "alias" "my_mn"
-> curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "masternodestart", "params": ["alias" "my_mn"] }' -H 'content-type: text/plain;' http://127.0.0.1:17001/
+> curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "masternodestart", "params": ["alias" "my_mn"] }' -H 'content-type: text/plain;' http://127.0.0.1:51473/
 ```
 
 ##### `preparebudget` & `submitbudget` Commands #####
@@ -171,7 +171,7 @@ Result:
 
 Examples:
 > wispr-cli getbudgetprojection
-> curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getbudgetprojection", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:17001/
+> curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getbudgetprojection", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:51473/
 ```
 
 #### Masternode network protocol layer reporting ####
