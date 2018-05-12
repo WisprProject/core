@@ -88,8 +88,8 @@ void ProcessMessageSwiftTX(CNode* pfrom, std::string& strCommand, CDataStream& v
             mapTxLockReq.insert(make_pair(tx.GetHash(), tx));
 
             LogPrintf("ProcessMessageSwiftTX::ix - Transaction Lock Request: %s %s : accepted %s\n",
-                pfrom->addr.ToString().c_str(), pfrom->cleanSubVer.c_str(),
-                tx.GetHash().ToString().c_str());
+                      pfrom->addr.ToString().c_str(), pfrom->cleanSubVer.c_str(),
+                      tx.GetHash().ToString().c_str());
 
             if (GetTransactionLockSignatures(tx.GetHash()) == SWIFTTX_SIGNATURES_REQUIRED) {
                 GetMainSignals().NotifyTransactionLock(tx);
@@ -103,8 +103,8 @@ void ProcessMessageSwiftTX(CNode* pfrom, std::string& strCommand, CDataStream& v
             // can we get the conflicting transaction as proof?
 
             LogPrintf("ProcessMessageSwiftTX::ix - Transaction Lock Request: %s %s : rejected %s\n",
-                pfrom->addr.ToString().c_str(), pfrom->cleanSubVer.c_str(),
-                tx.GetHash().ToString().c_str());
+                      pfrom->addr.ToString().c_str(), pfrom->cleanSubVer.c_str(),
+                      tx.GetHash().ToString().c_str());
 
             BOOST_FOREACH (const CTxIn& in, tx.vin) {
                 if (!mapLockedInputs.count(in.prevout)) {
@@ -158,8 +158,8 @@ void ProcessMessageSwiftTX(CNode* pfrom, std::string& strCommand, CDataStream& v
                 if (mapUnknownVotes[ctx.vinMasternode.prevout.hash] > GetTime() &&
                     mapUnknownVotes[ctx.vinMasternode.prevout.hash] - GetAverageVoteTime() > 60 * 10) {
                     LogPrintf("ProcessMessageSwiftTX::ix - masternode is spamming transaction votes: %s %s\n",
-                        ctx.vinMasternode.ToString().c_str(),
-                        ctx.txHash.ToString().c_str());
+                              ctx.vinMasternode.ToString().c_str(),
+                              ctx.txHash.ToString().c_str());
                     return;
                 } else {
                     mapUnknownVotes[ctx.vinMasternode.prevout.hash] = GetTime() + (60 * 10);
@@ -186,7 +186,7 @@ bool IsIXTXValid(const CTransaction& txCollateral)
     bool missingTx = false;
 
     BOOST_FOREACH (const CTxOut o, txCollateral.vout)
-        nValueOut += o.nValue;
+    nValueOut += o.nValue;
 
     BOOST_FOREACH (const CTxIn i, txCollateral.vin) {
         CTransaction tx2;
@@ -445,13 +445,13 @@ void CleanTransactionLocksList()
                 CTransaction& tx = mapTxLockReq[it->second.txHash];
 
                 BOOST_FOREACH (const CTxIn& in, tx.vin)
-                    mapLockedInputs.erase(in.prevout);
+                mapLockedInputs.erase(in.prevout);
 
                 mapTxLockReq.erase(it->second.txHash);
                 mapTxLockReqRejected.erase(it->second.txHash);
 
                 BOOST_FOREACH (CConsensusVote& v, it->second.vecConsensusVotes)
-                    mapTxLockVote.erase(v.GetHash());
+                mapTxLockVote.erase(v.GetHash());
             }
 
             mapTxLocks.erase(it++);
@@ -459,6 +459,17 @@ void CleanTransactionLocksList()
             it++;
         }
     }
+}
+
+int GetTransactionLockSignatures(uint256 txHash)
+{
+    if(fLargeWorkForkFound || fLargeWorkInvalidChainFound) return -2;
+    if (!IsSporkActive(SPORK_2_SWIFTTX)) return -1;
+
+    std::map<uint256, CTransactionLock>::iterator it = mapTxLocks.find(txHash);
+    if(it != mapTxLocks.end()) return it->second.CountSignatures();
+
+    return -1;
 }
 
 uint256 CConsensusVote::GetHash() const
