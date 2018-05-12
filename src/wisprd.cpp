@@ -30,7 +30,7 @@
  *
  * \section intro_sec Introduction
  *
- * This is the developer documentation of the reference client for an experimental new digital currency called PIVX (http://www.wispr.tech),
+ * This is the developer documentation of the reference client for an experimental new digital currency called PIVX (http://www.wispr.org),
  * which enables instant payments to anyone, anywhere in the world. PIVX uses peer-to-peer technology to operate
  * with no central authority: managing transactions and issuing money are carried out collectively by the network.
  *
@@ -42,7 +42,8 @@
 
 static bool fDaemon;
 
-void WaitForShutdown(boost::thread_group *threadGroup) {
+void WaitForShutdown(boost::thread_group* threadGroup)
+{
     bool fShutdown = ShutdownRequested();
     // Tell the main threads to shutdown.
     while (!fShutdown) {
@@ -59,7 +60,8 @@ void WaitForShutdown(boost::thread_group *threadGroup) {
 //
 // Start
 //
-bool AppInit(int argc, char *argv[]) {
+bool AppInit(int argc, char* argv[])
+{
     boost::thread_group threadGroup;
     CScheduler scheduler;
 
@@ -73,13 +75,13 @@ bool AppInit(int argc, char *argv[]) {
 
     // Process help and version before taking care about datadir
     if (mapArgs.count("-?") || mapArgs.count("-help") || mapArgs.count("-version")) {
-        std::string strUsage = _("Wispr Core Daemon") + " " + _("version") + " " + FormatFullVersion() + "\n";
+        std::string strUsage = _("Pivx Core Daemon") + " " + _("version") + " " + FormatFullVersion() + "\n";
 
         if (mapArgs.count("-version")) {
             strUsage += LicenseInfo();
         } else {
             strUsage += "\n" + _("Usage:") + "\n" +
-                        "  wisprd [options]                     " + _("Start Wispr Core Daemon") + "\n";
+                        "  wisprd [options]                     " + _("Start Pivx Core Daemon") + "\n";
 
             strUsage += "\n" + HelpMessage(HMM_BITCOIND);
         }
@@ -95,7 +97,7 @@ bool AppInit(int argc, char *argv[]) {
         }
         try {
             ReadConfigFile(mapArgs, mapMultiArgs);
-        } catch (std::exception &e) {
+        } catch (std::exception& e) {
             fprintf(stderr, "Error reading configuration file: %s\n", e.what());
             return false;
         }
@@ -119,8 +121,7 @@ bool AppInit(int argc, char *argv[]) {
                 fCommandLine = true;
 
         if (fCommandLine) {
-            fprintf(stderr,
-                    "Error: There is no RPC client functionality in wisprd anymore. Use the wispr-cli utility instead.\n");
+            fprintf(stderr, "Error: There is no RPC client functionality in wisprd anymore. Use the wispr-cli utility instead.\n");
             exit(1);
         }
 #ifndef WIN32
@@ -148,7 +149,7 @@ bool AppInit(int argc, char *argv[]) {
         SoftSetBoolArg("-server", true);
 
         fRet = AppInit2(threadGroup, scheduler);
-    } catch (std::exception &e) {
+    } catch (std::exception& e) {
         PrintExceptionContinue(&e, "AppInit()");
     } catch (...) {
         PrintExceptionContinue(NULL, "AppInit()");
@@ -167,7 +168,8 @@ bool AppInit(int argc, char *argv[]) {
     return fRet;
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[])
+{
     SetupEnvironment();
 
     // Connect wisprd signal handlers
