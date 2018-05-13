@@ -41,8 +41,8 @@ std::string HelpMessageCli() {
     strUsage += HelpMessageOpt("-rpcconnect=<ip>",
                                strprintf(_("Send commands to node running on <ip> (default: %s)"), "127.0.0.1"));
     strUsage += HelpMessageOpt("-rpcport=<port>",
-                               strprintf(_("Connect to JSON-RPC on <port> (default: %u or testnet: %u)"), 51473,
-                                         51475));
+                               strprintf(_("Connect to JSON-RPC on <port> (default: %u or testnet: %u)"), 17001,
+                                         17003));
     strUsage += HelpMessageOpt("-rpcwait", _("Wait for RPC server to start"));
     strUsage += HelpMessageOpt("-rpcuser=<user>", _("Username for JSON-RPC connections"));
     strUsage += HelpMessageOpt("-rpcpassword=<pw>", _("Password for JSON-RPC connections"));
