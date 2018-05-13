@@ -235,10 +235,10 @@ static const char UNUSED *wispr_strings[] = {
         QT_TRANSLATE_NOOP("wispr-core", ""
                                         "You must specify a masternodeprivkey in the configuration. Please see "
                                         "documentation for help."),
-        QT_TRANSLATE_NOOP("wispr-core", "(17000 could be used only on mainnet)"),
+        QT_TRANSLATE_NOOP("wispr-core", "(51472 could be used only on mainnet)"),
         QT_TRANSLATE_NOOP("wispr-core", "(default: %s)"),
         QT_TRANSLATE_NOOP("wispr-core", "(default: 1)"),
-        QT_TRANSLATE_NOOP("wispr-core", "(must be 17000 for mainnet)"),
+        QT_TRANSLATE_NOOP("wispr-core", "(must be 51472 for mainnet)"),
         QT_TRANSLATE_NOOP("wispr-core", "<category> can be:"),
         QT_TRANSLATE_NOOP("wispr-core", "Accept command line and JSON-RPC commands"),
         QT_TRANSLATE_NOOP("wispr-core", "Accept connections from outside (default: 1 if no -proxy or -connect)"),
