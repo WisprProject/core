@@ -1,114 +1,157 @@
-<TS language="de" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="de" version="2.1">
+<context>
+    <name>AboutDialog</name>
+    <message>
+        <location filename="../forms/aboutdialog.ui" line="+14"/>
+        <source>About Wispr</source>
+        <translation>Über Wispr</translation>
+    </message>
+    <message>
+        <location line="+39"/>
+        <source>&lt;b&gt;Wispr&lt;/b&gt; version</source>
+        <translation>&lt;b&gt;Wispr&lt;/b&gt; Version</translation>
+    </message>
+    <message>
+        <location line="+41"/>
+        <source>Copyright © 2009-2017 The Bitcoin developers
+Copyright © 2012-2014 The NovaCoin developers
+Copyright © 2014-2017 The Blackcoin developers
+Copyright © 2017 The Wispr developers</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>
+This is experimental software.
+
+Distributed under the MIT/X11 software license, see the accompanying file COPYING or &lt;a href=&quot;http://www.opensource.org/licenses/mit-license.php&quot;&gt;http://www.opensource.org/licenses/mit-license.php&lt;/a&gt;.
+
+This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit (&lt;a href=&quot;https://www.openssl.org/&quot;&gt;https://www.openssl.org/&lt;/a&gt;) and cryptographic software written by Eric Young (&lt;a href=&quot;mailto:eay@cryptsoft.com&quot;&gt;eay@cryptsoft.com&lt;/a&gt;) and UPnP software written by Thomas Bernard.</source>
+        <translation>
+Dies ist experimentelle Software.
+
+Veröffentlicht unter der MIT/X11-Softwarelizenz, siehe beiligende Datei COPYING oder http://www.opensource.org/licenses/mit-license.php.
+
+Dieses Produkt enthält Software, die vom OpenSSL-Projekt zur Verwendung im OpenSSL-Toolkit (http://www.openssl.org/) entwickelt wurde, sowie kryptographische Software geschrieben von Eric Young (eay@cryptsoft.com) und UPnP-Software geschrieben von Thomas Bernard.</translation>
+    </message>
+</context>
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>Rechts-Klick um Adresse oder Bezeichnung zu bearbeiten</translation>
+        <location filename="../forms/addressbookpage.ui" line="+14"/>
+        <source>Address Book</source>
+        <translation>Adressbuch</translation>
     </message>
     <message>
+        <location line="+22"/>
+        <source>Double-click to edit address or label</source>
+        <translation>Doppelklicken, um die Adresse oder die Bezeichnung zu bearbeiten</translation>
+    </message>
+    <message>
+        <location line="+24"/>
         <source>Create a new address</source>
         <translation>Eine neue Adresse erstellen</translation>
     </message>
     <message>
-        <source>&amp;New</source>
-        <translation>&amp;Neu</translation>
-    </message>
-    <message>
+        <location line="+10"/>
         <source>Copy the currently selected address to the system clipboard</source>
         <translation>Ausgewählte Adresse in die Zwischenablage kopieren</translation>
     </message>
     <message>
-        <source>&amp;Copy</source>
-        <translation>&amp;Kopieren</translation>
+        <location line="-7"/>
+        <source>&amp;New Address</source>
+        <translation>&amp;Neue Adresse</translation>
     </message>
     <message>
+        <location line="-43"/>
+        <source>These are your Wispr addresses for receiving payments. You may want to give a different one to each sender so you can keep track of who is paying you.</source>
+        <translation>Das sind Ihre Wispr Adressen um Zahlungen zu erhalten. Sie werden vielleicht verschiedene an jeden Sender vergeben, damit Sie im Auge behalten können wer Sie bezahlt.</translation>
+    </message>
+    <message>
+        <location line="+53"/>
+        <source>&amp;Copy Address</source>
+        <translation>Adresse &amp;kopieren</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Show &amp;QR Code</source>
+        <translation>&amp;QR Code anzeigen</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Sign a message to prove you own a Wispr address</source>
+        <translation>Signieren Sie eine Nachricht um zu beweisen, dass Sie eine Wispr Adresse besitzen</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Sign &amp;Message</source>
+        <translation>&amp;Nachricht signieren</translation>
+    </message>
+    <message>
+        <location line="+17"/>
         <source>Delete the currently selected address from the list</source>
         <translation>Ausgewählte Adresse aus der Liste entfernen</translation>
     </message>
     <message>
+        <location line="-10"/>
+        <source>Verify a message to ensure it was signed with a specified Wispr address</source>
+        <translation>Verifizieren Sie ob eine Nachricht einer bestimmten Wispr Adresse signiert wurde</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>&amp;Verify Message</source>
+        <translation>Nachricht &amp;verifizieren</translation>
+    </message>
+    <message>
+        <location line="+10"/>
         <source>&amp;Delete</source>
         <translation>&amp;Löschen</translation>
     </message>
     <message>
-        <source>Export the data in the current tab to a file</source>
-        <translation>Daten der aktuellen Ansicht in eine Datei exportieren</translation>
-    </message>
-    <message>
-        <source>&amp;Export</source>
-        <translation>&amp;Exportieren</translation>
-    </message>
-    <message>
-        <source>C&amp;lose</source>
-        <translation>&amp;Schließen</translation>
-    </message>
-    <message>
-        <source>Choose the address to send coins to</source>
-        <translation>Wählen Sie die Adresse aus, an die Sie Wispr überweisen möchten</translation>
-    </message>
-    <message>
-        <source>Choose the address to receive coins with</source>
-        <translation>Wählen Sie die Adresse aus, über die Sie Wispr empfangen wollen</translation>
-    </message>
-    <message>
-        <source>C&amp;hoose</source>
-        <translation>&amp;Auswählen</translation>
-    </message>
-    <message>
-        <source>Sending addresses</source>
-        <translation>Zahlungsadressen</translation>
-    </message>
-    <message>
-        <source>Receiving addresses</source>
-        <translation>Empfangsadressen</translation>
-    </message>
-    <message>
-        <source>These are your Wispr addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Dies sind ihre Wispr-Adressen zum Tätigen von Überweisungen. Bitte prüfen Sie den Betrag und die Empfangsadresse, bevor Sie Wispr überweisen.</translation>
-    </message>
-    <message>
-        <source>These are your Wispr addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Dies sind ihre Wispr-Adressen zum Empfangen von Zahlungen. Es wird empfohlen für jede Transaktion eine neue Empfangsadresse zu verwenden.</translation>
-    </message>
-    <message>
-        <source>&amp;Copy Address</source>
-        <translation>&amp;Adresse kopieren</translation>
-    </message>
-    <message>
+        <location filename="../addressbookpage.cpp" line="+66"/>
         <source>Copy &amp;Label</source>
         <translation>&amp;Bezeichnung kopieren</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>&amp;Edit</source>
         <translation>&amp;Editieren</translation>
     </message>
     <message>
-        <source>Export Address List</source>
-        <translation>Adressliste exportieren</translation>
+        <location line="+248"/>
+        <source>Export Address Book Data</source>
+        <translation>Adressbuch exportieren</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Comma separated file (*.csv)</source>
         <translation>Kommagetrennte-Datei (*.csv)</translation>
     </message>
     <message>
-        <source>Exporting Failed</source>
-        <translation>Exportieren fehlgeschlagen</translation>
+        <location line="+13"/>
+        <source>Error exporting</source>
+        <translation>Fehler beim Exportieren</translation>
     </message>
     <message>
-        <source>There was an error trying to save the address list to %1. Please try again.</source>
-        <translation>Beim Speichern der Adressliste nach %1 ist ein Fehler aufgetreten. Bitte noch einmal versuchen.</translation>
+        <location line="+0"/>
+        <source>Could not write to file %1.</source>
+        <translation>Datei konnte nicht geschrieben werden: %1</translation>
     </message>
 </context>
 <context>
     <name>AddressTableModel</name>
     <message>
+        <location filename="../addresstablemodel.cpp" line="+145"/>
         <source>Label</source>
         <translation>Bezeichnung</translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>Address</source>
         <translation>Adresse</translation>
     </message>
     <message>
+        <location line="+36"/>
         <source>(no label)</source>
         <translation>(keine Bezeichnung)</translation>
     </message>
@@ -116,640 +159,431 @@
 <context>
     <name>AskPassphraseDialog</name>
     <message>
+        <location filename="../forms/askpassphrasedialog.ui" line="+26"/>
         <source>Passphrase Dialog</source>
         <translation>Passphrasendialog</translation>
     </message>
     <message>
+        <location line="+21"/>
         <source>Enter passphrase</source>
         <translation>Passphrase eingeben</translation>
     </message>
     <message>
+        <location line="+14"/>
         <source>New passphrase</source>
         <translation>Neue Passphrase</translation>
     </message>
     <message>
+        <location line="+14"/>
         <source>Repeat new passphrase</source>
         <translation>Neue Passphrase wiederholen</translation>
     </message>
     <message>
+        <location line="+33"/>
         <source>Serves to disable the trivial sendmoney when OS account compromised. Provides no real security.</source>
-        <translation>Verhindert das einfache Überweisen von Geld, falls das Systemkonto kompromittiert wurde. Bietet keine wirkliche Sicherheit.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <source>For anonymization and staking only</source>
-        <translation>Nur zur Anonymisierung und "Staking"</translation>
+        <location line="+3"/>
+        <source>For staking only</source>
+        <translation>Nur zur Zinserzeugung</translation>
     </message>
     <message>
-        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
-        <translation>Geben Sie die neue Passphrase für die Wallet ein.&lt;br&gt;Bitte benutzen Sie eine Passphrase bestehend aus &lt;b&gt;10 oder mehr zufälligen Zeichen&lt;/b&gt; oder &lt;b&gt;8 oder mehr Wörtern&lt;/b&gt;.</translation>
-    </message>
-    <message>
+        <location filename="../askpassphrasedialog.cpp" line="+38"/>
         <source>Encrypt wallet</source>
         <translation>Wallet verschlüsseln</translation>
     </message>
     <message>
+        <location line="+7"/>
         <source>This operation needs your wallet passphrase to unlock the wallet.</source>
-        <translation>Dieser Vorgang benötigt ihre Passphrase, um die Wallet zu entsperren.</translation>
+        <translation>Dieser Vorgang benötigt ihre Passphrase, um die Brieftasche zu entsperren.</translation>
     </message>
     <message>
+        <location line="+5"/>
         <source>Unlock wallet</source>
         <translation>Wallet entsperren</translation>
     </message>
     <message>
+        <location line="+3"/>
         <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
-        <translation>Dieser Vorgang benötigt ihre Passphrase, um die Wallet zu entschlüsseln.</translation>
+        <translation>Dieser Vorgang benötigt ihre Passphrase, um die Brieftasche zu entschlüsseln.</translation>
     </message>
     <message>
+        <location line="+5"/>
         <source>Decrypt wallet</source>
         <translation>Wallet entschlüsseln</translation>
     </message>
     <message>
+        <location line="+3"/>
         <source>Change passphrase</source>
         <translation>Passphrase ändern</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Enter the old and new passphrase to the wallet.</source>
         <translation>Geben Sie die alte und neue Wallet-Passphrase ein.</translation>
     </message>
     <message>
+        <location line="+45"/>
         <source>Confirm wallet encryption</source>
         <translation>Wallet-Verschlüsselung bestätigen</translation>
     </message>
     <message>
-        <source>Wispr will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your PIVs from being stolen by malware infecting your computer.</source>
-        <translation>Die Anwendungs wird nun geschlossen um die Verschlüsselung abzuschließen. Bitte beachten Sie, dass auch Verschlüsselung nicht nicht vollständig vor Diebstahl ihrer PIVs durch Schadsoftware schützt, die ihren Computer befällt.</translation>
+        <location line="+1"/>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR COINS&lt;/b&gt;!</source>
+        <translation>Warnung: Wenn Sie Ihre Wallet verschlüsseln und die Passphrase verlieren, führt dies zum &lt;b&gt;VERLUST ALLER COINS&lt;/b&gt;!</translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>Are you sure you wish to encrypt your wallet?</source>
-        <translation>Sind Sie sich sicher, dass Sie ihre Wallet verschlüsseln möchten?</translation>
+        <translation>Sind Sie sich sicher, dass Sie Ihre Wallet verschlüsseln möchten?</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR WSP&lt;/b&gt;!</source>
-        <translation>Warnung: Wenn Sie ihre Wallet verschlüsseln und Ihre Passphrase verlieren werden Sie &lt;b&gt;alle ihre PIVs verlieren&lt;/b&gt;!</translation>
+        <location line="+15"/>
+        <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
+        <translation>WICHTIG: Alle vorherigen Wallet-Sicherungen sollten durch die neu erzeugte, verschlüsselte Wallet ersetzt werden. Aus Sicherheitsgründen werden vorherige Sicherungen der unverschlüsselten Wallet nutzlos, sobald Sie die neue, verschlüsselte Wallet verwenden.</translation>
     </message>
     <message>
+        <location line="+103"/>
+        <location line="+24"/>
+        <source>Warning: The Caps Lock key is on!</source>
+        <translation>Warnung: Die Feststelltaste ist aktiviert!</translation>
+    </message>
+    <message>
+        <location line="-133"/>
+        <location line="+60"/>
         <source>Wallet encrypted</source>
         <translation>Wallet verschlüsselt</translation>
     </message>
     <message>
-        <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
-        <translation>WICHTIG: Alle vorherigen Sicherungen sollten durch die neu erzeugte, verschlüsselte Wallet-Datei ersetzt werden. Aus Sicherheitsgründen werden vorherige Sicherungen der unverschlüsselten Wallet nutzlos, sobald Sie die neue, verschlüsselte Wallet verwenden.</translation>
+        <location line="-140"/>
+        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
+        <translation type="unfinished"/>
     </message>
     <message>
+        <location line="+82"/>
+        <source>Wispr will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your coins from being stolen by malware infecting your computer.</source>
+        <translation>Wispr wird sich schließen um den Verschlüsselungsvorgang abzuschließen. Beachten Sie, dass die Verschlüsselung Ihrer Wallet keinen vollständigen Schutz vor Diebstahl Ihrer Coins duch auf Ihrem Computer installierte Malware gewährleistet</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <location line="+7"/>
+        <location line="+44"/>
+        <location line="+6"/>
         <source>Wallet encryption failed</source>
         <translation>Wallet-Verschlüsselung fehlgeschlagen</translation>
     </message>
     <message>
+        <location line="-56"/>
         <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
         <translation>Die Wallet-Verschlüsselung ist aufgrund eines internen Fehlers fehlgeschlagen. Ihre Wallet wurde nicht verschlüsselt.</translation>
     </message>
     <message>
+        <location line="+7"/>
+        <location line="+50"/>
         <source>The supplied passphrases do not match.</source>
         <translation>Die eingegebenen Passphrasen stimmen nicht überein.</translation>
     </message>
     <message>
+        <location line="-38"/>
         <source>Wallet unlock failed</source>
         <translation>Wallet-Entsperrung fehlgeschlagen</translation>
     </message>
     <message>
+        <location line="+1"/>
+        <location line="+12"/>
+        <location line="+19"/>
         <source>The passphrase entered for the wallet decryption was incorrect.</source>
         <translation>Die eingegebene Passphrase zur Wallet-Entschlüsselung war nicht korrekt.</translation>
     </message>
     <message>
+        <location line="-20"/>
         <source>Wallet decryption failed</source>
         <translation>Wallet-Entschlüsselung fehlgeschlagen</translation>
     </message>
     <message>
+        <location line="+14"/>
         <source>Wallet passphrase was successfully changed.</source>
         <translation>Die Wallet-Passphrase wurde erfolgreich geändert.</translation>
-    </message>
-    <message>
-        <source>Warning: The Caps Lock key is on!</source>
-        <translation>Warnung: Die Feststelltaste ist aktiviert!</translation>
-    </message>
-</context>
-<context>
-    <name>Bip38ToolDialog</name>
-    <message>
-        <source>BIP 38 Tool</source>
-        <translation>BIP 38 Tool</translation>
-    </message>
-    <message>
-        <source>&amp;BIP 38 Encrypt</source>
-        <translation>&amp;BIP 38 Verschlüsselung</translation>
-    </message>
-    <message>
-        <source>Enter a Wispr Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</source>
-        <translation>Gib eine Wispr Adresse ein welche mit BIP 38 verschlüsselt werden soll. Gib ein Passwort in die mittleren Box ein. Drücke auf verschlüsseln, um den privaten schlüssel zu errechenen.</translation>
-    </message>
-    <message>
-        <source>Address:</source>
-        <translation>Adresse:</translation>
-    </message>
-    <message>
-        <source>The Wispr address to sign the message with</source>
-        <translation>Wispr Adresse mit welcher die Nachricht signiert werden soll</translation>
-    </message>
-    <message>
-        <source>Choose previously used address</source>
-        <translation>Bereits verwendete Adresse auswählen</translation>
-    </message>
-    <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
-        <source>Paste address from clipboard</source>
-        <translation>Adresse aus der Zwischenablage einfügen</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
-    </message>
-    <message>
-        <source>Passphrase: </source>
-        <translation>Passphrase: </translation>
-    </message>
-    <message>
-        <source>Encrypted Key:</source>
-        <translation>Geschützer Schlüssel:</translation>
-    </message>
-    <message>
-        <source>Copy the current signature to the system clipboard</source>
-        <translation>Kopiert die aktuelle Signatur in den Zwischenspeicher</translation>
-    </message>
-    <message>
-        <source>Sign the message to prove you own this Wispr address</source>
-        <translation>Signiere die Nachricht um zu Beweisen, dass du diese Wispr Adresse besitzt</translation>
-    </message>
-    <message>
-        <source>Encrypt &amp;Key</source>
-        <translation>Verschlüsselt &amp;Schlüssel</translation>
-    </message>
-    <message>
-        <source>Reset all sign message fields</source>
-        <translation>Setze alle signierten Nachrichten Felder zurück</translation>
-    </message>
-    <message>
-        <source>Clear &amp;All</source>
-        <translation>&amp;Alles zurücksetzen</translation>
-    </message>
-    <message>
-        <source>&amp;BIP 38 Decrypt</source>
-        <translation>&amp;BIP 38 Entschlüsseln</translation>
-    </message>
-    <message>
-        <source>Enter the BIP 38 encrypted private key. Enter the passphrase in the middle box. Click Decrypt Key to compute the private key. After the key is decrypted, clicking 'Import Address' will add this private key to the wallet.</source>
-        <translation>Geben Sie den BIP 38 verschlüsselten privaten Schlüssel ein. Geben Sie die Passphrase im mittleren Feld ein. Klicken Sie auf Entschlüsselung, um den privaten Schlüssel zu berechnen. Nachdem der Schlüssel entschlüsselt wurde, klicken Sie auf 'Adresse importieren', fügen Sie diesen privaten Schlüssel der Wallet hinzu.</translation>
-    </message>
-    <message>
-        <source>The Wispr address the message was signed with</source>
-        <translation>Die Wispr Adresse mit welcher die Nachricht signiert wurde.</translation>
-    </message>
-    <message>
-        <source>Verify the message to ensure it was signed with the specified Wispr address</source>
-        <translation>Überprüfen Sie die Nachricht, um sicherzustellen, dass sie mit der angegebenen Wispr-Adresse signiert wurde.</translation>
-    </message>
-    <message>
-        <source>Decrypt &amp;Key</source>
-        <translation>Entschlüsseln &amp;Schlüssel</translation>
-    </message>
-    <message>
-        <source>Reset all verify message fields</source>
-        <translation>Zurücksetzen aller überprüften Felder.</translation>
-    </message>
-    <message>
-        <source>Decrypted Key:</source>
-        <translation>Entschlüsselter Schlüssel:</translation>
-    </message>
-    <message>
-        <source>Import Address</source>
-        <translation>Adresse importieren</translation>
-    </message>
-    <message>
-        <source>Click "Decrypt Key" to compute key</source>
-        <translation>Klicke "Schlüssel entschlüsseln" um den Schlüssel zu berechnen</translation>
-    </message>
-    <message>
-        <source>The entered passphrase is invalid. </source>
-        <translation>Die eingegebene Passphrase ist ungültig. </translation>
-    </message>
-    <message>
-        <source>Allowed: 0-9,a-z,A-Z,</source>
-        <translation>Zulässig: 0-9,a-z,A-Z</translation>
-    </message>
-    <message>
-        <source>The entered address is invalid.</source>
-        <translation>Die eingegebene Adresse ist falsch</translation>
-    </message>
-    <message>
-        <source>Please check the address and try again.</source>
-        <translation>Bitte die Adresse prüfen und erneut eingeben</translation>
-    </message>
-    <message>
-        <source>The entered address does not refer to a key.</source>
-        <translation>Die eingegebene Adresse passt nicht zu einem Schlüssel</translation>
-    </message>
-    <message>
-        <source>Wallet unlock was cancelled.</source>
-        <translation>Wallet-Entsperrung wurde abgebrochen.</translation>
-    </message>
-    <message>
-        <source>Private key for the entered address is not available.</source>
-        <translation>Privater Schlüssel für die eingegebene Adresse ist nicht verfügbar</translation>
-    </message>
-    <message>
-        <source>Failed to decrypt.</source>
-        <translation>Entschlüsselung fehlgeschlagen.</translation>
-    </message>
-    <message>
-        <source>Please check the key and passphrase and try again.</source>
-        <translation>Bitte überprüfe den Schlüssel und die Passphrase und versuche es erneut.</translation>
-    </message>
-    <message>
-        <source>Data Not Valid.</source>
-        <translation>Daten fehlerhaft</translation>
-    </message>
-    <message>
-        <source>Please try again.</source>
-        <translation>Bitte versuche es noch einmal</translation>
-    </message>
-    <message>
-        <source>Please wait while key is imported</source>
-        <translation>Bitte warten. Schlüssel wird importiert..</translation>
-    </message>
-    <message>
-        <source>Key Already Held By Wallet</source>
-        <translation>Schlüssel bereits im Wallet vorhanden</translation>
-    </message>
-    <message>
-        <source>Error Adding Key To Wallet</source>
-        <translation>Fehler beim hinzufügen des Schlüssels zum Wallet</translation>
-    </message>
-    <message>
-        <source>Successfully Added Private Key To Wallet</source>
-        <translation>Erfolgreiches hinzufügen eines privaten Schlüssels zum Wallet</translation>
     </message>
 </context>
 <context>
     <name>BitcoinGUI</name>
     <message>
-        <source>Wallet</source>
-        <translation>Wallet</translation>
+        <location filename="../bitcoingui.cpp" line="+297"/>
+        <source>Sign &amp;message...</source>
+        <translation>&amp;Nachricht signieren...</translation>
     </message>
     <message>
-        <source>Node</source>
-        <translation>Knoten</translation>
-    </message>
-    <message>
-        <source>&amp;Overview</source>
-        <translation>&amp;Übersicht</translation>
-    </message>
-    <message>
+        <location line="-64"/>
         <source>Show general overview of wallet</source>
         <translation>Allgemeine Wallet-Übersicht anzeigen</translation>
     </message>
     <message>
-        <source>&amp;Send</source>
-        <translation>&amp;Überweisen</translation>
-    </message>
-    <message>
-        <source>&amp;Receive</source>
-        <translation>&amp;Empfangen</translation>
-    </message>
-    <message>
+        <location line="+17"/>
         <source>&amp;Transactions</source>
         <translation>&amp;Transaktionen</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Browse transaction history</source>
         <translation>Transaktionsverlauf durchsehen</translation>
     </message>
     <message>
-        <source>E&amp;xit</source>
-        <translation>&amp;Beenden</translation>
+        <location line="+5"/>
+        <source>&amp;Address Book</source>
+        <translation>&amp;Addressbuch</translation>
     </message>
     <message>
+        <location line="+1"/>
+        <source>Edit the list of stored addresses and labels</source>
+        <translation>Liste der gespeicherten Adressen und Bezeichnungen bearbeiten</translation>
+    </message>
+    <message>
+        <location line="-18"/>
+        <source>Show the list of addresses for receiving payments</source>
+        <translation>Liste mit Adressen für eingehende Zahlungen anzeigen</translation>
+    </message>
+    <message>
+        <location line="+34"/>
+        <source>E&amp;xit</source>
+        <translation>B&amp;eenden</translation>
+    </message>
+    <message>
+        <location line="+1"/>
         <source>Quit application</source>
         <translation>Anwendung beenden</translation>
     </message>
     <message>
+        <location line="+4"/>
+        <source>Show information about Wispr</source>
+        <translation>Informationen über Wispr anzeigen</translation>
+    </message>
+    <message>
+        <location line="+2"/>
         <source>About &amp;Qt</source>
         <translation>Über &amp;Qt</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Show information about Qt</source>
         <translation>Informationen über Qt anzeigen</translation>
     </message>
     <message>
+        <location line="+2"/>
         <source>&amp;Options...</source>
         <translation>&amp;Konfiguration...</translation>
     </message>
     <message>
-        <source>&amp;Show / Hide</source>
-        <translation>&amp;Anzeigen / Verstecken</translation>
-    </message>
-    <message>
-        <source>Show or hide the main Window</source>
-        <translation>Das Hauptfenster anzeigen oder verstecken</translation>
-    </message>
-    <message>
+        <location line="+4"/>
         <source>&amp;Encrypt Wallet...</source>
         <translation>Wallet &amp;verschlüsseln...</translation>
     </message>
     <message>
-        <source>Encrypt the private keys that belong to your wallet</source>
-        <translation>Verschlüsselt die zu ihrer Wallet gehörenden privaten Schlüssel</translation>
-    </message>
-    <message>
+        <location line="+2"/>
         <source>&amp;Backup Wallet...</source>
         <translation>Wallet &amp;sichern...</translation>
     </message>
     <message>
-        <source>Backup wallet to another location</source>
-        <translation>Eine Wallet-Sicherungskopie erstellen und abspeichern</translation>
-    </message>
-    <message>
+        <location line="+2"/>
         <source>&amp;Change Passphrase...</source>
         <translation>Passphrase &amp;ändern...</translation>
     </message>
     <message>
+        <location line="+9"/>
+        <source>&amp;Export...</source>
+        <translation>&amp;Exportieren...</translation>
+    </message>
+    <message>
+        <location line="-55"/>
+        <source>Send coins to a Wispr address</source>
+        <translation>Senden Sie Coins an eine Wispr Adresse</translation>
+    </message>
+    <message>
+        <location line="+39"/>
+        <source>Modify configuration options for Wispr</source>
+        <translation>Konfigurationsoptionen für Wispr ändern</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Export the data in the current tab to a file</source>
+        <translation>Die Daten in der aktuellen Ansicht in eine Datei exportieren</translation>
+    </message>
+    <message>
+        <location line="-13"/>
+        <source>Encrypt or decrypt wallet</source>
+        <translation>Wallet verschlüsseln oder entschlüsseln</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Backup wallet to another location</source>
+        <translation>Eine Wallet-Sicherungskopie erstellen und abspeichern</translation>
+    </message>
+    <message>
+        <location line="+2"/>
         <source>Change the passphrase used for wallet encryption</source>
         <translation>Ändert die Passphrase, die für die Wallet-Verschlüsselung benutzt wird</translation>
     </message>
     <message>
-        <source>&amp;Unlock Wallet...</source>
-        <translation>Wallet &amp;entsperren</translation>
+        <location line="+10"/>
+        <source>&amp;Debug window</source>
+        <translation>&amp;Debugfenster</translation>
     </message>
     <message>
+        <location line="+1"/>
+        <source>Open debugging and diagnostic console</source>
+        <translation>Debugging- und Diagnosekonsole öffnen</translation>
+    </message>
+    <message>
+        <location line="-5"/>
+        <source>&amp;Verify message...</source>
+        <translation>Nachricht &amp;verifizieren...</translation>
+    </message>
+    <message>
+        <location line="-214"/>
+        <location line="+555"/>
+        <source>Wispr</source>
+        <translation>Wispr</translation>
+    </message>
+    <message>
+        <location line="-555"/>
+        <source>Wallet</source>
+        <translation>Wallet</translation>
+    </message>
+    <message>
+        <location line="+193"/>
+        <source>&amp;About Wispr</source>
+        <translation>&amp;Über Wispr</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>&amp;Show / Hide</source>
+        <translation>&amp;Anzeigen / Verstecken</translation>
+    </message>
+    <message>
+        <location line="+8"/>
         <source>Unlock wallet</source>
         <translation>Wallet entsperren</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>&amp;Lock Wallet</source>
         <translation>Wallet &amp;sperren</translation>
     </message>
     <message>
-        <source>Sign &amp;message...</source>
-        <translation>Nachricht s&amp;ignieren...</translation>
+        <location line="+1"/>
+        <source>Lock wallet</source>
+        <translation>Wallet sperren</translation>
     </message>
     <message>
-        <source>&amp;Verify message...</source>
-        <translation>Nachricht prüfen...</translation>
-    </message>
-    <message>
-        <source>&amp;Information</source>
-        <translation>&amp;Information</translation>
-    </message>
-    <message>
-        <source>Show diagnostic information</source>
-        <translation>Diagnoseinformation anzeigen</translation>
-    </message>
-    <message>
-        <source>&amp;Debug console</source>
-        <translation>&amp;Debugkonsole</translation>
-    </message>
-    <message>
-        <source>Open debugging console</source>
-        <translation>Debugkonsole öffnen</translation>
-    </message>
-    <message>
-        <source>&amp;Network Monitor</source>
-        <translation>&amp;Netzwerkmonitor</translation>
-    </message>
-    <message>
-        <source>Show network monitor</source>
-        <translation>Netzwerkmonitor anzeigen</translation>
-    </message>
-    <message>
-        <source>&amp;Peers list</source>
-        <translation>&amp;Gegenstellen-Liste</translation>
-    </message>
-    <message>
-        <source>Show peers info</source>
-        <translation>Informationen zu Gegenstellen anzeigen</translation>
-    </message>
-    <message>
-        <source>Wallet &amp;Repair</source>
-        <translation>Wallet-&amp;Reparatur</translation>
-    </message>
-    <message>
-        <source>Show wallet repair options</source>
-        <translation>Optionen zur Wallet-Reparatur anzeigen</translation>
-    </message>
-    <message>
-        <source>Open configuration file</source>
-        <translation>Konfigurationsdatei öffnen</translation>
-    </message>
-    <message>
-        <source>Show Automatic &amp;Backups</source>
-        <translation>Automatische &amp;Sicherheitskopien anzeigen</translation>
-    </message>
-    <message>
-        <source>Show automatically created wallet backups</source>
-        <translation>Automatisch erzeugte Wallet-Sicherheitskopien anzeigen</translation>
-    </message>
-    <message>
-        <source>&amp;Sending addresses...</source>
-        <translation>&amp;Zahlungsadressen...</translation>
-    </message>
-    <message>
-        <source>Show the list of used sending addresses and labels</source>
-        <translation>Liste verwendeter Zahlungsadressen und Bezeichnungen anzeigen</translation>
-    </message>
-    <message>
-        <source>&amp;Receiving addresses...</source>
-        <translation>&amp;Empfangsadressen...</translation>
-    </message>
-    <message>
-        <source>Show the list of used receiving addresses and labels</source>
-        <translation>Liste verwendeter Empfangsadressen und Bezeichnungen anzeigen</translation>
-    </message>
-    <message>
-        <source>Open &amp;URI...</source>
-        <translation>&amp;URI öffnen...</translation>
-    </message>
-    <message>
-        <source>&amp;Command-line options</source>
-        <translation>&amp;Kommandozeilenoptionen</translation>
-    </message>
-    <message numerus="yes">
-        <source>Processed %n blocks of transaction history.</source>
-        <translation><numerusform>Verarbeitet %n Blöcke der Transaktionsgeschichte.</numerusform><numerusform>Verarbeitet %n Blöcke der Transaktionsgeschichte.</numerusform></translation>
-    </message>
-    <message>
-        <source>Synchronizing additional data: %p%</source>
-        <translation>Synchronisiere zusätzliche Daten:  %p%</translation>
-    </message>
-    <message>
+        <location line="+32"/>
         <source>&amp;File</source>
         <translation>&amp;Datei</translation>
     </message>
     <message>
+        <location line="+8"/>
         <source>&amp;Settings</source>
         <translation>&amp;Einstellungen</translation>
     </message>
     <message>
-        <source>&amp;Tools</source>
-        <translation>&amp;Werkzeuge</translation>
-    </message>
-    <message>
+        <location line="+8"/>
         <source>&amp;Help</source>
         <translation>&amp;Hilfe</translation>
     </message>
     <message>
+        <location line="+17"/>
         <source>Tabs toolbar</source>
         <translation>Registerkartenleiste</translation>
     </message>
     <message>
-        <source>Wispr Core</source>
-        <translation>Wispr Core</translation>
+        <location line="+46"/>
+        <location line="+9"/>
+        <source>[testnet]</source>
+        <translation>[Testnetz]</translation>
     </message>
     <message>
-        <source>Send coins to a Wispr address</source>
-        <translation>An eine Wispr-Adresse überweisen</translation>
+        <location line="+0"/>
+        <location line="+58"/>
+        <source>Wispr client</source>
+        <translation>Wispr Anwendung</translation>
+    </message>
+    <message numerus="yes">
+        <location line="+70"/>
+        <source>%n active connection(s) to Wispr network</source>
+        <translation><numerusform>%n aktive Verbindung zum Wispr Netzwerk</numerusform><numerusform>%n aktive Verbindungen zum Wispr Netzwerk</numerusform></translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and wispr: URIs)</source>
-        <translation>Zahlung anfordern (QR-Code Generierung und wispr: URIs)</translation>
+        <location line="+488"/>
+        <source>Staking.&lt;br&gt;Your weight is %1&lt;br&gt;Network weight is %2&lt;br&gt;Expected time to earn reward is %3</source>
+        <translation>Erzeuge Zinsen.&lt;br&gt;Ihr Gewicht ist %1&lt;br&gt;Das Gesamtgewicht ist %2&lt;br&gt;Die erwartete Zeit bis zur nächsten Vergütung ist %3</translation>
     </message>
     <message>
-        <source>&amp;Masternodes</source>
-        <translation>&amp;Masternodes</translation>
+        <location line="+6"/>
+        <source>Not staking because wallet is locked</source>
+        <translation>Keine Zinsen werden erzeugt, da die Brieftasche gesperrt ist</translation>
     </message>
     <message>
-        <source>Browse masternodes</source>
-        <translation>Masternodes durchsuchen</translation>
+        <location line="+2"/>
+        <source>Not staking because wallet is offline</source>
+        <translation>Es werden keine Zinsen werden erzeugt, da die Brieftasche gesperrt ist</translation>
     </message>
     <message>
-        <source>&amp;About Wispr Core</source>
-        <translation>Über.Wispr Core</translation>
+        <location line="+2"/>
+        <source>Not staking because wallet is syncing</source>
+        <translation>Es werden keine Zinsen werden erzeugt, da die Brieftasche nicht synchronisiert ist</translation>
     </message>
     <message>
-        <source>Show information about Wispr Core</source>
-        <translation>Zeigt Informationen über Wispr Core</translation>
+        <location line="+2"/>
+        <source>Not staking because you don&apos;t have mature coins (&#126;100 confirms)</source>
+        <translation>Es werden keine Zinsen werden erzeugt, da Sie keine reifen Coins haben</translation>
     </message>
     <message>
-        <source>Modify configuration options for Wispr</source>
-        <translation>Konfiguration von Wispr verändern</translation>
+        <location line="-812"/>
+        <source>&amp;Dashboard</source>
+        <translation>&amp;Übersicht / Dashboard</translation>
     </message>
     <message>
-        <source>Sign messages with your Wispr addresses to prove you own them</source>
-        <translation>Unterschreibt eine Nachricht mit Ihrer Wispr-Adresse und beweist, dass sie Ihnen gehört</translation>
+        <location line="+6"/>
+        <source>&amp;Receive</source>
+        <translation>&amp;Empfangen</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Wispr addresses</source>
-        <translation>Überprüft eine Nachricht um zu prüfen ob diese mit einer bestimmten Wispr-Adresse signiert wurde</translation>
+        <location line="+6"/>
+        <source>&amp;Send</source>
+        <translation>&amp;Senden</translation>
     </message>
     <message>
-        <source>&amp;BIP38 tool</source>
-        <translation>&amp;BIP38 Hilfsprogramm</translation>
+        <location line="+49"/>
+        <source>&amp;Unlock Wallet...</source>
+        <translation>Wallet &amp;entsperren</translation>
     </message>
     <message>
-        <source>&amp;MultiSend</source>
-        <translation>&amp;MultiSend</translation>
-    </message>
-    <message>
-        <source>MultiSend Settings</source>
-        <translation>MultiSend Einstellungen</translation>
-    </message>
-    <message>
-        <source>Open Wallet &amp;Configuration File</source>
-        <translation>Öffne Wallet &amp;Einstellungsdatei </translation>
-    </message>
-    <message>
-        <source>Open &amp;Masternode Configuration File</source>
-        <translation>Öffne &amp;Masternode Einstellungsdatei </translation>
-    </message>
-    <message>
-        <source>Open Masternode configuration file</source>
-        <translation>Öffne Masternode Einstellungsdatei</translation>
-    </message>
-    <message>
-        <source>Open a Wispr: URI or payment request</source>
-        <translation>Öffne eine Wispr: URI or Zahlungsanfrage</translation>
-    </message>
-    <message>
-        <source>&amp;Blockchain explorer</source>
-        <translation>&amp;Blockchain Betrachter</translation>
-    </message>
-    <message>
-        <source>Block explorer window</source>
-        <translation>Blockchain Betrachter Fenster</translation>
-    </message>
-    <message>
-        <source>Show the Wispr Core help message to get a list with possible Wispr command-line options</source>
-        <translation>Zeige die Wispr-Core Hilfe, um mögliche Wispr Kommando-Zeilen-Optionen anzuzeigen</translation>
-    </message>
-    <message>
-        <source>Wispr Core client</source>
-        <translation>Wispr Core Client</translation>
-    </message>
-    <message>
-        <source>Synchronizing with network...</source>
-        <translation>Synchronisiere mit Netzwerk...</translation>
-    </message>
-    <message>
-        <source>Importing blocks from disk...</source>
-        <translation>Importiere Blöcke von Datenträger...</translation>
-    </message>
-    <message>
-        <source>Reindexing blocks on disk...</source>
-        <translation>Reindiziere Blöcke auf Datenträger...</translation>
-    </message>
-    <message>
-        <source>No block source available...</source>
-        <translation>Keine Blockquelle verfügbar...</translation>
-    </message>
-    <message>
+        <location line="+277"/>
         <source>Up to date</source>
         <translation>Auf aktuellem Stand</translation>
     </message>
     <message>
-        <source>%1 and %2</source>
-        <translation>%1 und %2</translation>
-    </message>
-    <message>
-        <source>%1 behind</source>
-        <translation>%1 im Rückstand</translation>
-    </message>
-    <message>
+        <location line="+43"/>
         <source>Catching up...</source>
         <translation>Hole auf...</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>Der letzte empfangene Block ist %1 alt.</translation>
+        <location line="+113"/>
+        <source>Confirm transaction fee</source>
+        <translation>Transaktionsgebühr bestätigen</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>Transaktionen hiernach werden noch nicht angezeigt.</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation>Fehler</translation>
-    </message>
-    <message>
-        <source>Warning</source>
-        <translation>Warnung</translation>
-    </message>
-    <message>
-        <source>Information</source>
-        <translation>Hinweis</translation>
-    </message>
-    <message>
+        <location line="+27"/>
         <source>Sent transaction</source>
         <translation>Gesendete Transaktion</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Incoming transaction</source>
         <translation>Eingehende Transaktion</translation>
     </message>
     <message>
-        <source>Sent MultiSend transaction</source>
-        <translation>Versende MultiSend Transaktion</translation>
-    </message>
-    <message>
+        <location line="+1"/>
         <source>Date: %1
 Amount: %2
 Type: %3
@@ -761,68 +595,146 @@ Typ: %3
 Adresse: %4</translation>
     </message>
     <message>
-        <source>Staking is active
- MultiSend: %1</source>
-        <translation>Staking ist aktiviert
- MultiSend: %1</translation>
+        <location line="+100"/>
+        <location line="+15"/>
+        <source>URI handling</source>
+        <translation>URI Verarbeitung</translation>
     </message>
     <message>
-        <source>Active</source>
-        <translation>Aktiv</translation>
+        <location line="-15"/>
+        <location line="+15"/>
+        <source>URI can not be parsed! This can be caused by an invalid Wispr address or malformed URI parameters.</source>
+        <translation>Die URI kann nicht erkannt werden! Die Ursache hierfür kann eine ungültige Wispr Adresse oder eine fehlerhafte Angabe der URI Parameter sein.</translation>
     </message>
     <message>
-        <source>Not Active</source>
-        <translation>Nicht Aktiv</translation>
+        <location line="+9"/>
+        <source>Wallet is &lt;b&gt;not encrypted&lt;/b&gt;</source>
+        <translation>Die Wallet ist &lt;b&gt;nicht verschlüsselt&lt;/b&gt;</translation>
     </message>
     <message>
-        <source>Staking is not active
- MultiSend: %1</source>
-        <translation>Staking ist nicht aktiviert
- MultiSend: %1</translation>
-    </message>
-    <message>
+        <location line="+8"/>
         <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt;</source>
         <translation>Wallet ist &lt;b&gt;verschlüsselt&lt;/b&gt; und aktuell &lt;b&gt;entsperrt&lt;/b&gt;</translation>
     </message>
     <message>
-        <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt; for anonimization and staking only</source>
-        <translation>Wallet ist &lt;b&gt;verschlüsselt&lt;/b&gt; und aktuell nur zum Anonymisieren und "staking"&lt;b&gt;entsperrt&lt;/b&gt;</translation>
-    </message>
-    <message>
+        <location line="+8"/>
         <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;locked&lt;/b&gt;</source>
         <translation>Wallet ist &lt;b&gt;verschlüsselt&lt;/b&gt; und aktuell &lt;b&gt;gesperrt&lt;/b&gt;</translation>
     </message>
-</context>
-<context>
-    <name>BlockExplorer</name>
     <message>
-        <source>Blockchain Explorer</source>
-        <translation>Blockchain Explorer</translation>
+        <location line="+24"/>
+        <source>Backup Wallet</source>
+        <translation>Wallet sichern</translation>
     </message>
     <message>
-        <source>Address / Block / Transaction</source>
-        <translation>Addrese / Block / Tansaktion</translation>
+        <location line="+0"/>
+        <source>Wallet Data (*.dat)</source>
+        <translation>Wallet-Daten (*.dat)</translation>
     </message>
     <message>
-        <source>Search</source>
-        <translation>Suche</translation>
+        <location line="+3"/>
+        <source>Backup Failed</source>
+        <translation>Sicherung Fehlgeschlagen</translation>
     </message>
     <message>
-        <source>TextLabel</source>
-        <translation>TextEtikett</translation>
+        <location line="+0"/>
+        <source>There was an error trying to save the wallet data to the new location.</source>
+        <translation>Beim Speichern der Wallet Daten an dem neuen Ort ist ein Fehler aufgetreten.</translation>
+    </message>
+    <message numerus="yes">
+        <location line="+91"/>
+        <source>%n second(s)</source>
+        <translation><numerusform>%n Sekunde</numerusform><numerusform>%n Sekunden</numerusform></translation>
+    </message>
+    <message numerus="yes">
+        <location line="+4"/>
+        <source>%n minute(s)</source>
+        <translation><numerusform>%n Minute</numerusform><numerusform>%n Minuten</numerusform></translation>
+    </message>
+    <message numerus="yes">
+        <location line="-429"/>
+        <location line="+433"/>
+        <source>%n hour(s)</source>
+        <translation><numerusform>%n Stunde</numerusform><numerusform>%n Stunden</numerusform></translation>
     </message>
     <message>
-        <source>Not all transactions will be shown. To view all transactions you need to set txindex=1 in the configuration file (wispr.conf).</source>
-        <translation>Nicht alle Transaktionen können anzezeigt werden. Um alle Transaktionen zu sehen, müssen sie die Option  "txindex=1" in der "wispr.conf" Konfigurationsdatei hinzufügen.</translation>
+        <location line="-456"/>
+        <source>Processed %1 blocks of transaction history.</source>
+        <translation>%1 Block der Transaktionshistorie heruntergeladen.</translation>
+    </message>
+    <message numerus="yes">
+        <location line="+27"/>
+        <location line="+433"/>
+        <source>%n day(s)</source>
+        <translation><numerusform>%n Tag</numerusform><numerusform>%n Tage</numerusform></translation>
+    </message>
+    <message numerus="yes">
+        <location line="-429"/>
+        <location line="+6"/>
+        <source>%n week(s)</source>
+        <translation><numerusform>%n Woche</numerusform><numerusform>%n Wochen
+</numerusform></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>%1 and %2</source>
+        <translation>%1 und %2</translation>
+    </message>
+    <message numerus="yes">
+        <location line="+0"/>
+        <source>%n year(s)</source>
+        <translation><numerusform>%n Jahr</numerusform><numerusform>%n Jahre</numerusform></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>%1 behind</source>
+        <translation>%1 verbleibend</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Last received block was generated %1 ago.</source>
+        <translation>Der zuletzt empfangene Block wurden vor %1 Tagen erstellt.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Transactions after this will not yet be visible.</source>
+        <translation>Nachfolgende Transaktionen werden noch nicht sichtbar sein</translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Error</source>
+        <translation>Fehler</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Warning</source>
+        <translation>Warnung</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Information</source>
+        <translation>Information</translation>
+    </message>
+    <message>
+        <location line="+69"/>
+        <source>This transaction is over the size limit. You can still send it for a fee of %1, which goes to the nodes that process your transaction and helps to support the network. Do you want to pay the fee?</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+324"/>
+        <source>Not staking</source>
+        <translation>Aktuell nicht für eine Verzinsung freigeschaltet.</translation>
+    </message>
+    <message>
+        <location filename="../bitcoin.cpp" line="+104"/>
+        <source>A fatal error occurred. Wispr can no longer continue safely and will quit.</source>
+        <translation>Ein fataler Fehler ist aufgetreten. Wispr kann nicht fortgesetzt werden und wird beendet.</translation>
     </message>
 </context>
 <context>
     <name>ClientModel</name>
     <message>
-        <source>Total: %1 (OBF compatible: %2 / Enabled: %3)</source>
-        <translation>Gesamt: %1 (OBF kompatibel: %2 / Aktiviert: %3)</translation>
-    </message>
-    <message>
+        <location filename="../clientmodel.cpp" line="+119"/>
         <source>Network Alert</source>
         <translation>Netzwerkalarm</translation>
     </message>
@@ -830,246 +742,199 @@ Adresse: %4</translation>
 <context>
     <name>CoinControlDialog</name>
     <message>
+        <location filename="../forms/coincontroldialog.ui" line="+14"/>
+        <source>Coin Control</source>
+        <translation>&quot;Coin Control&quot;-Funktionen</translation>
+    </message>
+    <message>
+        <location line="+31"/>
         <source>Quantity:</source>
         <translation>Anzahl:</translation>
     </message>
     <message>
+        <location line="+32"/>
         <source>Bytes:</source>
         <translation>Byte:</translation>
     </message>
     <message>
+        <location line="+48"/>
         <source>Amount:</source>
         <translation>Betrag:</translation>
     </message>
     <message>
-        <source>Priority:</source>
-        <translation>Priorität:</translation>
-    </message>
-    <message>
+        <location line="+48"/>
         <source>Fee:</source>
         <translation>Gebühr:</translation>
     </message>
     <message>
-        <source>Coin Selection</source>
-        <translation>Münzenauswahl </translation>
+        <location line="+35"/>
+        <source>Low Output:</source>
+        <translation>Zu geringer Ausgabebetrag:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Abzug:</translation>
-    </message>
-    <message>
-        <source>After Fee:</source>
-        <translation>Nach Gebühren:</translation>
-    </message>
-    <message>
-        <source>Change:</source>
-        <translation>Wechselgeld:</translation>
-    </message>
-    <message>
-        <source>(un)select all</source>
-        <translation>(nicht) alle auswählen</translation>
-    </message>
-    <message>
-        <source>toggle lock state</source>
-        <translation>Sperrzustand umschalten</translation>
-    </message>
-    <message>
-        <source>Tree mode</source>
-        <translation>Baumansicht</translation>
-    </message>
-    <message>
-        <source>List mode</source>
-        <translation>Listenansicht </translation>
-    </message>
-    <message>
-        <source>(1 locked)</source>
-        <translation>(1 gesperrt)</translation>
-    </message>
-    <message>
-        <source>Amount</source>
-        <translation>Betrag</translation>
-    </message>
-    <message>
-        <source>Received with label</source>
-        <translation>Empfange mit Bezeichnung</translation>
-    </message>
-    <message>
-        <source>Received with address</source>
-        <translation>Empfangen mit Adresse</translation>
-    </message>
-    <message>
-        <source>DS Rounds</source>
-        <translation>DS-Runden</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation>Datum</translation>
-    </message>
-    <message>
-        <source>Confirmations</source>
-        <translation>Betätigungen</translation>
-    </message>
-    <message>
-        <source>Confirmed</source>
-        <translation>Bestätigt</translation>
-    </message>
-    <message>
-        <source>Priority</source>
-        <translation>Priorität</translation>
-    </message>
-    <message>
-        <source>Copy address</source>
-        <translation>Adresse kopieren</translation>
-    </message>
-    <message>
-        <source>Copy label</source>
-        <translation>Bezeichnung kopieren</translation>
-    </message>
-    <message>
-        <source>Copy amount</source>
-        <translation>Betrag kopieren</translation>
-    </message>
-    <message>
-        <source>Copy transaction ID</source>
-        <translation>Transaktions-ID kopieren</translation>
-    </message>
-    <message>
-        <source>Lock unspent</source>
-        <translation>Sperre Verwendung</translation>
-    </message>
-    <message>
-        <source>Unlock unspent</source>
-        <translation>Entsperre Verwendung</translation>
-    </message>
-    <message>
-        <source>Copy quantity</source>
-        <translation>Kopiere Anzahl</translation>
-    </message>
-    <message>
-        <source>Copy fee</source>
-        <translation>Kopiere Gebühr</translation>
-    </message>
-    <message>
-        <source>Copy after fee</source>
-        <translation>Kopiere nach Gebühr</translation>
-    </message>
-    <message>
-        <source>Copy bytes</source>
-        <translation>Kopiere Bytes</translation>
-    </message>
-    <message>
-        <source>Copy priority</source>
-        <translation>Kopiere Priorität</translation>
-    </message>
-    <message>
-        <source>Copy dust</source>
-        <translation>Kopiere Abzug</translation>
-    </message>
-    <message>
-        <source>Copy change</source>
-        <translation>Kopiere Wechselgeld</translation>
-    </message>
-    <message>
-        <source>Please switch to "List mode" to use this function.</source>
-        <translation>Bitte wechsle zur "Listenansicht" um diese Funktion zu verwenden.</translation>
-    </message>
-    <message>
-        <source>Non-anonymized input selected. &lt;b&gt;Obfuscation will be disabled.&lt;/b&gt;&lt;br&gt;&lt;br&gt;If you still want to use Obfuscation, please deselect all non-nonymized inputs first and then check Obfuscation checkbox again.</source>
-        <translation>Nicht anonymisierter Eingang ausgewählt. &lt;b&gt;&lt;/b&gt;Verschleierung wird deaktiviert. &lt;br&gt;&lt;br&gt;Wenn Sie immer noch verschleiern möchten, bitte deaktivieren Sie zuerst alle nicht-anonymisierten Eingang und überprüfen Sie dann das Verschleierungskontrollkästchen erneut.</translation>
-    </message>
-    <message>
-        <source>highest</source>
-        <translation>höchste</translation>
-    </message>
-    <message>
-        <source>higher</source>
-        <translation>höher</translation>
-    </message>
-    <message>
-        <source>high</source>
-        <translation>hoch</translation>
-    </message>
-    <message>
-        <source>medium-high</source>
-        <translation>mittel-hoch</translation>
-    </message>
-    <message>
-        <source>Can vary +/- %1 duff(s) per input.</source>
-        <translation>Kann um +/- %1 Abzug(s) pro Eingang variieren.</translation>
-    </message>
-    <message>
-        <source>n/a</source>
-        <translation>k.A.</translation>
-    </message>
-    <message>
-        <source>medium</source>
-        <translation>mittel</translation>
-    </message>
-    <message>
-        <source>low-medium</source>
-        <translation>niedrig-mittel</translation>
-    </message>
-    <message>
-        <source>low</source>
-        <translation>niedrig</translation>
-    </message>
-    <message>
-        <source>lower</source>
-        <translation>niedriger</translation>
-    </message>
-    <message>
-        <source>lowest</source>
-        <translation>am niedrigsten</translation>
-    </message>
-    <message>
-        <source>(%1 locked)</source>
-        <translation>(%1 gesperrt)</translation>
-    </message>
-    <message>
-        <source>none</source>
-        <translation>keine</translation>
-    </message>
-    <message>
-        <source>yes</source>
-        <translation>ja</translation>
-    </message>
-    <message>
+        <location filename="../coincontroldialog.cpp" line="+493"/>
         <source>no</source>
         <translation>nein</translation>
     </message>
     <message>
-        <source>This label turns red, if the transaction size is greater than 1000 bytes.</source>
-        <translation>Diese Bezeichnung wird rot, wenn die Transaktion größer als 1000 Bytes ist.</translation>
+        <location filename="../forms/coincontroldialog.ui" line="+51"/>
+        <source>After Fee:</source>
+        <translation>Abzüglich Gebühr:</translation>
     </message>
     <message>
-        <source>This means a fee of at least %1 per kB is required.</source>
-        <translation>Das heißt, eine Gebühr von mindestens %1 pro kB ist notwendig.</translation>
+        <location line="+35"/>
+        <source>Change:</source>
+        <translation>Wechselgeld:</translation>
     </message>
     <message>
-        <source>Can vary +/- 1 byte per input.</source>
-        <translation>Kann um +/-1 Byte pro Eingang variieren.</translation>
+        <location line="+69"/>
+        <source>(un)select all</source>
+        <translation>Alles (de)selektieren</translation>
     </message>
     <message>
-        <source>Transactions with higher priority are more likely to get included into a block.</source>
-        <translation>Transaktionen mit höherer Priorität werden eher in einen Block aufgenommen.</translation>
+        <location line="+13"/>
+        <source>Tree mode</source>
+        <translation>Baumansicht</translation>
     </message>
     <message>
-        <source>This label turns red, if the priority is smaller than "medium".</source>
-        <translation>Diese Bezeichnung wird rot, wenn die Priorität kleiner als "mittel" ist.</translation>
+        <location line="+16"/>
+        <source>List mode</source>
+        <translation>Listenansicht</translation>
     </message>
     <message>
-        <source>This label turns red, if any recipient receives an amount smaller than %1.</source>
-        <translation>Diese Bezeichnung wird rot, wenn ein Empfänger einen Betrag erhält, der kleiner ist als %1.</translation>
+        <location line="+45"/>
+        <source>Amount</source>
+        <translation>Betrag</translation>
     </message>
     <message>
+        <location line="+5"/>
+        <source>Label</source>
+        <translation>Bezeichnung</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Address</source>
+        <translation>Adresse</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Date</source>
+        <translation>Datum</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Confirmations</source>
+        <translation>Bestätigungen</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Confirmed</source>
+        <translation>Bestätigt</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Priority</source>
+        <translation>Priorität</translation>
+    </message>
+    <message>
+        <location filename="../coincontroldialog.cpp" line="-456"/>
+        <source>Copy address</source>
+        <translation>Adresse kopieren</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Copy label</source>
+        <translation>Bezeichnung kopieren</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <location line="+26"/>
+        <source>Copy amount</source>
+        <translation>Betrag kopieren</translation>
+    </message>
+    <message>
+        <location line="-25"/>
+        <source>Copy transaction ID</source>
+        <translation>Transaktions-ID kopieren</translation>
+    </message>
+    <message>
+        <location line="+24"/>
+        <source>Copy quantity</source>
+        <translation>Anzahl kopieren</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Copy fee</source>
+        <translation>Gebühr kopieren</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Copy after fee</source>
+        <translation>Abzüglich Gebühr kopieren</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Copy bytes</source>
+        <translation>Byte kopieren</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Copy low output</source>
+        <translation>Zu geringen Ausgabebetrag kopieren</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Copy change</source>
+        <translation>Wechselgeld kopieren</translation>
+    </message>
+    <message>
+        <location line="+423"/>
+        <source>DUST</source>
+        <translation>STAUB</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>yes</source>
+        <translation>ja</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>This label turns red, if the transaction size is bigger than 10000 bytes.
+
+ This means a fee of at least %1 per kb is required.
+
+ Can vary +/- 1 Byte per input.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>This label turns red, if any recipient receives an amount smaller than %1.
+
+ This means a fee of at least %2 is required. 
+
+ Amounts below 0.546 times the minimum relay fee are shown as DUST.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>This label turns red, if the change is smaller than %1.
+
+ This means a fee of at least %2 is required.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+35"/>
+        <location line="+58"/>
         <source>(no label)</source>
         <translation>(keine Bezeichnung)</translation>
     </message>
     <message>
+        <location line="-9"/>
         <source>change from %1 (%2)</source>
         <translation>Wechselgeld von %1 (%2)</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>(change)</source>
         <translation>(Wechselgeld)</translation>
     </message>
@@ -1077,1219 +942,1134 @@ Adresse: %4</translation>
 <context>
     <name>EditAddressDialog</name>
     <message>
+        <location filename="../forms/editaddressdialog.ui" line="+14"/>
         <source>Edit Address</source>
         <translation>Adresse bearbeiten</translation>
     </message>
     <message>
+        <location line="+11"/>
         <source>&amp;Label</source>
         <translation>&amp;Bezeichnung</translation>
     </message>
     <message>
-        <source>The label associated with this address list entry</source>
-        <translation>Bezeichnung, die dem Adresslisteneintrag zugeordnet ist</translation>
+        <location line="+10"/>
+        <source>The label associated with this address book entry</source>
+        <translation>Die Kennzeichnung verbunden mit diesem Adressbucheintrag.</translation>
     </message>
     <message>
+        <location line="+7"/>
         <source>&amp;Address</source>
         <translation>&amp;Adresse</translation>
     </message>
     <message>
-        <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation>Adresse, die dem Adresslisteneintrag zugeordnet ist. Diese kann nur bei Zahlungsadressen verändert werden.</translation>
+        <location line="+10"/>
+        <source>The address associated with this address book entry. This can only be modified for sending addresses.</source>
+        <translation>Die Adresse verknüpft mit diesem Adressbucheintrag. Kann nur bei Ausgangsadressen verändert werden.</translation>
     </message>
     <message>
+        <location filename="../editaddressdialog.cpp" line="+21"/>
         <source>New receiving address</source>
         <translation>Neue Empfangsadresse</translation>
     </message>
     <message>
+        <location line="+4"/>
         <source>New sending address</source>
         <translation>Neue Zahlungsadresse</translation>
     </message>
     <message>
+        <location line="+3"/>
         <source>Edit receiving address</source>
         <translation>Empfangsadresse bearbeiten</translation>
     </message>
     <message>
+        <location line="+4"/>
         <source>Edit sending address</source>
         <translation>Zahlungsadresse bearbeiten</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Wispr address.</source>
-        <translation>Die eingegebene Adresse "%1" ist keine gültige Wispr-Adresse.</translation>
+        <location line="+76"/>
+        <source>The entered address &quot;%1&quot; is already in the address book.</source>
+        <translation>Die eingegebene Adresse &quot;%1&quot; befindet sich bereits im Adressbuch.</translation>
     </message>
     <message>
-        <source>The entered address "%1" is already in the address book.</source>
-        <translation>Die eingegebene Adresse "%1" befindet sich bereits im Adressbuch.</translation>
+        <location line="-5"/>
+        <source>The entered address &quot;%1&quot; is not a valid Wispr address.</source>
+        <translation>Die eingegebene Adresse &quot;%1&quot; ist keine gültige Wispr Adresse.</translation>
     </message>
     <message>
+        <location line="+10"/>
         <source>Could not unlock wallet.</source>
         <translation>Wallet konnte nicht entsperrt werden.</translation>
     </message>
     <message>
+        <location line="+5"/>
         <source>New key generation failed.</source>
-        <translation>Erzeugung eines neuen Schlüssels fehlgeschlagen.</translation>
+        <translation>Generierung eines neuen Schlüssels fehlgeschlagen.</translation>
     </message>
 </context>
 <context>
-    <name>FreespaceChecker</name>
+    <name>GUIUtil::HelpMessageBox</name>
     <message>
-        <source>A new data directory will be created.</source>
-        <translation>Es wird ein neues Datenverzeichnis angelegt.</translation>
+        <location filename="../guiutil.cpp" line="+426"/>
+        <location line="+12"/>
+        <source>Wispr-Qt</source>
+        <translation>Wispr-Qt
+</translation>
     </message>
     <message>
-        <source>name</source>
-        <translation>Name</translation>
-    </message>
-    <message>
-        <source>Directory already exists. Add %1 if you intend to create a new directory here.</source>
-        <translation>Verzeichnis existiert bereits. Fügen Sie %1 an, wenn Sie beabsichtigen hier ein neues Verzeichnis anzulegen.</translation>
-    </message>
-    <message>
-        <source>Path already exists, and is not a directory.</source>
-        <translation>Pfad existiert bereits und ist kein Verzeichnis.</translation>
-    </message>
-    <message>
-        <source>Cannot create data directory here.</source>
-        <translation>Datenverzeichnis kann hier nicht angelegt werden.</translation>
-    </message>
-</context>
-<context>
-    <name>HelpMessageDialog</name>
-    <message>
+        <location line="-12"/>
         <source>version</source>
         <translation>Version</translation>
     </message>
     <message>
-        <source>Wispr Core</source>
-        <translation>Wispr Core</translation>
-    </message>
-    <message>
-        <source>(%1-bit)</source>
-        <translation>(%1-Bit)</translation>
-    </message>
-    <message>
-        <source>About Wispr Core</source>
-        <translation>Über Wispr Core</translation>
-    </message>
-    <message>
-        <source>Command-line options</source>
-        <translation>Kommandozeilenoptionen</translation>
-    </message>
-    <message>
+        <location line="+2"/>
         <source>Usage:</source>
         <translation>Benutzung:</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>command-line options</source>
-        <translation>Kommandozeilenoptionen</translation>
+        <translation>Kommandozeilen optionen</translation>
     </message>
     <message>
-        <source>UI Options:</source>
-        <translation>UI Optionen:</translation>
+        <location line="+4"/>
+        <source>UI options</source>
+        <translation>UI-Optionen</translation>
     </message>
     <message>
-        <source>Choose data directory on startup (default: %u)</source>
-        <translation>Wähle Datenverzeichnis beim Start (Standard: %u)</translation>
+        <location line="+1"/>
+        <source>Set language, for example &quot;de_DE&quot; (default: system locale)</source>
+        <translation>Sprache festlegen, z.B. &quot;de_DE&quot; (Standard: System Locale)</translation>
     </message>
     <message>
-        <source>Show splash screen on startup (default: %u)</source>
-        <translation>Zeige Startbildschirm beim Start (Standard: %u)</translation>
-    </message>
-    <message>
-        <source>Set language, for example "de_DE" (default: system locale)</source>
-        <translation>Sprache festlegen, z.B. "de_DE" (Standard: Systemstandard)</translation>
-    </message>
-    <message>
+        <location line="+1"/>
         <source>Start minimized</source>
         <translation>Minimiert starten</translation>
     </message>
     <message>
-        <source>Set SSL root certificates for payment request (default: -system-)</source>
-        <translation>SSL-Wurzelzertifikate für Zahlungsanforderungen festlegen (Standard: Systemstandard)</translation>
+        <location line="+1"/>
+        <source>Show splash screen on startup (default: 1)</source>
+        <translation>Startbildschirm beim Starten anzeigen (Standard: 1)</translation>
     </message>
 </context>
-<context>
-    <name>Intro</name>
-    <message>
-        <source>Welcome</source>
-        <translation>Willkommen</translation>
-    </message>
-    <message>
-        <source>Welcome to Wispr Core.</source>
-        <translation>Willkommen zu Wispr Core.</translation>
-    </message>
-    <message>
-        <source>As this is the first time the program is launched, you can choose where Wispr Core will store its data.</source>
-        <translation>Da dies das erste Mal ist, dass Sie Wispr Core starten, legen Sie jetzt bitte fest, an welchem Ort die Daten gespeichert werden sollen.</translation>
-    </message>
-    <message>
-        <source>Wispr Core will download and store a copy of the Wispr block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
-        <translation>Wispr Core wird die Blockchain laden und lokal speichern. Dafür sind mindestens %1GB freier Speicherplatz erforderlich. Der Speicherbedarf wird mit der Zeit anwachsen. Die Wallet wird ebenfalls in diesem Verzeichnis gespeichert.</translation>
-    </message>
-    <message>
-        <source>Use the default data directory</source>
-        <translation>Standard-Datenverzeichnis verwenden</translation>
-    </message>
-    <message>
-        <source>Use a custom data directory:</source>
-        <translation>Ein benutzerdefiniertes Datenverzeichnis verwenden:</translation>
-    </message>
-    <message>
-        <source>Wispr Core</source>
-        <translation>Wispr Core</translation>
-    </message>
-    <message>
-        <source>Error: Specified data directory "%1" cannot be created.</source>
-        <translation>Fehler: Angegebenes Datenverzeichnis "%1" kann nicht angelegt werden.</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation>Fehler</translation>
-    </message>
-    <message>
-        <source>%1 GB of free space available</source>
-        <translation>%1 GB freier Speicherplatz verfügbar</translation>
-    </message>
-    <message>
-        <source>(of %1 GB needed)</source>
-        <translation>(von benötigten %1 GB)</translation>
-    </message>
-</context>
-<context>
-    <name>MasternodeList</name>
-    <message>
-        <source>Form</source>
-        <translation>Formular</translation>
-    </message>
-    <message>
-        <source>My Masternodes</source>
-        <translation>Meine Masternodes</translation>
-    </message>
-    <message>
-        <source>Note: Status of your masternodes in local wallet can potentially be slightly incorrect.&lt;br /&gt;Always wait for wallet to sync additional data and then double check from another node&lt;br /&gt;if your node should be running but you still see "MISSING" in "Status" field.</source>
-        <translation>Achtung: Der Status Ihrer Masternodes kann in der lokalen Wallet leicht inkorrekt sein. &lt;br /&gt;Warten Sie immer bis die Wallet vollständig synchronisiert ist und überprüfen Sie von einer anderen Installation aus&lt;br /&gt;, sollte Ihre Masternode immer noch als "MISSING" angezeigt werden.</translation>
-    </message>
-    <message>
-        <source>Alias</source>
-        <translation>Name</translation>
-    </message>
-    <message>
-        <source>Address</source>
-        <translation>Adresse</translation>
-    </message>
-    <message>
-        <source>Protocol</source>
-        <translation>Protokoll</translation>
-    </message>
-    <message>
-        <source>Status</source>
-        <translation>Status</translation>
-    </message>
-    <message>
-        <source>Active</source>
-        <translation>Aktiv</translation>
-    </message>
-    <message>
-        <source>Last Seen (UTC)</source>
-        <translation>Zuletzt gesehen (UTC)</translation>
-    </message>
-    <message>
-        <source>Pubkey</source>
-        <translation>Öffentlicher Schlüssel</translation>
-    </message>
-    <message>
-        <source>S&amp;tart alias</source>
-        <translation>S&amp;tarten</translation>
-    </message>
-    <message>
-        <source>Start &amp;all</source>
-        <translation>&amp;Alle starten</translation>
-    </message>
-    <message>
-        <source>Start &amp;MISSING</source>
-        <translation>Starte nur &amp;MISSING</translation>
-    </message>
-    <message>
-        <source>&amp;Update status</source>
-        <translation>Stat&amp;us aktualisieren</translation>
-    </message>
-    <message>
-        <source>Status will be updated automatically in (sec):</source>
-        <translation>Status wird automatisch aktualisiert in (Sekunden):</translation>
-    </message>
-    <message>
-        <source>0</source>
-        <translation>0</translation>
-    </message>
-    <message>
-        <source>Start alias</source>
-        <translation>Starten</translation>
-    </message>
-    <message>
-        <source>Confirm masternode start</source>
-        <translation>Masternode start bestätigen</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to start masternode %1?</source>
-        <translation>Sind Sie sicher, dass Sie den Masternode %1 starten wollen?</translation>
-    </message>
-    <message>
-        <source>Confirm all masternodes start</source>
-        <translation>Start aller Masternodes bestätigen</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to start ALL masternodes?</source>
-        <translation>Sind Sie sicher, dass Sie alle Masternodes starten wollen?</translation>
-    </message>
-    <message>
-        <source>Command is not available right now</source>
-        <translation>Befehl steht zur Zeit nicht zut verfügung</translation>
-    </message>
-    <message>
-        <source>You can't use this command until masternode list is synced</source>
-        <translation>Sie können diesen Befehlt nicht ausführen, bevor der Masternode synchronisiert ist</translation>
-    </message>
-    <message>
-        <source>Confirm missing masternodes start</source>
-        <translation>Start fehlender Masternodes bestätigen</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to start MISSING masternodes?</source>
-        <translation>Sind Sie sicher, dass Sie alle fehlenden Masternodes starten wollen?</translation>
-    </message>
-</context>
-<context>
-    <name>MultiSendDialog</name>
-    <message>
-        <source>MultiSend</source>
-        <translation>MultiSend</translation>
-    </message>
-    <message>
-        <source>Enter whole numbers 1 - 100</source>
-        <translation>Gebe Ganzzahlen zwischen 1 - 100 ein</translation>
-    </message>
-    <message>
-        <source>Enter Address to Send to</source>
-        <translation>Zieladresse eingeben</translation>
-    </message>
-    <message>
-        <source>MultiSend allows you to automatically send up to 100% of your stake or masternode reward to a list of other Wispr addresses after it matures.
-To Add: enter percentage to give and Wispr address to add to the MultiSend vector.
-To Delete: Enter address to delete and press delete.
-MultiSend will not be activated unless you have clicked Activate</source>
-        <translation>MultiSend ermöglicht es automatisch bis zu 100% Ihrer Stake- oder Masternode-Belohnung zu einer Liste von anderen Wispr-Adressen zu senden.
-Zum hinzufügen: Gebe den Prozentsätze ein, um die Wispr-Adressen des MultiSend-Vektor hinzuzufügen.
-Zum entfernen: Gebe die zu löschende Adresse ein und drücke löschen.
-MultiSend wird nicht aktiviert bis Sie auf Aktivieren geklickt haben.</translation>
-    </message>
-    <message>
-        <source>Add to MultiSend Vector</source>
-        <translation>Füge zum MultiSend-Vektor hinzu</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation>Hinzufügen</translation>
-    </message>
-    <message>
-        <source>Deactivate MultiSend</source>
-        <translation>Deaktiviere MultiSend</translation>
-    </message>
-    <message>
-        <source>Deactivate</source>
-        <translation>Deaktivieren</translation>
-    </message>
-    <message>
-        <source>Choose an address from the address book</source>
-        <translation>Wähle eine Adresse aus dem Adressbuch</translation>
-    </message>
-    <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
-        <source>Percentage of stake to send</source>
-        <translation>Prozentsatz des Staken zum senden</translation>
-    </message>
-    <message>
-        <source>Percentage:</source>
-        <translation>Prozent:</translation>
-    </message>
-    <message>
-        <source>Address to send portion of stake to</source>
-        <translation>Adresse zum senden Teil des Staken an</translation>
-    </message>
-    <message>
-        <source>Address:</source>
-        <translation>Adresse:</translation>
-    </message>
-    <message>
-        <source>Delete Address From MultiSend Vector</source>
-        <translation>Lösche Adresse von MultiSend-Vektor</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>Löschen</translation>
-    </message>
-    <message>
-        <source>Activate MultiSend</source>
-        <translation>Aktiviere MultiSend</translation>
-    </message>
-    <message>
-        <source>Activate</source>
-        <translation>Aktivieren</translation>
-    </message>
-    <message>
-        <source>View MultiSend Vector</source>
-        <translation>Zeige MultiSend-Vektor</translation>
-    </message>
-    <message>
-        <source>View MultiSend</source>
-        <translation>Zeige MultiSend</translation>
-    </message>
-    <message>
-        <source>The entered address:
-</source>
-        <translation>Die eingegebene Adresse:
-</translation>
-    </message>
-    <message>
-        <source>Removed </source>
-        <translation>Gelöscht</translation>
-    </message>
-    </context>
-<context>
-    <name>ObfuscationConfig</name>
-    </context>
-<context>
-    <name>OpenURIDialog</name>
-    <message>
-        <source>Open URI</source>
-        <translation>URI öffnen</translation>
-    </message>
-    </context>
 <context>
     <name>OptionsDialog</name>
     <message>
-        <source>MB</source>
-        <translation>MB</translation>
+        <location filename="../forms/optionsdialog.ui" line="+14"/>
+        <source>Options</source>
+        <translation>Erweiterte Einstellungen</translation>
     </message>
     <message>
-        <source>Accept connections from outside</source>
-        <translation>Verbindungen von Aussen zulassen</translation>
+        <location line="+16"/>
+        <source>&amp;Main</source>
+        <translation>&amp;Allgemein</translation>
     </message>
     <message>
-        <source>Allow incoming connections</source>
-        <translation>Eingehende Verbindungen erlauben</translation>
+        <location line="+6"/>
+        <source>Optional transaction fee per kB that helps make sure your transactions are processed quickly. Most transactions are 1 kB. Fee 0.01 recommended.</source>
+        <translation>Optionale Transaktionsgebühr pro kB die eine zügige Bearbeitung der Transaktion gewährleistet. Die meisten Transaktionen sind 1 kB. Eine Gebühr von 0.01 ist empfohlen.</translation>
     </message>
     <message>
+        <location line="+15"/>
+        <source>Pay transaction &amp;fee</source>
+        <translation>Transaktions&amp;gebühr bezahlen</translation>
+    </message>
+    <message>
+        <location line="+31"/>
+        <source>Reserved amount does not participate in staking and is therefore spendable at any time.</source>
+        <translation>Zurückgehaltener Betrag der nicht zur Zinserzeugung genutzt wird und daher jederzeit zum Ausgeben bereitstehen.</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Reserve</source>
+        <translation>Reserviert</translation>
+    </message>
+    <message>
+        <location line="+31"/>
+        <source>Automatically start Wispr after logging in to the system.</source>
+        <translation>Automatisch Wispr starten beim Einloggen in das System.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>&amp;Start Wispr on system login</source>
+        <translation>&amp;Starte Wispr bei Systemstart</translation>
+    </message>
+    <message>
+        <location line="+21"/>
         <source>&amp;Network</source>
         <translation>&amp;Netzwerk</translation>
     </message>
     <message>
+        <location line="+6"/>
+        <source>Automatically open the Wispr client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Automatisch den Wispr client port auf dem Router öffnen. Das funktioniert nur wenn der Router UPnP unterstützt und UPnP aktiviert ist.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Map port using &amp;UPnP</source>
+        <translation>Portweiterleitung via &amp;UPnP</translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <source>Proxy &amp;IP:</source>
+        <translation>Proxy-&amp;IP:</translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <source>IP address of the proxy (e.g. 127.0.0.1)</source>
+        <translation>IP Adresse des Proxies (z.B. 127.0.01)</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>&amp;Port:</source>
+        <translation>&amp;Port:</translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <source>Port of the proxy (e.g. 9050)</source>
+        <translation>Port des Proxies (z.B. 9050)</translation>
+    </message>
+    <message>
+        <location line="-57"/>
+        <source>Connect to the Wispr network through a SOCKS5 proxy (e.g. when connecting through Tor).</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>&amp;Connect through SOCKS5 proxy:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+90"/>
         <source>&amp;Window</source>
-        <translation>&amp;Fenster</translation>
+        <translation>&amp;Programmfenster</translation>
     </message>
     <message>
+        <location line="+6"/>
+        <source>Show only a tray icon after minimizing the window.</source>
+        <translation>Nur ein Symbol im Infobereich anzeigen, nachdem das Programmfenster minimiert wurde.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>&amp;Minimize to the tray instead of the taskbar</source>
+        <translation>In den Infobereich anstatt in die Taskleiste &amp;minimieren</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Minimize instead of exit the application when the window is closed. When this option is enabled, the application will be closed only after selecting Quit in the menu.</source>
+        <translation>Minimiert die Anwendung anstatt sie zu beenden wenn das Fenster geschlossen wird. Wenn dies aktiviert ist, müssen Sie das Programm über &quot;Beenden&quot; im Menü schließen.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>M&amp;inimize on close</source>
+        <translation>Beim Schließen m&amp;inimieren</translation>
+    </message>
+    <message>
+        <location line="+21"/>
+        <source>&amp;Display</source>
+        <translation>&amp;Anzeige</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>User Interface &amp;language:</source>
+        <translation>&amp;Sprache der Benutzeroberfläche:</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>The user interface language can be set here. This setting will take effect after restarting Wispr.</source>
+        <translation>Die Sprache der GUI kann hier verändert werden. Die Einstellung wird nach einem Neustart übernommen.</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>&amp;Unit to show amounts in:</source>
+        <translation>&amp;Einheit der Beträge:</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
+        <translation>Wählen Sie die Standarduntereinheit, die in der Benutzeroberfläche und beim Überweisen von Wisprs angezeigt werden soll.</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Whether to show coin control features or not.</source>
+        <translation>Legt fest, ob die &quot;Coin Control&quot;-Funktionen angezeigt werden.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Display coin &amp;control features (experts only!)</source>
+        <translation>Coin &amp;control features anzeigen (nur Experten!)</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Use black visual theme (requires restart)</source>
+        <translation>Verwende das schwarze Wispr Wallet Design (Neustart erforderlich)</translation>
+    </message>
+    <message>
+        <location line="+71"/>
+        <source>&amp;OK</source>
+        <translation>&amp;OK</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>&amp;Cancel</source>
+        <translation>&amp;Abbrechen</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>&amp;Apply</source>
+        <translation>&amp;Anwenden</translation>
+    </message>
+    <message>
+        <location filename="../optionsdialog.cpp" line="+47"/>
         <source>default</source>
-        <translation>standard</translation>
+        <translation>Standard</translation>
     </message>
     <message>
-        <source>none</source>
-        <translation>keine</translation>
+        <location line="+147"/>
+        <location line="+9"/>
+        <source>Warning</source>
+        <translation>Warnung</translation>
     </message>
-    </context>
+    <message>
+        <location line="-9"/>
+        <location line="+9"/>
+        <source>This setting will take effect after restarting Wispr.</source>
+        <translation>Diese Einstellung wird nach einem Neustart übernommen.</translation>
+    </message>
+    <message>
+        <location line="+29"/>
+        <source>The supplied proxy address is invalid.</source>
+        <translation>Die eingegebene Proxyadresse ist ungültig.</translation>
+    </message>
+</context>
 <context>
     <name>OverviewPage</name>
     <message>
+        <location filename="../forms/overviewpage.ui" line="+14"/>
         <source>Form</source>
         <translation>Formular</translation>
     </message>
     <message>
-        <source>Available:</source>
-        <translation>Verfügbar:</translation>
+        <location line="+46"/>
+        <location line="+247"/>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Wispr network after a connection is established, but this process has not completed yet.</source>
+        <translation>Die angezeigte Information kann falsch sein. Die Brieftasche synchronisiert automatisch mit dem Wispr Netzwerk nachdem eine Verbindung zustande gekommen ist, aber dieser Prozess ist nicht abgeschlossen.</translation>
     </message>
     <message>
+        <location line="-173"/>
+        <source>Stake:</source>
+        <translation>Stake:</translation>
+    </message>
+    <message>
+        <location line="+32"/>
+        <source>Unconfirmed:</source>
+        <translation>Unbestätigt:</translation>
+    </message>
+    <message>
+        <location line="-113"/>
+        <source>Wallet</source>
+        <translation>Wallet</translation>
+    </message>
+    <message>
+        <location line="+49"/>
+        <source>Spendable:</source>
+        <translation>Ausgabebereit:</translation>
+    </message>
+    <message>
+        <location line="+16"/>
         <source>Your current spendable balance</source>
         <translation>Ihr aktuell verfügbarer Kontostand</translation>
     </message>
     <message>
-        <source>Pending:</source>
-        <translation>Ausstehend:</translation>
-    </message>
-    <message>
-        <source>Total of transactions that have yet to be confirmed, and do not yet count toward the spendable balance</source>
-        <translation>Betrag aus unbestätigten Transaktionen, der noch nicht im aktuell verfügbaren Kontostand enthalten ist</translation>
-    </message>
-    <message>
+        <location line="+80"/>
         <source>Immature:</source>
         <translation>Unreif:</translation>
     </message>
     <message>
-        <source>Staked or masternode rewards that has not yet matured</source>
+        <location line="+13"/>
+        <source>Mined balance that has not yet matured</source>
         <translation>Erarbeiteter Betrag der noch nicht gereift ist</translation>
     </message>
     <message>
-        <source>Balances</source>
-        <translation>Kontostände</translation>
-    </message>
-    <message>
-        <source>Unconfirmed transactions to watch-only addresses</source>
-        <translation>Unbestätigte Transaktionen  zu beobachteten Adressen</translation>
-    </message>
-    <message>
-        <source>Staked or masternode rewards in watch-only addresses that has not yet matured</source>
-        <translation>Erarbeiteter Betrag der beobachteten Adressen der noch nicht gereift ist</translation>
-    </message>
-    <message>
+        <location line="+23"/>
         <source>Total:</source>
         <translation>Gesamtbetrag:</translation>
     </message>
     <message>
+        <location line="+16"/>
         <source>Your current total balance</source>
         <translation>Aktueller Gesamtbetrag aus obigen Kategorien</translation>
     </message>
     <message>
-        <source>Current total balance in watch-only addresses</source>
-        <translation>Kontostand der beobachteten Adressen</translation>
+        <location line="+50"/>
+        <source>&lt;b&gt;Recent transactions&lt;/b&gt;</source>
+        <translation>&lt;b&gt;Letzte Transaktionen&lt;/b&gt;</translation>
     </message>
     <message>
-        <source>Watch-only:</source>
-        <translation>Beobachtet:</translation>
+        <location line="-118"/>
+        <source>Total of transactions that have yet to be confirmed, and do not yet count toward the current balance</source>
+        <translation>Anzahl der unbestätigten Transaktionen die somit noch nicht zum aktuellen Kontostand zählen.</translation>
     </message>
     <message>
-        <source>Your current balance in watch-only addresses</source>
-        <translation>Aktueller Kontostand der beobachteten Adressen</translation>
+        <location line="-32"/>
+        <source>Total of coins that was staked, and do not yet count toward the current balance</source>
+        <translation>Anzahl der unbestätigten Transaktionen die somit noch nicht zum aktuellen Kontostand zählen.</translation>
     </message>
     <message>
-        <source>Spendable:</source>
-        <translation>Verfügbar:</translation>
-    </message>
-    <message>
-        <source>Status:</source>
-        <translation>Status:</translation>
-    </message>
-    <message>
-        <source>Obfuscation Balance:</source>
-        <translation>Verschleierter Betrag:</translation>
-    </message>
-    <message>
-        <source>0 WSP / 0 Rounds</source>
-        <translation>0 WSP / 0 Runden</translation>
-    </message>
-    <message>
-        <source>Enabled/Disabled</source>
-        <translation>Aktiviert/Deaktiviert</translation>
-    </message>
-    <message>
-        <source>Obfuscation</source>
-        <translation>Verschleierung</translation>
-    </message>
-    <message>
-        <source>Completion:</source>
-        <translation>Vollendet:</translation>
-    </message>
-    <message>
-        <source>Amount and Rounds:</source>
-        <translation>Betrag und Runden:</translation>
-    </message>
-    <message>
-        <source>Submitted Denom:</source>
-        <translation>Stückelung des Betrages:</translation>
-    </message>
-    <message>
-        <source>n/a</source>
-        <translation>k.A.</translation>
-    </message>
-    <message>
-        <source>Recent transactions</source>
-        <translation>Letzte Transaktionen</translation>
-    </message>
-    <message>
-        <source>Start/Stop Mixing</source>
-        <translation>Starte/Stoppe das Mixen</translation>
-    </message>
-    <message>
-        <source>The denominations you submitted to the Masternode.&lt;br&gt;To mix, other users must submit the exact same denominations.</source>
-        <translation>Die gestückelten Beträge, die Sie zu dem Masternode gesendet haben.&lt;br&gt; Zum Erfolgreichen Mixen müssen andere Benutzer exakt gleich gestückelte Beträge senden.</translation>
-    </message>
-    <message>
-        <source>(Last Message)</source>
-        <translation>(Letzte Nachricht)</translation>
-    </message>
-    <message>
-        <source>Try Mix</source>
-        <translation>Versuche zu Mixen</translation>
-    </message>
-    <message>
-        <source>Reset</source>
-        <translation>Zurücksetzen</translation>
-    </message>
-    <message>
+        <location filename="../overviewpage.cpp" line="+116"/>
+        <location line="+1"/>
         <source>out of sync</source>
         <translation>nicht synchron</translation>
-    </message>
-    <message>
-        <source>Disabled</source>
-        <translation>Deaktiviert</translation>
-    </message>
-    <message>
-        <source>No inputs detected</source>
-        <translation>Keine Inputs gefunden</translation>
-    </message>
-    <message>
-        <source>Not enough compatible inputs to anonymize &lt;span style='color:red;'&gt;%1&lt;/span&gt;,&lt;br&gt;will anonymize &lt;span style='color:red;'&gt;%2&lt;/span&gt; instead</source>
-        <translation>Nicht genug kompatible Inputs zum Anonymisieren von &lt;span style='color:red;'&gt;%1&lt;/span&gt; gefunden,&lt;br/&gt;&lt;span style='color:red;'&gt;%2&lt;/span&gt; wird stattdessen anonymisiert</translation>
-    </message>
-    <message>
-        <source>Overall progress</source>
-        <translation>Fortschritt</translation>
-    </message>
-    <message>
-        <source>Denominated</source>
-        <translation>Gestückelt</translation>
-    </message>
-    <message>
-        <source>Anonymized</source>
-        <translation>Anonymisiert</translation>
-    </message>
-    <message>
-        <source>Wallet is locked and user declined to unlock. Disabling Obfuscation.</source>
-        <translation>Wallet ist gesperrt und der Benutzer verweigert die Entsperrung. Verschleierung deaktiviert.</translation>
-    </message>
-    <message>
-        <source>Found enough compatible inputs to anonymize %1</source>
-        <translation>Genug kompatible Inputs zum Anonymisieren von %1 gefunden</translation>
-    </message>
-    <message>
-        <source>Start Obfuscation</source>
-        <translation>Verschleierung starten</translation>
-    </message>
-    <message>
-        <source>Stop Obfuscation</source>
-        <translation>Verschleierung stoppen</translation>
-    </message>
-    <message>
-        <source>Mixed</source>
-        <translation>Gemixt</translation>
-    </message>
-    <message>
-        <source>Enabled</source>
-        <translation>Aktiviert</translation>
-    </message>
-    <message>
-        <source>N/A</source>
-        <translation>k.A.</translation>
     </message>
 </context>
 <context>
     <name>PaymentServer</name>
-    </context>
-<context>
-    <name>PeerTableModel</name>
     <message>
-        <source>Address/Hostname</source>
-        <translation>Adresse/Rechnername</translation>
-    </message>
-    <message>
-        <source>Version</source>
-        <translation>Programmversion</translation>
-    </message>
-    <message>
-        <source>Ping Time</source>
-        <translation>Latenz (Ping)</translation>
+        <location filename="../paymentserver.cpp" line="+107"/>
+        <source>Cannot start Wispr: click-to-pay handler</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
-    <name>QObject</name>
+    <name>QRCodeDialog</name>
     <message>
-        <source>Amount</source>
-        <translation>Betrag</translation>
+        <location filename="../forms/qrcodedialog.ui" line="+14"/>
+        <source>QR Code Dialog</source>
+        <translation>QR Code Dialog</translation>
     </message>
     <message>
-        <source>Enter a Wispr address (e.g. %1)</source>
-        <translation>Wispr-Adresse eingeben (z.B. %1)</translation>
+        <location line="+59"/>
+        <source>Request Payment</source>
+        <translation>Zahlung anfordern</translation>
     </message>
     <message>
-        <source>%1 d</source>
-        <translation>%1 T</translation>
+        <location line="+56"/>
+        <source>Amount:</source>
+        <translation>Betrag:</translation>
     </message>
     <message>
-        <source>%1 h</source>
-        <translation>%1 St.</translation>
+        <location line="-44"/>
+        <source>Label:</source>
+        <translation>Bezeichnung:</translation>
     </message>
     <message>
-        <source>%1 m</source>
-        <translation>%1 Min.</translation>
+        <location line="+19"/>
+        <source>Message:</source>
+        <translation>Nachricht:</translation>
     </message>
     <message>
-        <source>%1 s</source>
-        <translation>%1  S</translation>
+        <location line="+71"/>
+        <source>&amp;Save As...</source>
+        <translation>&amp; Speichern als...</translation>
     </message>
     <message>
-        <source>NETWORK</source>
-        <translation>NETZWERK</translation>
+        <location filename="../qrcodedialog.cpp" line="+62"/>
+        <source>Error encoding URI into QR Code.</source>
+        <translation>Fehler beim Kodieren der URI in den QR-Code.</translation>
     </message>
     <message>
-        <source>UNKNOWN</source>
-        <translation>UNBEKANNT</translation>
+        <location line="+40"/>
+        <source>The entered amount is invalid, please check.</source>
+        <translation>Der eingegebene Betrag ist ungültig, bitte überprüfen.</translation>
     </message>
     <message>
-        <source>None</source>
-        <translation>Keine</translation>
+        <location line="+23"/>
+        <source>Resulting URI too long, try to reduce the text for label / message.</source>
+        <translation>Resultierende URI zu lang, bitte den Text für Bezeichnung / Nachricht kürzen.</translation>
     </message>
     <message>
-        <source>N/A</source>
-        <translation>k.A.</translation>
-    </message>
-    <message>
-        <source>%1 ms</source>
-        <translation>%1 Ms</translation>
-    </message>
-</context>
-<context>
-    <name>QRImageWidget</name>
-    <message>
-        <source>&amp;Save Image...</source>
-        <translation>Grafik &amp;speichern...</translation>
-    </message>
-    <message>
-        <source>&amp;Copy Image</source>
-        <translation>Grafik &amp;kopieren</translation>
-    </message>
-    <message>
+        <location line="+25"/>
         <source>Save QR Code</source>
-        <translation>QR-Code speichern</translation>
+        <translation>QR Code Speichern</translation>
     </message>
     <message>
-        <source>PNG Image (*.png)</source>
-        <translation>PNG-Grafik (*.png)</translation>
+        <location line="+0"/>
+        <source>PNG Images (*.png)</source>
+        <translation>PNG Grafik (*.png)</translation>
     </message>
 </context>
 <context>
     <name>RPCConsole</name>
     <message>
-        <source>&amp;Information</source>
-        <translation>&amp;Information</translation>
+        <location filename="../forms/rpcconsole.ui" line="+46"/>
+        <source>Client name</source>
+        <translation>Clientname</translation>
     </message>
     <message>
+        <location line="+10"/>
+        <location line="+23"/>
+        <location line="+26"/>
+        <location line="+23"/>
+        <location line="+23"/>
+        <location line="+36"/>
+        <location line="+53"/>
+        <location line="+23"/>
         <source>N/A</source>
         <translation>k.A.</translation>
     </message>
     <message>
-        <source>Protocol</source>
-        <translation>Protokoll</translation>
+        <location line="-194"/>
+        <source>Client version</source>
+        <translation>Clientversion</translation>
     </message>
     <message>
-        <source>Version</source>
-        <translation>Programmversion</translation>
+        <location line="-45"/>
+        <source>&amp;Information</source>
+        <translation>&amp;Information</translation>
     </message>
     <message>
-        <source>Ping Time</source>
-        <translation>Latenz (Ping)</translation>
+        <location line="+68"/>
+        <source>Using OpenSSL version</source>
+        <translation>Verwendete OpenSSL-Version</translation>
     </message>
     <message>
+        <location line="+49"/>
+        <source>Startup time</source>
+        <translation>Startzeit</translation>
+    </message>
+    <message>
+        <location line="+29"/>
+        <source>Network</source>
+        <translation>Netzwerk</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Number of connections</source>
+        <translation>Anzahl Verbindungen</translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>On testnet</source>
+        <translation>Am Testnetz</translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Block chain</source>
+        <translation>Block kette</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Current number of blocks</source>
+        <translation>Aktuelle Anzahl Blöcke</translation>
+    </message>
+    <message>
+        <location line="+197"/>
+        <source>&amp;Network Traffic</source>
+        <translation>&amp; Netzwerk Traffic</translation>
+    </message>
+    <message>
+        <location line="+52"/>
+        <source>&amp;Clear</source>
+        <translation>&amp;Zurücksetzen</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Totals</source>
+        <translation>Gesamt</translation>
+    </message>
+    <message>
+        <location line="+64"/>
+        <location filename="../rpcconsole.cpp" line="+352"/>
+        <source>In:</source>
+        <translation>Eingang:</translation>
+    </message>
+    <message>
+        <location line="+80"/>
+        <location filename="../rpcconsole.cpp" line="+1"/>
+        <source>Out:</source>
+        <translation>Ausgang:</translation>
+    </message>
+    <message>
+        <location line="-383"/>
+        <source>Last block time</source>
+        <translation>Letzte Blockzeit</translation>
+    </message>
+    <message>
+        <location line="+52"/>
+        <source>&amp;Open</source>
+        <translation>&amp;Öffnen</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Command-line options</source>
+        <translation>Kommandozeilen Optionen:</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Show the Wispr-Qt help message to get a list with possible Wispr command-line options.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>&amp;Show</source>
+        <translation>&amp;Zeigen</translation>
+    </message>
+    <message>
+        <location line="+24"/>
+        <source>&amp;Console</source>
+        <translation>&amp;Konsole</translation>
+    </message>
+    <message>
+        <location line="-237"/>
+        <source>Build date</source>
+        <translation>Erstellungsdatum</translation>
+    </message>
+    <message>
+        <location line="-104"/>
+        <source>Wispr - Debug window</source>
+        <translation>Wispr - Debug Fenster</translation>
+    </message>
+    <message>
+        <location line="+25"/>
+        <source>Wispr Core</source>
+        <translation>Wispr Kern</translation>
+    </message>
+    <message>
+        <location line="+256"/>
+        <source>Debug log file</source>
+        <translation>Debugprotokolldatei</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Open the Wispr debug log file from the current data directory. This can take a few seconds for large log files.</source>
+        <translation>Offne die Wispr Fehlerlogs aus dem Datenverzeichnis. Diese Funktion kann bei größeren Log-Files länger benötigen.</translation>
+    </message>
+    <message>
+        <location line="+102"/>
+        <source>Clear console</source>
+        <translation>Konsole zurücksetzen</translation>
+    </message>
+    <message>
+        <location filename="../rpcconsole.cpp" line="-28"/>
+        <source>Welcome to the Wispr RPC console.</source>
+        <translation>Willkommen zur Wispr RPC Anwendung.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Use up and down arrows to navigate history, and &lt;b&gt;Ctrl-L&lt;/b&gt; to clear screen.</source>
+        <translation>Pfeiltaste hoch und runter, um den Verlauf durchzublättern und &lt;b&gt;Strg-L&lt;/b&gt;, um die Konsole zurückzusetzen.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Type &lt;b&gt;help&lt;/b&gt; for an overview of available commands.</source>
+        <translation>Bitte &lt;b&gt;help&lt;/b&gt; eingeben, um eine Übersicht verfügbarer Befehle zu erhalten.</translation>
+    </message>
+    <message>
+        <location line="+134"/>
         <source>%1 B</source>
-        <translation>%1 Byte</translation>
+        <translation>%1 B</translation>
     </message>
     <message>
+        <location line="+2"/>
         <source>%1 KB</source>
         <translation>%1 KB</translation>
     </message>
     <message>
+        <location line="+2"/>
         <source>%1 MB</source>
         <translation>%1 MB</translation>
     </message>
     <message>
+        <location line="+2"/>
         <source>%1 GB</source>
-        <translation>%1 GB</translation>
+        <translation>%1 GB
+</translation>
     </message>
     <message>
-        <source>never</source>
-        <translation>nie</translation>
+        <location line="+7"/>
+        <source>%1 m</source>
+        <translation>%1 m</translation>
     </message>
     <message>
-        <source>Unknown</source>
-        <translation>Unbekannt</translation>
-    </message>
-    </context>
-<context>
-    <name>ReceiveCoinsDialog</name>
-    <message>
-        <source>&amp;Message:</source>
-        <translation>Nachricht:</translation>
+        <location line="+5"/>
+        <source>%1 h</source>
+        <translation>%1 h</translation>
     </message>
     <message>
-        <source>&amp;Label:</source>
-        <translation>&amp;Bezeichnung:</translation>
-    </message>
-    <message>
-        <source>&amp;Request payment</source>
-        <translation>Zahlung anfo&amp;rdern</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Alle Formularfelder zurücksetzen.</translation>
-    </message>
-    <message>
-        <source>Copy label</source>
-        <translation>Bezeichnung kopieren</translation>
-    </message>
-    <message>
-        <source>Copy amount</source>
-        <translation>Betrag kopieren</translation>
+        <location line="+2"/>
+        <source>%1 h %2 m</source>
+        <translation>%1 h %2 m</translation>
     </message>
 </context>
 <context>
-    <name>ReceiveRequestDialog</name>
-    <message>
-        <source>QR Code</source>
-        <translation>QR Code</translation>
-    </message>
-    <message>
-        <source>&amp;Save Image...</source>
-        <translation>Grafik &amp;speichern...</translation>
-    </message>
-    <message>
-        <source>Address</source>
-        <translation>Adresse</translation>
-    </message>
-    <message>
-        <source>Amount</source>
-        <translation>Betrag</translation>
-    </message>
-    <message>
-        <source>Label</source>
-        <translation>Bezeichnung</translation>
-    </message>
-    <message>
-        <source>Message</source>
-        <translation>Nachricht</translation>
-    </message>
-    </context>
-<context>
-    <name>RecentRequestsTableModel</name>
-    <message>
-        <source>Date</source>
-        <translation>Datum</translation>
-    </message>
-    <message>
-        <source>Label</source>
-        <translation>Bezeichnung</translation>
-    </message>
-    <message>
-        <source>Message</source>
-        <translation>Nachricht</translation>
-    </message>
-    <message>
-        <source>Amount</source>
-        <translation>Betrag</translation>
-    </message>
-    <message>
-        <source>(no label)</source>
-        <translation>(keine Bezeichnung)</translation>
-    </message>
-    </context>
-<context>
     <name>SendCoinsDialog</name>
     <message>
+        <location filename="../forms/sendcoinsdialog.ui" line="+14"/>
+        <location filename="../sendcoinsdialog.cpp" line="+179"/>
+        <location line="+5"/>
+        <location line="+5"/>
+        <location line="+5"/>
+        <location line="+6"/>
+        <location line="+5"/>
+        <location line="+5"/>
         <source>Send Coins</source>
-        <translation>PIVs überweisen</translation>
+        <translation>Bitcoins überweisen</translation>
     </message>
     <message>
+        <location line="+76"/>
         <source>Coin Control Features</source>
-        <translation>"Coin Control"-Funktionen</translation>
+        <translation>&quot;Coin Control&quot;-Funktionen</translation>
     </message>
     <message>
+        <location line="+20"/>
+        <source>Inputs...</source>
+        <translation>Eingaben...</translation>
+    </message>
+    <message>
+        <location line="+7"/>
         <source>automatically selected</source>
         <translation>automatisch ausgewählt</translation>
     </message>
     <message>
+        <location line="+19"/>
         <source>Insufficient funds!</source>
         <translation>Unzureichender Kontostand!</translation>
     </message>
     <message>
+        <location line="+77"/>
         <source>Quantity:</source>
         <translation>Anzahl:</translation>
     </message>
     <message>
+        <location line="+22"/>
+        <location line="+35"/>
+        <source>0</source>
+        <translation>0</translation>
+    </message>
+    <message>
+        <location line="-19"/>
         <source>Bytes:</source>
         <translation>Byte:</translation>
     </message>
     <message>
+        <location line="+51"/>
         <source>Amount:</source>
         <translation>Betrag:</translation>
     </message>
     <message>
-        <source>Priority:</source>
-        <translation>Priorität:</translation>
-    </message>
-    <message>
-        <source>medium</source>
-        <translation>mittel</translation>
-    </message>
-    <message>
+        <location line="+54"/>
         <source>Fee:</source>
         <translation>Gebühr:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>"Dust":</translation>
+        <location line="+35"/>
+        <source>Low Output:</source>
+        <translation>Zu geringer Ausgabebetrag:</translation>
     </message>
     <message>
+        <location line="+19"/>
         <source>no</source>
         <translation>nein</translation>
     </message>
     <message>
+        <location line="+32"/>
         <source>After Fee:</source>
-        <translation>Nach Gebühren:</translation>
+        <translation>Abzüglich Gebühr:</translation>
     </message>
     <message>
-        <source>Change:</source>
-        <translation>Wechselgeld:</translation>
+        <location line="+35"/>
+        <source>Change</source>
+        <translation>Wechselgeld</translation>
     </message>
     <message>
-        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address.</source>
-        <translation>Wenn dies aktivert, und die Wechselgeld-Adresse leer oder ungültig ist, wird das Wechselgeld einer neu erzeugten Adresse gutgeschrieben.</translation>
+        <location line="+50"/>
+        <source>custom change address</source>
+        <translation>Standard Adresse für Wechselgeld</translation>
     </message>
     <message>
-        <source>Custom change address</source>
-        <translation>Benutzerdefinierte Wechselgeld-Adresse</translation>
-    </message>
-    <message>
-        <source>Split UTXO</source>
-        <translation>UTXO aufteilen</translation>
-    </message>
-    <message>
-        <source># of outputs</source>
-        <translation>Anzahl outputs</translation>
-    </message>
-    <message>
-        <source>UTXO Size:</source>
-        <translation>UTXO Größe:</translation>
-    </message>
-    <message>
-        <source>0 WSP</source>
-        <translation>0 WSP</translation>
-    </message>
-    <message>
-        <source>Transaction Fee:</source>
-        <translation>Transaktionsgebühr:</translation>
-    </message>
-    <message>
-        <source>Choose...</source>
-        <translation>Auswählen...</translation>
-    </message>
-    <message>
-        <source>collapse fee-settings</source>
-        <translation>Gebühreneinstellungen reduzieren</translation>
-    </message>
-    <message>
-        <source>Minimize</source>
-        <translation>Minimieren</translation>
-    </message>
-    <message>
-        <source>Obfuscation</source>
-        <translation>Verschleierung</translation>
-    </message>
-    <message>
-        <source>per kilobyte</source>
-        <translation>pro Kilobyte</translation>
-    </message>
-    <message>
-        <source>total at least</source>
-        <translation>pro Kilobyte</translation>
-    </message>
-    <message>
-        <source>(read the tooltip)</source>
-        <translation>(Kurzinfo lesen)</translation>
-    </message>
-    <message>
-        <source>Custom:</source>
-        <translation>Benutzerdefiniert:</translation>
-    </message>
-    <message>
-        <source>(Smart fee not initialized yet. This usually takes a few blocks...)</source>
-        <translation>("Intelligente" Gebühren sind noch nicht berechnet. Dies dauert normalerweise ein paar Blöcke...)</translation>
-    </message>
-    <message>
-        <source>Confirmation time:</source>
-        <translation>Bestätigungszeit:</translation>
-    </message>
-    <message>
-        <source>normal</source>
-        <translation>normal</translation>
-    </message>
-    <message>
-        <source>fast</source>
-        <translation>schnell</translation>
-    </message>
-    <message>
-        <source>Recommended</source>
-        <translation>Empfohlen</translation>
-    </message>
-    <message>
-        <source>S&amp;end</source>
-        <translation>Üb&amp;erweisen</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Alle Formularfelder zurücksetzen.</translation>
-    </message>
-    <message>
-        <source>Clear &amp;All</source>
-        <translation>&amp;Alles zurücksetzen</translation>
-    </message>
-    <message>
+        <location line="+106"/>
         <source>Send to multiple recipients at once</source>
-        <translation>An mehrere Empfänger auf einmal überweisen</translation>
+        <translation>In einer Transaktion an mehrere Empfänger auf einmal überweisen</translation>
     </message>
     <message>
+        <location line="+3"/>
         <source>Add &amp;Recipient</source>
-        <translation>Empfänge&amp;r hinzufügen</translation>
+        <translation>Empfänger &amp;hinzufügen</translation>
     </message>
     <message>
-        <source>SwiftTX</source>
-        <translation>SwiftTX</translation>
+        <location line="+16"/>
+        <source>Remove all transaction fields</source>
+        <translation>Alle &quot;Nachricht verifizieren&quot;-Felder zurücksetzen</translation>
     </message>
     <message>
+        <location line="+3"/>
+        <source>Clear &amp;All</source>
+        <translation>&amp;Zurücksetzen</translation>
+    </message>
+    <message>
+        <location line="+24"/>
         <source>Balance:</source>
         <translation>Kontostand:</translation>
     </message>
     <message>
-        <source>Copy quantity</source>
-        <translation>Kopiere Anzahl</translation>
+        <location line="+47"/>
+        <source>Confirm the send action</source>
+        <translation>Überweisung bestätigen</translation>
     </message>
     <message>
+        <location line="+3"/>
+        <source>S&amp;end</source>
+        <translation>&amp;Überweisen</translation>
+    </message>
+    <message>
+        <location filename="../sendcoinsdialog.cpp" line="-171"/>
+        <source>Enter a Wispr address (e.g. B8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
+        <translation>Empfängeradresse (z.b. B8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Copy quantity</source>
+        <translation>Anzahl kopieren</translation>
+    </message>
+    <message>
+        <location line="+1"/>
         <source>Copy amount</source>
         <translation>Betrag kopieren</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Copy fee</source>
-        <translation>Kopiere Gebühr</translation>
+        <translation>Gebühr kopieren</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Copy after fee</source>
-        <translation>Kopiere nach Gebühr</translation>
+        <translation>Abzüglich Gebühr kopieren</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Copy bytes</source>
-        <translation>Kopiere Bytes</translation>
+        <translation>Byte kopieren</translation>
     </message>
     <message>
-        <source>Copy priority</source>
-        <translation>Kopiere Priorität</translation>
+        <location line="+1"/>
+        <source>Copy low output</source>
+        <translation>Zu geringen Ausgabebetrag kopieren</translation>
     </message>
     <message>
-        <source>Copy dust</source>
-        <translation>Kopiere Abzug</translation>
-    </message>
-    <message>
+        <location line="+1"/>
         <source>Copy change</source>
-        <translation>Kopiere Änderung</translation>
+        <translation>Wechselgeld kopieren</translation>
     </message>
     <message>
-        <source>Warning: Unknown change address</source>
-        <translation>Warnung: Unbekannte Wechselgeld-Adresse </translation>
+        <location line="+85"/>
+        <source>&lt;b&gt;%1&lt;/b&gt; to %2 (%3)</source>
+        <translation>&lt;b&gt;%1&lt;/b&gt; bis %2 (%3)</translation>
     </message>
     <message>
+        <location line="+5"/>
+        <source>Confirm send coins</source>
+        <translation>Überweisung bestätigen</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Are you sure you want to send %1?</source>
+        <translation>Sins Sie sicher, dass Sie an %1 versenden möchten?</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source> and </source>
+        <translation>und</translation>
+    </message>
+    <message>
+        <location line="+29"/>
+        <source>The recipient address is not valid, please recheck.</source>
+        <translation>Die Zahlungsadresse ist ungültig, bitte nochmals überprüfen.</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>The amount to pay must be larger than 0.</source>
+        <translation>Der zu zahlende Betrag muss größer als 0 sein.</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>The amount exceeds your balance.</source>
+        <translation>Der angegebene Betrag übersteigt Ihren Kontostand.</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>The total exceeds your balance when the %1 transaction fee is included.</source>
+        <translation>Der angegebene Betrag übersteigt aufgrund der Transaktionsgebühr in Höhe von %1 Ihren Kontostand.</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Duplicate address found, can only send to each address once per send operation.</source>
+        <translation>Doppelte Adresse gefunden, pro Überweisung kann an jede Adresse nur einmalig etwas überwiesen werden.</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Error: Transaction creation failed!</source>
+        <translation>Fehler: Erstellung der Transaktion fehlgeschlagen</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Error: The transaction was rejected. This might happen if some of the coins in your wallet were already spent, such as if you used a copy of wallet.dat and coins were spent in the copy but not marked as spent here.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+241"/>
+        <source>WARNING: Invalid Wispr address</source>
+        <translation>Warnung: Ungültige Wispr Adresse</translation>
+    </message>
+    <message>
+        <location line="+13"/>
         <source>(no label)</source>
         <translation>(keine Bezeichnung)</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>WARNING: unknown change address</source>
+        <translation>Warnung: Unbekannte Wechselgeldadresse</translation>
     </message>
 </context>
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>This is a normal payment.</source>
-        <translation>Dies ist eine normale Überweisung.</translation>
+        <location filename="../forms/sendcoinsentry.ui" line="+14"/>
+        <source>Form</source>
+        <translation>Formular</translation>
     </message>
     <message>
+        <location line="+15"/>
+        <source>A&amp;mount:</source>
+        <translation>&amp;Betrag:</translation>
+    </message>
+    <message>
+        <location line="+13"/>
         <source>Pay &amp;To:</source>
-        <translation>E&amp;mpfänger:</translation>
+        <translation>&amp;Empfänger:</translation>
     </message>
     <message>
-        <source>The Wispr address to send the payment to</source>
-        <translation>Wispr-Adresse, an die überwiesen werden soll</translation>
+        <location line="+34"/>
+        <source>The address to send the payment to (e.g. B8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <source>Choose previously used address</source>
-        <translation>Bereits verwendete Adresse auswählen</translation>
+        <location line="+60"/>
+        <location filename="../sendcoinsentry.cpp" line="+26"/>
+        <source>Enter a label for this address to add it to your address book</source>
+        <translation>Adressbezeichnung eingeben (diese wird zusammen mit der Adresse dem Adressbuch hinzugefügt)</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
-        <source>Paste address from clipboard</source>
-        <translation>Adresse aus der Zwischenablage einfügen</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
-    </message>
-    <message>
-        <source>Remove this entry</source>
-        <translation>Diesen Eintrag entfernen</translation>
-    </message>
-    <message>
+        <location line="-78"/>
         <source>&amp;Label:</source>
         <translation>&amp;Bezeichnung:</translation>
     </message>
     <message>
-        <source>Enter a label for this address to add it to the list of used addresses</source>
-        <translation>Adressbezeichnung eingeben, um diese in der Liste der bereits verwendeten Adressen zu speichern</translation>
+        <location line="+28"/>
+        <source>Choose address from address book</source>
+        <translation>Adresse aus dem Adressbuch auswählen</translation>
     </message>
     <message>
-        <source>A&amp;mount:</source>
-        <translation>Betra&amp;g:</translation>
+        <location line="+10"/>
+        <source>Alt+A</source>
+        <translation>Alt+A</translation>
     </message>
     <message>
-        <source>Message:</source>
-        <translation>Nachricht:</translation>
+        <location line="+7"/>
+        <source>Paste address from clipboard</source>
+        <translation>Adresse aus der Zwischenablage einfügen</translation>
     </message>
     <message>
-        <source>A message that was attached to the Wispr: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Wispr network.</source>
-        <translation>Eine an die Wispr-URI angefügte Nachricht, die zusammen mit der Transaktion gespeichert wird. Hinweis: Diese Nachricht wird nicht über das Wispr-Netzwerk gesendet.</translation>
+        <location line="+10"/>
+        <source>Alt+P</source>
+        <translation>Alt+P</translation>
     </message>
     <message>
-        <source>This is an unverified payment request.</source>
-        <translation>Dies is eine unverifizierte Zahlungsanforderung.</translation>
+        <location line="+7"/>
+        <source>Remove this recipient</source>
+        <translation>Diesen Empfänger entfernen</translation>
     </message>
     <message>
-        <source>Pay To:</source>
-        <translation>Empfänger:</translation>
-    </message>
-    <message>
-        <source>Memo:</source>
-        <translation>Memo:</translation>
-    </message>
-    <message>
-        <source>This is a verified payment request.</source>
-        <translation>Dies is eine verifizierte Zahlungsanforderung.</translation>
-    </message>
-    <message>
-        <source>Enter a label for this address to add it to your address book</source>
-        <translation>Adressbezeichnung eingeben, diese wird zusammen mit der Adresse dem Adressbuch hinzugefügt</translation>
-    </message>
-</context>
-<context>
-    <name>ShutdownWindow</name>
-    <message>
-        <source>Wispr Core is shutting down...</source>
-        <translation>Wispr Core wird beendet...</translation>
-    </message>
-    <message>
-        <source>Do not shut down the computer until this window disappears.</source>
-        <translation>Fahren Sie den Computer nicht herunter, bevor dieses Fenster verschwindet.</translation>
+        <location filename="../sendcoinsentry.cpp" line="+1"/>
+        <source>Enter a Wispr address (e.g. B8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
+        <translation>Empfängeradresse (z.b. B8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</translation>
     </message>
 </context>
 <context>
     <name>SignVerifyMessageDialog</name>
     <message>
+        <location filename="../forms/signverifymessagedialog.ui" line="+14"/>
+        <source>Signatures - Sign / Verify a Message</source>
+        <translation>Signaturen - eine Nachricht signieren / verifizieren</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <location line="+124"/>
         <source>&amp;Sign Message</source>
         <translation>Nachricht &amp;signieren</translation>
     </message>
     <message>
-        <source>The Wispr address to sign the message with</source>
-        <translation>Wispr Adresse mit welcher die Nachricht signiert werden soll</translation>
+        <location line="-118"/>
+        <source>You can sign messages with your addresses to prove you own them. Be careful not to sign anything vague, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
+        <translation>Sie können Nachrichten mit ihren Adressen signieren, um den Besitz dieser Adressen zu beweisen. Bitte nutzen Sie diese Funktion mit Vorsicht und nehmen Sie sich vor Phishingangriffen in Acht. Signieren Sie nur Nachrichten, mit denen Sie vollständig einverstanden sind.</translation>
     </message>
     <message>
-        <source>Choose previously used address</source>
-        <translation>Bereits verwendete Adresse auswählen</translation>
+        <location line="+18"/>
+        <source>The address to sign the message with (e.g. B8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
+        <translation type="unfinished"/>
     </message>
     <message>
+        <location line="+10"/>
+        <location line="+203"/>
+        <source>Choose an address from the address book</source>
+        <translation>Eine Adresse aus dem Adressbuch wählen</translation>
+    </message>
+    <message>
+        <location line="-193"/>
+        <location line="+203"/>
         <source>Alt+A</source>
         <translation>Alt+A</translation>
     </message>
     <message>
+        <location line="-193"/>
         <source>Paste address from clipboard</source>
         <translation>Adresse aus der Zwischenablage einfügen</translation>
     </message>
     <message>
+        <location line="+10"/>
         <source>Alt+P</source>
         <translation>Alt+P</translation>
     </message>
     <message>
+        <location line="+12"/>
         <source>Enter the message you want to sign here</source>
-        <translation>Gehen Sie hier die Nachricht ein, die Sie digital unterschreiben möchten</translation>
+        <translation>Zu signierende Nachricht hier eingeben</translation>
     </message>
     <message>
+        <location line="+24"/>
         <source>Copy the current signature to the system clipboard</source>
-        <translation>Kopiert die aktuelle Signatur in den Zwischenspeicher</translation>
+        <translation>Aktuelle Signatur in die Zwischenablage kopieren</translation>
     </message>
     <message>
+        <location line="+21"/>
         <source>Sign the message to prove you own this Wispr address</source>
-        <translation>Signiere die Nachricht um zu Beweisen, dass du diese Wispr Adresse besitzt</translation>
+        <translation>Signiere die Nachricht um zu beweisen das du Besitzer dieser Wispr Adresse bist.</translation>
     </message>
     <message>
-        <source>The Wispr address the message was signed with</source>
-        <translation>Die Wispr Adresse mit welcher die Nachricht signiert wurde.</translation>
-    </message>
-    <message>
-        <source>Verify the message to ensure it was signed with the specified Wispr address</source>
-        <translation>Überprüfen Sie die Nachricht, um sicherzustellen, dass sie mit der angegebenen Wispr-Adresse signiert wurde.</translation>
-    </message>
-    <message>
+        <location line="+17"/>
         <source>Reset all sign message fields</source>
-        <translation>Setze alle signierten Nachrichten Felder zurück</translation>
+        <translation>Alle &quot;Nachricht signieren&quot;-Felder zurücksetzen</translation>
     </message>
     <message>
+        <location line="+3"/>
+        <location line="+146"/>
         <source>Clear &amp;All</source>
-        <translation>&amp;Alles zurücksetzen</translation>
+        <translation>&amp;Zurücksetzen</translation>
     </message>
     <message>
+        <location line="-87"/>
+        <location line="+70"/>
+        <source>&amp;Verify Message</source>
+        <translation>Nachricht &amp;verifizieren</translation>
+    </message>
+    <message>
+        <location line="-64"/>
+        <source>Enter the signing address, message (ensure you copy line breaks, spaces, tabs, etc. exactly) and signature below to verify the message. Be careful not to read more into the signature than what is in the signed message itself, to avoid being tricked by a man-in-the-middle attack.</source>
+        <translation>Geben Sie die signierende Adresse, Nachricht (achten Sie darauf Zeilenumbrüche, Leerzeichen, Tabulatoren usw. exakt zu kopieren) und Signatur unten ein, um die Nachricht zu verifizieren. Vorsicht, interpretieren Sie nicht mehr in die Signatur, als in der signierten Nachricht selber enthalten ist, um nicht von einem Man-in-the-middle-Angriff hinters Licht geführt zu werden.</translation>
+    </message>
+    <message>
+        <location line="+21"/>
+        <source>The address the message was signed with (e.g. B8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+40"/>
+        <source>Verify the message to ensure it was signed with the specified Wispr address</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+17"/>
         <source>Reset all verify message fields</source>
-        <translation>Zurücksetzen aller überprüften Felder.</translation>
+        <translation>Alle &quot;Nachricht verifizieren&quot;-Felder zurücksetzen</translation>
     </message>
     <message>
+        <location filename="../signverifymessagedialog.cpp" line="+27"/>
+        <location line="+3"/>
+        <source>Enter a Wispr address (e.g. B8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
+        <translation>Empfängeradresse (z.b. B8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</translation>
+    </message>
+    <message>
+        <location line="-2"/>
+        <source>Click &quot;Sign Message&quot; to generate signature</source>
+        <translation>Auf &quot;Nachricht signieren&quot; klicken, um die Signatur zu erzeugen</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Enter Wispr signature</source>
+        <translation>Wispr Signatur eingeben</translation>
+    </message>
+    <message>
+        <location line="+85"/>
+        <location line="+81"/>
         <source>The entered address is invalid.</source>
-        <translation>Die eingegebene Adresse ist falsch</translation>
+        <translation>Die eingegebene Adresse ist ungültig.</translation>
     </message>
     <message>
+        <location line="-81"/>
+        <location line="+8"/>
+        <location line="+73"/>
+        <location line="+8"/>
         <source>Please check the address and try again.</source>
-        <translation>Bitte die Adresse prüfen und erneut eingeben</translation>
+        <translation>Bitte überprüfen Sie die Adresse und versuchen Sie es erneut.</translation>
     </message>
     <message>
+        <location line="-81"/>
+        <location line="+81"/>
         <source>The entered address does not refer to a key.</source>
-        <translation>Die eingegebene Adresse passt nicht zu einem Schlüssel</translation>
+        <translation>Die eingegebene Adresse verweist nicht auf einen Schlüssel.</translation>
     </message>
     <message>
+        <location line="-73"/>
         <source>Wallet unlock was cancelled.</source>
         <translation>Wallet-Entsperrung wurde abgebrochen.</translation>
     </message>
     <message>
+        <location line="+8"/>
         <source>Private key for the entered address is not available.</source>
-        <translation>Privater Schlüssel für die eingegebene Adresse ist nicht verfügbar</translation>
-    </message>
-    </context>
-<context>
-    <name>SplashScreen</name>
-    <message>
-        <source>Wispr Core</source>
-        <translation>Wispr Core</translation>
+        <translation>Privater Schlüssel zur eingegebenen Adresse ist nicht verfügbar.</translation>
     </message>
     <message>
-        <source>Version %1</source>
-        <translation>Version %1</translation>
+        <location line="+12"/>
+        <source>Message signing failed.</source>
+        <translation>Signierung der Nachricht fehlgeschlagen.</translation>
     </message>
     <message>
-        <source>The Bitcoin Core developers</source>
-        <translation>Die Bitcoin Core Entwickler</translation>
+        <location line="+5"/>
+        <source>Message signed.</source>
+        <translation>Nachricht signiert.</translation>
     </message>
     <message>
-        <source>The Dash Core developers</source>
-        <translation>Die Dash Core Entwickler</translation>
+        <location line="+59"/>
+        <source>The signature could not be decoded.</source>
+        <translation>Die Signatur konnte nicht dekodiert werden.</translation>
     </message>
     <message>
-        <source>The Wispr Core developers</source>
-        <translation>Die Wispr Core Entwickler</translation>
+        <location line="+0"/>
+        <location line="+13"/>
+        <source>Please check the signature and try again.</source>
+        <translation>Bitte überprüfen Sie die Signatur und versuchen Sie es erneut.</translation>
     </message>
     <message>
-        <source>[testnet]</source>
-        <translation>[Testnetzwerk]</translation>
+        <location line="+0"/>
+        <source>The signature did not match the message digest.</source>
+        <translation>Die Signatur entspricht nicht dem Message Digest.</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Message verification failed.</source>
+        <translation>Verifikation der Nachricht fehlgeschlagen.</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Message verified.</source>
+        <translation>Nachricht verifiziert.</translation>
     </message>
 </context>
 <context>
     <name>TrafficGraphWidget</name>
     <message>
+        <location filename="../trafficgraphwidget.cpp" line="+75"/>
         <source>KB/s</source>
         <translation>KB/s</translation>
     </message>
@@ -2297,181 +2077,191 @@ MultiSend wird nicht aktiviert bis Sie auf Aktivieren geklickt haben.</translati
 <context>
     <name>TransactionDesc</name>
     <message>
+        <location filename="../transactiondesc.cpp" line="+25"/>
         <source>Open until %1</source>
         <translation>Offen bis %1</translation>
     </message>
     <message>
+        <location line="+6"/>
         <source>conflicted</source>
-        <translation>in Konflikt stehend</translation>
+        <translation>kollidiert</translation>
     </message>
     <message>
-        <source>%1/offline (verified via swifttx)</source>
-        <translation>%1/offline (Überprüft durch SwiftTX)</translation>
-    </message>
-    <message>
-        <source>%1/confirmed (verified via swifttx)</source>
-        <translation>%1/bestätigt (Überprüft durch SwiftTX)</translation>
-    </message>
-    <message>
-        <source>%1 confirmations (verified via swifttx)</source>
-        <translation>%1 Bestätigungen (Überprüft durch SwiftTX)</translation>
-    </message>
-    <message>
+        <location line="+2"/>
         <source>%1/offline</source>
         <translation>%1/offline</translation>
     </message>
     <message>
+        <location line="+2"/>
         <source>%1/unconfirmed</source>
         <translation>%1/unbestätigt</translation>
     </message>
     <message>
+        <location line="+2"/>
         <source>%1 confirmations</source>
         <translation>%1 Bestätigungen</translation>
     </message>
     <message>
-        <source>%1/offline (SwiftTX verification in progress - %2 of %3 signatures)</source>
-        <translation>%1/offline (Überprüfung durch SwiftTX - %2 von %3 Signaturen)</translation>
-    </message>
-    <message>
-        <source>%1/confirmed (SwiftTX verification in progress - %2 of %3 signatures )</source>
-        <translation>%1/bestätigt (Überprüfung durch SwiftTX - %2 von %3 Signaturen)</translation>
-    </message>
-    <message>
-        <source>%1 confirmations (SwiftTX verification in progress - %2 of %3 signatures)</source>
-        <translation>%1 Bestätigungen (Überprüfung durch SwiftTX - %2 von %3 Signaturen)</translation>
-    </message>
-    <message>
-        <source>%1/offline (SwiftTX verification failed)</source>
-        <translation>%1/offline (Überprüfung durch SwiftTX fehlgeschlagen)</translation>
-    </message>
-    <message>
-        <source>%1/confirmed (SwiftTX verification failed)</source>
-        <translation>%1/bestätigt (Überprüfung durch SwiftTX fehlgeschlagen)</translation>
-    </message>
-    <message>
+        <location line="+17"/>
         <source>Status</source>
         <translation>Status</translation>
     </message>
-    <message>
-        <source>, has not been successfully broadcast yet</source>
-        <translation>, wurde noch nicht erfolgreich übertragen</translation>
+    <message numerus="yes">
+        <location line="+7"/>
+        <source>, broadcast through %n node(s)</source>
+        <translation><numerusform>, über %n Knoten übertragen</numerusform><numerusform>, über %n Knoten übertragen</numerusform></translation>
     </message>
     <message>
+        <location line="+4"/>
         <source>Date</source>
         <translation>Datum</translation>
     </message>
     <message>
+        <location line="+7"/>
         <source>Source</source>
         <translation>Quelle</translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>Generated</source>
-        <translation>Erzeugt</translation>
+        <translation>Generiert</translation>
     </message>
     <message>
+        <location line="+5"/>
+        <location line="+13"/>
         <source>From</source>
         <translation>Von</translation>
     </message>
     <message>
-        <source>unknown</source>
-        <translation>unbekannt</translation>
-    </message>
-    <message>
+        <location line="+1"/>
+        <location line="+19"/>
+        <location line="+58"/>
         <source>To</source>
         <translation>An</translation>
     </message>
     <message>
+        <location line="-74"/>
+        <location line="+2"/>
         <source>own address</source>
         <translation>eigene Adresse</translation>
     </message>
     <message>
-        <source>watch-only</source>
-        <translation>nur beobachtet</translation>
-    </message>
-    <message>
+        <location line="-2"/>
         <source>label</source>
         <translation>Bezeichnung</translation>
     </message>
     <message>
+        <location line="+34"/>
+        <location line="+12"/>
+        <location line="+45"/>
+        <location line="+17"/>
+        <location line="+30"/>
         <source>Credit</source>
         <translation>Gutschrift</translation>
     </message>
+    <message numerus="yes">
+        <location line="-102"/>
+        <source>matures in %n more block(s)</source>
+        <translation><numerusform>reift noch %n weiteren Block</numerusform><numerusform>reift noch %n weitere Blöcke</numerusform></translation>
+    </message>
     <message>
+        <location line="+2"/>
         <source>not accepted</source>
         <translation>nicht angenommen</translation>
     </message>
     <message>
+        <location line="+44"/>
+        <location line="+8"/>
+        <location line="+15"/>
+        <location line="+30"/>
         <source>Debit</source>
         <translation>Belastung</translation>
     </message>
     <message>
-        <source>Total debit</source>
-        <translation>Gesamtbelastung</translation>
-    </message>
-    <message>
-        <source>Total credit</source>
-        <translation>Gesamtgutschrift</translation>
-    </message>
-    <message>
+        <location line="-39"/>
         <source>Transaction fee</source>
         <translation>Transaktionsgebühr</translation>
     </message>
     <message>
+        <location line="+16"/>
         <source>Net amount</source>
         <translation>Nettobetrag</translation>
     </message>
     <message>
+        <location line="+6"/>
         <source>Message</source>
-        <translation>Nachricht</translation>
+        <translation>Nachricht signieren</translation>
     </message>
     <message>
+        <location line="+2"/>
         <source>Comment</source>
         <translation>Kommentar</translation>
     </message>
     <message>
+        <location line="+2"/>
         <source>Transaction ID</source>
         <translation>Transaktions-ID</translation>
     </message>
     <message>
-        <source>Merchant</source>
-        <translation>Händler</translation>
+        <location line="+3"/>
+        <source>Generated coins must mature 510 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to &quot;not accepted&quot; and it won&apos;t be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
+        <translation>Generierte Coins müssen 510 Bestätigungen erhalten bevor sie verfügbar sind. Dieser Block wurde ans Netzwerk gesendet und der Blockkette angehängt als der Block generiert wurde. Wenn er der Blockkette nicht erfolgreich angehängt werden konnte, wird er den Status in &quot;nicht Akzeptiert&quot; ändern und wird nicht verfügbar sein. Das kann zufällig geschehen wenn eine andere Leitung den Block innerhalb von ein paar Sekunden generiert.</translation>
     </message>
     <message>
-        <source>Generated coins must mature %1 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to "not accepted" and it won't be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
-        <translation>Erzeugte PIVs müssen %1 Blöcke lang reifen, bevor sie ausgegeben werden können. Als Sie diesen Block erzeugten, wurde er an das Netzwerk übertragen, um ihn der Blockkette hinzuzufügen. Falls dies fehlschlägt wird der Status in "nicht angenommen" geändert und Sie werden keine PIVs gutgeschrieben bekommen. Das kann gelegentlich passieren, wenn ein anderer Knoten einen Block fast zeitgleich erzeugt.</translation>
-    </message>
-    <message>
+        <location line="+7"/>
         <source>Debug information</source>
         <translation>Debuginformationen</translation>
     </message>
     <message>
+        <location line="+8"/>
         <source>Transaction</source>
         <translation>Transaktion</translation>
     </message>
     <message>
+        <location line="+5"/>
         <source>Inputs</source>
-        <translation>Eingänge</translation>
+        <translation>Eingaben</translation>
     </message>
     <message>
+        <location line="+21"/>
         <source>Amount</source>
         <translation>Betrag</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>true</source>
         <translation>wahr</translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>false</source>
         <translation>falsch</translation>
+    </message>
+    <message>
+        <location line="-202"/>
+        <source>, has not been successfully broadcast yet</source>
+        <translation>, wurde noch nicht erfolgreich übertragen</translation>
+    </message>
+    <message numerus="yes">
+        <location line="-36"/>
+        <source>Open for %n more block(s)</source>
+        <translation type="unfinished"><numerusform></numerusform><numerusform></numerusform></translation>
+    </message>
+    <message>
+        <location line="+67"/>
+        <source>unknown</source>
+        <translation>unbekannt</translation>
     </message>
 </context>
 <context>
     <name>TransactionDescDialog</name>
     <message>
+        <location filename="../forms/transactiondescdialog.ui" line="+14"/>
         <source>Transaction details</source>
         <translation>Transaktionsdetails</translation>
     </message>
     <message>
+        <location line="+6"/>
         <source>This pane shows a detailed description of the transaction</source>
         <translation>Dieser Bereich zeigt eine detaillierte Beschreibung der Transaktion an</translation>
     </message>
@@ -2479,130 +2269,127 @@ MultiSend wird nicht aktiviert bis Sie auf Aktivieren geklickt haben.</translati
 <context>
     <name>TransactionTableModel</name>
     <message>
+        <location filename="../transactiontablemodel.cpp" line="+231"/>
         <source>Date</source>
         <translation>Datum</translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>Type</source>
-        <translation>Art</translation>
+        <translation>Typ</translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>Address</source>
         <translation>Adresse</translation>
     </message>
     <message>
+        <location line="+0"/>
+        <source>Amount</source>
+        <translation>Betrag</translation>
+    </message>
+    <message>
+        <location line="+52"/>
         <source>Open until %1</source>
         <translation>Offen bis %1</translation>
     </message>
     <message>
-        <source>Offline</source>
-        <translation>Offline</translation>
-    </message>
-    <message>
-        <source>Unconfirmed</source>
-        <translation>Unbestätigt</translation>
-    </message>
-    <message>
-        <source>Confirming (%1 of %2 recommended confirmations)</source>
-        <translation>Wird bestätigt (%1 von %2 empfohlenen Bestätigungen)</translation>
-    </message>
-    <message>
+        <location line="+12"/>
         <source>Confirmed (%1 confirmations)</source>
         <translation>Bestätigt (%1 Bestätigungen)</translation>
     </message>
-    <message>
-        <source>Conflicted</source>
-        <translation>Steht in Konflikt</translation>
+    <message numerus="yes">
+        <location line="-15"/>
+        <source>Open for %n more block(s)</source>
+        <translation><numerusform>Offen für %n weiteren Block</numerusform><numerusform>Offen für %n weitere Blöcke</numerusform></translation>
     </message>
     <message>
+        <location line="+6"/>
+        <source>Offline</source>
+        <translation>Nicht verbunden.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Unconfirmed</source>
+        <translation>Unbestätigt:</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Confirming (%1 of %2 recommended confirmations)</source>
+        <translation>wird Bestätigt (%1 von %2 Bestätigungen)</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Conflicted</source>
+        <translation>Konflikt</translation>
+    </message>
+    <message>
+        <location line="+3"/>
         <source>Immature (%1 confirmations, will be available after %2)</source>
         <translation>Unreif (%1 Bestätigungen, wird verfügbar sein nach %2)</translation>
     </message>
     <message>
+        <location line="+3"/>
         <source>This block was not received by any other nodes and will probably not be accepted!</source>
         <translation>Dieser Block wurde von keinem anderen Knoten empfangen und wird wahrscheinlich nicht angenommen werden!</translation>
     </message>
     <message>
+        <location line="+3"/>
+        <source>Generated but not accepted</source>
+        <translation>Generiert, jedoch nicht angenommen</translation>
+    </message>
+    <message>
+        <location line="+42"/>
         <source>Received with</source>
         <translation>Empfangen über</translation>
     </message>
     <message>
-        <source>Masternode Reward</source>
-        <translation>Masternode Vergütung</translation>
-    </message>
-    <message>
+        <location line="+2"/>
         <source>Received from</source>
         <translation>Empfangen von</translation>
     </message>
     <message>
-        <source>Received via Obfuscation</source>
-        <translation>über/durch Verschleierung empfangen</translation>
-    </message>
-    <message>
-        <source>Obfuscation Denominate</source>
-        <translation>Stückelung der Verschleierung</translation>
-    </message>
-    <message>
-        <source>Obfuscation Collateral Payment</source>
-        <translation>Sicherheitspfandzahlung für Verschleierung</translation>
-    </message>
-    <message>
-        <source>Obfuscation Make Collateral Inputs</source>
-        <translation>Verschleierung Erzeugung des Sicherheitspfand</translation>
-    </message>
-    <message>
-        <source>Obfuscation Create Denominations</source>
-        <translation>Verschleierung Erzeugung der Stückelung</translation>
-    </message>
-    <message>
+        <location line="+3"/>
         <source>Sent to</source>
         <translation>Überwiesen an</translation>
     </message>
     <message>
+        <location line="+2"/>
         <source>Payment to yourself</source>
         <translation>Eigenüberweisung</translation>
     </message>
     <message>
-        <source>Minted</source>
-        <translation>Erzeugt</translation>
-    </message>
-    <message>
+        <location line="+2"/>
         <source>Mined</source>
         <translation>Erarbeitet</translation>
     </message>
     <message>
-        <source>Obfuscated</source>
-        <translation>Verschleiert</translation>
-    </message>
-    <message>
-        <source>watch-only</source>
-        <translation>nur beobachtet</translation>
-    </message>
-    <message>
+        <location line="+38"/>
         <source>(n/a)</source>
         <translation>(k.A.)</translation>
     </message>
     <message>
+        <location line="+194"/>
         <source>Transaction status. Hover over this field to show number of confirmations.</source>
-        <translation>Transaktionsstatus, fahren Sie mit der Maus über dieses Feld, um die Anzahl der Bestätigungen zu sehen.</translation>
+        <translation>Transaktionsstatus. Fahren Sie mit der Maus über dieses Feld, um die Anzahl der Bestätigungen zu sehen.</translation>
     </message>
     <message>
+        <location line="+2"/>
         <source>Date and time that the transaction was received.</source>
-        <translation>Datum und Uhrzeit zu der die Transaktion empfangen wurde.</translation>
+        <translation>Datum und Uhrzeit als die Transaktion empfangen wurde.</translation>
     </message>
     <message>
+        <location line="+2"/>
         <source>Type of transaction.</source>
-        <translation>Art der Transaktion.</translation>
+        <translation>Art der Transaktion</translation>
     </message>
     <message>
-        <source>Whether or not a watch-only address is involved in this transaction.</source>
-        <translation>Zeigt ob eine nur beobachtete Adresse in dieser Transaktion beteiligt ist.</translation>
-    </message>
-    <message>
+        <location line="+2"/>
         <source>Destination address of transaction.</source>
         <translation>Zieladresse der Transaktion</translation>
     </message>
     <message>
+        <location line="+2"/>
         <source>Amount removed from or added to balance.</source>
         <translation>Der Betrag, der dem Kontostand abgezogen oder hinzugefügt wurde.</translation>
     </message>
@@ -2610,419 +2397,840 @@ MultiSend wird nicht aktiviert bis Sie auf Aktivieren geklickt haben.</translati
 <context>
     <name>TransactionView</name>
     <message>
+        <location filename="../transactionview.cpp" line="+54"/>
+        <location line="+17"/>
         <source>All</source>
         <translation>Alle</translation>
     </message>
     <message>
+        <location line="-16"/>
         <source>Today</source>
         <translation>Heute</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>This week</source>
         <translation>Diese Woche</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>This month</source>
         <translation>Diesen Monat</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Last month</source>
         <translation>Letzten Monat</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>This year</source>
         <translation>Dieses Jahr</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Range...</source>
         <translation>Zeitraum...</translation>
     </message>
     <message>
-        <source>Most Common</source>
-        <translation>Gängigste</translation>
-    </message>
-    <message>
+        <location line="+12"/>
         <source>Received with</source>
         <translation>Empfangen über</translation>
     </message>
     <message>
+        <location line="+2"/>
         <source>Sent to</source>
         <translation>Überwiesen an</translation>
     </message>
     <message>
-        <source>Obfuscated</source>
-        <translation>Verschleiert</translation>
-    </message>
-    <message>
-        <source>Obfuscation Make Collateral Inputs</source>
-        <translation>Verschleierung Erzeugung des Sicherheitspfand</translation>
-    </message>
-    <message>
-        <source>Obfuscation Create Denominations</source>
-        <translation>Verschleierung Erzeugung der Stückelung</translation>
-    </message>
-    <message>
-        <source>Obfuscation Denominate</source>
-        <translation>Stückelung der Verschleierung</translation>
-    </message>
-    <message>
-        <source>Obfuscation Collateral Payment</source>
-        <translation>Sicherheitspfandzahlung für Verschleierung</translation>
-    </message>
-    <message>
+        <location line="+2"/>
         <source>To yourself</source>
         <translation>Eigenüberweisung</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Mined</source>
         <translation>Erarbeitet</translation>
     </message>
     <message>
-        <source>Minted</source>
-        <translation>Erzeugt</translation>
-    </message>
-    <message>
-        <source>Masternode Reward</source>
-        <translation>Masternode Vergütung</translation>
-    </message>
-    <message>
+        <location line="+1"/>
         <source>Other</source>
         <translation>Andere</translation>
     </message>
     <message>
+        <location line="+7"/>
         <source>Enter address or label to search</source>
         <translation>Zu suchende Adresse oder Bezeichnung eingeben</translation>
     </message>
     <message>
+        <location line="+7"/>
         <source>Min amount</source>
         <translation>Minimaler Betrag</translation>
     </message>
     <message>
+        <location line="+34"/>
         <source>Copy address</source>
         <translation>Adresse kopieren</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Copy label</source>
         <translation>Bezeichnung kopieren</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Copy amount</source>
         <translation>Betrag kopieren</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Copy transaction ID</source>
         <translation>Transaktions-ID kopieren</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Edit label</source>
         <translation>Bezeichnung bearbeiten</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Show transaction details</source>
         <translation>Transaktionsdetails anzeigen</translation>
     </message>
     <message>
-        <source>Export Transaction History</source>
-        <translation>Transaktionsverlauf exportieren</translation>
+        <location line="+138"/>
+        <source>Export Transaction Data</source>
+        <translation>Exportiere Transaktionsdaten</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Comma separated file (*.csv)</source>
         <translation>Kommagetrennte-Datei (*.csv)</translation>
     </message>
     <message>
+        <location line="+8"/>
         <source>Confirmed</source>
         <translation>Bestätigt</translation>
     </message>
     <message>
-        <source>Watch-only</source>
-        <translation>Nur beobachtet</translation>
-    </message>
-    <message>
+        <location line="+1"/>
         <source>Date</source>
         <translation>Datum</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Type</source>
-        <translation>Art</translation>
+        <translation>Typ</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Label</source>
         <translation>Bezeichnung</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Address</source>
         <translation>Adresse</translation>
     </message>
     <message>
+        <location line="+1"/>
+        <source>Amount</source>
+        <translation>Betrag</translation>
+    </message>
+    <message>
+        <location line="+1"/>
         <source>ID</source>
         <translation>ID</translation>
     </message>
     <message>
-        <source>Exporting Failed</source>
-        <translation>Exportieren fehlgeschlagen</translation>
+        <location line="+4"/>
+        <source>Error exporting</source>
+        <translation>Fehler beim Exportieren</translation>
     </message>
     <message>
-        <source>There was an error trying to save the transaction history to %1.</source>
-        <translation>Beim Speichern des Transaktionsverlaufs nach %1 ist ein Fehler aufgetreten.</translation>
+        <location line="+0"/>
+        <source>Could not write to file %1.</source>
+        <translation>Kann Datei nicht schreiben %1.</translation>
     </message>
     <message>
-        <source>Exporting Successful</source>
-        <translation>Exportieren erfolgreich</translation>
-    </message>
-    <message>
-        <source>The transaction history was successfully saved to %1.</source>
-        <translation>Speichern des Transaktionsverlaufs nach %1 war erfolgreich.</translation>
-    </message>
-    <message>
+        <location line="+100"/>
         <source>Range:</source>
         <translation>Zeitraum:</translation>
     </message>
     <message>
+        <location line="+8"/>
         <source>to</source>
         <translation>bis</translation>
     </message>
 </context>
 <context>
-    <name>UnitDisplayStatusBarControl</name>
-    <message>
-        <source>Unit to show amounts in. Click to select another unit.</source>
-        <translation>Angezeigte Einheit. Anklicken Sie, um eine andere Einheit zu wählen.</translation>
-    </message>
-</context>
-<context>
-    <name>WalletFrame</name>
-    <message>
-        <source>No wallet has been loaded.</source>
-        <translation>Es wurde keine Wallet geladen.</translation>
-    </message>
-</context>
-<context>
     <name>WalletModel</name>
     <message>
-        <source>Send Coins</source>
-        <translation>PIVs überweisen</translation>
-    </message>
-    <message>
-        <source>SwiftTX doesn't support sending values that high yet. Transactions are currently limited to %1 WSP.</source>
-        <translation>SwiftTX unterstützt das Versenden von Beträgen dieser Höhe noch nicht. Transaktionen sind zur Zeit auf maximal %1 WSP begrenzt.</translation>
+        <location filename="../walletmodel.cpp" line="+212"/>
+        <source>Sending...</source>
+        <translation>Wird gesendet...</translation>
     </message>
 </context>
 <context>
-    <name>WalletView</name>
+    <name>bitcoin-core</name>
     <message>
-        <source>&amp;Export</source>
-        <translation>&amp;Exportieren</translation>
+        <location filename="../bitcoinstrings.cpp" line="+8"/>
+        <source>Wispr version</source>
+        <translation>Wispr Version</translation>
     </message>
     <message>
-        <source>Export the data in the current tab to a file</source>
-        <translation>Daten der aktuellen Ansicht in eine Datei exportieren</translation>
+        <location line="+1"/>
+        <source>Usage:</source>
+        <translation>Benutzung:</translation>
     </message>
     <message>
-        <source>Selected amount:</source>
-        <translation>Ausgewählter Betrag:</translation>
+        <location line="+1"/>
+        <source>Send command to -server or Wisprd</source>
+        <translation>Kommando versenden an -server oder Wisprd </translation>
     </message>
     <message>
-        <source>Backup Wallet</source>
-        <translation>Wallet sichern</translation>
+        <location line="+1"/>
+        <source>List commands</source>
+        <translation>Befehle auflisten</translation>
     </message>
     <message>
-        <source>Wallet Data (*.dat)</source>
-        <translation>Wallet-Daten (*.dat)</translation>
+        <location line="+1"/>
+        <source>Get help for a command</source>
+        <translation>Hilfe zu einem Befehl erhalten</translation>
     </message>
     <message>
-        <source>Backup Failed</source>
-        <translation>Sicherung fehlgeschlagen</translation>
+        <location line="+1"/>
+        <source>Options:</source>
+        <translation>Optionen:</translation>
     </message>
     <message>
-        <source>There was an error trying to save the wallet data to %1.</source>
-        <translation>Beim Speichern der Wallet-Daten nach %1 ist ein Fehler aufgetreten.</translation>
+        <location line="+2"/>
+        <source>Specify configuration file (default: Wispr.conf)</source>
+        <translation>Konfigurationsdatei angeben (Standard: Wispr.conf)</translation>
     </message>
     <message>
-        <source>Backup Successful</source>
-        <translation>Sicherung erfolgreich</translation>
+        <location line="+1"/>
+        <source>Specify pid file (default: Wisprd.pid)</source>
+        <translation>PID Datei angeben (Standard: Wispr.pid)</translation>
     </message>
     <message>
-        <source>The wallet data was successfully saved to %1.</source>
-        <translation>Speichern der Wallet-Daten nach %1 war erfolgreich.</translation>
-    </message>
-</context>
-<context>
-    <name>wispr-core</name>
-    <message>
-        <source>Error</source>
-        <translation>Fehler</translation>
+        <location line="+2"/>
+        <source>Specify wallet file (within data directory)</source>
+        <translation>Wallet-Datei festlegen (innerhalb des Datenverzeichnisses)</translation>
     </message>
     <message>
-        <source>Information</source>
-        <translation>Hinweis</translation>
+        <location line="-1"/>
+        <source>Specify data directory</source>
+        <translation>Datenverzeichnis festlegen</translation>
     </message>
     <message>
-        <source>Synchronization failed</source>
-        <translation>Synchronisierung fehlgeschlagen</translation>
+        <location line="+163"/>
+        <source>%s, you must set a rpcpassword in the configuration file:
+%s
+It is recommended you use the following random password:
+rpcuser=Wisprrpc
+rpcpassword=%s
+(you do not need to remember this password)
+The username and password MUST NOT be the same.
+If the file does not exist, create it with owner-readable-only file permissions.
+It is also recommended to set alertnotify so you are notified of problems;
+for example: alertnotify=echo %%s | mail -s &quot;Wispr Alert&quot; admin@foo.com
+</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <source>Synchronization finished</source>
-        <translation>Synchronisierung erfolgreich beendet</translation>
+        <location line="-161"/>
+        <source>Set database cache size in megabytes (default: 25)</source>
+        <translation>Größe des Datenbankcaches in MB festlegen (Standard: 25)</translation>
     </message>
     <message>
-        <source>Synchronization pending...</source>
-        <translation>Synchronisierung ausstehend...</translation>
+        <location line="+1"/>
+        <source>Set database disk log size in megabytes (default: 100)</source>
+        <translation>Größe des Datenbankspeichers in MB festlegen (Standard: 100)</translation>
     </message>
     <message>
-        <source>Synchronizing budgets...</source>
-        <translation>Synchronisiere Budgets....</translation>
+        <location line="+5"/>
+        <source>Listen for connections on &lt;port&gt; (default: 17000 or testnet: 17002)</source>
+        <translation>Horche für verbindungen auf &lt;Port&gt; (Standard: 17000 oder Testnetz: 17002)</translation>
     </message>
     <message>
-        <source>Synchronizing masternode winners...</source>
-        <translation>Synchronisiere ausgewählte Masternodes....</translation>
+        <location line="+1"/>
+        <source>Maintain at most &lt;n&gt; connections to peers (default: 125)</source>
+        <translation>Maximal &lt;n&gt; Verbindungen zu Gegenstellen aufrechterhalten (Standard: 125)</translation>
     </message>
     <message>
-        <source>Synchronizing masternodes...</source>
-        <translation>Synchronisiere Masternodes....</translation>
+        <location line="+3"/>
+        <source>Connect to a node to retrieve peer addresses, and disconnect</source>
+        <translation>Mit dem Knoten verbinden um Adressen von Gegenstellen abzufragen, danach trennen</translation>
     </message>
     <message>
-        <source>Synchronizing sporks...</source>
-        <translation>Synchronisiere Sporks....</translation>
+        <location line="+1"/>
+        <source>Specify your own public address</source>
+        <translation>Die eigene öffentliche Adresse angeben</translation>
     </message>
     <message>
-        <source>This help message</source>
-        <translation>Dieser Hilfetext</translation>
+        <location line="+4"/>
+        <source>Bind to given address. Use [host]:port notation for IPv6</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <source>This is experimental software.</source>
-        <translation>Dies ist experimentelle Software.</translation>
+        <location line="+1"/>
+        <source>Query for peer addresses via DNS lookup, if low on addresses (default: 1 unless -connect)</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <source>This is intended for regression testing tools and app development.</source>
-        <translation>Dies ist für Regressionstest-Tools und Anwendungsentwicklung gedacht.</translation>
+        <location line="+3"/>
+        <source>Always query for peer addresses via DNS lookup (default: 0)</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <source>This is not a Masternode.</source>
-        <translation>Dies ist keine Masternode.</translation>
+        <location line="+4"/>
+        <source>Threshold for disconnecting misbehaving peers (default: 100)</source>
+        <translation>Schwellenwert, um Verbindungen zu sich nicht konform verhaltenden Gegenstellen zu beenden (Standard: 100)</translation>
     </message>
     <message>
-        <source>Threshold for disconnecting misbehaving peers (default: %u)</source>
-        <translation>Schwellwert zum trennen von sich falsch verhaltenden Gegenstellen (Standard: %u)</translation>
+        <location line="+1"/>
+        <source>Number of seconds to keep misbehaving peers from reconnecting (default: 86400)</source>
+        <translation>Anzahl Sekunden, während denen sich nicht konform verhaltenden Gegenstellen die Wiederverbindung verweigert wird (Standard: 86400)</translation>
     </message>
     <message>
-        <source>Transaction amount too small</source>
-        <translation>Transaktionsbetrag zu niedrig</translation>
+        <location line="+153"/>
+        <source>An error occurred while setting up the RPC port %u for listening on IPv4: %s</source>
+        <translation>Beim Einrichten des abzuhörenden RPC-Ports %u für IPv4 ist ein Fehler aufgetreten: %s</translation>
     </message>
     <message>
-        <source>Transaction amounts must be positive</source>
-        <translation>Transaktionsbeträge müssen positiv sein</translation>
+        <location line="-126"/>
+        <source>Listen for JSON-RPC connections on &lt;port&gt; (default: 17001 or testnet: 17003)</source>
+        <translation>Horche für eingehende JSON-RPC Verbindungen auf &lt;Port&gt;(Standard: 17001 or Testnetz: 17003)</translation>
     </message>
     <message>
-        <source>Transaction created successfully.</source>
-        <translation>Transaktion erfolgreich erstellt.</translation>
+        <location line="-16"/>
+        <source>Accept command line and JSON-RPC commands</source>
+        <translation>Kommandozeilenbefehle und JSON-RPC-Befehle annehmen</translation>
     </message>
     <message>
-        <source>Transaction fees are too high.</source>
-        <translation>Transaktionsgebühren sind zu hoch.</translation>
+        <location line="+1"/>
+        <source>Run in the background as a daemon and accept commands</source>
+        <translation>Als Hintergrunddienst starten und Befehle annehmen</translation>
     </message>
     <message>
-        <source>Transaction not valid.</source>
-        <translation>Transaktion ungültig.</translation>
-    </message>
-    <message>
-        <source>Transaction too large for fee policy</source>
-        <translation>Transaktion ist für die Gebührenrichtlinie zu groß</translation>
-    </message>
-    <message>
-        <source>Transaction too large</source>
-        <translation>Transaktion zu groß</translation>
-    </message>
-    <message>
-        <source>Transmitting final transaction.</source>
-        <translation>Übertrage fertige Transaktion.</translation>
-    </message>
-    <message>
-        <source>Unable to bind to %s on this computer (bind returned error %s)</source>
-        <translation>Kann auf diesem Computer nicht an %s binden (zurückgegebener Fehler: %s)</translation>
-    </message>
-    <message>
-        <source>Unable to sign spork message, wrong key?</source>
-        <translation>Die Spork-Nachricht konnte nicht signiert werden. Falscher Key?</translation>
-    </message>
-    <message>
-        <source>Unknown network specified in -onlynet: '%s'</source>
-        <translation>Unbekannter Netztyp in -onlynet angegeben: '%s'</translation>
-    </message>
-    <message>
-        <source>Unknown state: id = %u</source>
-        <translation>Unbekannter Status: id = %u</translation>
-    </message>
-    <message>
-        <source>Upgrade wallet to latest format</source>
-        <translation>Wallet auf das neueste Format aktualisieren</translation>
-    </message>
-    <message>
-        <source>Use OpenSSL (https) for JSON-RPC connections</source>
-        <translation>OpenSSL (https) für JSON-RPC-Verbindungen verwenden</translation>
-    </message>
-    <message>
-        <source>Use UPnP to map the listening port (default: %u)</source>
-        <translation>UPnP verwenden, um eine Portweiterleitung einzurichten (Standard: %u)</translation>
-    </message>
-    <message>
-        <source>Use UPnP to map the listening port (default: 1 when listening)</source>
-        <translation>UPnP verwenden, um eine Portweiterleitung einzurichten (Standard: 1, wenn abgehört wird)</translation>
-    </message>
-    <message>
+        <location line="+1"/>
         <source>Use the test network</source>
-        <translation>Das Testnetzwerk verwenden</translation>
+        <translation>Das Testnetz verwenden</translation>
     </message>
     <message>
+        <location line="-23"/>
+        <source>Accept connections from outside (default: 1 if no -proxy or -connect)</source>
+        <translation>Eingehende Verbindungen annehmen (Standard: 1, wenn nicht -proxy oder -connect)</translation>
+    </message>
+    <message>
+        <location line="+160"/>
+        <source>An error occurred while setting up the RPC port %u for listening on IPv6, falling back to IPv4: %s</source>
+        <translation>Beim Einrichten des abzuhörenden RPC-Ports %u für IPv6 ist ein Fehler aufgetreten, es wird auf IPv4 zurückgegriffen: %s</translation>
+    </message>
+    <message>
+        <location line="-84"/>
+        <source>Warning: -paytxfee is set very high! This is the transaction fee you will pay if you send a transaction.</source>
+        <translation>Warnung: -paytxfee ist auf einen sehr hohen Wert festgelegt! Dies ist die Gebühr die beim Senden einer Transaktion fällig wird.</translation>
+    </message>
+    <message>
+        <location line="+46"/>
+        <source>Warning: Please check that your computer&apos;s date and time are correct! If your clock is wrong Wispr will not work properly.</source>
+        <translation>Wanung : Bitte prüfen Sie ob Datum und Uhrzeit richtig eingestellt sind. Wenn das Datum falsch ist wird Wispr nicht richtig funktionieren.</translation>
+    </message>
+    <message>
+        <location line="-19"/>
+        <source>Warning: error reading wallet.dat! All keys read correctly, but transaction data or address book entries might be missing or incorrect.</source>
+        <translation>Warnung: Lesen von wallet.dat fehlgeschlagen! Alle Schlüssel wurden korrekt gelesen, Transaktionsdaten bzw. Adressbucheinträge fehlen aber möglicherweise oder sind inkorrekt.</translation>
+    </message>
+    <message>
+        <location line="-16"/>
+        <source>Warning: wallet.dat corrupt, data salvaged! Original wallet.dat saved as wallet.{timestamp}.bak in %s; if your balance or transactions are incorrect you should restore from a backup.</source>
+        <translation>Warnung: wallet.dat beschädigt, Rettung erfolgreich! Original wallet.dat wurde als wallet.{Zeitstempel}.dat in %s gespeichert. Falls ihr Kontostand oder Transaktionen nicht korrekt sind, sollten Sie von einer Datensicherung wiederherstellen.</translation>
+    </message>
+    <message>
+        <location line="-31"/>
+        <source>Attempt to recover private keys from a corrupt wallet.dat</source>
+        <translation>Versucht private Schlüssel aus einer beschädigten wallet.dat wiederherzustellen</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Block creation options:</source>
+        <translation>Blockerzeugungsoptionen:</translation>
+    </message>
+    <message>
+        <location line="-66"/>
+        <source>Connect only to the specified node(s)</source>
+        <translation>Nur mit dem/den angegebenen Knoten verbinden</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Discover own IP address (default: 1 when listening and no -externalip)</source>
+        <translation>Eigene IP-Adresse erkennen (Standard: 1, wenn abgehört wird und nicht -externalip)</translation>
+    </message>
+    <message>
+        <location line="+97"/>
+        <source>Failed to listen on any port. Use -listen=0 if you want this.</source>
+        <translation>Fehler, es konnte kein Port abgehört werden. Wenn dies so gewünscht wird -listen=0 verwenden.</translation>
+    </message>
+    <message>
+        <location line="-2"/>
+        <source>Invalid -tor address: &apos;%s&apos;</source>
+        <translation>Ungültige -tor Adresse: &apos;%s&apos;</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Invalid amount for -reservebalance=&lt;amount&gt;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="-85"/>
+        <source>Maximum per-connection receive buffer, &lt;n&gt;*1000 bytes (default: 5000)</source>
+        <translation>Maximale Größe, &lt;n&gt; * 1000 Byte, des Empfangspuffers pro Verbindung (Standard: 5000)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Maximum per-connection send buffer, &lt;n&gt;*1000 bytes (default: 1000)</source>
+        <translation>Maximale Größe, &lt;n&gt; * 1000 Byte, des Sendepuffers pro Verbindung (Standard: 1000)</translation>
+    </message>
+    <message>
+        <location line="-16"/>
+        <source>Only connect to nodes in network &lt;net&gt; (IPv4, IPv6 or Tor)</source>
+        <translation>Verbinde nur zu Knoten des Netztyps &lt;net&gt; (IPv4, IPv6 oder Tor)</translation>
+    </message>
+    <message>
+        <location line="+30"/>
+        <source>Prepend debug output with timestamp</source>
+        <translation>Debuginformationen einen Zeitstempel voranstellen</translation>
+    </message>
+    <message>
+        <location line="+36"/>
+        <source>SSL options: (see the Bitcoin Wiki for SSL setup instructions)</source>
+        <translation>SSL-Optionen: (siehe Bitcoin-Wiki für SSL-Installationsanweisungen)</translation>
+    </message>
+    <message>
+        <location line="-34"/>
+        <source>Send trace/debug info to console instead of debug.log file</source>
+        <translation>Rückverfolgungs- und Debuginformationen an die Konsole senden anstatt sie in die Datei debug.log zu schreiben</translation>
+    </message>
+    <message>
+        <location line="+33"/>
+        <source>Set maximum block size in bytes (default: 250000)</source>
+        <translation>Maximale Blockgröße in Bytes festlegen (Standard: 250000)</translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Set minimum block size in bytes (default: 0)</source>
+        <translation>Minimale Blockgröße in Byte festlegen (Standard: 0)</translation>
+    </message>
+    <message>
+        <location line="-33"/>
+        <source>Shrink debug.log file on client startup (default: 1 when no -debug)</source>
+        <translation>Verkleinere Datei debug.log beim Starten des Clients (Standard: 1, wenn kein -debug)</translation>
+    </message>
+    <message>
+        <location line="-41"/>
+        <source>Specify connection timeout in milliseconds (default: 5000)</source>
+        <translation>Verbindungstimeout in Millisekunden festlegen (Standard: 5000)</translation>
+    </message>
+    <message>
+        <location line="+28"/>
+        <source>Use UPnP to map the listening port (default: 0)</source>
+        <translation>UPnP verwenden, um die Portweiterleitung einzurichten (Standard: 0)</translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Use UPnP to map the listening port (default: 1 when listening)</source>
+        <translation>UPnP verwenden, um die Portweiterleitung einzurichten (Standard: 1, wenn abgehört wird)</translation>
+    </message>
+    <message>
+        <location line="-25"/>
+        <source>Use proxy to reach tor hidden services (default: same as -proxy)</source>
+        <translation>Proxy benutzen um versteckte Services zu erreichen (Standard: selbe Einstellung wie Proxy)</translation>
+    </message>
+    <message>
+        <location line="+45"/>
         <source>Username for JSON-RPC connections</source>
         <translation>Benutzername für JSON-RPC-Verbindungen</translation>
     </message>
     <message>
-        <source>Value more than Obfuscation pool maximum allows.</source>
-        <translation>Wert höher als der vom Verschleierungspool maximal erlaubte.</translation>
+        <location line="+50"/>
+        <source>Verifying database integrity...</source>
+        <translation>Überprüfe Datenbank Integrität...</translation>
     </message>
     <message>
-        <source>Verifying blocks...</source>
-        <translation>Verifiziere Blöcke...</translation>
+        <location line="+43"/>
+        <source>Error: Wallet locked, unable to create transaction!</source>
+        <translation>Fehler: Brieftasche verschlüsselt, unfähig Transaktion zu erstellen</translation>
     </message>
     <message>
-        <source>Verifying wallet...</source>
-        <translation>Verifiziere Wallet...</translation>
+        <location line="+2"/>
+        <source>Error: This transaction requires a transaction fee of at least %s because of its amount, complexity, or use of recently received funds!</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <source>Wallet %s resides outside data directory %s</source>
-        <translation>Wallet %s liegt außerhalb des Datenverzeichnisses %s</translation>
+        <location line="+3"/>
+        <source>Error: Transaction creation failed!</source>
+        <translation>Fehler: Erstellung der Transaktion fehlgeschlagen</translation>
     </message>
     <message>
-        <source>Wallet is locked.</source>
-        <translation>Wallet gesperrt.</translation>
+        <location line="+2"/>
+        <source>Error: The transaction was rejected! This might happen if some of the coins in your wallet were already spent, such as if you used a copy of wallet.dat and coins were spent in the copy but not marked as spent here.</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <source>Wallet needed to be rewritten: restart Wispr Core to complete</source>
-        <translation>Wallet musste neu geschrieben werden: Bitte Wispr Core neu starten</translation>
-    </message>
-    <message>
-        <source>Wallet options:</source>
-        <translation>Wallet-Optionen:</translation>
-    </message>
-    <message>
-        <source>Wallet window title</source>
-        <translation>Fensterüberschrift der Wallet</translation>
-    </message>
-    <message>
+        <location line="-15"/>
         <source>Warning</source>
         <translation>Warnung</translation>
     </message>
     <message>
+        <location line="+1"/>
+        <source>Information</source>
+        <translation>Information</translation>
+    </message>
+    <message>
+        <location line="-7"/>
         <source>Warning: This version is obsolete, upgrade required!</source>
         <translation>Warnung: Diese Version is veraltet, Aktualisierung erforderlich!</translation>
     </message>
     <message>
-        <source>on startup</source>
-        <translation>beim Starten</translation>
+        <location line="-23"/>
+        <source>wallet.dat corrupt, salvage failed</source>
+        <translation>wallet.dat beschädigt, Rettung fehlgeschlagen</translation>
     </message>
     <message>
-        <source>wallet.dat corrupt, salvage failed</source>
-        <translation>wallet.dat beschädigt, Datenrettung fehlgeschlagen</translation>
+        <location line="-55"/>
+        <source>Password for JSON-RPC connections</source>
+        <translation>Passwort für JSON-RPC-Verbindungen</translation>
+    </message>
+    <message>
+        <location line="-47"/>
+        <source>Connect through SOCKS5 proxy</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Sync time with other nodes. Disable if time on your system is precise e.g. syncing with NTP (default: 1)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>When creating transactions, ignore inputs with value less than this (default: 0.01)</source>
+        <translation>Beim erstellen einer Transaktion werden eingaben kleiner als dieser Wert ignoriert (Standard 0,01)</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Output debugging information (default: 0, supplying &lt;category&gt; is optional)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>If &lt;category&gt; is not supplied, output all debugging information.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>&lt;category&gt; can be:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Enter regression test mode, which uses a special chain in which blocks can be solved instantly. This is intended for regression testing tools and app development.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Allow JSON-RPC connections from specified IP address</source>
+        <translation>JSON-RPC-Verbindungen von der angegebenen IP-Adresse erlauben</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Send commands to node running on &lt;ip&gt; (default: 127.0.0.1)</source>
+        <translation>Sende Befehle an Knoten &lt;ip&gt; (Standard: 127.0.0.1)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Wait for RPC server to start</source>
+        <translation>Bitte warten bis der RPC Server startet.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Set the number of threads to service RPC calls (default: 4)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Execute command when the best block changes (%s in cmd is replaced by block hash)</source>
+        <translation>Kommando ausführen wenn der beste Block wechselt (%s im Kommando wird durch den Hash des Blocks ersetzt)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Execute command when a wallet transaction changes (%s in cmd is replaced by TxID)</source>
+        <translation>Kommando ausführen wenn sich eine Wallet-Transaktion verändert (%s im Kommando wird durch die TxID ersetzt)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Require a confirmations for change (default: 0)</source>
+        <translation>Benötigt eine Bestätigung zur Änderung (Standard: 0)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Execute command when a relevant alert is received (%s in cmd is replaced by message)</source>
+        <translation>Kommando ausführen wenn eine relevante Meldung eingeht (%s in cmd wird von der Meldung ausgetauscht)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Upgrade wallet to latest format</source>
+        <translation>Wallet auf das neueste Format aktualisieren</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Set key pool size to &lt;n&gt; (default: 100)</source>
+        <translation>Größe des Schlüsselpools festlegen auf &lt;n&gt; (Standard: 100)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Rescan the block chain for missing wallet transactions</source>
+        <translation>Blockkette erneut nach fehlenden Wallet-Transaktionen durchsuchen</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>How thorough the block verification is (0-6, default: 1)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Imports blocks from external wsp000?.dat file</source>
+        <translation>Importiere Blöcke aus externer wsp000?.dat Datei.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Keep at most &lt;n&gt; MiB of unconnectable blocks in memory (default: %u)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Use OpenSSL (https) for JSON-RPC connections</source>
+        <translation>OpenSSL (https) für JSON-RPC-Verbindungen verwenden</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Server certificate file (default: server.cert)</source>
+        <translation>Serverzertifikat (Standard: server.cert)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Server private key (default: server.pem)</source>
+        <translation>Privater Serverschlüssel (Standard: server.pem)</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Error: Unsupported argument -socks found. Setting SOCKS version isn&apos;t possible anymore, only SOCKS5 proxies are supported.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Initialization sanity check failed. Wispr is shutting down.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Error loading block database</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+29"/>
+        <source>Error: Wallet unlocked for staking only, unable to create transaction.</source>
+        <translation>Fehler: Die Brieftasche wurde nur zur Zinserzeugung entsperrt. Transaktionen können nicht erzeugt werden.</translation>
+    </message>
+    <message>
+        <location line="-14"/>
+        <source>Error: Disk space is low!</source>
+        <translation>Warnung: Festplatte hat wenig freien Speicher</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
+        <translation>Dies ist eine pre-Release Version. Verwendung auf eigenes Risiko. Verwenden Sie diese Version nicht für das Minen oder als Anwendung für Händler / Dienstleistungen.</translation>
+    </message>
+    <message>
+        <location line="-135"/>
+        <source>This help message</source>
+        <translation>Dieser Hilfetext</translation>
+    </message>
+    <message>
+        <location line="+100"/>
+        <source>Wallet %s resides outside data directory %s.</source>
+        <translation>Wallet %s liegt außerhalb des Daten Verzeichnisses %s.</translation>
+    </message>
+    <message>
+        <location line="+46"/>
+        <source>Unable to bind to %s on this computer (bind returned error %d, %s)</source>
+        <translation>Kann auf diesem Computer nicht an %s binden (von bind zurückgegebener Fehler %d, %s)</translation>
+    </message>
+    <message>
+        <location line="-136"/>
+        <source>Allow DNS lookups for -addnode, -seednode and -connect</source>
+        <translation>Erlaube DNS-Namensauflösung für -addnode, -seednode und -connect</translation>
+    </message>
+    <message>
+        <location line="+121"/>
+        <source>Loading addresses...</source>
+        <translation>Lade Adressen...</translation>
+    </message>
+    <message>
+        <location line="-10"/>
+        <source>Error loading wallet.dat: Wallet corrupted</source>
+        <translation>Fehler beim Laden von wallet.dat: Wallet beschädigt</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Error loading wallet.dat: Wallet requires newer version of Wispr</source>
+        <translation>Fehler beim Laden wallet.dat. Brieftasche benötigt neuere Version der Wispr Brieftasche.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Wallet needed to be rewritten: restart Wispr to complete</source>
+        <translation>Brieftasche muss neu geschrieben werden. Starte die Wispr Brieftasche neu zum komplettieren.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Error loading wallet.dat</source>
+        <translation>Fehler beim Laden von wallet.dat</translation>
+    </message>
+    <message>
+        <location line="-15"/>
+        <source>Invalid -proxy address: &apos;%s&apos;</source>
+        <translation>Ungültige Adresse in -proxy: &apos;%s&apos;</translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Unknown network specified in -onlynet: &apos;%s&apos;</source>
+        <translation>Unbekannter Netztyp in -onlynet angegeben: &apos;%s&apos;</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Cannot resolve -bind address: &apos;%s&apos;</source>
+        <translation>Kann Adresse in -bind nicht auflösen: &apos;%s&apos;</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Cannot resolve -externalip address: &apos;%s&apos;</source>
+        <translation>Kann Adresse in -externalip nicht auflösen: &apos;%s&apos;</translation>
+    </message>
+    <message>
+        <location line="-22"/>
+        <source>Invalid amount for -paytxfee=&lt;amount&gt;: &apos;%s&apos;</source>
+        <translation>Ungültiger Betrag für -paytxfee=&lt;amount&gt;: &apos;%s&apos;</translation>
+    </message>
+    <message>
+        <location line="+59"/>
+        <source>Sending...</source>
+        <translation>Wird gesendet...</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Invalid amount</source>
+        <translation>Ungültiger Betrag</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Insufficient funds</source>
+        <translation>Unzureichender Kontostand</translation>
+    </message>
+    <message>
+        <location line="-41"/>
+        <source>Loading block index...</source>
+        <translation>Lade Blockindex...</translation>
+    </message>
+    <message>
+        <location line="-105"/>
+        <source>Add a node to connect to and attempt to keep the connection open</source>
+        <translation>Mit dem Knoten verbinden und versuchen die Verbindung aufrecht zu halten</translation>
+    </message>
+    <message>
+        <location line="+131"/>
+        <source>Unable to bind to %s on this computer. Wispr is probably already running.</source>
+        <translation>Fehler beim anbinden %s auf diesem Computer. BlaclCoin Client läuft wahrscheinlich bereits.</translation>
+    </message>
+    <message>
+        <location line="-108"/>
+        <source>Fee per KB to add to transactions you send</source>
+        <translation>Gebühr pro KB, zusätzlich zur ausgehenden Transaktion</translation>
+    </message>
+    <message>
+        <location line="+40"/>
+        <source>How many blocks to check at startup (default: 500, 0 = all)</source>
+        <translation>Anzahl der zu prüfenden Blöcke bei Programmstart (Standard: 2500, 0 = alle)</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Acceptable ciphers (default: TLSv1.2+HIGH:TLSv1+HIGH:!SSLv2:!aNULL:!eNULL:!3DES:@STRENGTH)</source>
+        <translation>Gültige Codierschlüssel (Standard: TLSv1.2+HIGH:TLSv1+HIGH:!SSLv2:!aNULL:!eNULL:!3DES:@STRENGTH)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Warning: Deprecated argument -debugnet ignored, use -debug=net</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Invalid amount for -mininput=&lt;amount&gt;: &apos;%s&apos;</source>
+        <translation>Ungültiger Betrag für -mininput=&lt;amount&gt;:&apos;%s&apos;</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Cannot obtain a lock on data directory %s. Wispr is probably already running.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Error initializing wallet database environment %s!</source>
+        <translation>Fehler beim Start der Wallet-Datenbank %s!</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Loading wallet...</source>
+        <translation>Lade Wallet...</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Cannot downgrade wallet</source>
+        <translation>Wallet kann nicht auf eine ältere Version herabgestuft werden</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Cannot write default address</source>
+        <translation>Standardadresse kann nicht geschrieben werden</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Rescanning...</source>
+        <translation>Durchsuche erneut...</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Done loading</source>
+        <translation>Laden abgeschlossen</translation>
+    </message>
+    <message>
+        <location line="+33"/>
+        <source>To use the %s option</source>
+        <translation>Zur Nutzung der %s Option</translation>
+    </message>
+    <message>
+        <location line="-27"/>
+        <source>Error</source>
+        <translation>Fehler</translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <source>You must set rpcpassword=&lt;password&gt; in the configuration file:
+%s
+If the file does not exist, create it with owner-readable-only file permissions.</source>
+        <translation>Sie müssen den Wert rpcpassword=&lt;passwort&gt; in der Konfigurationsdatei angeben:
+%s
+Falls die Konfigurationsdatei nicht existiert, erzeugen Sie diese bitte mit Leserechten nur für den Dateibesitzer.</translation>
     </message>
 </context>
 </TS>

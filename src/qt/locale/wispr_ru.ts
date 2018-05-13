@@ -1,3530 +1,3231 @@
-<TS language="ru" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="ru" version="2.1">
+<context>
+    <name>AboutDialog</name>
+    <message>
+        <location filename="../forms/aboutdialog.ui" line="+14"/>
+        <source>About Wispr</source>
+        <translation>О Wispr</translation>
+    </message>
+    <message>
+        <location line="+39"/>
+        <source>&lt;b&gt;Wispr&lt;/b&gt; version</source>
+        <translation>&lt;b&gt;Wispr&lt;/b&gt; версия</translation>
+    </message>
+    <message>
+        <location line="+41"/>
+        <source>Copyright © 2009-2017 The Bitcoin developers
+Copyright © 2012-2014 The NovaCoin developers
+Copyright © 2014-2017 The Blackcoin developers
+Copyright © 2017 The Wispr developers</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>
+This is experimental software.
+
+Distributed under the MIT/X11 software license, see the accompanying file COPYING or &lt;a href=&quot;http://www.opensource.org/licenses/mit-license.php&quot;&gt;http://www.opensource.org/licenses/mit-license.php&lt;/a&gt;.
+
+This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit (&lt;a href=&quot;https://www.openssl.org/&quot;&gt;https://www.openssl.org/&lt;/a&gt;) and cryptographic software written by Eric Young (&lt;a href=&quot;mailto:eay@cryptsoft.com&quot;&gt;eay@cryptsoft.com&lt;/a&gt;) and UPnP software written by Thomas Bernard.</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
 <context>
     <name>AddressBookPage</name>
     <message>
-        <source>Right-click to edit address or label</source>
-        <translation>Щелкните правой кнопкой мыши, чтобы изменить адрес или метку</translation>
+        <location filename="../forms/addressbookpage.ui" line="+14"/>
+        <source>Address Book</source>
+        <translation>Адресная книга</translation>
     </message>
     <message>
+        <location line="+22"/>
+        <source>Double-click to edit address or label</source>
+        <translation>Для того, чтобы изменить адрес или метку давжды кликните по изменяемому объекту</translation>
+    </message>
+    <message>
+        <location line="+24"/>
         <source>Create a new address</source>
         <translation>Создать новый адрес</translation>
     </message>
     <message>
-        <source>&amp;New</source>
-        <translation>&amp;Новый</translation>
-    </message>
-    <message>
+        <location line="+10"/>
         <source>Copy the currently selected address to the system clipboard</source>
-        <translation>Скопировать текущий выбранный адрес в буфер обмена системы</translation>
+        <translation>Копировать текущий выделенный адрес в буфер обмена</translation>
     </message>
     <message>
-        <source>&amp;Copy</source>
-        <translation>&amp;Копировать</translation>
+        <location line="-7"/>
+        <source>&amp;New Address</source>
+        <translation>&amp;Новый адрес</translation>
     </message>
     <message>
+        <location line="-43"/>
+        <source>These are your Wispr addresses for receiving payments. You may want to give a different one to each sender so you can keep track of who is paying you.</source>
+        <translation>Это Ваши адреса для получения платежей. Вы можете дать разные адреса отправителям, чтобы отслеживать, кто именно вам платит.</translation>
+    </message>
+    <message>
+        <location line="+53"/>
+        <source>&amp;Copy Address</source>
+        <translation>&amp;Копировать адрес</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Show &amp;QR Code</source>
+        <translation>Показать &amp;QR код</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Sign a message to prove you own a Wispr address</source>
+        <translation>Подписать сообщение, чтобы доказать владение адресом Wispr</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Sign &amp;Message</source>
+        <translation>&amp;Подписать сообщение</translation>
+    </message>
+    <message>
+        <location line="+17"/>
         <source>Delete the currently selected address from the list</source>
-        <translation>Удалить текущий выбранный адрес из списка</translation>
+        <translation>Удалить выбранный адрес из списка</translation>
     </message>
     <message>
+        <location line="-10"/>
+        <source>Verify a message to ensure it was signed with a specified Wispr address</source>
+        <translation>Проверить сообщение, чтобы убедиться, что оно было подписано указанным адресом Wispr</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>&amp;Verify Message</source>
+        <translation>&amp;Проверить сообщение</translation>
+    </message>
+    <message>
+        <location line="+10"/>
         <source>&amp;Delete</source>
         <translation>&amp;Удалить</translation>
     </message>
     <message>
-        <source>Export the data in the current tab to a file</source>
-        <translation>Экспортировать данные с текущей вкладки в файл</translation>
-    </message>
-    <message>
-        <source>&amp;Export</source>
-        <translation>&amp;Экспорт</translation>
-    </message>
-    <message>
-        <source>C&amp;lose</source>
-        <translation>З&amp;акрыть</translation>
-    </message>
-    <message>
-        <source>Choose the address to send coins to</source>
-        <translation>Выберите адрес для отправки монет</translation>
-    </message>
-    <message>
-        <source>Choose the address to receive coins with</source>
-        <translation>Выберите адрес для получения монет</translation>
-    </message>
-    <message>
-        <source>C&amp;hoose</source>
-        <translation>В&amp;ыберите</translation>
-    </message>
-    <message>
-        <source>Sending addresses</source>
-        <translation>Адреса отправки</translation>
-    </message>
-    <message>
-        <source>Receiving addresses</source>
-        <translation>Адреса получения</translation>
-    </message>
-    <message>
-        <source>These are your Wispr addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Это ваши Wispr-адреса для отправки платежей. Перед отправкой монет всегда проверяйте сумму и адрес получателя.</translation>
-    </message>
-    <message>
-        <source>These are your Wispr addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Это ваши Wispr-адреса для получения платежей. Для каждой транзакции рекомендуется использовать новый адрес получения.</translation>
-    </message>
-    <message>
-        <source>&amp;Copy Address</source>
-        <translation>&amp;Копировать Адрес</translation>
-    </message>
-    <message>
+        <location filename="../addressbookpage.cpp" line="+66"/>
         <source>Copy &amp;Label</source>
-        <translation>Копировать &amp;Метку</translation>
+        <translation>Копировать &amp;метку</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>&amp;Edit</source>
-        <translation>&amp;Редактировать</translation>
+        <translation>&amp;Правка</translation>
     </message>
     <message>
-        <source>Export Address List</source>
-        <translation>Экспорт списка адресов</translation>
+        <location line="+248"/>
+        <source>Export Address Book Data</source>
+        <translation>Экспортировать адресную книгу</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Comma separated file (*.csv)</source>
-        <translation>Файл формата csv</translation>
+        <translation>Текст, разделённый запятыми (*.csv)</translation>
     </message>
     <message>
-        <source>Exporting Failed</source>
+        <location line="+13"/>
+        <source>Error exporting</source>
         <translation>Ошибка экспорта</translation>
     </message>
     <message>
-        <source>There was an error trying to save the address list to %1. Please try again.</source>
-        <translation>Произошла ошибка при попытке сохранить список адресов в %1. Пожалуйста, попробуйте еще раз.</translation>
+        <location line="+0"/>
+        <source>Could not write to file %1.</source>
+        <translation>Невозможно записать в файл %1.</translation>
     </message>
 </context>
 <context>
     <name>AddressTableModel</name>
     <message>
+        <location filename="../addresstablemodel.cpp" line="+145"/>
         <source>Label</source>
         <translation>Метка</translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>Address</source>
         <translation>Адрес</translation>
     </message>
     <message>
+        <location line="+36"/>
         <source>(no label)</source>
-        <translation>(нет метки)</translation>
+        <translation>[нет метки]</translation>
     </message>
 </context>
 <context>
     <name>AskPassphraseDialog</name>
     <message>
+        <location filename="../forms/askpassphrasedialog.ui" line="+26"/>
         <source>Passphrase Dialog</source>
-        <translation>Диалоговое окно кодовой фразы</translation>
+        <translation>Диалог ввода пароля</translation>
     </message>
     <message>
+        <location line="+21"/>
         <source>Enter passphrase</source>
-        <translation>Введите кодовую фразу</translation>
+        <translation>Введите пароль</translation>
     </message>
     <message>
+        <location line="+14"/>
         <source>New passphrase</source>
-        <translation>Новая кодовая фраза</translation>
+        <translation>Новый пароль</translation>
     </message>
     <message>
+        <location line="+14"/>
         <source>Repeat new passphrase</source>
-        <translation>Повторить новую кодовую фразу</translation>
+        <translation>Повторите новый пароль</translation>
     </message>
     <message>
-        <source>For anonymization and staking only</source>
-        <translation>Только для анонимизации и хранения</translation>
+        <location line="+33"/>
+        <source>Serves to disable the trivial sendmoney when OS account compromised. Provides no real security.</source>
+        <translation>Служит для предотвращения тривиальной отправки монет, если ваша система скомпрометирована. Не предоставляет реальной безопасности.</translation>
     </message>
     <message>
-        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
-        <translation>Введите новый пароль к кошельку. &lt;br/&gt;Используйте при этом десять &lt;/b&gt;или болле случайных символов &lt;/b&gt;или восем и более слов.</translation>
+        <location line="+3"/>
+        <source>For staking only</source>
+        <translation>Только для участия в доле</translation>
     </message>
     <message>
+        <location filename="../askpassphrasedialog.cpp" line="+38"/>
         <source>Encrypt wallet</source>
-        <translation>Зашифровать кошелек</translation>
+        <translation>Зашифровать бумажник</translation>
     </message>
     <message>
+        <location line="+7"/>
         <source>This operation needs your wallet passphrase to unlock the wallet.</source>
-        <translation>Для этой операции требуется кодовая фраза вашего кошелька, чтобы разблокировать кошелек.</translation>
+        <translation>Для выполнения операции требуется пароль вашего бумажника.</translation>
     </message>
     <message>
+        <location line="+5"/>
         <source>Unlock wallet</source>
-        <translation>Снятие блокировки кошелька</translation>
+        <translation>Разблокировать бумажник</translation>
     </message>
     <message>
+        <location line="+3"/>
         <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
-        <translation>Для операции дешифрования вашего кошелька нужна кодовая фраза.</translation>
+        <translation>Для выполнения операции требуется пароль вашего бумажника.</translation>
     </message>
     <message>
+        <location line="+5"/>
         <source>Decrypt wallet</source>
-        <translation>Расшифровать кошелек</translation>
+        <translation>Расшифровать бумажник</translation>
     </message>
     <message>
+        <location line="+3"/>
         <source>Change passphrase</source>
-        <translation>Изменить кодовую фразу</translation>
+        <translation>Сменить пароль</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Enter the old and new passphrase to the wallet.</source>
-        <translation>Введите старую и новую кодовую фразу для кошелька.</translation>
+        <translation>Введите старый и новый пароль для бумажника.</translation>
     </message>
     <message>
+        <location line="+45"/>
         <source>Confirm wallet encryption</source>
-        <translation>Подтверждение шифрования кошелька</translation>
+        <translation>Подтвердите шифрование бумажника</translation>
     </message>
     <message>
-        <source>Wispr will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your PIVs from being stolen by malware infecting your computer.</source>
-        <translation>Wispr сейчас закроется, чтобы завершить процесс шифрования. Помните, что шифрование вашего кошелька не может полностью защитить ваши Wispr от кражи с использованием вредоносного ПО.</translation>
+        <location line="+1"/>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR COINS&lt;/b&gt;!</source>
+        <translation>Внимание: если вы зашифруете бумажник и потеряете пароль, вы &lt;b&gt;ПОТЕРЯЕТЕ ВСЕ ВАШИ МОНЕТЫ&lt;/b&gt;!</translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>Are you sure you wish to encrypt your wallet?</source>
-        <translation>Вы действительно хотите зашифровать свой кошелек?</translation>
+        <translation>Вы уверены, что хотите зашифровать ваш бумажник?</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR WSP&lt;/b&gt;!</source>
-        <translation>Внимание: если вы зашифруете свой кошелёк и потеряете от него пароль, то вы &lt;b&gt;ПОТЕРЯЕТЕ ВСЕ СВОИ WSP&lt;/b&gt;!</translation>
-    </message>
-    <message>
-        <source>Wallet encrypted</source>
-        <translation>Кошелек зашифрован</translation>
-    </message>
-    <message>
+        <location line="+15"/>
         <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
-        <translation>ВАЖНО: все предыдущие резервные копии вашего файла кошелька должны быть заменены вновь созданным зашифрованным файлом кошелька. Из соображений безопасности предыдущие резервные копии незашифрованного файла кошелька станут бесполезными, как только вы начнете использовать новый зашифрованный кошелек.</translation>
+        <translation>ВАЖНО: все предыдущие резервные копии вашего кошелька должны быть заменены новым зашифрованным файлом. В целях безопасности предыдущие резервные копии нешифрованного кошелька станут бесполезны, как только вы начнёте использовать новый шифрованный кошелёк.</translation>
     </message>
     <message>
-        <source>Wallet encryption failed</source>
-        <translation>Сбой шифрования кошелька</translation>
-    </message>
-    <message>
-        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
-        <translation>Шифрование кошелька не удалось из-за внутренней ошибки. Ваш кошелек не был зашифрован.</translation>
-    </message>
-    <message>
-        <source>The supplied passphrases do not match.</source>
-        <translation>Введенные парольные фразы не совпадают.</translation>
-    </message>
-    <message>
-        <source>Wallet unlock failed</source>
-        <translation>Не удалось разблокировать кошелек</translation>
-    </message>
-    <message>
-        <source>The passphrase entered for the wallet decryption was incorrect.</source>
-        <translation>Кодовая фраза, введенная для расшифровки кошелька, была неверной.</translation>
-    </message>
-    <message>
-        <source>Wallet decryption failed</source>
-        <translation>Не удалось дешифровать кошелек</translation>
-    </message>
-    <message>
-        <source>Wallet passphrase was successfully changed.</source>
-        <translation>Кодовая фраза кошелька успешно изменена.</translation>
-    </message>
-    <message>
+        <location line="+103"/>
+        <location line="+24"/>
         <source>Warning: The Caps Lock key is on!</source>
-        <translation>Внимание: Клавиша Caps Lock включена!</translation>
-    </message>
-</context>
-<context>
-    <name>Bip38ToolDialog</name>
-    <message>
-        <source>BIP 38 Tool</source>
-        <translation>BIP 38 Утилита</translation>
+        <translation>Внимание: Caps Lock включен!</translation>
     </message>
     <message>
-        <source>&amp;BIP 38 Encrypt</source>
-        <translation>&amp;BIP 38 Шифрование</translation>
+        <location line="-133"/>
+        <location line="+60"/>
+        <source>Wallet encrypted</source>
+        <translation>Бумажник зашифрован</translation>
     </message>
     <message>
-        <source>Enter a Wispr Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</source>
-        <translation>Введите Wispr адрес, которым вы хотите зашифровать, используя BIP 38. Введите пароль в среднем поле. Нажмите "Зашифровать", чтобы создать зашиврованный секретный ключ.</translation>
+        <location line="-140"/>
+        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <source>Address:</source>
-        <translation>Адрес:</translation>
+        <location line="+82"/>
+        <source>Wispr will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your coins from being stolen by malware infecting your computer.</source>
+        <translation>Сейчас программа закроется для завершения процесса шифрования. Помните, что шифрование вашего бумажника не может полностью защитить ваши монеты от кражи с помощью инфицирования вашего компьютера вредоносным ПО.</translation>
     </message>
     <message>
-        <source>The Wispr address to sign the message with</source>
-        <translation>Адрес Wispr для подписи сообщения с помощью</translation>
+        <location line="+13"/>
+        <location line="+7"/>
+        <location line="+44"/>
+        <location line="+6"/>
+        <source>Wallet encryption failed</source>
+        <translation>Не удалось зашифровать бумажник</translation>
     </message>
     <message>
-        <source>Choose previously used address</source>
-        <translation>Выбрать ранее использованный адрес</translation>
+        <location line="-56"/>
+        <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
+        <translation>Шифрование бумажника не удалось из-за внутренней ошибки. Ваш бумажник не был зашифрован.</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
+        <location line="+7"/>
+        <location line="+50"/>
+        <source>The supplied passphrases do not match.</source>
+        <translation>Введённые пароли не совпадают.</translation>
     </message>
     <message>
-        <source>Paste address from clipboard</source>
-        <translation>Вставить адрес из буфера обмена</translation>
+        <location line="-38"/>
+        <source>Wallet unlock failed</source>
+        <translation>Разблокировка бумажника не удалась</translation>
     </message>
     <message>
-        <source>Alt+P</source>
-        <translation>Alt+P</translation>
+        <location line="+1"/>
+        <location line="+12"/>
+        <location line="+19"/>
+        <source>The passphrase entered for the wallet decryption was incorrect.</source>
+        <translation>Указанный пароль не подходит.</translation>
     </message>
     <message>
-        <source>Passphrase: </source>
-        <translation>Кодовая фраза:</translation>
+        <location line="-20"/>
+        <source>Wallet decryption failed</source>
+        <translation>Расшифрование бумажника не удалось</translation>
     </message>
     <message>
-        <source>Encrypted Key:</source>
-        <translation>Зашифрованный ключ:</translation>
-    </message>
-    <message>
-        <source>Copy the current signature to the system clipboard</source>
-        <translation>Копировать текущую подпись в системный буфер обмена</translation>
-    </message>
-    <message>
-        <source>Sign the message to prove you own this Wispr address</source>
-        <translation>Подпишите сообщение, чтобы подтвердить свой адрес Wispr</translation>
-    </message>
-    <message>
-        <source>Encrypt &amp;Key</source>
-        <translation>Зашифровать &amp;Ключ</translation>
-    </message>
-    <message>
-        <source>Reset all sign message fields</source>
-        <translation>Сбросить все поля сообщений</translation>
-    </message>
-    <message>
-        <source>Clear &amp;All</source>
-        <translation>Очистить &amp;Все</translation>
-    </message>
-    <message>
-        <source>&amp;BIP 38 Decrypt</source>
-        <translation>&amp;BIP 38 Дешифрование</translation>
-    </message>
-    <message>
-        <source>Enter the BIP 38 encrypted private key. Enter the passphrase in the middle box. Click Decrypt Key to compute the private key. After the key is decrypted, clicking 'Import Address' will add this private key to the wallet.</source>
-        <translation>Введите зашифрованный с помощью BIP 38 секретный ключ. Введите секретную фразу в среднем окне. Нажмите Дешифровать Ключ чтобы создать секретный ключ. Нажав на Импортировать Адрес после дешифровки, вы добавите секретный ключ к кошельку.</translation>
-    </message>
-    <message>
-        <source>The Wispr address the message was signed with</source>
-        <translation>Адрес Wispr, которым подписано сообщение</translation>
-    </message>
-    <message>
-        <source>Verify the message to ensure it was signed with the specified Wispr address</source>
-        <translation>Проверте сообщение, чтобы убедиться, что оно было подписано указанным Wispr адресом </translation>
-    </message>
-    <message>
-        <source>Decrypt &amp;Key</source>
-        <translation>Дешифровать &amp;Ключ</translation>
-    </message>
-    <message>
-        <source>Reset all verify message fields</source>
-        <translation>Сбросить все поля подтверждения</translation>
-    </message>
-    <message>
-        <source>Decrypted Key:</source>
-        <translation>Дешифрованный Ключ</translation>
-    </message>
-    <message>
-        <source>Import Address</source>
-        <translation>Импортировать Адрес</translation>
-    </message>
-    <message>
-        <source>Click "Decrypt Key" to compute key</source>
-        <translation>Нажмите "Дешифровать Ключ" для генерации ключа</translation>
-    </message>
-    <message>
-        <source>The entered passphrase is invalid. </source>
-        <translation>Неправильно введена кодовая фраза.</translation>
-    </message>
-    <message>
-        <source>Allowed: 0-9,a-z,A-Z,</source>
-        <translation>Допускается: 0-9,a-z,A-Z,</translation>
-    </message>
-    <message>
-        <source>The entered address is invalid.</source>
-        <translation>Неправильно введен адрес.</translation>
-    </message>
-    <message>
-        <source>Please check the address and try again.</source>
-        <translation>Пожалуйста, проверьте адрес и попробуйте снова.</translation>
-    </message>
-    <message>
-        <source>The entered address does not refer to a key.</source>
-        <translation>Введенный адрес не связан с ключом.</translation>
-    </message>
-    <message>
-        <source>Wallet unlock was cancelled.</source>
-        <translation>Снятие блокировки кошелька было отменено.</translation>
-    </message>
-    <message>
-        <source>Private key for the entered address is not available.</source>
-        <translation>Персональный ключ для введенного адреса недоступен.</translation>
-    </message>
-    <message>
-        <source>Failed to decrypt.</source>
-        <translation>Не удалось дешифровать.</translation>
-    </message>
-    <message>
-        <source>Please check the key and passphrase and try again.</source>
-        <translation>Пожалуйста, проверьте ключ и кодовую фразу и попробуйте снова.</translation>
-    </message>
-    <message>
-        <source>Data Not Valid.</source>
-        <translation>Данные недействительны.</translation>
-    </message>
-    <message>
-        <source>Please try again.</source>
-        <translation>Пожалуйста, попробуйте снова.</translation>
-    </message>
-    <message>
-        <source>Please wait while key is imported</source>
-        <translation>Пожалуйста, дождитесь импортирования ключа</translation>
-    </message>
-    <message>
-        <source>Key Already Held By Wallet</source>
-        <translation>Ключ уже используется кошельком</translation>
-    </message>
-    <message>
-        <source>Error Adding Key To Wallet</source>
-        <translation>Ошибка при добавлении ключа к кошельку</translation>
-    </message>
-    <message>
-        <source>Successfully Added Private Key To Wallet</source>
-        <translation>Персональный ключ успешно добавлен к кошельку</translation>
+        <location line="+14"/>
+        <source>Wallet passphrase was successfully changed.</source>
+        <translation>Пароль бумажника успешно изменён.</translation>
     </message>
 </context>
 <context>
     <name>BitcoinGUI</name>
     <message>
-        <source>Wallet</source>
-        <translation>Кошелек</translation>
+        <location filename="../bitcoingui.cpp" line="+297"/>
+        <source>Sign &amp;message...</source>
+        <translation>&amp;Подписать сообщение</translation>
     </message>
     <message>
-        <source>Node</source>
-        <translation>Узел</translation>
-    </message>
-    <message>
-        <source>&amp;Overview</source>
-        <translation>&amp;Обзор</translation>
-    </message>
-    <message>
+        <location line="-64"/>
         <source>Show general overview of wallet</source>
-        <translation>Общий обзор кошелька</translation>
+        <translation>Показать общий обзор действий с бумажником</translation>
     </message>
     <message>
-        <source>&amp;Send</source>
-        <translation>&amp;Отправить</translation>
-    </message>
-    <message>
-        <source>&amp;Receive</source>
-        <translation>&amp;Получить</translation>
-    </message>
-    <message>
+        <location line="+17"/>
         <source>&amp;Transactions</source>
         <translation>&amp;Транзакции</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Browse transaction history</source>
-        <translation>Просмотр истории транзакций</translation>
+        <translation>Показать историю транзакций</translation>
     </message>
     <message>
+        <location line="+5"/>
+        <source>&amp;Address Book</source>
+        <translation>&amp;Адресная книга</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Edit the list of stored addresses and labels</source>
+        <translation>Изменить список сохранённых адресов и меток к ним</translation>
+    </message>
+    <message>
+        <location line="-18"/>
+        <source>Show the list of addresses for receiving payments</source>
+        <translation>Показать список адресов для получения платежей</translation>
+    </message>
+    <message>
+        <location line="+34"/>
         <source>E&amp;xit</source>
         <translation>В&amp;ыход</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Quit application</source>
-        <translation>Завершить работу</translation>
+        <translation>Закрыть приложение</translation>
     </message>
     <message>
+        <location line="+4"/>
+        <source>Show information about Wispr</source>
+        <translation>Показать информацию о Wispr&apos;е</translation>
+    </message>
+    <message>
+        <location line="+2"/>
         <source>About &amp;Qt</source>
         <translation>О &amp;Qt</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Show information about Qt</source>
         <translation>Показать информацию о Qt</translation>
     </message>
     <message>
+        <location line="+2"/>
         <source>&amp;Options...</source>
-        <translation>&amp;Опции...</translation>
+        <translation>Оп&amp;ции...</translation>
     </message>
     <message>
-        <source>&amp;Show / Hide</source>
-        <translation>&amp;Показать / Скрыть</translation>
-    </message>
-    <message>
-        <source>Show or hide the main Window</source>
-        <translation>Показать или скрыть основное Окно</translation>
-    </message>
-    <message>
+        <location line="+4"/>
         <source>&amp;Encrypt Wallet...</source>
-        <translation>&amp;Зашифровать кошелек...</translation>
+        <translation>&amp;Зашифровать бумажник</translation>
     </message>
     <message>
-        <source>Encrypt the private keys that belong to your wallet</source>
-        <translation>Зашифровать личные ключи, принадлежащие вашему кошельку</translation>
-    </message>
-    <message>
+        <location line="+2"/>
         <source>&amp;Backup Wallet...</source>
-        <translation>&amp;Резервная копия кошелька...</translation>
+        <translation>&amp;Сделать резервную копию бумажника</translation>
     </message>
     <message>
-        <source>Backup wallet to another location</source>
-        <translation>Сделать резервную копию кошелька в другом месте</translation>
-    </message>
-    <message>
+        <location line="+2"/>
         <source>&amp;Change Passphrase...</source>
-        <translation>&amp;Изменить кодовую фразу</translation>
+        <translation>&amp;Изменить пароль</translation>
     </message>
     <message>
+        <location line="+9"/>
+        <source>&amp;Export...</source>
+        <translation>&amp;Экспорт...</translation>
+    </message>
+    <message>
+        <location line="-55"/>
+        <source>Send coins to a Wispr address</source>
+        <translation>Отправить монеты на указанный адрес Wispr</translation>
+    </message>
+    <message>
+        <location line="+39"/>
+        <source>Modify configuration options for Wispr</source>
+        <translation>Изменить параметры конфигурации Wispr</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Export the data in the current tab to a file</source>
+        <translation>Экспортировать данные из вкладки в файл</translation>
+    </message>
+    <message>
+        <location line="-13"/>
+        <source>Encrypt or decrypt wallet</source>
+        <translation>Зашифровать или расшифровать бумажник</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Backup wallet to another location</source>
+        <translation>Сделать резервную копию бумажника в другом месте</translation>
+    </message>
+    <message>
+        <location line="+2"/>
         <source>Change the passphrase used for wallet encryption</source>
-        <translation>Изменение кодовой фразы, используемой для шифрования кошелька</translation>
+        <translation>Изменить пароль шифрования бумажника</translation>
     </message>
     <message>
-        <source>&amp;Unlock Wallet...</source>
-        <translation>&amp;Разблокировать кошелек...</translation>
+        <location line="+10"/>
+        <source>&amp;Debug window</source>
+        <translation>&amp;Окно отладки</translation>
     </message>
     <message>
-        <source>Unlock wallet</source>
-        <translation>Снятие блокировки кошелька</translation>
+        <location line="+1"/>
+        <source>Open debugging and diagnostic console</source>
+        <translation>Открыть консоль отладки и диагностики</translation>
     </message>
     <message>
-        <source>&amp;Lock Wallet</source>
-        <translation>&amp;Блокировка кошелька</translation>
-    </message>
-    <message>
-        <source>Sign &amp;message...</source>
-        <translation>Подписать &amp;сообщение...</translation>
-    </message>
-    <message>
+        <location line="-5"/>
         <source>&amp;Verify message...</source>
         <translation>&amp;Проверить сообщение...</translation>
     </message>
     <message>
-        <source>&amp;Information</source>
-        <translation>&amp;Информация</translation>
+        <location line="-214"/>
+        <location line="+555"/>
+        <source>Wispr</source>
+        <translation>Wispr</translation>
     </message>
     <message>
-        <source>Show diagnostic information</source>
-        <translation>Показать диагностическую информацию</translation>
+        <location line="-555"/>
+        <source>Wallet</source>
+        <translation>Бумажник</translation>
     </message>
     <message>
-        <source>&amp;Debug console</source>
-        <translation>&amp;Консоль отладки</translation>
+        <location line="+193"/>
+        <source>&amp;About Wispr</source>
+        <translation>&amp;О Wispr</translation>
     </message>
     <message>
-        <source>Open debugging console</source>
-        <translation>Открыть консоль отладки</translation>
+        <location line="+9"/>
+        <source>&amp;Show / Hide</source>
+        <translation>&amp;Показать / Скрыть</translation>
     </message>
     <message>
-        <source>&amp;Network Monitor</source>
-        <translation>&amp;Сетевой монитор</translation>
+        <location line="+8"/>
+        <source>Unlock wallet</source>
+        <translation>Разблокировать бумажник</translation>
     </message>
     <message>
-        <source>Show network monitor</source>
-        <translation>Показать сетевой монитор</translation>
+        <location line="+1"/>
+        <source>&amp;Lock Wallet</source>
+        <translation>&amp;Заблокировать бумажник</translation>
     </message>
     <message>
-        <source>&amp;Peers list</source>
-        <translation>&amp;Список пиров</translation>
+        <location line="+1"/>
+        <source>Lock wallet</source>
+        <translation>Заблокировать бумажник</translation>
     </message>
     <message>
-        <source>Show peers info</source>
-        <translation>Показать информацию о пирах</translation>
-    </message>
-    <message>
-        <source>Wallet &amp;Repair</source>
-        <translation>Ремонт &amp;кошелька</translation>
-    </message>
-    <message>
-        <source>Show wallet repair options</source>
-        <translation>Показать варианты восстановления кошелька</translation>
-    </message>
-    <message>
-        <source>Open configuration file</source>
-        <translation>Открыть файл настроек</translation>
-    </message>
-    <message>
-        <source>Show Automatic &amp;Backups</source>
-        <translation>Показать автоматические &amp;резервные копии</translation>
-    </message>
-    <message>
-        <source>Show automatically created wallet backups</source>
-        <translation>Показать автоматически созданные резервные копии кошелька</translation>
-    </message>
-    <message>
-        <source>&amp;Sending addresses...</source>
-        <translation>&amp;Адреса отправки...</translation>
-    </message>
-    <message>
-        <source>Show the list of used sending addresses and labels</source>
-        <translation>Показать список использованых адресов отправки </translation>
-    </message>
-    <message>
-        <source>&amp;Receiving addresses...</source>
-        <translation>&amp;Адреса получения...</translation>
-    </message>
-    <message>
-        <source>Show the list of used receiving addresses and labels</source>
-        <translation>Показать список использованых адресов приёма</translation>
-    </message>
-    <message>
-        <source>Open &amp;URI...</source>
-        <translation>Открыть &amp;URI</translation>
-    </message>
-    <message>
-        <source>&amp;Command-line options</source>
-        <translation>&amp;Параметры командной строки</translation>
-    </message>
-    <message>
-        <source>Synchronizing additional data: %p%</source>
-        <translation>Синхронизация дополнительных данных: %p%</translation>
-    </message>
-    <message>
+        <location line="+32"/>
         <source>&amp;File</source>
         <translation>&amp;Файл</translation>
     </message>
     <message>
+        <location line="+8"/>
         <source>&amp;Settings</source>
         <translation>&amp;Настройки</translation>
     </message>
     <message>
-        <source>&amp;Tools</source>
-        <translation>&amp;Инструменты</translation>
-    </message>
-    <message>
+        <location line="+8"/>
         <source>&amp;Help</source>
         <translation>&amp;Помощь</translation>
     </message>
     <message>
+        <location line="+17"/>
         <source>Tabs toolbar</source>
         <translation>Панель вкладок</translation>
     </message>
     <message>
-        <source>Wispr Core</source>
-        <translation>Wispr Core</translation>
+        <location line="+46"/>
+        <location line="+9"/>
+        <source>[testnet]</source>
+        <translation>[тестовая сеть]</translation>
     </message>
     <message>
-        <source>Send coins to a Wispr address</source>
-        <translation>Отправить монеты на Wispr адрес</translation>
-    </message>
-    <message>
-        <source>Request payments (generates QR codes and wispr: URIs)</source>
-        <translation>Запросить платежи (генерирует QR-код и Wispr: URI)</translation>
-    </message>
-    <message>
-        <source>&amp;Masternodes</source>
-        <translation>&amp;Мастерноды</translation>
-    </message>
-    <message>
-        <source>Browse masternodes</source>
-        <translation>Обзор мастернод</translation>
-    </message>
-    <message>
-        <source>&amp;About Wispr Core</source>
-        <translation>&amp;О Wispr Core</translation>
-    </message>
-    <message>
-        <source>Show information about Wispr Core</source>
-        <translation>Показать информацию о Wispr Core</translation>
-    </message>
-    <message>
-        <source>Modify configuration options for Wispr</source>
-        <translation>Изменение параметров конфигурации Wispr</translation>
-    </message>
-    <message>
-        <source>Sign messages with your Wispr addresses to prove you own them</source>
-        <translation>Подписывайте сообщения вашими Wispr адресами, чтобы доказать, что вы их владелец</translation>
-    </message>
-    <message>
-        <source>Verify messages to ensure they were signed with specified Wispr addresses</source>
-        <translation>Проверте сообщения, чтобы убедиться, что они были подписаны указанным Wispr адресом </translation>
-    </message>
-    <message>
-        <source>&amp;BIP38 tool</source>
-        <translation>&amp;BIP38 Утилита</translation>
-    </message>
-    <message>
-        <source>Encrypt and decrypt private keys using a passphrase</source>
-        <translation>Шифрование и дешифрование личных ключей с использованием кодовой фразы</translation>
-    </message>
-    <message>
-        <source>&amp;MultiSend</source>
-        <translation>&amp;MultiSend</translation>
-    </message>
-    <message>
-        <source>MultiSend Settings</source>
-        <translation>Настройки MultiSend</translation>
-    </message>
-    <message>
-        <source>Open Wallet &amp;Configuration File</source>
-        <translation>Открыть файл &amp;настроек кошелька</translation>
-    </message>
-    <message>
-        <source>Open &amp;Masternode Configuration File</source>
-        <translation>Открыть файл &amp;настроек мастернод</translation>
-    </message>
-    <message>
-        <source>Open Masternode configuration file</source>
-        <translation>Открыть файл настроек мастернод</translation>
-    </message>
-    <message>
-        <source>Open a Wispr: URI or payment request</source>
-        <translation>Открыть Wispr: URI или запрос платежа</translation>
-    </message>
-    <message>
-        <source>&amp;Blockchain explorer</source>
-        <translation>&amp;Обзор блокчейна</translation>
-    </message>
-    <message>
-        <source>Block explorer window</source>
-        <translation>Окно обзора блока</translation>
-    </message>
-    <message>
-        <source>Show the Wispr Core help message to get a list with possible Wispr command-line options</source>
-        <translation>Смотрите помощь к программе, чтобы получить документацию ко всем возможным опциям комманды Wispr</translation>
-    </message>
-    <message>
-        <source>Wispr Core client</source>
-        <translation>Клиент Wispr Core</translation>
+        <location line="+0"/>
+        <location line="+58"/>
+        <source>Wispr client</source>
+        <translation>Wispr клиент</translation>
     </message>
     <message numerus="yes">
+        <location line="+70"/>
         <source>%n active connection(s) to Wispr network</source>
-        <translation><numerusform>%n активное подключение к сети Wispr</numerusform><numerusform>%n активных подключений к сети Wispr</numerusform><numerusform>%n активных подключений к сети Wispr</numerusform><numerusform>%n активных подключений к сети Wispr</numerusform></translation>
+        <translation><numerusform>%n активное соединение с сетью</numerusform><numerusform>%n активных соединений с сетью</numerusform><numerusform>%n активных соединений с сетью</numerusform><numerusform>%n активных соединений с сетью</numerusform></translation>
     </message>
     <message>
-        <source>Synchronizing with network...</source>
-        <translation>Синхронизация с сетью...</translation>
+        <location line="+488"/>
+        <source>Staking.&lt;br&gt;Your weight is %1&lt;br&gt;Network weight is %2&lt;br&gt;Expected time to earn reward is %3</source>
+        <translation>Участвуем в доле.&lt;br&gt;Ваш вес %1&lt;br&gt;Вес сети %2&lt;br&gt;Ожидаемое время получения награды %3</translation>
     </message>
     <message>
-        <source>Importing blocks from disk...</source>
-        <translation>Импортирование блоков с диска...</translation>
+        <location line="+6"/>
+        <source>Not staking because wallet is locked</source>
+        <translation>Не участвуем в доле, так как кошелёк заблокирован</translation>
     </message>
     <message>
-        <source>Reindexing blocks on disk...</source>
-        <translation>Переиндексация блоков на диске...</translation>
+        <location line="+2"/>
+        <source>Not staking because wallet is offline</source>
+        <translation>Не участвуем в доле, так как кошелёк оффлайн</translation>
     </message>
     <message>
-        <source>No block source available...</source>
-        <translation>Источник блоков недоступен</translation>
+        <location line="+2"/>
+        <source>Not staking because wallet is syncing</source>
+        <translation>Не участвуем в доле, так как кошелёк синхронизируется</translation>
     </message>
     <message>
+        <location line="+2"/>
+        <source>Not staking because you don&apos;t have mature coins (&#126;100 confirms)</source>
+        <translation>Не участвуем в доле, так как нет зрелых монет</translation>
+    </message>
+    <message>
+        <location line="-812"/>
+        <source>&amp;Dashboard</source>
+        <translation>&amp;Обзор</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>&amp;Receive</source>
+        <translation>&amp;Получение</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>&amp;Send</source>
+        <translation>Отп&amp;равка</translation>
+    </message>
+    <message>
+        <location line="+49"/>
+        <source>&amp;Unlock Wallet...</source>
+        <translation>&amp;Разблокировать бумажник</translation>
+    </message>
+    <message>
+        <location line="+277"/>
         <source>Up to date</source>
-        <translation>Обновление не требуется</translation>
-    </message>
-    <message numerus="yes">
-        <source>%n hour(s)</source>
-        <translation><numerusform>%n час</numerusform><numerusform>%n часов</numerusform><numerusform>%n часов</numerusform><numerusform>%n часов</numerusform></translation>
-    </message>
-    <message numerus="yes">
-        <source>%n day(s)</source>
-        <translation><numerusform>%n день</numerusform><numerusform>%n дней</numerusform><numerusform>%n дней</numerusform><numerusform>%n дней</numerusform></translation>
-    </message>
-    <message numerus="yes">
-        <source>%n week(s)</source>
-        <translation><numerusform>%n неделя</numerusform><numerusform>%n недель</numerusform><numerusform>%n недель</numerusform><numerusform>%n недель</numerusform></translation>
+        <translation>Синхронизировано</translation>
     </message>
     <message>
-        <source>%1 and %2</source>
-        <translation>%1 и %2</translation>
-    </message>
-    <message numerus="yes">
-        <source>%n year(s)</source>
-        <translation><numerusform>%n год</numerusform><numerusform>%n лет</numerusform><numerusform>%n лет</numerusform><numerusform>%n лет</numerusform></translation>
-    </message>
-    <message>
-        <source>%1 behind</source>
-        <translation>%1 позади</translation>
-    </message>
-    <message>
+        <location line="+43"/>
         <source>Catching up...</source>
-        <translation>ловлю...</translation>
+        <translation>Синхронизируется...</translation>
     </message>
     <message>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>Последний полученный блок был сгенерирован %1 назад</translation>
+        <location line="+113"/>
+        <source>Confirm transaction fee</source>
+        <translation>Подтвердите комиссию</translation>
     </message>
     <message>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>Трансакции после этой не будут видимы</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation>Ошибка</translation>
-    </message>
-    <message>
-        <source>Warning</source>
-        <translation>Предупреждение</translation>
-    </message>
-    <message>
-        <source>Information</source>
-        <translation>Информация</translation>
-    </message>
-    <message>
+        <location line="+27"/>
         <source>Sent transaction</source>
-        <translation>Отправленная транзакция</translation>
+        <translation>Исходящая транзакция</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Incoming transaction</source>
         <translation>Входящая транзакция</translation>
     </message>
     <message>
-        <source>Sent MultiSend transaction</source>
-        <translation>Отправленная MultiSend транзакция</translation>
-    </message>
-    <message>
+        <location line="+1"/>
         <source>Date: %1
 Amount: %2
 Type: %3
 Address: %4
 </source>
         <translation>Дата: %1
-Сумма: %2
+Количество: %2
 Тип: %3
 Адрес: %4
 </translation>
     </message>
     <message>
-        <source>Staking is active
- MultiSend: %1</source>
-        <translation>Хранение активно
-MultiSend: %1</translation>
+        <location line="+100"/>
+        <location line="+15"/>
+        <source>URI handling</source>
+        <translation>Обработка URI</translation>
     </message>
     <message>
-        <source>Active</source>
-        <translation>Активно</translation>
+        <location line="-15"/>
+        <location line="+15"/>
+        <source>URI can not be parsed! This can be caused by an invalid Wispr address or malformed URI parameters.</source>
+        <translation>Не удалось обработать URI! Это может быть связано с неверным адресом Wispr или неправильными параметрами URI.</translation>
     </message>
     <message>
-        <source>Not Active</source>
-        <translation>Не активно</translation>
+        <location line="+9"/>
+        <source>Wallet is &lt;b&gt;not encrypted&lt;/b&gt;</source>
+        <translation>Бумажник &lt;b&gt;не зашифрован&lt;/b&gt;</translation>
     </message>
     <message>
-        <source>Staking is not active
- MultiSend: %1</source>
-        <translation>Хранение не активно
-MultiSend: %1</translation>
-    </message>
-    <message>
+        <location line="+8"/>
         <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt;</source>
-        <translation>Кошелек &lt;b&gt;зашифрован&lt;/b&gt; и в настоящее время &lt;b&gt;разблокирован&lt;/b&gt;</translation>
+        <translation>Бумажник &lt;b&gt;зашифрован&lt;/b&gt; и в настоящее время &lt;b&gt;разблокирован&lt;/b&gt;</translation>
     </message>
     <message>
-        <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt; for anonimization and staking only</source>
-        <translation>Кошелек &lt;b&gt;зашифрован&lt;/b&gt; и в настоящее время &lt;b&gt;разблокирован&lt;/b&gt; для анонимизации и хранения.</translation>
-    </message>
-    <message>
+        <location line="+8"/>
         <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;locked&lt;/b&gt;</source>
-        <translation>Кошелек &lt;b&gt;зашифрован&lt;/b&gt; и в настоящее время &lt;b&gt;заблокирован&lt;/b&gt;</translation>
-    </message>
-</context>
-<context>
-    <name>BlockExplorer</name>
-    <message>
-        <source>Blockchain Explorer</source>
-        <translation>Обзор блокчейна</translation>
+        <translation>Бумажник &lt;b&gt;зашифрован&lt;/b&gt; и в настоящее время &lt;b&gt;заблокирован&lt;/b&gt;</translation>
     </message>
     <message>
-        <source>Address / Block / Transaction</source>
-        <translation>Адрес / Блок / Транзакция</translation>
+        <location line="+24"/>
+        <source>Backup Wallet</source>
+        <translation>Сделать резервную копию бумажника</translation>
     </message>
     <message>
-        <source>Search</source>
-        <translation>Поиск</translation>
+        <location line="+0"/>
+        <source>Wallet Data (*.dat)</source>
+        <translation>Данные бумажника (*.dat)</translation>
     </message>
     <message>
-        <source>TextLabel</source>
-        <translation>Текстовая метка</translation>
+        <location line="+3"/>
+        <source>Backup Failed</source>
+        <translation>Резервное копирование не удалось</translation>
     </message>
     <message>
-        <source>Not all transactions will be shown. To view all transactions you need to set txindex=1 in the configuration file (wispr.conf).</source>
-        <translation>Будут показаны не все транзакции. Для отображения всех транзакций необходимо выставить txindex=1 в конфигурационном файле (wispr.conf).</translation>
+        <location line="+0"/>
+        <source>There was an error trying to save the wallet data to the new location.</source>
+        <translation>При попытке сохранения данных бумажника в новое место произошла ошибка.</translation>
+    </message>
+    <message numerus="yes">
+        <location line="+91"/>
+        <source>%n second(s)</source>
+        <translation><numerusform>%n секунда</numerusform><numerusform>%n секунды</numerusform><numerusform>%n секунд</numerusform><numerusform>%n секунд</numerusform></translation>
+    </message>
+    <message numerus="yes">
+        <location line="+4"/>
+        <source>%n minute(s)</source>
+        <translation><numerusform>%n минута</numerusform><numerusform>%n минуты</numerusform><numerusform>%n минут</numerusform><numerusform>%n минут</numerusform></translation>
+    </message>
+    <message numerus="yes">
+        <location line="-429"/>
+        <location line="+433"/>
+        <source>%n hour(s)</source>
+        <translation><numerusform>%n час</numerusform><numerusform>%n часа</numerusform><numerusform>%n часов</numerusform><numerusform>%n часов</numerusform></translation>
+    </message>
+    <message>
+        <location line="-456"/>
+        <source>Processed %1 blocks of transaction history.</source>
+        <translation>Обработано %1 блоков истории транзакций.</translation>
+    </message>
+    <message numerus="yes">
+        <location line="+27"/>
+        <location line="+433"/>
+        <source>%n day(s)</source>
+        <translation><numerusform>%n день</numerusform><numerusform>%n дня</numerusform><numerusform>%n дней</numerusform><numerusform>%n дней</numerusform></translation>
+    </message>
+    <message numerus="yes">
+        <location line="-429"/>
+        <location line="+6"/>
+        <source>%n week(s)</source>
+        <translation type="unfinished"><numerusform></numerusform><numerusform></numerusform><numerusform></numerusform><numerusform></numerusform></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>%1 and %2</source>
+        <translation type="unfinished"/>
+    </message>
+    <message numerus="yes">
+        <location line="+0"/>
+        <source>%n year(s)</source>
+        <translation type="unfinished"><numerusform></numerusform><numerusform></numerusform><numerusform></numerusform><numerusform></numerusform></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>%1 behind</source>
+        <translation>%1 позади</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Last received block was generated %1 ago.</source>
+        <translation>Последний полученный блок был сгенерирован %1 назад.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Transactions after this will not yet be visible.</source>
+        <translation>Транзакции после него пока не будут видны.</translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Error</source>
+        <translation>Ошибка</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Warning</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Information</source>
+        <translation>Информация</translation>
+    </message>
+    <message>
+        <location line="+69"/>
+        <source>This transaction is over the size limit. You can still send it for a fee of %1, which goes to the nodes that process your transaction and helps to support the network. Do you want to pay the fee?</source>
+        <translation>Данная транзакция превышает предельно допустимый размер.  Но Вы можете всё равно совершить её, добавив комиссию в %1, которая отправится тем узлам, которые обработают Вашу транзакцию, и поможет поддержать сеть.  Вы хотите добавить комиссию?</translation>
+    </message>
+    <message>
+        <location line="+324"/>
+        <source>Not staking</source>
+        <translation>Не участвуем в доле</translation>
+    </message>
+    <message>
+        <location filename="../bitcoin.cpp" line="+104"/>
+        <source>A fatal error occurred. Wispr can no longer continue safely and will quit.</source>
+        <translation>Произошла неисправимая ошибка. Wispr не может безопасно продолжать работу и будет закрыт.</translation>
     </message>
 </context>
 <context>
     <name>ClientModel</name>
     <message>
-        <source>Total: %1 (OBF compatible: %2 / Enabled: %3)</source>
-        <translation>Всего: %1 (OBF совместимые: %2 / Включеные: %3)</translation>
-    </message>
-    <message>
+        <location filename="../clientmodel.cpp" line="+119"/>
         <source>Network Alert</source>
-        <translation>Сетевое предупреждение</translation>
+        <translation>Сетевая Тревога</translation>
     </message>
 </context>
 <context>
     <name>CoinControlDialog</name>
     <message>
+        <location filename="../forms/coincontroldialog.ui" line="+14"/>
+        <source>Coin Control</source>
+        <translation>Выбор входов</translation>
+    </message>
+    <message>
+        <location line="+31"/>
         <source>Quantity:</source>
         <translation>Количество:</translation>
     </message>
     <message>
+        <location line="+32"/>
         <source>Bytes:</source>
-        <translation>Байты:</translation>
+        <translation>Размер:</translation>
     </message>
     <message>
+        <location line="+48"/>
         <source>Amount:</source>
         <translation>Сумма:</translation>
     </message>
     <message>
-        <source>Priority:</source>
-        <translation>Приоритет:</translation>
-    </message>
-    <message>
+        <location line="+48"/>
         <source>Fee:</source>
         <translation>Комиссия:</translation>
     </message>
     <message>
-        <source>Coin Selection</source>
-        <translation>Выбор монеты</translation>
+        <location line="+35"/>
+        <source>Low Output:</source>
+        <translation>Мелкие входы:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Пыль:</translation>
-    </message>
-    <message>
-        <source>After Fee:</source>
-        <translation>После комиссии:</translation>
-    </message>
-    <message>
-        <source>Change:</source>
-        <translation>Изменить:</translation>
-    </message>
-    <message>
-        <source>(un)select all</source>
-        <translation>выделить(снять) все</translation>
-    </message>
-    <message>
-        <source>toggle lock state</source>
-        <translation>поменять статус блокировки</translation>
-    </message>
-    <message>
-        <source>Tree mode</source>
-        <translation>Режим древа</translation>
-    </message>
-    <message>
-        <source>List mode</source>
-        <translation>Режим списка</translation>
-    </message>
-    <message>
-        <source>(1 locked)</source>
-        <translation>(1 заблокирован)</translation>
-    </message>
-    <message>
-        <source>Amount</source>
-        <translation>Сумма</translation>
-    </message>
-    <message>
-        <source>Received with label</source>
-        <translation>Получено с меткой</translation>
-    </message>
-    <message>
-        <source>Received with address</source>
-        <translation>Полученно на адрес</translation>
-    </message>
-    <message>
-        <source>DS Rounds</source>
-        <translation>DS циклов</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation>Дата</translation>
-    </message>
-    <message>
-        <source>Confirmations</source>
-        <translation>Подтверждения</translation>
-    </message>
-    <message>
-        <source>Confirmed</source>
-        <translation>Подтверждено</translation>
-    </message>
-    <message>
-        <source>Priority</source>
-        <translation>Приоритет</translation>
-    </message>
-    <message>
-        <source>Copy address</source>
-        <translation>Копировать адрес</translation>
-    </message>
-    <message>
-        <source>Copy label</source>
-        <translation>Копировать метку</translation>
-    </message>
-    <message>
-        <source>Copy amount</source>
-        <translation>Копировать сумму</translation>
-    </message>
-    <message>
-        <source>Copy transaction ID</source>
-        <translation>Копировать ID транзакции</translation>
-    </message>
-    <message>
-        <source>Lock unspent</source>
-        <translation>Заблокировать нестраченные</translation>
-    </message>
-    <message>
-        <source>Unlock unspent</source>
-        <translation>Разблокировать неистраченные</translation>
-    </message>
-    <message>
-        <source>Copy quantity</source>
-        <translation>Копировать количество</translation>
-    </message>
-    <message>
-        <source>Copy fee</source>
-        <translation>Копировать комиссию</translation>
-    </message>
-    <message>
-        <source>Copy after fee</source>
-        <translation>Копировать после вознаграждения </translation>
-    </message>
-    <message>
-        <source>Copy bytes</source>
-        <translation>Копировать байты</translation>
-    </message>
-    <message>
-        <source>Copy priority</source>
-        <translation>Копировать приоритет</translation>
-    </message>
-    <message>
-        <source>Copy dust</source>
-        <translation>Копировать пыль</translation>
-    </message>
-    <message>
-        <source>Copy change</source>
-        <translation>Копировать изменение</translation>
-    </message>
-    <message>
-        <source>Please switch to "List mode" to use this function.</source>
-        <translation>Для использования этой функции перейдите в "Режим списка"</translation>
-    </message>
-    <message>
-        <source>Non-anonymized input selected. &lt;b&gt;Obfuscation will be disabled.&lt;/b&gt;&lt;br&gt;&lt;br&gt;If you still want to use Obfuscation, please deselect all non-nonymized inputs first and then check Obfuscation checkbox again.</source>
-        <translation>Выбран неанонимизированный ввод. &lt;b&gt;Запутывание будет отключено. &lt;/b&gt; &lt;br&gt;&lt;br&gt;. Если вы всё же хотите использовать запутывание, пожалуйста отмените сначала выбор всех неанонимизированных вводов, затем снова поставте флажок "Запутывание".</translation>
-    </message>
-    <message>
-        <source>highest</source>
-        <translation>самый высокий</translation>
-    </message>
-    <message>
-        <source>higher</source>
-        <translation>выше</translation>
-    </message>
-    <message>
-        <source>high</source>
-        <translation>высокий</translation>
-    </message>
-    <message>
-        <source>medium-high</source>
-        <translation>средне-высокий</translation>
-    </message>
-    <message>
-        <source>Can vary +/- %1 duff(s) per input.</source>
-        <translation>Может вариировать +/- %1 duff(s) к вводу</translation>
-    </message>
-    <message>
-        <source>n/a</source>
-        <translation>недоступен</translation>
-    </message>
-    <message>
-        <source>medium</source>
-        <translation>промежуточный</translation>
-    </message>
-    <message>
-        <source>low-medium</source>
-        <translation>низко-средний</translation>
-    </message>
-    <message>
-        <source>low</source>
-        <translation>низкий</translation>
-    </message>
-    <message>
-        <source>lower</source>
-        <translation>ниже</translation>
-    </message>
-    <message>
-        <source>lowest</source>
-        <translation>самый низкий</translation>
-    </message>
-    <message>
-        <source>(%1 locked)</source>
-        <translation>(%1 заблокирован)</translation>
-    </message>
-    <message>
-        <source>none</source>
-        <translation>ничего</translation>
-    </message>
-    <message>
-        <source>yes</source>
-        <translation>да</translation>
-    </message>
-    <message>
+        <location filename="../coincontroldialog.cpp" line="+493"/>
         <source>no</source>
         <translation>нет</translation>
     </message>
     <message>
-        <source>This label turns red, if the transaction size is greater than 1000 bytes.</source>
-        <translation>Этот маркер становится красным если размер транзакции превысит 1000 байт.</translation>
+        <location filename="../forms/coincontroldialog.ui" line="+51"/>
+        <source>After Fee:</source>
+        <translation>С комиссией:</translation>
     </message>
     <message>
-        <source>This means a fee of at least %1 per kB is required.</source>
-        <translation>Это означает, что необходима комиссия в размере как минимум %1 за kB</translation>
+        <location line="+35"/>
+        <source>Change:</source>
+        <translation>Сдача:</translation>
     </message>
     <message>
-        <source>Can vary +/- 1 byte per input.</source>
-        <translation>Может вариировать +/- 1 байт на каждый ввод</translation>
+        <location line="+69"/>
+        <source>(un)select all</source>
+        <translation>Выбрать все</translation>
     </message>
     <message>
-        <source>Transactions with higher priority are more likely to get included into a block.</source>
-        <translation>Транзакции с высоким приоритетом с большей вероятностью будут включены в блок.</translation>
+        <location line="+13"/>
+        <source>Tree mode</source>
+        <translation>Дерево</translation>
     </message>
     <message>
-        <source>This label turns red, if the priority is smaller than "medium".</source>
-        <translation>Этот маркер становится красным если приоритет ниже, чем "средний".</translation>
+        <location line="+16"/>
+        <source>List mode</source>
+        <translation>Список</translation>
     </message>
     <message>
-        <source>This label turns red, if any recipient receives an amount smaller than %1.</source>
-        <translation>Этот маркер становится красным если получаемая адресатом сумма меньше, чем %1</translation>
+        <location line="+45"/>
+        <source>Amount</source>
+        <translation>Сумма</translation>
     </message>
     <message>
+        <location line="+5"/>
+        <source>Label</source>
+        <translation>Метка</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Address</source>
+        <translation>Адрес</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Date</source>
+        <translation>Дата</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Confirmations</source>
+        <translation>Подтверждения</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Confirmed</source>
+        <translation>Подтверждено</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Priority</source>
+        <translation>Приоритет</translation>
+    </message>
+    <message>
+        <location filename="../coincontroldialog.cpp" line="-456"/>
+        <source>Copy address</source>
+        <translation>Копировать адрес</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Copy label</source>
+        <translation>Копировать метку</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <location line="+26"/>
+        <source>Copy amount</source>
+        <translation>Копировать сумму</translation>
+    </message>
+    <message>
+        <location line="-25"/>
+        <source>Copy transaction ID</source>
+        <translation>Скопировать ID транзакции</translation>
+    </message>
+    <message>
+        <location line="+24"/>
+        <source>Copy quantity</source>
+        <translation>Копировать количество</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Copy fee</source>
+        <translation>Копировать комиссию</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Copy after fee</source>
+        <translation>Копировать с комиссией</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Copy bytes</source>
+        <translation>Копировать объем</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Copy low output</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Copy change</source>
+        <translation>Копировать сдачу</translation>
+    </message>
+    <message>
+        <location line="+423"/>
+        <source>DUST</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>yes</source>
+        <translation>да</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>This label turns red, if the transaction size is bigger than 10000 bytes.
+
+ This means a fee of at least %1 per kb is required.
+
+ Can vary +/- 1 Byte per input.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>This label turns red, if any recipient receives an amount smaller than %1.
+
+ This means a fee of at least %2 is required. 
+
+ Amounts below 0.546 times the minimum relay fee are shown as DUST.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>This label turns red, if the change is smaller than %1.
+
+ This means a fee of at least %2 is required.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+35"/>
+        <location line="+58"/>
         <source>(no label)</source>
         <translation>(нет метки)</translation>
     </message>
     <message>
+        <location line="-9"/>
         <source>change from %1 (%2)</source>
-        <translation>изменить с %1 (%2)</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
+        <location line="+1"/>
         <source>(change)</source>
-        <translation>(изменить)</translation>
+        <translation>(сдача)</translation>
     </message>
 </context>
 <context>
     <name>EditAddressDialog</name>
     <message>
+        <location filename="../forms/editaddressdialog.ui" line="+14"/>
         <source>Edit Address</source>
         <translation>Изменить адрес</translation>
     </message>
     <message>
+        <location line="+11"/>
         <source>&amp;Label</source>
         <translation>&amp;Метка</translation>
     </message>
     <message>
-        <source>The label associated with this address list entry</source>
-        <translation>Метка, связанная с этой записью в списке адресов</translation>
+        <location line="+10"/>
+        <source>The label associated with this address book entry</source>
+        <translation>Метка, связанная с данной записью</translation>
     </message>
     <message>
+        <location line="+7"/>
         <source>&amp;Address</source>
         <translation>&amp;Адрес</translation>
     </message>
     <message>
-        <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation>Адрес ассоциирован с этим элемнтом списка адресов. Это может быть изменнено только для адресов отправления.</translation>
+        <location line="+10"/>
+        <source>The address associated with this address book entry. This can only be modified for sending addresses.</source>
+        <translation>Адрес, связанный с данной записью.</translation>
     </message>
     <message>
+        <location filename="../editaddressdialog.cpp" line="+21"/>
         <source>New receiving address</source>
-        <translation>Новый адрес получения</translation>
+        <translation>Новый адрес для получения</translation>
     </message>
     <message>
+        <location line="+4"/>
         <source>New sending address</source>
-        <translation>Новый адрес отправки</translation>
+        <translation>Новый адрес для отправки</translation>
     </message>
     <message>
+        <location line="+3"/>
         <source>Edit receiving address</source>
-        <translation>Изменить адрес получения</translation>
+        <translation>Изменение адреса для получения</translation>
     </message>
     <message>
+        <location line="+4"/>
         <source>Edit sending address</source>
-        <translation>Изменить адрес отправки</translation>
+        <translation>Изменение адреса для отправки</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Wispr address.</source>
-        <translation>Введенный адрес "%1" не является Wispr адресом.</translation>
+        <location line="+76"/>
+        <source>The entered address &quot;%1&quot; is already in the address book.</source>
+        <translation>Введённый адрес «%1» уже находится в адресной книге.</translation>
     </message>
     <message>
-        <source>The entered address "%1" is already in the address book.</source>
-        <translation>Введенный адрес "%1" уже находится в записной книге.</translation>
+        <location line="-5"/>
+        <source>The entered address &quot;%1&quot; is not a valid Wispr address.</source>
+        <translation>Введённый адрес &quot;%1&quot; не является правильным Wispr-адресом.</translation>
     </message>
     <message>
+        <location line="+10"/>
         <source>Could not unlock wallet.</source>
-        <translation>Не удалось разблокировать кошелек.</translation>
+        <translation>Не удается разблокировать бумажник.</translation>
     </message>
     <message>
+        <location line="+5"/>
         <source>New key generation failed.</source>
-        <translation>Не удалось создать новый ключ.</translation>
+        <translation>Генерация нового ключа не удалась.</translation>
     </message>
 </context>
 <context>
-    <name>FreespaceChecker</name>
+    <name>GUIUtil::HelpMessageBox</name>
     <message>
-        <source>A new data directory will be created.</source>
-        <translation>Будет создан новый каталог данных.</translation>
+        <location filename="../guiutil.cpp" line="+426"/>
+        <location line="+12"/>
+        <source>Wispr-Qt</source>
+        <translation>Wispr-Qt</translation>
     </message>
     <message>
-        <source>name</source>
-        <translation>имя</translation>
-    </message>
-    <message>
-        <source>Directory already exists. Add %1 if you intend to create a new directory here.</source>
-        <translation>Данный каталог уже существует. Добавьте %1 если вы все еще хотите создать здесь новый каталог.</translation>
-    </message>
-    <message>
-        <source>Path already exists, and is not a directory.</source>
-        <translation>Путь уже существует и не является каталогом.</translation>
-    </message>
-    <message>
-        <source>Cannot create data directory here.</source>
-        <translation>Здесь невозможно создать каталог данных.</translation>
-    </message>
-</context>
-<context>
-    <name>HelpMessageDialog</name>
-    <message>
+        <location line="-12"/>
         <source>version</source>
         <translation>версия</translation>
     </message>
     <message>
-        <source>Wispr Core</source>
-        <translation>Wispr Core</translation>
-    </message>
-    <message>
-        <source>(%1-bit)</source>
-        <translation>(%1-бит)</translation>
-    </message>
-    <message>
-        <source>About Wispr Core</source>
-        <translation>О Wispr Core</translation>
-    </message>
-    <message>
-        <source>Command-line options</source>
-        <translation>Параметры командной строки</translation>
-    </message>
-    <message>
+        <location line="+2"/>
         <source>Usage:</source>
-        <translation>Применение:</translation>
+        <translation>Использование:</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>command-line options</source>
         <translation>параметры командной строки</translation>
     </message>
     <message>
-        <source>UI Options:</source>
+        <location line="+4"/>
+        <source>UI options</source>
         <translation>Опции интерфейса</translation>
     </message>
     <message>
-        <source>Choose data directory on startup (default: %u)</source>
-        <translation>Выберите директорию для данных при запуске (по умолчанию: %u)</translation>
+        <location line="+1"/>
+        <source>Set language, for example &quot;de_DE&quot; (default: system locale)</source>
+        <translation>Выберите язык, например &quot;de_DE&quot; (по умолчанию: как в системе)</translation>
     </message>
     <message>
-        <source>Show splash screen on startup (default: %u)</source>
-        <translation>Показывать загрузочную заставку при запуске (по умолчанию: %u)</translation>
-    </message>
-    <message>
-        <source>Set language, for example "de_DE" (default: system locale)</source>
-        <translation>Задайте язык, например "de_DE"(по умолчанию: язык системы)</translation>
-    </message>
-    <message>
+        <location line="+1"/>
         <source>Start minimized</source>
         <translation>Запускать свёрнутым</translation>
     </message>
     <message>
-        <source>Set SSL root certificates for payment request (default: -system-)</source>
-        <translation>Задать корневой сертификат SSL для платежных запросов (по умолчанию: -system-)</translation>
-    </message>
-</context>
-<context>
-    <name>Intro</name>
-    <message>
-        <source>Welcome</source>
-        <translation>Добро пожаловать</translation>
-    </message>
-    <message>
-        <source>Welcome to Wispr Core.</source>
-        <translation>Добро пожаловать в Wispr Core.</translation>
-    </message>
-    <message>
-        <source>As this is the first time the program is launched, you can choose where Wispr Core will store its data.</source>
-        <translation>Поскольку это первый запуск программы, вы можете выбрать, где будут храниться данные Wispr Core.</translation>
-    </message>
-    <message>
-        <source>Wispr Core will download and store a copy of the Wispr block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
-        <translation>Wispr Core загрузит и сохранит копию цепочки блоков Wispr. Каталог будет занимать около %1GB и со временем размер будет увеличиваться. Кроме того, в этом каталоге будет храниться кошелек.</translation>
-    </message>
-    <message>
-        <source>Use the default data directory</source>
-        <translation>Использовать каталог данных по умолчанию</translation>
-    </message>
-    <message>
-        <source>Use a custom data directory:</source>
-        <translation>Использовать другой каталог данных:</translation>
-    </message>
-    <message>
-        <source>Wispr Core</source>
-        <translation>Wispr Core</translation>
-    </message>
-    <message>
-        <source>Error: Specified data directory "%1" cannot be created.</source>
-        <translation>Ошибка: Невозможно создать указанный каталог данных "%1" </translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation>Ошибка</translation>
-    </message>
-    <message>
-        <source>%1 GB of free space available</source>
-        <translation>Доступно %1 GB свободного места</translation>
-    </message>
-    <message>
-        <source>(of %1 GB needed)</source>
-        <translation>(требуется %1 GB)</translation>
-    </message>
-</context>
-<context>
-    <name>MasternodeList</name>
-    <message>
-        <source>Form</source>
-        <translation>Вид</translation>
-    </message>
-    <message>
-        <source>My Masternodes</source>
-        <translation>Мои Мастерноды</translation>
-    </message>
-    <message>
-        <source>Note: Status of your masternodes in local wallet can potentially be slightly incorrect.&lt;br /&gt;Always wait for wallet to sync additional data and then double check from another node&lt;br /&gt;if your node should be running but you still see "MISSING" in "Status" field.</source>
-        <translation>Примечание: Состояние ваших мастернод в локальном кошельке может слегка отличаться от действительности. &lt;br /&gt;Всегда дожидайтесь окончания синхронизации дополнительных данных и затем дважды проверьте с другого узла&lt;br /&gt;если ваша нода должна работать, но в окне "Состояние" пишет "НЕАКТИВНО"</translation>
-    </message>
-    <message>
-        <source>Alias</source>
-        <translation>Алиас</translation>
-    </message>
-    <message>
-        <source>Address</source>
-        <translation>Адрес</translation>
-    </message>
-    <message>
-        <source>Protocol</source>
-        <translation>Протокол</translation>
-    </message>
-    <message>
-        <source>Status</source>
-        <translation>Состояние</translation>
-    </message>
-    <message>
-        <source>Active</source>
-        <translation>Активно</translation>
-    </message>
-    <message>
-        <source>Last Seen (UTC)</source>
-        <translation>Последний визит (UTC)</translation>
-    </message>
-    <message>
-        <source>Pubkey</source>
-        <translation>Публичный ключ</translation>
-    </message>
-    <message>
-        <source>S&amp;tart alias</source>
-        <translation>З&amp;апуск алиаса</translation>
-    </message>
-    <message>
-        <source>Start &amp;all</source>
-        <translation>Запустить &amp;все</translation>
-    </message>
-    <message>
-        <source>Start &amp;MISSING</source>
-        <translation>Запуск &amp;НЕАКТИВНЫХ</translation>
-    </message>
-    <message>
-        <source>&amp;Update status</source>
-        <translation>&amp;Обновить состояние</translation>
-    </message>
-    <message>
-        <source>Status will be updated automatically in (sec):</source>
-        <translation>Состояние будет автоматически обновлено через (сек):</translation>
-    </message>
-    <message>
-        <source>0</source>
-        <translation>0</translation>
-    </message>
-    <message>
-        <source>Start alias</source>
-        <translation>Запуск алиаса</translation>
-    </message>
-    <message>
-        <source>Confirm masternode start</source>
-        <translation>Подтверждение запуска мастерноды</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to start masternode %1?</source>
-        <translation>Вы уверены, что хотите запустить мастерноду %1?</translation>
-    </message>
-    <message>
-        <source>Confirm all masternodes start</source>
-        <translation>Подтвердить старт всех мастернод</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to start ALL masternodes?</source>
-        <translation>Вы уверены, что хотите запустить ВСЕ мастерноды?</translation>
-    </message>
-    <message>
-        <source>Command is not available right now</source>
-        <translation>Команда сейчас недоступна</translation>
-    </message>
-    <message>
-        <source>You can't use this command until masternode list is synced</source>
-        <translation>Использование этой команды невозможно пока не синхронизирован список мастернод</translation>
-    </message>
-    <message>
-        <source>Confirm missing masternodes start</source>
-        <translation>Подтверждение запуска неактивных мастернод</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to start MISSING masternodes?</source>
-        <translation>Вы уверены, что хотите запустить НЕАКТИВНЫЕ мастерноды?</translation>
-    </message>
-</context>
-<context>
-    <name>MultiSendDialog</name>
-    <message>
-        <source>MultiSend</source>
-        <translation>MultiSend</translation>
-    </message>
-    <message>
-        <source>Enter whole numbers 1 - 100</source>
-        <translation>Введите целые числа 1 - 100</translation>
-    </message>
-    <message>
-        <source>Enter % to Give (1-100)</source>
-        <translation>Введите % Передачи (1-100)</translation>
-    </message>
-    <message>
-        <source>Enter Address to Send to</source>
-        <translation>Введите адрес для отправки</translation>
-    </message>
-    <message>
-        <source>MultiSend allows you to automatically send up to 100% of your stake or masternode reward to a list of other Wispr addresses after it matures.
-To Add: enter percentage to give and Wispr address to add to the MultiSend vector.
-To Delete: Enter address to delete and press delete.
-MultiSend will not be activated unless you have clicked Activate</source>
-        <translation>MultiSend позволяет вам автоматически отправлять до 100% вознаграждения за мастерноды и хранение, после их созревания, на другие Wispr адреса.
-Для добавления: введите передаваемый процент и Wispr адрес для добавления к вектору MultiSend.
-Для удаления: введите удаляемый адрес и нажмите удалить.
-MultiSend будет неактивен до тех пор, пока вы не нажмете Включить</translation>
-    </message>
-    <message>
-        <source>Add to MultiSend Vector</source>
-        <translation>Добавить к вектору MultiSend</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation>Добавить</translation>
-    </message>
-    <message>
-        <source>Deactivate MultiSend</source>
-        <translation>Выключить MultiSend</translation>
-    </message>
-    <message>
-        <source>Deactivate</source>
-        <translation>Выключить</translation>
-    </message>
-    <message>
-        <source>Choose an address from the address book</source>
-        <translation>Выберите адрес из адресной книги</translation>
-    </message>
-    <message>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
-    </message>
-    <message>
-        <source>Percentage of stake to send</source>
-        <translation>Процент от хранящихся монет для отправки</translation>
-    </message>
-    <message>
-        <source>Percentage:</source>
-        <translation>Проценты:</translation>
-    </message>
-    <message>
-        <source>Address to send portion of stake to</source>
-        <translation>Адрес для отправки части от хранения</translation>
-    </message>
-    <message>
-        <source>Address:</source>
-        <translation>Адрес:</translation>
-    </message>
-    <message>
-        <source>Delete Address From MultiSend Vector</source>
-        <translation>Удалить адрес из Вектора MultiSend</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>Удалить</translation>
-    </message>
-    <message>
-        <source>Activate MultiSend</source>
-        <translation>Включить MultiSend</translation>
-    </message>
-    <message>
-        <source>Activate</source>
-        <translation>Включить</translation>
-    </message>
-    <message>
-        <source>View MultiSend Vector</source>
-        <translation>Посмотреть Вектор MultiSend</translation>
-    </message>
-    <message>
-        <source>View MultiSend</source>
-        <translation>Просмотр MultiSend</translation>
-    </message>
-    <message>
-        <source>Send For Stakes</source>
-        <translation>Передавать вознаграждение от хранения</translation>
-    </message>
-    <message>
-        <source>Send For Masternode Rewards</source>
-        <translation>Передавать вознаграждение за мастерноды</translation>
-    </message>
-    <message>
-        <source>The entered address:
-</source>
-        <translation>Введенный адрес:
-</translation>
-    </message>
-    <message>
-        <source> is invalid.
-Please check the address and try again.</source>
-        <translation>недопустим.
-Пожалуйста, проверьте адрес и попробуйте снова.</translation>
-    </message>
-    <message>
-        <source>The total amount of your MultiSend vector is over 100% of your stake reward
-</source>
-        <translation>Итоговое значение вектора MultiSend превышает 100% ваших вознаграждений
-</translation>
-    </message>
-    <message>
-        <source>Please Enter 1 - 100 for percent.</source>
-        <translation>Введите 1 - 100 для указания процентов.</translation>
-    </message>
-    <message>
-        <source>MultiSend Vector
-</source>
-        <translation>Вектор MultiSend
-</translation>
-    </message>
-    <message>
-        <source>Removed </source>
-        <translation>Удалено</translation>
-    </message>
-    <message>
-        <source>Could not locate address
-</source>
-        <translation>Не удалось найти адрес
-</translation>
-    </message>
-</context>
-<context>
-    <name>ObfuscationConfig</name>
-    <message>
-        <source>Configure Obfuscation</source>
-        <translation>Параметры Перемешивания</translation>
-    </message>
-    <message>
-        <source>Basic Privacy</source>
-        <translation>Базовая конфиденциальность</translation>
-    </message>
-    <message>
-        <source>High Privacy</source>
-        <translation>Повышенная конфиденциальность</translation>
-    </message>
-    <message>
-        <source>Maximum Privacy</source>
-        <translation>Максимальная конфиденциальность</translation>
-    </message>
-    <message>
-        <source>Please select a privacy level.</source>
-        <translation>Выберите уровень конфиденциальности.</translation>
-    </message>
-    <message>
-        <source>Use 2 separate masternodes to mix funds up to 10000 WSP</source>
-        <translation>Используйте 2 разные мастерноды для смешивания средств до 10000 WSP</translation>
-    </message>
-    <message>
-        <source>Use 8 separate masternodes to mix funds up to 10000 WSP</source>
-        <translation>Используйте 8 разных мастернод для смешивания средств до 10000 WSP</translation>
-    </message>
-    <message>
-        <source>Use 16 separate masternodes</source>
-        <translation>Используйте 16 разных мастернод</translation>
-    </message>
-    <message>
-        <source>This option is the quickest and will cost about ~0.025 WSP to anonymize 10000 WSP</source>
-        <translation>Этот вариант является самым быстрым и будет стоить порядка ~0.025 WSP для анонимизации 10000 WSP</translation>
-    </message>
-    <message>
-        <source>This option is moderately fast and will cost about 0.05 WSP to anonymize 10000 WSP</source>
-        <translation>Это средний по скорости вариант и он будет стоить около 0.05 WSP для анонимизации 10000 WSP</translation>
-    </message>
-    <message>
-        <source>This is the slowest and most secure option. Using maximum anonymity will cost</source>
-        <translation>Это самый медленный и безопасный вариант. Максимальная анонимность стоит</translation>
-    </message>
-    <message>
-        <source>0.1 WSP per 10000 WSP you anonymize.</source>
-        <translation>0.1 WSP за 10000 WSP которые вы собираетесь анонимизировать.</translation>
-    </message>
-    <message>
-        <source>Obfuscation Configuration</source>
-        <translation>Настройка Перемешивания</translation>
-    </message>
-    <message>
-        <source>Obfuscation was successfully set to basic (%1 and 2 rounds). You can change this at any time by opening Wispr's configuration screen.</source>
-        <translation>Перемешивание было успешно выставлено на стандартные значения (%1 и 2 цикла). Вы в любой момент можете это изменить, открыв окно настройки Wispr.</translation>
-    </message>
-    <message>
-        <source>Obfuscation was successfully set to high (%1 and 8 rounds). You can change this at any time by opening Wispr's configuration screen.</source>
-        <translation>Перемешивание было успешно выбрано как высокое (%1 и 8 циклов). Вы в любой момент можете это изменить, открыв окно настройки Wispr.</translation>
-    </message>
-    <message>
-        <source>Obfuscation was successfully set to maximum (%1 and 16 rounds). You can change this at any time by opening Wispr's configuration screen.</source>
-        <translation>Перемешивание было успешно выставлено на максимальное (%1 и 16 циклов). Вы в любой момент можете это изменить, открыв окно настройки Wispr.</translation>
-    </message>
-</context>
-<context>
-    <name>OpenURIDialog</name>
-    <message>
-        <source>Open URI</source>
-        <translation>Открыть URI</translation>
-    </message>
-    <message>
-        <source>Open payment request from URI or file</source>
-        <translation>Запросить платеж через URI или файл</translation>
-    </message>
-    <message>
-        <source>URI:</source>
-        <translation>URI:</translation>
-    </message>
-    <message>
-        <source>Select payment request file</source>
-        <translation>Выберите файл запроса платежа</translation>
-    </message>
-    <message>
-        <source>Select payment request file to open</source>
-        <translation>Выберите файл запроса платежа чтобы его открыть</translation>
+        <location line="+1"/>
+        <source>Show splash screen on startup (default: 1)</source>
+        <translation>Показывать сплэш при запуске (по умолчанию: 1)</translation>
     </message>
 </context>
 <context>
     <name>OptionsDialog</name>
     <message>
+        <location filename="../forms/optionsdialog.ui" line="+14"/>
         <source>Options</source>
-        <translation>Настройки</translation>
+        <translation>Опции</translation>
     </message>
     <message>
+        <location line="+16"/>
         <source>&amp;Main</source>
-        <translation>&amp;Основной</translation>
+        <translation>&amp;Главная</translation>
     </message>
     <message>
-        <source>Size of &amp;database cache</source>
-        <translation>Размер кэша &amp;базы данных</translation>
+        <location line="+6"/>
+        <source>Optional transaction fee per kB that helps make sure your transactions are processed quickly. Most transactions are 1 kB. Fee 0.01 recommended.</source>
+        <translation>Опциональная комиссия за каждый КБ транзакции, которая позволяет быть уверенным, что Ваша транзакция будет обработана быстро.  Большинство транзакций занимают 1КБ.  Рекомендуется комиссия 0.01.</translation>
     </message>
     <message>
-        <source>MB</source>
-        <translation>MB</translation>
+        <location line="+15"/>
+        <source>Pay transaction &amp;fee</source>
+        <translation>Заплатить ко&amp;миссию</translation>
     </message>
     <message>
-        <source>Number of script &amp;verification threads</source>
-        <translation>Количество сценариев &amp;проверочных потоков</translation>
+        <location line="+31"/>
+        <source>Reserved amount does not participate in staking and is therefore spendable at any time.</source>
+        <translation>Зарезервированная сумма не участвует в доле, и поэтому может быть потрачена в любое время.</translation>
     </message>
     <message>
-        <source>(0 = auto, &lt;0 = leave that many cores free)</source>
-        <translation>(0 = авто, &lt;0 = оставить свободных ядер)</translation>
+        <location line="+15"/>
+        <source>Reserve</source>
+        <translation>Зарезервировать</translation>
     </message>
     <message>
-        <source>W&amp;allet</source>
-        <translation>К&amp;ошелек</translation>
-    </message>
-    <message>
-        <source>If you disable the spending of unconfirmed change, the change from a transaction&lt;br/&gt;cannot be used until that transaction has at least one confirmation.&lt;br/&gt;This also affects how your balance is computed.</source>
-        <translation>Отключив проведение неподтвержденных изменений все изменения о транзакции &lt;br/&gt;не будут использованы пока транзакция не получит хотя бы одно подтверждение.&lt;br/&gt;Также это влияет на расчет вашего баланса.</translation>
-    </message>
-    <message>
-        <source>Automatically open the Wispr client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Автоматически открыть клиентский порт Wispr через роутер. Ваш роутер должен поддерживать UPnP, а сам сервис должен быть включен.</translation>
-    </message>
-    <message>
-        <source>Accept connections from outside</source>
-        <translation>Принимать внешние подключения</translation>
-    </message>
-    <message>
-        <source>Allow incoming connections</source>
-        <translation>Разрешить входящие подключения</translation>
-    </message>
-    <message>
-        <source>&amp;Connect through SOCKS5 proxy (default proxy):</source>
-        <translation>&amp;Подключиться через SOCKS5 (прокси-сервер по умолчанию):</translation>
-    </message>
-    <message>
-        <source>Expert</source>
-        <translation>Эксперт</translation>
-    </message>
-    <message>
+        <location line="+31"/>
         <source>Automatically start Wispr after logging in to the system.</source>
-        <translation>Автоматически запускать Wispr после входа в систему.</translation>
+        <translation>Автоматически запускать Wispr после входа в систему</translation>
     </message>
     <message>
+        <location line="+3"/>
         <source>&amp;Start Wispr on system login</source>
         <translation>&amp;Запускать Wispr при входе в систему</translation>
     </message>
     <message>
-        <source>This setting determines the amount of individual masternodes that an input will be anonymized through.&lt;br/&gt;More rounds of anonymization gives a higher degree of privacy, but also costs more in fees.</source>
-        <translation>Эта настройка определяет количество мастернод, используемых для анонимизации. Чем больше циклов, тем выше уровень конфиденциальности, но не стоит забывать также об увеличивающейся комиссии.</translation>
-    </message>
-    <message>
-        <source>Obfuscation rounds to use</source>
-        <translation>Количество циклов Перемешивания</translation>
-    </message>
-    <message>
-        <source>This amount acts as a threshold to turn off Obfuscation once it's reached.</source>
-        <translation>При достижении этого значения Перемешивание будет отключено.</translation>
-    </message>
-    <message>
-        <source>Amount of Wispr to keep anonymized</source>
-        <translation>Количество Wispr, держащихся анонимизированными</translation>
-    </message>
-    <message>
-        <source>Whether to show coin control features or not.</source>
-        <translation>Показывает или скрывает особенности управления монетами.</translation>
-    </message>
-    <message>
-        <source>Enable coin &amp;control features</source>
-        <translation>Включить функции &amp;управления монет</translation>
-    </message>
-    <message>
-        <source>Show additional tab listing all your masternodes in first sub-tab&lt;br/&gt;and all masternodes on the network in second sub-tab.</source>
-        <translation>Показать список всех ваших мастернод в первой вкладке&lt;br/&gt;и всех мастернод в сети во второй вкладке.</translation>
-    </message>
-    <message>
-        <source>Show Masternodes Tab</source>
-        <translation>Показать вкладку Мастернод</translation>
-    </message>
-    <message>
-        <source>&amp;Spend unconfirmed change</source>
-        <translation>&amp;Проведение неподтвержденных изменений</translation>
-    </message>
-    <message>
+        <location line="+21"/>
         <source>&amp;Network</source>
         <translation>&amp;Сеть</translation>
     </message>
     <message>
-        <source>The user interface language can be set here. This setting will take effect after restarting Wispr.</source>
-        <translation>Здесь можно выставить язык интерфейса. Изменения вступят в силу после перезапуска Wispr.</translation>
+        <location line="+6"/>
+        <source>Automatically open the Wispr client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Автоматически открыть порт для Wispr-клиента на роутере. Работает только если Ваш роутер поддерживает UPnP, и данная функция включена.</translation>
     </message>
     <message>
-        <source>Language missing or translation incomplete? Help contributing translations here:
-https://www.transifex.com/wispr-project/wispr-project-translations</source>
-        <translation>Отсутствует ваш язык или заметили незавершенный перевод? Вы можете помочь нам стать лучше:
-https://www.transifex.com/wispr-project/wispr-project-translations</translation>
-    </message>
-    <message>
+        <location line="+3"/>
         <source>Map port using &amp;UPnP</source>
-        <translation>Карта порта, использующего &amp;UPnP</translation>
+        <translation>Пробросить порт через &amp;UPnP</translation>
     </message>
     <message>
-        <source>Connect to the Wispr network through a SOCKS5 proxy.</source>
-        <translation>Подключиться к сети Wispr через SOCKS5 прокси.</translation>
-    </message>
-    <message>
+        <location line="+19"/>
         <source>Proxy &amp;IP:</source>
-        <translation>&amp;IP адрес:</translation>
+        <translation>&amp;IP Прокси: </translation>
     </message>
     <message>
-        <source>IP address of the proxy (e.g. IPv4: 127.0.0.1 / IPv6: ::1)</source>
-        <translation>IP-адрес прокси сервера (например: IPv4: 127.0.0.1 / IPv6: ::1)</translation>
+        <location line="+19"/>
+        <source>IP address of the proxy (e.g. 127.0.0.1)</source>
+        <translation>IP-адрес прокси (например 127.0.0.1)</translation>
     </message>
     <message>
+        <location line="+7"/>
         <source>&amp;Port:</source>
-        <translation>&amp;Порт</translation>
+        <translation>По&amp;рт: </translation>
     </message>
     <message>
+        <location line="+19"/>
         <source>Port of the proxy (e.g. 9050)</source>
-        <translation>Порт прокси сервера (например: 9050)</translation>
+        <translation>Порт прокси-сервера (например, 9050)</translation>
     </message>
     <message>
+        <location line="-57"/>
+        <source>Connect to the Wispr network through a SOCKS5 proxy (e.g. when connecting through Tor).</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>&amp;Connect through SOCKS5 proxy:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+90"/>
         <source>&amp;Window</source>
         <translation>&amp;Окно</translation>
     </message>
     <message>
+        <location line="+6"/>
         <source>Show only a tray icon after minimizing the window.</source>
-        <translation>После сворачивания окна показывать только значок в трее.</translation>
+        <translation>Показывать только иконку в системном лотке после сворачивания окна.</translation>
     </message>
     <message>
+        <location line="+3"/>
         <source>&amp;Minimize to the tray instead of the taskbar</source>
-        <translation>&amp;Свернуть в трей, а не на панель задач</translation>
+        <translation>&amp;Cворачивать в системный лоток вместо панели задач</translation>
     </message>
     <message>
+        <location line="+7"/>
         <source>Minimize instead of exit the application when the window is closed. When this option is enabled, the application will be closed only after selecting Quit in the menu.</source>
-        <translation>Сворачивать окно при закрывании вместо выхода из приложения. При включении этой опции покинуть приложение можно только после нажатия Выйти в меню программы.</translation>
+        <translation>Сворачивать вместо закрытия. Если данная опция будет выбрана — приложение закроется только после выбора соответствующего пункта в меню.</translation>
     </message>
     <message>
+        <location line="+3"/>
         <source>M&amp;inimize on close</source>
-        <translation>C&amp;ворачивать при закрытии</translation>
+        <translation>С&amp;ворачивать при закрытии</translation>
     </message>
     <message>
+        <location line="+21"/>
         <source>&amp;Display</source>
-        <translation>&amp;Экран</translation>
+        <translation>О&amp;тображение</translation>
     </message>
     <message>
+        <location line="+8"/>
         <source>User Interface &amp;language:</source>
-        <translation>&amp;Язык Интерфейса</translation>
+        <translation>&amp;Язык интерфейса:</translation>
     </message>
     <message>
-        <source>User Interface Theme:</source>
-        <translation>Тема Интерфейса</translation>
+        <location line="+13"/>
+        <source>The user interface language can be set here. This setting will take effect after restarting Wispr.</source>
+        <translation>Здесь можно выбрать язык интерфейса. Настройки вступят в силу после перезапуска Wispr.</translation>
     </message>
     <message>
+        <location line="+11"/>
         <source>&amp;Unit to show amounts in:</source>
-        <translation>В каких единицах показывать сумму:</translation>
+        <translation>&amp;Отображать суммы в единицах: </translation>
     </message>
     <message>
+        <location line="+13"/>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Выберите стандарную дробную величину, которая будет показываться в графическом интерфейсе и при отправке монет.</translation>
+        <translation>Выберите единицу измерения монет при отображении и отправке.</translation>
     </message>
     <message>
-        <source>Decimal digits</source>
-        <translation>Десятичная разрядность</translation>
+        <location line="+9"/>
+        <source>Whether to show coin control features or not.</source>
+        <translation>Выключает и включает отображение панели выбора входов.</translation>
     </message>
     <message>
-        <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
-        <translation>Сторониие ссылки (такие как block exporer), которые отображаются в закладке "транзакции" как контекстное меню. %s в ссыле будет замещено хэшем транзакции. Ссылки отделяются друг от друга вертикальной чертой |.</translation>
+        <location line="+3"/>
+        <source>Display coin &amp;control features (experts only!)</source>
+        <translation>Управление &amp;входами (только для продвинутых пользователей!)</translation>
     </message>
     <message>
-        <source>Third party transaction URLs</source>
-        <translation>Сторонние ссылки</translation>
+        <location line="+7"/>
+        <source>Use black visual theme (requires restart)</source>
+        <translation>Использовать чёрную тему оформления (требуется перезапуск)</translation>
     </message>
     <message>
-        <source>Active command-line options that override above options:</source>
-        <translation>Активные опции коммандной строки, которые переписывают опции выше:</translation>
-    </message>
-    <message>
-        <source>Reset all client options to default.</source>
-        <translation>Вернуть стандартные настройки клиента</translation>
-    </message>
-    <message>
-        <source>&amp;Reset Options</source>
-        <translation>&amp;Сбросить Настройки</translation>
-    </message>
-    <message>
+        <location line="+71"/>
         <source>&amp;OK</source>
-        <translation>&amp;OK</translation>
+        <translation>О&amp;К</translation>
     </message>
     <message>
+        <location line="+7"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Отмена</translation>
     </message>
     <message>
+        <location line="+10"/>
+        <source>&amp;Apply</source>
+        <translation>&amp;Применить</translation>
+    </message>
+    <message>
+        <location filename="../optionsdialog.cpp" line="+47"/>
         <source>default</source>
-        <translation>по-умолчанию</translation>
+        <translation>по умолчанию</translation>
     </message>
     <message>
-        <source>none</source>
-        <translation>ничего</translation>
+        <location line="+147"/>
+        <location line="+9"/>
+        <source>Warning</source>
+        <translation>Внимание</translation>
     </message>
     <message>
-        <source>Confirm options reset</source>
-        <translation>Подтвердить сброс настроек</translation>
+        <location line="-9"/>
+        <location line="+9"/>
+        <source>This setting will take effect after restarting Wispr.</source>
+        <translation>Эта настройка вступит в силу после перезапуска Wispr</translation>
     </message>
     <message>
-        <source>Client restart required to activate changes.</source>
-        <translation>Для применения изменений требуется перезапуск клиента.</translation>
-    </message>
-    <message>
-        <source>Client will be shutdown, do you want to proceed?</source>
-        <translation>Клиент будет закрыт, вы хотите продолжить?</translation>
-    </message>
-    <message>
-        <source>This change would require a client restart.</source>
-        <translation>Это изменение потребует перезапуска клиента.</translation>
-    </message>
-    <message>
+        <location line="+29"/>
         <source>The supplied proxy address is invalid.</source>
-        <translation>Указан недопустимый адрес прокси-сервера.</translation>
+        <translation>Адрес прокси неверен.</translation>
     </message>
 </context>
 <context>
     <name>OverviewPage</name>
     <message>
+        <location filename="../forms/overviewpage.ui" line="+14"/>
         <source>Form</source>
-        <translation>Вид</translation>
+        <translation>Форма</translation>
     </message>
     <message>
-        <source>Available:</source>
+        <location line="+46"/>
+        <location line="+247"/>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Wispr network after a connection is established, but this process has not completed yet.</source>
+        <translation>Отображаемая информация может быть устаревшей. Ваш бумажник автоматически синхронизируется с сетью Wispr после подключения, но этот процесс пока не завершён.</translation>
+    </message>
+    <message>
+        <location line="-173"/>
+        <source>Stake:</source>
+        <translation>Доля:</translation>
+    </message>
+    <message>
+        <location line="+32"/>
+        <source>Unconfirmed:</source>
+        <translation>Не подтверждено:</translation>
+    </message>
+    <message>
+        <location line="-113"/>
+        <source>Wallet</source>
+        <translation>Бумажник</translation>
+    </message>
+    <message>
+        <location line="+49"/>
+        <source>Spendable:</source>
         <translation>Доступно:</translation>
     </message>
     <message>
+        <location line="+16"/>
         <source>Your current spendable balance</source>
-        <translation>Ваш текущий остаток средств</translation>
+        <translation>Баланс, доступный в настоящее время</translation>
     </message>
     <message>
-        <source>Pending:</source>
-        <translation>В ожидании:</translation>
-    </message>
-    <message>
-        <source>Total of transactions that have yet to be confirmed, and do not yet count toward the spendable balance</source>
-        <translation>Транзакции, которые ещё должны быть подтверждены и не уменьшают баланс</translation>
-    </message>
-    <message>
+        <location line="+80"/>
         <source>Immature:</source>
-        <translation>Дозревают:</translation>
+        <translation>Незрелые:</translation>
     </message>
     <message>
-        <source>Staked or masternode rewards that has not yet matured</source>
-        <translation>Награды за хранение и мастерноды, которые еще не *созрели*</translation>
+        <location line="+13"/>
+        <source>Mined balance that has not yet matured</source>
+        <translation>Баланс добытых монет, который ещё не созрел</translation>
     </message>
     <message>
-        <source>Balances</source>
-        <translation>Балансы</translation>
-    </message>
-    <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Wispr network after a connection is established, but this process has not completed yet.</source>
-        <translation>Возможно отображаемая информация устарела. Ваш кошелек автоматически синхронизируется с сетью Wispr после установки соединения, но этот процесс еще не завершен. </translation>
-    </message>
-    <message>
-        <source>Unconfirmed transactions to watch-only addresses</source>
-        <translation>Неподтверждённые транзакции на наблюдаемые адреса</translation>
-    </message>
-    <message>
-        <source>Staked or masternode rewards in watch-only addresses that has not yet matured</source>
-        <translation>Награды за хранение и мастерноды в наблюдаемых адресах, которые еще не *созрели*</translation>
-    </message>
-    <message>
+        <location line="+23"/>
         <source>Total:</source>
-        <translation>Всего:</translation>
+        <translation>Итого:</translation>
     </message>
     <message>
+        <location line="+16"/>
         <source>Your current total balance</source>
-        <translation>Ваш текущий баланс</translation>
+        <translation>Ваш суммарный баланс</translation>
     </message>
     <message>
-        <source>Current total balance in watch-only addresses</source>
-        <translation>Текущий баланс всех наблюдаемых адресов</translation>
+        <location line="+50"/>
+        <source>&lt;b&gt;Recent transactions&lt;/b&gt;</source>
+        <translation>&lt;b&gt;Последние транзакции&lt;/b&gt;</translation>
     </message>
     <message>
-        <source>Watch-only:</source>
-        <translation>Наблюдаемый:</translation>
+        <location line="-118"/>
+        <source>Total of transactions that have yet to be confirmed, and do not yet count toward the current balance</source>
+        <translation>Общая сумма всех транзакций, которые до сих пор не подтверждены, и до сих пор не учитываются в текущем балансе</translation>
     </message>
     <message>
-        <source>Your current balance in watch-only addresses</source>
-        <translation>Ваш текущий баланс в наблюдаемых адресах</translation>
+        <location line="-32"/>
+        <source>Total of coins that was staked, and do not yet count toward the current balance</source>
+        <translation>Общая сумма всех монет, используемых для Proof-of-Stake, и не учитывающихся на балансе</translation>
     </message>
     <message>
-        <source>Spendable:</source>
-        <translation>Расходуемый:</translation>
-    </message>
-    <message>
-        <source>Status:</source>
-        <translation>Статус:</translation>
-    </message>
-    <message>
-        <source>Obfuscation Balance:</source>
-        <translation>Баланс Обфускации</translation>
-    </message>
-    <message>
-        <source>0 WSP / 0 Rounds</source>
-        <translation>0 WSP / 0 Циклов</translation>
-    </message>
-    <message>
-        <source>Enabled/Disabled</source>
-        <translation>Включено/Выключено</translation>
-    </message>
-    <message>
-        <source>Try to manually submit a Obfuscation request.</source>
-        <translation>Попробуюте вручную создать запрос на Обфускацию.</translation>
-    </message>
-    <message>
-        <source>Reset the current status of Obfuscation (can interrupt Obfuscation if it's in the process of Mixing, which can cost you money!)</source>
-        <translation>Сбросить текущий статус Обфускации (может прервать обфускацию, если она уже началась, что может стоить ваших денег!)</translation>
-    </message>
-    <message>
-        <source>Obfuscation</source>
-        <translation>Обфускация</translation>
-    </message>
-    <message>
-        <source>Completion:</source>
-        <translation>Завершение:</translation>
-    </message>
-    <message>
-        <source>Amount and Rounds:</source>
-        <translation>Количесво повторений:</translation>
-    </message>
-    <message>
-        <source>Submitted Denom:</source>
-        <translation>Выбранная единица:</translation>
-    </message>
-    <message>
-        <source>n/a</source>
-        <translation>недоступен</translation>
-    </message>
-    <message>
-        <source>Recent transactions</source>
-        <translation>Последние транзакции</translation>
-    </message>
-    <message>
-        <source>Start/Stop Mixing</source>
-        <translation>Запустить/Остановить смешивание </translation>
-    </message>
-    <message>
-        <source>The denominations you submitted to the Masternode.&lt;br&gt;To mix, other users must submit the exact same denominations.</source>
-        <translation>Деноминации, которые вы отправили на мастерноду. &lt;br&gt;Для смешиваыния, другие пользователи должны отправить точно такие же деноминации.</translation>
-    </message>
-    <message>
-        <source>(Last Message)</source>
-        <translation>(Последнее сообщение)</translation>
-    </message>
-    <message>
-        <source>Try Mix</source>
-        <translation>Попытка смешать</translation>
-    </message>
-    <message>
-        <source>Reset</source>
-        <translation>Сброс</translation>
-    </message>
-    <message>
+        <location filename="../overviewpage.cpp" line="+116"/>
+        <location line="+1"/>
         <source>out of sync</source>
-        <translation>несинронизировано</translation>
-    </message>
-    <message>
-        <source>Disabled</source>
-        <translation>Выключено</translation>
-    </message>
-    <message>
-        <source>No inputs detected</source>
-        <translation>Нет ввода</translation>
-    </message>
-    <message numerus="yes">
-        <source>%n Rounds</source>
-        <translation><numerusform>%n Цикл</numerusform><numerusform>%n Циклов</numerusform><numerusform>%n Циклов</numerusform><numerusform>%n Циклов</numerusform></translation>
-    </message>
-    <message>
-        <source>Not enough compatible inputs to anonymize &lt;span style='color:red;'&gt;%1&lt;/span&gt;,&lt;br&gt;will anonymize &lt;span style='color:red;'&gt;%2&lt;/span&gt; instead</source>
-        <translation>Недостаточно совместимых вводов для анонимизации &lt;span style='color:red;'&gt;%1&lt;/span&gt;,&lt;br&gt; вместо этого будет анонимизировано &lt;span style='color:red;'&gt;%2&lt;/span&gt;</translation>
-    </message>
-    <message>
-        <source>Overall progress</source>
-        <translation>Общий ход выполнения</translation>
-    </message>
-    <message>
-        <source>Anonymized</source>
-        <translation>Анонимизировано</translation>
-    </message>
-    <message>
-        <source>Last Obfuscation message:
-</source>
-        <translation>Последнее сообщение Обфускации:
-</translation>
-    </message>
-    <message>
-        <source>Obfuscation was successfully reset.</source>
-        <translation>Обфускация была успешно сброшена.</translation>
-    </message>
-    <message>
-        <source>If you don't want to see internal Obfuscation fees/transactions select "Most Common" as Type on the "Transactions" tab.</source>
-        <translation>Если вы не хотите видеть внутреннию плату / трансакции Обфускацци выберите "Наиболее распространненные" как Тип в закладке "Транзакции".</translation>
-    </message>
-    <message>
-        <source>Obfuscation requires at least %1 to use.</source>
-        <translation>Для использования обфускации необходимо как минимум %1</translation>
-    </message>
-    <message>
-        <source>Wallet is locked and user declined to unlock. Disabling Obfuscation.</source>
-        <translation>Кошелёк заблокирован и пользователь отклонен для разблокировки. Отключение Обфускации.</translation>
-    </message>
-    <message>
-        <source>Found enough compatible inputs to anonymize %1</source>
-        <translation>Найдено достаточно совместимых вводов для анонимизации %1</translation>
-    </message>
-    <message>
-        <source>Start Obfuscation</source>
-        <translation>Начать Обфускацию</translation>
-    </message>
-    <message>
-        <source>Stop Obfuscation</source>
-        <translation>Остановить Обфускацию</translation>
-    </message>
-    <message>
-        <source>Mixed</source>
-        <translation>Смешано</translation>
-    </message>
-    <message>
-        <source>Enabled</source>
-        <translation>Включено</translation>
-    </message>
-    <message>
-        <source>N/A</source>
-        <translation>Недоступно</translation>
+        <translation>не синхронизировано</translation>
     </message>
 </context>
 <context>
     <name>PaymentServer</name>
     <message>
-        <source>Payment request error</source>
-        <translation>Ошибка при запросе на оплату</translation>
-    </message>
-    <message>
-        <source>URI handling</source>
-        <translation>Обработка ссылок</translation>
-    </message>
-    <message>
-        <source>Payment request file handling</source>
-        <translation>Обработка файла запроса на оплату</translation>
-    </message>
-    <message>
-        <source>Invalid payment address %1</source>
-        <translation>Неверный адрес оплаты %1</translation>
-    </message>
-    <message>
-        <source>Cannot start wispr: click-to-pay handler</source>
-        <translation>Не удалось запустить wispr: обработчик click-to-pay </translation>
-    </message>
-    <message>
-        <source>URI cannot be parsed! This can be caused by an invalid Wispr address or malformed URI parameters.</source>
-        <translation>URI не интерпретируется! Причиной этому может быть неверный Wispr адрес или неверные параметеры URI.</translation>
-    </message>
-    <message>
-        <source>Payment request file cannot be read! This can be caused by an invalid payment request file.</source>
-        <translation>Файл запроса оплаты нечитается! Причиной может быть неверный файл запроса оплаты.</translation>
-    </message>
-    <message>
-        <source>Payment request rejected</source>
-        <translation>Запрос на оплату отклонен</translation>
-    </message>
-    <message>
-        <source>Payment request network doesn't match client network.</source>
-        <translation>Сеть запроса на оплату отличается от сети клиента.</translation>
-    </message>
-    <message>
-        <source>Payment request has expired.</source>
-        <translation>Запрос на оплату просрочен.</translation>
-    </message>
-    <message>
-        <source>Payment request is not initialized.</source>
-        <translation>Запрос на оплату не инициализирован.</translation>
-    </message>
-    <message>
-        <source>Unverified payment requests to custom payment scripts are unsupported.</source>
-        <translation>Неверифицированные запросы на оплату к пользовательским скриптам оплаты не поддерживается.</translation>
-    </message>
-    <message>
-        <source>Requested payment amount of %1 is too small (considered dust).</source>
-        <translation>Запрашиваемая сумма оплаты %1 слишком мала (considered dust).</translation>
-    </message>
-    <message>
-        <source>Refund from %1</source>
-        <translation>Сумма возврата от %1</translation>
-    </message>
-    <message>
-        <source>Payment request %1 is too large (%2 bytes, allowed %3 bytes).</source>
-        <translation>Запрос на оплату %1 слишком велик (%2 байт, разрешено %3 байт).</translation>
-    </message>
-    <message>
-        <source>Payment request DoS protection</source>
-        <translation>Защита от DoS атак, использующих запросы на оплату</translation>
-    </message>
-    <message>
-        <source>Error communicating with %1: %2</source>
-        <translation>Ошибка коммуникации с %1: %2</translation>
-    </message>
-    <message>
-        <source>Payment request cannot be parsed!</source>
-        <translation>Запрос на оплату непонятен!</translation>
-    </message>
-    <message>
-        <source>Bad response from server %1</source>
-        <translation>Неожиданный ответ сервера %1</translation>
-    </message>
-    <message>
-        <source>Network request error</source>
-        <translation>Ошибка обращения к сети</translation>
-    </message>
-    <message>
-        <source>Payment acknowledged</source>
-        <translation>Оплата принята к обработке</translation>
+        <location filename="../paymentserver.cpp" line="+107"/>
+        <source>Cannot start Wispr: click-to-pay handler</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
-    <name>PeerTableModel</name>
+    <name>QRCodeDialog</name>
     <message>
-        <source>Address/Hostname</source>
-        <translation>Адрес / имя хоста</translation>
+        <location filename="../forms/qrcodedialog.ui" line="+14"/>
+        <source>QR Code Dialog</source>
+        <translation>Диалог QR-кода</translation>
     </message>
     <message>
-        <source>Version</source>
-        <translation>Версия</translation>
+        <location line="+59"/>
+        <source>Request Payment</source>
+        <translation>Запросить платёж</translation>
     </message>
     <message>
-        <source>Ping Time</source>
-        <translation>Время отклика</translation>
-    </message>
-</context>
-<context>
-    <name>QObject</name>
-    <message>
-        <source>Amount</source>
-        <translation>Сумма</translation>
+        <location line="+56"/>
+        <source>Amount:</source>
+        <translation>Количество:</translation>
     </message>
     <message>
-        <source>Enter a Wispr address (e.g. %1)</source>
-        <translation>Введите адрес Wispr (например %1)</translation>
+        <location line="-44"/>
+        <source>Label:</source>
+        <translation>Метка:</translation>
     </message>
     <message>
-        <source>%1 d</source>
-        <translation>%1 д</translation>
+        <location line="+19"/>
+        <source>Message:</source>
+        <translation>Сообщение:</translation>
     </message>
     <message>
-        <source>%1 h</source>
-        <translation>%1 ч</translation>
+        <location line="+71"/>
+        <source>&amp;Save As...</source>
+        <translation>&amp;Сохранить как...</translation>
     </message>
     <message>
-        <source>%1 m</source>
-        <translation>%1 м</translation>
+        <location filename="../qrcodedialog.cpp" line="+62"/>
+        <source>Error encoding URI into QR Code.</source>
+        <translation>Ошибка кодирования URI в QR-код</translation>
     </message>
     <message>
-        <source>%1 s</source>
-        <translation>%1 с</translation>
+        <location line="+40"/>
+        <source>The entered amount is invalid, please check.</source>
+        <translation>Введено неверное количество, проверьте ещё раз.</translation>
     </message>
     <message>
-        <source>NETWORK</source>
-        <translation>СЕТЬ</translation>
+        <location line="+23"/>
+        <source>Resulting URI too long, try to reduce the text for label / message.</source>
+        <translation>Получившийся URI слишком длинный, попробуйте сократить текст метки / сообщения.</translation>
     </message>
     <message>
-        <source>UNKNOWN</source>
-        <translation>НЕИЗВЕСТНО</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation>Ничего</translation>
-    </message>
-    <message>
-        <source>N/A</source>
-        <translation>Недоступно</translation>
-    </message>
-    <message>
-        <source>%1 ms</source>
-        <translation>%1 мс</translation>
-    </message>
-</context>
-<context>
-    <name>QRImageWidget</name>
-    <message>
-        <source>&amp;Save Image...</source>
-        <translation>&amp;Сохранить изображение</translation>
-    </message>
-    <message>
-        <source>&amp;Copy Image</source>
-        <translation>&amp;Копировать изображение</translation>
-    </message>
-    <message>
+        <location line="+25"/>
         <source>Save QR Code</source>
         <translation>Сохранить QR-код</translation>
     </message>
     <message>
-        <source>PNG Image (*.png)</source>
-        <translation>Изображение в формате PNG (*.png)</translation>
+        <location line="+0"/>
+        <source>PNG Images (*.png)</source>
+        <translation>PNG Изображения (*.png)</translation>
     </message>
 </context>
 <context>
     <name>RPCConsole</name>
     <message>
-        <source>Tools window</source>
-        <translation>Окно с инструментами</translation>
-    </message>
-    <message>
-        <source>&amp;Information</source>
-        <translation>&amp;Информация</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>Основное</translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation>Имя</translation>
-    </message>
-    <message>
+        <location filename="../forms/rpcconsole.ui" line="+46"/>
         <source>Client name</source>
         <translation>Имя клиента</translation>
     </message>
     <message>
+        <location line="+10"/>
+        <location line="+23"/>
+        <location line="+26"/>
+        <location line="+23"/>
+        <location line="+23"/>
+        <location line="+36"/>
+        <location line="+53"/>
+        <location line="+23"/>
         <source>N/A</source>
-        <translation>Недоступно</translation>
+        <translation>Н/Д</translation>
     </message>
     <message>
-        <source>Number of connections</source>
-        <translation>Количество соениднений</translation>
-    </message>
-    <message>
-        <source>&amp;Open</source>
-        <translation>&amp;Открыть</translation>
-    </message>
-    <message>
-        <source>Startup time</source>
-        <translation>Время старта</translation>
-    </message>
-    <message>
-        <source>Network</source>
-        <translation>Сеть</translation>
-    </message>
-    <message>
-        <source>Last block time</source>
-        <translation>Время последнего блока</translation>
-    </message>
-    <message>
-        <source>Debug log file</source>
-        <translation>Протокол отладки</translation>
-    </message>
-    <message>
-        <source>Using OpenSSL version</source>
-        <translation>Используемая версия OpenSSL</translation>
-    </message>
-    <message>
-        <source>Build date</source>
-        <translation>Дата сборки</translation>
-    </message>
-    <message>
-        <source>Current number of blocks</source>
-        <translation>Текущее количество блоков</translation>
-    </message>
-    <message>
+        <location line="-194"/>
         <source>Client version</source>
         <translation>Версия клиента</translation>
     </message>
     <message>
-        <source>Using BerkeleyDB version</source>
-        <translation>Используемая версия BrekleyDB</translation>
+        <location line="-45"/>
+        <source>&amp;Information</source>
+        <translation>&amp;Информация</translation>
     </message>
     <message>
+        <location line="+68"/>
+        <source>Using OpenSSL version</source>
+        <translation>Используется версия OpenSSL</translation>
+    </message>
+    <message>
+        <location line="+49"/>
+        <source>Startup time</source>
+        <translation>Время запуска</translation>
+    </message>
+    <message>
+        <location line="+29"/>
+        <source>Network</source>
+        <translation>Сеть</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Number of connections</source>
+        <translation>Число подключений</translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>On testnet</source>
+        <translation>В тестовой сети</translation>
+    </message>
+    <message>
+        <location line="+23"/>
         <source>Block chain</source>
-        <translation>Блокчейн</translation>
+        <translation>Цепь блоков</translation>
     </message>
     <message>
-        <source>Open the Wispr debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation>Открыть протокол отладки Wispr. Это может занять некоторе время, если файл протокола очень большой.</translation>
+        <location line="+7"/>
+        <source>Current number of blocks</source>
+        <translation>Текущее число блоков</translation>
     </message>
     <message>
-        <source>Number of Masternodes</source>
-        <translation>Количество мастернод</translation>
-    </message>
-    <message>
-        <source>&amp;Console</source>
-        <translation>&amp;Коммандая строка</translation>
-    </message>
-    <message>
-        <source>Clear console</source>
-        <translation>Очистить коммандную строку</translation>
-    </message>
-    <message>
+        <location line="+197"/>
         <source>&amp;Network Traffic</source>
-        <translation>&amp;Сетевая передача данных</translation>
+        <translation>Сетевой &amp;трафик</translation>
     </message>
     <message>
+        <location line="+52"/>
         <source>&amp;Clear</source>
-        <translation>&amp;Очистить</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
+        <location line="+13"/>
         <source>Totals</source>
-        <translation>Результаты</translation>
+        <translation>Всего</translation>
     </message>
     <message>
-        <source>Received</source>
-        <translation>Принято</translation>
-    </message>
-    <message>
-        <source>Sent</source>
-        <translation>Отправлено</translation>
-    </message>
-    <message>
-        <source>&amp;Peers</source>
-        <translation>&amp;Пиры</translation>
-    </message>
-    <message>
-        <source>Select a peer to view detailed information.</source>
-        <translation>Выберите пир, чтобы показать детальную информацию.</translation>
-    </message>
-    <message>
-        <source>Direction</source>
-        <translation>Направление</translation>
-    </message>
-    <message>
-        <source>Protocol</source>
-        <translation>Протокол</translation>
-    </message>
-    <message>
-        <source>Version</source>
-        <translation>Версия</translation>
-    </message>
-    <message>
-        <source>Services</source>
-        <translation>Сервисы</translation>
-    </message>
-    <message>
-        <source>Starting Height</source>
-        <translation>Стартовая мощность</translation>
-    </message>
-    <message>
-        <source>Sync Height</source>
-        <translation>Мощность при синхронизации</translation>
-    </message>
-    <message>
-        <source>Ban Score</source>
-        <translation>Рекорд банов</translation>
-    </message>
-    <message>
-        <source>Connection Time</source>
-        <translation>Продолжительность соединения</translation>
-    </message>
-    <message>
-        <source>Last Send</source>
-        <translation>Посленее отправление</translation>
-    </message>
-    <message>
-        <source>Last Receive</source>
-        <translation>Послений приём</translation>
-    </message>
-    <message>
-        <source>Bytes Sent</source>
-        <translation>Байтов отправлено</translation>
-    </message>
-    <message>
-        <source>Bytes Received</source>
-        <translation>Байтов получено</translation>
-    </message>
-    <message>
-        <source>Ping Time</source>
-        <translation>Время отклика</translation>
-    </message>
-    <message>
-        <source>&amp;Wallet Repair</source>
-        <translation>&amp;Ремонт кошелька</translation>
-    </message>
-    <message>
-        <source>Wallet In Use:</source>
-        <translation>Используемый кошелек:</translation>
-    </message>
-    <message>
-        <source>Rescan blockchain files</source>
-        <translation>Пересканировать файлы блокчейна</translation>
-    </message>
-    <message>
-        <source>Rescan the block chain for missing wallet transactions.</source>
-        <translation>Пересканировать блокчейн для поиска пропущенных транзакций в кошельке.</translation>
-    </message>
-    <message>
-        <source>Recover transactions 1</source>
-        <translation>Востановление транзакций 1</translation>
-    </message>
-    <message>
-        <source>Recover transactions from blockchain (keep meta-data, e.g. account owner).</source>
-        <translation>Перезаписать транзакции из блокчейна (при сохранении мета-данных, таких как владелец кошелька).</translation>
-    </message>
-    <message>
-        <source>Recover transactions 2</source>
-        <translation>Востановление транзакций 2</translation>
-    </message>
-    <message>
-        <source>Recover transactions from blockchain (drop meta-data).</source>
-        <translation>Перезаписать транзакции из блокчейна (с удалением мета-данных, таких как владелец кошелька).</translation>
-    </message>
-    <message>
-        <source>Upgrade wallet format</source>
-        <translation>Обновить формат кошелька</translation>
-    </message>
-    <message>
-        <source>Rebuild block chain index from current blk000??.dat files.</source>
-        <translation>Перестроить индекс блокчейна из текущих blk000??.dat файлов.</translation>
-    </message>
-    <message>
-        <source>The buttons below will restart the wallet with command-line options to repair the wallet, fix issues with corrupt blockhain files or missing/obsolete transactions.</source>
-        <translation>Кнопка ниже перезапустит кошелёк с некоторыми опциями кммандной строки чтобы отремотировать кошелёк, файлы блокчейна и пропавшие / устаревшие транзакции. </translation>
-    </message>
-    <message>
-        <source>Wallet repair options.</source>
-        <translation>Опции ремонта кошелька.</translation>
-    </message>
-    <message>
-        <source>Upgrade wallet to latest format on startup. (Note: this is NOT an update of the wallet itself!)</source>
-        <translation>Обновить кошелек до последнего формата при запуске.
-(Примечание: это НЕ обновление самого кошелька!)</translation>
-    </message>
-    <message>
-        <source>Rebuild index</source>
-        <translation>Пересоздать индекс</translation>
-    </message>
-    <message>
+        <location line="+64"/>
+        <location filename="../rpcconsole.cpp" line="+352"/>
         <source>In:</source>
-        <translation>Ввод:</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
+        <location line="+80"/>
+        <location filename="../rpcconsole.cpp" line="+1"/>
         <source>Out:</source>
-        <translation>Вывод:</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
+        <location line="-383"/>
+        <source>Last block time</source>
+        <translation>Время последнего блока</translation>
+    </message>
+    <message>
+        <location line="+52"/>
+        <source>&amp;Open</source>
+        <translation>&amp;Открыть</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Command-line options</source>
+        <translation>Параметры командной строки</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Show the Wispr-Qt help message to get a list with possible Wispr command-line options.</source>
+        <translation>Показать помощь по Wispr-Qt, чтобы получить список доступных параметров командной строки.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>&amp;Show</source>
+        <translation>&amp;Показать</translation>
+    </message>
+    <message>
+        <location line="+24"/>
+        <source>&amp;Console</source>
+        <translation>Консоль</translation>
+    </message>
+    <message>
+        <location line="-237"/>
+        <source>Build date</source>
+        <translation>Дата сборки</translation>
+    </message>
+    <message>
+        <location line="-104"/>
+        <source>Wispr - Debug window</source>
+        <translation>Wispr - Окно отладки</translation>
+    </message>
+    <message>
+        <location line="+25"/>
+        <source>Wispr Core</source>
+        <translation>Ядро Wispr</translation>
+    </message>
+    <message>
+        <location line="+256"/>
+        <source>Debug log file</source>
+        <translation>Отладочный лог-файл</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Open the Wispr debug log file from the current data directory. This can take a few seconds for large log files.</source>
+        <translation>Открыть отладочный лог-файл Wispr из текущего каталога данных. Это может занять несколько секунд для больших лог-файлов.</translation>
+    </message>
+    <message>
+        <location line="+102"/>
+        <source>Clear console</source>
+        <translation>Очистить консоль</translation>
+    </message>
+    <message>
+        <location filename="../rpcconsole.cpp" line="-28"/>
         <source>Welcome to the Wispr RPC console.</source>
-        <translation>Добро пожаловать в окружение Wispr RPC.</translation>
+        <translation>Добро пожаловать в RPC-консоль Wispr.</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Use up and down arrows to navigate history, and &lt;b&gt;Ctrl-L&lt;/b&gt; to clear screen.</source>
-        <translation>Используйте стрелки вверх и вниз для навигации по истории, и &lt;b&gt;Ctrl-L&lt;/b&gt; для очистки экрана.</translation>
+        <translation>Используйте стрелки вверх и вниз для просмотра истории и &lt;b&gt;Ctrl-L&lt;/b&gt; для очистки экрана.</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Type &lt;b&gt;help&lt;/b&gt; for an overview of available commands.</source>
-        <translation>Введите &lt;b&gt;help&lt;/b&gt; для просмотра доступных команд.</translation>
+        <translation>Напишите &lt;b&gt;help&lt;/b&gt; для просмотра доступных команд.</translation>
     </message>
     <message>
+        <location line="+134"/>
         <source>%1 B</source>
-        <translation>%1 Б</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
+        <location line="+2"/>
         <source>%1 KB</source>
-        <translation>%1 КБ</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
+        <location line="+2"/>
         <source>%1 MB</source>
-        <translation>%1 МБ</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
+        <location line="+2"/>
         <source>%1 GB</source>
-        <translation>%1 ГБ</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <source>via %1</source>
-        <translation>через %1</translation>
+        <location line="+7"/>
+        <source>%1 m</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <source>never</source>
-        <translation>никогда</translation>
+        <location line="+5"/>
+        <source>%1 h</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <source>Unknown</source>
-        <translation>Неизвестно</translation>
-    </message>
-    <message>
-        <source>Fetching...</source>
-        <translation>Извлечение...</translation>
+        <location line="+2"/>
+        <source>%1 h %2 m</source>
+        <translation type="unfinished"/>
     </message>
 </context>
-<context>
-    <name>ReceiveCoinsDialog</name>
-    <message>
-        <source>&amp;Message:</source>
-        <translation>&amp;Сообщение:</translation>
-    </message>
-    <message>
-        <source>&amp;Amount:</source>
-        <translation>&amp;Количество:</translation>
-    </message>
-    <message>
-        <source>&amp;Request payment</source>
-        <translation>&amp;Запрос платежа</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Очистить все поля этой формы.</translation>
-    </message>
-    <message>
-        <source>Clear</source>
-        <translation>Очистить</translation>
-    </message>
-    <message>
-        <source>Requested payments history</source>
-        <translation>Запрос истории платежей</translation>
-    </message>
-    <message>
-        <source>Show the selected request (does the same as double clicking an entry)</source>
-        <translation>Показать этот выбранный запрос (или просто сделайте двойной клик за запись)</translation>
-    </message>
-    <message>
-        <source>Show</source>
-        <translation>Показать</translation>
-    </message>
-    <message>
-        <source>Remove the selected entries from the list</source>
-        <translation>Удалить эти выбранные записи из этого списка</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation>Удалить</translation>
-    </message>
-    <message>
-        <source>Copy label</source>
-        <translation>Копировать метку</translation>
-    </message>
-    <message>
-        <source>Copy message</source>
-        <translation>Скопировать сообщение</translation>
-    </message>
-    <message>
-        <source>Copy amount</source>
-        <translation>Копировать сумму</translation>
-    </message>
-</context>
-<context>
-    <name>ReceiveRequestDialog</name>
-    <message>
-        <source>QR Code</source>
-        <translation>QR код</translation>
-    </message>
-    <message>
-        <source>Copy &amp;URI</source>
-        <translation>Скопировать &amp;URI</translation>
-    </message>
-    <message>
-        <source>Copy &amp;Address</source>
-        <translation>Скопировать &amp;Адрес</translation>
-    </message>
-    <message>
-        <source>&amp;Save Image...</source>
-        <translation>&amp;Сохранить изображение</translation>
-    </message>
-    <message>
-        <source>Payment information</source>
-        <translation>Платежная информация</translation>
-    </message>
-    <message>
-        <source>URI</source>
-        <translation>URI</translation>
-    </message>
-    <message>
-        <source>Address</source>
-        <translation>Адрес</translation>
-    </message>
-    <message>
-        <source>Amount</source>
-        <translation>Сумма</translation>
-    </message>
-    <message>
-        <source>Label</source>
-        <translation>Метка</translation>
-    </message>
-    <message>
-        <source>Message</source>
-        <translation>Сообщение</translation>
-    </message>
-    <message>
-        <source>Error encoding URI into QR Code.</source>
-        <translation>Ошибка при кодировании URI в QR код.</translation>
-    </message>
-</context>
-<context>
-    <name>RecentRequestsTableModel</name>
-    <message>
-        <source>Date</source>
-        <translation>Дата</translation>
-    </message>
-    <message>
-        <source>Label</source>
-        <translation>Метка</translation>
-    </message>
-    <message>
-        <source>Message</source>
-        <translation>Сообщение</translation>
-    </message>
-    <message>
-        <source>Amount</source>
-        <translation>Сумма</translation>
-    </message>
-    <message>
-        <source>(no label)</source>
-        <translation>(нет метки)</translation>
-    </message>
-    <message>
-        <source>(no message)</source>
-        <translation>(нет сообщений)</translation>
-    </message>
-    </context>
 <context>
     <name>SendCoinsDialog</name>
     <message>
+        <location filename="../forms/sendcoinsdialog.ui" line="+14"/>
+        <location filename="../sendcoinsdialog.cpp" line="+179"/>
+        <location line="+5"/>
+        <location line="+5"/>
+        <location line="+5"/>
+        <location line="+6"/>
+        <location line="+5"/>
+        <location line="+5"/>
         <source>Send Coins</source>
-        <translation>Отправить Монеты</translation>
+        <translation>Отправка</translation>
     </message>
     <message>
+        <location line="+76"/>
+        <source>Coin Control Features</source>
+        <translation>Выбор входов</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Inputs...</source>
+        <translation>Входы...</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>automatically selected</source>
+        <translation>автоматический выбор</translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <source>Insufficient funds!</source>
+        <translation>Недостаточно средств!</translation>
+    </message>
+    <message>
+        <location line="+77"/>
         <source>Quantity:</source>
         <translation>Количество:</translation>
     </message>
     <message>
-        <source>Bytes:</source>
-        <translation>Байты:</translation>
+        <location line="+22"/>
+        <location line="+35"/>
+        <source>0</source>
+        <translation type="unfinished"/>
     </message>
     <message>
+        <location line="-19"/>
+        <source>Bytes:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+51"/>
         <source>Amount:</source>
         <translation>Сумма:</translation>
     </message>
     <message>
-        <source>Priority:</source>
-        <translation>Приоритет:</translation>
-    </message>
-    <message>
-        <source>medium</source>
-        <translation>промежуточный</translation>
-    </message>
-    <message>
+        <location line="+54"/>
         <source>Fee:</source>
         <translation>Комиссия:</translation>
     </message>
     <message>
-        <source>Dust:</source>
-        <translation>Пыль:</translation>
+        <location line="+35"/>
+        <source>Low Output:</source>
+        <translation type="unfinished"/>
     </message>
     <message>
+        <location line="+19"/>
         <source>no</source>
         <translation>нет</translation>
     </message>
     <message>
+        <location line="+32"/>
         <source>After Fee:</source>
-        <translation>После комиссии:</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <source>Change:</source>
-        <translation>Изменить:</translation>
+        <location line="+35"/>
+        <source>Change</source>
+        <translation>Сдача</translation>
     </message>
     <message>
-        <source>0 WSP</source>
-        <translation>0 WSP</translation>
+        <location line="+50"/>
+        <source>custom change address</source>
+        <translation>адрес для сдачи</translation>
     </message>
     <message>
-        <source>Transaction Fee:</source>
-        <translation>Комиссия за транзакцию:</translation>
+        <location line="+106"/>
+        <source>Send to multiple recipients at once</source>
+        <translation>Отправить нескольким получателям одновременно</translation>
     </message>
     <message>
-        <source>Choose...</source>
-        <translation>Выберите:</translation>
+        <location line="+3"/>
+        <source>Add &amp;Recipient</source>
+        <translation>&amp;Добавить получателя</translation>
     </message>
     <message>
-        <source>Minimize</source>
-        <translation>Свернуть</translation>
+        <location line="+16"/>
+        <source>Remove all transaction fields</source>
+        <translation>Удалить все поля транзакции</translation>
     </message>
     <message>
-        <source>Obfuscation</source>
-        <translation>Обфускация</translation>
-    </message>
-    <message>
-        <source>per kilobyte</source>
-        <translation>за килобайт</translation>
-    </message>
-    <message>
-        <source>Confirmation time:</source>
-        <translation>Количество подтверждений:</translation>
-    </message>
-    <message>
-        <source>normal</source>
-        <translation>нормально</translation>
-    </message>
-    <message>
-        <source>fast</source>
-        <translation>быстро</translation>
-    </message>
-    <message>
-        <source>Clear all fields of the form.</source>
-        <translation>Очистить все поля этой формы.</translation>
-    </message>
-    <message>
+        <location line="+3"/>
         <source>Clear &amp;All</source>
-        <translation>Очистить &amp;Все</translation>
+        <translation>Очистить &amp;всё</translation>
     </message>
     <message>
-        <source>SwiftTX</source>
-        <translation>SwiftTX</translation>
-    </message>
-    <message>
+        <location line="+24"/>
         <source>Balance:</source>
         <translation>Баланс:</translation>
     </message>
     <message>
+        <location line="+47"/>
+        <source>Confirm the send action</source>
+        <translation>Подтвердить отправку</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>S&amp;end</source>
+        <translation>&amp;Отправить</translation>
+    </message>
+    <message>
+        <location filename="../sendcoinsdialog.cpp" line="-171"/>
+        <source>Enter a Wispr address (e.g. B8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
+        <translation>Введите Wispr-адрес (например B8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</translation>
+    </message>
+    <message>
+        <location line="+15"/>
         <source>Copy quantity</source>
         <translation>Копировать количество</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Copy amount</source>
         <translation>Копировать сумму</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Copy fee</source>
         <translation>Копировать комиссию</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Copy after fee</source>
-        <translation>Копировать после вознаграждения </translation>
+        <translation type="unfinished"/>
     </message>
     <message>
+        <location line="+1"/>
         <source>Copy bytes</source>
-        <translation>Копировать байты</translation>
+        <translation>Копировать количество байтов</translation>
     </message>
     <message>
-        <source>Copy priority</source>
-        <translation>Копировать приоритет</translation>
+        <location line="+1"/>
+        <source>Copy low output</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <source>Copy dust</source>
-        <translation>Копировать пыль</translation>
-    </message>
-    <message>
+        <location line="+1"/>
         <source>Copy change</source>
-        <translation>Копировать изменение</translation>
+        <translation>Копировать сдачу</translation>
     </message>
     <message>
-        <source>Warning: Invalid Wispr address</source>
-        <translation>Предупреждение: неправильный Wispr адрес</translation>
+        <location line="+85"/>
+        <source>&lt;b&gt;%1&lt;/b&gt; to %2 (%3)</source>
+        <translation>&lt;b&gt;%1&lt;/b&gt; адресату %2 (%3)</translation>
     </message>
     <message>
-        <source>and SwiftTX</source>
-        <translation>и SwiftTX</translation>
+        <location line="+5"/>
+        <source>Confirm send coins</source>
+        <translation>Подтвердите отправку монет</translation>
     </message>
     <message>
-        <source>%1 to %2</source>
-        <translation>%1 до %2</translation>
+        <location line="+1"/>
+        <source>Are you sure you want to send %1?</source>
+        <translation>Вы уверены, что хотите отправить %1?</translation>
     </message>
     <message>
-        <source>Are you sure you want to send?</source>
-        <translation>Вы уверены, что хотите отправить?</translation>
+        <location line="+0"/>
+        <source> and </source>
+        <translation> и </translation>
     </message>
     <message>
+        <location line="+29"/>
+        <source>The recipient address is not valid, please recheck.</source>
+        <translation>Адрес получателя неверный, пожалуйста, перепроверьте.</translation>
+    </message>
+    <message>
+        <location line="+5"/>
         <source>The amount to pay must be larger than 0.</source>
-        <translation>Сумма для платежа должна быть больше, чем 0.</translation>
+        <translation>Количество монет для отправки должно быть больше 0.</translation>
     </message>
     <message>
+        <location line="+5"/>
+        <source>The amount exceeds your balance.</source>
+        <translation>Количество отправляемых монет превышает Ваш баланс</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>The total exceeds your balance when the %1 transaction fee is included.</source>
+        <translation>Сумма превысит Ваш баланс, если комиссия в размере %1 будет добавлена к транзакции</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Duplicate address found, can only send to each address once per send operation.</source>
+        <translation>Обнаружен дублирующийся адрес. Отправка на один и тот же адрес возможна только один раз за одну операцию отправки</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Error: Transaction creation failed!</source>
+        <translation>Ошибка: не удалось создать транзакцию!</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Error: The transaction was rejected. This might happen if some of the coins in your wallet were already spent, such as if you used a copy of wallet.dat and coins were spent in the copy but not marked as spent here.</source>
+        <translation>Ошибка: В транзакции отказано.  Такое может произойти, если некоторые монеты уже были потрачены, например, если Вы используете одну копию файла wallet.dat, а монеты были потрачены из другой копии, но не были отмечены как потраченные в этой.</translation>
+    </message>
+    <message>
+        <location line="+241"/>
+        <source>WARNING: Invalid Wispr address</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+13"/>
         <source>(no label)</source>
         <translation>(нет метки)</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>WARNING: unknown change address</source>
+        <translation>ПРЕДУПРЕЖДЕНИЕ: неизвестный адрес для сдачи</translation>
     </message>
 </context>
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <source>Choose previously used address</source>
-        <translation>Выбрать ранее использованный адрес</translation>
+        <location filename="../forms/sendcoinsentry.ui" line="+14"/>
+        <source>Form</source>
+        <translation>Форма</translation>
     </message>
     <message>
+        <location line="+15"/>
+        <source>A&amp;mount:</source>
+        <translation>Ко&amp;личество:</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Pay &amp;To:</source>
+        <translation>Полу&amp;чатель:</translation>
+    </message>
+    <message>
+        <location line="+34"/>
+        <source>The address to send the payment to (e.g. B8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
+        <translation>Адрес получателя платежа (например B8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</translation>
+    </message>
+    <message>
+        <location line="+60"/>
+        <location filename="../sendcoinsentry.cpp" line="+26"/>
+        <source>Enter a label for this address to add it to your address book</source>
+        <translation>Введите метку для данного адреса (для добавления в адресную книгу)</translation>
+    </message>
+    <message>
+        <location line="-78"/>
+        <source>&amp;Label:</source>
+        <translation>&amp;Метка:</translation>
+    </message>
+    <message>
+        <location line="+28"/>
+        <source>Choose address from address book</source>
+        <translation>Выберите адрес из адресной книги</translation>
+    </message>
+    <message>
+        <location line="+10"/>
         <source>Alt+A</source>
         <translation>Alt+A</translation>
     </message>
     <message>
+        <location line="+7"/>
         <source>Paste address from clipboard</source>
         <translation>Вставить адрес из буфера обмена</translation>
     </message>
     <message>
+        <location line="+10"/>
         <source>Alt+P</source>
         <translation>Alt+P</translation>
     </message>
     <message>
-        <source>Remove this entry</source>
-        <translation>Удалить эту запись</translation>
+        <location line="+7"/>
+        <source>Remove this recipient</source>
+        <translation>Удалить этого получателя</translation>
     </message>
     <message>
-        <source>Message:</source>
-        <translation>Сообщение:</translation>
-    </message>
-    </context>
-<context>
-    <name>ShutdownWindow</name>
-    <message>
-        <source>Wispr Core is shutting down...</source>
-        <translation>Wispr Core выключается...</translation>
-    </message>
-    <message>
-        <source>Do not shut down the computer until this window disappears.</source>
-        <translation>Не выключайте этот компьютер пока это окно не исчезнет.</translation>
+        <location filename="../sendcoinsentry.cpp" line="+1"/>
+        <source>Enter a Wispr address (e.g. B8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
+        <translation>Введите Wispr-адрес (например B8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</translation>
     </message>
 </context>
 <context>
     <name>SignVerifyMessageDialog</name>
     <message>
-        <source>The Wispr address to sign the message with</source>
-        <translation>Адрес Wispr для подписи сообщения с помощью</translation>
+        <location filename="../forms/signverifymessagedialog.ui" line="+14"/>
+        <source>Signatures - Sign / Verify a Message</source>
+        <translation>Подписи - подписать/проверить сообщение</translation>
     </message>
     <message>
-        <source>Choose previously used address</source>
-        <translation>Выбрать ранее использованный адрес</translation>
+        <location line="+13"/>
+        <location line="+124"/>
+        <source>&amp;Sign Message</source>
+        <translation>&amp;Подписать сообщение</translation>
     </message>
     <message>
+        <location line="-118"/>
+        <source>You can sign messages with your addresses to prove you own them. Be careful not to sign anything vague, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
+        <translation>Вы можете подписывать сообщения своими адресами, чтобы доказать владение ими. Будьте осторожны, не подписывайте что-то неопределённое, так как фишинговые атаки могут обманным путём заставить вас подписать нежелательные сообщения. Подписывайте только те сообщения, с которыми вы согласны вплоть до мелочей.</translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>The address to sign the message with (e.g. B8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
+        <translation>Адрес, которым вы хотите подписать сообщение  (напр. B8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <location line="+203"/>
+        <source>Choose an address from the address book</source>
+        <translation>Выберите адрес из адресной книги</translation>
+    </message>
+    <message>
+        <location line="-193"/>
+        <location line="+203"/>
         <source>Alt+A</source>
         <translation>Alt+A</translation>
     </message>
     <message>
+        <location line="-193"/>
         <source>Paste address from clipboard</source>
         <translation>Вставить адрес из буфера обмена</translation>
     </message>
     <message>
+        <location line="+10"/>
         <source>Alt+P</source>
         <translation>Alt+P</translation>
     </message>
     <message>
+        <location line="+12"/>
+        <source>Enter the message you want to sign here</source>
+        <translation>Введите сообщение для подписи</translation>
+    </message>
+    <message>
+        <location line="+24"/>
         <source>Copy the current signature to the system clipboard</source>
-        <translation>Копировать текущую подпись в системный буфер обмена</translation>
+        <translation>Скопировать текущую подпись в системный буфер обмена</translation>
     </message>
     <message>
+        <location line="+21"/>
         <source>Sign the message to prove you own this Wispr address</source>
-        <translation>Подпишите сообщение, чтобы подтвердить свой адрес Wispr</translation>
+        <translation>Подписать сообщение, чтобы доказать владение адресом Wispr</translation>
     </message>
     <message>
-        <source>The Wispr address the message was signed with</source>
-        <translation>Адрес Wispr, которым подписано сообщение</translation>
-    </message>
-    <message>
-        <source>Verify the message to ensure it was signed with the specified Wispr address</source>
-        <translation>Проверте сообщение, чтобы убедиться, что оно было подписано указанным Wispr адресом </translation>
-    </message>
-    <message>
+        <location line="+17"/>
         <source>Reset all sign message fields</source>
-        <translation>Сбросить все поля сообщений</translation>
+        <translation>Сбросить значения всех полей подписывания сообщений</translation>
     </message>
     <message>
+        <location line="+3"/>
+        <location line="+146"/>
         <source>Clear &amp;All</source>
-        <translation>Очистить &amp;Все</translation>
+        <translation>Очистить &amp;всё</translation>
     </message>
     <message>
+        <location line="-87"/>
+        <location line="+70"/>
+        <source>&amp;Verify Message</source>
+        <translation>&amp;Проверить сообщение</translation>
+    </message>
+    <message>
+        <location line="-64"/>
+        <source>Enter the signing address, message (ensure you copy line breaks, spaces, tabs, etc. exactly) and signature below to verify the message. Be careful not to read more into the signature than what is in the signed message itself, to avoid being tricked by a man-in-the-middle attack.</source>
+        <translation>Введите ниже адрес для подписи, сообщение (убедитесь, что переводы строк, пробелы, табы и т.п. в точности скопированы) и подпись, чтобы проверить сообщение. Убедитесь, что не скопировали лишнего в подпись, по сравнению с самим подписываемым сообщением, чтобы не стать жертвой атаки &quot;man-in-the-middle&quot;.</translation>
+    </message>
+    <message>
+        <location line="+21"/>
+        <source>The address the message was signed with (e.g. B8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
+        <translation>Адрес, которым было подписано сообщение (напр. B8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</translation>
+    </message>
+    <message>
+        <location line="+40"/>
+        <source>Verify the message to ensure it was signed with the specified Wispr address</source>
+        <translation>Проверить сообщение, чтобы убедиться, что оно было подписано указанным адресом Wispr</translation>
+    </message>
+    <message>
+        <location line="+17"/>
         <source>Reset all verify message fields</source>
-        <translation>Сбросить все поля подтверждения</translation>
+        <translation>Сбросить все поля проверки сообщения</translation>
     </message>
     <message>
+        <location filename="../signverifymessagedialog.cpp" line="+27"/>
+        <location line="+3"/>
+        <source>Enter a Wispr address (e.g. B8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</source>
+        <translation>Введите адрес Wispr (напр. B8gZqgY4r2RoEdqYk3QsAqFckyf9pRHN6i)</translation>
+    </message>
+    <message>
+        <location line="-2"/>
+        <source>Click &quot;Sign Message&quot; to generate signature</source>
+        <translation>Нажмите &quot;Подписать сообщение&quot; для создания подписи</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Enter Wispr signature</source>
+        <translation>Введите подпись Wispr</translation>
+    </message>
+    <message>
+        <location line="+85"/>
+        <location line="+81"/>
         <source>The entered address is invalid.</source>
-        <translation>Неправильно введен адрес.</translation>
+        <translation>Введённый адрес неверен</translation>
     </message>
     <message>
+        <location line="-81"/>
+        <location line="+8"/>
+        <location line="+73"/>
+        <location line="+8"/>
         <source>Please check the address and try again.</source>
-        <translation>Пожалуйста, проверьте адрес и попробуйте снова.</translation>
+        <translation>Пожалуйста, проверьте адрес и попробуйте ещё раз.</translation>
     </message>
     <message>
+        <location line="-81"/>
+        <location line="+81"/>
         <source>The entered address does not refer to a key.</source>
-        <translation>Введенный адрес не связан с ключом.</translation>
+        <translation>Введённый адрес не связан с ключом</translation>
     </message>
     <message>
+        <location line="-73"/>
         <source>Wallet unlock was cancelled.</source>
-        <translation>Снятие блокировки кошелька было отменено.</translation>
+        <translation>Разблокировка бумажника была отменена.</translation>
     </message>
     <message>
+        <location line="+8"/>
         <source>Private key for the entered address is not available.</source>
-        <translation>Персональный ключ для введенного адреса недоступен.</translation>
+        <translation>Для введённого адреса недоступен закрытый ключ</translation>
     </message>
     <message>
+        <location line="+12"/>
+        <source>Message signing failed.</source>
+        <translation>Не удалось подписать сообщение</translation>
+    </message>
+    <message>
+        <location line="+5"/>
         <source>Message signed.</source>
-        <translation>Сообщение подписано.</translation>
+        <translation>Сообщение подписано</translation>
     </message>
     <message>
+        <location line="+59"/>
+        <source>The signature could not be decoded.</source>
+        <translation>Подпись не может быть раскодирована.</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <location line="+13"/>
         <source>Please check the signature and try again.</source>
-        <translation>Пожалуйста, проверьте эту подпись и попробуйте снова.</translation>
-    </message>
-    </context>
-<context>
-    <name>SplashScreen</name>
-    <message>
-        <source>Wispr Core</source>
-        <translation>Wispr Core</translation>
+        <translation>Пожалуйста, проверьте подпись и попробуйте ещё раз.</translation>
     </message>
     <message>
-        <source>Version %1</source>
-        <translation>Версия %1</translation>
+        <location line="+0"/>
+        <source>The signature did not match the message digest.</source>
+        <translation>Подпись не соответствует отпечатку сообщения.</translation>
     </message>
     <message>
-        <source>The Bitcoin Core developers</source>
-        <translation>Разработчики Bitcoin Core</translation>
+        <location line="+7"/>
+        <source>Message verification failed.</source>
+        <translation>Проверка сообщения не удалась.</translation>
     </message>
     <message>
-        <source>The Dash Core developers</source>
-        <translation>Разработчики Dash Core</translation>
-    </message>
-    <message>
-        <source>The Wispr Core developers</source>
-        <translation>Разработчики Wispr Core</translation>
-    </message>
-    <message>
-        <source>[testnet]</source>
-        <translation>[тестовая сеть]</translation>
+        <location line="+5"/>
+        <source>Message verified.</source>
+        <translation>Сообщение проверено.</translation>
     </message>
 </context>
 <context>
     <name>TrafficGraphWidget</name>
     <message>
+        <location filename="../trafficgraphwidget.cpp" line="+75"/>
         <source>KB/s</source>
-        <translation>КБ/с</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>TransactionDesc</name>
     <message>
-        <source>Status</source>
-        <translation>Состояние</translation>
+        <location filename="../transactiondesc.cpp" line="+25"/>
+        <source>Open until %1</source>
+        <translation>Открыто до %1</translation>
     </message>
     <message>
+        <location line="+6"/>
+        <source>conflicted</source>
+        <translation>конфликт</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>%1/offline</source>
+        <translation>%1/оффлайн</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>%1/unconfirmed</source>
+        <translation>%1/не подтверждено</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>%1 confirmations</source>
+        <translation>%1 подтверждений</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Status</source>
+        <translation>Статус</translation>
+    </message>
+    <message numerus="yes">
+        <location line="+7"/>
+        <source>, broadcast through %n node(s)</source>
+        <translation><numerusform>, разослано через %n узел</numerusform><numerusform>, разослано через %n узла</numerusform><numerusform>, разослано через %n узлов</numerusform><numerusform>, разослано через %n узлов</numerusform></translation>
+    </message>
+    <message>
+        <location line="+4"/>
         <source>Date</source>
         <translation>Дата</translation>
     </message>
     <message>
+        <location line="+7"/>
         <source>Source</source>
         <translation>Источник</translation>
     </message>
     <message>
+        <location line="+0"/>
+        <source>Generated</source>
+        <translation>Сгенерировано</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+13"/>
         <source>From</source>
         <translation>От</translation>
     </message>
     <message>
-        <source>unknown</source>
-        <translation>неизвестно</translation>
-    </message>
-    <message>
+        <location line="+1"/>
+        <location line="+19"/>
+        <location line="+58"/>
         <source>To</source>
-        <translation>Кому</translation>
+        <translation>Для</translation>
     </message>
     <message>
+        <location line="-74"/>
+        <location line="+2"/>
+        <source>own address</source>
+        <translation>свой адрес</translation>
+    </message>
+    <message>
+        <location line="-2"/>
+        <source>label</source>
+        <translation>метка</translation>
+    </message>
+    <message>
+        <location line="+34"/>
+        <location line="+12"/>
+        <location line="+45"/>
+        <location line="+17"/>
+        <location line="+30"/>
         <source>Credit</source>
         <translation>Кредит</translation>
     </message>
+    <message numerus="yes">
+        <location line="-102"/>
+        <source>matures in %n more block(s)</source>
+        <translation><numerusform>будет доступно через %n блок</numerusform><numerusform>будет доступно через %n блока</numerusform><numerusform>будет доступно через %n блоков</numerusform><numerusform>будет доступно через %n блоков</numerusform></translation>
+    </message>
     <message>
+        <location line="+2"/>
+        <source>not accepted</source>
+        <translation>не принято</translation>
+    </message>
+    <message>
+        <location line="+44"/>
+        <location line="+8"/>
+        <location line="+15"/>
+        <location line="+30"/>
         <source>Debit</source>
-        <translation>Дебит</translation>
+        <translation>Дебет</translation>
     </message>
     <message>
+        <location line="-39"/>
         <source>Transaction fee</source>
-        <translation>Комиссия за транзакцию</translation>
+        <translation>Комиссия</translation>
     </message>
     <message>
+        <location line="+16"/>
+        <source>Net amount</source>
+        <translation>Чистая сумма</translation>
+    </message>
+    <message>
+        <location line="+6"/>
         <source>Message</source>
         <translation>Сообщение</translation>
     </message>
     <message>
+        <location line="+2"/>
         <source>Comment</source>
         <translation>Комментарий</translation>
     </message>
     <message>
+        <location line="+2"/>
         <source>Transaction ID</source>
-        <translation>Номер транзакции</translation>
+        <translation>ID транзакции</translation>
     </message>
     <message>
+        <location line="+3"/>
+        <source>Generated coins must mature 510 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to &quot;not accepted&quot; and it won&apos;t be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
+        <translation>Сгенерированные монеты должны подождать 510 блоков, прежде чем они могут быть потрачены. Когда Вы сгенерировали этот блок, он был отправлен в сеть для добавления в цепочку блоков. Если данная процедура не удастся, статус изменится на «не подтверждено», и монеты будут недействительны. Это иногда происходит в случае, если другой узел сгенерирует блок на несколько секунд раньше вас.</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Debug information</source>
+        <translation>Отладочная информация</translation>
+    </message>
+    <message>
+        <location line="+8"/>
         <source>Transaction</source>
         <translation>Транзакция</translation>
     </message>
     <message>
-        <source>Amount</source>
-        <translation>Сумма</translation>
+        <location line="+5"/>
+        <source>Inputs</source>
+        <translation>Входы</translation>
     </message>
     <message>
+        <location line="+21"/>
+        <source>Amount</source>
+        <translation>Количество</translation>
+    </message>
+    <message>
+        <location line="+1"/>
         <source>true</source>
         <translation>истина</translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>false</source>
         <translation>ложь</translation>
+    </message>
+    <message>
+        <location line="-202"/>
+        <source>, has not been successfully broadcast yet</source>
+        <translation>, ещё не было успешно разослано</translation>
+    </message>
+    <message numerus="yes">
+        <location line="-36"/>
+        <source>Open for %n more block(s)</source>
+        <translation><numerusform>Открыто для ещё %n блока</numerusform><numerusform>Открыто для ещё %n блоков</numerusform><numerusform>Открыто для ещё %n блоков</numerusform><numerusform>Открыто для ещё %n блоков</numerusform></translation>
+    </message>
+    <message>
+        <location line="+67"/>
+        <source>unknown</source>
+        <translation>неизвестно</translation>
     </message>
 </context>
 <context>
     <name>TransactionDescDialog</name>
     <message>
+        <location filename="../forms/transactiondescdialog.ui" line="+14"/>
         <source>Transaction details</source>
         <translation>Детали транзакции</translation>
     </message>
-    </context>
+    <message>
+        <location line="+6"/>
+        <source>This pane shows a detailed description of the transaction</source>
+        <translation>Данный диалог показывает детализированную статистику по выбранной транзакции</translation>
+    </message>
+</context>
 <context>
     <name>TransactionTableModel</name>
     <message>
+        <location filename="../transactiontablemodel.cpp" line="+231"/>
         <source>Date</source>
         <translation>Дата</translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>Type</source>
         <translation>Тип</translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>Address</source>
         <translation>Адрес</translation>
     </message>
     <message>
-        <source>Masternode Reward</source>
-        <translation>Вознаграждение Мастерноды</translation>
+        <location line="+0"/>
+        <source>Amount</source>
+        <translation>Количество</translation>
     </message>
     <message>
+        <location line="+52"/>
+        <source>Open until %1</source>
+        <translation>Открыто до %1</translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>Confirmed (%1 confirmations)</source>
+        <translation>Подтверждено (%1 подтверждений)</translation>
+    </message>
+    <message numerus="yes">
+        <location line="-15"/>
+        <source>Open for %n more block(s)</source>
+        <translation><numerusform>Открыто для ещё %n блока</numerusform><numerusform>Открыто для ещё %n блоков</numerusform><numerusform>Открыто для ещё %n блоков</numerusform><numerusform>Открыто для ещё %n блоков</numerusform></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Offline</source>
+        <translation>Оффлайн</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Unconfirmed</source>
+        <translation>Не подтверждено</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Confirming (%1 of %2 recommended confirmations)</source>
+        <translation>Подтверждается (%1 из %2 рекомендованных подтверждений)</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Conflicted</source>
+        <translation>Конфликт</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Immature (%1 confirmations, will be available after %2)</source>
+        <translation>Незрелые (%1 подтверждений, будут доступны после %2)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>This block was not received by any other nodes and will probably not be accepted!</source>
+        <translation>Этот блок не был получен другими узлами и, возможно, не будет принят!</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Generated but not accepted</source>
+        <translation>Сгенерировано, но не принято</translation>
+    </message>
+    <message>
+        <location line="+42"/>
+        <source>Received with</source>
+        <translation>Получено</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Received from</source>
+        <translation>Получено от</translation>
+    </message>
+    <message>
+        <location line="+3"/>
         <source>Sent to</source>
-        <translation>Отправить</translation>
+        <translation>Отправлено</translation>
     </message>
     <message>
+        <location line="+2"/>
+        <source>Payment to yourself</source>
+        <translation>Отправлено себе</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Mined</source>
+        <translation>Добыто</translation>
+    </message>
+    <message>
+        <location line="+38"/>
         <source>(n/a)</source>
-        <translation>(н/з)</translation>
+        <translation>[не доступно]</translation>
     </message>
     <message>
+        <location line="+194"/>
+        <source>Transaction status. Hover over this field to show number of confirmations.</source>
+        <translation>Статус транзакции. Подведите курсор к нужному полю для того, чтобы увидеть количество подтверждений.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Date and time that the transaction was received.</source>
+        <translation>Дата и время, когда транзакция была получена.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
         <source>Type of transaction.</source>
         <translation>Тип транзакции.</translation>
     </message>
-    </context>
+    <message>
+        <location line="+2"/>
+        <source>Destination address of transaction.</source>
+        <translation>Адрес назначения транзакции.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Amount removed from or added to balance.</source>
+        <translation>Сумма, добавленная, или снятая с баланса.</translation>
+    </message>
+</context>
 <context>
     <name>TransactionView</name>
     <message>
+        <location filename="../transactionview.cpp" line="+54"/>
+        <location line="+17"/>
+        <source>All</source>
+        <translation>Все</translation>
+    </message>
+    <message>
+        <location line="-16"/>
         <source>Today</source>
         <translation>Сегодня</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>This week</source>
-        <translation>Эта неделя</translation>
+        <translation>На этой неделе</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>This month</source>
-        <translation>Этот месяц</translation>
+        <translation>В этом месяце</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Last month</source>
-        <translation>Последний месяц</translation>
+        <translation>За последний месяц</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>This year</source>
-        <translation>Этот год</translation>
+        <translation>В этом году</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Range...</source>
-        <translation>Диапазон...</translation>
+        <translation>Промежуток...</translation>
     </message>
     <message>
+        <location line="+12"/>
+        <source>Received with</source>
+        <translation>Получено на</translation>
+    </message>
+    <message>
+        <location line="+2"/>
         <source>Sent to</source>
-        <translation>Отправить</translation>
+        <translation>Отправлено на</translation>
     </message>
     <message>
-        <source>Masternode Reward</source>
-        <translation>Вознаграждение Мастерноды</translation>
+        <location line="+2"/>
+        <source>To yourself</source>
+        <translation>Отправленные себе</translation>
     </message>
     <message>
+        <location line="+1"/>
+        <source>Mined</source>
+        <translation>Добытые</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Other</source>
+        <translation>Другое</translation>
+    </message>
+    <message>
+        <location line="+7"/>
         <source>Enter address or label to search</source>
-        <translation>Введите адрес или имя для поиска</translation>
+        <translation>Введите адрес или метку для поиска</translation>
     </message>
     <message>
+        <location line="+7"/>
+        <source>Min amount</source>
+        <translation>Мин. сумма</translation>
+    </message>
+    <message>
+        <location line="+34"/>
         <source>Copy address</source>
         <translation>Копировать адрес</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Copy label</source>
         <translation>Копировать метку</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Copy amount</source>
-        <translation>Копировать сумму</translation>
+        <translation>Скопировать сумму</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Copy transaction ID</source>
-        <translation>Копировать ID транзакции</translation>
+        <translation>Скопировать ID транзакции</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Edit label</source>
-        <translation>Редактировать имя</translation>
+        <translation>Изменить метку</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Show transaction details</source>
-        <translation>Детали транзакции</translation>
+        <translation>Показать подробности транзакции</translation>
     </message>
     <message>
-        <source>Export Transaction History</source>
-        <translation>Экспорт истории транзакций</translation>
+        <location line="+138"/>
+        <source>Export Transaction Data</source>
+        <translation>Экспортировать данные транзакций</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Comma separated file (*.csv)</source>
-        <translation>Файл формата csv</translation>
+        <translation>Текст, разделённый запятыми (*.csv)</translation>
     </message>
     <message>
+        <location line="+8"/>
         <source>Confirmed</source>
         <translation>Подтверждено</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Date</source>
         <translation>Дата</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Type</source>
         <translation>Тип</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Label</source>
         <translation>Метка</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Address</source>
         <translation>Адрес</translation>
     </message>
     <message>
-        <source>ID</source>
-        <translation>Номер</translation>
+        <location line="+1"/>
+        <source>Amount</source>
+        <translation>Количество</translation>
     </message>
     <message>
-        <source>Exporting Failed</source>
+        <location line="+1"/>
+        <source>ID</source>
+        <translation>ID</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Error exporting</source>
         <translation>Ошибка экспорта</translation>
     </message>
     <message>
-        <source>Exporting Successful</source>
-        <translation>Экспортирование произошло успешно</translation>
+        <location line="+0"/>
+        <source>Could not write to file %1.</source>
+        <translation>Невозможно записать в файл %1.</translation>
     </message>
-    </context>
-<context>
-    <name>UnitDisplayStatusBarControl</name>
-    </context>
-<context>
-    <name>WalletFrame</name>
-    </context>
+    <message>
+        <location line="+100"/>
+        <source>Range:</source>
+        <translation>Промежуток от:</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>to</source>
+        <translation>до</translation>
+    </message>
+</context>
 <context>
     <name>WalletModel</name>
     <message>
-        <source>Send Coins</source>
-        <translation>Отправить Монеты</translation>
+        <location filename="../walletmodel.cpp" line="+212"/>
+        <source>Sending...</source>
+        <translation>Отправка....</translation>
     </message>
-    </context>
+</context>
 <context>
-    <name>WalletView</name>
+    <name>bitcoin-core</name>
     <message>
-        <source>&amp;Export</source>
-        <translation>&amp;Экспорт</translation>
+        <location filename="../bitcoinstrings.cpp" line="+8"/>
+        <source>Wispr version</source>
+        <translation>Версия</translation>
     </message>
     <message>
-        <source>Export the data in the current tab to a file</source>
-        <translation>Экспортировать данные с текущей вкладки в файл</translation>
+        <location line="+1"/>
+        <source>Usage:</source>
+        <translation>Использование:</translation>
     </message>
     <message>
-        <source>Backup Wallet</source>
-        <translation>Резервная копия кошелька</translation>
-    </message>
-    </context>
-<context>
-    <name>wispr-core</name>
-    <message>
-        <source>SwiftTX requires inputs with at least 6 confirmations, you might need to wait a few minutes and try again.</source>
-        <translation>Для SwiftTX требуется как минимум 6 подтверждений, Вам нужно подождать несколько минут и попытаться снова.</translation>
+        <location line="+1"/>
+        <source>Send command to -server or Wisprd</source>
+        <translation>Отправить команду на -server или Wisprd</translation>
     </message>
     <message>
-        <source>Block creation options:</source>
-        <translation>Варианты создания блока:</translation>
+        <location line="+1"/>
+        <source>List commands</source>
+        <translation>Список команд
+</translation>
     </message>
     <message>
-        <source>Cannot downgrade wallet</source>
-        <translation>Нельзя понизить кошелек</translation>
+        <location line="+1"/>
+        <source>Get help for a command</source>
+        <translation>Получить помощь по команде</translation>
     </message>
     <message>
-        <source>Cannot write default address</source>
-        <translation>Невозможно записать адрес по умолчанию</translation>
-    </message>
-    <message>
-        <source>Collateral not valid.</source>
-        <translation>Залог недействителен.</translation>
-    </message>
-    <message>
-        <source>Connection options:</source>
-        <translation>Варианты подключения:</translation>
-    </message>
-    <message>
-        <source>Copyright (C) 2009-%i The Bitcoin Core Developers</source>
-        <translation>Copyright (C) 2009-%i Разработчики Bitcoin Core</translation>
-    </message>
-    <message>
-        <source>Copyright (C) 2014-%i The Dash Core Developers</source>
-        <translation>Copyright (C) 2014-%i Разработчики Dash Core</translation>
-    </message>
-    <message>
-        <source>Copyright (C) 2015-%i The Wispr Core Developers</source>
-        <translation>Copyright (C) 2015-%i Разработчики Wispr Core</translation>
-    </message>
-    <message>
-        <source>Corrupted block database detected</source>
-        <translation>Обнаружена поврежденная база данных блоков</translation>
-    </message>
-    <message>
-        <source>Debugging/Testing options:</source>
-        <translation>Параметры отладки / тестирования:</translation>
-    </message>
-    <message>
-        <source>Do you want to rebuild the block database now?</source>
-        <translation>Вы хотите перестроить базу данных блоков сейчас?</translation>
-    </message>
-    <message>
-        <source>Done loading</source>
-        <translation>Загрузка выполнена</translation>
-    </message>
-    <message>
-        <source>Entries are full.</source>
-        <translation>Записи заполнены.</translation>
-    </message>
-    <message>
-        <source>Error initializing block database</source>
-        <translation>Ошибка инициализации базы данных блоков</translation>
-    </message>
-    <message>
-        <source>Error loading block database</source>
-        <translation>Ошибка загрузки базы данных блоков</translation>
-    </message>
-    <message>
-        <source>Error loading wallet.dat</source>
-        <translation>Ошибка при загрузке wallet.dat</translation>
-    </message>
-    <message>
-        <source>Error loading wallet.dat: Wallet corrupted</source>
-        <translation>Ошибка при загрузке wallet.dat: Кошелек поврежден</translation>
-    </message>
-    <message>
-        <source>Error opening block database</source>
-        <translation>Ошибка открытия базы данных блоков</translation>
-    </message>
-    <message>
-        <source>Error reading from database, shutting down.</source>
-        <translation>Ошибка чтения из базы данных, завершение работы.</translation>
-    </message>
-    <message>
-        <source>Error recovering public key.</source>
-        <translation>Ошибка при восстановлении открытого ключа.</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation>Ошибка</translation>
-    </message>
-    <message>
-        <source>Error: A fatal internal error occured, see debug.log for details</source>
-        <translation>Ошибка: произошла фатальная внутренняя ошибка, подробности см. В файле debug.log.</translation>
-    </message>
-    <message>
-        <source>Error: Can't select current denominated inputs</source>
-        <translation>Ошибка: невозможно выбрать текущие входы</translation>
-    </message>
-    <message>
-        <source>Error: Disk space is low!</source>
-        <translation>Ошибка. Недостаточно места на диске!</translation>
-    </message>
-    <message>
-        <source>Error: Wallet locked, unable to create transaction!</source>
-        <translation>Ошибка: кошелек заблокирован, невозможно создать транзакцию!</translation>
-    </message>
-    <message>
-        <source>Failed to read block</source>
-        <translation>Не удалось прочитать блок</translation>
-    </message>
-    <message>
-        <source>Finalizing transaction.</source>
-        <translation>Завершение транзакции.</translation>
-    </message>
-    <message>
-        <source>Found enough users, signing ...</source>
-        <translation>Нашел достаточно пользователей, подписал ...</translation>
-    </message>
-    <message>
-        <source>Importing...</source>
-        <translation>Импорт ...</translation>
-    </message>
-    <message>
-        <source>Incompatible mode.</source>
-        <translation>Несовместимый режим.</translation>
-    </message>
-    <message>
-        <source>Incompatible version.</source>
-        <translation>Несовместимая версия.</translation>
-    </message>
-    <message>
-        <source>Incorrect or no genesis block found. Wrong datadir for network?</source>
-        <translation>Неправильный или не обнаруженный блок генезиса. Неверный каталог данных для сети?</translation>
-    </message>
-    <message>
-        <source>Information</source>
-        <translation>Информация</translation>
-    </message>
-    <message>
-        <source>Input is not valid.</source>
-        <translation>Недопустимый ввод.</translation>
-    </message>
-    <message>
-        <source>Insufficient funds.</source>
-        <translation>Недостаточно средств.</translation>
-    </message>
-    <message>
-        <source>Invalid private key.</source>
-        <translation>Недопустимый закрытый ключ.</translation>
-    </message>
-    <message>
-        <source>Invalid script detected.</source>
-        <translation>Обнаружен неверный сценарий.</translation>
-    </message>
-    <message>
-        <source>Last successful Obfuscation action was too recent.</source>
-        <translation>Последняя успешная операция обфускации была совсем недавно.</translation>
-    </message>
-    <message>
-        <source>Loading addresses...</source>
-        <translation>Загрузка адресов ...</translation>
-    </message>
-    <message>
-        <source>Loading block index...</source>
-        <translation>Загружается индекс блока ...</translation>
-    </message>
-    <message>
-        <source>Loading budget cache...</source>
-        <translation>Загрузка кэша бюджета ...</translation>
-    </message>
-    <message>
-        <source>Loading wallet... (%3.2f %%)</source>
-        <translation>Загрузка кошелька ... (%3.2f %%)</translation>
-    </message>
-    <message>
-        <source>Loading wallet...</source>
-        <translation>Загрузка кошелька ...</translation>
-    </message>
-    <message>
-        <source>Masternode:</source>
-        <translation>Мастернода:</translation>
-    </message>
-    <message>
-        <source>Missing input transaction information.</source>
-        <translation>Отсутствует входная информация о транзакции.</translation>
-    </message>
-    <message>
-        <source>Mixing in progress...</source>
-        <translation>Выполняется микширование ...</translation>
-    </message>
-    <message>
-        <source>No Masternodes detected.</source>
-        <translation>Мастерноды не найдены.</translation>
-    </message>
-    <message>
-        <source>No funds detected in need of denominating.</source>
-        <translation>Не обнаружено средств, требующих деноминации.</translation>
-    </message>
-    <message>
-        <source>No matching denominations found for mixing.</source>
-        <translation>Соответствующие наименования для смешивания не найдены.</translation>
-    </message>
-    <message>
-        <source>Node relay options:</source>
-        <translation>Варианты реле узла:</translation>
-    </message>
-    <message>
-        <source>Non-standard public key detected.</source>
-        <translation>Обнаружен нестандартный открытый ключ.</translation>
-    </message>
-    <message>
-        <source>Not compatible with existing transactions.</source>
-        <translation>Не совместим с существующими транзакциями.</translation>
-    </message>
-    <message>
-        <source>Not enough file descriptors available.</source>
-        <translation>Недостаточно доступных дескрипторов файлов.</translation>
-    </message>
-    <message>
-        <source>Obfuscation options:</source>
-        <translation>Варианты обфускации:</translation>
-    </message>
-    <message>
-        <source>Obfuscation request complete:</source>
-        <translation>Запрос об обфускации завершен:</translation>
-    </message>
-    <message>
-        <source>Obfuscation request incomplete:</source>
-        <translation>Запрос об обфускации неполный:</translation>
-    </message>
-    <message>
+        <location line="+1"/>
         <source>Options:</source>
         <translation>Опции:</translation>
     </message>
     <message>
-        <source>Password for JSON-RPC connections</source>
-        <translation>Пароль для подключений JSON-RPC</translation>
+        <location line="+2"/>
+        <source>Specify configuration file (default: Wispr.conf)</source>
+        <translation>Указать конфигурационный файл (по умолчанию: Wispr.conf)</translation>
     </message>
     <message>
-        <source>RPC server options:</source>
-        <translation>Параметры сервера RPC:</translation>
+        <location line="+1"/>
+        <source>Specify pid file (default: Wisprd.pid)</source>
+        <translation>Указать pid-файл (по умолчанию: Wisprd.pid)</translation>
     </message>
     <message>
-        <source>Rescan the block chain for missing wallet transactions</source>
-        <translation>Повторите сканирование цепочки блоков для пропущенных транзакций в кошельке.</translation>
+        <location line="+2"/>
+        <source>Specify wallet file (within data directory)</source>
+        <translation>Указать файл кошелька (в пределах DATA директории)</translation>
     </message>
     <message>
-        <source>Rescanning...</source>
-        <translation>Повторное сканирование ...</translation>
-    </message>
-    <message>
-        <source>Run in the background as a daemon and accept commands</source>
-        <translation>Запускать в фоновом режиме в качестве демона и принимать команды</translation>
-    </message>
-    <message>
-        <source>Session not complete!</source>
-        <translation>Сессия не завершена!</translation>
-    </message>
-    <message>
-        <source>Session timed out.</source>
-        <translation>Время сеанса истекло.</translation>
-    </message>
-    <message>
-        <source>Signing failed.</source>
-        <translation>Сбой подписи.</translation>
-    </message>
-    <message>
-        <source>Signing transaction failed</source>
-        <translation>Не удалось подписать транзакцию</translation>
-    </message>
-    <message>
+        <location line="-1"/>
         <source>Specify data directory</source>
         <translation>Укажите каталог данных</translation>
     </message>
     <message>
-        <source>Specify wallet file (within data directory)</source>
-        <translation>Укажите файл кошелька (в каталоге данных)</translation>
+        <location line="+163"/>
+        <source>%s, you must set a rpcpassword in the configuration file:
+%s
+It is recommended you use the following random password:
+rpcuser=Wisprrpc
+rpcpassword=%s
+(you do not need to remember this password)
+The username and password MUST NOT be the same.
+If the file does not exist, create it with owner-readable-only file permissions.
+It is also recommended to set alertnotify so you are notified of problems;
+for example: alertnotify=echo %%s | mail -s &quot;Wispr Alert&quot; admin@foo.com
+</source>
+        <translation type="unfinished"/>
     </message>
     <message>
+        <location line="-161"/>
+        <source>Set database cache size in megabytes (default: 25)</source>
+        <translation>Установить размер кэша базы данных в мегабайтах (по умолчанию: 25)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Set database disk log size in megabytes (default: 100)</source>
+        <translation>Установить размер лога базы данных в мегабайтах (по умолчанию: 100)</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Listen for connections on &lt;port&gt; (default: 17000 or testnet: 17002)</source>
+        <translation>Принимать входящие подключения на &lt;port&gt; (по умолчанию: 17000 или 17002 в тестовой сети)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Maintain at most &lt;n&gt; connections to peers (default: 125)</source>
+        <translation>Поддерживать не более &lt;n&gt; подключений к узлам (по умолчанию: 125)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Connect to a node to retrieve peer addresses, and disconnect</source>
+        <translation>Подключиться к узлу, чтобы получить список адресов других участников и отключиться</translation>
+    </message>
+    <message>
+        <location line="+1"/>
         <source>Specify your own public address</source>
-        <translation>Укажите свой собственный общедоступный адрес</translation>
+        <translation>Укажите ваш собственный публичный адрес</translation>
     </message>
     <message>
-        <source>Synchronization failed</source>
-        <translation>Ошибка синхронизации</translation>
+        <location line="+4"/>
+        <source>Bind to given address. Use [host]:port notation for IPv6</source>
+        <translation>Привязаться (bind) к указанному адресу. Используйте запись вида [хост]:порт для IPv6</translation>
     </message>
     <message>
-        <source>Synchronization finished</source>
-        <translation>Синхронизация завершена</translation>
+        <location line="+1"/>
+        <source>Query for peer addresses via DNS lookup, if low on addresses (default: 1 unless -connect)</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <source>Synchronization pending...</source>
-        <translation>Ожидается синхронизация ...</translation>
+        <location line="+3"/>
+        <source>Always query for peer addresses via DNS lookup (default: 0)</source>
+        <translation>Всегда запрашивать адреса пиров с помощью DNS (по умолчанию: 0)</translation>
     </message>
     <message>
-        <source>Synchronizing budgets...</source>
-        <translation>Синхронизация бюджетов ...</translation>
+        <location line="+4"/>
+        <source>Threshold for disconnecting misbehaving peers (default: 100)</source>
+        <translation>Порог для отключения неправильно ведущих себя узлов (по умолчанию: 100)</translation>
     </message>
     <message>
-        <source>Synchronizing masternode winners...</source>
-        <translation>Синхронизация мастернод победителей ...</translation>
+        <location line="+1"/>
+        <source>Number of seconds to keep misbehaving peers from reconnecting (default: 86400)</source>
+        <translation>Число секунд блокирования неправильно ведущих себя узлов (по умолчанию: 86400)</translation>
     </message>
     <message>
-        <source>Synchronizing masternodes...</source>
-        <translation>Синхронизация мастернод ...</translation>
+        <location line="+153"/>
+        <source>An error occurred while setting up the RPC port %u for listening on IPv4: %s</source>
+        <translation>Произошла ошибка при открытии RPC-порта %u для прослушивания на IPv4: %s</translation>
     </message>
     <message>
-        <source>Synchronizing sporks...</source>
-        <translation>Синхронизация спорков ...</translation>
+        <location line="-126"/>
+        <source>Listen for JSON-RPC connections on &lt;port&gt; (default: 17001 or testnet: 17003)</source>
+        <translation>Прослушивать подключения JSON-RPC на &lt;порту&gt; (по умолчанию: 17001 или для testnet: 17003)</translation>
     </message>
     <message>
-        <source>This help message</source>
-        <translation>Это справочное сообщение</translation>
+        <location line="-16"/>
+        <source>Accept command line and JSON-RPC commands</source>
+        <translation>Принимать командную строку и команды JSON-RPC</translation>
     </message>
     <message>
-        <source>This is experimental software.</source>
-        <translation>Это экспериментальное программное обеспечение.</translation>
+        <location line="+1"/>
+        <source>Run in the background as a daemon and accept commands</source>
+        <translation>Запускаться в фоне как демон и принимать команды</translation>
     </message>
     <message>
-        <source>This is intended for regression testing tools and app development.</source>
-        <translation>Это предназначено для инструментов тестирования регрессии и разработки приложений.</translation>
+        <location line="+1"/>
+        <source>Use the test network</source>
+        <translation>Использовать тестовую сеть</translation>
     </message>
     <message>
-        <source>Transaction amount too small</source>
-        <translation>Слишком маленькая сумма транзакции</translation>
+        <location line="-23"/>
+        <source>Accept connections from outside (default: 1 if no -proxy or -connect)</source>
+        <translation>Принимать подключения извне (по умолчанию: 1, если не используется -proxy или -connect)</translation>
     </message>
     <message>
-        <source>Transaction amounts must be positive</source>
-        <translation>Суммы транзакций должны быть положительными</translation>
+        <location line="+160"/>
+        <source>An error occurred while setting up the RPC port %u for listening on IPv6, falling back to IPv4: %s</source>
+        <translation>Произошла ошибка при открытии на прослушивание IPv6 RCP-порта %u, возвращаемся к IPv4: %s</translation>
     </message>
     <message>
-        <source>Transaction created successfully.</source>
-        <translation>Транзакция создана успешно.</translation>
+        <location line="-84"/>
+        <source>Warning: -paytxfee is set very high! This is the transaction fee you will pay if you send a transaction.</source>
+        <translation>Внимание: установлено очень большое значение -paytxfee. Это комиссия, которую вы заплатите при проведении транзакции.</translation>
     </message>
     <message>
-        <source>Transaction fees are too high.</source>
-        <translation>Сборы за транзакцию слишком высоки.</translation>
+        <location line="+46"/>
+        <source>Warning: Please check that your computer&apos;s date and time are correct! If your clock is wrong Wispr will not work properly.</source>
+        <translation>Внимание: убедитесь, что дата и время на Вашем компьютере выставлены верно. Если Ваши часы идут неправильно, Wispr будет работать некорректно.</translation>
     </message>
     <message>
-        <source>Transaction not valid.</source>
-        <translation>Транзакция недействительна.</translation>
+        <location line="-19"/>
+        <source>Warning: error reading wallet.dat! All keys read correctly, but transaction data or address book entries might be missing or incorrect.</source>
+        <translation>Внимание: ошибка чтения wallet.dat! Все ключи восстановлены, но записи в адресной книге и истории транзакций могут быть некорректными.</translation>
     </message>
     <message>
-        <source>Transaction too large</source>
-        <translation>Слишком большая транзакция</translation>
+        <location line="-16"/>
+        <source>Warning: wallet.dat corrupt, data salvaged! Original wallet.dat saved as wallet.{timestamp}.bak in %s; if your balance or transactions are incorrect you should restore from a backup.</source>
+        <translation>Внимание: wallet.dat был поврежден, данные восстановлены! Оригинальный wallet.dat сохранен как wallet.{timestamp}.bak в %s;, если ваши транзакции или баланс отображаются неправильно, следует восстановить его из данной копии.</translation>
     </message>
     <message>
-        <source>Transmitting final transaction.</source>
-        <translation>Передача окончательной транзакции.</translation>
+        <location line="-31"/>
+        <source>Attempt to recover private keys from a corrupt wallet.dat</source>
+        <translation>Попытка восстановления ключей из поврежденного wallet.dat</translation>
     </message>
     <message>
+        <location line="+5"/>
+        <source>Block creation options:</source>
+        <translation>Параметры создания блоков:</translation>
+    </message>
+    <message>
+        <location line="-66"/>
+        <source>Connect only to the specified node(s)</source>
+        <translation>Подключаться только к указанному узлу(ам)</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Discover own IP address (default: 1 when listening and no -externalip)</source>
+        <translation>Определить свой IP (по умолчанию: 1 при прослушивании и если не используется -externalip)</translation>
+    </message>
+    <message>
+        <location line="+97"/>
+        <source>Failed to listen on any port. Use -listen=0 if you want this.</source>
+        <translation>Не удалось начать прослушивание на порту. Используйте -listen=0 если вас это устраивает.</translation>
+    </message>
+    <message>
+        <location line="-2"/>
+        <source>Invalid -tor address: &apos;%s&apos;</source>
+        <translation>Неверный адрес -tor: &apos;%s&apos;</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Invalid amount for -reservebalance=&lt;amount&gt;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="-85"/>
+        <source>Maximum per-connection receive buffer, &lt;n&gt;*1000 bytes (default: 5000)</source>
+        <translation>Максимальный размер буфера приёма на соединение, &lt;n&gt;*1000 байт (по умолчанию: 5000)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Maximum per-connection send buffer, &lt;n&gt;*1000 bytes (default: 1000)</source>
+        <translation>Максимальный размер буфера отправки на соединение, &lt;n&gt;*1000 байт (по умолчанию: 1000)</translation>
+    </message>
+    <message>
+        <location line="-16"/>
+        <source>Only connect to nodes in network &lt;net&gt; (IPv4, IPv6 or Tor)</source>
+        <translation>Подключаться только к узлам из сети &lt;net&gt; (IPv4, IPv6 или Tor)</translation>
+    </message>
+    <message>
+        <location line="+30"/>
+        <source>Prepend debug output with timestamp</source>
+        <translation>Дописывать отметки времени к отладочному выводу</translation>
+    </message>
+    <message>
+        <location line="+36"/>
+        <source>SSL options: (see the Bitcoin Wiki for SSL setup instructions)</source>
+        <translation>
+Параметры SSL: (см. Bitcoin Wiki для инструкций по настройке SSL)</translation>
+    </message>
+    <message>
+        <location line="-34"/>
+        <source>Send trace/debug info to console instead of debug.log file</source>
+        <translation>Выводить информацию трассировки/отладки на консоль вместо файла debug.log</translation>
+    </message>
+    <message>
+        <location line="+33"/>
+        <source>Set maximum block size in bytes (default: 250000)</source>
+        <translation>Максимальный размер блока в байтах (по умолчанию: 250000)</translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Set minimum block size in bytes (default: 0)</source>
+        <translation>Минимальный размер блока в байтах (по умолчанию: 0)</translation>
+    </message>
+    <message>
+        <location line="-33"/>
+        <source>Shrink debug.log file on client startup (default: 1 when no -debug)</source>
+        <translation>Сжимать файл debug.log при запуске клиента (по умолчанию: 1, если нет -debug)</translation>
+    </message>
+    <message>
+        <location line="-41"/>
+        <source>Specify connection timeout in milliseconds (default: 5000)</source>
+        <translation>Таймаут соединения в миллисекундах (по умолчанию: 5000)</translation>
+    </message>
+    <message>
+        <location line="+28"/>
+        <source>Use UPnP to map the listening port (default: 0)</source>
+        <translation>Использовать UPnP для проброса порта (по умолчанию: 0)</translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Use UPnP to map the listening port (default: 1 when listening)</source>
+        <translation>Использовать UPnP для проброса порта (по умолчанию: 1, если используется прослушивание)</translation>
+    </message>
+    <message>
+        <location line="-25"/>
+        <source>Use proxy to reach tor hidden services (default: same as -proxy)</source>
+        <translation>Использовать прокси для скрытых сервисов (по умолчанию: тот же, что и в -proxy)</translation>
+    </message>
+    <message>
+        <location line="+45"/>
+        <source>Username for JSON-RPC connections</source>
+        <translation>Имя для подключений JSON-RPC</translation>
+    </message>
+    <message>
+        <location line="+50"/>
+        <source>Verifying database integrity...</source>
+        <translation>Проверка целостности базы данных...</translation>
+    </message>
+    <message>
+        <location line="+43"/>
+        <source>Error: Wallet locked, unable to create transaction!</source>
+        <translation>Ошибка: бумажник заблокирован, невозможно создать транзакцию!</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Error: This transaction requires a transaction fee of at least %s because of its amount, complexity, or use of recently received funds!</source>
+        <translation>Ошибка: эта транзакция требует комиссию в размере как минимум %s из-за её объёма, сложности или использования недавно полученных средств!</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Error: Transaction creation failed!</source>
+        <translation>Ошибка: не удалось создать транзакцию!</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Error: The transaction was rejected! This might happen if some of the coins in your wallet were already spent, such as if you used a copy of wallet.dat and coins were spent in the copy but not marked as spent here.</source>
+        <translation>Ошибка: В транзакции отказано!  Такое может произойти, если некоторые монеты уже были потрачены, например, если Вы используете одну копию файла wallet.dat, а монеты были потрачены из другой копии, но не были отмечены как потраченные в этой.</translation>
+    </message>
+    <message>
+        <location line="-15"/>
         <source>Warning</source>
-        <translation>Предупреждение</translation>
+        <translation type="unfinished"/>
     </message>
-    </context>
+    <message>
+        <location line="+1"/>
+        <source>Information</source>
+        <translation>Информация</translation>
+    </message>
+    <message>
+        <location line="-7"/>
+        <source>Warning: This version is obsolete, upgrade required!</source>
+        <translation>Внимание: эта версия устарела, требуется обновление!</translation>
+    </message>
+    <message>
+        <location line="-23"/>
+        <source>wallet.dat corrupt, salvage failed</source>
+        <translation>wallet.dat поврежден, восстановление не удалось</translation>
+    </message>
+    <message>
+        <location line="-55"/>
+        <source>Password for JSON-RPC connections</source>
+        <translation>Пароль для подключений JSON-RPC</translation>
+    </message>
+    <message>
+        <location line="-47"/>
+        <source>Connect through SOCKS5 proxy</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Sync time with other nodes. Disable if time on your system is precise e.g. syncing with NTP (default: 1)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>When creating transactions, ignore inputs with value less than this (default: 0.01)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Output debugging information (default: 0, supplying &lt;category&gt; is optional)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>If &lt;category&gt; is not supplied, output all debugging information.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>&lt;category&gt; can be:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Enter regression test mode, which uses a special chain in which blocks can be solved instantly. This is intended for regression testing tools and app development.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Allow JSON-RPC connections from specified IP address</source>
+        <translation>Разрешить подключения JSON-RPC с указанного IP</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Send commands to node running on &lt;ip&gt; (default: 127.0.0.1)</source>
+        <translation>Посылать команды узлу, запущенному на &lt;ip&gt; (по умолчанию: 127.0.0.1)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Wait for RPC server to start</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Set the number of threads to service RPC calls (default: 4)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Execute command when the best block changes (%s in cmd is replaced by block hash)</source>
+        <translation>Выполнить команду, когда появляется новый блок (%s в команде заменяется на хэш блока)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Execute command when a wallet transaction changes (%s in cmd is replaced by TxID)</source>
+        <translation>Выполнить команду, когда получена новая транзакция (%s в команде заменяется на ID транзакции)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Require a confirmations for change (default: 0)</source>
+        <translation>Требовать подтверждения для сдачи (по умолчанию: 0)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Execute command when a relevant alert is received (%s in cmd is replaced by message)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Upgrade wallet to latest format</source>
+        <translation>Обновить бумажник до последнего формата</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Set key pool size to &lt;n&gt; (default: 100)</source>
+        <translation>Установить размер запаса ключей в &lt;n&gt; (по умолчанию: 100)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Rescan the block chain for missing wallet transactions</source>
+        <translation>Перепроверить цепь блоков на предмет отсутствующих в бумажнике транзакций</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>How thorough the block verification is (0-6, default: 1)</source>
+        <translation>Насколько тщательно проверять блоки (0-6, по умолчанию: 1)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Imports blocks from external wsp000?.dat file</source>
+        <translation>Импортировать блоки из внешнего файла wsp000?.dat</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Keep at most &lt;n&gt; MiB of unconnectable blocks in memory (default: %u)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Use OpenSSL (https) for JSON-RPC connections</source>
+        <translation>Использовать OpenSSL (https) для подключений JSON-RPC</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Server certificate file (default: server.cert)</source>
+        <translation>Файл серверного сертификата (по умолчанию: server.cert)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Server private key (default: server.pem)</source>
+        <translation>Приватный ключ сервера (по умолчанию: server.pem)</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Error: Unsupported argument -socks found. Setting SOCKS version isn&apos;t possible anymore, only SOCKS5 proxies are supported.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Initialization sanity check failed. Wispr is shutting down.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Error loading block database</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+29"/>
+        <source>Error: Wallet unlocked for staking only, unable to create transaction.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="-14"/>
+        <source>Error: Disk space is low!</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
+        <translation>Это пре-релизная тестовая сборка - используйте на свой страх и риск - не используйте для добычи или торговых приложений</translation>
+    </message>
+    <message>
+        <location line="-135"/>
+        <source>This help message</source>
+        <translation>Эта справка</translation>
+    </message>
+    <message>
+        <location line="+100"/>
+        <source>Wallet %s resides outside data directory %s.</source>
+        <translation>Кошелек %s находится вне рабочей директории %s.</translation>
+    </message>
+    <message>
+        <location line="+46"/>
+        <source>Unable to bind to %s on this computer (bind returned error %d, %s)</source>
+        <translation>Невозможно привязаться к %s на этом компьютере (bind вернул ошибку %d, %s)</translation>
+    </message>
+    <message>
+        <location line="-136"/>
+        <source>Allow DNS lookups for -addnode, -seednode and -connect</source>
+        <translation>Разрешить поиск в DNS для -addnode, -seednode и -connect</translation>
+    </message>
+    <message>
+        <location line="+121"/>
+        <source>Loading addresses...</source>
+        <translation>Загрузка адресов...</translation>
+    </message>
+    <message>
+        <location line="-10"/>
+        <source>Error loading wallet.dat: Wallet corrupted</source>
+        <translation>Ошибка загрузки wallet.dat: Бумажник поврежден</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Error loading wallet.dat: Wallet requires newer version of Wispr</source>
+        <translation>Ошибка загрузки wallet.dat: бумажник требует более новую версию Wispr</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Wallet needed to be rewritten: restart Wispr to complete</source>
+        <translation>Необходимо перезаписать бумажник, перезапустите Wispr для завершения операции</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Error loading wallet.dat</source>
+        <translation>Ошибка при загрузке wallet.dat</translation>
+    </message>
+    <message>
+        <location line="-15"/>
+        <source>Invalid -proxy address: &apos;%s&apos;</source>
+        <translation>Неверный адрес -proxy: &apos;%s&apos;</translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Unknown network specified in -onlynet: &apos;%s&apos;</source>
+        <translation>В параметре -onlynet указана неизвестная сеть: &apos;%s&apos;</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Cannot resolve -bind address: &apos;%s&apos;</source>
+        <translation>Не удаётся разрешить адрес в параметре -bind: &apos;%s&apos;</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Cannot resolve -externalip address: &apos;%s&apos;</source>
+        <translation>Не удаётся разрешить адрес в параметре -externalip: &apos;%s&apos;</translation>
+    </message>
+    <message>
+        <location line="-22"/>
+        <source>Invalid amount for -paytxfee=&lt;amount&gt;: &apos;%s&apos;</source>
+        <translation>Неверное количество в параметре -paytxfee=&lt;кол-во&gt;: &apos;%s&apos;</translation>
+    </message>
+    <message>
+        <location line="+59"/>
+        <source>Sending...</source>
+        <translation>Отправка...</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Invalid amount</source>
+        <translation>Неверное количество</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Insufficient funds</source>
+        <translation>Недостаточно монет</translation>
+    </message>
+    <message>
+        <location line="-41"/>
+        <source>Loading block index...</source>
+        <translation>Загрузка индекса блоков...</translation>
+    </message>
+    <message>
+        <location line="-105"/>
+        <source>Add a node to connect to and attempt to keep the connection open</source>
+        <translation>Добавить узел для подключения и пытаться поддерживать соединение открытым</translation>
+    </message>
+    <message>
+        <location line="+131"/>
+        <source>Unable to bind to %s on this computer. Wispr is probably already running.</source>
+        <translation>Невозможно привязаться к %s на этом компьютере.  Возможно, Wispr уже работает.</translation>
+    </message>
+    <message>
+        <location line="-108"/>
+        <source>Fee per KB to add to transactions you send</source>
+        <translation>Комиссия на килобайт, добавляемая к вашим транзакциям</translation>
+    </message>
+    <message>
+        <location line="+40"/>
+        <source>How many blocks to check at startup (default: 500, 0 = all)</source>
+        <translation>Сколько блоков проверять при запуске (по умолчанию: 500, 0 = все)</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Acceptable ciphers (default: TLSv1.2+HIGH:TLSv1+HIGH:!SSLv2:!aNULL:!eNULL:!3DES:@STRENGTH)</source>
+        <translation>Разрешённые алгоритмы (по умолчанию: TLSv1.2+HIGH:TLSv1+HIGH:!SSLv2:!aNULL:!eNULL:!3DES:@STRENGTH)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Warning: Deprecated argument -debugnet ignored, use -debug=net</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Invalid amount for -mininput=&lt;amount&gt;: &apos;%s&apos;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Cannot obtain a lock on data directory %s. Wispr is probably already running.</source>
+        <translation>Невозможно установить блокировку на рабочую директорию %s.  Возможно, бумажник уже запущен.</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Error initializing wallet database environment %s!</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Loading wallet...</source>
+        <translation>Загрузка бумажника...</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Cannot downgrade wallet</source>
+        <translation>Не удаётся понизить версию бумажника</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Cannot write default address</source>
+        <translation>Не удаётся записать адрес по умолчанию</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Rescanning...</source>
+        <translation>Сканирование...</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Done loading</source>
+        <translation>Загрузка завершена</translation>
+    </message>
+    <message>
+        <location line="+33"/>
+        <source>To use the %s option</source>
+        <translation>Чтобы использовать опцию %s</translation>
+    </message>
+    <message>
+        <location line="-27"/>
+        <source>Error</source>
+        <translation>Ошибка</translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <source>You must set rpcpassword=&lt;password&gt; in the configuration file:
+%s
+If the file does not exist, create it with owner-readable-only file permissions.</source>
+        <translation>Вы должны установить rpcpassword=&lt;password&gt; в конфигурационном файле:
+%s
+Если файл не существует, создайте его и установите права доступа только для владельца.</translation>
+    </message>
+</context>
 </TS>
