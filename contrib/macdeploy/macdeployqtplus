@@ -631,7 +631,7 @@ else:
 
 # ------------------------------------------------
 
-target = os.path.join("dist", "Wispr-Qt.app")
+target = os.path.join("dist", "WISPR-Qt.app")
 
 if verbose >= 2:
     print("+ Copying source bundle +")

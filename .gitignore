@@ -84,7 +84,7 @@ src/qt/test/moc*.cpp
 *.qm
 Makefile
 wispr-qt
-Wispr-Qt.app
+WISPR-Qt.app
 
 # Unit-tests
 Makefile.test
