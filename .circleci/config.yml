@@ -3,7 +3,7 @@ jobs:
   build:
     machine: true
     enviroment:
-     MAKEJOBS: -j3
+     $MAKEJOBS: -j3
      RUN_TESTS: false
      CHECK_DOC: 0
      CHECK_LOGPRINT: 0
@@ -14,11 +14,11 @@ jobs:
      BASE_OUTDIR: /
      SDK_URL: https://bitcoincore.org/depends-sources/sdks
      WINEDEBUG: fixme-all
-     HOST: x86_64-unknown-linux-gnu
+     $HOST: "x86_64-unknown-linux-gnu"
      PACKAGES: bc python3-zmq
-     DEP_OPTS: NO_QT=1 NO_UPNP=1 DEBUG=1
+     $DEP_OPTS: "NO_QT=1 NO_UPNP=1 DEBUG=1"
      RUN_TESTS: true
-     GOAL: install
+     $GOAL: install
      BITCOIN_CONFIG: --enable-zmq --enable-glibc-back-compat --enable-reduce-exports CPPFLAGS=-DDEBUG_LOCKORDER
     steps:
       - checkout
@@ -39,7 +39,7 @@ jobs:
           command: mkdir -p depends/SDKs depends/sdk-sources && ls
       - run:
           name: Make libraries
-          command: make $MAKEJOBS -C depends HOST=x86_64-unknown-linux-gnu NO_QT=1 NO_UPNP=1 DEBUG=1
+          command: make $MAKEJOBS -C depends HOST=$HOST $DEP_OPTS
       - run:
           name: Set outdir
           command: OUTDIR=$BASE_OUTDIR/$HOST
