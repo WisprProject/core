@@ -41,10 +41,10 @@ jobs:
           command: make $MAKEJOBS -C depends HOST=$HOST $DEP_OPTS
       - run:
           name: Set outdir
-          command: OUTDIR=$BASE_OUTDIR/$HOST
+          command: OUTDIR=$BASE_OUTDIR/$CIRCLE_PULL_REQUEST/$CIRCLE_WORKFLOW_ID-$HOST
       - run:
           name: Set config params
-          command: BITCOIN_CONFIG_ALL="--disable-dependency-tracking --prefix=$TRAVIS_BUILD_DIR/depends/$HOST --bindir=$OUTDIR/bin --libdir=$OUTDIR/lib"
+          command: BITCOIN_CONFIG_ALL="--disable-dependency-tracking --prefix=$CURRENT_WORKING_DIR/depends/$HOST --bindir=$OUTDIR/bin --libdir=$OUTDIR/lib"
       - run:
           name: set Cache
           command: depends/$HOST/native/bin/ccache --max-size=$CCACHE_SIZE
@@ -68,7 +68,7 @@ jobs:
           command: make $MAKEJOBS $GOAL || ( echo "Build failure. Verbose build follows." && make $GOAL V=1 ; false )
       - run:
           name: export libraries
-          command: export LD_LIBRARY_PATH=$TRAVIS_BUILD_DIR/depends/$HOST/lib
+          command: export LD_LIBRARY_PATH=$CURRENT_WORKING_DIR/depends/$HOST/lib
       - run:
           name: Run tests
           command: make $MAKEJOBS check VERBOSE=1
