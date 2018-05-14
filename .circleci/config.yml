@@ -11,6 +11,7 @@ jobs:
      CCACHE_TEMPDIR: /tmp/.ccache-temp
      CCACHE_COMPRESS: 1
      BASE_OUTDIR: /home/project/out
+     OUTDIR: /home/project/out/x86_64-unknown-linux-gnu
      SDK_URL: https://bitcoincore.org/depends-sources/sdks
      WINEDEBUG: fixme-all
      HOST: x86_64-unknown-linux-gnu
@@ -20,6 +21,7 @@ jobs:
      RUN_TESTS: true
      GOAL: install
      BITCOIN_CONFIG: --enable-zmq --enable-glibc-back-compat --enable-reduce-exports CPPFLAGS=-DDEBUG_LOCKORDER
+     BITCOIN_CONFIG_ALL: --disable-dependency-tracking --prefix=/home/project/depends/x86_64-unknown-linux-gnu --bindir=/home/project/out/x86_64-unknown-linux-gnu/bin --libdir=/home/project/out/x86_64-unknown-linux-gnu/lib
     steps:
       - checkout
       - run:
@@ -40,9 +42,6 @@ jobs:
       - run:
           name: Make libraries
           command: make $MAKEJOBS -C depends HOST=$HOST $DEP_OPTS
-      - run:
-          name: Set outdir
-          command: OUTDIR=$BASE_OUTDIR/$HOST
       - run:
           name: Get outdir
           command: echo $OUTDIR
