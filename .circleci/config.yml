@@ -10,7 +10,7 @@ jobs:
      CCACHE_SIZE: 100M
      CCACHE_TEMPDIR: /tmp/.ccache-temp
      CCACHE_COMPRESS: 1
-     BASE_OUTDIR: ~/project/out
+     BASE_OUTDIR: /home/project/out
      SDK_URL: https://bitcoincore.org/depends-sources/sdks
      WINEDEBUG: fixme-all
      HOST: x86_64-unknown-linux-gnu
@@ -45,7 +45,7 @@ jobs:
           command: OUTDIR=$BASE_OUTDIR/42312331/$HOST
       - run:
           name: Set config params
-          command: BITCOIN_CONFIG_ALL="--disable-dependency-tracking --prefix=~/project/depends/$HOST --bindir=$OUTDIR/bin --libdir=$OUTDIR/lib"
+          command: BITCOIN_CONFIG_ALL="--disable-dependency-tracking --prefix=/home/project/depends/$HOST --bindir=$OUTDIR/bin --libdir=$OUTDIR/lib"
       - run:
           name: set Cache
           command: depends/$HOST/native/bin/ccache --max-size=$CCACHE_SIZE
@@ -69,7 +69,7 @@ jobs:
           command: make $MAKEJOBS $GOAL || ( echo "Build failure. Verbose build follows." && make $GOAL V=1 ; false )
       - run:
           name: export libraries
-          command: export LD_LIBRARY_PATH=~/project/depends/$HOST/lib
+          command: export LD_LIBRARY_PATH=/home/project/depends/$HOST/lib
       - run:
           name: Run tests
           command: make $MAKEJOBS check VERBOSE=1
