@@ -16,6 +16,7 @@ jobs:
      HOST: x86_64-unknown-linux-gnu
      PACKAGES: bc python3-zmq
      DEP_OPTS: NO_QT=1 NO_UPNP=1 DEBUG=1
+     PYZMQ: true
      RUN_TESTS: true
      GOAL: install
      BITCOIN_CONFIG: --enable-zmq --enable-glibc-back-compat --enable-reduce-exports CPPFLAGS=-DDEBUG_LOCKORDER
@@ -24,6 +25,9 @@ jobs:
       - run:
           name: Set PATH
           command: export PATH=$(echo $PATH | tr ':' "\n" | sed '/\/opt\/python/d' | tr "\n" ":" | sed "s|::|:|g")
+      - run:
+          name: Set PATH
+          command: echo $MAKEJOBS $CHECK_DOC $CHECK_LOGPRINT $BOOST_TEST_RANDOM $CCACHE_SIZE $BASE_OUTDIR $HOST $DEP_OPTS $CURRENT_WORKING_DIR/depends/$HOST
       - run:
           name: Update apt repo
           command: sudo apt-get update
