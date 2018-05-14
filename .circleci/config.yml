@@ -45,7 +45,7 @@ jobs:
           command: make $MAKEJOBS -C depends HOST=$HOST $DEP_OPTS
       - run:
           name: Set outdir
-          command: OUTDIR=$BASE_OUTDIR/$CIRCLE_PULL_REQUEST/255-$HOST
+          command: OUTDIR=$BASE_OUTDIR/$HOST
       - run:
           name: Set config params
           command: BITCOIN_CONFIG_ALL="--disable-dependency-tracking --prefix=~/project/depends/$HOST --bindir=$OUTDIR/bin --libdir=$OUTDIR/lib"
@@ -54,7 +54,7 @@ jobs:
           command: depends/$HOST/native/bin/ccache --max-size=$CCACHE_SIZE
       - run:
           name: Autogen
-          command: test -n "$USE_SHELL" && eval '"$USE_SHELL" -c "./autogeFn.sh"' || ./autogen.sh
+          command: test -n "$USE_SHELL" && eval '"$USE_SHELL" -c "./autogen.sh"' || ./autogen.sh
       - run:
           name: Configure
           command: ./configure --cache-file=config.cache $BITCOIN_CONFIG_ALL $BITCOIN_CONFIG || ( cat config.log && false)
