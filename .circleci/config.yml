@@ -26,9 +26,6 @@ jobs:
           name: Set PATH
           command: export PATH=$(echo $PATH | tr ':' "\n" | sed '/\/opt\/python/d' | tr "\n" ":" | sed "s|::|:|g")
       - run:
-          name: Set PATH
-          command: echo $CIRCLE_PULL_REQUEST $CIRCLE_WORKFLOW_ID $CCACHE_SIZE $BASE_OUTDIR $HOST $DEP_OPTS
-      - run:
           name: Update apt repo
           command: sudo apt-get update
       - run:
@@ -45,7 +42,7 @@ jobs:
           command: make $MAKEJOBS -C depends HOST=$HOST $DEP_OPTS
       - run:
           name: Set outdir
-          command: OUTDIR=$BASE_OUTDIR/$HOST
+          command: OUTDIR=$BASE_OUTDIR/42312331/$HOST
       - run:
           name: Set config params
           command: BITCOIN_CONFIG_ALL="--disable-dependency-tracking --prefix=~/project/depends/$HOST --bindir=$OUTDIR/bin --libdir=$OUTDIR/lib"
