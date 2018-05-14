@@ -10,8 +10,8 @@ jobs:
      CCACHE_SIZE: 100M
      CCACHE_TEMPDIR: /tmp/.ccache-temp
      CCACHE_COMPRESS: 1
-     BASE_OUTDIR: /home/project/out
-     OUTDIR: /home/project/out/x86_64-unknown-linux-gnu
+     BASE_OUTDIR: /home/circleci/project/out
+     OUTDIR: /home/circleci/project/out/x86_64-unknown-linux-gnu
      SDK_URL: https://bitcoincore.org/depends-sources/sdks
      WINEDEBUG: fixme-all
      HOST: x86_64-unknown-linux-gnu
@@ -21,7 +21,7 @@ jobs:
      RUN_TESTS: true
      GOAL: install
      BITCOIN_CONFIG: --enable-zmq --enable-glibc-back-compat --enable-reduce-exports CPPFLAGS=-DDEBUG_LOCKORDER
-     BITCOIN_CONFIG_ALL: --disable-dependency-tracking --prefix=/home/project/depends/x86_64-unknown-linux-gnu --bindir=/home/project/out/x86_64-unknown-linux-gnu/bin --libdir=/home/project/out/x86_64-unknown-linux-gnu/lib
+     BITCOIN_CONFIG_ALL: --disable-dependency-tracking --prefix=/home/circleci/project/depends/x86_64-unknown-linux-gnu --bindir=/home/circleci/project/out/x86_64-unknown-linux-gnu/bin --libdir=/home/circleci/project/out/x86_64-unknown-linux-gnu/lib
     steps:
       - checkout
       - run:
@@ -47,7 +47,7 @@ jobs:
           command: echo $OUTDIR
       - run:
           name: Set config params
-          command: BITCOIN_CONFIG_ALL="--disable-dependency-tracking --prefix=/home/project/depends/$HOST --bindir=$OUTDIR/bin --libdir=$OUTDIR/lib"
+          command: BITCOIN_CONFIG_ALL="--disable-dependency-tracking --prefix=/home/circleci/project/depends/$HOST --bindir=$OUTDIR/bin --libdir=$OUTDIR/lib"
       - run:
           name: set Cache
           command: depends/$HOST/native/bin/ccache --max-size=$CCACHE_SIZE
@@ -71,7 +71,7 @@ jobs:
           command: make $MAKEJOBS $GOAL || ( echo "Build failure. Verbose build follows." && make $GOAL V=1 ; false )
       - run:
           name: export libraries
-          command: export LD_LIBRARY_PATH=/home/project/depends/$HOST/lib
+          command: export LD_LIBRARY_PATH=/home/circleci/project/depends/$HOST/lib
       - run:
           name: Run tests
           command: make $MAKEJOBS check VERBOSE=1
