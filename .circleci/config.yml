@@ -10,7 +10,7 @@ jobs:
      CCACHE_SIZE: 100M
      CCACHE_TEMPDIR: /tmp/.ccache-temp
      CCACHE_COMPRESS: 1
-     BASE_OUTDIR: $CIRCLE_WORKING_DIRECTORY/out
+     BASE_OUTDIR: ~/project/out
      SDK_URL: https://bitcoincore.org/depends-sources/sdks
      WINEDEBUG: fixme-all
      HOST: x86_64-unknown-linux-gnu
@@ -27,7 +27,7 @@ jobs:
           command: export PATH=$(echo $PATH | tr ':' "\n" | sed '/\/opt\/python/d' | tr "\n" ":" | sed "s|::|:|g")
       - run:
           name: Set PATH
-          command: echo $MAKEJOBS $CHECK_DOC $CHECK_LOGPRINT $BOOST_TEST_RANDOM $CCACHE_SIZE $BASE_OUTDIR $HOST $DEP_OPTS $CIRCLE_WORKING_DIRECTORY/depends/$HOST
+          command: echo $MAKEJOBS $CHECK_DOC $CHECK_LOGPRINT $BOOST_TEST_RANDOM $CIRCLE_WORKFLOW_ID $CCACHE_SIZE $BASE_OUTDIR $HOST $DEP_OPTS $CIRCLE_WORKING_DIRECTORY/depends/$HOST
       - run:
           name: Update apt repo
           command: sudo apt-get update
@@ -45,7 +45,7 @@ jobs:
           command: make $MAKEJOBS -C depends HOST=$HOST $DEP_OPTS
       - run:
           name: Set outdir
-          command: OUTDIR=$BASE_OUTDIR/CIRCLE_PULL_REQUEST/CIRCLE_WORKFLOW_ID-$HOST
+          command: OUTDIR=$BASE_OUTDIR/$CIRCLE_PULL_REQUEST/$CIRCLE_WORKFLOW_ID-$HOST
       - run:
           name: Set config params
           command: BITCOIN_CONFIG_ALL="--disable-dependency-tracking --prefix=$CIRCLE_WORKING_DIRECTORY/depends/$HOST --bindir=$OUTDIR/bin --libdir=$OUTDIR/lib"
