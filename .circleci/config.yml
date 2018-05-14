@@ -42,7 +42,10 @@ jobs:
           command: make $MAKEJOBS -C depends HOST=$HOST $DEP_OPTS
       - run:
           name: Set outdir
-          command: OUTDIR=$BASE_OUTDIR/42312331/$HOST
+          command: OUTDIR=$BASE_OUTDIR/$HOST
+      - run:
+          name: Get outdir
+          command: echo $OUTDIR
       - run:
           name: Set config params
           command: BITCOIN_CONFIG_ALL="--disable-dependency-tracking --prefix=/home/project/depends/$HOST --bindir=$OUTDIR/bin --libdir=$OUTDIR/lib"
