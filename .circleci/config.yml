@@ -6,7 +6,7 @@ jobs:
      MAKEJOBS: -j3
      CHECK_DOC: 0
      CHECK_LOGPRINT: 0
-     BOOST_TEST_RANDOM: $CIRCLE_WORKFLOW_ID
+     BOOST_TEST_RANDOM: 1255
      CCACHE_SIZE: 100M
      CCACHE_TEMPDIR: /tmp/.ccache-temp
      CCACHE_COMPRESS: 1
@@ -27,7 +27,7 @@ jobs:
           command: export PATH=$(echo $PATH | tr ':' "\n" | sed '/\/opt\/python/d' | tr "\n" ":" | sed "s|::|:|g")
       - run:
           name: Set PATH
-          command: echo $MAKEJOBS $CHECK_DOC $CHECK_LOGPRINT $BOOST_TEST_RANDOM $CIRCLE_WORKFLOW_ID $CCACHE_SIZE $BASE_OUTDIR $HOST $DEP_OPTS $CIRCLE_WORKING_DIRECTORY/depends/$HOST
+          command: echo $CIRCLE_PULL_REQUEST $CIRCLE_WORKFLOW_ID $CCACHE_SIZE $BASE_OUTDIR $HOST $DEP_OPTS
       - run:
           name: Update apt repo
           command: sudo apt-get update
@@ -45,10 +45,10 @@ jobs:
           command: make $MAKEJOBS -C depends HOST=$HOST $DEP_OPTS
       - run:
           name: Set outdir
-          command: OUTDIR=$BASE_OUTDIR/$CIRCLE_PULL_REQUEST/$CIRCLE_WORKFLOW_ID-$HOST
+          command: OUTDIR=$BASE_OUTDIR/$CIRCLE_PULL_REQUEST/255-$HOST
       - run:
           name: Set config params
-          command: BITCOIN_CONFIG_ALL="--disable-dependency-tracking --prefix=$CIRCLE_WORKING_DIRECTORY/depends/$HOST --bindir=$OUTDIR/bin --libdir=$OUTDIR/lib"
+          command: BITCOIN_CONFIG_ALL="--disable-dependency-tracking --prefix=~/project/depends/$HOST --bindir=$OUTDIR/bin --libdir=$OUTDIR/lib"
       - run:
           name: set Cache
           command: depends/$HOST/native/bin/ccache --max-size=$CCACHE_SIZE
@@ -59,7 +59,7 @@ jobs:
           name: Configure
           command: ./configure --cache-file=config.cache $BITCOIN_CONFIG_ALL $BITCOIN_CONFIG || ( cat config.log && false)
       - run:
-          name: Make direcotries
+          name: Make directories
           command: make distdir PACKAGE=bitcoin VERSION=$HOST
       - run:
           name: Enter directory
@@ -72,7 +72,7 @@ jobs:
           command: make $MAKEJOBS $GOAL || ( echo "Build failure. Verbose build follows." && make $GOAL V=1 ; false )
       - run:
           name: export libraries
-          command: export LD_LIBRARY_PATH=$CIRCLE_WORKING_DIRECTORY/depends/$HOST/lib
+          command: export LD_LIBRARY_PATH=~/project/depends/$HOST/lib
       - run:
           name: Run tests
           command: make $MAKEJOBS check VERBOSE=1
