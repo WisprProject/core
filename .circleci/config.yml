@@ -144,9 +144,9 @@ jobs:
           command: ./src/secp256k1/tests
       - store_test_results:
           path: ./tmp/results
-      - persist_to_workspace:
-          root: .
-          paths: ./tmp/results/junit
+#      - persist_to_workspace:
+#          root: .
+#          paths: ./tmp/results/junit
       - store_artifacts:
           path: ./tmp/results
       - store_artifacts:
@@ -166,7 +166,7 @@ jobs:
           command: printenv
       - run:
           name: Go to dir
-          command: ./src/univalue
+          command: cd ./src/univalue
       - run:
           name: Run Object Tests
           command: test/object
@@ -181,9 +181,9 @@ jobs:
           command: test/unitester
       - store_test_results:
           path: ./tmp/results
-      - persist_to_workspace:
-          root: .
-          paths: ./tmp/results/junit
+#      - persist_to_workspace:
+#          root: .
+#          paths: ./tmp/results/junit
       - store_artifacts:
           path: ./tmp/results
       - store_artifacts:
@@ -206,9 +206,8 @@ jobs:
           command: ./src/qt/test/test_wispr-qt
       - store_test_results:
           path: ./tmp/results
-      - persist_to_workspace:
-          root: .
-          paths: ./tmp/results/junit
+#      - persist_to_workspace:
+#          root: .
       - store_artifacts:
           path: ./tmp/results
       - store_artifacts:
@@ -228,12 +227,12 @@ jobs:
           command: printenv
       - run:
           name: Run BTC Util Tests
-          command: ./src/test/bitcoin-util-test.py
+          command: cd ./src && test/bitcoin-util-test.py
       - store_test_results:
           path: ./tmp/results
-      - persist_to_workspace:
-          root: .
-          paths: ./tmp/results/junit
+#      - persist_to_workspace:
+#          root: .
+#          paths: ./tmp/results/junit
       - store_artifacts:
           path: ./tmp/results
       - store_artifacts:
