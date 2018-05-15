@@ -122,13 +122,16 @@ jobs:
           command: src/qt/test/test_wispr-qt
       - run:
           name: Run Object Tests
-          command: src/test/object
+          command: src/univalue/test/object
       - run:
           name: Run No_Nul Tests
-          command: src/test/no_nul
+          command: src/univalue/test/no_nul
+      - run:
+          name: Run JSON Tests
+          command: src/univalue/test/test_json
       - run:
           name: Run Univalue Tests
-          command: src/test/unitester
+          command: src/univalue/test/unitester
       - store_test_results:
           path: ./tmp/results
       - store_artifacts:
