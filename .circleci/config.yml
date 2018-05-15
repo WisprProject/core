@@ -18,6 +18,7 @@ run_log_mem_use: &run_log_mem_use
 build_machine_environment: &build_machine_environment
     machine: true
     environment:
+     srcdir: './src'
      MAKEJOBS: -j3
      CHECK_DOC: 0
      CHECK_LOGPRINT: 0
@@ -165,20 +166,17 @@ jobs:
           name: "Print environment"
           command: printenv
       - run:
-          name: Go to dir
-          command: cd ./src/univalue
-      - run:
           name: Run Object Tests
-          command: test/object
+          command: ./src/univalue/test/object
       - run:
           name: Run No_Nul Tests
-          command: test/no_nul
+          command: ./src/univalue/test/no_nul
       - run:
           name: Run JSON Tests
-          command: test/test_json
+          command: ./src/univalue/test/test_json
       - run:
           name: Run Univalue Tests
-          command: test/unitester
+          command: ./src/univalue/test/unitester
       - store_test_results:
           path: ./tmp/results
 #      - persist_to_workspace:
