@@ -73,6 +73,27 @@ jobs:
           name: export libraries
           command: export LD_LIBRARY_PATH=/home/circleci/project/depends/$HOST/lib
   test:
+    machine: true
+    environment:
+     MAKEJOBS: -j3
+     CHECK_DOC: 0
+     CHECK_LOGPRINT: 0
+     BOOST_TEST_RANDOM: 1255
+     CCACHE_SIZE: 100M
+     CCACHE_TEMPDIR: /tmp/.ccache-temp
+     CCACHE_COMPRESS: 1
+     BASE_OUTDIR: /home/circleci/project/out
+     OUTDIR: /home/circleci/project/out/x86_64-unknown-linux-gnu
+     SDK_URL: https://bitcoincore.org/depends-sources/sdks
+     WINEDEBUG: fixme-all
+     HOST: x86_64-unknown-linux-gnu
+     PACKAGES: bc python3-zmq
+     DEP_OPTS: NO_QT=1 NO_UPNP=1 DEBUG=1
+     PYZMQ: true
+     RUN_TESTS: true
+     GOAL: install
+     BITCOIN_CONFIG: --enable-zmq --enable-glibc-back-compat --enable-reduce-exports CPPFLAGS=-DDEBUG_LOCKORDER
+     BITCOIN_CONFIG_ALL: --disable-dependency-tracking --prefix=/home/circleci/project/depends/x86_64-unknown-linux-gnu --bindir=/home/circleci/project/out/x86_64-unknown-linux-gnu/bin --libdir=/home/circleci/project/out/x86_64-unknown-linux-gnu/lib
     steps:
       - run:
           name: Run Wispr Tests
