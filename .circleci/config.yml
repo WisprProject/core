@@ -138,7 +138,7 @@ jobs:
           command: printenv
       - run:
           name: Run libsecp256k1 Tests
-          command: cd src/secp256k1/src && tests
+          command: cd src/secp256k1/src && ls && tests
       - store_test_results:
           path: ./tmp/results
       - persist_to_workspace:
@@ -166,7 +166,7 @@ jobs:
           command: cd src/univalue
       - run:
           name: Run Object Tests
-          command: test/object
+          command: ls && test/object
       - run:
           name: Run No_Nul Tests
           command: test/no_nul
@@ -200,7 +200,7 @@ jobs:
           command: printenv
       - run:
           name: Run Qt Tests
-          command: cd src && qt/test/test_wispr-qt
+          command: cd src && ls && qt/test/test_wispr-qt
       - store_test_results:
           path: ./tmp/results
       - persist_to_workspace:
@@ -225,7 +225,7 @@ jobs:
           command: printenv
       - run:
           name: Run BTC Util Tests
-          command: cd src && test/bitcoin-util-test.py
+          command: cd src && ls && test/bitcoin-util-test.py
       - store_test_results:
           path: ./tmp/results
       - persist_to_workspace:
