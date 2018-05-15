@@ -108,8 +108,6 @@ jobs:
     steps:
       - run:
           <<: *run_log_mem_use
-#      - run:
-#          <<: *run_env_change
       - attach_workspace:
           at: .
       - run:
@@ -220,20 +218,6 @@ workflows:
       - Isolated Tests:
           requires:
             - Get Ready
-#      - Test Group 0:
-#          requires:
-#            - Get Ready
       - Clean Up:
           requires:
             - Isolated Tests
-#            - Test Group 0
-#            - Test Group 1
-#            - Test Group 2
-#            - Test Group 3
-#            - Test Group 4
-#            - Test Group 5
-#            - Test Group 6
-#            - Test Group 7
-#            - Test Group 8
-#            - Test Group 9
-#            - Test Group 10
