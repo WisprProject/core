@@ -279,8 +279,8 @@ public:
         genesis.nNonce = 2402015;
 
         hashGenesisBlock = genesis.GetHash();
-        printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
-                assert(hashGenesisBlock == uint256("1c9b46a8492510e9e79ad594089ac4a432a376c3f107af520e6149ab290c1e1e"));
+//        printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
+         assert(hashGenesisBlock == uint256("1c9b46a8492510e9e79ad594089ac4a432a376c3f107af520e6149ab290c1e1e"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
