@@ -101,7 +101,7 @@ jobs:
       - store_artifacts:
           path: /tmp/memuse.txt
 
-  Isolated Tests:
+  Test Wispr:
     <<: *build_machine_environment
     steps:
       - run:
@@ -114,12 +114,50 @@ jobs:
       - run:
           name: Run Wispr Tests
           command: src/test/test_wispr
+      - store_test_results:
+          path: ./tmp/results
+      - store_artifacts:
+          path: ./tmp/results
+      - store_artifacts:
+          path: /tmp/core_dumps
+      - store_artifacts:
+          path: /tmp/memuse.txt
+
+  Test libsecp256k1:
+    <<: *build_machine_environment
+    steps:
       - run:
-          name: Run BTC Util Tests
-          command: src/test/bitcoin-util-test.py
+          <<: *run_log_mem_use
+      - attach_workspace:
+          at: .
       - run:
-          name: Run Qt Tests
-          command: src/qt/test/test_wispr-qt
+          name: "Print environment"
+          command: printenv
+      - run:
+          name: Run libsecp256k1 Tests
+          command: src/secp256k1/src/tests
+      - store_test_results:
+          path: ./tmp/results
+      - persist_to_workspace:
+          root: .
+          paths: ./tmp/results/junit
+      - store_artifacts:
+          path: ./tmp/results
+      - store_artifacts:
+          path: /tmp/core_dumps
+      - store_artifacts:
+          path: /tmp/memuse.txt
+
+  Test univalue:
+    <<: *build_machine_environment
+    steps:
+      - run:
+          <<: *run_log_mem_use
+      - attach_workspace:
+          at: .
+      - run:
+          name: "Print environment"
+          command: printenv
       - run:
           name: Run Object Tests
           command: src/univalue/test/object
@@ -134,6 +172,9 @@ jobs:
           command: src/univalue/test/unitester
       - store_test_results:
           path: ./tmp/results
+      - persist_to_workspace:
+          root: .
+          paths: ./tmp/results/junit
       - store_artifacts:
           path: ./tmp/results
       - store_artifacts:
@@ -141,46 +182,55 @@ jobs:
       - store_artifacts:
           path: /tmp/memuse.txt
 
-#  Test Group 0:
-#    <<: *build_machine_environment
-#    steps:
-#      - run:
-#          <<: *run_log_mem_use
-#      - run:
-#          <<: *run_env_change
-#      - attach_workspace:
-#          at: .
-#      - run:
-#          name: "Print environment"
-#          command: printenv
-#      - run:
-#          name: "Running self-test (Test Group 0)"
-#          command: |
-#            if [ -f ./tmp/test-groups/0.txt ]; then TEST_GROUP=$(<./tmp/test-groups/0.txt); else TEST_GROUP='^[a-b]|^c[a-n]|^co[a-l]|^comm'; fi
-#            echo $TEST_GROUP;
-#            eval $PRE_TEST_COMMANDS;
-#            ./meteor self-test \
-#              "$TEST_GROUP" \
-#              --retries ${METEOR_SELF_TEST_RETRIES} \
-#              --exclude "${SELF_TEST_EXCLUDE}" \
-#              --headless \
-#              --junit ./tmp/results/junit/0.xml \
-#              --without-tag "custom-warehouse"
-#          no_output_timeout: 20m
-#      - run:
-#          <<: *run_save_node_bin
-#      - store_test_results:
-#          path: ./tmp/results
-#      - persist_to_workspace:
-#          root: .
-#          paths: ./tmp/results/junit
-#      - store_artifacts:
-#          path: ./tmp/results
-#      - store_artifacts:
-#          path: /tmp/core_dumps
-#      - store_artifacts:
-#          path: /tmp/memuse.txt
+  Test qt:
+    <<: *build_machine_environment
+    steps:
+      - run:
+          <<: *run_log_mem_use
+      - attach_workspace:
+          at: .
+      - run:
+          name: "Print environment"
+          command: printenv
+      - run:
+          name: Run Qt Tests
+          command: src/qt/test/test_wispr-qt
+      - store_test_results:
+          path: ./tmp/results
+      - persist_to_workspace:
+          root: .
+          paths: ./tmp/results/junit
+      - store_artifacts:
+          path: ./tmp/results
+      - store_artifacts:
+          path: /tmp/core_dumps
+      - store_artifacts:
+          path: /tmp/memuse.txt
 
+  Test btc util:
+    <<: *build_machine_environment
+    steps:
+      - run:
+          <<: *run_log_mem_use
+      - attach_workspace:
+          at: .
+      - run:
+          name: "Print environment"
+          command: printenv
+      - run:
+          name: Run BTC Util Tests
+          command: src/test/bitcoin-util-test.py
+      - store_test_results:
+          path: ./tmp/results
+      - persist_to_workspace:
+          root: .
+          paths: ./tmp/results/junit
+      - store_artifacts:
+          path: ./tmp/results
+      - store_artifacts:
+          path: /tmp/core_dumps
+      - store_artifacts:
+          path: /tmp/memuse.txt
 #  Clean Up:
 #    <<: *build_machine_environment
 #    steps:
@@ -216,9 +266,21 @@ workflows:
   Build and Test:
     jobs:
       - Get Ready
-      - Isolated Tests:
+      - Test Wispr:
           requires:
             - Get Ready
-      - Clean Up:
+      - Test univalue:
           requires:
-            - Isolated Tests
+            - Get Ready
+      - Test libsecp256k1:
+          requires:
+            - Get Ready
+      - Test qt:
+          requires:
+            - Get Ready
+      - Test btc util:
+          requires:
+            - Get Ready
+#      - Clean Up:
+#          requires:
+#            - Isolated Tests
