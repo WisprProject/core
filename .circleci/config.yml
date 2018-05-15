@@ -44,8 +44,6 @@ jobs:
     steps:
       - run:
           <<: *run_log_mem_use
-      - run:
-          <<: *run_env_change
       - checkout
       - run:
           name: Set PATH
