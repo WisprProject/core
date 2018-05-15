@@ -72,6 +72,23 @@ jobs:
       - run:
           name: export libraries
           command: export LD_LIBRARY_PATH=/home/circleci/project/depends/$HOST/lib
+  test:
+    steps:
       - run:
-          name: Run tests
-          command: make $MAKEJOBS check VERBOSE=1
+          name: Run Wispr Tests
+          command: src/test/test_wispr
+      - run:
+          name: Run BTC Util Tests
+          command: src/test/bitcoin-util-test.py
+      - run:
+          name: Run Qt Tests
+          command: src/qt/test/test_wispr-qt
+      - run:
+          name: Run Object Tests
+          command: src/test/object
+      - run:
+          name: Run No_Nul Tests
+          command: src/test/no_nul
+      - run:
+          name: Run Univalue Tests
+          command: src/test/unitester
