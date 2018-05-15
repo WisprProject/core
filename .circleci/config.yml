@@ -50,6 +50,9 @@ jobs:
           command: export PATH=$(echo $PATH | tr ':' "\n" | sed '/\/opt\/python/d' | tr "\n" ":" | sed "s|::|:|g")
       - run:
           name: Update apt repo
+          command: pip install pyzmq --user
+      - run:
+          name: Update apt repo
           command: sudo apt-get update
       - run:
           name: Install packages
