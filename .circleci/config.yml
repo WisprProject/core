@@ -172,9 +172,6 @@ jobs:
           name: Run No_Nul Tests
           command: ./src/univalue/test/no_nul
       - run:
-          name: Run JSON Tests
-          command: ./src/univalue/test/test_json
-      - run:
           name: Run Univalue Tests
           command: ./src/univalue/test/unitester
       - store_test_results:
