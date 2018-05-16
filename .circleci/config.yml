@@ -18,7 +18,7 @@ run_log_mem_use: &run_log_mem_use
 build_machine_environment: &build_machine_environment
     machine: true
     environment:
-     srcdir: '/src'
+     srcdir: 'src'
      MAKEJOBS: -j3
      CHECK_DOC: 0
      CHECK_LOGPRINT: 0
@@ -97,6 +97,9 @@ jobs:
       - run:
           name: export libraries
           command: export LD_LIBRARY_PATH=/home/circleci/project/depends/$HOST/lib
+      - run:
+          name: "Print environment"
+          command: printenv
       - run:
           name: Check
           command: make $MAKEJOBS check || ( echo "Build failure. Verbose build follows." && make $GOAL V=1 ; false )
