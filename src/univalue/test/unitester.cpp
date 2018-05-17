@@ -58,7 +58,6 @@ static void runtest_file(const char *filename_)
 {
         string basename(filename_);
         string filename = srcdir + "/" + basename;
-        cout << filename;
         FILE *f = fopen(filename.c_str(), "r");
         assert(f != NULL);
 
