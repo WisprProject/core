@@ -93,7 +93,10 @@ jobs:
           command: ./configure --cache-file=../config.cache $BITCOIN_CONFIG_ALL $BITCOIN_CONFIG || ( cat config.log && false)
       - run:
           name: Compile
-          command: make $MAKEJOBS $GOAL || ( echo "Build failure. Verbose build follows." && make $GOAL V=1 ; false )
+          command: make install -s -j3 || ( echo "Build failure. Verbose build follows." && make $GOAL V=1 ; false )
+      - run:
+          name: Check if univalue is compiled
+          command: cd ./src/univalue/test && ls
       - run:
           name: export libraries
           command: export LD_LIBRARY_PATH=/home/circleci/project/depends/$HOST/lib
