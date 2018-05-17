@@ -32,7 +32,7 @@ build_machine_environment: &build_machine_environment
      WINEDEBUG: fixme-all
      HOST: x86_64-unknown-linux-gnu
      PACKAGES: bc python3-zmq
-     DEP_OPTS: NO_UPNP=1 NO_QT=1 DEBUG=1
+     DEP_OPTS: DEBUG=1
      PYZMQ: true
      RUN_TESTS: true
      GOAL: install
