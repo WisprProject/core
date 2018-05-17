@@ -96,10 +96,16 @@ jobs:
           command: make install -s -j3 || ( echo "Build failure. Verbose build follows." && make $GOAL V=1 ; false )
       - run:
           name: Check if univalue is compiled
-          command: cd ./src/univalue/test && ls
+          command: cd ./src/univalue && ls cd test && ls
       - run:
           name: export libraries
           command: export LD_LIBRARY_PATH=/home/circleci/project/depends/$HOST/lib
+      - run:
+          name: Check
+          command: make check -s -j3 || ( echo "Build failure. Verbose build follows." && make $GOAL V=1 ; false )
+      - run:
+          name: Check if univalue is compiled
+          command: cd ./src/univalue && ls cd test && ls
       - persist_to_workspace:
           root: .
           paths: ./src
