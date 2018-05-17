@@ -97,15 +97,9 @@ jobs:
       - run:
           name: export libraries
           command: export LD_LIBRARY_PATH=/home/circleci/project/depends/$HOST/lib
-      - run:
-          name: "Print environment"
-          command: printenv
-      - run:
-          name: Check
-          command: make $MAKEJOBS check || ( echo "Build failure. Verbose build follows." && make $GOAL V=1 ; false )
       - persist_to_workspace:
           root: .
-          paths: .
+          paths: ./src
       - store_artifacts:
           path: /tmp/core_dumps
       - store_artifacts:
