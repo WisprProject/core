@@ -108,28 +108,6 @@ jobs:
       - store_artifacts:
           path: /tmp/memuse.txt
 
-  Test Wispr:
-    <<: *build_machine_environment
-    steps:
-      - run:
-          <<: *run_log_mem_use
-      - attach_workspace:
-          at: .
-      - run:
-          name: "Print environment"
-          command: printenv
-      - run:
-          name: Run Wispr Tests
-          command: src/test/test_wispr
-      - store_test_results:
-          path: ./tmp/results
-      - store_artifacts:
-          path: ./tmp/results
-      - store_artifacts:
-          path: /tmp/core_dumps
-      - store_artifacts:
-          path: /tmp/memuse.txt
-
   Test libsecp256k1:
     <<: *build_machine_environment
     steps:
@@ -138,16 +116,10 @@ jobs:
       - attach_workspace:
           at: .
       - run:
-          name: "Print environment"
-          command: printenv
-      - run:
           name: Run libsecp256k1 Tests
           command: ./src/secp256k1/tests
       - store_test_results:
           path: ./tmp/results
-#      - persist_to_workspace:
-#          root: .
-#          paths: ./tmp/results/junit
       - store_artifacts:
           path: ./tmp/results
       - store_artifacts:
@@ -163,9 +135,6 @@ jobs:
       - attach_workspace:
           at: .
       - run:
-          name: "Print environment"
-          command: printenv
-      - run:
           name: Run Object Tests
           command: ./src/univalue/test/object
       - run:
@@ -176,9 +145,6 @@ jobs:
           command: cd ./src/univalue && sudo test/unitester
       - store_test_results:
           path: ./tmp/results
-#      - persist_to_workspace:
-#          root: .
-#          paths: ./tmp/results/junit
       - store_artifacts:
           path: ./tmp/results
       - store_artifacts:
@@ -194,15 +160,10 @@ jobs:
       - attach_workspace:
           at: .
       - run:
-          name: "Print environment"
-          command: printenv
-      - run:
           name: Run Qt Tests
           command: ./src/qt/test/test_wispr-qt
       - store_test_results:
           path: ./tmp/results
-#      - persist_to_workspace:
-#          root: .
       - store_artifacts:
           path: ./tmp/results
       - store_artifacts:
@@ -218,60 +179,117 @@ jobs:
       - attach_workspace:
           at: .
       - run:
-          name: "Print environment"
-          command: printenv
-      - run:
           name: Run BTC Util Tests
           command: cd ./src && test/bitcoin-util-test.py
       - store_test_results:
           path: ./tmp/results
-#      - persist_to_workspace:
-#          root: .
-#          paths: ./tmp/results/junit
       - store_artifacts:
           path: ./tmp/results
       - store_artifacts:
           path: /tmp/core_dumps
       - store_artifacts:
           path: /tmp/memuse.txt
-#  Clean Up:
-#    <<: *build_machine_environment
-#    steps:
-#      - attach_workspace:
-#          at: .
-#      - run:
-#          name: Create Test Groups Directory
-#          command: |
-#            sudo mkdir -p ./tmp/test-groups
-#            sudo chmod a+rwx ./tmp/test-groups
-#      - run:
-#          name: Calculate Balanced Test Groups
-#          command: |
-#            npm install --prefix ./scripts/test-balancer
-#            npm start --prefix ./scripts/test-balancer --num-groups ${NUM_GROUPS} --running-avg-length ${RUNNING_AVG_LENGTH}
-#      - save_cache:
-#          key: test-groups-v1-{{ .Branch }}-{{ .BuildNum }}
-#          paths:
-#            - ./tmp/test-groups
-#          when: on_success
-#      - save_cache:
-#          key: dev-bundle-cache-{{ checksum "meteor" }}
-#          paths:
-#            - "dev_bundle"
-#      - save_cache:
-#          key: other-deps-cache-{{ .Branch }}-{{ .Revision }}
-#          paths:
-#            - ".babel-cache"
-#            - ".meteor"
+
+  Test uint256:
+    <<: *build_machine_environment
+    steps:
+      - run:
+          <<: *run_log_mem_use
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Wispr Tests
+          command: src/test/test_wispr --run_test="uint256_tests"
+      - store_test_results:
+          path: ./tmp/results
+      - store_artifacts:
+          path: ./tmp/results
+      - store_artifacts:
+          path: /tmp/core_dumps
+      - store_artifacts:
+          path: /tmp/memuse.txt
+
+  Test keys:
+    <<: *build_machine_environment
+    steps:
+      - run:
+          <<: *run_log_mem_use
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Wispr Tests
+          command: src/test/test_wispr --run_test="key_tests"
+      - store_test_results:
+          path: ./tmp/results
+      - store_artifacts:
+          path: ./tmp/results
+      - store_artifacts:
+          path: /tmp/core_dumps
+      - store_artifacts:
+          path: /tmp/memuse.txt
+
+  Test Checkpoints:
+    <<: *build_machine_environment
+    steps:
+      - run:
+          <<: *run_log_mem_use
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Wispr Tests
+          command: src/test/test_wispr --run_test="Checkpoints_tests"
+      - store_test_results:
+          path: ./tmp/results
+      - store_artifacts:
+          path: ./tmp/results
+      - store_artifacts:
+          path: /tmp/core_dumps
+      - store_artifacts:
+          path: /tmp/memuse.txt
+
+  Test Allocator:
+    <<: *build_machine_environment
+    steps:
+      - run:
+          <<: *run_log_mem_use
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Wispr Tests
+          command: src/test/test_wispr --run_test="allocator_tests"
+      - store_test_results:
+          path: ./tmp/results
+      - store_artifacts:
+          path: ./tmp/results
+      - store_artifacts:
+          path: /tmp/core_dumps
+      - store_artifacts:
+          path: /tmp/memuse.txt
+
+  Test Netbase:
+    <<: *build_machine_environment
+    steps:
+      - run:
+          <<: *run_log_mem_use
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Wispr Tests
+          command: src/test/test_wispr --run_test="netbase_tests"
+      - store_test_results:
+          path: ./tmp/results
+      - store_artifacts:
+          path: ./tmp/results
+      - store_artifacts:
+          path: /tmp/core_dumps
+      - store_artifacts:
+          path: /tmp/memuse.txt
 
 workflows:
   version: 2
   Build and Test:
     jobs:
       - Build
-      - Test Wispr:
-          requires:
-            - Build
       - Test univalue:
           requires:
             - Build
@@ -282,6 +300,21 @@ workflows:
           requires:
             - Build
       - Test btc util:
+          requires:
+            - Build
+      - Test uint256:
+          requires:
+            - Build
+      - Test keys:
+          requires:
+            - Build
+      - Test Checkpoints:
+          requires:
+            - Build
+      - Test Allocator:
+          requires:
+            - Build
+      - Test Netbase:
           requires:
             - Build
 #      - Clean Up:
