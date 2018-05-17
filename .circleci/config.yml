@@ -32,7 +32,7 @@ build_machine_environment: &build_machine_environment
      WINEDEBUG: fixme-all
      HOST: x86_64-unknown-linux-gnu
      PACKAGES: bc python3-zmq
-     DEP_OPTS: NO_UPNP=1 DEBUG=1
+     DEP_OPTS: NO_UPNP=1 NO_QT=1 DEBUG=1
      PYZMQ: true
      RUN_TESTS: true
      GOAL: install
@@ -96,7 +96,7 @@ jobs:
           command: make install -s -j3 || ( echo "Build failure. Verbose build follows." && make $GOAL V=1 ; false )
       - run:
           name: Check if univalue is compiled
-          command: cd ./src/univalue && ls cd test && ls
+          command: cd ./src/univalue && ls && cd test && ls
       - run:
           name: export libraries
           command: export LD_LIBRARY_PATH=/home/circleci/project/depends/$HOST/lib
@@ -105,7 +105,7 @@ jobs:
           command: make check -s -j3 || ( echo "Build failure. Verbose build follows." && make $GOAL V=1 ; false )
       - run:
           name: Check if univalue is compiled
-          command: cd ./src/univalue && ls cd test && ls
+          command: cd ./src/univalue && ls && cd test && ls
       - persist_to_workspace:
           root: .
           paths: ./src
