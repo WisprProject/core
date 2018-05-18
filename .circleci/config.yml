@@ -424,6 +424,119 @@ jobs:
       - store_artifacts:
           path: /tmp/memuse.txt
 
+  Test sanity:
+    <<: *build_machine_environment
+    steps:
+      - run:
+          <<: *run_log_mem_use
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Wispr Tests
+          command: src/test/test_wispr --run_test="sanity_tests"
+      - store_test_results:
+          path: ./tmp/results
+      - store_artifacts:
+          path: ./tmp/results
+      - store_artifacts:
+          path: /tmp/core_dumps
+      - store_artifacts:
+          path: /tmp/memuse.txt
+
+  Test CheckBlock:
+    <<: *build_machine_environment
+    steps:
+      - run:
+          <<: *run_log_mem_use
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Wispr Tests
+          command: src/test/test_wispr --run_test="CheckBlock_tests"
+      - store_test_results:
+          path: ./tmp/results
+      - store_artifacts:
+          path: ./tmp/results
+      - store_artifacts:
+          path: /tmp/core_dumps
+      - store_artifacts:
+          path: /tmp/memuse.txt
+
+  Test miner:
+    <<: *build_machine_environment
+    steps:
+      - run:
+          <<: *run_log_mem_use
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Wispr Tests
+          command: src/test/test_wispr --run_test="miner_tests"
+      - store_test_results:
+          path: ./tmp/results
+      - store_artifacts:
+          path: ./tmp/results
+      - store_artifacts:
+          path: /tmp/core_dumps
+      - store_artifacts:
+          path: /tmp/memuse.txt
+
+  Test rpc:
+    <<: *build_machine_environment
+    steps:
+      - run:
+          <<: *run_log_mem_use
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Wispr Tests
+          command: src/test/test_wispr --run_test="rpc_tests"
+      - store_test_results:
+          path: ./tmp/results
+      - store_artifacts:
+          path: ./tmp/results
+      - store_artifacts:
+          path: /tmp/core_dumps
+      - store_artifacts:
+          path: /tmp/memuse.txt
+
+  Test zerocoin implementation:
+    <<: *build_machine_environment
+    steps:
+      - run:
+          <<: *run_log_mem_use
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Wispr Tests
+          command: src/test/test_wispr --run_test="zerocoin_implementation_tests"
+      - store_test_results:
+          path: ./tmp/results
+      - store_artifacts:
+          path: ./tmp/results
+      - store_artifacts:
+          path: /tmp/core_dumps
+      - store_artifacts:
+          path: /tmp/memuse.txt
+
+  Test accounting:
+    <<: *build_machine_environment
+    steps:
+      - run:
+          <<: *run_log_mem_use
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Wispr Tests
+          command: src/test/test_wispr --run_test="accounting_tests"
+      - store_test_results:
+          path: ./tmp/results
+      - store_artifacts:
+          path: ./tmp/results
+      - store_artifacts:
+          path: /tmp/core_dumps
+      - store_artifacts:
+          path: /tmp/memuse.txt
 workflows:
   version: 2
   Build and Test:
@@ -478,6 +591,21 @@ workflows:
           requires:
             - Build
       - Test crypto:
+          requires:
+            - Build
+      - Test CheckBlock:
+          requires:
+            - Build
+      - Test miner:
+          requires:
+            - Build
+      - Test rpc:
+          requires:
+            - Build
+      - Test zerocoin implementation:
+          requires:
+            - Build
+      - Test accounting:
           requires:
             - Build
 #      - Clean Up:
