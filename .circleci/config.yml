@@ -310,6 +310,120 @@ jobs:
       - store_artifacts:
           path: /tmp/memuse.txt
 
+  Test sigopcount:
+    <<: *build_machine_environment
+    steps:
+      - run:
+          <<: *run_log_mem_use
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Wispr Tests
+          command: src/test/test_wispr --run_test="sigopcount_tests"
+      - store_test_results:
+          path: ./tmp/results
+      - store_artifacts:
+          path: ./tmp/results
+      - store_artifacts:
+          path: /tmp/core_dumps
+      - store_artifacts:
+          path: /tmp/memuse.txt
+
+  Test budget:
+    <<: *build_machine_environment
+    steps:
+      - run:
+          <<: *run_log_mem_use
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Wispr Tests
+          command: src/test/test_wispr --run_test="budget_tests"
+      - store_test_results:
+          path: ./tmp/results
+      - store_artifacts:
+          path: ./tmp/results
+      - store_artifacts:
+          path: /tmp/core_dumps
+      - store_artifacts:
+          path: /tmp/memuse.txt
+
+  Test zerocoin denom:
+    <<: *build_machine_environment
+    steps:
+      - run:
+          <<: *run_log_mem_use
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Wispr Tests
+          command: src/test/test_wispr --run_test="zerocoin_denom_tests"
+      - store_test_results:
+          path: ./tmp/results
+      - store_artifacts:
+          path: ./tmp/results
+      - store_artifacts:
+          path: /tmp/core_dumps
+      - store_artifacts:
+          path: /tmp/memuse.txt
+
+  Test mempool:
+    <<: *build_machine_environment
+    steps:
+      - run:
+          <<: *run_log_mem_use
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Wispr Tests
+          command: src/test/test_wispr --run_test="mempool_tests"
+      - store_test_results:
+          path: ./tmp/results
+      - store_artifacts:
+          path: ./tmp/results
+      - store_artifacts:
+          path: /tmp/core_dumps
+      - store_artifacts:
+          path: /tmp/memuse.txt
+
+  Test multisig:
+    <<: *build_machine_environment
+    steps:
+      - run:
+          <<: *run_log_mem_use
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Wispr Tests
+          command: src/test/test_wispr --run_test="multisig_tests"
+      - store_test_results:
+          path: ./tmp/results
+      - store_artifacts:
+          path: ./tmp/results
+      - store_artifacts:
+          path: /tmp/core_dumps
+      - store_artifacts:
+          path: /tmp/memuse.txt
+
+  Test crypto:
+    <<: *build_machine_environment
+    steps:
+      - run:
+          <<: *run_log_mem_use
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Wispr Tests
+          command: src/test/test_wispr --run_test="crypto_tests"
+      - store_test_results:
+          path: ./tmp/results
+      - store_artifacts:
+          path: ./tmp/results
+      - store_artifacts:
+          path: /tmp/core_dumps
+      - store_artifacts:
+          path: /tmp/memuse.txt
+
 workflows:
   version: 2
   Build and Test:
@@ -343,6 +457,27 @@ workflows:
           requires:
             - Build
       - Test libzerocoin:
+          requires:
+            - Build
+      - Test sigopcount:
+          requires:
+            - Build
+      - Test budget:
+          requires:
+            - Build
+      - Test zerocoin denom:
+          requires:
+            - Build
+      - Test mempool:
+          requires:
+            - Build
+      - Test multisig:
+          requires:
+            - Build
+      - Test sanity:
+          requires:
+            - Build
+      - Test crypto:
           requires:
             - Build
 #      - Clean Up:
