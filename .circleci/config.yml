@@ -32,7 +32,7 @@ build_machine_environment: &build_machine_environment
      WINEDEBUG: fixme-all
      HOST: x86_64-unknown-linux-gnu
      PACKAGES: bc python3-zmq
-     DEP_OPTS: NO_QT=1 NO_UPNP=1 DEBUG=1
+     DEP_OPTS: NO_UPNP=1 DEBUG=1
      PYZMQ: true
      RUN_TESTS: true
      GOAL: install
@@ -874,6 +874,25 @@ jobs:
           path: /tmp/core_dumps
       - store_artifacts:
           path: /tmp/memuse.txt
+
+  Test rpctests:
+    <<: *build_machine_environment
+    steps:
+      - run:
+          <<: *run_log_mem_use
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Wispr Tests
+          command: qa/pull-tester/rpc-tests.py --coverage
+      - store_test_results:
+          path: ./tmp/results
+      - store_artifacts:
+          path: ./tmp/results
+      - store_artifacts:
+          path: /tmp/core_dumps
+      - store_artifacts:
+          path: /tmp/memuse.txt
 workflows:
   version: 2
   Build and Test:
@@ -988,6 +1007,9 @@ workflows:
           requires:
             - Build
       - Test univalues:
+          requires:
+            - Build
+      - Test rpctests:
           requires:
             - Build
 
