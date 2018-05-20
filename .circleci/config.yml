@@ -480,7 +480,61 @@ jobs:
           path: /tmp/core_dumps
       - store_artifacts:
           path: /tmp/memuse.txt
+  Test compress:
+    <<: *build_machine_environment
+    steps:
+      - run:
+          <<: *run_log_mem_use
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Wispr Tests
+          command: src/test/test_wispr --run_test="compress_tests"
+      - store_test_results:
+          path: ./tmp/results
+      - store_artifacts:
+          path: ./tmp/results
+      - store_artifacts:
+          path: /tmp/core_dumps
+      - store_artifacts:
+          path: /tmp/memuse.txt
 
+  Test mruset:
+    <<: *build_machine_environment
+    steps:
+      - run:
+          <<: *run_log_mem_use
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Wispr Tests
+          command: src/test/test_wispr --run_test="mruset_tests"
+      - store_test_results:
+          path: ./tmp/results
+      - store_artifacts:
+          path: ./tmp/results
+      - store_artifacts:
+          path: /tmp/core_dumps
+      - store_artifacts:
+          path: /tmp/memuse.txt
+  Test pmt:
+    <<: *build_machine_environment
+    steps:
+      - run:
+          <<: *run_log_mem_use
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Wispr Tests
+          command: src/test/test_wispr --run_test="pmt_tests"
+      - store_test_results:
+          path: ./tmp/results
+      - store_artifacts:
+          path: ./tmp/results
+      - store_artifacts:
+          path: /tmp/core_dumps
+      - store_artifacts:
+          path: /tmp/memuse.txt
   Test rpc:
     <<: *build_machine_environment
     steps:
@@ -652,7 +706,174 @@ jobs:
       - store_artifacts:
           path: /tmp/memuse.txt
 
+  Test skiplist:
+    <<: *build_machine_environment
+    steps:
+      - run:
+          <<: *run_log_mem_use
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Wispr Tests
+          command: src/test/test_wispr --run_test="skiplist_tests"
+      - store_test_results:
+          path: ./tmp/results
+      - store_artifacts:
+          path: ./tmp/results
+      - store_artifacts:
+          path: /tmp/core_dumps
+      - store_artifacts:
+          path: /tmp/memuse.txt
 
+  Test script:
+    <<: *build_machine_environment
+    steps:
+      - run:
+          <<: *run_log_mem_use
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Wispr Tests
+          command: src/test/test_wispr --run_test="script_tests"
+      - store_test_results:
+          path: ./tmp/results
+      - store_artifacts:
+          path: ./tmp/results
+      - store_artifacts:
+          path: /tmp/core_dumps
+      - store_artifacts:
+          path: /tmp/memuse.txt
+
+  Test scriptnum:
+    <<: *build_machine_environment
+    steps:
+      - run:
+          <<: *run_log_mem_use
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Wispr Tests
+          command: src/test/test_wispr --run_test="scriptnum_tests"
+      - store_test_results:
+          path: ./tmp/results
+      - store_artifacts:
+          path: ./tmp/results
+      - store_artifacts:
+          path: /tmp/core_dumps
+      - store_artifacts:
+          path: /tmp/memuse.txt
+
+  Test serialize:
+    <<: *build_machine_environment
+    steps:
+      - run:
+          <<: *run_log_mem_use
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Wispr Tests
+          command: src/test/test_wispr --run_test="serialize_tests"
+      - store_test_results:
+          path: ./tmp/results
+      - store_artifacts:
+          path: ./tmp/results
+      - store_artifacts:
+          path: /tmp/core_dumps
+      - store_artifacts:
+          path: /tmp/memuse.txt
+
+  Test base32:
+    <<: *build_machine_environment
+    steps:
+      - run:
+          <<: *run_log_mem_use
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Wispr Tests
+          command: src/test/test_wispr --run_test="base32_tests"
+      - store_test_results:
+          path: ./tmp/results
+      - store_artifacts:
+          path: ./tmp/results
+      - store_artifacts:
+          path: /tmp/core_dumps
+      - store_artifacts:
+          path: /tmp/memuse.txt
+  Test base58:
+    <<: *build_machine_environment
+    steps:
+      - run:
+          <<: *run_log_mem_use
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Wispr Tests
+          command: src/test/test_wispr --run_test="base58_tests"
+      - store_test_results:
+          path: ./tmp/results
+      - store_artifacts:
+          path: ./tmp/results
+      - store_artifacts:
+          path: /tmp/core_dumps
+      - store_artifacts:
+          path: /tmp/memuse.txt
+  Test base64:
+    <<: *build_machine_environment
+    steps:
+      - run:
+          <<: *run_log_mem_use
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Wispr Tests
+          command: src/test/test_wispr --run_test="base64_tests"
+      - store_test_results:
+          path: ./tmp/results
+      - store_artifacts:
+          path: ./tmp/results
+      - store_artifacts:
+          path: /tmp/core_dumps
+      - store_artifacts:
+          path: /tmp/memuse.txt
+
+  Test transaction:
+    <<: *build_machine_environment
+    steps:
+      - run:
+          <<: *run_log_mem_use
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Wispr Tests
+          command: src/test/test_wispr --run_test="transaction_tests"
+      - store_test_results:
+          path: ./tmp/results
+      - store_artifacts:
+          path: ./tmp/results
+      - store_artifacts:
+          path: /tmp/core_dumps
+      - store_artifacts:
+          path: /tmp/memuse.txt
+
+  Test univalues:
+    <<: *build_machine_environment
+    steps:
+      - run:
+          <<: *run_log_mem_use
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Wispr Tests
+          command: src/test/test_wispr --run_test="univalue_tests"
+      - store_test_results:
+          path: ./tmp/results
+      - store_artifacts:
+          path: ./tmp/results
+      - store_artifacts:
+          path: /tmp/core_dumps
+      - store_artifacts:
+          path: /tmp/memuse.txt
 workflows:
   version: 2
   Build and Test:
@@ -715,6 +936,9 @@ workflows:
       - Test coins:
           requires:
             - Build
+      - Test compress:
+          requires:
+            - Build
       - Test rpc:
           requires:
             - Build
@@ -742,11 +966,30 @@ workflows:
       - Test sighash:
           requires:
             - Build
-
-
-
-
-
+      - Test mruset:
+          requires:
+            - Build
+      - Test pmt:
+          requires:
+            - Build
+      - Test skiplist:
+          requires:
+            - Build
+      - Test script:
+          requires:
+            - Build
+      - Test scriptnum:
+          requires:
+            - Build
+      - Test serialize:
+          requires:
+            - Build
+      - Test transaction:
+          requires:
+            - Build
+      - Test univalues:
+          requires:
+            - Build
 
 #      - Clean Up:
 #          requires:
