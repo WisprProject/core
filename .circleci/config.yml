@@ -32,7 +32,7 @@ build_machine_environment: &build_machine_environment
      WINEDEBUG: fixme-all
      HOST: x86_64-unknown-linux-gnu
      PACKAGES: bc python3-zmq
-     DEP_OPTS: DEBUG=1
+     DEP_OPTS: NO_QT=1 NO_UPNP=1 DEBUG=1
      PYZMQ: true
      RUN_TESTS: true
      GOAL: install
@@ -462,7 +462,7 @@ jobs:
       - store_artifacts:
           path: /tmp/memuse.txt
 
-  Test miner:
+  Test coins:
     <<: *build_machine_environment
     steps:
       - run:
@@ -471,7 +471,7 @@ jobs:
           at: .
       - run:
           name: Run Wispr Tests
-          command: src/test/test_wispr --run_test="miner_tests"
+          command: src/test/test_wispr --run_test="coins_tests"
       - store_test_results:
           path: ./tmp/results
       - store_artifacts:
@@ -538,7 +538,7 @@ jobs:
       - store_artifacts:
           path: /tmp/memuse.txt
 
-  Test arith uint256:
+  Test rpc wallet:
     <<: *build_machine_environment
     steps:
       - run:
@@ -547,7 +547,7 @@ jobs:
           at: .
       - run:
           name: Run Wispr Tests
-          command: src/test/test_wispr --run_test="arith_uint256_tests"
+          command: src/test/test_wispr --run_test="rpc_wallet_tests"
       - store_test_results:
           path: ./tmp/results
       - store_artifacts:
@@ -614,7 +614,7 @@ jobs:
       - store_artifacts:
           path: /tmp/memuse.txt
 
-  Test bloom:
+  Test wallet:
     <<: *build_machine_environment
     steps:
       - run:
@@ -623,7 +623,7 @@ jobs:
           at: .
       - run:
           name: Run Wispr Tests
-          command: src/test/test_wispr --run_test="bloom_tests"
+          command: src/test/test_wispr --run_test="wallet_tests"
       - store_test_results:
           path: ./tmp/results
       - store_artifacts:
@@ -712,7 +712,7 @@ workflows:
       - Test CheckBlock:
           requires:
             - Build
-      - Test miner:
+      - Test coins:
           requires:
             - Build
       - Test rpc:
@@ -724,7 +724,7 @@ workflows:
       - Test accounting:
           requires:
             - Build
-      - Test arith uint256:
+      - Test rpc wallet:
           requires:
             - Build
       - Test util:
@@ -736,7 +736,7 @@ workflows:
       - Test tutorial libzerocoin:
           requires:
             - Build
-      - Test bloom:
+      - Test wallet:
           requires:
             - Build
       - Test sighash:
