@@ -32,7 +32,7 @@ static const char UNUSED *wispr_strings[] = {
         QT_TRANSLATE_NOOP("wispr-core", ""
                                         "Calculated accumulator checkpoint is not what is recorded by block index"),
         QT_TRANSLATE_NOOP("wispr-core", ""
-                                        "Cannot obtain a lock on data directory %s. PIVX Core is probably already "
+                                        "Cannot obtain a lock on data directory %s. Wispr Core is probably already "
                                         "running."),
         QT_TRANSLATE_NOOP("wispr-core", ""
                                         "Change automatic finalized budget voting behavior. mode=auto: Vote for only "
@@ -50,7 +50,7 @@ static const char UNUSED *wispr_strings[] = {
                                         "Delete all zerocoin spends and mints that have been recorded to the "
                                         "blockchain database and reindex them (0-1, default: %u)"),
         QT_TRANSLATE_NOOP("wispr-core", ""
-                                        "Disable all PIVX specific functionality (Masternodes, Zerocoin, SwiftX, "
+                                        "Disable all Wispr specific functionality (Masternodes, Zerocoin, SwiftX, "
                                         "Budgeting) (0-1, default: %u)"),
         QT_TRANSLATE_NOOP("wispr-core", ""
                                         "Distributed under the MIT software license, see the accompanying file "
@@ -58,12 +58,12 @@ static const char UNUSED *wispr_strings[] = {
         QT_TRANSLATE_NOOP("wispr-core", ""
                                         "Enable SwiftX, show confirmations for locked transactions (bool, default: %s)"),
         QT_TRANSLATE_NOOP("wispr-core", ""
-                                        "Enable automatic wallet backups triggered after each zPIV minting (0-1, "
+                                        "Enable automatic wallet backups triggered after each zWSP minting (0-1, "
                                         "default: %u)"),
         QT_TRANSLATE_NOOP("wispr-core", ""
-                                        "Enable or disable staking functionality for PIV inputs (0-1, default: %u)"),
+                                        "Enable or disable staking functionality for WSP inputs (0-1, default: %u)"),
         QT_TRANSLATE_NOOP("wispr-core", ""
-                                        "Enable or disable staking functionality for zPIV inputs (0-1, default: %u)"),
+                                        "Enable or disable staking functionality for zWSP inputs (0-1, default: %u)"),
         QT_TRANSLATE_NOOP("wispr-core", ""
                                         "Enable spork administration functionality with the appropriate private key."),
         QT_TRANSLATE_NOOP("wispr-core", ""
@@ -100,10 +100,10 @@ static const char UNUSED *wispr_strings[] = {
         QT_TRANSLATE_NOOP("wispr-core", ""
                                         "Failed to find coin set amongst held coins with less than maxNumber of Spends"),
         QT_TRANSLATE_NOOP("wispr-core", ""
-                                        "Fees (in PIV/Kb) smaller than this are considered zero fee for relaying "
+                                        "Fees (in WSP/Kb) smaller than this are considered zero fee for relaying "
                                         "(default: %s)"),
         QT_TRANSLATE_NOOP("wispr-core", ""
-                                        "Fees (in PIV/Kb) smaller than this are considered zero fee for transaction "
+                                        "Fees (in WSP/Kb) smaller than this are considered zero fee for transaction "
                                         "creation (default: %s)"),
         QT_TRANSLATE_NOOP("wispr-core", ""
                                         "Flush database activity from memory pool to disk log every <n> megabytes "
@@ -171,7 +171,7 @@ static const char UNUSED *wispr_strings[] = {
                                         "Show N confirmations for a successfully locked transaction (0-9999, default: "
                                         "%u)"),
         QT_TRANSLATE_NOOP("wispr-core", ""
-                                        "Specify custom backup path to add a copy of any automatic zPIV backup. If "
+                                        "Specify custom backup path to add a copy of any automatic zWSP backup. If "
                                         "set as dir, every backup generates a timestamped file. If set as file, will "
                                         "rewrite to that file every backup. If backuppath is set as well, 4 backups "
                                         "will happen"),
@@ -192,15 +192,15 @@ static const char UNUSED *wispr_strings[] = {
                                         "the OpenSSL Toolkit <https://www.openssl.org/> and cryptographic software "
                                         "written by Eric Young and UPnP software written by Thomas Bernard."),
         QT_TRANSLATE_NOOP("wispr-core", ""
-                                        "Unable to bind to %s on this computer. PIVX Core is probably already running."),
+                                        "Unable to bind to %s on this computer. Wispr Core is probably already running."),
         QT_TRANSLATE_NOOP("wispr-core", ""
                                         "Unable to locate enough Obfuscation denominated funds for this transaction."),
         QT_TRANSLATE_NOOP("wispr-core", ""
                                         "Unable to locate enough Obfuscation non-denominated funds for this "
-                                        "transaction that are not equal 10000 PIV."),
+                                        "transaction that are not equal 10000 WSP."),
         QT_TRANSLATE_NOOP("wispr-core", ""
                                         "Unable to locate enough funds for this transaction that are not equal 10000 "
-                                        "PIV."),
+                                        "WSP."),
         QT_TRANSLATE_NOOP("wispr-core", ""
                                         "Use separate SOCKS5 proxy to reach peers via Tor hidden services (default: "
                                         "%s)"),
@@ -212,7 +212,7 @@ static const char UNUSED *wispr_strings[] = {
                                         "pay if you send a transaction."),
         QT_TRANSLATE_NOOP("wispr-core", ""
                                         "Warning: Please check that your computer's date and time are correct! If "
-                                        "your clock is wrong PIVX Core will not work properly."),
+                                        "your clock is wrong Wispr Core will not work properly."),
         QT_TRANSLATE_NOOP("wispr-core", ""
                                         "Warning: The network does not appear to fully agree! Some miners appear to "
                                         "be experiencing issues."),
@@ -268,7 +268,7 @@ static const char UNUSED *wispr_strings[] = {
         QT_TRANSLATE_NOOP("wispr-core", "Connection options:"),
         QT_TRANSLATE_NOOP("wispr-core", "Copyright (C) 2009-%i The Bitcoin Core Developers"),
         QT_TRANSLATE_NOOP("wispr-core", "Copyright (C) 2014-%i The Dash Core Developers"),
-        QT_TRANSLATE_NOOP("wispr-core", "Copyright (C) 2015-%i The PIVX Core Developers"),
+        QT_TRANSLATE_NOOP("wispr-core", "Copyright (C) 2015-%i The Wispr Core Developers"),
         QT_TRANSLATE_NOOP("wispr-core", "Corrupted block database detected"),
         QT_TRANSLATE_NOOP("wispr-core", "Could not parse masternode.conf"),
         QT_TRANSLATE_NOOP("wispr-core", "Debugging/Testing options:"),
@@ -297,7 +297,7 @@ static const char UNUSED *wispr_strings[] = {
         QT_TRANSLATE_NOOP("wispr-core", "Error loading block database"),
         QT_TRANSLATE_NOOP("wispr-core", "Error loading wallet.dat"),
         QT_TRANSLATE_NOOP("wispr-core", "Error loading wallet.dat: Wallet corrupted"),
-        QT_TRANSLATE_NOOP("wispr-core", "Error loading wallet.dat: Wallet requires newer version of PIVX Core"),
+        QT_TRANSLATE_NOOP("wispr-core", "Error loading wallet.dat: Wallet requires newer version of Wispr Core"),
         QT_TRANSLATE_NOOP("wispr-core", "Error opening block database"),
         QT_TRANSLATE_NOOP("wispr-core", "Error reading from database, shutting down."),
         QT_TRANSLATE_NOOP("wispr-core", "Error recovering public key."),
@@ -319,7 +319,7 @@ static const char UNUSED *wispr_strings[] = {
         QT_TRANSLATE_NOOP("wispr-core", "Failed to select a zerocoin"),
         QT_TRANSLATE_NOOP("wispr-core", "Failed to wipe zerocoinDB"),
         QT_TRANSLATE_NOOP("wispr-core", "Failed to write coin serial number into wallet"),
-        QT_TRANSLATE_NOOP("wispr-core", "Fee (in PIV/kB) to add to transactions you send (default: %s)"),
+        QT_TRANSLATE_NOOP("wispr-core", "Fee (in WSP/kB) to add to transactions you send (default: %s)"),
         QT_TRANSLATE_NOOP("wispr-core", "Finalizing transaction."),
         QT_TRANSLATE_NOOP("wispr-core", "Force safe mode (default: %u)"),
         QT_TRANSLATE_NOOP("wispr-core", "Found enough users, signing ( waiting %s )"),
@@ -334,7 +334,7 @@ static const char UNUSED *wispr_strings[] = {
         QT_TRANSLATE_NOOP("wispr-core", "Incompatible version."),
         QT_TRANSLATE_NOOP("wispr-core", "Incorrect or no genesis block found. Wrong datadir for network?"),
         QT_TRANSLATE_NOOP("wispr-core", "Information"),
-        QT_TRANSLATE_NOOP("wispr-core", "Initialization sanity check failed. PIVX Core is shutting down."),
+        QT_TRANSLATE_NOOP("wispr-core", "Initialization sanity check failed. Wispr Core is shutting down."),
         QT_TRANSLATE_NOOP("wispr-core", "Input is not valid."),
         QT_TRANSLATE_NOOP("wispr-core", "Insufficient funds"),
         QT_TRANSLATE_NOOP("wispr-core", "Insufficient funds."),
@@ -408,7 +408,7 @@ static const char UNUSED *wispr_strings[] = {
         QT_TRANSLATE_NOOP("wispr-core", "Randomly fuzz 1 of every <n> network messages"),
         QT_TRANSLATE_NOOP("wispr-core", "Rebuild block chain index from current blk000??.dat files"),
         QT_TRANSLATE_NOOP("wispr-core", "Receive and display P2P network alerts (default: %u)"),
-        QT_TRANSLATE_NOOP("wispr-core", "Reindex the PIV and zPIV money supply statistics"),
+        QT_TRANSLATE_NOOP("wispr-core", "Reindex the WSP and zWSP money supply statistics"),
         QT_TRANSLATE_NOOP("wispr-core", "Reindex the accumulator database"),
         QT_TRANSLATE_NOOP("wispr-core", "Reindexing zerocoin database..."),
         QT_TRANSLATE_NOOP("wispr-core", "Reindexing zerocoin failed"),
@@ -460,7 +460,7 @@ static const char UNUSED *wispr_strings[] = {
         QT_TRANSLATE_NOOP("wispr-core", "Synchronizing masternode winners..."),
         QT_TRANSLATE_NOOP("wispr-core", "Synchronizing masternodes..."),
         QT_TRANSLATE_NOOP("wispr-core", "Synchronizing sporks..."),
-        QT_TRANSLATE_NOOP("wispr-core", "Syncing zPIV wallet..."),
+        QT_TRANSLATE_NOOP("wispr-core", "Syncing zWSP wallet..."),
         QT_TRANSLATE_NOOP("wispr-core", "The coin spend has been used"),
         QT_TRANSLATE_NOOP("wispr-core", "The new spend coin transaction did not verify"),
         QT_TRANSLATE_NOOP("wispr-core", "The selected mint coin is an invalid coin"),
@@ -497,14 +497,14 @@ static const char UNUSED *wispr_strings[] = {
         QT_TRANSLATE_NOOP("wispr-core", "Use a custom max chain reorganization depth (default: %u)"),
         QT_TRANSLATE_NOOP("wispr-core", "Use the test network"),
         QT_TRANSLATE_NOOP("wispr-core", "Username for JSON-RPC connections"),
-        QT_TRANSLATE_NOOP("wispr-core", "Value is below the smallest available denomination (= 1) of zPIV"),
+        QT_TRANSLATE_NOOP("wispr-core", "Value is below the smallest available denomination (= 1) of zWSP"),
         QT_TRANSLATE_NOOP("wispr-core", "Value more than Obfuscation pool maximum allows."),
         QT_TRANSLATE_NOOP("wispr-core", "Verifying blocks..."),
         QT_TRANSLATE_NOOP("wispr-core", "Verifying wallet..."),
-        QT_TRANSLATE_NOOP("wispr-core", "Version 1 zPIV require a security level of 100 to successfully spend."),
+        QT_TRANSLATE_NOOP("wispr-core", "Version 1 zWSP require a security level of 100 to successfully spend."),
         QT_TRANSLATE_NOOP("wispr-core", "Wallet %s resides outside data directory %s"),
         QT_TRANSLATE_NOOP("wispr-core", "Wallet is locked."),
-        QT_TRANSLATE_NOOP("wispr-core", "Wallet needed to be rewritten: restart PIVX Core to complete"),
+        QT_TRANSLATE_NOOP("wispr-core", "Wallet needed to be rewritten: restart Wispr Core to complete"),
         QT_TRANSLATE_NOOP("wispr-core", "Wallet options:"),
         QT_TRANSLATE_NOOP("wispr-core", "Wallet window title"),
         QT_TRANSLATE_NOOP("wispr-core", "Warning"),

@@ -178,7 +178,7 @@
                                                                                                     name="horizontalLayout_3">
                                                                                                 <item>
                                                                                                     <widget class="QLabel"
-                                                                                                            name="labelzPIVActions">
+                                                                                                            name="labelzWSPActions">
                                                                                                         <property
                                                                                                                 name="font">
                                                                                                             <font>
@@ -224,7 +224,7 @@
                                                                                                                 automatically
                                                                                                                 synchronizes
                                                                                                                 with the
-                                                                                                                PIVX
+                                                                                                                Wispr
                                                                                                                 network
                                                                                                                 after a
                                                                                                                 connection
@@ -341,10 +341,10 @@
                                                                                                             <string>
                                                                                                                 Enter an
                                                                                                                 amount
-                                                                                                                of Piv
+                                                                                                                of WSP
                                                                                                                 to
                                                                                                                 convert
-                                                                                                                to zPIV
+                                                                                                                to zWSP
                                                                                                             </string>
                                                                                                         </property>
                                                                                                         <property
@@ -384,18 +384,18 @@
                                                                                                 </item>
                                                                                                 <item>
                                                                                                     <widget class="QLabel"
-                                                                                                            name="labelzPIV_2">
+                                                                                                            name="labelzWSP_2">
                                                                                                         <property
                                                                                                                 name="text">
                                                                                                             <string>
-                                                                                                                zPIV
+                                                                                                                zWSP
                                                                                                             </string>
                                                                                                         </property>
                                                                                                     </widget>
                                                                                                 </item>
                                                                                                 <item>
                                                                                                     <widget class="QLabel"
-                                                                                                            name="labelzPIVAmountText">
+                                                                                                            name="labelzWSPAmountText">
                                                                                                         <property
                                                                                                                 name="toolTip">
                                                                                                             <string>
@@ -449,17 +449,17 @@
                                                                                                             <string>
                                                                                                                 Enter an
                                                                                                                 amount
-                                                                                                                of Piv
+                                                                                                                of WSP
                                                                                                                 to
                                                                                                                 convert
-                                                                                                                to zPIV
+                                                                                                                to zWSP
                                                                                                             </string>
                                                                                                         </property>
                                                                                                         <property
                                                                                                                 name="text">
                                                                                                             <string>
                                                                                                                 0.000 000 00
-                                                                                                                PIV
+                                                                                                                WSP
                                                                                                             </string>
                                                                                                         </property>
                                                                                                         <property
@@ -784,7 +784,7 @@
                                                                                                                         name="text">
                                                                                                                     <string notr="true">
                                                                                                                         0.00
-                                                                                                                        PIV
+                                                                                                                        WSP
                                                                                                                     </string>
                                                                                                                 </property>
                                                                                                                 <property
@@ -983,10 +983,10 @@
                                                                                                 </property>
                                                                                                 <item>
                                                                                                     <widget class="QPushButton"
-                                                                                                            name="pushButtonZPivControl">
+                                                                                                            name="pushButtonzWSPControl">
                                                                                                         <property
                                                                                                                 name="text">
-                                                                                                            <string>zPIV
+                                                                                                            <string>zWSP
                                                                                                                 Control
                                                                                                             </string>
                                                                                                         </property>
@@ -994,10 +994,10 @@
                                                                                                 </item>
                                                                                                 <item>
                                                                                                     <widget class="QLabel"
-                                                                                                            name="labelzPivSelected">
+                                                                                                            name="labelzWSPSelected">
                                                                                                         <property
                                                                                                                 name="text">
-                                                                                                            <string>zPIV
+                                                                                                            <string>zWSP
                                                                                                                 Selected:
                                                                                                             </string>
                                                                                                         </property>
@@ -1005,7 +1005,7 @@
                                                                                                 </item>
                                                                                                 <item>
                                                                                                     <widget class="QLabel"
-                                                                                                            name="labelzPivSelected_int">
+                                                                                                            name="labelzWSPSelected_int">
                                                                                                         <property
                                                                                                                 name="text">
                                                                                                             <string>0
@@ -1130,7 +1130,7 @@
                                                                                                 </item>
                                                                                                 <item>
                                                                                                     <widget class="QLabel"
-                                                                                                            name="labelzPIVBalanceText">
+                                                                                                            name="labelzWSPBalanceText">
                                                                                                         <property
                                                                                                                 name="toolTip">
                                                                                                             <string>
@@ -1138,7 +1138,7 @@
                                                                                                                 (mature
                                                                                                                 and
                                                                                                                 spendable)
-                                                                                                                zPIV for
+                                                                                                                zWSP for
                                                                                                                 spending
                                                                                                             </string>
                                                                                                         </property>
@@ -1178,10 +1178,10 @@
                                                                                                                 (mature
                                                                                                                 and
                                                                                                                 spendable)
-                                                                                                                zPIV for
+                                                                                                                zWSP for
                                                                                                                 spending
 
-                                                                                                                zPIV are
+                                                                                                                zWSP are
                                                                                                                 mature
                                                                                                                 when
                                                                                                                 they
@@ -1203,7 +1203,7 @@
                                                                                                         <property
                                                                                                                 name="text">
                                                                                                             <string>0
-                                                                                                                zPIV
+                                                                                                                zWSP
                                                                                                             </string>
                                                                                                         </property>
                                                                                                         <property
@@ -1425,7 +1425,7 @@
                                                                                                                         name="toolTip">
                                                                                                                     <string>
                                                                                                                         The
-                                                                                                                        PIVX
+                                                                                                                        Wispr
                                                                                                                         address
                                                                                                                         to
                                                                                                                         send
@@ -1616,7 +1616,7 @@
                                                                                                         </item>
                                                                                                         <item>
                                                                                                             <widget class="QLabel"
-                                                                                                                    name="labelzPIV">
+                                                                                                                    name="labelzWSP">
                                                                                                                 <property
                                                                                                                         name="minimumSize">
                                                                                                                     <size>
@@ -1631,7 +1631,7 @@
                                                                                                                 <property
                                                                                                                         name="text">
                                                                                                                     <string>
-                                                                                                                        zPIV
+                                                                                                                        zWSP
                                                                                                                     </string>
                                                                                                                 </property>
                                                                                                                 <property
@@ -1791,7 +1791,7 @@
                                                                                                     name="horizontalLayout_21">
                                                                                                 <item>
                                                                                                     <widget class="QLabel"
-                                                                                                            name="labelzPIVStats">
+                                                                                                            name="labelzWSPStats">
                                                                                                         <property
                                                                                                                 name="font">
                                                                                                             <font>
@@ -1936,7 +1936,7 @@
                                                                                                                 unconfirmed
                                                                                                                 and
                                                                                                                 immature
-                                                                                                                zPIV
+                                                                                                                zWSP
                                                                                                             </string>
                                                                                                         </property>
                                                                                                         <property
@@ -2011,13 +2011,13 @@
                                                                                                                 unconfirmed
                                                                                                                 and
                                                                                                                 immature
-                                                                                                                zPIV
+                                                                                                                zWSP
                                                                                                             </string>
                                                                                                         </property>
                                                                                                         <property
                                                                                                                 name="text">
                                                                                                             <string>0
-                                                                                                                zPIV
+                                                                                                                zWSP
                                                                                                             </string>
                                                                                                         </property>
                                                                                                         <property
@@ -2941,7 +2941,7 @@
                                                                                                                 status
                                                                                                                 of
                                                                                                                 automatic
-                                                                                                                zPIV
+                                                                                                                zWSP
                                                                                                                 minting.
 
                                                                                                                 To
@@ -2974,7 +2974,7 @@
                                                                                                                 Settings-&gt;Options-&gt;Percentage
                                                                                                                 of
                                                                                                                 autominted
-                                                                                                                zPIV
+                                                                                                                zWSP
 
                                                                                                             </string>
                                                                                                         </property>
@@ -3105,7 +3105,7 @@
                                                                                                         <property
                                                                                                                 name="text">
                                                                                                             <string>0
-                                                                                                                zPIV
+                                                                                                                zWSP
                                                                                                             </string>
                                                                                                         </property>
                                                                                                     </widget>
@@ -3155,7 +3155,7 @@
                                                                                                         <property
                                                                                                                 name="text">
                                                                                                             <string>0
-                                                                                                                zPIV
+                                                                                                                zWSP
                                                                                                             </string>
                                                                                                         </property>
                                                                                                     </widget>
@@ -3205,7 +3205,7 @@
                                                                                                         <property
                                                                                                                 name="text">
                                                                                                             <string>0
-                                                                                                                zPIV
+                                                                                                                zWSP
                                                                                                             </string>
                                                                                                         </property>
                                                                                                     </widget>
@@ -3255,7 +3255,7 @@
                                                                                                         <property
                                                                                                                 name="text">
                                                                                                             <string>0
-                                                                                                                zPIV
+                                                                                                                zWSP
                                                                                                             </string>
                                                                                                         </property>
                                                                                                     </widget>
@@ -3305,7 +3305,7 @@
                                                                                                         <property
                                                                                                                 name="text">
                                                                                                             <string>0
-                                                                                                                zPIV
+                                                                                                                zWSP
                                                                                                             </string>
                                                                                                         </property>
                                                                                                     </widget>
@@ -3355,7 +3355,7 @@
                                                                                                         <property
                                                                                                                 name="text">
                                                                                                             <string>0
-                                                                                                                zPIV
+                                                                                                                zWSP
                                                                                                             </string>
                                                                                                         </property>
                                                                                                     </widget>
@@ -3405,7 +3405,7 @@
                                                                                                         <property
                                                                                                                 name="text">
                                                                                                             <string>0
-                                                                                                                zPIV
+                                                                                                                zWSP
                                                                                                             </string>
                                                                                                         </property>
                                                                                                     </widget>
@@ -3455,7 +3455,7 @@
                                                                                                         <property
                                                                                                                 name="text">
                                                                                                             <string>0
-                                                                                                                zPIV
+                                                                                                                zWSP
                                                                                                             </string>
                                                                                                         </property>
                                                                                                     </widget>
@@ -3505,7 +3505,7 @@
                                                                                                         <property
                                                                                                                 name="text">
                                                                                                             <string>0
-                                                                                                                zPIV
+                                                                                                                zWSP
                                                                                                             </string>
                                                                                                         </property>
                                                                                                     </widget>
@@ -3644,7 +3644,7 @@
                                     <enum>Qt::ActionsContextMenu</enum>
                                 </property>
                                 <property name="text">
-                                    <string notr="true">0.000 000 00 PIV</string>
+                                    <string notr="true">0.000 000 00 WSP</string>
                                 </property>
                                 <property name="textInteractionFlags">
                                     <set>
@@ -3728,7 +3728,7 @@
                                             <enum>Qt::ActionsContextMenu</enum>
                                         </property>
                                         <property name="text">
-                                            <string notr="true">0.00 PIV</string>
+                                            <string notr="true">0.00 WSP</string>
                                         </property>
                                         <property name="textInteractionFlags">
                                             <set>
@@ -3954,7 +3954,7 @@
                                     <enum>Qt::ActionsContextMenu</enum>
                                 </property>
                                 <property name="text">
-                                    <string notr="true">0.000 000 00 PIV</string>
+                                    <string notr="true">0.000 000 00 WSP</string>
                                 </property>
                                 <property name="textInteractionFlags">
                                     <set>

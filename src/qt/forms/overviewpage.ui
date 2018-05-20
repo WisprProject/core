@@ -302,7 +302,7 @@
                                                                                                             automatically
                                                                                                             synchronizes
                                                                                                             with the
-                                                                                                            PIVX network
+                                                                                                            Wispr network
                                                                                                             after a
                                                                                                             connection
                                                                                                             is
@@ -431,7 +431,7 @@
                                                                                                             name="text">
                                                                                                         <string notr="true">
                                                                                                             0.000 000 00
-                                                                                                            PIV
+                                                                                                            WSP
                                                                                                         </string>
                                                                                                     </property>
                                                                                                     <property
@@ -490,7 +490,7 @@
                                                                                                             name="text">
                                                                                                         <string notr="true">
                                                                                                             0.000 000 00
-                                                                                                            PIV
+                                                                                                            WSP
                                                                                                         </string>
                                                                                                     </property>
                                                                                                     <property
@@ -588,7 +588,7 @@
                                                                                                     </property>
                                                                                                     <property
                                                                                                             name="text">
-                                                                                                        <string>PIV
+                                                                                                        <string>WSP
                                                                                                             Balance
                                                                                                         </string>
                                                                                                     </property>
@@ -596,7 +596,7 @@
                                                                                             </item>
                                                                                             <item>
                                                                                                 <widget class="QLabel"
-                                                                                                        name="labelPIVPercent">
+                                                                                                        name="labelWSPPercent">
                                                                                                     <property
                                                                                                             name="text">
                                                                                                         <string notr="true">
@@ -733,7 +733,7 @@
                                                                                                             name="text">
                                                                                                         <string notr="true">
                                                                                                             0.000 000 00
-                                                                                                            PIV
+                                                                                                            WSP
                                                                                                         </string>
                                                                                                     </property>
                                                                                                     <property
@@ -781,7 +781,7 @@
                                                                                                             name="text">
                                                                                                         <string notr="true">
                                                                                                             0.000 000 00
-                                                                                                            PIV
+                                                                                                            WSP
                                                                                                         </string>
                                                                                                     </property>
                                                                                                     <property
@@ -845,7 +845,7 @@
                                                                                                             name="text">
                                                                                                         <string notr="true">
                                                                                                             0.000 000 00
-                                                                                                            PIV
+                                                                                                            WSP
                                                                                                         </string>
                                                                                                     </property>
                                                                                                     <property
@@ -894,7 +894,7 @@
                                                                                                             name="text">
                                                                                                         <string notr="true">
                                                                                                             0.000 000 00
-                                                                                                            PIV
+                                                                                                            WSP
                                                                                                         </string>
                                                                                                     </property>
                                                                                                     <property
@@ -954,7 +954,7 @@
                                                                                                             name="text">
                                                                                                         <string notr="true">
                                                                                                             0.000 000 00
-                                                                                                            PIV
+                                                                                                            WSP
                                                                                                         </string>
                                                                                                     </property>
                                                                                                     <property
@@ -1005,7 +1005,7 @@
                                                                                                             name="text">
                                                                                                         <string notr="true">
                                                                                                             0.000 000 00
-                                                                                                            PIV
+                                                                                                            WSP
                                                                                                         </string>
                                                                                                     </property>
                                                                                                     <property
@@ -1028,12 +1028,12 @@
                                                                                                     <property
                                                                                                             name="toolTip">
                                                                                                         <string>Locked
-                                                                                                            PIV or
+                                                                                                            WSP or
                                                                                                             Masternode
                                                                                                             collaterals.
                                                                                                             These are
                                                                                                             excluded
-                                                                                                            from zPIV
+                                                                                                            from zWSP
                                                                                                             minting.
                                                                                                         </string>
                                                                                                     </property>
@@ -1066,12 +1066,12 @@
                                                                                                     <property
                                                                                                             name="toolTip">
                                                                                                         <string>Locked
-                                                                                                            PIV or
+                                                                                                            WSP or
                                                                                                             Masternode
                                                                                                             collaterals.
                                                                                                             These are
                                                                                                             excluded
-                                                                                                            from zPIV
+                                                                                                            from zWSP
                                                                                                             minting.
                                                                                                         </string>
                                                                                                     </property>
@@ -1079,7 +1079,7 @@
                                                                                                             name="text">
                                                                                                         <string notr="true">
                                                                                                             0.000 000 00
-                                                                                                            PIV
+                                                                                                            WSP
                                                                                                         </string>
                                                                                                     </property>
                                                                                                     <property
@@ -1127,7 +1127,7 @@
                                                                                                             name="text">
                                                                                                         <string notr="true">
                                                                                                             0.000 000 00
-                                                                                                            PIV
+                                                                                                            WSP
                                                                                                         </string>
                                                                                                     </property>
                                                                                                     <property
@@ -1150,7 +1150,7 @@
                                                                                                     <property
                                                                                                             name="toolTip">
                                                                                                         <string>Your
-                                                                                                            current PIVX
+                                                                                                            current Wispr
                                                                                                             balance,
                                                                                                             unconfirmed
                                                                                                             and immature
@@ -1186,7 +1186,7 @@
                                                                                                     <property
                                                                                                             name="toolTip">
                                                                                                         <string>Your
-                                                                                                            current PIVX
+                                                                                                            current Wispr
                                                                                                             balance,
                                                                                                             unconfirmed
                                                                                                             and immature
@@ -1198,7 +1198,7 @@
                                                                                                             name="text">
                                                                                                         <string notr="true">
                                                                                                             0.000 000 00
-                                                                                                            PIV
+                                                                                                            WSP
                                                                                                         </string>
                                                                                                     </property>
                                                                                                     <property
@@ -1246,7 +1246,7 @@
                                                                                                             name="text">
                                                                                                         <string notr="true">
                                                                                                             0.000 000 00
-                                                                                                            PIV
+                                                                                                            WSP
                                                                                                         </string>
                                                                                                     </property>
                                                                                                     <property
@@ -1345,7 +1345,7 @@
                                                                                                     </property>
                                                                                                     <property
                                                                                                             name="text">
-                                                                                                        <string>zPIV
+                                                                                                        <string>zWSP
                                                                                                             Balance
                                                                                                         </string>
                                                                                                     </property>
@@ -1353,7 +1353,7 @@
                                                                                             </item>
                                                                                             <item>
                                                                                                 <widget class="QLabel"
-                                                                                                        name="labelzPIVPercent">
+                                                                                                        name="labelzWSPPercent">
                                                                                                     <property
                                                                                                             name="text">
                                                                                                         <string notr="true">
@@ -1429,7 +1429,7 @@
                                                                                                             denomination
                                                                                                             after it was
                                                                                                             minted.
-                                                                                                            These zPIV
+                                                                                                            These zWSP
                                                                                                             are
                                                                                                             spendable.
                                                                                                         </string>
@@ -1465,7 +1465,7 @@
                                                                                                             denomination
                                                                                                             after it was
                                                                                                             minted.
-                                                                                                            These zPIV
+                                                                                                            These zWSP
                                                                                                             are
                                                                                                             spendable.
                                                                                                         </string>
@@ -1474,7 +1474,7 @@
                                                                                                             name="text">
                                                                                                         <string notr="true">
                                                                                                             0.000 000 00
-                                                                                                            PIV
+                                                                                                            WSP
                                                                                                         </string>
                                                                                                     </property>
                                                                                                     <property
@@ -1544,7 +1544,7 @@
                                                                                                             name="text">
                                                                                                         <string notr="true">
                                                                                                             0.000 000 00
-                                                                                                            PIV
+                                                                                                            WSP
                                                                                                         </string>
                                                                                                     </property>
                                                                                                     <property
@@ -1614,7 +1614,7 @@
                                                                                                             name="text">
                                                                                                         <string notr="true">
                                                                                                             0.000 000 00
-                                                                                                            PIV
+                                                                                                            WSP
                                                                                                         </string>
                                                                                                     </property>
                                                                                                     <property
@@ -1631,11 +1631,11 @@
                                                                                                     <property
                                                                                                             name="toolTip">
                                                                                                         <string>Your
-                                                                                                            current zPIV
+                                                                                                            current zWSP
                                                                                                             balance,
                                                                                                             unconfirmed
                                                                                                             and immature
-                                                                                                            zPIV
+                                                                                                            zWSP
                                                                                                             included.
                                                                                                         </string>
                                                                                                     </property>
@@ -1667,11 +1667,11 @@
                                                                                                     <property
                                                                                                             name="toolTip">
                                                                                                         <string>Your
-                                                                                                            current zPIV
+                                                                                                            current zWSP
                                                                                                             balance,
                                                                                                             unconfirmed
                                                                                                             and immature
-                                                                                                            zPIV
+                                                                                                            zWSP
                                                                                                             included.
                                                                                                         </string>
                                                                                                     </property>
@@ -1679,7 +1679,7 @@
                                                                                                             name="text">
                                                                                                         <string notr="true">
                                                                                                             0.000 000 00
-                                                                                                            PIV
+                                                                                                            WSP
                                                                                                         </string>
                                                                                                     </property>
                                                                                                     <property
@@ -1802,7 +1802,7 @@
                                                                                                 of date. Your wallet
                                                                                                 automatically
                                                                                                 synchronizes with the
-                                                                                                PIVX network after a
+                                                                                                Wispr network after a
                                                                                                 connection is
                                                                                                 established, but this
                                                                                                 process has not

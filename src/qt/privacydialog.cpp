@@ -170,7 +170,7 @@ void PrivacyDialog::on_pushButtonMintzPIV_clicked() {
     // Request unlock if wallet was locked or unlocked for mixing:
     WalletModel::EncryptionStatus encStatus = walletModel->getEncryptionStatus();
     if (encStatus == walletModel->Locked) {
-        WalletModel::UnlockContext ctx(walletModel->requestUnlock(AskPassphraseDialog::Context::Mint_zPIV, true));
+        WalletModel::UnlockContext ctx(walletModel->requestUnlock(AskPassphraseDialog::Context::Mint_zWSP, true));
         if (!ctx.isValid()) {
             // Unlock wallet was cancelled
             ui->TEMintStatus->setPlainText(
@@ -284,7 +284,7 @@ void PrivacyDialog::on_pushButtonSpendzPIV_clicked() {
     // Request unlock if wallet was locked or unlocked for mixing:
     WalletModel::EncryptionStatus encStatus = walletModel->getEncryptionStatus();
     if (encStatus == walletModel->Locked || encStatus == walletModel->UnlockedForAnonymizationOnly) {
-        WalletModel::UnlockContext ctx(walletModel->requestUnlock(AskPassphraseDialog::Context::Send_zPIV, true));
+        WalletModel::UnlockContext ctx(walletModel->requestUnlock(AskPassphraseDialog::Context::Send_zWSP, true));
         if (!ctx.isValid()) {
             // Unlock wallet was cancelled
             return;
@@ -301,13 +301,13 @@ void PrivacyDialog::on_pushButtonZPivControl_clicked() {
     if (!walletModel || !walletModel->getOptionsModel())
         return;
 
-    ZPivControlDialog *zPivControl = new ZPivControlDialog(this);
+    ZWspControlDialog *zPivControl = new ZWspControlDialog(this);
     zPivControl->setModel(walletModel);
     zPivControl->exec();
 }
 
 void PrivacyDialog::setZPivControlLabels(int64_t nAmount, int nQuantity) {
-    ui->labelzPivSelected_int->setText(QString::number(nAmount));
+    ui->labelzWSPSelected_int->setText(QString::number(nAmount));
     ui->labelQuantitySelected_int->setText(QString::number(nQuantity));
 }
 
@@ -417,8 +417,8 @@ void PrivacyDialog::sendzPIV() {
     // use mints from zPIV selector if applicable
     vector <CMintMeta> vMintsToFetch;
     vector <CZerocoinMint> vMintsSelected;
-    if (!ZPivControlDialog::setSelectedMints.empty()) {
-        vMintsToFetch = ZPivControlDialog::GetSelectedMints();
+    if (!ZWspControlDialog::setSelectedMints.empty()) {
+        vMintsToFetch = ZWspControlDialog::GetSelectedMints();
 
         for (auto &meta : vMintsToFetch) {
             if (meta.nVersion < libzerocoin::PrivateCoin::PUBKEY_VERSION) {
@@ -504,8 +504,8 @@ void PrivacyDialog::sendzPIV() {
     }
 
     // Clear zpiv selector in case it was used
-    ZPivControlDialog::setSelectedMints.clear();
-    ui->labelzPivSelected_int->setText(QString("0"));
+    ZWspControlDialog::setSelectedMints.clear();
+    ui->labelzWSPSelected_int->setText(QString("0"));
     ui->labelQuantitySelected_int->setText(QString("0"));
 
     // Some statistics for entertainment

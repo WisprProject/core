@@ -72,7 +72,7 @@ private:
     int nDisplayUnit;
 
     void
-    getPercentage(CAmount nTotalBalance, CAmount nZerocoinBalance, QString &sPIVPercentage, QString &szPIVPercentage);
+    getPercentage(CAmount nTotalBalance, CAmount nZerocoinBalance, QString &sWSPPercentage, QString &szWSPPercentage);
 
     TxViewDelegate *txdelegate;
     TransactionFilterProxy *filter;

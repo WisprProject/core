@@ -51,7 +51,7 @@
                         <item>
                             <widget class="QValidatedLineEdit" name="payTo">
                                 <property name="toolTip">
-                                    <string>The PIVX address to send the payment to</string>
+                                    <string>The Wispr address to send the payment to</string>
                                 </property>
                             </widget>
                         </item>
@@ -157,8 +157,8 @@
                 <item row="3" column="1">
                     <widget class="QLabel" name="messageTextLabel">
                         <property name="toolTip">
-                            <string>A message that was attached to the PIVX: URI which will be stored with the
-                                transaction for your reference. Note: This message will not be sent over the PIVX
+                            <string>A message that was attached to the Wispr: URI which will be stored with the
+                                transaction for your reference. Note: This message will not be sent over the Wispr
                                 network.
                             </string>
                         </property>

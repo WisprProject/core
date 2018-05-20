@@ -136,7 +136,7 @@
                                         <enum>Qt::ActionsContextMenu</enum>
                                     </property>
                                     <property name="text">
-                                        <string notr="true">0.00 PIV</string>
+                                        <string notr="true">0.00 WSP</string>
                                     </property>
                                     <property name="textInteractionFlags">
                                         <set>
@@ -214,7 +214,7 @@
                                         <enum>Qt::ActionsContextMenu</enum>
                                     </property>
                                     <property name="text">
-                                        <string notr="true">0.00 PIV</string>
+                                        <string notr="true">0.00 WSP</string>
                                     </property>
                                     <property name="textInteractionFlags">
                                         <set>
@@ -298,7 +298,7 @@
                                         <enum>Qt::ActionsContextMenu</enum>
                                     </property>
                                     <property name="text">
-                                        <string notr="true">0.00 PIV</string>
+                                        <string notr="true">0.00 WSP</string>
                                     </property>
                                     <property name="textInteractionFlags">
                                         <set>
@@ -335,7 +335,7 @@
                                         <enum>Qt::ActionsContextMenu</enum>
                                     </property>
                                     <property name="text">
-                                        <string notr="true">0.00 PIV</string>
+                                        <string notr="true">0.00 WSP</string>
                                     </property>
                                     <property name="textInteractionFlags">
                                         <set>

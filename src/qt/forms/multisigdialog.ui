@@ -452,7 +452,7 @@
                                                                 </sizepolicy>
                                                             </property>
                                                             <property name="toolTip">
-                                                                <string>Add destinations to send PIV to</string>
+                                                                <string>Add destinations to send WSP to</string>
                                                             </property>
                                                             <property name="text">
                                                                 <string>Add &amp;Destination</string>

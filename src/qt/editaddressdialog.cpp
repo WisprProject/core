@@ -97,7 +97,7 @@ void EditAddressDialog::accept() {
                 break;
             case AddressTableModel::INVALID_ADDRESS:
                 QMessageBox::warning(this, windowTitle(),
-                                     tr("The entered address \"%1\" is not a valid PIVX address.").arg(
+                                     tr("The entered address \"%1\" is not a valid Wispr address.").arg(
                                              ui->addressEdit->text()),
                                      QMessageBox::Ok, QMessageBox::Ok);
                 break;

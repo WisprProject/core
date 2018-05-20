@@ -376,7 +376,7 @@
                             <item row="16" column="0">
                                 <widget class="QPushButton" name="openDebugLogfileButton">
                                     <property name="toolTip">
-                                        <string>Open the PIVX debug log file from the current data directory. This can
+                                        <string>Open the Wispr debug log file from the current data directory. This can
                                             take a few seconds for large log files.
                                         </string>
                                     </property>
@@ -1398,9 +1398,9 @@
                                 </widget>
                             </item>
                             <item row="4" column="0">
-                                <widget class="QLabel" name="wallet_customzpivbackuppath_label">
+                                <widget class="QLabel" name="wallet_customzWSPbackuppath_label">
                                     <property name="text">
-                                        <string>Custom zPIV Backup Path:</string>
+                                        <string>Custom zWSP Backup Path:</string>
                                     </property>
                                     <property name="visible">
                                         <bool>false</bool>
@@ -1408,7 +1408,7 @@
                                 </widget>
                             </item>
                             <item row="4" column="1" colspan="3">
-                                <widget class="QLabel" name="wallet_customzpivbackuppath">
+                                <widget class="QLabel" name="wallet_customzWSPbackuppath">
                                     <property name="cursor">
                                         <cursorShape>IBeamCursor</cursorShape>
                                     </property>

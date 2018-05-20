@@ -50,7 +50,7 @@ static const int MAX_URI_LENGTH = 255;
 /* Number of frames in spinner animation */
 #define SPINNER_FRAMES 35
 
-#define QAPP_ORG_NAME "PIVX"
+#define QAPP_ORG_NAME "Wispr"
 #define QAPP_ORG_DOMAIN "wispr.tech"
 #define QAPP_APP_NAME_DEFAULT "WISPR-Qt"
 #define QAPP_APP_NAME_TESTNET "WISPR-Qt-testnet"

@@ -165,7 +165,7 @@
                                                                 <string>An optional message to attach to the payment
                                                                     request, which will be displayed when the request is
                                                                     opened. Note: The message will not be sent with the
-                                                                    payment over the PIVX network.
+                                                                    payment over the Wispr network.
                                                                 </string>
                                                             </property>
                                                             <property name="text">
@@ -195,7 +195,7 @@
                                                                 <string>An optional message to attach to the payment
                                                                     request, which will be displayed when the request is
                                                                     opened.&lt;br&gt;Note: The message will not be sent
-                                                                    with the payment over the PIVX network.
+                                                                    with the payment over the Wispr network.
                                                                 </string>
                                                             </property>
                                                         </widget>

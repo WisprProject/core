@@ -90,7 +90,7 @@ TransactionView::TransactionView(QWidget *parent) : QWidget(parent), model(0), t
                                        TransactionFilterProxy::TYPE(TransactionRecord::SendToOther));
 
 /* Obsolete Obfuscation entries. Remove once the corresponding TYPES are removed:
- * 
+ *
     typeWidget->addItem(tr("Obfuscated"), TransactionFilterProxy::TYPE(TransactionRecord::Obfuscated));
     typeWidget->addItem(tr("Obfuscation Make Collateral Inputs"), TransactionFilterProxy::TYPE(TransactionRecord::ObfuscationMakeCollaterals));
     typeWidget->addItem(tr("Obfuscation Create Denominations"), TransactionFilterProxy::TYPE(TransactionRecord::ObfuscationCreateDenominations));
@@ -101,14 +101,14 @@ TransactionView::TransactionView(QWidget *parent) : QWidget(parent), model(0), t
     typeWidget->addItem(tr("To yourself"), TransactionFilterProxy::TYPE(TransactionRecord::SendToSelf));
     typeWidget->addItem(tr("Mined"), TransactionFilterProxy::TYPE(TransactionRecord::Generated));
     typeWidget->addItem(tr("Minted"), TransactionFilterProxy::TYPE(TransactionRecord::StakeMint) |
-                                      TransactionFilterProxy::TYPE(TransactionRecord::StakeZPIV));
+                                      TransactionFilterProxy::TYPE(TransactionRecord::StakeZWSP));
     typeWidget->addItem(tr("Masternode Reward"), TransactionFilterProxy::TYPE(TransactionRecord::MNReward));
-    typeWidget->addItem(tr("Received PIV from zPIV"),
+    typeWidget->addItem(tr("Received WSP from zWSP"),
                         TransactionFilterProxy::TYPE(TransactionRecord::RecvFromZerocoinSpend));
     typeWidget->addItem(tr("Zerocoin Mint"), TransactionFilterProxy::TYPE(TransactionRecord::ZerocoinMint));
     typeWidget->addItem(tr("Zerocoin Spend"), TransactionFilterProxy::TYPE(TransactionRecord::ZerocoinSpend));
-    typeWidget->addItem(tr("Zerocoin Spend, Change in zPIV"),
-                        TransactionFilterProxy::TYPE(TransactionRecord::ZerocoinSpend_Change_zPiv));
+    typeWidget->addItem(tr("Zerocoin Spend, Change in zWSP"),
+                        TransactionFilterProxy::TYPE(TransactionRecord::ZerocoinSpend_Change_zWSP));
     typeWidget->addItem(tr("Zerocoin Spend to Self"),
                         TransactionFilterProxy::TYPE(TransactionRecord::ZerocoinSpend_FromMe));
     typeWidget->addItem(tr("Other"), TransactionFilterProxy::TYPE(TransactionRecord::Other));

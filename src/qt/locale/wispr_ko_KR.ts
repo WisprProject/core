@@ -176,8 +176,8 @@
         <translation>지갑 암호화 확인</translation>
     </message>
     <message>
-        <source>Wispr will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your PIVs from being stolen by malware infecting your computer.</source>
-        <translation>PIVX는 이제 암호화 프로세스를 마치기 위해 닫힐것입니다. 지갑을 암호화하더라도 맬웨어로 인한 PIVs 의 도난당하는 것을 완벽하게 보호 할 수는 없습니다.</translation>
+        <source>Wispr will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your WSPs from being stolen by malware infecting your computer.</source>
+        <translation>Wispr는 이제 암호화 프로세스를 마치기 위해 닫힐것입니다. 지갑을 암호화하더라도 맬웨어로 인한 WSPs 의 도난당하는 것을 완벽하게 보호 할 수는 없습니다.</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -185,7 +185,7 @@
     </message>
     <message>
         <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR WSP&lt;/b&gt;!</source>
-        <translation>경고: 지갑 암호화 후 암호를 분실하게 되면 &lt;b&gt;모든 PIV를 잃게 됩니다&lt;/b&gt;!</translation>
+        <translation>경고: 지갑 암호화 후 암호를 분실하게 되면 &lt;b&gt;모든 WSP를 잃게 됩니다&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Wallet encrypted</source>
@@ -631,7 +631,7 @@
     </message>
     <message>
         <source>Modify configuration options for Wispr</source>
-        <translation>PIVX에 대한 구성 옵션 수정</translation>
+        <translation>Wispr에 대한 구성 옵션 수정</translation>
     </message>
     <message>
         <source>Sign messages with your Wispr addresses to prove you own them</source>
@@ -1557,11 +1557,11 @@ Please check the address and try again.</source>
     </message>
     <message>
         <source>This option is the quickest and will cost about ~0.025 WSP to anonymize 10000 WSP</source>
-        <translation>이 옵션은 가장 빠르게 전송되며 10000 WSP 익명화에 약 ~0.025 PIV의 비용이 들어갑니다.</translation>
+        <translation>이 옵션은 가장 빠르게 전송되며 10000 WSP 익명화에 약 ~0.025 WSP의 비용이 들어갑니다.</translation>
     </message>
     <message>
         <source>This option is moderately fast and will cost about 0.05 WSP to anonymize 10000 WSP</source>
-        <translation>이 옵션은 중간 정도의 속도로 전송되며 10000 WSP 익명화에 약 0.05 PIV의 비용이 들어갑니다.</translation>
+        <translation>이 옵션은 중간 정도의 속도로 전송되며 10000 WSP 익명화에 약 0.05 WSP의 비용이 들어갑니다.</translation>
     </message>
     <message>
         <source>This is the slowest and most secure option. Using maximum anonymity will cost</source>
@@ -1577,15 +1577,15 @@ Please check the address and try again.</source>
     </message>
     <message>
         <source>Obfuscation was successfully set to basic (%1 and 2 rounds). You can change this at any time by opening Wispr's configuration screen.</source>
-        <translation>난독화가 성공적으로 높게 설정되었습니다.(%1 및 2 rounds) PIVX의 설정 화면을 열어 언제든지 다시 변경할 수 있습니다.</translation>
+        <translation>난독화가 성공적으로 높게 설정되었습니다.(%1 및 2 rounds) Wispr의 설정 화면을 열어 언제든지 다시 변경할 수 있습니다.</translation>
     </message>
     <message>
         <source>Obfuscation was successfully set to high (%1 and 8 rounds). You can change this at any time by opening Wispr's configuration screen.</source>
-        <translation>난독화가 성공적으로 높게 설정되었습니다.(%1 및 8 rounds) PIVX의 설정 화면을 열어 언제든지 다시 변경할 수 있습니다.</translation>
+        <translation>난독화가 성공적으로 높게 설정되었습니다.(%1 및 8 rounds) Wispr의 설정 화면을 열어 언제든지 다시 변경할 수 있습니다.</translation>
     </message>
     <message>
         <source>Obfuscation was successfully set to maximum (%1 and 16 rounds). You can change this at any time by opening Wispr's configuration screen.</source>
-        <translation>난독화가 성공적으로 높게 설정되었습니다.(%1 및 16 rounds) PIVX의 설정 화면을 열어 언제든지 다시 변경할 수 있습니다.</translation>
+        <translation>난독화가 성공적으로 높게 설정되었습니다.(%1 및 16 rounds) Wispr의 설정 화면을 열어 언제든지 다시 변경할 수 있습니다.</translation>
     </message>
 </context>
 <context>
@@ -1667,7 +1667,7 @@ Please check the address and try again.</source>
     </message>
     <message>
         <source>Automatically start Wispr after logging in to the system.</source>
-        <translation>시스템 로그인 후 PIVX을 자동으로 시작합니다.</translation>
+        <translation>시스템 로그인 후 Wispr을 자동으로 시작합니다.</translation>
     </message>
     <message>
         <source>&amp;Start Wispr on system login</source>
@@ -1715,7 +1715,7 @@ Please check the address and try again.</source>
     </message>
     <message>
         <source>The user interface language can be set here. This setting will take effect after restarting Wispr.</source>
-        <translation>사용자 인터페이스 언어를 설정할 수 있습니다. 이 설정은 PIVX을 다시 시작한 후에 적용됩니다.</translation>
+        <translation>사용자 인터페이스 언어를 설정할 수 있습니다. 이 설정은 Wispr을 다시 시작한 후에 적용됩니다.</translation>
     </message>
     <message>
         <source>Language missing or translation incomplete? Help contributing translations here:
@@ -2093,7 +2093,7 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
     </message>
     <message>
         <source>Cannot start wispr: click-to-pay handler</source>
-        <translation>PIVX을 시작할 수 없습니다: 결제하기 위한 클릭 처리</translation>
+        <translation>Wispr을 시작할 수 없습니다: 결제하기 위한 클릭 처리</translation>
     </message>
     <message>
         <source>URI cannot be parsed! This can be caused by an invalid Wispr address or malformed URI parameters.</source>
@@ -2845,12 +2845,12 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
         <translation>승인 시간:</translation>
     </message>
     <message>
-        <source>If the custom fee is set to 1000 uPIVs and the transaction is only 250 bytes, then "per kilobyte" only pays 250 uPIVs in fee,&lt;br /&gt;while "at least" pays 1000 uPIVs. For transactions bigger than a kilobyte both pay by kilobyte.</source>
-        <translation>트랜잭션이 250바이트 인 경우 사용자 지정 수수료가 1000 uPIVs로 설정되고,&lt;br /&gt;1000 uPIVs 안에는 최소 "킬로바이트당" 250 uPIVs 만 지불합니다. 1 킬로바이트보다 큰 트랜잭션의 경우 모두 킬로바이트 단위로 지불합니다.</translation>
+        <source>If the custom fee is set to 1000 uWSPs and the transaction is only 250 bytes, then "per kilobyte" only pays 250 uWSPs in fee,&lt;br /&gt;while "at least" pays 1000 uWSPs. For transactions bigger than a kilobyte both pay by kilobyte.</source>
+        <translation>트랜잭션이 250바이트 인 경우 사용자 지정 수수료가 1000 uWSPs로 설정되고,&lt;br /&gt;1000 uWSPs 안에는 최소 "킬로바이트당" 250 uWSPs 만 지불합니다. 1 킬로바이트보다 큰 트랜잭션의 경우 모두 킬로바이트 단위로 지불합니다.</translation>
     </message>
     <message>
-        <source>If the custom fee is set to 1000 uPIVs and the transaction is only 250 bytes, then "per kilobyte" only pays 250 uPIVs in fee,&lt;br /&gt;while "total at least" pays 1000 uPIVs. For transactions bigger than a kilobyte both pay by kilobyte.</source>
-        <translation>트랜잭션이 250바이트 인 경우 사용자 지정 수수료가 1000 uPIVs로 설정되고,&lt;br /&gt;1000 uPIVs 안에는 전체에서 최소 "킬로바이트당" 250 uPIVs 만 지불합니다. 1 킬로바이트보다 큰 트랜잭션의 경우 모두 킬로바이트 단위로 지불합니다.</translation>
+        <source>If the custom fee is set to 1000 uWSPs and the transaction is only 250 bytes, then "per kilobyte" only pays 250 uWSPs in fee,&lt;br /&gt;while "total at least" pays 1000 uWSPs. For transactions bigger than a kilobyte both pay by kilobyte.</source>
+        <translation>트랜잭션이 250바이트 인 경우 사용자 지정 수수료가 1000 uWSPs로 설정되고,&lt;br /&gt;1000 uWSPs 안에는 전체에서 최소 "킬로바이트당" 250 uWSPs 만 지불합니다. 1 킬로바이트보다 큰 트랜잭션의 경우 모두 킬로바이트 단위로 지불합니다.</translation>
     </message>
     <message>
         <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks.&lt;br /&gt;But be aware that this can end up in a never confirming transaction once there is more demand for Wispr transactions than the network can process.</source>
@@ -3851,7 +3851,7 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
     </message>
     <message>
         <source>SwiftTX doesn't support sending values that high yet. Transactions are currently limited to %1 WSP.</source>
-        <translation>SwiftTX는 아직 높은 값을 전송하는 것을 지원하지 않습니다. 트랜잭션은 현재 %1 PIV로 제한됩니다.</translation>
+        <translation>SwiftTX는 아직 높은 값을 전송하는 것을 지원하지 않습니다. 트랜잭션은 현재 %1 WSP로 제한됩니다.</translation>
     </message>
 </context>
 <context>
@@ -3941,7 +3941,7 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
     </message>
     <message>
         <source>Disable all Wispr specific functionality (Masternodes, Obfuscation, SwiftTX, Budgeting) (0-1, default: %u)</source>
-        <translation>PIVX의 모든 특정 기능들을 비활성화합니다(마스터노드, 난독화, SwiftTX, Budgeting) (0-1, 기본값: %u)</translation>
+        <translation>Wispr의 모든 특정 기능들을 비활성화합니다(마스터노드, 난독화, SwiftTX, Budgeting) (0-1, 기본값: %u)</translation>
     </message>
     <message>
         <source>Distributed under the MIT software license, see the accompanying file COPYING or &lt;http://www.opensource.org/licenses/mit-license.php&gt;.</source>
@@ -4103,10 +4103,10 @@ If the file does not exist, create it with owner-readable-only file permissions.
 It is also recommended to set alertnotify so you are notified of problems;
 for example: alertnotify=echo %%s | mail -s "Wispr Alert" admin@foo.com
 </source>
-        <translation>PIVXd 또는 Wispr-qt에 대한 -server 옵션 파일을 사용하려면 configuration 파일에서 rpcpassword를 설정해야 합니다:
+        <translation>Wisprd 또는 Wispr-qt에 대한 -server 옵션 파일을 사용하려면 configuration 파일에서 rpcpassword를 설정해야 합니다:
 %s
 다음 무작위 암호를 사용하는 것을 추천합니다:
-rpcuser=PIVXpc
+rpcuser=Wisprpc
 rpcpassword=%s
 (이 비밀번호는 기억할 필요가 없습니다)
 유저 이름과 비밀번호는 반드시 달라야 합니다.
@@ -4125,11 +4125,11 @@ rpcpassword=%s
     </message>
     <message>
         <source>Unable to locate enough Obfuscation non-denominated funds for this transaction that are not equal 10000 WSP.</source>
-        <translation>이 트랜잭션를 위해 난독화 표기가 안된 충분한 금액을 찾을 수 없습니다. 10000 PIV과 일치하지 않음.</translation>
+        <translation>이 트랜잭션를 위해 난독화 표기가 안된 충분한 금액을 찾을 수 없습니다. 10000 WSP과 일치하지 않음.</translation>
     </message>
     <message>
         <source>Unable to locate enough funds for this transaction that are not equal 10000 WSP.</source>
-        <translation>트랜잭션에 대한 충분한 금액을 찾을 수 없습니다. 10000 PIV와 같지 않음</translation>
+        <translation>트랜잭션에 대한 충분한 금액을 찾을 수 없습니다. 10000 WSP와 같지 않음</translation>
     </message>
     <message>
         <source>Use separate SOCKS5 proxy to reach peers via Tor hidden services (default: %s)</source>

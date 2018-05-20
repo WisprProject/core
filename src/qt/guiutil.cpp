@@ -108,7 +108,7 @@ namespace GUIUtil {
 #if QT_VERSION >= 0x040700
         // We don't want translators to use own addresses in translations
         // and this is the only place, where this address is supplied.
-        widget->setPlaceholderText(QObject::tr("Enter a PIVX address (e.g. %1)").arg("D7VFR83SQbiezrW72hjcWJtcfip5krte2Z"));
+        widget->setPlaceholderText(QObject::tr("Enter a Wispr address (e.g. %1)").arg("WfundQCUtX9zbGbScT5GKyjMPDfv6uQ9ZE"));
 #endif
         widget->setValidator(new BitcoinAddressEntryValidator(parent));
         widget->setCheckValidator(new BitcoinAddressCheckValidator(parent));
@@ -123,7 +123,7 @@ namespace GUIUtil {
     }
 
     bool parseBitcoinURI(const QUrl &uri, SendCoinsRecipient *out) {
-        // return if URI is not valid or is no PIVX: URI
+        // return if URI is not valid or is no Wispr: URI
         if (!uri.isValid() || uri.scheme() != QString(URI_SCHEME))
             return false;
 
@@ -158,7 +158,7 @@ namespace GUIUtil {
                 fShouldReturnFalse = false;
             } else if (i->first == "amount") {
                 if (!i->second.isEmpty()) {
-                    if (!BitcoinUnits::parse(BitcoinUnits::PIV, i->second, &rv.amount)) {
+                    if (!BitcoinUnits::parse(BitcoinUnits::WSP, i->second, &rv.amount)) {
                         return false;
                     }
                 }
@@ -192,7 +192,7 @@ namespace GUIUtil {
 
         if (info.amount) {
             ret += QString("?amount=%1").arg(
-                    BitcoinUnits::format(BitcoinUnits::PIV, info.amount, false, BitcoinUnits::separatorNever));
+                    BitcoinUnits::format(BitcoinUnits::WSP, info.amount, false, BitcoinUnits::separatorNever));
             paramCount++;
         }
 
@@ -573,12 +573,12 @@ namespace GUIUtil {
 #ifdef WIN32
     boost::filesystem::path static StartupShortcutPath()
     {
-        return GetSpecialFolderPath(CSIDL_STARTUP) / "PIVX.lnk";
+        return GetSpecialFolderPath(CSIDL_STARTUP) / "Wispr.lnk";
     }
 
     bool GetStartOnSystemStartup()
     {
-        // check for PIVX.lnk
+        // check for Wispr.lnk
         return boost::filesystem::exists(StartupShortcutPath());
     }
 
@@ -691,7 +691,7 @@ namespace GUIUtil {
             // Write a wispr.desktop file to the autostart directory:
             optionFile << "[Desktop Entry]\n";
             optionFile << "Type=Application\n";
-            optionFile << "Name=PIVX\n";
+            optionFile << "Name=Wispr\n";
             optionFile << "Exec=" << pszExePath << " -min\n";
             optionFile << "Terminal=false\n";
             optionFile << "Hidden=false\n";

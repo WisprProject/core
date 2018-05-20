@@ -38,7 +38,7 @@ class QWidget;
 
 QT_END_NAMESPACE
 
-/** Utility functions used by the PIVX Qt UI.
+/** Utility functions used by the Wispr Qt UI.
  */
 namespace GUIUtil {
 // Create human-readable string from date
@@ -46,7 +46,7 @@ namespace GUIUtil {
 
     QString dateTimeStr(qint64 nTime);
 
-// Render PIVX addresses in monospace font
+// Render addresses in monospace font
     QFont bitcoinAddressFont();
 
 // Set up widgets for address and amounts
