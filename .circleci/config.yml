@@ -108,7 +108,9 @@ jobs:
           command: cd ./src/univalue && ls && cd test && ls
       - persist_to_workspace:
           root: .
-          paths: ./src
+          paths:
+              - ./src
+              - ./qa
       - store_artifacts:
           path: /tmp/core_dumps
       - store_artifacts:
