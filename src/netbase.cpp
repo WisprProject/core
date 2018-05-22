@@ -835,18 +835,17 @@ enum Network CNetAddr::GetNetwork() const {
     return NET_IPV6;
 }
 
-std::string CNetAddr::ToStringIP(bool fUseGetnameinfo) const {
+std::string CNetAddr::ToStringIP() const
+{
     if (IsTor())
         return EncodeBase32(&ip[6], 10) + ".onion";
-    if (fUseGetnameinfo) {
-        CService serv(*this, 0);
-        struct sockaddr_storage sockaddr;
-        socklen_t socklen = sizeof(sockaddr);
-        if (serv.GetSockAddr((struct sockaddr *) &sockaddr, &socklen)) {
-            char name[1025] = "";
-            if (!getnameinfo((const struct sockaddr *) &sockaddr, socklen, name, sizeof(name), NULL, 0, NI_NUMERICHOST))
-                return std::string(name);
-        }
+    CService serv(*this, 0);
+    struct sockaddr_storage sockaddr;
+    socklen_t socklen = sizeof(sockaddr);
+    if (serv.GetSockAddr((struct sockaddr*)&sockaddr, &socklen)) {
+        char name[1025] = "";
+        if (!getnameinfo((const struct sockaddr*)&sockaddr, socklen, name, sizeof(name), NULL, 0, NI_NUMERICHOST))
+            return std::string(name);
     }
     if (IsIPv4())
         return strprintf("%u.%u.%u.%u", GetByte(3), GetByte(2), GetByte(1), GetByte(0));
@@ -857,6 +856,7 @@ std::string CNetAddr::ToStringIP(bool fUseGetnameinfo) const {
                          GetByte(7) << 8 | GetByte(6), GetByte(5) << 8 | GetByte(4),
                          GetByte(3) << 8 | GetByte(2), GetByte(1) << 8 | GetByte(0));
 }
+
 
 std::string CNetAddr::ToString() const {
     return ToStringIP();
@@ -1166,17 +1166,20 @@ std::string CService::ToStringPort() const {
     return strprintf("%u", port);
 }
 
-std::string CService::ToStringIPPort(bool fUseGetnameinfo) const {
+std::string CService::ToStringIPPort() const
+{
     if (IsIPv4() || IsTor()) {
-        return ToStringIP(fUseGetnameinfo) + ":" + ToStringPort();
+        return ToStringIP() + ":" + ToStringPort();
     } else {
-        return "[" + ToStringIP(fUseGetnameinfo) + "]:" + ToStringPort();
+        return "[" + ToStringIP() + "]:" + ToStringPort();
     }
 }
 
-std::string CService::ToString(bool fUseGetnameinfo) const {
-    return ToStringIPPort(fUseGetnameinfo);
+std::string CService::ToString() const
+{
+    return ToStringIPPort();
 }
+
 
 void CService::SetPort(unsigned short portIn) {
     port = portIn;

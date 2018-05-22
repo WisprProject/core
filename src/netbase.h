@@ -94,7 +94,7 @@ public:
 
     std::string ToString() const;
 
-    std::string ToStringIP(bool fUseGetnameinfo = true) const;
+    std::string ToStringIP() const;
 
     unsigned int GetByte(int n) const;
 
@@ -205,11 +205,11 @@ public:
 
     std::vector<unsigned char> GetKey() const;
 
-    std::string ToString(bool fUseGetnameinfo = true) const;
+    std::string ToString() const;
 
     std::string ToStringPort() const;
 
-    std::string ToStringIPPort(bool fUseGetnameinfo = true) const;
+    std::string ToStringIPPort() const;
 
     CService(const struct in6_addr &ipv6Addr, unsigned short port);
 
