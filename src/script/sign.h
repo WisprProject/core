@@ -13,27 +13,19 @@
 #include "script/standard.h"
 
 class CKeyStore;
-
 class CScript;
-
 class CTransaction;
 
 struct CMutableTransaction;
 
-bool Sign1(const CKeyID &address, const CKeyStore &keystore, uint256 hash, int nHashType, CScript &scriptSigRet);
-
-bool SignSignature(const CKeyStore &keystore, const CScript &fromPubKey, CMutableTransaction &txTo, unsigned int nIn,
-                   int nHashType = SIGHASH_ALL);
-
-bool SignSignature(const CKeyStore &keystore, const CTransaction &txFrom, CMutableTransaction &txTo, unsigned int nIn,
-                   int nHashType = SIGHASH_ALL);
+bool Sign1(const CKeyID& address, const CKeyStore& keystore, uint256 hash, int nHashType, CScript& scriptSigRet);
+bool SignSignature(const CKeyStore& keystore, const CScript& fromPubKey, CMutableTransaction& txTo, unsigned int nIn, int nHashType=SIGHASH_ALL);
+bool SignSignature(const CKeyStore& keystore, const CTransaction& txFrom, CMutableTransaction& txTo, unsigned int nIn, int nHashType=SIGHASH_ALL);
 
 /**
  * Given two sets of signatures for scriptPubKey, possibly with OP_0 placeholders,
  * combine them intelligently and return the result.
  */
-CScript
-CombineSignatures(const CScript &scriptPubKey, const CTransaction &txTo, unsigned int nIn, const CScript &scriptSig1,
-                  const CScript &scriptSig2);
+CScript CombineSignatures(const CScript& scriptPubKey, const CTransaction& txTo, unsigned int nIn, const CScript& scriptSig1, const CScript& scriptSig2);
 
 #endif // BITCOIN_SCRIPT_SIGN_H

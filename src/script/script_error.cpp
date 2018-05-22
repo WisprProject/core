@@ -5,8 +5,10 @@
 
 #include "script_error.h"
 
-const char *ScriptErrorString(const ScriptError serror) {
-    switch (serror) {
+const char* ScriptErrorString(const ScriptError serror)
+{
+    switch (serror)
+    {
         case SCRIPT_ERR_OK:
             return "No error";
         case SCRIPT_ERR_EVAL_FALSE:
@@ -63,8 +65,7 @@ const char *ScriptErrorString(const ScriptError serror) {
             return "Public key is neither compressed or uncompressed";
         case SCRIPT_ERR_UNKNOWN_ERROR:
         case SCRIPT_ERR_ERROR_COUNT:
-        default:
-            break;
+        default: break;
     }
     return "unknown error";
 }

@@ -179,8 +179,8 @@ public:
         assert(hashGenesisBlock == uint256("fa671f0555b2a118714896f0a12337a25b3c8413ee30c3ce09e66153f642d92b"));
         assert(genesis.hashMerkleRoot == uint256("dc8031216674405e2e4d66e6e00ea3888188959d5d5551af5eaf0d584da842f6"));
 
-        vSeeds.push_back(CDNSSeedData("fuzzbawls.pw", "pivx.seed.fuzzbawls.pw"));     // Primary DNS Seeder from Fuzzbawls
-        vSeeds.push_back(CDNSSeedData("fuzzbawls.pw", "pivx.seed2.fuzzbawls.pw"));    // Secondary DNS Seeder from Fuzzbawls
+        vSeeds.push_back(CDNSSeedData("fuzzbawls.pw", "wispr.seed.fuzzbawls.pw"));     // Primary DNS Seeder from Fuzzbawls
+        vSeeds.push_back(CDNSSeedData("fuzzbawls.pw", "wispr.seed2.fuzzbawls.pw"));    // Secondary DNS Seeder from Fuzzbawls
         vSeeds.push_back(CDNSSeedData("coin-server.com", "coin-server.com"));         // Single node address
         vSeeds.push_back(CDNSSeedData("s3v3nh4cks.ddns.net", "s3v3nh4cks.ddns.net")); // Single node address
         vSeeds.push_back(CDNSSeedData("178.254.23.111", "178.254.23.111"));           // Single node address
@@ -284,8 +284,8 @@ public:
 
 //        vFixedSeeds.clear();
         vSeeds.clear();
-//        vSeeds.push_back(CDNSSeedData("fuzzbawls.pw", "pivx-testnet.seed.fuzzbawls.pw"));
-//        vSeeds.push_back(CDNSSeedData("fuzzbawls.pw", "pivx-testnet.seed2.fuzzbawls.pw"));
+//        vSeeds.push_back(CDNSSeedData("fuzzbawls.pw", "wispr-testnet.seed.fuzzbawls.pw"));
+//        vSeeds.push_back(CDNSSeedData("fuzzbawls.pw", "wispr-testnet.seed2.fuzzbawls.pw"));
 //        vSeeds.push_back(CDNSSeedData("s3v3nh4cks.ddns.net", "s3v3nh4cks.ddns.net"));
 //        vSeeds.push_back(CDNSSeedData("88.198.192.110", "88.198.192.110"));
 //        vSeeds.push_back(CDNSSeedData("136.144.157.58", "136.144.157.58"));
