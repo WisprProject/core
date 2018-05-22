@@ -5230,10 +5230,10 @@ bool InitBlockIndex()
             unsigned int nBlockSize = ::GetSerializeSize(block, SER_DISK, CLIENT_VERSION);
             CDiskBlockPos blockPos;
             CValidationState state;
-            std::string s = state;
-            std::string bp = blockPos;
-            std::string bs = nBlockSize;
-            std::string bt = block.GetBlockTime();
+            std::string s(state);
+            std::string bp(blockPos);
+            std::string bs(nBlockSize);
+            std::string bt(block.GetBlockTime());
             LogPrintf("Loggin block data...\n");
             LogPrintf(s);
             LogPrintf(bp);
