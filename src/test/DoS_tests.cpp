@@ -53,16 +53,16 @@ BOOST_AUTO_TEST_SUITE(DoS_tests)
         SendMessages(&dummyNode1, false);
         BOOST_CHECK(CNode::IsBanned(addr1));
         BOOST_CHECK(!CNode::IsBanned(ip(0xa0b0c001|0x0000ff00))); // Different IP, not banned
-//        CAddress addr2(ip(0xa0b0c002));
-//        CNode dummyNode2(INVALID_SOCKET, addr2, "", true);
-//        dummyNode2.nVersion = 1;
-//        Misbehaving(dummyNode2.GetId(), 50);
-//        SendMessages(&dummyNode2, false);
-//        BOOST_CHECK(!CNode::IsBanned(addr2)); // 2 not banned yet...
-//        BOOST_CHECK(CNode::IsBanned(addr1));  // ... but 1 still should be
-//        Misbehaving(dummyNode2.GetId(), 50);
-//        SendMessages(&dummyNode2, false);
-//        BOOST_CHECK(CNode::IsBanned(addr2));
+        CAddress addr2(ip(0xa0b0c002));
+        CNode dummyNode2(INVALID_SOCKET, addr2, "", true);
+        dummyNode2.nVersion = 1;
+        Misbehaving(dummyNode2.GetId(), 50);
+        SendMessages(&dummyNode2, false);
+        BOOST_CHECK(!CNode::IsBanned(addr2)); // 2 not banned yet...
+        BOOST_CHECK(CNode::IsBanned(addr1));  // ... but 1 still should be
+        Misbehaving(dummyNode2.GetId(), 50);
+        SendMessages(&dummyNode2, false);
+        BOOST_CHECK(CNode::IsBanned(addr2));
     }
 
     BOOST_AUTO_TEST_CASE(DoS_banscore)
