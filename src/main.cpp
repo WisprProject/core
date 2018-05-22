@@ -39,6 +39,7 @@
 #include "invalid.h"
 
 #include <sstream>
+#include <string>
 
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/filesystem.hpp>
@@ -5229,6 +5230,16 @@ bool InitBlockIndex()
             unsigned int nBlockSize = ::GetSerializeSize(block, SER_DISK, CLIENT_VERSION);
             CDiskBlockPos blockPos;
             CValidationState state;
+            std::string s = state;
+            std::string bp = blockPos;
+            std::string bs = nBlockSize;
+            std::string bt = block.GetBlockTime();
+            LogPrintf("Loggin block data...\n");
+            LogPrintf(s);
+            LogPrintf(bp);
+            LogPrintf(bs);
+            LogPrintf(bt);
+            LogPrintf("Closing block data...\n");
             if (!FindBlockPos(state, blockPos, nBlockSize + 8, 0, block.GetBlockTime()))
                 cout << "Find block pos failed...\n";
                 return error("LoadBlockIndex() : FindBlockPos failed");
