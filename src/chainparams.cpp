@@ -282,19 +282,17 @@ public:
 //        printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
          assert(hashGenesisBlock == uint256("1c9b46a8492510e9e79ad594089ac4a432a376c3f107af520e6149ab290c1e1e"));
 
-        vFixedSeeds.clear();
+//        vFixedSeeds.clear();
         vSeeds.clear();
         vSeeds.push_back(CDNSSeedData("136.144.157.58", "136.144.157.58"));
         vSeeds.push_back(CDNSSeedData("54.171.130.70", "54.171.130.70"));
         vSeeds.push_back(CDNSSeedData("34.245.197.246", "34.245.197.246"));
 
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 139); // Testnet wispr addresses start with 'x' or 'y'
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 19);  // Testnet wispr script addresses start with '8' or '9'
-        base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 239);     // Testnet private keys start with '9' or 'c' (Bitcoin defaults)
-        // Testnet wispr BIP32 pubkeys start with 'DRKV'
-        base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x3a)(0x80)(0x61)(0xa0).convert_to_container<std::vector<unsigned char> >();
-        // Testnet wispr BIP32 prvkeys start with 'DRKP'
-        base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x3a)(0x80)(0x58)(0x37).convert_to_container<std::vector<unsigned char> >();
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 73);
+        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 135);
+        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1, 145);
+        base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x04)(0x88)(0xB2)(0x1E).convert_to_container<std::vector<unsigned char> >();
+        base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x04)(0x88)(0xAD)(0xE4).convert_to_container<std::vector<unsigned char> >();
         // Testnet wispr BIP44 coin type is '1' (All coin's testnet default)
         base58Prefixes[EXT_COIN_TYPE] = boost::assign::list_of(0x80)(0x00)(0x00)(0x01).convert_to_container<std::vector<unsigned char> >();
 
