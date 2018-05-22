@@ -350,7 +350,7 @@ public:
         genesis.nNonce = 12345;
 
         hashGenesisBlock = genesis.GetHash();
-        nDefaultPort = 51476;
+        nDefaultPort = 17004;
 //        printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
         assert(hashGenesisBlock == uint256("cc93f4427f494c868f1cdf36d2ab21f1812390bdac16f449b4d88561816c71b8"));
 
@@ -381,7 +381,7 @@ public:
     {
         networkID = CBaseChainParams::UNITTEST;
         strNetworkID = "unittest";
-        nDefaultPort = 51478;
+        nDefaultPort = 17005;
         vFixedSeeds.clear(); //! Unit test mode doesn't have any fixed seeds.
         vSeeds.clear();      //! Unit test mode doesn't have any DNS seeds.
 
