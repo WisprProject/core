@@ -491,7 +491,7 @@ bool static ConnectSocketDirectly(const CService& addrConnect, SOCKET& hSocketRe
 #ifdef WIN32
             if (getsockopt(hSocket, SOL_SOCKET, SO_ERROR, (char*)(&nRet), &nRetSize) == SOCKET_ERROR)
 #else
-                if (getsockopt(hSocket, SOL_SOCKET, SO_ERROR, &nRet, &nRetSize) == SOCKET_ERROR)
+            if (getsockopt(hSocket, SOL_SOCKET, SO_ERROR, &nRet, &nRetSize) == SOCKET_ERROR)
 #endif
             {
                 LogPrintf("getsockopt() for %s failed: %s\n", addrConnect.ToString(), NetworkErrorString(WSAGetLastError()));
@@ -505,9 +505,9 @@ bool static ConnectSocketDirectly(const CService& addrConnect, SOCKET& hSocketRe
             }
         }
 #ifdef WIN32
-        else if (WSAGetLastError() != WSAEISCONN)
+            else if (WSAGetLastError() != WSAEISCONN)
 #else
-            else
+        else
 #endif
         {
             LogPrintf("connect() to %s failed: %s\n", addrConnect.ToString(), NetworkErrorString(WSAGetLastError()));
@@ -1191,7 +1191,7 @@ bool CService::GetSockAddr(struct sockaddr* paddr, socklen_t* addrlen) const
 {
     if (IsIPv4()) {
         if (*addrlen < (socklen_t)sizeof(struct sockaddr_in))
-            return false;
+        return false;
         *addrlen = sizeof(struct sockaddr_in);
         struct sockaddr_in* paddrin = (struct sockaddr_in*)paddr;
         memset(paddrin, 0, *addrlen);
@@ -1203,7 +1203,7 @@ bool CService::GetSockAddr(struct sockaddr* paddr, socklen_t* addrlen) const
     }
     if (IsIPv6()) {
         if (*addrlen < (socklen_t)sizeof(struct sockaddr_in6))
-            return false;
+        return false;
         *addrlen = sizeof(struct sockaddr_in6);
         struct sockaddr_in6* paddrin6 = (struct sockaddr_in6*)paddr;
         memset(paddrin6, 0, *addrlen);
@@ -1402,8 +1402,8 @@ std::string NetworkErrorString(int err)
     char buf[256];
     buf[0] = 0;
     if (FormatMessageA(FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS | FORMAT_MESSAGE_MAX_WIDTH_MASK,
-                       NULL, err, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-                       buf, sizeof(buf), NULL)) {
+            NULL, err, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+            buf, sizeof(buf), NULL)) {
         return strprintf("%s (%d)", buf, err);
     } else {
         return strprintf("Unknown error (%d)", err);
@@ -1447,7 +1447,7 @@ bool SetSocketNonBlocking(SOCKET& hSocket, bool fNonBlocking)
         u_long nOne = 1;
         if (ioctlsocket(hSocket, FIONBIO, &nOne) == SOCKET_ERROR) {
 #else
-            int fFlags = fcntl(hSocket, F_GETFL, 0);
+        int fFlags = fcntl(hSocket, F_GETFL, 0);
         if (fcntl(hSocket, F_SETFL, fFlags | O_NONBLOCK) == SOCKET_ERROR) {
 #endif
             CloseSocket(hSocket);
@@ -1458,7 +1458,7 @@ bool SetSocketNonBlocking(SOCKET& hSocket, bool fNonBlocking)
         u_long nZero = 0;
         if (ioctlsocket(hSocket, FIONBIO, &nZero) == SOCKET_ERROR) {
 #else
-            int fFlags = fcntl(hSocket, F_GETFL, 0);
+        int fFlags = fcntl(hSocket, F_GETFL, 0);
         if (fcntl(hSocket, F_SETFL, fFlags & ~O_NONBLOCK) == SOCKET_ERROR) {
 #endif
             CloseSocket(hSocket);
