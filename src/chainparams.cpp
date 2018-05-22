@@ -283,10 +283,13 @@ public:
          assert(hashGenesisBlock == uint256("1c9b46a8492510e9e79ad594089ac4a432a376c3f107af520e6149ab290c1e1e"));
 
         vFixedSeeds.clear();
-//        vSeeds.clear();
-//        vSeeds.push_back(CDNSSeedData("136.144.157.58", "136.144.157.58"));
-//        vSeeds.push_back(CDNSSeedData("54.171.130.70", "54.171.130.70"));
-//        vSeeds.push_back(CDNSSeedData("34.245.197.246", "34.245.197.246"));
+        vSeeds.clear();
+        vSeeds.push_back(CDNSSeedData("fuzzbawls.pw", "pivx-testnet.seed.fuzzbawls.pw"));
+        vSeeds.push_back(CDNSSeedData("fuzzbawls.pw", "pivx-testnet.seed2.fuzzbawls.pw"));
+        vSeeds.push_back(CDNSSeedData("s3v3nh4cks.ddns.net", "s3v3nh4cks.ddns.net"));
+        vSeeds.push_back(CDNSSeedData("136.144.157.58", "136.144.157.58"));
+        vSeeds.push_back(CDNSSeedData("54.171.130.70", "54.171.130.70"));
+        vSeeds.push_back(CDNSSeedData("34.245.197.246", "34.245.197.246"));
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 139); // Testnet wispr addresses start with 'x' or 'y'
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 19);  // Testnet wispr script addresses start with '8' or '9'
