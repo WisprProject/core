@@ -282,12 +282,12 @@ public:
 //        printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
          assert(hashGenesisBlock == uint256("1c9b46a8492510e9e79ad594089ac4a432a376c3f107af520e6149ab290c1e1e"));
 
-        vFixedSeeds.clear();
+//        vFixedSeeds.clear();
         vSeeds.clear();
-        vSeeds.push_back(CDNSSeedData("fuzzbawls.pw", "pivx-testnet.seed.fuzzbawls.pw"));
-        vSeeds.push_back(CDNSSeedData("fuzzbawls.pw", "pivx-testnet.seed2.fuzzbawls.pw"));
-        vSeeds.push_back(CDNSSeedData("s3v3nh4cks.ddns.net", "s3v3nh4cks.ddns.net"));
-        vSeeds.push_back(CDNSSeedData("88.198.192.110", "88.198.192.110"));
+//        vSeeds.push_back(CDNSSeedData("fuzzbawls.pw", "pivx-testnet.seed.fuzzbawls.pw"));
+//        vSeeds.push_back(CDNSSeedData("fuzzbawls.pw", "pivx-testnet.seed2.fuzzbawls.pw"));
+//        vSeeds.push_back(CDNSSeedData("s3v3nh4cks.ddns.net", "s3v3nh4cks.ddns.net"));
+//        vSeeds.push_back(CDNSSeedData("88.198.192.110", "88.198.192.110"));
 //        vSeeds.push_back(CDNSSeedData("136.144.157.58", "136.144.157.58"));
 //        vSeeds.push_back(CDNSSeedData("54.171.130.70", "54.171.130.70"));
 //        vSeeds.push_back(CDNSSeedData("34.245.197.246", "34.245.197.246"));
