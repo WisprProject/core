@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef PIVX_ACCUMULATORS_H
-#define PIVX_ACCUMULATORS_H
+#ifndef WISPR_ACCUMULATORS_H
+#define WISPR_ACCUMULATORS_H
 
 #include "libzerocoin/Accumulator.h"
 #include "libzerocoin/Coin.h"
@@ -45,4 +45,4 @@ bool InvalidCheckpointRange(int nHeight);
 
 bool ValidateAccumulatorCheckpoint(const CBlock &block, CBlockIndex *pindex, AccumulatorMap &mapAccumulators);
 
-#endif //PIVX_ACCUMULATORS_H
+#endif //WISPR_ACCUMULATORS_H

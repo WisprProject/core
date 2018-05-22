@@ -1,6 +1,6 @@
-PIVX Core version *3.1.0.1* is now available from:  <https://github.com/WisprProject/core/releases>
+WISPR Core version *3.1.0.1* is now available from:  <https://github.com/WisprProject/core/releases>
 
-This is a new bugfix release, specifically addressing a bug with windows OS masternode control wallets. Users upgrading to this version are encouraged to also read the detailed release notes for the previous [3.1.0](https://github.com/WISPR-Project/PIVX/releases/tag/v3.1.0) release as information will not be duplicated here.
+This is a new bugfix release, specifically addressing a bug with windows OS masternode control wallets. Users upgrading to this version are encouraged to also read the detailed release notes for the previous [3.1.0](https://github.com/WISPR-Project/WISPR/releases/tag/v3.1.0) release as information will not be duplicated here.
 
 Please report bugs using the issue tracker at github: <https://github.com/WisprProject/core/issues>
 
@@ -13,11 +13,11 @@ If you are running an older version, shut it down. Wait until it has completely 
 Compatibility
 ==============
 
-PIVX Core is extensively tested on multiple operating systems using the Linux kernel, macOS 10.8+, and Windows 7 and later.
+WISPR Core is extensively tested on multiple operating systems using the Linux kernel, macOS 10.8+, and Windows 7 and later.
 
 Microsoft ended support for Windows XP on [April 8th, 2014](https://www.microsoft.com/en-us/WindowsForBusiness/end-of-xp-support), No attempt is made to prevent installing or running the software on Windows XP, you can still do so at your own risk but be aware that there are known instabilities and issues. Please do not report issues about Windows XP to the issue tracker.
 
-PIVX Core should also work on most other Unix-like systems but is not frequently tested on them.
+WISPR Core should also work on most other Unix-like systems but is not frequently tested on them.
 
 ### :exclamation::exclamation::exclamation: MacOS 10.13 High Sierra :exclamation::exclamation::exclamation:
 

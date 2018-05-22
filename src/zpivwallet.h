@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef PIVX_ZPIVWALLET_H
-#define PIVX_ZPIVWALLET_H
+#ifndef WISPR_ZWSPWALLET_H
+#define WISPR_ZWSPWALLET_H
 
 #include <map>
 #include "libzerocoin/Coin.h"
@@ -13,7 +13,7 @@
 
 class CDeterministicMint;
 
-class CzPIVWallet {
+class CzWSPWallet {
 private:
     uint256 seedMaster;
     uint32_t nCountLastUsed;
@@ -21,7 +21,7 @@ private:
     CMintPool mintPool;
 
 public:
-    CzPIVWallet(std::string strWalletFile);
+    CzWSPWallet(std::string strWalletFile);
 
     void AddToMintPool(const std::pair <uint256, uint32_t> &pMint, bool fVerbose);
 
@@ -31,7 +31,7 @@ public:
 
     void SyncWithChain(bool fGenerateMintPool = true);
 
-    void GenerateDeterministicZPIV(libzerocoin::CoinDenomination denom, libzerocoin::PrivateCoin &coin,
+    void GenerateDeterministicZWSP(libzerocoin::CoinDenomination denom, libzerocoin::PrivateCoin &coin,
                                    CDeterministicMint &dMint, bool fGenerateOnly = false);
 
     void GenerateMint(const uint32_t &nCount, const libzerocoin::CoinDenomination denom, libzerocoin::PrivateCoin &coin,
@@ -56,10 +56,10 @@ public:
 
     void Lock();
 
-    void SeedToZPIV(const uint512 &seed, CBigNum &bnValue, CBigNum &bnSerial, CBigNum &bnRandomness, CKey &key);
+    void SeedToZWSP(const uint512 &seed, CBigNum &bnValue, CBigNum &bnSerial, CBigNum &bnRandomness, CKey &key);
 
 private:
     uint512 GetZerocoinSeed(uint32_t n);
 };
 
-#endif //PIVX_ZPIVWALLET_H
+#endif //WISPR_ZWSPWALLET_H

@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef PIVX_STAKEINPUT_H
-#define PIVX_STAKEINPUT_H
+#ifndef WISPR_STAKEINPUT_H
+#define WISPR_STAKEINPUT_H
 
 class CKeyStore;
 
@@ -30,13 +30,13 @@ public:
 
     virtual bool GetModifier(uint64_t &nStakeModifier) = 0;
 
-    virtual bool IsZPIV() = 0;
+    virtual bool IsZWSP() = 0;
 
     virtual CDataStream GetUniqueness() = 0;
 };
 
 
-// zPIVStake can take two forms
+// zWSPStake can take two forms
 // 1) the stake candidate, which is a zcmint that is attempted to be staked
 // 2) a staked zpiv, which is a zcspend that has successfully staked
 class CZPivStake : public CStakeInput {
@@ -72,7 +72,7 @@ public:
 
     bool MarkSpent(CWallet *pwallet, const uint256 &txid);
 
-    bool IsZPIV() override { return true; }
+    bool IsZWSP() override { return true; }
 
     int GetChecksumHeightFromMint();
 
@@ -106,8 +106,8 @@ public:
 
     bool CreateTxOuts(CWallet *pwallet, vector <CTxOut> &vout, CAmount nTotal) override;
 
-    bool IsZPIV() override { return false; }
+    bool IsZWSP() override { return false; }
 };
 
 
-#endif //PIVX_STAKEINPUT_H
+#endif //WISPR_STAKEINPUT_H

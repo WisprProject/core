@@ -2,15 +2,15 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef PIVX_ZPIVTRACKER_H
-#define PIVX_ZPIVTRACKER_H
+#ifndef WISPR_ZWSPTRACKER_H
+#define WISPR_ZWSPTRACKER_H
 
 #include "primitives/zerocoin.h"
 #include <list>
 
 class CDeterministicMint;
 
-class CzPIVTracker {
+class CzWSPTracker {
 private:
     bool fInitialized;
     std::string strWalletFile;
@@ -19,9 +19,9 @@ private:
     bool UpdateStatusInternal(const std::set <uint256> &setMempool, CMintMeta &mint);
 
 public:
-    CzPIVTracker(std::string strWalletFile);
+    CzWSPTracker(std::string strWalletFile);
 
-    ~CzPIVTracker();
+    ~CzWSPTracker();
 
     void Add(const CDeterministicMint &dMint, bool isNew = false, bool isArchived = false);
 
@@ -74,4 +74,4 @@ public:
     void Clear();
 };
 
-#endif //PIVX_ZPIVTRACKER_H
+#endif //WISPR_ZWSPTRACKER_H

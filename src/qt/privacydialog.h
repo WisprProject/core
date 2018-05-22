@@ -85,7 +85,7 @@ private:
 
     bool updateLabel(const QString &address);
 
-    void sendzPIV();
+    void sendzWSP();
 
 private
     slots:
@@ -112,13 +112,13 @@ private
 //    void coinControlClipboardLowOutput();
 //    void coinControlClipboardChange();
 
-    void on_pushButtonMintzPIV_clicked();
+    void on_pushButtonMintzWSP_clicked();
 
     void on_pushButtonMintReset_clicked();
 
     void on_pushButtonSpentReset_clicked();
 
-    void on_pushButtonSpendzPIV_clicked();
+    void on_pushButtonSpendzWSP_clicked();
 
     void on_pushButtonZPivControl_clicked();
 

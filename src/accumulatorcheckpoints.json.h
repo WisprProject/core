@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef PIVX_ACCUMULATORCHECKPOINTS_JSON_H
-#define PIVX_ACCUMULATORCHECKPOINTS_JSON_H
+#ifndef WISPR_ACCUMULATORCHECKPOINTS_JSON_H
+#define WISPR_ACCUMULATORCHECKPOINTS_JSON_H
 
 #include <string>
 
@@ -476,4 +476,4 @@ std::string GetRegTestCheckpoints() {
     return strRegTestCheckpoints;
 }
 
-#endif //PIVX_ACCUMULATORCHECKPOINTS_JSON_H
+#endif //WISPR_ACCUMULATORCHECKPOINTS_JSON_H

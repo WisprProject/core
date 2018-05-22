@@ -1,9 +1,9 @@
 /* src/config/wispr-config.h.  Generated from wispr-config.h.in by configure.  */
 /* src/config/wispr-config.h.in.  Generated from configure.ac by autoheader.  */
 
-#ifndef PIV_CONFIG_H
+#ifndef WSP_CONFIG_H
 
-#define PIV_CONFIG_H
+#define WSP_CONFIG_H
 
 /* Define if building universal (internal helper macro) */
 /* #undef AC_APPLE_UNIVERSAL_BUILD */
@@ -346,4 +346,4 @@
 /* Define for large files, on AIX-style hosts. */
 /* #undef _LARGE_FILES */
 
-#endif //PIV_CONFIG_H
+#endif //WSP_CONFIG_H

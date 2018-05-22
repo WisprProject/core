@@ -91,7 +91,7 @@ namespace libzerocoin {
     }
 
 // return the highest denomination that is less than or equal to the amount given
-// use case: converting PIV to zPIV without user worrying about denomination math themselves
+// use case: converting WSP to zWSP without user worrying about denomination math themselves
     CoinDenomination AmountToClosestDenomination(CAmount nAmount, CAmount &nRemaining) {
         if (nAmount < 1 * COIN)
             return ZQ_ERROR;

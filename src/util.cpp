@@ -103,7 +103,7 @@ namespace boost {
 
 using namespace std;
 
-// PIVX only features
+// WISPR only features
 // Masternode
 bool fMasterNode = false;
 string strMasterNodePrivKey = "";
@@ -408,13 +408,13 @@ void PrintExceptionContinue(std::exception *pex, const char *pszThread) {
 
 boost::filesystem::path GetDefaultDataDir() {
     namespace fs = boost::filesystem;
-// Windows < Vista: C:\Documents and Settings\Username\Application Data\PIVX
-// Windows >= Vista: C:\Users\Username\AppData\Roaming\PIVX
-// Mac: ~/Library/Application Support/PIVX
+// Windows < Vista: C:\Documents and Settings\Username\Application Data\WISPR
+// Windows >= Vista: C:\Users\Username\AppData\Roaming\WISPR
+// Mac: ~/Library/Application Support/WISPR
 // Unix: ~/.wispr
 #ifdef WIN32
     // Windows
-    return GetSpecialFolderPath(CSIDL_APPDATA) / "PIVX";
+    return GetSpecialFolderPath(CSIDL_APPDATA) / "WISPR";
 #else
     fs::path pathRet;
     char *pszHome = getenv("HOME");
@@ -426,7 +426,7 @@ boost::filesystem::path GetDefaultDataDir() {
     // Mac
     pathRet /= "Library/Application Support";
     TryCreateDirectory(pathRet);
-    return pathRet / "PIVX";
+    return pathRet / "WISPR";
 #else
     // Unix
     return pathRet / ".wispr";

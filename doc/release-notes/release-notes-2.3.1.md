@@ -1,4 +1,4 @@
-PIVX Core version 2.3.1 is now available from:
+WISPR Core version 2.3.1 is now available from:
 
   <https://github.com/WisprProject/core/releases>
 
@@ -17,7 +17,7 @@ If you are running an older version, shut it down. Wait until it has completely 
 Compatibility
 ==============
 
-PIVX Core is extensively tested on multiple operating systems using
+WISPR Core is extensively tested on multiple operating systems using
 the Linux kernel, macOS 10.8+, and Windows Vista and later.
 
 Microsoft ended support for Windows XP on [April 8th, 2014](https://www.microsoft.com/en-us/WindowsForBusiness/end-of-xp-support),
@@ -25,7 +25,7 @@ No attempt is made to prevent installing or running the software on Windows XP, 
 can still do so at your own risk but be aware that there are known instabilities and issues.
 Please do not report issues about Windows XP to the issue tracker.
 
-PIVX Core should also work on most other Unix-like systems but is not
+WISPR Core should also work on most other Unix-like systems but is not
 frequently tested on them.
 
 Notable Changes
@@ -159,7 +159,7 @@ Result:
     "BlockEnd": n,                (numeric) Proposal ending block
     "TotalPaymentCount": n,       (numeric) Number of payments
     "RemainingPaymentCount": n,   (numeric) Number of remaining payments
-    "PaymentAddress": "xxxx",     (string) PIVX address of payment
+    "PaymentAddress": "xxxx",     (string) WISPR address of payment
     "Ratio": x.xxx,               (numeric) Ratio of yeas vs nays
     "Yeas": n,                    (numeric) Number of yea votes
     "Nays": n,                    (numeric) Number of nay votes

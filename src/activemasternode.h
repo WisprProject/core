@@ -34,7 +34,7 @@ private:
     CreateBroadcast(CTxIn vin, CService service, CKey key, CPubKey pubKey, CKey keyMasternode, CPubKey pubKeyMasternode,
                     std::string &errorMessage, CMasternodeBroadcast &mnb);
 
-    /// Get 10000 PIV input that can be used for the Masternode
+    /// Get 10000 WSP input that can be used for the Masternode
     bool
     GetMasterNodeVin(CTxIn &vin, CPubKey &pubkey, CKey &secretKey, std::string strTxHash, std::string strOutputIndex);
 
@@ -65,7 +65,7 @@ public:
     bool CreateBroadcast(std::string strService, std::string strKey, std::string strTxHash, std::string strOutputIndex,
                          std::string &errorMessage, CMasternodeBroadcast &mnb, bool fOffline = false);
 
-    /// Get 10000 PIV input that can be used for the Masternode
+    /// Get 10000 WSP input that can be used for the Masternode
     bool GetMasterNodeVin(CTxIn &vin, CPubKey &pubkey, CKey &secretKey);
 
     vector <COutput> SelectCoinsMasternode();

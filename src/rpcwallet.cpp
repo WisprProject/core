@@ -157,7 +157,7 @@ UniValue getaccountaddress(const UniValue &params, bool fHelp) {
     if (fHelp || params.size() != 1)
         throw runtime_error(
                 "getaccountaddress \"account\"\n"
-                "\nReturns the current PIVX address for receiving payments to this account.\n"
+                "\nReturns the current WISPR address for receiving payments to this account.\n"
 
                 "\nArguments:\n"
                 "1. \"account\"       (string, required) The account name for the address. It can also be set to the empty string \"\" to represent the default account. The account does not need to exist, it will be created and a new address created  if there is no account by the given name.\n"
@@ -186,7 +186,7 @@ UniValue getrawchangeaddress(const UniValue &params, bool fHelp) {
     if (fHelp || params.size() > 1)
         throw runtime_error(
                 "getrawchangeaddress\n"
-                "\nReturns a new PIVX address, for receiving change.\n"
+                "\nReturns a new WISPR address, for receiving change.\n"
                 "This is for use with raw transactions, NOT normal use.\n"
 
                 "\nResult:\n"
@@ -231,7 +231,7 @@ UniValue setaccount(const UniValue &params, bool fHelp) {
 
     CBitcoinAddress address(params[0].get_str());
     if (!address.IsValid())
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid PIVX address");
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid WISPR address");
 
 
     string strAccount;
@@ -274,7 +274,7 @@ UniValue getaccount(const UniValue &params, bool fHelp) {
 
     CBitcoinAddress address(params[0].get_str());
     if (!address.IsValid())
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid PIVX address");
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid WISPR address");
 
     string strAccount;
     map<CTxDestination, CAddressBookData>::iterator mi = pwalletMain->mapAddressBook.find(address.Get());
@@ -334,7 +334,7 @@ void SendMoney(const CTxDestination &address, CAmount nValue, CWalletTx &wtxNew,
         throw JSONRPCError(RPC_WALLET_ERROR, strError);
     }
 
-    // Parse PIVX address
+    // Parse WISPR address
     CScript scriptPubKey = GetScriptForDestination(address);
 
     // Create and send the transaction
@@ -363,7 +363,7 @@ UniValue sendtoaddress(const UniValue &params, bool fHelp) {
 
                                             "\nArguments:\n"
                                             "1. \"wispraddress\"  (string, required) The wispr address to send to.\n"
-                                            "2. \"amount\"      (numeric, required) The amount in PIV to send. eg 0.1\n"
+                                            "2. \"amount\"      (numeric, required) The amount in WSP to send. eg 0.1\n"
                                             "3. \"comment\"     (string, optional) A comment used to store what the transaction is for. \n"
                                             "                             This is not part of the transaction, just kept in your wallet.\n"
                                             "4. \"comment-to\"  (string, optional) A comment to store the name of the person or organization \n"
@@ -384,7 +384,7 @@ UniValue sendtoaddress(const UniValue &params, bool fHelp) {
 
     CBitcoinAddress address(params[0].get_str());
     if (!address.IsValid())
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid PIVX address");
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid WISPR address");
 
     // Amount
     CAmount nAmount = AmountFromValue(params[1]);
@@ -412,7 +412,7 @@ UniValue sendtoaddressix(const UniValue &params, bool fHelp) {
 
                                             "\nArguments:\n"
                                             "1. \"wispraddress\"  (string, required) The wispr address to send to.\n"
-                                            "2. \"amount\"      (numeric, required) The amount in PIV to send. eg 0.1\n"
+                                            "2. \"amount\"      (numeric, required) The amount in WSP to send. eg 0.1\n"
                                             "3. \"comment\"     (string, optional) A comment used to store what the transaction is for. \n"
                                             "                             This is not part of the transaction, just kept in your wallet.\n"
                                             "4. \"comment-to\"  (string, optional) A comment to store the name of the person or organization \n"
@@ -433,7 +433,7 @@ UniValue sendtoaddressix(const UniValue &params, bool fHelp) {
 
     CBitcoinAddress address(params[0].get_str());
     if (!address.IsValid())
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid PIVX address");
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid WISPR address");
 
     // Amount
     CAmount nAmount = AmountFromValue(params[1]);
@@ -465,7 +465,7 @@ UniValue listaddressgroupings(const UniValue &params, bool fHelp) {
                 "  [\n"
                 "    [\n"
                 "      \"wispraddress\",     (string) The wispr address\n"
-                "      amount,                 (numeric) The amount in PIV\n"
+                "      amount,                 (numeric) The amount in WSP\n"
                 "      \"account\"             (string, optional) The account\n"
                 "    ]\n"
                 "    ,...\n"
@@ -566,7 +566,7 @@ UniValue getreceivedbyaddress(const UniValue &params, bool fHelp) {
                 "2. minconf             (numeric, optional, default=1) Only include transactions confirmed at least this many times.\n"
 
                 "\nResult:\n"
-                "amount   (numeric) The total amount in PIV received at this address.\n"
+                "amount   (numeric) The total amount in WSP received at this address.\n"
 
                 "\nExamples:\n"
                 "\nThe amount from transactions with at least 1 confirmation\n" +
@@ -583,7 +583,7 @@ UniValue getreceivedbyaddress(const UniValue &params, bool fHelp) {
     // wispr address
     CBitcoinAddress address = CBitcoinAddress(params[0].get_str());
     if (!address.IsValid())
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid PIVX address");
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid WISPR address");
     CScript scriptPubKey = GetScriptForDestination(address.Get());
     if (!IsMine(*pwalletMain, scriptPubKey))
         return (double) 0.0;
@@ -623,7 +623,7 @@ UniValue getreceivedbyaccount(const UniValue &params, bool fHelp) {
                 "2. minconf          (numeric, optional, default=1) Only include transactions confirmed at least this many times.\n"
 
                 "\nResult:\n"
-                "amount              (numeric) The total amount in PIV received for this account.\n"
+                "amount              (numeric) The total amount in WSP received for this account.\n"
 
                 "\nExamples:\n"
                 "\nAmount received by the default account with at least 1 confirmation\n" +
@@ -713,7 +713,7 @@ UniValue getbalance(const UniValue &params, bool fHelp) {
                 "3. includeWatchonly (bool, optional, default=false) Also include balance in watchonly addresses (see 'importaddress')\n"
 
                 "\nResult:\n"
-                "amount              (numeric) The total amount in PIV received for this account.\n"
+                "amount              (numeric) The total amount in WSP received for this account.\n"
 
                 "\nExamples:\n"
                 "\nThe total amount in the server across all accounts\n" +
@@ -804,9 +804,9 @@ UniValue movecmd(const UniValue &params, bool fHelp) {
                 "true|false           (boolean) true if successfull.\n"
 
                 "\nExamples:\n"
-                "\nMove 0.01 PIV from the default account to the account named tabby\n" +
+                "\nMove 0.01 WSP from the default account to the account named tabby\n" +
                 HelpExampleCli("move", "\"\" \"tabby\" 0.01") +
-                "\nMove 0.01 PIV from timotei to akiko with a comment and funds have 6 confirmations\n" +
+                "\nMove 0.01 WSP from timotei to akiko with a comment and funds have 6 confirmations\n" +
                 HelpExampleCli("move", "\"timotei\" \"akiko\" 0.01 6 \"happy birthday!\"") +
                 "\nAs a json rpc call\n" +
                 HelpExampleRpc("move", "\"timotei\", \"akiko\", 0.01, 6, \"happy birthday!\""));
@@ -867,7 +867,7 @@ UniValue sendfrom(const UniValue &params, bool fHelp) {
                                             "\nArguments:\n"
                                             "1. \"fromaccount\"       (string, required) The name of the account to send funds from. May be the default account using \"\".\n"
                                             "2. \"towispraddress\"  (string, required) The wispr address to send funds to.\n"
-                                            "3. amount                (numeric, required) The amount in PIV. (transaction fee is added on top).\n"
+                                            "3. amount                (numeric, required) The amount in WSP. (transaction fee is added on top).\n"
                                             "4. minconf               (numeric, optional, default=1) Only use funds with at least this many confirmations.\n"
                                             "5. \"comment\"           (string, optional) A comment used to store what the transaction is for. \n"
                                             "                                     This is not part of the transaction, just kept in your wallet.\n"
@@ -879,7 +879,7 @@ UniValue sendfrom(const UniValue &params, bool fHelp) {
                                             "\"transactionid\"        (string) The transaction id.\n"
 
                                             "\nExamples:\n"
-                                            "\nSend 0.01 PIV from the default account to the address, must have at least 1 confirmation\n" +
+                                            "\nSend 0.01 WSP from the default account to the address, must have at least 1 confirmation\n" +
                 HelpExampleCli("sendfrom", "\"\" \"DMJRSsuU9zfyrvxVaAEFQqK4MxZg6vgeS6\" 0.01") +
                 "\nSend 0.01 from the tabby account to the given address, funds must have at least 6 confirmations\n" +
                 HelpExampleCli("sendfrom",
@@ -893,7 +893,7 @@ UniValue sendfrom(const UniValue &params, bool fHelp) {
     string strAccount = AccountFromValue(params[0]);
     CBitcoinAddress address(params[1].get_str());
     if (!address.IsValid())
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid PIVX address");
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid WISPR address");
     CAmount nAmount = AmountFromValue(params[2]);
     int nMinDepth = 1;
     if (params.size() > 3)
@@ -930,7 +930,7 @@ UniValue sendmany(const UniValue &params, bool fHelp) {
                                             "1. \"fromaccount\"         (string, required) The account to send the funds from, can be \"\" for the default account\n"
                                             "2. \"amounts\"             (string, required) A json object with addresses and amounts\n"
                                             "    {\n"
-                                            "      \"address\":amount   (numeric) The wispr address is the key, the numeric amount in PIV is the value\n"
+                                            "      \"address\":amount   (numeric) The wispr address is the key, the numeric amount in WSP is the value\n"
                                             "      ,...\n"
                                             "    }\n"
                                             "3. minconf                 (numeric, optional, default=1) Only use the balance confirmed at least this many times.\n"
@@ -973,7 +973,7 @@ UniValue sendmany(const UniValue &params, bool fHelp) {
     const string &name_, keys) {
         CBitcoinAddress address(name_);
         if (!address.IsValid())
-            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, string("Invalid PIVX address: ") + name_);
+            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, string("Invalid WISPR address: ") + name_);
 
         if (setAddress.count(address))
             throw JSONRPCError(RPC_INVALID_PARAMETER, string("Invalid parameter, duplicated address: ") + name_);
@@ -1014,7 +1014,7 @@ UniValue addmultisigaddress(const UniValue &params, bool fHelp) {
         throw runtime_error(
                 "addmultisigaddress nrequired [\"key\",...] ( \"account\" )\n"
                 "\nAdd a nrequired-to-sign multisignature address to the wallet.\n"
-                "Each key is a PIVX address or hex-encoded public key.\n"
+                "Each key is a WISPR address or hex-encoded public key.\n"
                 "If 'account' is specified, assign address to that account.\n"
 
                 "\nArguments:\n"
@@ -1203,7 +1203,7 @@ UniValue listreceivedbyaddress(const UniValue &params, bool fHelp) {
                 "    \"involvesWatchonly\" : \"true\",    (bool) Only returned if imported addresses were involved in transaction\n"
                 "    \"address\" : \"receivingaddress\",  (string) The receiving address\n"
                 "    \"account\" : \"accountname\",       (string) The account of the receiving address. The default account is \"\".\n"
-                "    \"amount\" : x.xxx,                  (numeric) The total amount in PIV received by the address\n"
+                "    \"amount\" : x.xxx,                  (numeric) The total amount in WSP received by the address\n"
                 "    \"confirmations\" : n                (numeric) The number of confirmations of the most recent transaction included\n"
                 "    \"bcconfirmations\" : n              (numeric) The number of blockchain confirmations of the most recent transaction included\n"
                 "  }\n"
@@ -1361,11 +1361,11 @@ UniValue listtransactions(const UniValue &params, bool fHelp) {
                 "                                                transaction between accounts, and not associated with an address,\n"
                 "                                                transaction id or block. 'send' and 'receive' transactions are \n"
                 "                                                associated with an address, transaction id and block details\n"
-                "    \"amount\": x.xxx,          (numeric) The amount in PIV. This is negative for the 'send' category, and for the\n"
+                "    \"amount\": x.xxx,          (numeric) The amount in WSP. This is negative for the 'send' category, and for the\n"
                 "                                         'move' category for moves outbound. It is positive for the 'receive' category,\n"
                 "                                         and for the 'move' category for inbound funds.\n"
                 "    \"vout\" : n,               (numeric) the vout value\n"
-                "    \"fee\": x.xxx,             (numeric) The amount of the fee in PIV. This is negative and only available for the \n"
+                "    \"fee\": x.xxx,             (numeric) The amount of the fee in WSP. This is negative and only available for the \n"
                 "                                         'send' category of transactions.\n"
                 "    \"confirmations\": n,       (numeric) The number of confirmations for the transaction. Available for 'send' and \n"
                 "                                         'receive' category of transactions.\n"
@@ -1556,10 +1556,10 @@ UniValue listsinceblock(const UniValue &params, bool fHelp) {
                 "    \"account\":\"accountname\",       (string) The account name associated with the transaction. Will be \"\" for the default account.\n"
                 "    \"address\":\"wispraddress\",    (string) The wispr address of the transaction. Not present for move transactions (category = move).\n"
                 "    \"category\":\"send|receive\",     (string) The transaction category. 'send' has negative amounts, 'receive' has positive amounts.\n"
-                "    \"amount\": x.xxx,          (numeric) The amount in PIV. This is negative for the 'send' category, and for the 'move' category for moves \n"
+                "    \"amount\": x.xxx,          (numeric) The amount in WSP. This is negative for the 'send' category, and for the 'move' category for moves \n"
                 "                                          outbound. It is positive for the 'receive' category, and for the 'move' category for inbound funds.\n"
                 "    \"vout\" : n,               (numeric) the vout value\n"
-                "    \"fee\": x.xxx,             (numeric) The amount of the fee in PIV. This is negative and only available for the 'send' category of transactions.\n"
+                "    \"fee\": x.xxx,             (numeric) The amount of the fee in WSP. This is negative and only available for the 'send' category of transactions.\n"
                 "    \"confirmations\": n,       (numeric) The number of confirmations for the transaction. Available for 'send' and 'receive' category of transactions.\n"
                 "    \"bcconfirmations\" : n,    (numeric) The number of blockchain confirmations for the transaction. Available for 'send' and 'receive' category of transactions.\n"
                 "    \"blockhash\": \"hashvalue\",     (string) The block hash containing the transaction. Available for 'send' and 'receive' category of transactions.\n"
@@ -1641,7 +1641,7 @@ UniValue gettransaction(const UniValue &params, bool fHelp) {
 
                 "\nResult:\n"
                 "{\n"
-                "  \"amount\" : x.xxx,        (numeric) The transaction amount in PIV\n"
+                "  \"amount\" : x.xxx,        (numeric) The transaction amount in WSP\n"
                 "  \"confirmations\" : n,     (numeric) The number of confirmations\n"
                 "  \"bcconfirmations\" : n,   (numeric) The number of blockchain confirmations\n"
                 "  \"blockhash\" : \"hash\",  (string) The block hash\n"
@@ -1655,7 +1655,7 @@ UniValue gettransaction(const UniValue &params, bool fHelp) {
                 "      \"account\" : \"accountname\",  (string) The account name involved in the transaction, can be \"\" for the default account.\n"
                 "      \"address\" : \"wispraddress\",   (string) The wispr address involved in the transaction\n"
                 "      \"category\" : \"send|receive\",    (string) The category, either 'send' or 'receive'\n"
-                "      \"amount\" : x.xxx                  (numeric) The amount in PIV\n"
+                "      \"amount\" : x.xxx                  (numeric) The amount in WSP\n"
                 "      \"vout\" : n,                       (numeric) the vout value\n"
                 "    }\n"
                 "    ,...\n"
@@ -1775,7 +1775,7 @@ UniValue walletpassphrase(const UniValue &params, bool fHelp) {
         throw runtime_error(
                 "walletpassphrase \"passphrase\" timeout ( anonymizeonly )\n"
                 "\nStores the wallet decryption key in memory for 'timeout' seconds.\n"
-                "This is needed prior to performing transactions related to private keys such as sending PIVs\n"
+                "This is needed prior to performing transactions related to private keys such as sending WSPs\n"
 
                 "\nArguments:\n"
                 "1. \"passphrase\"     (string, required) The wallet passphrase\n"
@@ -1933,7 +1933,7 @@ UniValue encryptwallet(const UniValue &params, bool fHelp) {
                 "\nExamples:\n"
                 "\nEncrypt you wallet\n" +
                 HelpExampleCli("encryptwallet", "\"my pass phrase\"") +
-                "\nNow set the passphrase to use the wallet, such as for signing or sending PIVs\n" +
+                "\nNow set the passphrase to use the wallet, such as for signing or sending WSPs\n" +
                 HelpExampleCli("walletpassphrase", "\"my pass phrase\"") +
                 "\nNow we can so something like sign\n" +
                 HelpExampleCli("signmessage", "\"wispraddress\" \"test message\"") +
@@ -1977,7 +1977,7 @@ UniValue lockunspent(const UniValue &params, bool fHelp) {
                 "lockunspent unlock [{\"txid\":\"txid\",\"vout\":n},...]\n"
                 "\nUpdates list of temporarily unspendable outputs.\n"
                 "Temporarily lock (unlock=false) or unlock (unlock=true) specified transaction outputs.\n"
-                "A locked transaction output will not be chosen by automatic coin selection, when spending PIVs.\n"
+                "A locked transaction output will not be chosen by automatic coin selection, when spending WSPs.\n"
                 "Locks are stored in memory only. Nodes start with zero locked outputs, and the locked output list\n"
                 "is always cleared (by virtue of process exit) when a node stops or fails.\n"
                 "Also see the listunspent call\n"
@@ -2110,7 +2110,7 @@ UniValue settxfee(const UniValue &params, bool fHelp) {
                 "\nSet the transaction fee per kB.\n"
 
                 "\nArguments:\n"
-                "1. amount         (numeric, required) The transaction fee in PIV/kB rounded to the nearest 0.00000001\n"
+                "1. amount         (numeric, required) The transaction fee in WSP/kB rounded to the nearest 0.00000001\n"
 
                 "\nResult\n"
                 "true|false        (boolean) Returns true if successful\n"
@@ -2137,7 +2137,7 @@ UniValue getwalletinfo(const UniValue &params, bool fHelp) {
                 "\nResult:\n"
                 "{\n"
                 "  \"walletversion\": xxxxx,     (numeric) the wallet version\n"
-                "  \"balance\": xxxxxxx,         (numeric) the total PIV balance of the wallet\n"
+                "  \"balance\": xxxxxxx,         (numeric) the total WSP balance of the wallet\n"
                 "  \"txcount\": xxxxxxx,         (numeric) the total number of transactions in the wallet\n"
                 "  \"keypoololdest\": xxxxxx,    (numeric) the timestamp (seconds since GMT epoch) of the oldest pre-generated key in the key pool\n"
                 "  \"keypoolsize\": xxxx,        (numeric) how many new keys are pre-generated\n"
@@ -2273,7 +2273,7 @@ UniValue autocombinerewards(const UniValue &params, bool fHelp) {
     if (fHelp || params.size() < 1 || (fEnable && params.size() != 2) || params.size() > 2)
         throw runtime_error(
                 "autocombinerewards enable ( threshold )\n"
-                "\nWallet will automatically monitor for any coins with value below the threshold amount, and combine them if they reside with the same PIVX address\n"
+                "\nWallet will automatically monitor for any coins with value below the threshold amount, and combine them if they reside with the same WISPR address\n"
                 "When autocombinerewards runs it will create a transaction, and therefore will be subject to transaction fees.\n"
 
                 "\nArguments:\n"
@@ -2482,7 +2482,7 @@ UniValue multisend(const UniValue &params, bool fHelp) {
                 "The MultiSend transaction is sent when the staked coins mature (100 confirmations)\n"
                 "****************************************************************\n"
                 "TO CREATE OR ADD TO THE MULTISEND VECTOR:\n"
-                "multisend <PIVX Address> <percent>\n"
+                "multisend <WISPR Address> <percent>\n"
                 "This will add a new address to the MultiSend vector\n"
                 "Percent is a whole number 1 to 100.\n"
                 "****************************************************************\n"
@@ -2501,7 +2501,7 @@ UniValue multisend(const UniValue &params, bool fHelp) {
     string strAddress = params[0].get_str();
     CBitcoinAddress address(strAddress);
     if (!address.IsValid())
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid PIV address");
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid WSP address");
     if (boost::lexical_cast<int>(params[1].get_str()) < 0)
         throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, expected valid percentage");
     if (pwalletMain->IsLocked())
@@ -2548,11 +2548,11 @@ UniValue getzerocoinbalance(const UniValue &params, bool fHelp) {
     if (fHelp || params.size() != 0)
         throw runtime_error(
                 "getzerocoinbalance\n"
-                "\nReturn the wallet's total zPIV balance.\n" +
+                "\nReturn the wallet's total zWSP balance.\n" +
                 HelpRequiringPassphrase() + "\n"
 
                                             "\nResult:\n"
-                                            "amount         (numeric) Total zPIV balance.\n"
+                                            "amount         (numeric) Total zWSP balance.\n"
 
                                             "\nExamples:\n" +
                 HelpExampleCli("getzerocoinbalance", "") + HelpExampleRpc("getzerocoinbalance", ""));
@@ -2575,7 +2575,7 @@ UniValue listmintedzerocoins(const UniValue &params, bool fHelp) {
     if (fHelp || params.size() != 0)
         throw runtime_error(
                 "listmintedzerocoins\n"
-                "\nList all zPIV mints in the wallet.\n" +
+                "\nList all zWSP mints in the wallet.\n" +
                 HelpRequiringPassphrase() + "\n"
 
                                             "\nResult:\n"
@@ -2649,7 +2649,7 @@ UniValue listspentzerocoins(const UniValue &params, bool fHelp) {
     if (fHelp || params.size() != 0)
         throw runtime_error(
                 "listspentzerocoins\n"
-                "\nList all the spent zPIV mints in the wallet.\n" +
+                "\nList all the spent zWSP mints in the wallet.\n" +
                 HelpRequiringPassphrase() + "\n"
 
                                             "\nResult:\n"
@@ -2680,11 +2680,11 @@ UniValue mintzerocoin(const UniValue &params, bool fHelp) {
     if (fHelp || params.size() < 1 || params.size() > 2)
         throw runtime_error(
                 "mintzerocoin amount ( utxos )\n"
-                "\nMint the specified zPIV amount\n" +
+                "\nMint the specified zWSP amount\n" +
                 HelpRequiringPassphrase() + "\n"
 
                                             "\nArguments:\n"
-                                            "1. amount      (numeric, required) Enter an amount of Piv to convert to zPIV\n"
+                                            "1. amount      (numeric, required) Enter an amount of Piv to convert to zWSP\n"
                                             "2. utxos       (string, optional) A json array of objects.\n"
                                             "                   Each object needs the txid (string) and vout (numeric)\n"
                                             "  [\n"
@@ -2728,7 +2728,7 @@ UniValue mintzerocoin(const UniValue &params, bool fHelp) {
 
     int64_t nTime = GetTimeMillis();
     if (GetAdjustedTime() > GetSporkValue(SPORK_16_ZEROCOIN_MAINTENANCE_MODE))
-        throw JSONRPCError(RPC_WALLET_ERROR, "zPIV is currently disabled due to maintenance.");
+        throw JSONRPCError(RPC_WALLET_ERROR, "zWSP is currently disabled due to maintenance.");
 
     EnsureWalletIsUnlocked(true);
 
@@ -2788,7 +2788,7 @@ UniValue spendzerocoin(const UniValue &params, bool fHelp) {
     if (fHelp || params.size() > 5 || params.size() < 4)
         throw runtime_error(
                 "spendzerocoin amount mintchange minimizechange securitylevel ( \"address\" )\n"
-                "\nSpend zPIV to a PIV address.\n" +
+                "\nSpend zWSP to a WSP address.\n" +
                 HelpRequiringPassphrase() + "\n"
 
                                             "\nArguments:\n"
@@ -2819,8 +2819,8 @@ UniValue spendzerocoin(const UniValue &params, bool fHelp) {
                                             "  ],\n"
                                             "  \"outputs\": [                 (array) JSON array of output objects.\n"
                                             "    {\n"
-                                            "      \"value\": amount,         (numeric) Value in PIV.\n"
-                                            "      \"address\": \"xxx\"         (string) PIV address or \"zerocoinmint\" for reminted change.\n"
+                                            "      \"value\": amount,         (numeric) Value in WSP.\n"
+                                            "      \"address\": \"xxx\"         (string) WSP address or \"zerocoinmint\" for reminted change.\n"
                                             "    }\n"
                                             "    ,...\n"
                                             "  ]\n"
@@ -2833,13 +2833,13 @@ UniValue spendzerocoin(const UniValue &params, bool fHelp) {
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
     if (GetAdjustedTime() > GetSporkValue(SPORK_16_ZEROCOIN_MAINTENANCE_MODE))
-        throw JSONRPCError(RPC_WALLET_ERROR, "zPIV is currently disabled due to maintenance.");
+        throw JSONRPCError(RPC_WALLET_ERROR, "zWSP is currently disabled due to maintenance.");
 
     EnsureWalletIsUnlocked();
 
     int64_t nTimeStart = GetTimeMillis();
     CAmount nAmount = AmountFromValue(params[0]);   // Spending amount
-    bool fMintChange = params[1].get_bool();        // Mint change to zPIV
+    bool fMintChange = params[1].get_bool();        // Mint change to zWSP
     bool fMinimizeChange = params[2].get_bool();    // Minimize change
     int nSecurityLevel = params[3].get_int();       // Security level
 
@@ -2849,7 +2849,7 @@ UniValue spendzerocoin(const UniValue &params, bool fHelp) {
         // to avoid type confusion from the JSON interpreter
         address = CBitcoinAddress(params[4].get_str());
         if (!address.IsValid())
-            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid PIVX address");
+            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid WISPR address");
     }
 
     CWalletTx wtx;
@@ -2938,7 +2938,7 @@ UniValue resetmintzerocoin(const UniValue &params, bool fHelp) {
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
     CWalletDB walletdb(pwalletMain->strWalletFile);
-    CzPIVTracker *zpivTracker = pwalletMain->zpivTracker.get();
+    CzWSPTracker *zpivTracker = pwalletMain->zpivTracker.get();
     set <CMintMeta> setMints = zpivTracker->ListMints(false, false, true);
     vector <CMintMeta> vMintsToFind(setMints.begin(), setMints.end());
     vector <CMintMeta> vMintsMissing;
@@ -2990,7 +2990,7 @@ UniValue resetspentzerocoin(const UniValue &params, bool fHelp) {
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
     CWalletDB walletdb(pwalletMain->strWalletFile);
-    CzPIVTracker *zpivTracker = pwalletMain->zpivTracker.get();
+    CzWSPTracker *zpivTracker = pwalletMain->zpivTracker.get();
     set <CMintMeta> setMints = zpivTracker->ListMints(false, false, false);
     list <CZerocoinSpend> listSpends = walletdb.ListSpentCoins();
     list <CZerocoinSpend> listUnconfirmedSpends;
@@ -3094,7 +3094,7 @@ UniValue exportzerocoins(const UniValue &params, bool fHelp) {
 
                                             "\nArguments:\n"
                                             "1. \"include_spent\"        (bool, required) Include mints that have already been spent\n"
-                                            "2. \"denomination\"         (integer, optional) Export a specific denomination of zPIV\n"
+                                            "2. \"denomination\"         (integer, optional) Export a specific denomination of zWSP\n"
 
                                             "\nResult:\n"
                                             "[                   (array of json object)\n"
@@ -3106,8 +3106,8 @@ UniValue exportzerocoins(const UniValue &params, bool fHelp) {
                                             "    \"t\": \"txid\",    (string) The txid that the coin was minted in\n"
                                             "    \"h\": n,         (numeric) The height the tx was added to the blockchain\n"
                                             "    \"u\": used,      (boolean) Whether the mint has been spent\n"
-                                            "    \"v\": version,   (numeric) The version of the zPIV\n"
-                                            "    \"k\": \"privkey\"  (string) The zPIV private key (V2+ zPIV only)\n"
+                                            "    \"v\": version,   (numeric) The version of the zWSP\n"
+                                            "    \"k\": \"privkey\"  (string) The zWSP private key (V2+ zWSP only)\n"
                                             "  }\n"
                                             "  ,...\n"
                                             "]\n"
@@ -3126,7 +3126,7 @@ UniValue exportzerocoins(const UniValue &params, bool fHelp) {
     if (params.size() == 2)
         denomination = libzerocoin::IntToZerocoinDenomination(params[1].get_int());
 
-    CzPIVTracker *zpivTracker = pwalletMain->zpivTracker.get();
+    CzWSPTracker *zpivTracker = pwalletMain->zpivTracker.get();
     set <CMintMeta> setMints = zpivTracker->ListMints(!fIncludeSpent, false, false);
 
     UniValue jsonList(UniValue::VARR);
@@ -3172,7 +3172,7 @@ UniValue importzerocoins(const UniValue &params, bool fHelp) {
                                             "\nResult:\n"
                                             "{\n"
                                             "  \"added\": n,        (numeric) The quantity of zerocoin mints that were added\n"
-                                            "  \"value\": amount    (numeric) The total zPIV value of zerocoin mints that were added\n"
+                                            "  \"value\": amount    (numeric) The total zWSP value of zerocoin mints that were added\n"
                                             "}\n"
 
                                             "\nExamples\n" +
@@ -3253,7 +3253,7 @@ UniValue reconsiderzerocoins(const UniValue &params, bool fHelp) {
     if (fHelp || !params.empty())
         throw runtime_error(
                 "reconsiderzerocoins\n"
-                "\nCheck archived zPIV list to see if any mints were added to the blockchain.\n" +
+                "\nCheck archived zWSP list to see if any mints were added to the blockchain.\n" +
                 HelpRequiringPassphrase() + "\n"
 
                                             "\nResult:\n"
@@ -3322,7 +3322,7 @@ UniValue setzpivseed(const UniValue &params, bool fHelp) {
     uint256 seed;
     seed.SetHex(params[0].get_str());
 
-    CzPIVWallet *zwallet = pwalletMain->getZWallet();
+    CzWSPWallet *zwallet = pwalletMain->getZWallet();
     bool fSuccess = zwallet->SetMasterSeed(seed, true);
     if (fSuccess)
         zwallet->SyncWithChain();
@@ -3337,18 +3337,18 @@ UniValue getzpivseed(const UniValue &params, bool fHelp) {
     if (fHelp || !params.empty())
         throw runtime_error(
                 "getzpivseed\n"
-                "\nCheck archived zPIV list to see if any mints were added to the blockchain.\n" +
+                "\nCheck archived zWSP list to see if any mints were added to the blockchain.\n" +
                 HelpRequiringPassphrase() + "\n"
 
                                             "\nResult\n"
-                                            "\"seed\" : s,  (string) The deterministic zPIV seed.\n"
+                                            "\"seed\" : s,  (string) The deterministic zWSP seed.\n"
 
                                             "\nExamples\n" +
                 HelpExampleCli("getzpivseed", "") + HelpExampleRpc("getzpivseed", ""));
 
     EnsureWalletIsUnlocked();
 
-    CzPIVWallet *zwallet = pwalletMain->getZWallet();
+    CzWSPWallet *zwallet = pwalletMain->getZWallet();
     uint256 seed = zwallet->GetMasterSeed();
 
     UniValue ret(UniValue::VOBJ);
@@ -3361,12 +3361,12 @@ UniValue generatemintlist(const UniValue &params, bool fHelp) {
     if (fHelp || params.size() != 2)
         throw runtime_error(
                 "generatemintlist\n"
-                "\nShow mints that are derived from the deterministic zPIV seed.\n" +
+                "\nShow mints that are derived from the deterministic zWSP seed.\n" +
                 HelpRequiringPassphrase() + "\n"
 
                                             "\nArguments\n"
-                                            "1. \"count\"  : n,  (numeric) Which sequential zPIV to start with.\n"
-                                            "2. \"range\"  : n,  (numeric) How many zPIV to generate.\n"
+                                            "1. \"count\"  : n,  (numeric) Which sequential zWSP to start with.\n"
+                                            "2. \"range\"  : n,  (numeric) How many zWSP to generate.\n"
 
                                             "\nResult:\n"
                                             "[\n"
@@ -3386,7 +3386,7 @@ UniValue generatemintlist(const UniValue &params, bool fHelp) {
 
     int nCount = params[0].get_int();
     int nRange = params[1].get_int();
-    CzPIVWallet *zwallet = pwalletMain->zwalletMain;
+    CzWSPWallet *zwallet = pwalletMain->zwalletMain;
 
     UniValue arrRet(UniValue::VARR);
     for (int i = nCount; i < nCount + nRange; i++) {
@@ -3409,13 +3409,13 @@ UniValue dzpivstate(const UniValue &params, bool fHelp) {
     if (fHelp || params.size() != 0)
         throw runtime_error(
                 "dzpivstate\n"
-                "\nThe current state of the mintpool of the deterministic zPIV wallet.\n" +
+                "\nThe current state of the mintpool of the deterministic zWSP wallet.\n" +
                 HelpRequiringPassphrase() + "\n"
 
                                             "\nExamples\n" +
                 HelpExampleCli("mintpoolstatus", "") + HelpExampleRpc("mintpoolstatus", ""));
 
-    CzPIVWallet *zwallet = pwalletMain->zwalletMain;
+    CzWSPWallet *zwallet = pwalletMain->zwalletMain;
     UniValue obj(UniValue::VOBJ);
     int nCount, nCountLastUsed;
     zwallet->GetState(nCount, nCountLastUsed);
@@ -3426,7 +3426,7 @@ UniValue dzpivstate(const UniValue &params, bool fHelp) {
 }
 
 
-void static SearchThread(CzPIVWallet *zwallet, int nCountStart, int nCountEnd) {
+void static SearchThread(CzWSPWallet *zwallet, int nCountStart, int nCountEnd) {
     LogPrintf("%s: start=%d end=%d\n", __func__, nCountStart, nCountEnd);
     CWalletDB walletDB(pwalletMain->strWalletFile);
     try {
@@ -3442,7 +3442,7 @@ void static SearchThread(CzPIVWallet *zwallet, int nCountStart, int nCountEnd) {
             CBigNum bnSerial;
             CBigNum bnRandomness;
             CKey key;
-            zwallet->SeedToZPIV(zerocoinSeed, bnValue, bnSerial, bnRandomness, key);
+            zwallet->SeedToZWSP(zerocoinSeed, bnValue, bnSerial, bnRandomness, key);
 
             uint256 hashPubcoin = GetPubCoinHash(bnValue);
             zwallet->AddToMintPool(make_pair(hashPubcoin, i), true);
@@ -3459,12 +3459,12 @@ UniValue searchdzpiv(const UniValue &params, bool fHelp) {
     if (fHelp || params.size() != 3)
         throw runtime_error(
                 "searchdzpiv\n"
-                "\nMake an extended search for deterministically generated zPIV that have not yet been recognized by the wallet.\n" +
+                "\nMake an extended search for deterministically generated zWSP that have not yet been recognized by the wallet.\n" +
                 HelpRequiringPassphrase() + "\n"
 
                                             "\nArguments\n"
-                                            "1. \"count\"       (numeric) Which sequential zPIV to start with.\n"
-                                            "2. \"range\"       (numeric) How many zPIV to generate.\n"
+                                            "1. \"count\"       (numeric) Which sequential zWSP to start with.\n"
+                                            "2. \"range\"       (numeric) How many zWSP to generate.\n"
                                             "3. \"threads\"     (numeric) How many threads should this operation consume.\n"
 
                                             "\nExamples\n" +
@@ -3482,7 +3482,7 @@ UniValue searchdzpiv(const UniValue &params, bool fHelp) {
 
     int nThreads = params[2].get_int();
 
-    CzPIVWallet *zwallet = pwalletMain->zwalletMain;
+    CzWSPWallet *zwallet = pwalletMain->zwalletMain;
 
     boost::thread_group *dzpivThreads = new boost::thread_group();
     int nRangePerThread = nRange / nThreads;

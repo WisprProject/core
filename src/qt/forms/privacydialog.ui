@@ -210,7 +210,7 @@
                                                                                                 </item>
                                                                                                 <item>
                                                                                                     <widget class="QLabel"
-                                                                                                            name="labelzPIVSyncStatus">
+                                                                                                            name="labelzWSPSyncStatus">
                                                                                                         <property
                                                                                                                 name="toolTip">
                                                                                                             <string>The
@@ -324,7 +324,7 @@
                                                                                                     name="horizontalLayout_4">
                                                                                                 <item>
                                                                                                     <widget class="QPushButton"
-                                                                                                            name="pushButtonMintzPIV">
+                                                                                                            name="pushButtonMintzWSP">
                                                                                                         <property
                                                                                                                 name="minimumSize">
                                                                                                             <size>
@@ -432,7 +432,7 @@
                                                                                                 </item>
                                                                                                 <item>
                                                                                                     <widget class="QLabel"
-                                                                                                            name="labelzPIVAmountValue">
+                                                                                                            name="labelzWSPAmountValue">
                                                                                                         <property
                                                                                                                 name="font">
                                                                                                             <font>
@@ -1092,7 +1092,7 @@
                                                                                                     name="horizontalLayout_6">
                                                                                                 <item>
                                                                                                     <widget class="QPushButton"
-                                                                                                            name="pushButtonSpendzPIV">
+                                                                                                            name="pushButtonSpendzWSP">
                                                                                                         <property
                                                                                                                 name="minimumSize">
                                                                                                             <size>
@@ -1596,7 +1596,7 @@
                                                                                                         <property
                                                                                                                 name="buddy">
                                                                                                             <cstring>
-                                                                                                                zPIVpayAmount
+                                                                                                                zWSPpayAmount
                                                                                                             </cstring>
                                                                                                         </property>
                                                                                                     </widget>
@@ -1612,7 +1612,7 @@
                                                                                                         </property>
                                                                                                         <item>
                                                                                                             <widget class="QLineEdit"
-                                                                                                                    name="zPIVpayAmount"/>
+                                                                                                                    name="zWSPpayAmount"/>
                                                                                                         </item>
                                                                                                         <item>
                                                                                                             <widget class="QLabel"
