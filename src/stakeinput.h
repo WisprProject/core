@@ -38,8 +38,8 @@ public:
 
 // zWSPStake can take two forms
 // 1) the stake candidate, which is a zcmint that is attempted to be staked
-// 2) a staked zpiv, which is a zcspend that has successfully staked
-class CZPivStake : public CStakeInput {
+// 2) a staked zwsp, which is a zcspend that has successfully staked
+class CZWspStake : public CStakeInput {
 private:
     uint32_t nChecksum;
     bool fMint;
@@ -47,14 +47,14 @@ private:
     uint256 hashSerial;
 
 public:
-    explicit CZPivStake(libzerocoin::CoinDenomination denom, const uint256 &hashSerial) {
+    explicit CZWspStake(libzerocoin::CoinDenomination denom, const uint256 &hashSerial) {
         this->denom = denom;
         this->hashSerial = hashSerial;
         this->pindexFrom = nullptr;
         fMint = true;
     }
 
-    explicit CZPivStake(const libzerocoin::CoinSpend &spend);
+    explicit CZWspStake(const libzerocoin::CoinSpend &spend);
 
     CBlockIndex *GetIndexFrom() override;
 
@@ -81,12 +81,12 @@ public:
     uint32_t GetChecksum();
 };
 
-class CPivStake : public CStakeInput {
+class CWspStake : public CStakeInput {
 private:
     CTransaction txFrom;
     unsigned int nPosition;
 public:
-    CPivStake() {
+    CWspStake() {
         this->pindexFrom = nullptr;
     }
 

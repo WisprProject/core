@@ -2,7 +2,7 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include "zpivwallet.h"
+#include "zwspwallet.h"
 #include "main.h"
 #include "txdb.h"
 #include "walletdb.h"
@@ -19,7 +19,7 @@ CzWSPWallet::CzWSPWallet(std::string strWalletFile) {
     uint256 hashSeed;
     bool fFirstRun = !walletdb.ReadCurrentSeedHash(hashSeed);
 
-    //Check for old db version of storing zpiv seed
+    //Check for old db version of storing zwsp seed
     if (fFirstRun) {
         uint256 seed;
         if (walletdb.ReadZWSPSeed_deprecated(seed)) {
@@ -31,7 +31,7 @@ CzWSPWallet::CzWSPWallet(std::string strWalletFile) {
                     LogPrintf("%s: Updated zWSP seed databasing\n", __func__);
                     fFirstRun = false;
                 } else {
-                    LogPrintf("%s: failed to remove old zpiv seed\n", __func__);
+                    LogPrintf("%s: failed to remove old zwsp seed\n", __func__);
                 }
             }
         }
@@ -53,7 +53,7 @@ CzWSPWallet::CzWSPWallet(std::string strWalletFile) {
         key.MakeNewKey(true);
         seed = key.GetPrivKey_256();
         seedMaster = seed;
-        LogPrintf("%s: first run of zpiv wallet detected, new seed generated. Seedhash=%s\n", __func__,
+        LogPrintf("%s: first run of zwsp wallet detected, new seed generated. Seedhash=%s\n", __func__,
                   Hash(seed.begin(), seed.end()).GetHex());
     } else if (!pwalletMain->GetDeterministicSeed(hashSeed, seed)) {
         LogPrintf("%s: failed to get deterministic seed for hashseed %s\n", __func__, hashSeed.GetHex());
@@ -194,7 +194,7 @@ void CzWSPWallet::SyncWithChain(bool fGenerateMintPool) {
             if (ShutdownRequested())
                 return;
 
-            if (pwalletMain->zpivTracker->HasPubcoinHash(pMint.first)) {
+            if (pwalletMain->zwspTracker->HasPubcoinHash(pMint.first)) {
                 mintPool.Remove(pMint.first);
                 continue;
             }
@@ -319,8 +319,8 @@ bool CzWSPWallet::SetMintSeen(const CBigNum &bnValue, const int &nHeight, const 
         pwalletMain->AddToWallet(wtx);
     }
 
-    // Add to zpivTracker which also adds to database
-    pwalletMain->zpivTracker->Add(dMint, true);
+    // Add to zwspTracker which also adds to database
+    pwalletMain->zwspTracker->Add(dMint, true);
 
     //Update the count if it is less than the mint's count
     if (nCountLastUsed < pMint.second) {

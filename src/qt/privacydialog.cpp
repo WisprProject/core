@@ -14,7 +14,7 @@
 #include "sendcoinsentry.h"
 #include "walletmodel.h"
 #include "coincontrol.h"
-#include "zpivcontroldialog.h"
+#include "zwspcontroldialog.h"
 #include "spork.h"
 #include "askpassphrasedialog.h"
 
@@ -297,16 +297,16 @@ void PrivacyDialog::on_pushButtonSpendzWSP_clicked() {
     sendzWSP();
 }
 
-void PrivacyDialog::on_pushButtonZPivControl_clicked() {
+void PrivacyDialog::on_pushButtonZWspControl_clicked() {
     if (!walletModel || !walletModel->getOptionsModel())
         return;
 
-    ZWspControlDialog *zPivControl = new ZWspControlDialog(this);
-    zPivControl->setModel(walletModel);
-    zPivControl->exec();
+    ZWspControlDialog *zWspControl = new ZWspControlDialog(this);
+    zWspControl->setModel(walletModel);
+    zWspControl->exec();
 }
 
-void PrivacyDialog::setZPivControlLabels(int64_t nAmount, int nQuantity) {
+void PrivacyDialog::setZWspControlLabels(int64_t nAmount, int nQuantity) {
     ui->labelzWSPSelected_int->setText(QString::number(nAmount));
     ui->labelQuantitySelected_int->setText(QString::number(nQuantity));
 }
@@ -503,7 +503,7 @@ void PrivacyDialog::sendzWSP() {
             walletModel->updateAddressBookLabels(address.Get(), "(no label)", "send");
     }
 
-    // Clear zpiv selector in case it was used
+    // Clear zwsp selector in case it was used
     ZWspControlDialog::setSelectedMints.clear();
     ui->labelzWSPSelected_int->setText(QString("0"));
     ui->labelQuantitySelected_int->setText(QString("0"));
@@ -523,7 +523,7 @@ void PrivacyDialog::sendzWSP() {
 
     CAmount nValueOut = 0;
     for (const CTxOut &txout: wtxNew.vout) {
-        strStats += tr("value out: ") + FormatMoney(txout.nValue).c_str() + " Piv, ";
+        strStats += tr("value out: ") + FormatMoney(txout.nValue).c_str() + " Wsp, ";
         nValueOut += txout.nValue;
 
         strStats += tr("address: ");
@@ -633,7 +633,7 @@ PrivacyDialog::setBalance(const CAmount &balance, const CAmount &unconfirmedBala
         mapImmature.insert(make_pair(denom, 0));
     }
 
-    std::vector <CMintMeta> vMints = pwalletMain->zpivTracker->GetMints(false);
+    std::vector <CMintMeta> vMints = pwalletMain->zwspTracker->GetMints(false);
     map<libzerocoin::CoinDenomination, int> mapMaturityHeights = GetMintMaturityHeight();
     for (auto &meta : vMints) {
         // All denominations

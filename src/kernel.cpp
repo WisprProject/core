@@ -362,7 +362,7 @@ bool CheckProofOfStake(const CBlock block, uint256 &hashProofOfStake, std::uniqu
         if (spend.getSpendType() != libzerocoin::SpendType::STAKE)
             return error("%s: spend is using the wrong SpendType (%d)", __func__, (int) spend.getSpendType());
 
-        stake = std::unique_ptr<CStakeInput>(new CZPivStake(spend));
+        stake = std::unique_ptr<CStakeInput>(new CZWspStake(spend));
     } else {
         // First try finding the previous transaction in database
         uint256 hashBlock;
@@ -376,9 +376,9 @@ bool CheckProofOfStake(const CBlock block, uint256 &hashProofOfStake, std::uniqu
             return error("CheckProofOfStake() : VerifySignature failed on coinstake %s",
                          tx.GetHash().ToString().c_str());
 
-        CPivStake *pivInput = new CPivStake();
-        pivInput->SetInput(txPrev, txin.prevout.n);
-        stake = std::unique_ptr<CStakeInput>(pivInput);
+        CWspStake *wspInput = new CWspStake();
+        wspInput->SetInput(txPrev, txin.prevout.n);
+        stake = std::unique_ptr<CStakeInput>(wspInput);
     }
 
     CBlockIndex *pindex = stake->GetIndexFrom();

@@ -48,7 +48,7 @@ public:
 
     void showOutOfSyncWarning(bool fShow);
 
-    void setZPivControlLabels(int64_t nAmount, int nQuantity);
+    void setZWspControlLabels(int64_t nAmount, int nQuantity);
 
 public
     slots:
@@ -120,7 +120,7 @@ private
 
     void on_pushButtonSpendzWSP_clicked();
 
-    void on_pushButtonZPivControl_clicked();
+    void on_pushButtonZWspControl_clicked();
 
     void on_pasteButton_clicked();
 

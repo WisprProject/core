@@ -52,11 +52,11 @@ The zWSP accumulator code has undergone a major refactor. Accumulators are one o
 
 libzerocoin Exploit Fix
 ---------------------
-zWSP relies on a 3rd party library called libzerocoin. All currencies that utilize the zerocoin protocol use libzerocoin, and many of those currencies have been exposed to an exploit which allowed for the creation of multiple zero-knowledge spending proofs for one single zerocoin mint. The PIVX developers were able properly identify the exploit, track down any fraudulent spending proofs, link the fraudulent spending proofs with their one valid proof that they were mutated from, and remove any mints from the accumulators that were derived from the invalid spends. 
+zWSP relies on a 3rd party library called libzerocoin. All currencies that utilize the zerocoin protocol use libzerocoin, and many of those currencies have been exposed to an exploit which allowed for the creation of multiple zero-knowledge spending proofs for one single zerocoin mint. The WISPR developers were able properly identify the exploit, track down any fraudulent spending proofs, link the fraudulent spending proofs with their one valid proof that they were mutated from, and remove any mints from the accumulators that were derived from the invalid spends. 
 
 zWSP Maintenance Mode Spork
 ---------------------
-Handling the above noted libzerocoin exploit required the WISPR team to immediately release a patched wallet to as many users as possible which rejected bad spends and also disabled all zWSP transactions in general. The process of releasing a patched wallet in such a small time frame is frustrating and difficult for all members of the WISPR team and especially users of WISPR. The PIVX developers have added a new spork which allows for zWSP transacting to be turned on/off without having to release a patched wallet. This will allow much smoother operation if any problems occur in the future, and should also allow exchanges and 3rd party services to continue to operate even if zWSP is in maintenance mode.
+Handling the above noted libzerocoin exploit required the WISPR team to immediately release a patched wallet to as many users as possible which rejected bad spends and also disabled all zWSP transactions in general. The process of releasing a patched wallet in such a small time frame is frustrating and difficult for all members of the WISPR team and especially users of WISPR. The WISPR developers have added a new spork which allows for zWSP transacting to be turned on/off without having to release a patched wallet. This will allow much smoother operation if any problems occur in the future, and should also allow exchanges and 3rd party services to continue to operate even if zWSP is in maintenance mode.
 
 Money Supply Indexing
 ---------------------
@@ -85,7 +85,7 @@ git merge commit are mentioned.
 
 ### Wallet
 - #308 `bd8a982` [Minting] Clear mempool after invalid block from miner (presstab)
-- #316 `ed192cf` [Minting] Better filtering of zPiv serials in miner. (presstab)
+- #316 `ed192cf` [Minting] Better filtering of zWsp serials in miner. (presstab)
 
 ### GUI
 - #278 `46f4960` [QT] Multisignature GUI (rejectedpromise)

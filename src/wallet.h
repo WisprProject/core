@@ -23,8 +23,8 @@
 #include "validationinterface.h"
 #include "wallet_ismine.h"
 #include "walletdb.h"
-#include "zpivwallet.h"
-#include "zpivtracker.h"
+#include "zwspwallet.h"
+#include "zwsptracker.h"
 
 #include <algorithm>
 #include <map>
@@ -250,7 +250,7 @@ public:
     void ReconsiderZerocoins(std::list <CZerocoinMint> &listMintsRestored,
                              std::list <CDeterministicMint> &listDMintsRestored);
 
-    void ZPivBackupWallet();
+    void ZWspBackupWallet();
 
     bool GetZerocoinKey(const CBigNum &bnSerial, CKey &key);
 
@@ -267,7 +267,7 @@ public:
     bool UpdateMint(const CBigNum &bnValue, const int &nHeight, const uint256 &txid,
                     const libzerocoin::CoinDenomination &denom);
 
-    string GetUniqueWalletBackupName(bool fzpivAuto) const;
+    string GetUniqueWalletBackupName(bool fzwspAuto) const;
 
 
     /** Zerocin entry changed.
@@ -290,7 +290,7 @@ public:
     bool fWalletUnlockAnonymizeOnly;
     std::string strWalletFile;
     bool fBackupMints;
-    std::unique_ptr <CzWSPTracker> zpivTracker;
+    std::unique_ptr <CzWSPTracker> zwspTracker;
 
     std::set <int64_t> setKeyPool;
     std::map <CKeyID, CKeyMetadata> mapKeyMetadata;
@@ -372,7 +372,7 @@ public:
 
     void setZWallet(CzWSPWallet *zwallet) {
         zwalletMain = zwallet;
-        zpivTracker = std::unique_ptr<CzWSPTracker>(new CzWSPTracker(strWalletFile));
+        zwspTracker = std::unique_ptr<CzWSPTracker>(new CzWSPTracker(strWalletFile));
     }
 
     CzWSPWallet *getZWallet() { return zwalletMain; }
@@ -381,7 +381,7 @@ public:
         return fEnableZeromint;
     }
 
-    void setZPivAutoBackups(bool fEnabled) {
+    void setZWspAutoBackups(bool fEnabled) {
         fBackupMints = fEnabled;
     }
 

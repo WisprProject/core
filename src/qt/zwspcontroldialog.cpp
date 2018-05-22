@@ -2,8 +2,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include "zpivcontroldialog.h"
-#include "ui_zpivcontroldialog.h"
+#include "zwspcontroldialog.h"
+#include "ui_zwspcontroldialog.h"
 
 #include "accumulators.h"
 #include "main.h"
@@ -159,7 +159,7 @@ void ZWspControlDialog::updateLabels() {
     ui->labelQuantity_int->setText(QString::number(setSelectedMints.size()));
 
     //update PrivacyDialog labels
-    privacyDialog->setZPivControlLabels(nAmount, setSelectedMints.size());
+    privacyDialog->setZWspControlLabels(nAmount, setSelectedMints.size());
 }
 
 std::vector <CMintMeta> ZWspControlDialog::GetSelectedMints() {
