@@ -1,5 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
+// Copyright (c) 2014-2015 The Dash developers
+// Copyright (c) 2015-2017 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -15,10 +17,11 @@
 #include <math.h>
 
 
-unsigned int GetNextWorkRequired(const CBlockIndex *pindexLast, const CBlockHeader *pblock) {
+unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader* pblock)
+{
     /* current difficulty formula, wispr - DarkGravity v3, written by Evan Duffield - evan@dashpay.io */
-    const CBlockIndex *BlockLastSolved = pindexLast;
-    const CBlockIndex *BlockReading = pindexLast;
+    const CBlockIndex* BlockLastSolved = pindexLast;
+    const CBlockIndex* BlockReading = pindexLast;
     int64_t nActualTimespan = 0;
     int64_t LastBlockTime = 0;
     int64_t PastBlocksMin = 24;
@@ -68,9 +71,7 @@ unsigned int GetNextWorkRequired(const CBlockIndex *pindexLast, const CBlockHead
             if (CountBlocks == 1) {
                 PastDifficultyAverage.SetCompact(BlockReading->nBits);
             } else {
-                PastDifficultyAverage =
-                        ((PastDifficultyAveragePrev * CountBlocks) + (uint256().SetCompact(BlockReading->nBits))) /
-                        (CountBlocks + 1);
+                PastDifficultyAverage = ((PastDifficultyAveragePrev * CountBlocks) + (uint256().SetCompact(BlockReading->nBits))) / (CountBlocks + 1);
             }
             PastDifficultyAveragePrev = PastDifficultyAverage;
         }
@@ -108,7 +109,8 @@ unsigned int GetNextWorkRequired(const CBlockIndex *pindexLast, const CBlockHead
     return bnNew.GetCompact();
 }
 
-bool CheckProofOfWork(uint256 hash, unsigned int nBits) {
+bool CheckProofOfWork(uint256 hash, unsigned int nBits)
+{
     bool fNegative;
     bool fOverflow;
     uint256 bnTarget;
@@ -129,7 +131,8 @@ bool CheckProofOfWork(uint256 hash, unsigned int nBits) {
     return true;
 }
 
-uint256 GetBlockProof(const CBlockIndex &block) {
+uint256 GetBlockProof(const CBlockIndex& block)
+{
     uint256 bnTarget;
     bool fNegative;
     bool fOverflow;

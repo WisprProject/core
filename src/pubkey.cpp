@@ -1,4 +1,5 @@
 // Copyright (c) 2009-2014 The Bitcoin developers
+// Copyright (c) 2017 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -9,12 +10,11 @@
 #ifdef USE_SECP256K1
 #include <secp256k1.h>
 #else
-
 #include "ecwrapper.h"
-
 #endif
 
-bool CPubKey::Verify(const uint256 &hash, const std::vector<unsigned char> &vchSig) const {
+bool CPubKey::Verify(const uint256& hash, const std::vector<unsigned char>& vchSig) const
+{
     if (!IsValid())
         return false;
 #ifdef USE_SECP256K1
@@ -30,7 +30,8 @@ bool CPubKey::Verify(const uint256 &hash, const std::vector<unsigned char> &vchS
     return true;
 }
 
-bool CPubKey::RecoverCompact(const uint256 &hash, const std::vector<unsigned char> &vchSig) {
+bool CPubKey::RecoverCompact(const uint256& hash, const std::vector<unsigned char>& vchSig)
+{
     if (vchSig.size() != 65)
         return false;
     int recid = (vchSig[0] - 27) & 3;
@@ -51,7 +52,8 @@ bool CPubKey::RecoverCompact(const uint256 &hash, const std::vector<unsigned cha
     return true;
 }
 
-bool CPubKey::IsFullyValid() const {
+bool CPubKey::IsFullyValid() const
+{
     if (!IsValid())
         return false;
 #ifdef USE_SECP256K1
@@ -65,7 +67,8 @@ bool CPubKey::IsFullyValid() const {
     return true;
 }
 
-bool CPubKey::Decompress() {
+bool CPubKey::Decompress()
+{
     if (!IsValid())
         return false;
 #ifdef USE_SECP256K1
@@ -84,8 +87,8 @@ bool CPubKey::Decompress() {
     return true;
 }
 
-bool CPubKey::Derive(CPubKey &pubkeyChild, unsigned char ccChild[32], unsigned int nChild,
-                     const unsigned char cc[32]) const {
+bool CPubKey::Derive(CPubKey& pubkeyChild, unsigned char ccChild[32], unsigned int nChild, const unsigned char cc[32]) const
+{
     assert(IsValid());
     assert((nChild >> 31) == 0);
     assert(begin() + 33 == end());
@@ -106,7 +109,8 @@ bool CPubKey::Derive(CPubKey &pubkeyChild, unsigned char ccChild[32], unsigned i
     return ret;
 }
 
-void CExtPubKey::Encode(unsigned char code[74]) const {
+void CExtPubKey::Encode(unsigned char code[74]) const
+{
     code[0] = nDepth;
     memcpy(code + 1, vchFingerprint, 4);
     code[5] = (nChild >> 24) & 0xFF;
@@ -118,7 +122,8 @@ void CExtPubKey::Encode(unsigned char code[74]) const {
     memcpy(code + 41, pubkey.begin(), 33);
 }
 
-void CExtPubKey::Decode(const unsigned char code[74]) {
+void CExtPubKey::Decode(const unsigned char code[74])
+{
     nDepth = code[0];
     memcpy(vchFingerprint, code + 1, 4);
     nChild = (code[5] << 24) | (code[6] << 16) | (code[7] << 8) | code[8];
@@ -126,7 +131,8 @@ void CExtPubKey::Decode(const unsigned char code[74]) {
     pubkey.Set(code + 41, code + 74);
 }
 
-bool CExtPubKey::Derive(CExtPubKey &out, unsigned int nChild) const {
+bool CExtPubKey::Derive(CExtPubKey& out, unsigned int nChild) const
+{
     out.nDepth = nDepth + 1;
     CKeyID id = pubkey.GetID();
     memcpy(&out.vchFingerprint[0], &id, 4);
