@@ -53,6 +53,7 @@ static void convertSeed6(std::vector<CAddress>& vSeedsOut, const SeedSpec6* data
 // + Contains no strange transactions
 static Checkpoints::MapCheckpoints mapCheckpoints =
         boost::assign::map_list_of
+                (0, uint256("0x0000ec93e0a3fe0aafa3be7dafe1290f5fca039a4037dd5174bc3dd7a35d67f0"))
                 (14317, uint256("50929653a7146de37b82b9125e55ea03aa4ae062ce3a2e3098026eea07e5bc81")) // 125.000 Coin Burn Confirmation
                 (50000, uint256("b177127054381243141e809bbfb2d568aeae2dd9b3c486e54f0989d4546d0d80")) // Block 50.000
                 (75000, uint256("06f162fe22851c400c1532a6d49d7894640ea0aa292fad5f02f348480da6b20d")) // Block 75.000
@@ -120,7 +121,7 @@ public:
         pchMessageStart[3] = 0xe9;
         vAlertPubKey = ParseHex("0000098d3ba6ba6e7423fa5cbd6a89e0a9a5348f88d332b44a5cb1a8b7ed2c1eaa335fc8dc4f012cb8241cc0bdafd6ca70c5f5448916e4e6f511bcd746ed57dc50");
         nDefaultPort = 17000;
-        bnProofOfWorkLimit = ~uint256(0) >> 20; // WISPR starting difficulty is 1 / 2^12
+        bnProofOfWorkLimit = ~uint256(0) >> 16; // WISPR starting difficulty is 1 / 2^12
         nSubsidyHalvingInterval = 0;
         nMaxReorganizationDepth = 500;
         nEnforceBlockUpgradeMajority = 750;
@@ -135,16 +136,16 @@ public:
 
         /** Height or Time Based Activations **/
         nLastPOWBlock = 450;
-        nModifierUpdateBlock = 615800;
-        nZerocoinStartHeight = 863787;
-        nZerocoinStartTime = 1508214600; // October 17, 2017 4:30:00 AM
-        nBlockEnforceSerialRange = 895400; //Enforce serial range starting this block
-        nBlockRecalculateAccumulators = 908000; //Trigger a recalculation of accumulators
+        nModifierUpdateBlock = 200000;
+        nZerocoinStartHeight = 200000;
+        nZerocoinStartTime = 1528129727; // June 4, 2018
+        nBlockEnforceSerialRange = 200000; //Enforce serial range starting this block
+        nBlockRecalculateAccumulators = 200000; //Trigger a recalculation of accumulators
         nBlockFirstFraudulent = 891737; //First block that bad serials emerged
         nBlockLastGoodCheckpoint = 891730; //Last valid accumulator checkpoint
-        nBlockEnforceInvalidUTXO = 902850; //Start enforcing the invalid UTXO's
+        nBlockEnforceInvalidUTXO = 200000; //Start enforcing the invalid UTXO's
 //        nInvalidAmountFiltered = 268200*COIN; //Amount of invalid coins filtered through exchanges, that should be considered valid
-        nBlockZerocoinV2 = 20000; //!> The block that zerocoin v2 becomes active - roughly Tuesday, May 8, 2018 4:00:00 AM GMT
+        nBlockZerocoinV2 = 200000; //!> The block that zerocoin v2 becomes active - roughly Tuesday, May 8, 2018 4:00:00 AM GMT
 //        nEnforceNewSporkKey = 20000; //!> Sporks signed after (GMT): Tuesday, May 1, 2018 7:00:00 AM GMT must use the new spork key
 //        nRejectOldSporkKey = 20000; //!> Fully reject old spork key after (GMT): Friday, June 1, 2018 12:00:00 AM
 
@@ -170,12 +171,13 @@ public:
         genesis.hashMerkleRoot = genesis.BuildMerkleTree();
         genesis.nVersion = 1;
         genesis.nTime = 1513403825;
-        genesis.nBits = 0x1e0ffff0;
+        genesis.nBits = bnProofOfWorkLimit.GetCompact();
         genesis.nNonce = 36156;
 
         hashGenesisBlock = genesis.GetHash();
-//        printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
-//        printf("genesis.hashMerkleRoot = %s\n", genesis.hashMerkleRoot.ToString().c_str());
+        printf("Main net\n");
+        printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
+        printf("genesis.hashMerkleRoot = %s\n", genesis.hashMerkleRoot.ToString().c_str());
         assert(hashGenesisBlock == uint256("fa671f0555b2a118714896f0a12337a25b3c8413ee30c3ce09e66153f642d92b"));
         assert(genesis.hashMerkleRoot == uint256("dc8031216674405e2e4d66e6e00ea3888188959d5d5551af5eaf0d584da842f6"));
 
@@ -208,7 +210,7 @@ public:
         strSporkKey = "0499A7AF4806FC6DE640D23BC5936C29B77ADF2174B4F45492727F897AE63CF8D27B2F05040606E0D14B547916379FA10716E344E745F880EDC037307186AA25B7";
 //        strSporkKeyOld = "04B433E6598390C992F4F022F20D3B4CBBE691652EE7C48243B81701CBDB7CC7D7BF0EE09E154E6FCBF2043D65AF4E9E97B89B5DBAF830D83B9B7F469A6C45A717";
         strObfuscationPoolDummyAddress = "D87q2gC9j6nNrnzCsg4aY6bHMLsT9nUhEw";
-        nStartMasternodePayments = 1403728576; //Wed, 25 Jun 2014 20:36:16 GMT
+        nStartMasternodePayments = 1528129727; //Wed, 4 Jun 2018
 
         /** Zerocoin */
         zerocoinModulus = "25195908475657893494027183240048398571429282126204032027777137836043662020707595556264018525880784"
@@ -260,26 +262,27 @@ public:
         nLastPOWBlock = 450;
         nMaturity = 15;
         nMasternodeCountDrift = 4;
-        nModifierUpdateBlock = 51197; //approx Mon, 17 Apr 2017 04:00:00 GMT
+        nModifierUpdateBlock = 200000; //approx Mon, 17 Apr 2017 04:00:00 GMT
         nMaxMoneyOut = 5000000 * COIN;
-        nZerocoinStartHeight = 201576;
-        nZerocoinStartTime = 1501776000;
+        nZerocoinStartHeight = 200000;
+        nZerocoinStartTime = 1528129727; //Wed, 4 Jun 2018
         nBlockEnforceSerialRange = 1; //Enforce serial range starting this block
-        nBlockRecalculateAccumulators = 9908000; //Trigger a recalculation of accumulators
-        nBlockFirstFraudulent = 9891737; //First block that bad serials emerged
-        nBlockLastGoodCheckpoint = 9891730; //Last valid accumulator checkpoint
-        nBlockEnforceInvalidUTXO = 9902850; //Start enforcing the invalid UTXO's
+        nBlockRecalculateAccumulators = 200000; //Trigger a recalculation of accumulators
+        nBlockFirstFraudulent = 200000; //First block that bad serials emerged
+        nBlockLastGoodCheckpoint = 200000; //Last valid accumulator checkpoint
+        nBlockEnforceInvalidUTXO = 200000; //Start enforcing the invalid UTXO's
 //        nInvalidAmountFiltered = 0; //Amount of invalid coins filtered through exchanges, that should be considered valid
-        nBlockZerocoinV2 = 444020; //!> The block that zerocoin v2 becomes active
+        nBlockZerocoinV2 = 200000; //!> The block that zerocoin v2 becomes active
 //        nEnforceNewSporkKey = 1521604800; //!> Sporks signed after Wednesday, March 21, 2018 4:00:00 AM GMT must use the new spork key
 //        nRejectOldSporkKey = 1522454400; //!> Reject old spork key after Saturday, March 31, 2018 12:00:00 AM GMT
 
         //! Modify the testnet genesis block so the timestamp is valid for a later start.
         genesis.nTime = 1532363327;
-        genesis.nNonce = 2402015;
+        genesis.nNonce = 142000;
 
         hashGenesisBlock = genesis.GetHash();
-//        printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
+        printf("Test net\n");
+        printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
         assert(hashGenesisBlock == uint256("1c9b46a8492510e9e79ad594089ac4a432a376c3f107af520e6149ab290c1e1e"));
 
 //        vFixedSeeds.clear();
@@ -315,7 +318,7 @@ public:
         strSporkKey = "04A8B319388C0F8588D238B9941DC26B26D3F9465266B368A051C5C100F79306A557780101FE2192FE170D7E6DEFDCBEE4C8D533396389C0DAFFDBC842B002243C";
 //        strSporkKeyOld = "04348C2F50F90267E64FACC65BFDC9D0EB147D090872FB97ABAE92E9A36E6CA60983E28E741F8E7277B11A7479B626AC115BA31463AC48178A5075C5A9319D4A38";
         strObfuscationPoolDummyAddress = "y57cqfGRkekRyDRNeJiLtYVEbvhXrNbmox";
-        nStartMasternodePayments = 1420837558; //Fri, 09 Jan 2015 21:05:58 GMT
+        nStartMasternodePayments = 1528129727; //Wed, 4 Jun 2018
         nBudget_Fee_Confirmations = 3; // Number of confirmations for the finalization fee. We have to make this very short
         // here because we only have a 8 block finalization window on testnet
     }
@@ -355,6 +358,7 @@ public:
         hashGenesisBlock = genesis.GetHash();
         nDefaultPort = 17004;
 //        printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
+        printf("Req net\n");
         assert(hashGenesisBlock == uint256("cc93f4427f494c868f1cdf36d2ab21f1812390bdac16f449b4d88561816c71b8"));
 
         vFixedSeeds.clear(); //! Testnet mode doesn't have any fixed seeds.
