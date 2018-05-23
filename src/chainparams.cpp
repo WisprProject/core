@@ -283,7 +283,7 @@ public:
         hashGenesisBlock = genesis.GetHash();
         printf("Test net\n");
         printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
-        assert(hashGenesisBlock == uint256("1c9b46a8492510e9e79ad594089ac4a432a376c3f107af520e6149ab290c1e1e"));
+        assert(hashGenesisBlock == uint256("eaed1be0a78bd8f6e6ad58d227ec0ac6cbbcca53886871d56a93d7bb4f8fa71a"));
 
 //        vFixedSeeds.clear();
         vSeeds.clear();
