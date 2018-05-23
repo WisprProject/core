@@ -10,7 +10,6 @@
 #include "txdb.h"
 #include "ui_interface.h"
 #include "util.h"
-
 #ifdef ENABLE_WALLET
 #include "db.h"
 #include "wallet.h"
@@ -21,56 +20,45 @@
 #include <boost/thread.hpp>
 
 CClientUIInterface uiInterface;
-CWallet *pwalletMain;
+CWallet* pwalletMain;
 
 extern bool fPrintToConsole;
-
 extern void noui_connect();
+
 struct TestingSetup {
     CCoinsViewDB *pcoinsdbview;
     boost::filesystem::path pathTemp;
     boost::thread_group threadGroup;
+
     TestingSetup() {
         SetupEnvironment();
-        cout << "Finished setup environment...\n";
         fPrintToDebugLog = false; // don't want to write to debug.log file
         fCheckBlockIndex = true;
-        cout << "Select params...\n";
         SelectParams(CBaseChainParams::UNITTEST);
-        cout << "Connect noui...\n";
         noui_connect();
 #ifdef ENABLE_WALLET
         bitdb.MakeMock();
 #endif
-        pathTemp = GetTempPath() / strprintf("test_wispr_%lu_%i", (unsigned long) GetTime(), (int) (GetRand(100000)));
-        cout << "Create Directories...\n";
+        pathTemp = GetTempPath() / strprintf("test_wispr_%lu_%i", (unsigned long)GetTime(), (int)(GetRand(100000)));
         boost::filesystem::create_directories(pathTemp);
         mapArgs["-datadir"] = pathTemp.string();
-        cout << "Create BlockTreeDB...\n";
         pblocktree = new CBlockTreeDB(1 << 20, true);
-        cout << "Create CoinsViewDB...\n";
         pcoinsdbview = new CCoinsViewDB(1 << 23, true);
-        cout << "Create CoinsViewCache...\n";
         pcoinsTip = new CCoinsViewCache(pcoinsdbview);
-        cout << "Init block index...\n";
         InitBlockIndex();
 #ifdef ENABLE_WALLET
         bool fFirstRun;
-        cout << "Create wallet...\n";
         pwalletMain = new CWallet("wallet.dat");
-        cout << "Load wallet...\n";
         pwalletMain->LoadWallet(fFirstRun);
-        cout << "Register validation interface...\n";
         RegisterValidationInterface(pwalletMain);
 #endif
         nScriptCheckThreads = 3;
-        cout << "Create threads...\n";
-        for (int i = 0; i < nScriptCheckThreads - 1; i++)
+        for (int i=0; i < nScriptCheckThreads-1; i++)
             threadGroup.create_thread(&ThreadScriptCheck);
         RegisterNodeSignals(GetNodeSignals());
     }
-    ~TestingSetup() {
-        cout << "Testing Setup...\n";
+    ~TestingSetup()
+    {
         threadGroup.interrupt_all();
         threadGroup.join_all();
         UnregisterNodeSignals(GetNodeSignals());
@@ -90,14 +78,17 @@ struct TestingSetup {
 
 BOOST_GLOBAL_FIXTURE(TestingSetup);
 
-void Shutdown(void *parg) {
+void Shutdown(void* parg)
+{
     exit(0);
 }
 
-void StartShutdown() {
+void StartShutdown()
+{
     exit(0);
 }
 
-bool ShutdownRequested() {
+bool ShutdownRequested()
+{
     return false;
 }
