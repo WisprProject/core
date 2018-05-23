@@ -6941,6 +6941,7 @@ bool SendMessages(CNode* pto, bool fSendTrickle)
         if (!state.fSyncStarted && !pto->fClient && fFetch /*&& !fImporting*/ && !fReindex) {
             // Only actively request headers from a single peer, unless we're close to end of initial download.
             cout << "Only actively request headers from a single peer \n";
+            cout << pindexBestHeader << "\n";
             if (nSyncStarted == 0 || pindexBestHeader->GetBlockTime() > GetAdjustedTime() - 6 * 60 * 60) { // NOTE: was "close to today" and 24h in Bitcoin
                 cout << "Sync started \n";
                 state.fSyncStarted = true;
@@ -6952,6 +6953,7 @@ bool SendMessages(CNode* pto, bool fSendTrickle)
                 cout << "Push message get blocks \n";
                 pto->PushMessage("getblocks", chainActive.GetLocator(chainActive.Tip()), uint256(0));
             }
+            cout << "Sync is done \n";
         }
 
         cout << "Resend wallet transactions that are nog send yet \n";
