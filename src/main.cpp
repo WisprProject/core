@@ -6941,7 +6941,7 @@ bool SendMessages(CNode* pto, bool fSendTrickle)
         if (!state.fSyncStarted && !pto->fClient && fFetch /*&& !fImporting*/ && !fReindex) {
             // Only actively request headers from a single peer, unless we're close to end of initial download.
             cout << "Only actively request headers from a single peer \n";
-            cout << "pindexBestHeade  = " << pindexBestHeader << "\n";
+            cout << "pindexBestHeader  = " << pindexBestHeader << "\n";
             cout << "nSyncStarted before sync start =" << nSyncStarted << "\n";
             cout << "Blocktime = " << pindexBestHeader->GetBlockTime() << "\n";
             cout << "Adjusted time  = " << GetAdjustedTime() << "\n";
