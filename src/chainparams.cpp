@@ -178,7 +178,7 @@ public:
         printf("Main net\n");
         printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
         printf("genesis.hashMerkleRoot = %s\n", genesis.hashMerkleRoot.ToString().c_str());
-        assert(hashGenesisBlock == uint256("fa671f0555b2a118714896f0a12337a25b3c8413ee30c3ce09e66153f642d92b"));
+        assert(hashGenesisBlock == uint256("7b96cdf7a6a164ba9aca5a15351f68ade86ace5834d694e0afd069d7ed43906d"));
         assert(genesis.hashMerkleRoot == uint256("dc8031216674405e2e4d66e6e00ea3888188959d5d5551af5eaf0d584da842f6"));
 
         vSeeds.push_back(CDNSSeedData("fuzzbawls.pw", "wispr.seed.fuzzbawls.pw"));     // Primary DNS Seeder from Fuzzbawls
