@@ -351,6 +351,19 @@ private:
 class CScript : public std::vector<unsigned char>
 {
 protected:
+    CScript& push_big(int64_t n)
+    {
+        if (n == -1 || (n >= 1 && n <= 16))
+        {
+            push_back(n + (OP_1 - 1));
+        }
+        else
+        {
+            CBigNum bn(n);
+            *this << bn.getvch();
+        }
+        return *this;
+    }
     CScript& push_int64(int64_t n)
     {
         if (n == -1 || (n >= 1 && n <= 16))
@@ -394,6 +407,7 @@ public:
 
 
     CScript& operator<<(int64_t b) { return push_int64(b); }
+    CScript& operator<<(int b)     { return push_big(b); }
 
     CScript& operator<<(opcodetype opcode)
     {
@@ -402,7 +416,11 @@ public:
         insert(end(), (unsigned char)opcode);
         return *this;
     }
-
+    CScript& operator<<(const CBigNum& b)
+    {
+        *this << b.getvch();
+        return *this;
+    }
     CScript& operator<<(const CScriptNum& b)
     {
         *this << b.getvch();
