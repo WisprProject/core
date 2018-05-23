@@ -13,6 +13,7 @@
 #include "serialize.h"
 #include "uint256.h"
 #include "version.h"
+#include <stdint.h>
 
 /** Errors thrown by the bignum class */
 class bignum_error : public std::runtime_error
