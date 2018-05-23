@@ -115,13 +115,13 @@ public:
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 4-byte int at any alignment.
          */
-        pchMessageStart[0] = 0x90;
-        pchMessageStart[1] = 0xc4;
-        pchMessageStart[2] = 0xfd;
-        pchMessageStart[3] = 0xe9;
-        vAlertPubKey = ParseHex("0000098d3ba6ba6e7423fa5cbd6a89e0a9a5348f88d332b44a5cb1a8b7ed2c1eaa335fc8dc4f012cb8241cc0bdafd6ca70c5f5448916e4e6f511bcd746ed57dc50");
+        pchMessageStart[0] = 0x20;
+        pchMessageStart[1] = 0x45;
+        pchMessageStart[2] = 0x12;
+        pchMessageStart[3] = 0x77;
+        vAlertPubKey=ParseHex("04a2b4f239f3f1f4439ef384d0e1927f42d1b33963400735fa0db35946816d2ddce9588dae345108f4ed295d7f2df826fe63bfa0ee7f3bde18805a8465386edb4c");
         nDefaultPort = 17000;
-        bnProofOfWorkLimit = ~uint256(0) >> 16; // WISPR starting difficulty is 1 / 2^12
+        bnProofOfWorkLimit = CBigNum(~uint256(0) >> 16); // WISPR starting difficulty is 1 / 2^12
         nSubsidyHalvingInterval = 0;
         nMaxReorganizationDepth = 500;
         nEnforceBlockUpgradeMajority = 750;
@@ -159,13 +159,13 @@ public:
          *     CTxOut(nValue=50.00000000, scriptPubKey=0xA9037BAC7050C479B121CF)
          *   vMerkleTree: e0028e
          */
-        const char* pszTimestamp = "U.S. News & World Report Jan 28 2016 With His Absence, Trump Dominates Another Debate";
+        const char* pszTimestamp = "I would rather be without a state than without a voice";
         CMutableTransaction txNew;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
-        txNew.vin[0].scriptSig = CScript() << 486604799 << CScriptNum(4) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
+        txNew.vin[0].scriptSig = CScript() << 0 << CBigNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
         txNew.vout[0].nValue = 125000 * COIN;
-        txNew.vout[0].scriptPubKey = CScript() << ParseHex("04c10e83b2703ccf322f7dbd62dd5855ac7c10bd055814ce121ba32607d573b8810c02c0582aed05b4deb9c4b77b26d92428c61256cd42774babea0a073b2ed0c9") << OP_CHECKSIG;
+        txNew.vout[0].scriptPubKey = CScript() << ParseHex("0433f2952f9002c9088a19607e3d4a54d3d9dfe1cf5c78168b8ba6524fb19fc5d7d3202948e6b8b09e98c425875af6af78fd4f64ff07d97a9ae31ebda5162fbac3") << OP_CHECKSIG;
         genesis.vtx.push_back(txNew);
         genesis.hashPrevBlock = 0;
         genesis.hashMerkleRoot = genesis.BuildMerkleTree();
@@ -178,8 +178,8 @@ public:
         printf("Main net\n");
         printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
         printf("genesis.hashMerkleRoot = %s\n", genesis.hashMerkleRoot.ToString().c_str());
-        assert(hashGenesisBlock == uint256("7b96cdf7a6a164ba9aca5a15351f68ade86ace5834d694e0afd069d7ed43906d"));
-        assert(genesis.hashMerkleRoot == uint256("dc8031216674405e2e4d66e6e00ea3888188959d5d5551af5eaf0d584da842f6"));
+        assert(hashGenesisBlock == uint256("0x0000ec93e0a3fe0aafa3be7dafe1290f5fca039a4037dd5174bc3dd7a35d67f0"));
+        assert(genesis.hashMerkleRoot == uint256("0xbcd0064f46daed0b3c1ccff16656a0da04b5509924118b7c13d21c81d62ec521"));
 
         vSeeds.push_back(CDNSSeedData("fuzzbawls.pw", "wispr.seed.fuzzbawls.pw"));     // Primary DNS Seeder from Fuzzbawls
         vSeeds.push_back(CDNSSeedData("fuzzbawls.pw", "wispr.seed2.fuzzbawls.pw"));    // Secondary DNS Seeder from Fuzzbawls
@@ -247,12 +247,14 @@ public:
     {
         networkID = CBaseChainParams::TESTNET;
         strNetworkID = "test";
-        pchMessageStart[0] = 0x45;
-        pchMessageStart[1] = 0x76;
-        pchMessageStart[2] = 0x65;
-        pchMessageStart[3] = 0xba;
-        vAlertPubKey = ParseHex("000010e83b2703ccf322f7dbd62dd5855ac7c10bd055814ce121ba32607d573b8810c02c0582aed05b4deb9c4b77b26d92428c61256cd42774babea0a073b2ed0c9");
+        pchMessageStart[0] = 0x21;
+        pchMessageStart[1] = 0x46;
+        pchMessageStart[2] = 0x13;
+        pchMessageStart[3] = 0x78;
+        vAlertPubKey=ParseHex("0433f2952f9002c9088a19607e3d4a54d3d9dfe1cf5c78168b8ba6524fb19fc5d7d3202948e6b8b09e98c425875af6af78fd4f64ff07d97a9ae31ebda5162fbac3");
         nDefaultPort = 17002;
+        bnProofOfWorkLimit = CBigNum(~uint256(0) >> 16);
+
         nEnforceBlockUpgradeMajority = 51;
         nRejectBlockOutdatedMajority = 75;
         nToCheckBlockUpgradeMajority = 100;
