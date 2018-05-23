@@ -79,20 +79,35 @@ BOOST_AUTO_TEST_CASE(DoS_banning)
 BOOST_AUTO_TEST_CASE(DoS_banscore)
 {
     CNode::ClearBanned();
+    BOOST_TEST_CHECKPOINT("Cleared banned nodes");
     mapArgs["-banscore"] = "111"; // because 11 is my favorite number
+    BOOST_TEST_CHECKPOINT("Set banscore");
     CAddress addr1(ip(0xa0b0c001));
+    BOOST_TEST_CHECKPOINT("Created addres");
     CNode dummyNode1(INVALID_SOCKET, addr1, "", true);
+    BOOST_TEST_CHECKPOINT("Created dummy node");
     dummyNode1.nVersion = 1;
     Misbehaving(dummyNode1.GetId(), 100);
+    BOOST_TEST_CHECKPOINT("Node misbehaved");
     SendMessages(&dummyNode1, false);
+    BOOST_TEST_CHECKPOINT("Send messages");
     BOOST_CHECK(!CNode::IsBanned(addr1));
+    BOOST_TEST_CHECKPOINT("node is not banned");
     Misbehaving(dummyNode1.GetId(), 10);
+    BOOST_TEST_CHECKPOINT("Node misbehaved again");
     SendMessages(&dummyNode1, false);
+    BOOST_TEST_CHECKPOINT("Send messages again");
     BOOST_CHECK(!CNode::IsBanned(addr1));
+    BOOST_CHECK(!CNode::IsBanned(addr1));
+    BOOST_TEST_CHECKPOINT("node is not banned");
     Misbehaving(dummyNode1.GetId(), 1);
+    BOOST_TEST_CHECKPOINT("Node misbehaved again");
     SendMessages(&dummyNode1, false);
+    BOOST_TEST_CHECKPOINT("Send messages again");
     BOOST_CHECK(CNode::IsBanned(addr1));
+    BOOST_TEST_CHECKPOINT("Node is banned");
     mapArgs.erase("-banscore");
+    BOOST_TEST_CHECKPOINT("Erased banscore");
 }
 
 BOOST_AUTO_TEST_CASE(DoS_bantime)
