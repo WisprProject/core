@@ -17,7 +17,7 @@
 #include <string.h>
 #include <string>
 #include <vector>
-#include "bignum.h"
+#include <libzerocoin/bignum.h>
 
 typedef std::vector<unsigned char> valtype;
 
