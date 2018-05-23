@@ -98,22 +98,31 @@ BOOST_AUTO_TEST_CASE(DoS_banscore)
 BOOST_AUTO_TEST_CASE(DoS_bantime)
 {
     CNode::ClearBanned();
+    BOOST_TEST_CHECKPOINT("Cleared banned nodes");
     int64_t nStartTime = GetTime();
+    BOOST_TEST_CHECKPOINT("Get time");
     SetMockTime(nStartTime); // Overrides future calls to GetTime()
-
+    BOOST_TEST_CHECKPOINT("Set mock time");
     CAddress addr(ip(0xa0b0c001));
+    BOOST_TEST_CHECKPOINT("Created addres");
     CNode dummyNode(INVALID_SOCKET, addr, "", true);
+    BOOST_TEST_CHECKPOINT("Created dummy node");
     dummyNode.nVersion = 1;
 
     Misbehaving(dummyNode.GetId(), 100);
+    BOOST_TEST_CHECKPOINT("Node misbehaved");
     SendMessages(&dummyNode, false);
+    BOOST_TEST_CHECKPOINT("Send messages");
     BOOST_CHECK(CNode::IsBanned(addr));
-
+    BOOST_TEST_CHECKPOINT("Node is banned");
     SetMockTime(nStartTime+60*60);
+    BOOST_TEST_CHECKPOINT("Updated start time");
     BOOST_CHECK(CNode::IsBanned(addr));
-
+    BOOST_TEST_CHECKPOINT("node is still banned");
     SetMockTime(nStartTime+60*60*24+1);
+    BOOST_TEST_CHECKPOINT("Updated start time with a day");
     BOOST_CHECK(!CNode::IsBanned(addr));
+    BOOST_TEST_CHECKPOINT("node is not banned");
 }
 
 CTransaction RandomOrphan()
