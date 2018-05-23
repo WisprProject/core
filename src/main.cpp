@@ -6830,36 +6830,36 @@ bool SendMessages(CNode* pto, bool fSendTrickle)
         // Don't send anything until we get their version message
         if (pto->nVersion == 0)
             return true;
-        cout << "version is not 0";
+        cout << "version is not 0\n";
         //
         // Message: ping
         //
         bool pingSend = false;
         if (pto->fPingQueued) {
             // RPC ping request by user
-            cout << "RPC ping request";
+            cout << "RPC ping request\n";
             pingSend = true;
         }
         if (pto->nPingNonceSent == 0 && pto->nPingUsecStart + PING_INTERVAL * 1000000 < GetTimeMicros()) {
             // Ping automatically sent as a latency probe & keepalive.
-            cout << "Latency probe & keepalive";
+            cout << "Latency probe & keepalive \n";
             pingSend = true;
         }
         if (pingSend) {
             uint64_t nonce = 0;
             while (nonce == 0) {
-                cout << "Get rand bytes";
+                cout << "Get rand bytes \n";
                 GetRandBytes((unsigned char*)&nonce, sizeof(nonce));
             }
             pto->fPingQueued = false;
-            cout << "Get time";
+            cout << "Get time \n";
             pto->nPingUsecStart = GetTimeMicros();
             if (pto->nVersion > BIP0031_VERSION) {
                 pto->nPingNonceSent = nonce;
-                cout << "Push message";
+                cout << "Push message \n";
                 pto->PushMessage("ping", nonce);
             } else {
-                cout << "Peer is to old";
+                cout << "Peer is to old \n";
                 // Peer is too old to support ping command with nonce, pong will never arrive.
                 pto->nPingNonceSent = 0;
                 pto->PushMessage("ping");
@@ -6869,14 +6869,14 @@ bool SendMessages(CNode* pto, bool fSendTrickle)
         TRY_LOCK(cs_main, lockMain); // Acquire cs_main for IsInitialBlockDownload() and CNodeState()
         if (!lockMain)
             return true;
-        cout << "Main is locked";
+        cout << "Main is locked \n";
         // Address refresh broadcast
         static int64_t nLastRebroadcast;
         if (!IsInitialBlockDownload() && (GetTime() - nLastRebroadcast > 24 * 60 * 60)) {
             LOCK(cs_vNodes);
             BOOST_FOREACH (CNode* pnode, vNodes) {
                 // Periodically clear setAddrKnown to allow refresh broadcasts
-                cout << "Periodically clear setAddrKnown to allow refresh broadcasts";
+                cout << "Periodically clear setAddrKnown to allow refresh broadcasts \n";
                 if (nLastRebroadcast)
                     pnode->setAddrKnown.clear();
 
@@ -6887,12 +6887,14 @@ bool SendMessages(CNode* pto, bool fSendTrickle)
                 nLastRebroadcast = GetTime();
         }
 
+        cout << "ifSendTrickle \n";
         //
         // Message: addr
         //
         if (fSendTrickle) {
             vector<CAddress> vAddr;
             vAddr.reserve(pto->vAddrToSend.size());
+            cout << "Boost foreach addres to send \n";
             BOOST_FOREACH (const CAddress& addr, pto->vAddrToSend) {
                 // returns true if wasn't already contained in the set
                 cout << "return true if it wasn't already contained in the set";
@@ -6911,6 +6913,7 @@ bool SendMessages(CNode* pto, bool fSendTrickle)
         }
 
         CNodeState& state = *State(pto->GetId());
+        cout << "If state should ban \n";
         if (state.fShouldBan) {
             if (pto->fWhitelisted)
                 LogPrintf("Warning: not punishing whitelisted peer %s!\n", pto->addr.ToString());
@@ -6930,12 +6933,16 @@ bool SendMessages(CNode* pto, bool fSendTrickle)
         state.rejects.clear();
 
         // Start block sync
+        cout << "Start block sync \n";
         if (pindexBestHeader == NULL)
             pindexBestHeader = chainActive.Tip();
         bool fFetch = state.fPreferredDownload || (nPreferredDownload == 0 && !pto->fClient && !pto->fOneShot); // Download if this is a nice peer, or we have no nice peers and this one might do.
+        cout << "Downloaded is is nice peer \n";
         if (!state.fSyncStarted && !pto->fClient && fFetch /*&& !fImporting*/ && !fReindex) {
             // Only actively request headers from a single peer, unless we're close to end of initial download.
+            cout << "Only actively request headers from a single peer \n";
             if (nSyncStarted == 0 || pindexBestHeader->GetBlockTime() > GetAdjustedTime() - 6 * 60 * 60) { // NOTE: was "close to today" and 24h in Bitcoin
+                cout << "Sync started \n";
                 state.fSyncStarted = true;
                 nSyncStarted++;
                 //CBlockIndex *pindexStart = pindexBestHeader->pprev ? pindexBestHeader->pprev : pindexBestHeader;
@@ -6945,6 +6952,7 @@ bool SendMessages(CNode* pto, bool fSendTrickle)
             }
         }
 
+        cout << "Resend wallet transactions that are nog send yet \n";
         // Resend wallet transactions that haven't gotten in a block yet
         // Except during reindex, importing and IBD, when old wallet
         // transactions become unconfirmed and spams other nodes.
