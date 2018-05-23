@@ -6945,9 +6945,11 @@ bool SendMessages(CNode* pto, bool fSendTrickle)
                 cout << "Sync started \n";
                 state.fSyncStarted = true;
                 nSyncStarted++;
+                cout << "nSyncStarted =" << nSyncStarted << "\n";
                 //CBlockIndex *pindexStart = pindexBestHeader->pprev ? pindexBestHeader->pprev : pindexBestHeader;
                 //LogPrint("net", "initial getheaders (%d) to peer=%d (startheight:%d)\n", pindexStart->nHeight, pto->id, pto->nStartingHeight);
                 //pto->PushMessage("getheaders", chainActive.GetLocator(pindexStart), uint256(0));
+                cout << "Push message get blocks \n";
                 pto->PushMessage("getblocks", chainActive.GetLocator(chainActive.Tip()), uint256(0));
             }
         }
