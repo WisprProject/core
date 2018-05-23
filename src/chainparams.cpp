@@ -352,7 +352,7 @@ public:
         nMinerThreads = 1;
         nTargetTimespan = 24 * 60 * 60; // WISPR: 1 day
         nTargetSpacing = 1 * 60;        // WISPR: 1 minutes
-        bnProofOfWorkLimit = CBigNum(~uint256(0) >> 1);
+        bnProofOfWorkLimit = CBigNum(~uint256(0) >> 1).getuint256();
         genesis.nTime = 1454124731;
         genesis.nBits = 0x207fffff;
         genesis.nNonce = 12345;
