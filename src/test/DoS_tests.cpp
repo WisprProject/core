@@ -53,9 +53,11 @@ BOOST_AUTO_TEST_CASE(DoS_banning)
     SendMessages(&dummyNode1, false);
     BOOST_CHECK(CNode::IsBanned(addr1));
     BOOST_CHECK(!CNode::IsBanned(ip(0xa0b0c001|0x0000ff00))); // Different IP, not banned
-
+    BOOST_TEST_CHECKPOINT("Finished addr1");
     CAddress addr2(ip(0xa0b0c002));
+    BOOST_TEST_CHECKPOINT("Created addr2");
     CNode dummyNode2(INVALID_SOCKET, addr2, "", true);
+    BOOST_TEST_CHECKPOINT("Created dummy node 2");
     dummyNode2.nVersion = 1;
     Misbehaving(dummyNode2.GetId(), 50);
     SendMessages(&dummyNode2, false);
