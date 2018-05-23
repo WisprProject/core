@@ -60,12 +60,20 @@ BOOST_AUTO_TEST_CASE(DoS_banning)
     BOOST_TEST_CHECKPOINT("Created dummy node 2");
     dummyNode2.nVersion = 1;
     Misbehaving(dummyNode2.GetId(), 50);
+    BOOST_TEST_CHECKPOINT("Dummy node 2 misbehaving");
     SendMessages(&dummyNode2, false);
+    BOOST_TEST_CHECKPOINT("Dummy node 2 send messages");
     BOOST_CHECK(!CNode::IsBanned(addr2)); // 2 not banned yet...
+    BOOST_TEST_CHECKPOINT("Address 2 is not banned");
     BOOST_CHECK(CNode::IsBanned(addr1));  // ... but 1 still should be
+    BOOST_TEST_CHECKPOINT("But 1 still is");
     Misbehaving(dummyNode2.GetId(), 50);
+    BOOST_TEST_CHECKPOINT("Address 2 misbehaving again");
     SendMessages(&dummyNode2, false);
+    BOOST_TEST_CHECKPOINT("Dummy node 2 send messages again");
     BOOST_CHECK(CNode::IsBanned(addr2));
+    BOOST_TEST_CHECKPOINT("Address 2 is banned");
+
 }
 
 BOOST_AUTO_TEST_CASE(DoS_banscore)
