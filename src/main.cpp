@@ -6946,7 +6946,7 @@ bool SendMessages(CNode* pto, bool fSendTrickle)
             cout << "Blocktime = " << pindexBestHeader->GetBlockTime() << "\n";
             cout << "Adjusted time  = " << GetAdjustedTime() << "\n";
             cout << "Adjusted time - =" << GetAdjustedTime() - 6 * 60 * 60 << "\n";
-            cout << "if statement result = " << nSyncStarted == 0 || pindexBestHeader->GetBlockTime() > GetAdjustedTime() - 6 * 60 * 60 << "\n";
+//            cout << "if statement result = " << nSyncStarted == 0 || pindexBestHeader->GetBlockTime() > GetAdjustedTime() - 6 * 60 * 60 << "\n";
             if (nSyncStarted == 0 || pindexBestHeader->GetBlockTime() > GetAdjustedTime() - 6 * 60 * 60) { // NOTE: was "close to today" and 24h in Bitcoin
                 cout << "Sync started \n";
                 state.fSyncStarted = true;
