@@ -12,15 +12,20 @@
 #include "tinyformat.h"
 #include "utilstrencodings.h"
 #include "util.h"
+#include "crypto/scrypt.h"
+
 
 uint256 CBlockHeader::GetHash() const
 {
-    if(nVersion < 4)
+    if(nVersion < 2)
         return Hash(BEGIN(nVersion), END(nNonce));
 
-    return Hash(BEGIN(nVersion), END(nAccumulatorCheckpoint));
+    return GetPoWHash();
 }
-
+uint256 GetPoWHash() const
+{
+    return scrypt_blockhash(CVOIDBEGIN(nVersion));
+}
 uint256 CBlock::BuildMerkleTree(bool* fMutated) const
 {
     /* WARNING! If you're reading this because you're learning about crypto
