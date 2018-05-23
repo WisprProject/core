@@ -275,7 +275,7 @@ public:
 //        nRejectOldSporkKey = 1522454400; //!> Reject old spork key after Saturday, March 31, 2018 12:00:00 AM GMT
 
         //! Modify the testnet genesis block so the timestamp is valid for a later start.
-        genesis.nTime = 1454124731;
+        genesis.nTime = 1532363327;
         genesis.nNonce = 2402015;
 
         hashGenesisBlock = genesis.GetHash();
