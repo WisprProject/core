@@ -22,7 +22,7 @@ uint256 CBlockHeader::GetHash() const
 
     return GetPoWHash();
 }
-uint256 GetPoWHash() const
+uint256 CBlockHeader::GetPoWHash() const
 {
     return scrypt_blockhash(CVOIDBEGIN(nVersion));
 }
