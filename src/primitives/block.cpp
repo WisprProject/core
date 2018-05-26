@@ -17,7 +17,7 @@
 
 uint256 CBlockHeader::GetHash() const
 {
-    if(nVersion < 2)
+    if(nVersion > 1)
         return Hash(BEGIN(nVersion), END(nNonce));
 
     return GetPoWHash();
