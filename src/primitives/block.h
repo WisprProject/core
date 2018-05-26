@@ -26,7 +26,7 @@ static const unsigned int MAX_BLOCK_SIZE_LEGACY = 1000000;
 class CBlockHeader {
 public:
     // header
-    static const int32_t CURRENT_VERSION = 3;
+    static const int32_t CURRENT_VERSION = 7;
     int32_t nVersion;
     uint256 hashPrevBlock;
     uint256 hashMerkleRoot;
@@ -52,7 +52,7 @@ public:
         READWRITE(nNonce);
 
         //zerocoin active, header changes to include accumulator checksum
-        if (nVersion > 3)
+        if (nVersion > 10)
             READWRITE(nAccumulatorCheckpoint);
     }
 
