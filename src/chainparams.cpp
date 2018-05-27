@@ -176,6 +176,7 @@ public:
 
         hashGenesisBlock = genesis.GetHash();
         printf("Main net\n");
+        printf("genesis.nBits = %s\n", genesis.nBits);
         printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
         printf("genesis.hashMerkleRoot = %s\n", genesis.hashMerkleRoot.ToString().c_str());
         assert(hashGenesisBlock == uint256("0x0000ec93e0a3fe0aafa3be7dafe1290f5fca039a4037dd5174bc3dd7a35d67f0"));
