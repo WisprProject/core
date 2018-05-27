@@ -176,7 +176,7 @@ public:
 
         hashGenesisBlock = genesis.GetHash();
         printf("Main net\n");
-        printf("genesis.nBits = %s\n", genesis.nBits.ToString().c_str());
+        printf("genesis.nBits = %s\n", to_string(genesis.nBits).c_str());
         printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
         printf("genesis.hashMerkleRoot = %s\n", genesis.hashMerkleRoot.ToString().c_str());
         printf("genesis = %s\n", genesis.ToString().c_str());
