@@ -121,7 +121,7 @@ public:
         pchMessageStart[3] = 0x77;
         vAlertPubKey=ParseHex("04a2b4f239f3f1f4439ef384d0e1927f42d1b33963400735fa0db35946816d2ddce9588dae345108f4ed295d7f2df826fe63bfa0ee7f3bde18805a8465386edb4c");
         nDefaultPort = 17000;
-        bnProofOfWorkLimit = CScriptNum(~uint256(0) >> 16); // WISPR starting difficulty is 1 / 2^12
+        bnProofOfWorkLimit = ~uint256(0) >> 16; // WISPR starting difficulty is 1 / 2^12
         nSubsidyHalvingInterval = 0;
         nMaxReorganizationDepth = 500;
         nEnforceBlockUpgradeMajority = 750;
