@@ -246,11 +246,12 @@ public:
     }
 
     // invalidates the object
-    uint256 GetHash()
-    {
-        uint256 result;
-        ctx.Finalize((unsigned char*)&result);
-        return result;
+    uint256 GetHash() {
+        uint256 hash1;
+        SHA256_Final((unsigned char*)&hash1, &ctx);
+        uint256 hash2;
+        SHA256((unsigned char*)&hash1, sizeof(hash1), (unsigned char*)&hash2);
+        return hash2;
     }
 
     template <typename T>
