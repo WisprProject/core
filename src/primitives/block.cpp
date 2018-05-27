@@ -63,30 +63,48 @@ uint256 CBlock::BuildMerkleTree(bool* fMutated) const
        known ways of changing the transactions without affecting the merkle
        root.
     */
-    vMerkleTree.clear();
-    vMerkleTree.reserve(vtx.size() * 2 + 16); // Safe upper bound for the number of total nodes.
-    for (std::vector<CTransaction>::const_iterator it(vtx.begin()); it != vtx.end(); ++it)
-        vMerkleTree.push_back(it->GetHash());
-    int j = 0;
-    bool mutated = false;
-    for (int nSize = vtx.size(); nSize > 1; nSize = (nSize + 1) / 2)
-    {
-        for (int i = 0; i < nSize; i += 2)
+    if(nVersion > 8){
+        vMerkleTree.clear();
+        vMerkleTree.reserve(vtx.size() * 2 + 16); // Safe upper bound for the number of total nodes.
+        for (std::vector<CTransaction>::const_iterator it(vtx.begin()); it != vtx.end(); ++it)
+            vMerkleTree.push_back(it->GetHash());
+        int j = 0;
+        bool mutated = false;
+        for (int nSize = vtx.size(); nSize > 1; nSize = (nSize + 1) / 2)
         {
-            int i2 = std::min(i+1, nSize-1);
-            if (i2 == i + 1 && i2 + 1 == nSize && vMerkleTree[j+i] == vMerkleTree[j+i2]) {
-                // Two identical hashes at the end of the list at a particular level.
-                mutated = true;
+            for (int i = 0; i < nSize; i += 2)
+            {
+                int i2 = std::min(i+1, nSize-1);
+                if (i2 == i + 1 && i2 + 1 == nSize && vMerkleTree[j+i] == vMerkleTree[j+i2]) {
+                    // Two identical hashes at the end of the list at a particular level.
+                    mutated = true;
+                }
+                vMerkleTree.push_back(Hash(BEGIN(vMerkleTree[j+i]),  END(vMerkleTree[j+i]),
+                                           BEGIN(vMerkleTree[j+i2]), END(vMerkleTree[j+i2])));
             }
-            vMerkleTree.push_back(Hash(BEGIN(vMerkleTree[j+i]),  END(vMerkleTree[j+i]),
-                                       BEGIN(vMerkleTree[j+i2]), END(vMerkleTree[j+i2])));
+            j += nSize;
         }
-        j += nSize;
+        if (fMutated) {
+            *fMutated = mutated;
+        }
+        return (vMerkleTree.empty() ? uint256() : vMerkleTree.back());
+    }else{
+        vMerkleTree.clear();
+        BOOST_FOREACH(const CTransaction& tx, vtx)
+        vMerkleTree.push_back(tx.GetHash());
+        int j = 0;
+        for (int nSize = vtx.size(); nSize > 1; nSize = (nSize + 1) / 2)
+        {
+            for (int i = 0; i < nSize; i += 2)
+            {
+                int i2 = std::min(i+1, nSize-1);
+                vMerkleTree.push_back(Hash(BEGIN(vMerkleTree[j+i]),  END(vMerkleTree[j+i]),
+                                           BEGIN(vMerkleTree[j+i2]), END(vMerkleTree[j+i2])));
+            }
+            j += nSize;
+        }
+        return (vMerkleTree.empty() ? 0 : vMerkleTree.back());
     }
-    if (fMutated) {
-        *fMutated = mutated;
-    }
-    return (vMerkleTree.empty() ? uint256() : vMerkleTree.back());
 }
 
 std::vector<uint256> CBlock::GetMerkleBranch(int nIndex) const
