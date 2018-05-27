@@ -161,6 +161,7 @@ public:
          */
         const char* pszTimestamp = "I would rather be without a state than without a voice";
         CMutableTransaction txNew;
+        txNew.nTime = 1513403825;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
         txNew.vin[0].scriptSig = CScript() << 0 << CScriptNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
