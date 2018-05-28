@@ -231,36 +231,31 @@ inline uint160 Hash160(const std::vector<unsigned char>& vch)
 class CHashWriter
 {
 private:
-    SHA256_CTX ctx;
+    CHash256 ctx;
 
 public:
     int nType;
     int nVersion;
 
-    void Init() {
-        SHA256_Init(&ctx);
-    }
+    CHashWriter(int nTypeIn, int nVersionIn) : nType(nTypeIn), nVersion(nVersionIn) {}
 
-    CHashWriter(int nTypeIn, int nVersionIn) : nType(nTypeIn), nVersion(nVersionIn) {
-        Init();
-    }
-
-    CHashWriter& write(const char *pch, size_t size) {
-        SHA256_Update(&ctx, pch, size);
+    CHashWriter& write(const char* pch, size_t size)
+    {
+        ctx.Write((const unsigned char*)pch, size);
         return (*this);
     }
 
     // invalidates the object
-    uint256 GetHash() {
-        uint256 hash1;
-        SHA256_Final((unsigned char*)&hash1, &ctx);
-        uint256 hash2;
-        SHA256((unsigned char*)&hash1, sizeof(hash1), (unsigned char*)&hash2);
-        return hash2;
+    uint256 GetHash()
+    {
+        uint256 result;
+        ctx.Finalize((unsigned char*)&result);
+        return result;
     }
 
-    template<typename T>
-    CHashWriter& operator<<(const T& obj) {
+    template <typename T>
+    CHashWriter& operator<<(const T& obj)
+    {
         // Serialize to this stream
         ::Serialize(*this, obj, nType, nVersion);
         return (*this);
