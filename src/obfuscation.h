@@ -88,7 +88,7 @@ public:
 
     CTxDSOut(const CTxOut &out) {
         nValue = out.nValue;
-        nRounds = out.nRounds;
+//        nRounds = out.nRounds;
         scriptPubKey = out.scriptPubKey;
         nSentTimes = 0;
     }
