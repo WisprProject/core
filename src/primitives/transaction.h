@@ -132,8 +132,6 @@ public:
     inline void SerializationOp(Stream &s, Operation ser_action, int nType, int nVersion) {
         READWRITE(nValue);
         READWRITE(scriptPubKey);
-         if (nVersion > 1)
-             READWRITE(nRounds);
     }
 
     void SetNull() {

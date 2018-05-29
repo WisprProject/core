@@ -85,7 +85,7 @@ std::string CTxOut::ToString() const {
 CMutableTransaction::CMutableTransaction() : nVersion(CTransaction::CURRENT_VERSION), nLockTime(0) {}
 
 CMutableTransaction::CMutableTransaction(const CTransaction &tx) : nVersion(tx.nVersion), vin(tx.vin), vout(tx.vout),
-                                                                   nLockTime(tx.nLockTime) {}
+                                                                   nLockTime(tx.nLockTime), nTime(tx.nTime) {}
 
 uint256 CMutableTransaction::GetHash() const {
     return SerializeHash(*this);
@@ -113,7 +113,7 @@ void CTransaction::UpdateHash() const {
 CTransaction::CTransaction() : hash(), nVersion(CTransaction::CURRENT_VERSION), vin(), vout(), nLockTime(0), nTime() {}
 
 CTransaction::CTransaction(const CMutableTransaction &tx) : nVersion(tx.nVersion), vin(tx.vin), vout(tx.vout),
-                                                            nLockTime(tx.nLockTime), nTime(nTime) {
+                                                            nLockTime(tx.nLockTime), nTime(tx.nTime) {
     UpdateHash();
 }
 
@@ -122,6 +122,7 @@ CTransaction &CTransaction::operator=(const CTransaction &tx) {
     *const_cast<std::vector <CTxIn> *>(&vin) = tx.vin;
     *const_cast<std::vector <CTxOut> *>(&vout) = tx.vout;
     *const_cast<unsigned int *>(&nLockTime) = tx.nLockTime;
+    *const_cast<unsigned int *>(&nTime) = tx.nTime;
     *const_cast<uint256 *>(&hash) = tx.hash;
     return *this;
 }
@@ -230,12 +231,13 @@ unsigned int CTransaction::CalculateModifiedSize(unsigned int nTxSize) const {
 
 std::string CTransaction::ToString() const {
     std::string str;
-    str += strprintf("CTransaction(hash=%s, ver=%d, vin.size=%u, vout.size=%u, nLockTime=%u)\n",
+    str += strprintf("CTransaction(hash=%s, ver=%d, vin.size=%u, vout.size=%u, nLockTime=%u, nTime=%u)\n",
                      GetHash().ToString(),
                      nVersion,
                      vin.size(),
                      vout.size(),
-                     nLockTime);
+                     nLockTime,
+                     nTime);
     for (unsigned int i = 0; i < vin.size(); i++)
         str += "    " + vin[i].ToString() + "\n";
     for (unsigned int i = 0; i < vout.size(); i++)
