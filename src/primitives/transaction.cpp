@@ -52,7 +52,7 @@ std::string CTxIn::ToString() const {
         else
             str += strprintf(", coinbase %s", HexStr(scriptSig));
     else
-        str += strprintf(", scriptSig=%s", scriptSig.ToString().substr(0, 24));
+        str += strprintf(", scriptSig=%s", scriptSig.ToString());
     if (nSequence != std::numeric_limits<unsigned int>::max())
         str += strprintf(", nSequence=%u", nSequence);
     str += ")";
@@ -78,7 +78,7 @@ uint256 CTxOut::GetHash() const {
 
 std::string CTxOut::ToString() const {
     return strprintf("CTxOut(nValue=%d.%08d, scriptPubKey=%s)", nValue / COIN, nValue % COIN,
-                     scriptPubKey.ToString().substr(0, 30));
+                     scriptPubKey.ToString());
 }
 
 CMutableTransaction::CMutableTransaction() : nVersion(CTransaction::CURRENT_VERSION), nLockTime(0) {}
@@ -229,7 +229,7 @@ unsigned int CTransaction::CalculateModifiedSize(unsigned int nTxSize) const {
 std::string CTransaction::ToString() const {
     std::string str;
     str += strprintf("CTransaction(hash=%s, ver=%d, vin.size=%u, vout.size=%u, nLockTime=%u)\n",
-                     GetHash().ToString().substr(0, 10),
+                     GetHash().ToString(),
                      nVersion,
                      vin.size(),
                      vout.size(),
