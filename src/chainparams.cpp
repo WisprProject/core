@@ -169,7 +169,7 @@ public:
         txNew.vout[0].scriptPubKey = CScript() << ParseHex("0433f2952f9002c9088a19607e3d4a54d3d9dfe1cf5c78168b8ba6524fb19fc5d7d3202948e6b8b09e98c425875af6af78fd4f64ff07d97a9ae31ebda5162fbac3") << OP_CHECKSIG;
         genesis.vtx.push_back(txNew);
         genesis.hashPrevBlock = 0;
-        genesis.hashMerkleRoot = "bcd0064f46daed0b3c1ccff16656a0da04b5509924118b7c13d21c81d62ec521";
+        genesis.hashMerkleRoot = uint256("bcd0064f46daed0b3c1ccff16656a0da04b5509924118b7c13d21c81d62ec521");
         genesis.nVersion = 1;
         genesis.nTime = 1513403825;
         genesis.nBits = bnProofOfWorkLimit.GetCompact();
