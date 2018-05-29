@@ -60,7 +60,7 @@ std::string CTxIn::ToString() const {
     return str;
 }
 
-CTxOut::CTxOut(const CAmount &nValueIn, CScript scriptPubKeyIn, int nVersion) {
+CTxOut::CTxOut(const CAmount &nValueIn, CScript scriptPubKeyIn) {
     nValue = nValueIn;
     scriptPubKey = scriptPubKeyIn;
      if (nVersion > 1)
