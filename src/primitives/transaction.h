@@ -118,7 +118,7 @@ class CTxOut {
 public:
     CAmount nValue;
     CScript scriptPubKey;
-//    int nRounds;
+    int nRounds;
 
     CTxOut() {
         SetNull();
@@ -132,13 +132,15 @@ public:
     inline void SerializationOp(Stream &s, Operation ser_action, int nType, int nVersion) {
         READWRITE(nValue);
         READWRITE(scriptPubKey);
+         if (nVersion > 1)
+             READWRITE(nRounds);
     }
 
     void SetNull() {
         nValue = -1;
         scriptPubKey.clear();
        // if (nVersion > 1)
-          //  nRounds = 0; // an initial value, should be no way to get this by calculations
+        nRounds = -10; // an initial value, should be no way to get this by calculations
     }
 
     bool IsNull() const {
@@ -175,8 +177,8 @@ public:
     friend bool operator==(const CTxOut &a, const CTxOut &b) {
         return (a.nValue == b.nValue &&
                 a.scriptPubKey == b.scriptPubKey
-//                &&
-//                a.nRounds == b.nRounds
+                &&
+                a.nRounds == b.nRounds
         );
     }
 
