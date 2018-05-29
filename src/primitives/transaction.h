@@ -137,7 +137,8 @@ public:
     void SetNull() {
         nValue = -1;
         scriptPubKey.clear();
-        nRounds = -10; // an initial value, should be no way to get this by calculations
+        if (nVersion > 1)
+            nRounds = -10; // an initial value, should be no way to get this by calculations
     }
 
     bool IsNull() const {
@@ -197,7 +198,7 @@ private:
     void UpdateHash() const;
 
 public:
-    static const int32_t CURRENT_VERSION = 3;
+    static const int32_t CURRENT_VERSION = 2;
 
     // The local variables are made const to prevent unintended modification
     // without updating the cached hash value. However, CTransaction is not
