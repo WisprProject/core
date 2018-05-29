@@ -46,6 +46,7 @@ std::string CTxIn::ToString() const {
     std::string str;
     str += "CTxIn(";
     str += prevout.ToString();
+    str += strprintf(", prevPubKey = %s...", HexStr(prevPubKey).substr(0, 25));
     if (prevout.IsNull())
         if (scriptSig.IsZerocoinSpend())
             str += strprintf(", zerocoinspend %s...", HexStr(scriptSig).substr(0, 25));
@@ -77,8 +78,8 @@ uint256 CTxOut::GetHash() const {
 }
 
 std::string CTxOut::ToString() const {
-    return strprintf("CTxOut(nValue=%d.%08d, scriptPubKey=%s)", nValue / COIN, nValue % COIN,
-                     scriptPubKey.ToString());
+    return strprintf("CTxOut(nValue=%d.%08d, scriptPubKey=%s, nRounds=%u)", nValue / COIN, nValue % COIN,
+                     scriptPubKey.ToString(), nRounds);
 }
 
 CMutableTransaction::CMutableTransaction() : nVersion(CTransaction::CURRENT_VERSION), nLockTime(0) {}
@@ -92,10 +93,11 @@ uint256 CMutableTransaction::GetHash() const {
 
 std::string CMutableTransaction::ToString() const {
     std::string str;
-    str += strprintf("CMutableTransaction(ver=%d, vin.size=%u, vout.size=%u, nLockTime=%u)\n",
+    str += strprintf("CMutableTransaction(ver=%d, vin.size=%u, vout.size=%u, nTime=%u, nLockTime=%u)\n",
                      nVersion,
                      vin.size(),
                      vout.size(),
+                     nTime,
                      nLockTime);
     for (unsigned int i = 0; i < vin.size(); i++)
         str += "    " + vin[i].ToString() + "\n";
