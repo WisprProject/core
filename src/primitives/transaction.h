@@ -92,7 +92,8 @@ public:
     inline void SerializationOp(Stream &s, Operation ser_action, int nType, int nVersion) {
         READWRITE(prevout);
         READWRITE(scriptSig);
-        READWRITE(nSequence);
+        if (nVersion > 1)
+            READWRITE(nSequence);
     }
 
     bool IsFinal() const {
@@ -198,7 +199,7 @@ private:
     void UpdateHash() const;
 
 public:
-    static const int32_t CURRENT_VERSION = 1;
+    static const int32_t CURRENT_VERSION = 3;
 
     // The local variables are made const to prevent unintended modification
     // without updating the cached hash value. However, CTransaction is not
@@ -228,7 +229,8 @@ public:
         READWRITE(*const_cast<std::vector <CTxIn> *>(&vin));
         READWRITE(*const_cast<std::vector <CTxOut> *>(&vout));
         READWRITE(*const_cast<uint32_t *>(&nLockTime));
-        READWRITE(*const_cast<uint32_t *>(&nTime));
+        if (nVersion < 2)
+            READWRITE(*const_cast<uint32_t *>(&nTime));
         if (ser_action.ForRead())
             UpdateHash();
     }
@@ -315,10 +317,11 @@ struct CMutableTransaction {
     inline void SerializationOp(Stream &s, Operation ser_action, int nType, int nVersion) {
         READWRITE(this->nVersion);
         nVersion = this->nVersion;
-        READWRITE(nTime);
         READWRITE(vin);
         READWRITE(vout);
         READWRITE(nLockTime);
+        if (nVersion < 2)
+             READWRITE(nTime);
     }
 
     /** Compute the hash of this CMutableTransaction. This is computed on the
