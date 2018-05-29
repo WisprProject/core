@@ -60,10 +60,11 @@ std::string CTxIn::ToString() const {
     return str;
 }
 
-CTxOut::CTxOut(const CAmount &nValueIn, CScript scriptPubKeyIn) {
+CTxOut::CTxOut(const CAmount &nValueIn, CScript scriptPubKeyIn, int nVersion) {
     nValue = nValueIn;
     scriptPubKey = scriptPubKeyIn;
-//    nRounds = -10;
+     if (nVersion > 1)
+         nRounds = -10;
 }
 
 bool COutPoint::IsMasternodeReward(const CTransaction *tx) const {
