@@ -92,8 +92,6 @@ public:
     inline void SerializationOp(Stream &s, Operation ser_action, int nType, int nVersion) {
         READWRITE(prevout);
         READWRITE(scriptSig);
-        if (nVersion > 1)
-            READWRITE(nSequence);
     }
 
     bool IsFinal() const {
