@@ -46,7 +46,7 @@ std::string CTxIn::ToString() const {
     std::string str;
     str += "CTxIn(";
     str += prevout.ToString();
-    str += strprintf(", prevPubKey = %s...", HexStr(prevPubKey).substr(0, 25));
+    str += strprintf(", prevPubKey = %s", HexStr(prevPubKey));
     if (prevout.IsNull())
         if (scriptSig.IsZerocoinSpend())
             str += strprintf(", zerocoinspend %s...", HexStr(scriptSig).substr(0, 25));
@@ -79,8 +79,8 @@ uint256 CTxOut::GetHash() const {
 }
 
 std::string CTxOut::ToString() const {
-    return strprintf("CTxOut(nValue=%d.%08d, scriptPubKey=%s, nRounds=%u)", nValue / COIN, nValue % COIN,
-                     scriptPubKey.ToString(), nRounds);
+    return strprintf("CTxOut(nValue=%d.%08d, scriptPubKey=%s, nRounds=%u, hash=%s)", nValue / COIN, nValue % COIN,
+                     scriptPubKey.ToString(), nRounds, GetHash().ToString());
 }
 
 CMutableTransaction::CMutableTransaction() : nVersion(CTransaction::CURRENT_VERSION), nLockTime(0) {}
