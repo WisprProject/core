@@ -17,6 +17,7 @@
 
 #include <iomanip>
 #include <openssl/sha.h>
+#include <openssl/ripemd.h>
 #include <sstream>
 #include <vector>
 
