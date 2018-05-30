@@ -64,7 +64,7 @@ std::string CTxIn::ToString() const {
 CTxOut::CTxOut(const CAmount &nValueIn, CScript scriptPubKeyIn) {
     nValue = nValueIn;
     scriptPubKey = scriptPubKeyIn;
-//    nRounds = -10;
+    nRounds = -10;
 }
 
 bool COutPoint::IsMasternodeReward(const CTransaction *tx) const {
@@ -79,11 +79,11 @@ uint256 CTxOut::GetHash() const {
 }
 
 std::string CTxOut::ToString() const {
-    return strprintf("CTxOut(nValue=%d.%08d, scriptPubKey=%s, hash=%s)",
+    return strprintf("CTxOut(nValue=%d.%08d, scriptPubKey=%s, nRounds=%u, hash=%s)",
                      nValue / COIN,
                      nValue % COIN,
                      scriptPubKey.ToString(),
-//                     nRounds,
+                     nRounds,
                      GetHash().ToString());
 }
 

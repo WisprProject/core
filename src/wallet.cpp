@@ -778,95 +778,94 @@ CAmount CWallet::GetDebit(const CTxIn &txin, const isminefilter &filter) const {
 }
 
 // Recursively determine the rounds of a given input (How deep is the Obfuscation chain for a given input)
-//int CWallet::GetRealInputObfuscationRounds(CTxIn in, int rounds) const {
-//    static std::map <uint256, CMutableTransaction> mDenomWtxes;
-//
-//    if (rounds >= 16) return 15; // 16 rounds max
-//
-//    uint256 hash = in.prevout.hash;
-//    unsigned int nout = in.prevout.n;
-//
-//    const CWalletTx *wtx = GetWalletTx(hash);
-//    if (wtx != NULL) {
-//        std::map<uint256, CMutableTransaction>::const_iterator mdwi = mDenomWtxes.find(hash);
-//        // not known yet, let's add it
-//        if (mdwi == mDenomWtxes.end()) {
-//            LogPrint("obfuscation", "GetInputObfuscationRounds INSERTING %s\n", hash.ToString());
-//            mDenomWtxes[hash] = CMutableTransaction(*wtx);
-//        }
-//            // found and it's not an initial value, just return it
-//        else if (mDenomWtxes[hash].vout[nout].nRounds != -10) {
-//            return mDenomWtxes[hash].vout[nout].nRounds;
-//        }
-//
-//
-//        // bounds check
-//        if (nout >= wtx->vout.size()) {
-//            // should never actually hit this
-//            LogPrint("obfuscation", "GetInputObfuscationRounds UPDATED   %s %3d %3d\n", hash.ToString(), nout, -4);
-//            return -4;
-//        }
-//
-//        if (pwalletMain->IsCollateralAmount(wtx->vout[nout].nValue)) {
-//            mDenomWtxes[hash].vout[nout].nRounds = -3;
-//            LogPrint("obfuscation", "GetInputObfuscationRounds UPDATED   %s %3d %3d\n", hash.ToString(), nout,
-//                     mDenomWtxes[hash].vout[nout].nRounds);
-//            return mDenomWtxes[hash].vout[nout].nRounds;
-//        }
-//
-//        //make sure the final output is non-denominate
-//        if (/*rounds == 0 && */ !IsDenominatedAmount(wtx->vout[nout].nValue)) //NOT DENOM
-//        {
-//            mDenomWtxes[hash].vout[nout].nRounds = -2;
-//            LogPrint("obfuscation", "GetInputObfuscationRounds UPDATED   %s %3d %3d\n", hash.ToString(), nout,
-//                     mDenomWtxes[hash].vout[nout].nRounds);
-//            return mDenomWtxes[hash].vout[nout].nRounds;
-//        }
-//
-//        bool fAllDenoms = true;
-//        BOOST_FOREACH(CTxOut
-//        out, wtx->vout) {
-//            fAllDenoms = fAllDenoms && IsDenominatedAmount(out.nValue);
-//        }
-//        // this one is denominated but there is another non-denominated output found in the same tx
-//        if (!fAllDenoms) {
-//            mDenomWtxes[hash].vout[nout].nRounds = 0;
-//            LogPrint("obfuscation", "GetInputObfuscationRounds UPDATED   %s %3d %3d\n", hash.ToString(), nout,
-//                     mDenomWtxes[hash].vout[nout].nRounds);
-//            return mDenomWtxes[hash].vout[nout].nRounds;
-//        }
-//
-//        int nShortest = -10; // an initial value, should be no way to get this by calculations
-//        bool fDenomFound = false;
-//        // only denoms here so let's look up
-//        BOOST_FOREACH(CTxIn
-//        in2, wtx->vin) {
-//            if (IsMine(in2)) {
-//                int n = GetRealInputObfuscationRounds(in2, rounds + 1);
-//                // denom found, find the shortest chain or initially assign nShortest with the first found value
-//                if (n >= 0 && (n < nShortest || nShortest == -10)) {
-//                    nShortest = n;
-//                    fDenomFound = true;
-//                }
-//            }
-//        }
-//        mDenomWtxes[hash].vout[nout].nRounds = fDenomFound ? (nShortest >= 15 ? 16 : nShortest +
-//                                                                                     1) // good, we a +1 to the shortest one but only 16 rounds max allowed
-//                                                           :
-//                                               0; // too bad, we are the fist one in that chain
-//        LogPrint("obfuscation", "GetInputObfuscationRounds UPDATED   %s %3d %3d\n", hash.ToString(), nout,
-//                 mDenomWtxes[hash].vout[nout].nRounds);
-//        return mDenomWtxes[hash].vout[nout].nRounds;
-//    }
-//
-//    return rounds - 1;
-//}
+int CWallet::GetRealInputObfuscationRounds(CTxIn in, int rounds) const {
+    static std::map <uint256, CMutableTransaction> mDenomWtxes;
+
+    if (rounds >= 16) return 15; // 16 rounds max
+
+    uint256 hash = in.prevout.hash;
+    unsigned int nout = in.prevout.n;
+
+    const CWalletTx *wtx = GetWalletTx(hash);
+    if (wtx != NULL) {
+        std::map<uint256, CMutableTransaction>::const_iterator mdwi = mDenomWtxes.find(hash);
+        // not known yet, let's add it
+        if (mdwi == mDenomWtxes.end()) {
+            LogPrint("obfuscation", "GetInputObfuscationRounds INSERTING %s\n", hash.ToString());
+            mDenomWtxes[hash] = CMutableTransaction(*wtx);
+        }
+            // found and it's not an initial value, just return it
+        else if (mDenomWtxes[hash].vout[nout].nRounds != -10) {
+            return mDenomWtxes[hash].vout[nout].nRounds;
+        }
+
+
+        // bounds check
+        if (nout >= wtx->vout.size()) {
+            // should never actually hit this
+            LogPrint("obfuscation", "GetInputObfuscationRounds UPDATED   %s %3d %3d\n", hash.ToString(), nout, -4);
+            return -4;
+        }
+
+        if (pwalletMain->IsCollateralAmount(wtx->vout[nout].nValue)) {
+            mDenomWtxes[hash].vout[nout].nRounds = -3;
+            LogPrint("obfuscation", "GetInputObfuscationRounds UPDATED   %s %3d %3d\n", hash.ToString(), nout,
+                     mDenomWtxes[hash].vout[nout].nRounds);
+            return mDenomWtxes[hash].vout[nout].nRounds;
+        }
+
+        //make sure the final output is non-denominate
+        if (/*rounds == 0 && */ !IsDenominatedAmount(wtx->vout[nout].nValue)) //NOT DENOM
+        {
+            mDenomWtxes[hash].vout[nout].nRounds = -2;
+            LogPrint("obfuscation", "GetInputObfuscationRounds UPDATED   %s %3d %3d\n", hash.ToString(), nout,
+                     mDenomWtxes[hash].vout[nout].nRounds);
+            return mDenomWtxes[hash].vout[nout].nRounds;
+        }
+
+        bool fAllDenoms = true;
+        BOOST_FOREACH(CTxOut
+        out, wtx->vout) {
+            fAllDenoms = fAllDenoms && IsDenominatedAmount(out.nValue);
+        }
+        // this one is denominated but there is another non-denominated output found in the same tx
+        if (!fAllDenoms) {
+            mDenomWtxes[hash].vout[nout].nRounds = 0;
+            LogPrint("obfuscation", "GetInputObfuscationRounds UPDATED   %s %3d %3d\n", hash.ToString(), nout,
+                     mDenomWtxes[hash].vout[nout].nRounds);
+            return mDenomWtxes[hash].vout[nout].nRounds;
+        }
+
+        int nShortest = -10; // an initial value, should be no way to get this by calculations
+        bool fDenomFound = false;
+        // only denoms here so let's look up
+        BOOST_FOREACH(CTxIn
+        in2, wtx->vin) {
+            if (IsMine(in2)) {
+                int n = GetRealInputObfuscationRounds(in2, rounds + 1);
+                // denom found, find the shortest chain or initially assign nShortest with the first found value
+                if (n >= 0 && (n < nShortest || nShortest == -10)) {
+                    nShortest = n;
+                    fDenomFound = true;
+                }
+            }
+        }
+        mDenomWtxes[hash].vout[nout].nRounds = fDenomFound ? (nShortest >= 15 ? 16 : nShortest +
+                                                                                     1) // good, we a +1 to the shortest one but only 16 rounds max allowed
+                                                           :
+                                               0; // too bad, we are the fist one in that chain
+        LogPrint("obfuscation", "GetInputObfuscationRounds UPDATED   %s %3d %3d\n", hash.ToString(), nout,
+                 mDenomWtxes[hash].vout[nout].nRounds);
+        return mDenomWtxes[hash].vout[nout].nRounds;
+    }
+
+    return rounds - 1;
+}
 
 // respect current settings
 int CWallet::GetInputObfuscationRounds(CTxIn in) const {
     LOCK(cs_wallet);
-//    int realObfuscationRounds = GetRealInputObfuscationRounds(in, 0);
-    int realObfuscationRounds = -10;
+    int realObfuscationRounds = GetRealInputObfuscationRounds(in, 0);
     return realObfuscationRounds > nZeromintPercentage ? nZeromintPercentage : realObfuscationRounds;
 }
 
