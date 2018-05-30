@@ -201,7 +201,7 @@ private:
     void UpdateHash() const;
 
 public:
-    static const int32_t CURRENT_VERSION = 2;
+    static const int32_t CURRENT_VERSION = 1;
 
     // The local variables are made const to prevent unintended modification
     // without updating the cached hash value. However, CTransaction is not
@@ -231,8 +231,8 @@ public:
         READWRITE(*const_cast<std::vector <CTxIn> *>(&vin));
         READWRITE(*const_cast<std::vector <CTxOut> *>(&vout));
         READWRITE(*const_cast<uint32_t *>(&nLockTime));
-        if (nVersion < 2)
-            READWRITE(*const_cast<uint32_t *>(&nTime));
+//        if (nVersion < 2)
+        READWRITE(*const_cast<uint32_t *>(&nTime));
         if (ser_action.ForRead())
             UpdateHash();
     }
@@ -322,8 +322,8 @@ struct CMutableTransaction {
         READWRITE(vin);
         READWRITE(vout);
         READWRITE(nLockTime);
-        if (nVersion < 2)
-             READWRITE(nTime);
+//        if (nVersion < 2)
+        READWRITE(nTime);
     }
 
     /** Compute the hash of this CMutableTransaction. This is computed on the
