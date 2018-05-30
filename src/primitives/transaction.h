@@ -139,7 +139,7 @@ public:
         nValue = -1;
         scriptPubKey.clear();
        // if (nVersion > 1)
-        nRounds = 0; // an initial value, should be no way to get this by calculations
+        nRounds = -10; // an initial value, should be no way to get this by calculations
     }
 
     bool IsNull() const {
