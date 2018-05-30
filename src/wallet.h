@@ -887,11 +887,12 @@ public:
 
     template<typename Stream, typename Operation>
     inline void SerializationOp(Stream &s, Operation ser_action, int nType, int nVersion) {
-        READWRITE(*(CTransaction *) this);
         nVersion = this->nVersion;
         READWRITE(hashBlock);
         READWRITE(vMerkleBranch);
         READWRITE(nIndex);
+        if (nVersion > 1)
+            READWRITE(*(CTransaction *) this);
     }
 
     int SetMerkleBranch(const CBlock &block);
