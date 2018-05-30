@@ -94,6 +94,7 @@ public:
         READWRITE(scriptSig);
         READWRITE(nSequence);
     }
+    uint256 GetHash() const;
 
     bool IsFinal() const {
         return (nSequence == std::numeric_limits<uint32_t>::max());

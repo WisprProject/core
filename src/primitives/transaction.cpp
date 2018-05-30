@@ -46,6 +46,7 @@ std::string CTxIn::ToString() const {
     std::string str;
     str += "CTxIn(";
     str += prevout.ToString();
+    str += strprintf(", hash=%s", GetHash().ToString());
     str += strprintf(", prevPubKey=%s", prevPubKey.ToString());
     str += strprintf(", nSequence=%u", nSequence);
     if (prevout.IsNull())
@@ -75,6 +76,9 @@ bool COutPoint::IsMasternodeReward(const CTransaction *tx) const {
 }
 
 uint256 CTxOut::GetHash() const {
+    return SerializeHash(*this);
+}
+uint256 CTxIn::GetHash() const {
     return SerializeHash(*this);
 }
 
