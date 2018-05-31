@@ -359,7 +359,7 @@ public:
         nMinerThreads = 1;
         nTargetTimespan = 24 * 60 * 60; // WISPR: 1 day
         nTargetSpacing = 1 * 60;        // WISPR: 1 minutes
-        bnProofOfWorkLimit = CBigNum(~uint256(0) >> 1).getuint256();
+        bnProofOfWorkLimit = ~uint256(0) >> 1;
         genesis.nTime = 1454124731;
         genesis.nBits = 0x207fffff;
         genesis.nNonce = 12345;
@@ -368,7 +368,7 @@ public:
         nDefaultPort = 17004;
         printf("Req net\n");
         printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
-        assert(hashGenesisBlock == uint256("cc93f4427f494c868f1cdf36d2ab21f1812390bdac16f449b4d88561816c71b8"));
+        assert(hashGenesisBlock == uint256("edc048a846ba8723bba32d7ce4abf832a7c20cb8c44339755c4482994352cbdd"));
 
         vFixedSeeds.clear(); //! Testnet mode doesn't have any fixed seeds.
         vSeeds.clear();      //! Testnet mode doesn't have any DNS seeds.
