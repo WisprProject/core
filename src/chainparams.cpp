@@ -170,7 +170,7 @@ public:
         txNew.vout[0].nValue = 125000 * COIN;
         txNew.vout[0].scriptPubKey = CScript() << ParseHex("0433f2952f9002c9088a19607e3d4a54d3d9dfe1cf5c78168b8ba6524fb19fc5d7d3202948e6b8b09e98c425875af6af78fd4f64ff07d97a9ae31ebda5162fbac3") << OP_CHECKSIG;
         printf("Main net\n");
-        printf("genesis.GetHash = %s\n", txNew.GetHash().ToString().c_str());
+//        printf("genesis.GetHash = %s\n", txNew.GetHash().ToString().c_str());
         genesis.vtx.push_back(txNew);
         genesis.hashPrevBlock = 0;
 //        genesis.hashMerkleRoot = uint256("bcd0064f46daed0b3c1ccff16656a0da04b5509924118b7c13d21c81d62ec521");
@@ -181,9 +181,9 @@ public:
         genesis.nNonce = 36156;
 
         hashGenesisBlock = genesis.GetHash();
-        printf("genesis.nBits = %s\n", to_string(genesis.nBits).c_str());
-        printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
-        printf("genesis.hashMerkleRoot = %s\n", genesis.hashMerkleRoot.ToString().c_str());
+//        printf("genesis.nBits = %s\n", to_string(genesis.nBits).c_str());
+//        printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
+//        printf("genesis.hashMerkleRoot = %s\n", genesis.hashMerkleRoot.ToString().c_str());
         printf("genesis = %s\n", genesis.ToString().c_str());
         assert(hashGenesisBlock == uint256("0000ec93e0a3fe0aafa3be7dafe1290f5fca039a4037dd5174bc3dd7a35d67f0"));
         assert(genesis.hashMerkleRoot == uint256("bcd0064f46daed0b3c1ccff16656a0da04b5509924118b7c13d21c81d62ec521"));
@@ -260,7 +260,7 @@ public:
         pchMessageStart[3] = 0x78;
         vAlertPubKey=ParseHex("0433f2952f9002c9088a19607e3d4a54d3d9dfe1cf5c78168b8ba6524fb19fc5d7d3202948e6b8b09e98c425875af6af78fd4f64ff07d97a9ae31ebda5162fbac3");
         nDefaultPort = 17002;
-        bnProofOfWorkLimit = CBigNum(~uint256(0) >> 16).getuint256(); // WISPR starting difficulty is 1 / 2^12
+        bnProofOfWorkLimit = ~uint256(0) >> 16; // WISPR starting difficulty is 1 / 2^12
 
         nEnforceBlockUpgradeMajority = 51;
         nRejectBlockOutdatedMajority = 75;
@@ -272,7 +272,7 @@ public:
         nMaturity = 15;
         nMasternodeCountDrift = 4;
         nModifierUpdateBlock = 250000; //approx Mon, 17 Apr 2017 04:00:00 GMT
-        nMaxMoneyOut = 5000000 * COIN;
+        nMaxMoneyOut = 120000000 * COIN;
         nZerocoinStartHeight = 250000;
         nZerocoinStartTime = 1528129727; //Wed, 4 Jun 2018
         nBlockEnforceSerialRange = 1; //Enforce serial range starting this block
@@ -292,7 +292,9 @@ public:
         hashGenesisBlock = genesis.GetHash();
         printf("Test net\n");
         printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
-        assert(hashGenesisBlock == uint256("eaed1be0a78bd8f6e6ad58d227ec0ac6cbbcca53886871d56a93d7bb4f8fa71a"));
+        assert(hashGenesisBlock == uint256("c492edc474c18d8b20ae2da5123ddb1ddbed84cf613f8b9e3b33da5621525323"));
+//        assert(genesis.hashMerkleRoot == uint256("0x26069b04c7c7b5b8773824b15cfbf0ddaf11ee261657a1aeb28aa5c8163909ee"));
+//        assert(hashGenesisBlock == uint256("eaed1be0a78bd8f6e6ad58d227ec0ac6cbbcca53886871d56a93d7bb4f8fa71a"));
 
 //        vFixedSeeds.clear();
         vSeeds.clear();
@@ -304,13 +306,11 @@ public:
 //        vSeeds.push_back(CDNSSeedData("54.171.130.70", "54.171.130.70"));
 //        vSeeds.push_back(CDNSSeedData("34.245.197.246", "34.245.197.246"));
 
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 139); // Testnet wispr addresses start with 'x' or 'y'
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 19);  // Testnet wispr script addresses start with '8' or '9'
-        base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 239);     // Testnet private keys start with '9' or 'c' (Bitcoin defaults)
-        // Testnet wispr BIP32 pubkeys start with 'DRKV'
-        base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x3a)(0x80)(0x61)(0xa0).convert_to_container<std::vector<unsigned char> >();
-        // Testnet wispr BIP32 prvkeys start with 'DRKP'
-        base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x3a)(0x80)(0x58)(0x37).convert_to_container<std::vector<unsigned char> >();
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 110);
+        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 8);
+        base58Prefixes[SECRET_KEY]     = std::vector<unsigned char>(1, 239);
+        base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x04)(0x35)(0x87)(0xCF).convert_to_container<std::vector<unsigned char> >();
+        base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x04)(0x35)(0x83)(0x94).convert_to_container<std::vector<unsigned char> >();
         // Testnet wispr BIP44 coin type is '1' (All coin's testnet default)
         base58Prefixes[EXT_COIN_TYPE] = boost::assign::list_of(0x80)(0x00)(0x00)(0x01).convert_to_container<std::vector<unsigned char> >();
 
