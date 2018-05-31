@@ -209,11 +209,11 @@ public:
     // actually immutable; deserialization and assignment are implemented,
     // and bypass the constness. This is safe, as they update the entire
     // structure, including the hash.
-    int32_t nVersion;
+    const int32_t nVersion;
     unsigned int nTime;
     std::vector <CTxIn> vin;
     std::vector <CTxOut> vout;
-    uint32_t nLockTime;
+    const uint32_t nLockTime;
 
     /** Construct a CTransaction that qualifies as IsNull() */
     CTransaction();
@@ -227,21 +227,12 @@ public:
 
     template<typename Stream, typename Operation>
     inline void SerializationOp(Stream &s, Operation ser_action, int nType, int nVersion) {
-        if (nVersion > 1) {
-            READWRITE(*const_cast<int32_t *>(&this->nVersion));
-            nVersion = this->nVersion;
-            READWRITE(*const_cast<std::vector <CTxIn> *>(&vin));
-            READWRITE(*const_cast<std::vector <CTxOut> *>(&vout));
-            READWRITE(*const_cast<uint32_t *>(&nLockTime));
-            READWRITE(*const_cast<unsigned int *>(&nTime));
-        }else {
-            READWRITE(this->nVersion);
-            nVersion = this->nVersion;
-            READWRITE(nTime);
-            READWRITE(vin);
-            READWRITE(vout);
-            READWRITE(nLockTime);
-        }
+        READWRITE(*const_cast<int32_t *>(&this->nVersion));
+        nVersion = this->nVersion;
+        READWRITE(*const_cast<unsigned int *>(&nTime));
+        READWRITE(*const_cast<std::vector <CTxIn> *>(&vin));
+        READWRITE(*const_cast<std::vector <CTxOut> *>(&vout));
+        READWRITE(*const_cast<uint32_t *>(&nLockTime));
         if (ser_action.ForRead())
             UpdateHash();
     }
