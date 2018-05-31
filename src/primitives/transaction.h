@@ -209,11 +209,11 @@ public:
     // actually immutable; deserialization and assignment are implemented,
     // and bypass the constness. This is safe, as they update the entire
     // structure, including the hash.
-    const int32_t nVersion;
-    const unsigned int nTime;
+    int32_t nVersion;
+    unsigned int nTime;
     std::vector <CTxIn> vin;
     std::vector <CTxOut> vout;
-    const uint32_t nLockTime;
+    uint32_t nLockTime;
 
     /** Construct a CTransaction that qualifies as IsNull() */
     CTransaction();
