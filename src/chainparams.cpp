@@ -348,10 +348,10 @@ public:
     {
         networkID = CBaseChainParams::REGTEST;
         strNetworkID = "regtest";
-        pchMessageStart[0] = 0xa1;
-        pchMessageStart[1] = 0xcf;
-        pchMessageStart[2] = 0x7e;
-        pchMessageStart[3] = 0xac;
+        pchMessageStart[0] = 0xFF;
+        pchMessageStart[1] = 0xAF;
+        pchMessageStart[2] = 0xB7;
+        pchMessageStart[3] = 0xDF;
         nSubsidyHalvingInterval = 0;
         nEnforceBlockUpgradeMajority = 750;
         nRejectBlockOutdatedMajority = 950;
