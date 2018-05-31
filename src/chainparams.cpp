@@ -169,6 +169,8 @@ public:
         txNew.vin[0].scriptSig = CScript() << 0 << CScriptNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
         txNew.vout[0].nValue = 125000 * COIN;
         txNew.vout[0].scriptPubKey = CScript() << ParseHex("0433f2952f9002c9088a19607e3d4a54d3d9dfe1cf5c78168b8ba6524fb19fc5d7d3202948e6b8b09e98c425875af6af78fd4f64ff07d97a9ae31ebda5162fbac3") << OP_CHECKSIG;
+        printf("Main net\n");
+        printf("genesis.GetHash = %s\n", txNew.GetHash().ToString().c_str());
         genesis.vtx.push_back(txNew);
         genesis.hashPrevBlock = 0;
 //        genesis.hashMerkleRoot = uint256("bcd0064f46daed0b3c1ccff16656a0da04b5509924118b7c13d21c81d62ec521");
@@ -179,7 +181,6 @@ public:
         genesis.nNonce = 36156;
 
         hashGenesisBlock = genesis.GetHash();
-        printf("Main net\n");
         printf("genesis.nBits = %s\n", to_string(genesis.nBits).c_str());
         printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
         printf("genesis.hashMerkleRoot = %s\n", genesis.hashMerkleRoot.ToString().c_str());
