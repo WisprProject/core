@@ -297,7 +297,7 @@ public:
 //        assert(hashGenesisBlock == uint256("eaed1be0a78bd8f6e6ad58d227ec0ac6cbbcca53886871d56a93d7bb4f8fa71a"));
 
 //        vFixedSeeds.clear();
-        vSeeds.clear();
+//        vSeeds.clear();
 //        vSeeds.push_back(CDNSSeedData("fuzzbawls.pw", "wispr-testnet.seed.fuzzbawls.pw"));
 //        vSeeds.push_back(CDNSSeedData("fuzzbawls.pw", "wispr-testnet.seed2.fuzzbawls.pw"));
 //        vSeeds.push_back(CDNSSeedData("s3v3nh4cks.ddns.net", "s3v3nh4cks.ddns.net"));
