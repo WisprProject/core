@@ -79,8 +79,8 @@ BOOST_AUTO_TEST_CASE(key_test1)
     CKey key2C = bsecret2C.GetKey();
     BOOST_CHECK(key2C.IsCompressed() == true);
 
-    CPubKey pubkey1  = key1. GetPubKey();
-    CPubKey pubkey2  = key2. GetPubKey();
+    CPubKey pubkey1  = key1.GetPubKey();
+    CPubKey pubkey2  = key2.GetPubKey();
     CPubKey pubkey1C = key1C.GetPubKey();
     CPubKey pubkey2C = key2C.GetPubKey();
 
