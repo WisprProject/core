@@ -63,8 +63,7 @@ public:
         nTime = 0;
         nBits = 0;
         nNonce = 0;
-        if (nVersion > 7)
-            nAccumulatorCheckpoint = 0;
+        nAccumulatorCheckpoint = 0;
     }
 
     bool IsNull() const {
