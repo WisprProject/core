@@ -115,51 +115,51 @@ void static RandomTransaction(CMutableTransaction &tx, bool fSingle) {
 
 BOOST_AUTO_TEST_SUITE(sighash_tests)
 
-//BOOST_AUTO_TEST_CASE(sighash_test)
-//{
-//    seed_insecure_rand(false);
-//
-//    #if defined(PRINT_SIGHASH_JSON)
-//    std::cout << "[\n";
-//    std::cout << "\t[\"raw_transaction, script, input_index, hashType, signature_hash (result)\"],\n";
-//    #endif
-//    int nRandomTests = 50000;
-//
-//    #if defined(PRINT_SIGHASH_JSON)
-//    nRandomTests = 500;
-//    #endif
-//    for (int i=0; i<nRandomTests; i++) {
-//        int nHashType = insecure_rand();
-//        CMutableTransaction txTo;
-//        RandomTransaction(txTo, (nHashType & 0x1f) == SIGHASH_SINGLE);
-//        CScript scriptCode;
-//        RandomScript(scriptCode);
-//        int nIn = insecure_rand() % txTo.vin.size();
-//
-//        uint256 sh, sho;
-//        sho = SignatureHashOld(scriptCode, txTo, nIn, nHashType);
-//        sh = SignatureHash(scriptCode, txTo, nIn, nHashType);
-//        #if defined(PRINT_SIGHASH_JSON)
-//        CDataStream ss(SER_NETWORK, PROTOCOL_VERSION);
-//        ss << txTo;
-//
-//        std::cout << "\t[\"" ;
-//        std::cout << HexStr(ss.begin(), ss.end()) << "\", \"";
-//        std::cout << HexStr(scriptCode) << "\", ";
-//        std::cout << nIn << ", ";
-//        std::cout << nHashType << ", \"";
-//        std::cout << sho.GetHex() << "\"]";
-//        if (i+1 != nRandomTests) {
-//          std::cout << ",";
-//        }
-//        std::cout << "\n";
-//        #endif
-//        BOOST_CHECK(sh == sho);
-//    }
-//    #if defined(PRINT_SIGHASH_JSON)
-//    std::cout << "]\n";
-//    #endif
-//}
+BOOST_AUTO_TEST_CASE(sighash_test)
+{
+    seed_insecure_rand(false);
+
+    #if defined(PRINT_SIGHASH_JSON)
+    std::cout << "[\n";
+    std::cout << "\t[\"raw_transaction, script, input_index, hashType, signature_hash (result)\"],\n";
+    #endif
+    int nRandomTests = 50000;
+
+    #if defined(PRINT_SIGHASH_JSON)
+    nRandomTests = 500;
+    #endif
+    for (int i=0; i<nRandomTests; i++) {
+        int nHashType = insecure_rand();
+        CMutableTransaction txTo;
+        RandomTransaction(txTo, (nHashType & 0x1f) == SIGHASH_SINGLE);
+        CScript scriptCode;
+        RandomScript(scriptCode);
+        int nIn = insecure_rand() % txTo.vin.size();
+
+        uint256 sh, sho;
+        sho = SignatureHashOld(scriptCode, txTo, nIn, nHashType);
+        sh = SignatureHash(scriptCode, txTo, nIn, nHashType);
+        #if defined(PRINT_SIGHASH_JSON)
+        CDataStream ss(SER_NETWORK, PROTOCOL_VERSION);
+        ss << txTo;
+
+        std::cout << "\t[\"" ;
+        std::cout << HexStr(ss.begin(), ss.end()) << "\", \"";
+        std::cout << HexStr(scriptCode) << "\", ";
+        std::cout << nIn << ", ";
+        std::cout << nHashType << ", \"";
+        std::cout << sho.GetHex() << "\"]";
+        if (i+1 != nRandomTests) {
+          std::cout << ",";
+        }
+        std::cout << "\n";
+        #endif
+        BOOST_CHECK(sh == sho);
+    }
+    #if defined(PRINT_SIGHASH_JSON)
+    std::cout << "]\n";
+    #endif
+}
 
 // Goal: check that SignatureHash generates correct hash
 BOOST_AUTO_TEST_CASE(sighash_from_data)
