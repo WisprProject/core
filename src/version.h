@@ -20,8 +20,8 @@ static const int INIT_PROTO_VERSION = 209;
 static const int GETHEADERS_VERSION = 70077;
 
 //! disconnect from peers older than this proto version
-static const int MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT = 70912;
-static const int MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT = 70914;
+static const int MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT = 60016;
+static const int MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT = 60016;
 
 //! masternodes older than this proto version use old strMessage format for mnannounce
 static const int MIN_PEER_MNANNOUNCE = 70913;
@@ -40,7 +40,7 @@ static const int MEMPOOL_GD_VERSION = 60002;
 static const int NO_BLOOM_VERSION = 70005;
 
 //! reject blocks with non-canonical signatures starting from this version
-static const int CANONICAL_BLOCK_SIG_VERSION = 60016;
-static const int CANONICAL_BLOCK_SIG_LOW_S_VERSION = 60018;
+//static const int CANONICAL_BLOCK_SIG_VERSION = 60016;
+//static const int CANONICAL_BLOCK_SIG_LOW_S_VERSION = 60018;
 
 #endif // BITCOIN_VERSION_H
