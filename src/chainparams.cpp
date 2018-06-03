@@ -292,7 +292,7 @@ public:
         hashGenesisBlock = genesis.GetHash();
         printf("Test net\n");
         printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
-        assert(hashGenesisBlock == uint256("c492edc474c18d8b20ae2da5123ddb1ddbed84cf613f8b9e3b33da5621525323"));
+        assert(hashGenesisBlock == uint256("81a6b7867613e1a4fdf52bf36b78669309cd5fbcbea417ee4dd27437027426b9"));
 //        assert(genesis.hashMerkleRoot == uint256("0x26069b04c7c7b5b8773824b15cfbf0ddaf11ee261657a1aeb28aa5c8163909ee"));
 //        assert(hashGenesisBlock == uint256("eaed1be0a78bd8f6e6ad58d227ec0ac6cbbcca53886871d56a93d7bb4f8fa71a"));
 
