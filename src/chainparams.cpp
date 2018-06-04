@@ -370,15 +370,15 @@ public:
         nTargetSpacing = 1 * 60;        // WISPR: 1 minutes
         bnProofOfWorkLimit = ~uint256(0) >> 1;
         genesis.SetNull();
-        genesis.nTime = 1454124731;
-        genesis.nBits = 0x207fffff;
-        genesis.nNonce = 12345;
+        genesis.nTime = 1411111111;
+        genesis.nBits  = bnProofOfWorkLimit.GetCompact();
+        genesis.nNonce = 2;
 
         hashGenesisBlock = genesis.GetHash();
         nDefaultPort = 17004;
         printf("Req net\n");
-        printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
-        assert(hashGenesisBlock == uint256("edc048a846ba8723bba32d7ce4abf832a7c20cb8c44339755c4482994352cbdd"));
+        printf("genesis = %s\n", genesis.ToString().c_str());
+        assert(hashGenesisBlock == uint256("0x523dda6d336047722cbaf1c5dce622298af791bac21b33bf6e2d5048b2a13e3d"));
 
         vFixedSeeds.clear(); //! Testnet mode doesn't have any fixed seeds.
         vSeeds.clear();      //! Testnet mode doesn't have any DNS seeds.
