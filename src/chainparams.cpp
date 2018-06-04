@@ -188,11 +188,7 @@ public:
         assert(hashGenesisBlock == uint256("0000ec93e0a3fe0aafa3be7dafe1290f5fca039a4037dd5174bc3dd7a35d67f0"));
         assert(genesis.hashMerkleRoot == uint256("bcd0064f46daed0b3c1ccff16656a0da04b5509924118b7c13d21c81d62ec521"));
 
-//        vSeeds.push_back(CDNSSeedData("fuzzbawls.pw", "wispr.seed.fuzzbawls.pw"));     // Primary DNS Seeder from Fuzzbawls
-//        vSeeds.push_back(CDNSSeedData("fuzzbawls.pw", "wispr.seed2.fuzzbawls.pw"));    // Secondary DNS Seeder from Fuzzbawls
-//        vSeeds.push_back(CDNSSeedData("coin-server.com", "coin-server.com"));         // Single node address
-//        vSeeds.push_back(CDNSSeedData("s3v3nh4cks.ddns.net", "s3v3nh4cks.ddns.net")); // Single node address
-//        vSeeds.push_back(CDNSSeedData("178.254.23.111", "178.254.23.111"));           // Single node address
+        vSeeds.push_back(CDNSSeedData("wispr.tech", "dnsseed.wispr.tech"));     // Primary DNS Seeder for wispr
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 73);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 135);
@@ -298,13 +294,8 @@ public:
 
         vFixedSeeds.clear();
         vSeeds.clear();
-//        vSeeds.push_back(CDNSSeedData("fuzzbawls.pw", "wispr-testnet.seed.fuzzbawls.pw"));
-//        vSeeds.push_back(CDNSSeedData("fuzzbawls.pw", "wispr-testnet.seed2.fuzzbawls.pw"));
-//        vSeeds.push_back(CDNSSeedData("s3v3nh4cks.ddns.net", "s3v3nh4cks.ddns.net"));
-//        vSeeds.push_back(CDNSSeedData("88.198.192.110", "88.198.192.110"));
-//        vSeeds.push_back(CDNSSeedData("136.144.157.58", "136.144.157.58"));
-//        vSeeds.push_back(CDNSSeedData("54.171.130.70", "54.171.130.70"));
-//        vSeeds.push_back(CDNSSeedData("34.245.197.246", "34.245.197.246"));
+        vSeeds.push_back(CDNSSeedData("wispr.tech", "testnet-seed.wispr.tech"));     // Primary DNS Seeder for testnet wispr
+
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 110);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 8);
