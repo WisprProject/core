@@ -371,6 +371,7 @@ public:
         bnProofOfWorkLimit = ~uint256(0) >> 1;
         genesis.SetNull();
         genesis.nTime = 1411111111;
+        genesis.nVersion = 1;
         genesis.nBits  = bnProofOfWorkLimit.GetCompact();
         genesis.nNonce = 2;
 
