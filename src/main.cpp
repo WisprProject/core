@@ -2705,12 +2705,12 @@ bool RecalculateWSPSupply(int nHeightStart)
         if (pindex->nHeight == Params().Zerocoin_Block_RecalculateAccumulators()) {
             LogPrintf("%s : Original money supply=%s\n", __func__, FormatMoney(pindex->nMoneySupply));
 
-            pindex->nMoneySupply += Params().InvalidAmountFiltered();
-            LogPrintf("%s : Adding filtered funds to supply + %s : supply=%s\n", __func__, FormatMoney(Params().InvalidAmountFiltered()), FormatMoney(pindex->nMoneySupply));
+//            pindex->nMoneySupply += Params().InvalidAmountFiltered();
+//            LogPrintf("%s : Adding filtered funds to supply + %s : supply=%s\n", __func__, FormatMoney(Params().InvalidAmountFiltered()), FormatMoney(pindex->nMoneySupply));
 
-            CAmount nLocked = GetInvalidUTXOValue();
-            pindex->nMoneySupply -= nLocked;
-            LogPrintf("%s : Removing locked from supply - %s : supply=%s\n", __func__, FormatMoney(nLocked), FormatMoney(pindex->nMoneySupply));
+//            CAmount nLocked = GetInvalidUTXOValue();
+//            pindex->nMoneySupply -= nLocked;
+//            LogPrintf("%s : Removing locked from supply - %s : supply=%s\n", __func__, FormatMoney(nLocked), FormatMoney(pindex->nMoneySupply));
         }
 
         assert(pblocktree->WriteBlockIndex(CDiskBlockIndex(pindex)));
