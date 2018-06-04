@@ -282,16 +282,16 @@ public:
         nRejectOldSporkKey = 1522454400; //!> Reject old spork key after Saturday, March 31, 2018 12:00:00 AM GMT
         const char* pszTimestamp = "I would rather be without a state than without a voice";
 
-        CMutableTransaction txNew;
-        txNew.nVersion = 1;
-        txNew.nTime = 1512932225;
-        txNew.nLockTime = 0;
-        txNew.vin.resize(1);
-        txNew.vout.resize(1);
-        txNew.vin[0].scriptSig = CScript() << 0 << CScriptNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
-        txNew.vout[0].SetEmpty();
+        CMutableTransaction txNew2;
+        txNew2.nVersion = 1;
+        txNew2.nTime = 1512932225;
+        txNew2.nLockTime = 0;
+        txNew2.vin.resize(1);
+        txNew2.vout.resize(1);
+        txNew2.vin[0].scriptSig = CScript() << 0 << CScriptNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
+        txNew2.vout[0].SetEmpty();
         //! Modify the testnet genesis block so the timestamp is valid for a later start.
-        genesis.vtx.push_back(txNew);
+        genesis.vtx.push_back(txNew2);
         genesis.hashPrevBlock = 0;
         genesis.hashMerkleRoot = genesis.BuildMerkleTree();
         genesis.nVersion = 1;
