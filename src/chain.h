@@ -382,11 +382,10 @@ public:
 
     std::string ToString() const
     {
-        return strprintf("CBlockIndex(pprev=%p, nHeight=%d, merkle=%s, hashBlock=%s, nBits=%s)",
+        return strprintf("CBlockIndex(pprev=%p, nHeight=%d, merkle=%s, hashBlock=%s, nBits=%08x)",
                          pprev, nHeight,
                          hashMerkleRoot.ToString(),
-                         GetBlockHash().ToString()),
-                nBits;
+                         GetBlockHash().ToString()), nBits;
     }
 
     //! Check whether this block index entry is valid up to the passed validity level.
