@@ -17,7 +17,6 @@
 #include <string.h>
 #include <string>
 #include <vector>
-#include <libzerocoin/bignum.h>
 
 typedef std::vector<unsigned char> valtype;
 
@@ -352,32 +351,6 @@ private:
 class CScript : public std::vector<unsigned char>
 {
 protected:
-    CScript& push_big(int64_t n)
-    {
-        if (n == -1 || (n >= 1 && n <= 16))
-        {
-            push_back(n + (OP_1 - 1));
-        }
-        else
-        {
-            CBigNum bn(n);
-            *this << bn.getvch();
-        }
-        return *this;
-    }
-    CScript& push_uint64(uint64_t n)
-    {
-        if (n >= 1 && n <= 16)
-        {
-            push_back(n + (OP_1 - 1));
-        }
-        else
-        {
-            CBigNum bn(n);
-            *this << bn.getvch();
-        }
-        return *this;
-    }
     CScript& push_int64(int64_t n)
     {
         if (n == -1 || (n >= 1 && n <= 16))
@@ -419,17 +392,8 @@ public:
     explicit CScript(const CScriptNum& b) { operator<<(b); }
     explicit CScript(const std::vector<unsigned char>& b) { operator<<(b); }
 
-    CScript& operator<<(signed char b)        { return push_int64(b); }
-    CScript& operator<<(short b)              { return push_int64(b); }
-    CScript& operator<<(long b)               { return push_int64(b); }
-    CScript& operator<<(long long b)          { return push_int64(b); }
-    CScript& operator<<(unsigned char b)      { return push_uint64(b); }
-    CScript& operator<<(unsigned int b)       { return push_uint64(b); }
-    CScript& operator<<(unsigned short b)     { return push_uint64(b); }
-    CScript& operator<<(unsigned long b)      { return push_uint64(b); }
-    CScript& operator<<(unsigned long long b) { return push_uint64(b); }
-//    CScript& operator<<(int64_t b) { return push_int64(b); }
-    CScript& operator<<(int b)     { return push_big(b); }
+
+    CScript& operator<<(int64_t b) { return push_int64(b); }
 
     CScript& operator<<(opcodetype opcode)
     {
@@ -438,11 +402,7 @@ public:
         insert(end(), (unsigned char)opcode);
         return *this;
     }
-    CScript& operator<<(const CBigNum& b)
-    {
-        *this << b.getvch();
-        return *this;
-    }
+
     CScript& operator<<(const CScriptNum& b)
     {
         *this << b.getvch();

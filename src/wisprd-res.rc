@@ -16,8 +16,8 @@ BEGIN
     BEGIN
         BLOCK "040904E4" // U.S. English - multilingual (hex)
         BEGIN
-            VALUE "CompanyName",        "Wispr"
-            VALUE "FileDescription",    "wisprd (OSS daemon/client for Wispr)"
+            VALUE "CompanyName",        "WISPR"
+            VALUE "FileDescription",    "wisprd (OSS daemon/client for WISPR)"
             VALUE "FileVersion",        VER_FILEVERSION_STR
             VALUE "InternalName",       "wisprd"
             VALUE "LegalCopyright",     COPYRIGHT_STR

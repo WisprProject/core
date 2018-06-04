@@ -8,11 +8,12 @@
 
 static CMainSignals g_signals;
 
-CMainSignals &GetMainSignals() {
+CMainSignals& GetMainSignals()
+{
     return g_signals;
 }
 
-void RegisterValidationInterface(CValidationInterface *pwalletIn) {
+void RegisterValidationInterface(CValidationInterface* pwalletIn) {
 // XX42 g_signals.EraseTransaction.connect(boost::bind(&CValidationInterface::EraseFromWallet, pwalletIn, _1));
     g_signals.UpdatedBlockTip.connect(boost::bind(&CValidationInterface::UpdatedBlockTip, pwalletIn, _1));
     g_signals.SyncTransaction.connect(boost::bind(&CValidationInterface::SyncTransaction, pwalletIn, _1, _2));
@@ -26,7 +27,7 @@ void RegisterValidationInterface(CValidationInterface *pwalletIn) {
     g_signals.BlockFound.connect(boost::bind(&CValidationInterface::ResetRequestCount, pwalletIn, _1));
 }
 
-void UnregisterValidationInterface(CValidationInterface *pwalletIn) {
+void UnregisterValidationInterface(CValidationInterface* pwalletIn) {
     g_signals.BlockFound.disconnect(boost::bind(&CValidationInterface::ResetRequestCount, pwalletIn, _1));
 // XX42    g_signals.ScriptForMining.disconnect(boost::bind(&CValidationInterface::GetScriptForMining, pwalletIn, _1));
     g_signals.BlockChecked.disconnect(boost::bind(&CValidationInterface::BlockChecked, pwalletIn, _1, _2));
@@ -34,8 +35,7 @@ void UnregisterValidationInterface(CValidationInterface *pwalletIn) {
     g_signals.Inventory.disconnect(boost::bind(&CValidationInterface::Inventory, pwalletIn, _1));
     g_signals.SetBestChain.disconnect(boost::bind(&CValidationInterface::SetBestChain, pwalletIn, _1));
     g_signals.UpdatedTransaction.disconnect(boost::bind(&CValidationInterface::UpdatedTransaction, pwalletIn, _1));
-    g_signals.NotifyTransactionLock.disconnect(
-            boost::bind(&CValidationInterface::NotifyTransactionLock, pwalletIn, _1));
+    g_signals.NotifyTransactionLock.disconnect(boost::bind(&CValidationInterface::NotifyTransactionLock, pwalletIn, _1));
     g_signals.SyncTransaction.disconnect(boost::bind(&CValidationInterface::SyncTransaction, pwalletIn, _1, _2));
     g_signals.UpdatedBlockTip.disconnect(boost::bind(&CValidationInterface::UpdatedBlockTip, pwalletIn, _1));
 // XX42    g_signals.EraseTransaction.disconnect(boost::bind(&CValidationInterface::EraseFromWallet, pwalletIn, _1));

@@ -12,7 +12,6 @@
 #include <QStringList>
 
 class ClientModel;
-
 class BanTablePriv;
 
 struct CCombinedBan {
@@ -20,12 +19,12 @@ struct CCombinedBan {
     CBanEntry banEntry;
 };
 
-class BannedNodeLessThan {
+class BannedNodeLessThan
+{
 public:
     BannedNodeLessThan(int nColumn, Qt::SortOrder fOrder) :
-            column(nColumn), order(fOrder) {}
-
-    bool operator()(const CCombinedBan &left, const CCombinedBan &right) const;
+        column(nColumn), order(fOrder) {}
+    bool operator()(const CCombinedBan& left, const CCombinedBan& right) const;
 
 private:
     int column;
@@ -36,16 +35,14 @@ private:
    Qt model providing information about connected peers, similar to the
    "getpeerinfo" RPC call. Used by the rpc console UI.
  */
-class BanTableModel : public QAbstractTableModel {
+class BanTableModel : public QAbstractTableModel
+{
     Q_OBJECT
 
 public:
     explicit BanTableModel(ClientModel *parent = 0);
-
     ~BanTableModel();
-
     void startAutoRefresh();
-
     void stopAutoRefresh();
 
     enum ColumnIndex {
@@ -56,32 +53,22 @@ public:
     /** @name Methods overridden from QAbstractTableModel
         @{*/
     int rowCount(const QModelIndex &parent) const;
-
     int columnCount(const QModelIndex &parent) const;
-
     QVariant data(const QModelIndex &index, int role) const;
-
     QVariant headerData(int section, Qt::Orientation orientation, int role) const;
-
     QModelIndex index(int row, int column, const QModelIndex &parent) const;
-
     Qt::ItemFlags flags(const QModelIndex &index) const;
-
     void sort(int column, Qt::SortOrder order);
-
     bool shouldShow();
     /*@}*/
 
-public
-    Q_SLOTS:
-            void
-
-    refresh();
+public Q_SLOTS:
+    void refresh();
 
 private:
     ClientModel *clientModel;
     QStringList columns;
-    std::unique_ptr <BanTablePriv> priv;
+    std::unique_ptr<BanTablePriv> priv;
 };
 
 #endif // BITCOIN_QT_BANTABLEMODEL_H

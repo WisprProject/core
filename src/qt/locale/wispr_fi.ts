@@ -62,12 +62,12 @@
         <translation>Vastaanottavat osoitteet</translation>
     </message>
     <message>
-        <source>These are your Wispr addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Nämä ovat sinun Wispr osoitteesi maksujen lähetystä varten. Tarkista aina määrä ja vastaanottava osoite ennen kolikoiden lähettämistä.</translation>
+        <source>These are your WISPR addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Nämä ovat sinun WISPR osoitteesi maksujen lähetystä varten. Tarkista aina määrä ja vastaanottava osoite ennen kolikoiden lähettämistä.</translation>
     </message>
     <message>
-        <source>These are your Wispr addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Nämä ovat sinun Wispr osoitteesi maksujen vastaanottamista varten. On suositeltavaa käyttää uutta vastaanottavaa osoitetta jokaiselle uudelle rahansiirrolle.</translation>
+        <source>These are your WISPR addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>Nämä ovat sinun WISPR osoitteesi maksujen vastaanottamista varten. On suositeltavaa käyttää uutta vastaanottavaa osoitetta jokaiselle uudelle rahansiirrolle.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -93,7 +93,11 @@
         <source>Exporting Failed</source>
         <translation>Vienti epäonnistui</translation>
     </message>
-    </context>
+    <message>
+        <source>There was an error trying to save the address list to %1. Please try again.</source>
+        <translation>Tapahtui virhe osoitelistan tallennuksessa %1. Yritä uudestaan.</translation>
+    </message>
+</context>
 <context>
     <name>AddressTableModel</name>
     <message>
@@ -132,10 +136,6 @@
         <translation>Ottaa pois käytöstä tavallisen sendmoneyn kun käyttöjärjestelmä on kompromisoitu. Ei tarjoa todellista turvaa.</translation>
     </message>
     <message>
-        <source>For anonymization and staking only</source>
-        <translation>Vain anonymisointiin ja panostukseen</translation>
-    </message>
-    <message>
         <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
         <translation>Syötä uusi salausavain lompakkoon &lt;br/&gt; Käytä salausavaimena &lt;b&gt;yli kymmentä satunnaista merkkiä&lt;/b&gt;, tai &lt;b&gt; kahdeksaa tai useampaa sanaa&lt;/b&gt;.</translation>
     </message>
@@ -172,8 +172,8 @@
         <translation>Vahvista lompakon salaus</translation>
     </message>
     <message>
-        <source>Wispr will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your WSPs from being stolen by malware infecting your computer.</source>
-        <translation>Wispr sulkeutuu salausprosessin ajaksi. Muista, että lompakon salaus ei voi täysin suojella WSPien varkaudelta, jos tietokoneesi sisältää haittaohjelmia.</translation>
+        <source>WISPR will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your WSPs from being stolen by malware infecting your computer.</source>
+        <translation>WISPR sulkeutuu salausprosessin ajaksi. Muista, että lompakon salaus ei voi täysin suojella WSPien varkaudelta, jos tietokoneesi sisältää haittaohjelmia.</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -225,6 +225,9 @@
     </message>
 </context>
 <context>
+    <name>BanTableModel</name>
+    </context>
+<context>
     <name>Bip38ToolDialog</name>
     <message>
         <source>BIP 38 Tool</source>
@@ -235,17 +238,8 @@
         <translation>&amp;BIP 38 Salaus</translation>
     </message>
     <message>
-        <source>Enter a Wispr Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</source>
-        <translation>Syötä Wispr osoite, jonnka tahtoisit salata käyttäen BIP 38.
-Syötä salausavain laatikon keskelle. Paina salaa tuottaaksesi salatun yksityisavaimen.</translation>
-    </message>
-    <message>
         <source>Address:</source>
         <translation>Osoite:</translation>
-    </message>
-    <message>
-        <source>The Wispr address to sign the message with</source>
-        <translation>Wispr osoite, jolla viesti allekirjoitetaan</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -276,16 +270,8 @@ Syötä salausavain laatikon keskelle. Paina salaa tuottaaksesi salatun yksityis
         <translation>Kopioi nykyinen allekirjoitus järjestelmän leikepöydälle</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Wispr address</source>
-        <translation>Allekirjoita viesti todistaaksesi, että omistat tämän Wispr osoitteen</translation>
-    </message>
-    <message>
         <source>Encrypt &amp;Key</source>
         <translation>Salaus &amp;Avain</translation>
-    </message>
-    <message>
-        <source>Reset all sign message fields</source>
-        <translation>Tyhjennä kaikki allekirjoita viesti kentät</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>
@@ -300,20 +286,8 @@ Syötä salausavain laatikon keskelle. Paina salaa tuottaaksesi salatun yksityis
         <translation>Syötä BIP 38 salattu yksityisavain. Syötä salausavain laatikkoon. Paina Avaa Salaus tuottaaksesi yksityisavaimen. Kun avain on dekryptattu, painamalla "Import osoite" lisää tämän yksityisavaimen lompakkoon.</translation>
     </message>
     <message>
-        <source>The Wispr address the message was signed with</source>
-        <translation>Wispr osoite, jolla viesti allekirjoitettiin</translation>
-    </message>
-    <message>
-        <source>Verify the message to ensure it was signed with the specified Wispr address</source>
-        <translation>Vahvista että viesti on allekirjoitettu kyseessä olevalla Wispr osoitteella.</translation>
-    </message>
-    <message>
         <source>Decrypt &amp;Key</source>
         <translation>Salauksen avaus &amp;Avain</translation>
-    </message>
-    <message>
-        <source>Reset all verify message fields</source>
-        <translation>Tyhjennä kaikki vahvista viesti kentät</translation>
     </message>
     <message>
         <source>Decrypted Key:</source>
@@ -591,12 +565,12 @@ Syötä salausavain laatikon keskelle. Paina salaa tuottaaksesi salatun yksityis
         <translation>&amp;Apua</translation>
     </message>
     <message>
-        <source>Wispr Core</source>
-        <translation>Wispr Ydin</translation>
+        <source>WISPR Core</source>
+        <translation>WISPR Ydin</translation>
     </message>
     <message>
-        <source>Send coins to a Wispr address</source>
-        <translation>Lähetä kolikkoja Wispr osoitteeseen</translation>
+        <source>Send coins to a WISPR address</source>
+        <translation>Lähetä kolikkoja WISPR osoitteeseen</translation>
     </message>
     <message>
         <source>Request payments (generates QR codes and wispr: URIs)</source>
@@ -611,24 +585,24 @@ Syötä salausavain laatikon keskelle. Paina salaa tuottaaksesi salatun yksityis
         <translation>Selaa masternodeja</translation>
     </message>
     <message>
-        <source>&amp;About Wispr Core</source>
-        <translation>Wispr Core &amp;ytimestä</translation>
+        <source>&amp;About WISPR Core</source>
+        <translation>WISPR Core &amp;ytimestä</translation>
     </message>
     <message>
-        <source>Show information about Wispr Core</source>
-        <translation>Näytä tietoja Wispr Ytimestä</translation>
+        <source>Show information about WISPR Core</source>
+        <translation>Näytä tietoja WISPR Ytimestä</translation>
     </message>
     <message>
-        <source>Modify configuration options for Wispr</source>
-        <translation>Muokkaa konfiguraatio vaihtoehtoja Wispr:lle</translation>
+        <source>Modify configuration options for WISPR</source>
+        <translation>Muokkaa konfiguraatio vaihtoehtoja WISPR:lle</translation>
     </message>
     <message>
-        <source>Sign messages with your Wispr addresses to prove you own them</source>
+        <source>Sign messages with your WISPR addresses to prove you own them</source>
         <translation>Allekirjoita viestejä todistaaksesi, että omistat ne.</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Wispr addresses</source>
-        <translation>Vahvista viestit varmistaaksesi, että ne allekirjoitettiin tietyllä Wispr osoiteella.</translation>
+        <source>Verify messages to ensure they were signed with specified WISPR addresses</source>
+        <translation>Vahvista viestit varmistaaksesi, että ne allekirjoitettiin tietyllä WISPR osoiteella.</translation>
     </message>
     <message>
         <source>&amp;BIP38 tool</source>
@@ -659,8 +633,8 @@ Syötä salausavain laatikon keskelle. Paina salaa tuottaaksesi salatun yksityis
         <translation>Avaa Masternode konfiguraatiotiedosto</translation>
     </message>
     <message>
-        <source>Open a Wispr: URI or payment request</source>
-        <translation>Avaa Wispr: URI tai pyydä maksua</translation>
+        <source>Open a WISPR: URI or payment request</source>
+        <translation>Avaa WISPR: URI tai pyydä maksua</translation>
     </message>
     <message>
         <source>&amp;Blockchain explorer</source>
@@ -671,12 +645,12 @@ Syötä salausavain laatikon keskelle. Paina salaa tuottaaksesi salatun yksityis
         <translation>Lohkon tutkija näkymä</translation>
     </message>
     <message>
-        <source>Show the Wispr Core help message to get a list with possible Wispr command-line options</source>
-        <translation>Näytä Wispr Ydin apuviesti saadaksesi lista mahdollisista Wispr komentolinja komennoista.</translation>
+        <source>Show the WISPR Core help message to get a list with possible WISPR command-line options</source>
+        <translation>Näytä WISPR Ydin apuviesti saadaksesi lista mahdollisista WISPR komentolinja komennoista.</translation>
     </message>
     <message>
-        <source>Wispr Core client</source>
-        <translation>Wispr Ydin asiakasohjelma</translation>
+        <source>WISPR Core client</source>
+        <translation>WISPR Ydin asiakasohjelma</translation>
     </message>
     <message>
         <source>Synchronizing with network...</source>
@@ -701,10 +675,6 @@ Syötä salausavain laatikon keskelle. Paina salaa tuottaaksesi salatun yksityis
     <message>
         <source>%1 and %2</source>
         <translation>%1 ja %2</translation>
-    </message>
-    <message>
-        <source>%1 behind</source>
-        <translation>%1 takana</translation>
     </message>
     <message>
         <source>Catching up...</source>
@@ -811,6 +781,10 @@ Syötä salausavain laatikon keskelle. Paina salaa tuottaaksesi salatun yksityis
     <message>
         <source>Amount</source>
         <translation>Määrä</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation>Tyyppi</translation>
     </message>
     <message>
         <source>Date</source>
@@ -934,8 +908,8 @@ Syötä salausavain laatikon keskelle. Paina salaa tuottaaksesi salatun yksityis
 <context>
     <name>HelpMessageDialog</name>
     <message>
-        <source>Wispr Core</source>
-        <translation>Wispr Ydin</translation>
+        <source>WISPR Core</source>
+        <translation>WISPR Ydin</translation>
     </message>
     <message>
         <source>Usage:</source>
@@ -953,12 +927,12 @@ Syötä salausavain laatikon keskelle. Paina salaa tuottaaksesi salatun yksityis
         <translation>Tervetuloa</translation>
     </message>
     <message>
-        <source>Welcome to Wispr Core.</source>
-        <translation>Tervetuloa Wispr Ytimeen.</translation>
+        <source>Welcome to WISPR Core.</source>
+        <translation>Tervetuloa WISPR Ytimeen.</translation>
     </message>
     <message>
-        <source>Wispr Core</source>
-        <translation>Wispr Ydin</translation>
+        <source>WISPR Core</source>
+        <translation>WISPR Ydin</translation>
     </message>
     <message>
         <source>Error</source>
@@ -1079,6 +1053,10 @@ Syötä salausavain laatikon keskelle. Paina salaa tuottaaksesi salatun yksityis
         <translation>Lähetä Masternode palkkioihin</translation>
     </message>
     <message>
+        <source>(no label)</source>
+        <translation>(ei nimikettä)</translation>
+    </message>
+    <message>
         <source>The entered address:
 </source>
         <translation>Syötetty osoite:</translation>
@@ -1113,6 +1091,21 @@ Please check the address and try again.</source>
     </message>
 </context>
 <context>
+    <name>MultisigDialog</name>
+    <message>
+        <source>Status:</source>
+        <translation>Tila:</translation>
+    </message>
+    <message>
+        <source>0</source>
+        <translation>0</translation>
+    </message>
+    <message>
+        <source>Amount:</source>
+        <translation>Määrä:</translation>
+    </message>
+    </context>
+<context>
     <name>ObfuscationConfig</name>
     <message>
         <source>Configure Obfuscation</source>
@@ -1136,11 +1129,11 @@ Please check the address and try again.</source>
     </message>
     <message>
         <source>Use 2 separate masternodes to mix funds up to 10000 WSP</source>
-        <translation>Käytä 2 erillistä masternodea sekoittaaksesi enintään 10000 Wispr</translation>
+        <translation>Käytä 2 erillistä masternodea sekoittaaksesi enintään 10000 WISPR</translation>
     </message>
     <message>
         <source>Use 8 separate masternodes to mix funds up to 10000 WSP</source>
-        <translation>Käytä 8 erillistä masternodea sekoittaaksesi enintään 10000 Wispr</translation>
+        <translation>Käytä 8 erillistä masternodea sekoittaaksesi enintään 10000 WISPR</translation>
     </message>
     <message>
         <source>Use 16 separate masternodes</source>
@@ -1148,11 +1141,11 @@ Please check the address and try again.</source>
     </message>
     <message>
         <source>This option is the quickest and will cost about ~0.025 WSP to anonymize 10000 WSP</source>
-        <translation>Tämä vaihtoehto on nopein ja maksaa noin ~0.025 WSP anonymoidaksesi 10000 Wispr</translation>
+        <translation>Tämä vaihtoehto on nopein ja maksaa noin ~0.025 WSP anonymoidaksesi 10000 WISPR</translation>
     </message>
     <message>
         <source>This option is moderately fast and will cost about 0.05 WSP to anonymize 10000 WSP</source>
-        <translation>Tämä vaihtoehto on suhteellisen nopea ja maksaa 0.05 Wispr anonymoidaksesi 10000 Wispr</translation>
+        <translation>Tämä vaihtoehto on suhteellisen nopea ja maksaa 0.05 WISPR anonymoidaksesi 10000 WISPR</translation>
     </message>
     <message>
         <source>This is the slowest and most secure option. Using maximum anonymity will cost</source>
@@ -1160,7 +1153,7 @@ Please check the address and try again.</source>
     </message>
     <message>
         <source>0.1 WSP per 10000 WSP you anonymize.</source>
-        <translation>0.1 per 10000 Wispr, jotka anonymisoit.</translation>
+        <translation>0.1 per 10000 WISPR, jotka anonymisoit.</translation>
     </message>
     <message>
         <source>Obfuscation Configuration</source>
@@ -1209,16 +1202,12 @@ Please check the address and try again.</source>
         <translation>Ekspertti</translation>
     </message>
     <message>
-        <source>Automatically start Wispr after logging in to the system.</source>
-        <translation>Automaattisesti käynnistä Wispr kun kirjaudut sisään.</translation>
+        <source>Automatically start WISPR after logging in to the system.</source>
+        <translation>Automaattisesti käynnistä WISPR kun kirjaudut sisään.</translation>
     </message>
     <message>
-        <source>&amp;Start Wispr on system login</source>
-        <translation>&amp;Aloita Wispr järjestelmän kirjautumisessa</translation>
-    </message>
-    <message>
-        <source>Amount of Wispr to keep anonymized</source>
-        <translation>Wispr määrä joka pidetään anonymisoituna</translation>
+        <source>&amp;Start WISPR on system login</source>
+        <translation>&amp;Aloita WISPR järjestelmän kirjautumisessa</translation>
     </message>
     <message>
         <source>Enable coin &amp;control features</source>
@@ -1237,12 +1226,12 @@ Please check the address and try again.</source>
         <translation>&amp;Verkko</translation>
     </message>
     <message>
-        <source>The user interface language can be set here. This setting will take effect after restarting Wispr.</source>
+        <source>The user interface language can be set here. This setting will take effect after restarting WISPR.</source>
         <translation>Käyttöliittymän kielen voi säätää täällä. Tämä asetus tulee voimaan uudelleenkäynnistettyäsi lompakon.</translation>
     </message>
     <message>
-        <source>Connect to the Wispr network through a SOCKS5 proxy.</source>
-        <translation>Yhdistä Wispr verkkoon SOCKS5 proxyn kautta</translation>
+        <source>Connect to the WISPR network through a SOCKS5 proxy.</source>
+        <translation>Yhdistä WISPR verkkoon SOCKS5 proxyn kautta</translation>
     </message>
     <message>
         <source>Proxy &amp;IP:</source>
@@ -1344,7 +1333,7 @@ Please check the address and try again.</source>
         <source>The supplied proxy address is invalid.</source>
         <translation>Tarjottu proxy osoite on virheellinen.</translation>
     </message>
-</context>
+    </context>
 <context>
     <name>OverviewPage</name>
     <message>
@@ -1376,28 +1365,12 @@ Please check the address and try again.</source>
         <translation>Panostus tai masternodem palkiinnot jotka eivät ole vielä kypsyneet.</translation>
     </message>
     <message>
-        <source>Balances</source>
-        <translation>Saldot</translation>
-    </message>
-    <message>
         <source>Total:</source>
         <translation>Määrä:</translation>
     </message>
     <message>
-        <source>Your current total balance</source>
-        <translation>Sinun nykyinen kokonaissaldo</translation>
-    </message>
-    <message>
         <source>Spendable:</source>
         <translation>Käytettävää:</translation>
-    </message>
-    <message>
-        <source>Status:</source>
-        <translation>Tila:</translation>
-    </message>
-    <message>
-        <source>Enabled/Disabled</source>
-        <translation>Päällä/Pois päältä</translation>
     </message>
     </context>
 <context>
@@ -1414,6 +1387,93 @@ Please check the address and try again.</source>
         <translation>Ping aika</translation>
     </message>
 </context>
+<context>
+    <name>PrivacyDialog</name>
+    <message>
+        <source>0</source>
+        <translation>0</translation>
+    </message>
+    <message>
+        <source>Quantity:</source>
+        <translation>Määrä:</translation>
+    </message>
+    <message>
+        <source>Amount:</source>
+        <translation>Määrä:</translation>
+    </message>
+    <message>
+        <source>Choose previously used address</source>
+        <translation>Valitse aikaisemmin käytetty osoite</translation>
+    </message>
+    <message>
+        <source>Alt+A</source>
+        <translation>Alt+A</translation>
+    </message>
+    <message>
+        <source>Paste address from clipboard</source>
+        <translation>Liitä osoite leikepöydältä</translation>
+    </message>
+    <message>
+        <source>Alt+P</source>
+        <translation>Alt+P</translation>
+    </message>
+    <message>
+        <source>&amp;Label:</source>
+        <translation>&amp;Nimike:</translation>
+    </message>
+    <message>
+        <source>Enter a label for this address to add it to the list of used addresses</source>
+        <translation>Syötä nimike tälle osoittelle lisätäksesi se käytettävien osoitteiden listaan</translation>
+    </message>
+    <message>
+        <source>A&amp;mount:</source>
+        <translation>M&amp;äärä:</translation>
+    </message>
+    <message>
+        <source>Priority:</source>
+        <translation>Tärkeys:</translation>
+    </message>
+    <message>
+        <source>TextLabel</source>
+        <translation>TekstiNimike</translation>
+    </message>
+    <message>
+        <source>Fee:</source>
+        <translation>Taksa:</translation>
+    </message>
+    <message>
+        <source>no</source>
+        <translation>ei</translation>
+    </message>
+    <message>
+        <source>Bytes:</source>
+        <translation>Tavut:</translation>
+    </message>
+    <message>
+        <source>Insufficient funds!</source>
+        <translation>Puutteelliset varat!</translation>
+    </message>
+    <message>
+        <source>medium</source>
+        <translation>kohtalainen</translation>
+    </message>
+    <message>
+        <source>Change:</source>
+        <translation>Muutos:</translation>
+    </message>
+    <message>
+        <source>Copy quantity</source>
+        <translation>Kopioi määrä</translation>
+    </message>
+    <message>
+        <source>Copy amount</source>
+        <translation>Kopioi määrä</translation>
+    </message>
+    <message>
+        <source>Confirm send coins</source>
+        <translation>Vahvista kolikoiden lähetys</translation>
+    </message>
+    </context>
 <context>
     <name>QObject</name>
     <message>
@@ -1475,8 +1535,8 @@ Please check the address and try again.</source>
         <translation>Lohko ketju</translation>
     </message>
     <message>
-        <source>Open the Wispr debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation>Avaa Wispr debug loki nykyisestä sijainnista. Tämä voi kestää muutaman sekunnin suurille lokeille</translation>
+        <source>Open the WISPR debug log file from the current data directory. This can take a few seconds for large log files.</source>
+        <translation>Avaa WISPR debug loki nykyisestä sijainnista. Tämä voi kestää muutaman sekunnin suurille lokeille</translation>
     </message>
     <message>
         <source>Number of Masternodes</source>
@@ -1587,8 +1647,8 @@ Please check the address and try again.</source>
         <translation>Ulos:</translation>
     </message>
     <message>
-        <source>Welcome to the Wispr RPC console.</source>
-        <translation>Tervetuloa Wispr RPC konsoliin.</translation>
+        <source>Welcome to the WISPR RPC console.</source>
+        <translation>Tervetuloa WISPR RPC konsoliin.</translation>
     </message>
     <message>
         <source>never</source>
@@ -1605,10 +1665,6 @@ Please check the address and try again.</source>
     <message>
         <source>Unknown</source>
         <translation>Tuntematon</translation>
-    </message>
-    <message>
-        <source>Fetching...</source>
-        <translation>Haetaan...</translation>
     </message>
 </context>
 <context>
@@ -1630,12 +1686,12 @@ Please check the address and try again.</source>
         <translation>Vaihtoehtoinen nimike uudelle vastaanottavalle osoitteelle</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Wispr network.</source>
-        <translation>Vaihtoehtoinen viesti joka liitetään maksupyyntöön, joka näytetään kun pyyntö avataan. Huomio: Viestiä ei lähetetä maksun mukana Wispr verkolle.</translation>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the WISPR network.</source>
+        <translation>Vaihtoehtoinen viesti joka liitetään maksupyyntöön, joka näytetään kun pyyntö avataan. Huomio: Viestiä ei lähetetä maksun mukana WISPR verkolle.</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened.&lt;br&gt;Note: The message will not be sent with the payment over the Wispr network.</source>
-        <translation>Vaihtoehtoinen viesti, joka liitetään maksupyyntöö, joka näytetään kun pyyntö avataan. &lt;br&gt; Huomio: Tätä viestiä ei lähetetä maksun mukana Wispr  verkolle.</translation>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened.&lt;br&gt;Note: The message will not be sent with the payment over the WISPR network.</source>
+        <translation>Vaihtoehtoinen viesti, joka liitetään maksupyyntöö, joka näytetään kun pyyntö avataan. &lt;br&gt; Huomio: Tätä viestiä ei lähetetä maksun mukana WISPR  verkolle.</translation>
     </message>
     <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</source>
@@ -1791,10 +1847,6 @@ Please check the address and try again.</source>
         <translation>Lähetä Kolikot</translation>
     </message>
     <message>
-        <source>automatically selected</source>
-        <translation>automaattisesti valittu</translation>
-    </message>
-    <message>
         <source>Insufficient funds!</source>
         <translation>Puutteelliset varat!</translation>
     </message>
@@ -1895,10 +1947,6 @@ Please check the address and try again.</source>
         <translation>Lisää &amp;Vastaanottaja</translation>
     </message>
     <message>
-        <source>SwiftTX</source>
-        <translation>SwiftTX</translation>
-    </message>
-    <message>
         <source>Balance:</source>
         <translation>Saldo:</translation>
     </message>
@@ -1915,12 +1963,8 @@ Please check the address and try again.</source>
         <translation>Kopioi taksa</translation>
     </message>
     <message>
-        <source>using</source>
-        <translation>käyttää</translation>
-    </message>
-    <message>
-        <source>Warning: Invalid Wispr address</source>
-        <translation>Varoitus: Virheellinen Wispr osoite</translation>
+        <source>Warning: Invalid WISPR address</source>
+        <translation>Varoitus: Virheellinen WISPR osoite</translation>
     </message>
     <message>
         <source>Are you sure you want to send?</source>
@@ -1955,6 +1999,10 @@ Please check the address and try again.</source>
         <translation>Virhe: Lompakko avattiin vain kolikoiden anonymisointiin. Avaus peruutettu.</translation>
     </message>
     <message>
+        <source>Pay only the minimum fee of %1</source>
+        <translation>Maksa vain %1 minimi taksa</translation>
+    </message>
+    <message>
         <source>(no label)</source>
         <translation>(ei nimikettä)</translation>
     </message>
@@ -1966,8 +2014,8 @@ Please check the address and try again.</source>
         <translation>Tämä on normaali maksu.</translation>
     </message>
     <message>
-        <source>The Wispr address to send the payment to</source>
-        <translation>Wispr osoite johon maksu lähetetään</translation>
+        <source>The WISPR address to send the payment to</source>
+        <translation>WISPR osoite johon maksu lähetetään</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -2009,8 +2057,8 @@ Please check the address and try again.</source>
 <context>
     <name>ShutdownWindow</name>
     <message>
-        <source>Wispr Core is shutting down...</source>
-        <translation>Wispr core sammuu...</translation>
+        <source>WISPR Core is shutting down...</source>
+        <translation>WISPR core sammuu...</translation>
     </message>
     <message>
         <source>Do not shut down the computer until this window disappears.</source>
@@ -2028,8 +2076,8 @@ Please check the address and try again.</source>
         <translation>Voit allekirjoittaa viestejä osoitteillasi todistaaksesi, että omistat ne. Ole varovainen ettet allekirjoita mitään kummallista, sillä kalasteluyritykset saattavat yrittää huijata sinut luovuttamaan tietoja. Allekirjoita vain täysin yksityiskohtaisia sanomia, jotka hyväksyt.</translation>
     </message>
     <message>
-        <source>The Wispr address to sign the message with</source>
-        <translation>Wispr osoite, jolla viesti allekirjoitetaan</translation>
+        <source>The WISPR address to sign the message with</source>
+        <translation>WISPR osoite, jolla viesti allekirjoitetaan</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -2060,16 +2108,16 @@ Please check the address and try again.</source>
         <translation>Kopioi nykyinen allekirjoitus järjestelmän leikepöydälle</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Wispr address</source>
-        <translation>Allekirjoita viesti todistaaksesi, että omistat tämän Wispr osoitteen</translation>
+        <source>Sign the message to prove you own this WISPR address</source>
+        <translation>Allekirjoita viesti todistaaksesi, että omistat tämän WISPR osoitteen</translation>
     </message>
     <message>
-        <source>The Wispr address the message was signed with</source>
-        <translation>Wispr osoite, jolla viesti allekirjoitettiin</translation>
+        <source>The WISPR address the message was signed with</source>
+        <translation>WISPR osoite, jolla viesti allekirjoitettiin</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Wispr address</source>
-        <translation>Vahvista että viesti on allekirjoitettu kyseessä olevalla Wispr osoitteella.</translation>
+        <source>Verify the message to ensure it was signed with the specified WISPR address</source>
+        <translation>Vahvista että viesti on allekirjoitettu kyseessä olevalla WISPR osoitteella.</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>
@@ -2151,8 +2199,8 @@ Please check the address and try again.</source>
 <context>
     <name>SplashScreen</name>
     <message>
-        <source>Wispr Core</source>
-        <translation>Wispr Ydin</translation>
+        <source>WISPR Core</source>
+        <translation>WISPR Ydin</translation>
     </message>
     <message>
         <source>Version %1</source>
@@ -2167,8 +2215,8 @@ Please check the address and try again.</source>
         <translation>Dash Core kehittäjät</translation>
     </message>
     <message>
-        <source>The Wispr Core developers</source>
-        <translation>Wispr core kehittäjät</translation>
+        <source>The WISPR Core developers</source>
+        <translation>WISPR core kehittäjät</translation>
     </message>
     <message>
         <source>[testnet]</source>
@@ -2273,10 +2321,6 @@ Please check the address and try again.</source>
     <message>
         <source>Payment to yourself</source>
         <translation>Maksut itsellesi</translation>
-    </message>
-    <message>
-        <source>Minted</source>
-        <translation>Luotu</translation>
     </message>
     <message>
         <source>Mined</source>
@@ -2417,6 +2461,10 @@ Please check the address and try again.</source>
         <source>Exporting Successful</source>
         <translation>Vienti onnistui</translation>
     </message>
+    <message>
+        <source>The transaction history was successfully saved to %1.</source>
+        <translation>Rahansiirto historia onnistuneesti tallennettu %1</translation>
+    </message>
     </context>
 <context>
     <name>UnitDisplayStatusBarControl</name>
@@ -2461,13 +2509,12 @@ Please check the address and try again.</source>
         <source>Wallet Data (*.dat)</source>
         <translation>Lompakko Data (*.dat)</translation>
     </message>
+</context>
+<context>
+    <name>ZWspControlDialog</name>
     <message>
-        <source>Backup Failed</source>
-        <translation>Varmuuskopiointi epäonnistui</translation>
-    </message>
-    <message>
-        <source>Backup Successful</source>
-        <translation>Varmuuskopiointi onnistui</translation>
+        <source>0</source>
+        <translation>0</translation>
     </message>
     </context>
 <context>
@@ -2521,8 +2568,8 @@ Please check the address and try again.</source>
         <translation>Virhe ladattaessa wallet.dat tiedostoa: Lompakko korruptoitunut</translation>
     </message>
     <message>
-        <source>Error loading wallet.dat: Wallet requires newer version of Wispr Core</source>
-        <translation>Virhe ladattaessa wallet.dat tiedostoa: Lompakko vaatii uudemman version Wispr Coresta</translation>
+        <source>Error loading wallet.dat: Wallet requires newer version of WISPR Core</source>
+        <translation>Virhe ladattaessa wallet.dat tiedostoa: Lompakko vaatii uudemman version WISPR Coresta</translation>
     </message>
     <message>
         <source>Error reading from database, shutting down.</source>

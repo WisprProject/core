@@ -53,91 +53,57 @@ BOOST_AUTO_TEST_CASE(DoS_banning)
     SendMessages(&dummyNode1, false);
     BOOST_CHECK(CNode::IsBanned(addr1));
     BOOST_CHECK(!CNode::IsBanned(ip(0xa0b0c001|0x0000ff00))); // Different IP, not banned
-    BOOST_TEST_CHECKPOINT("Finished addr1");
-//    CAddress addr2(ip(0xa0b0c002));
-//    BOOST_TEST_CHECKPOINT("Created addr2");
-//    CNode dummyNode2(INVALID_SOCKET, addr2, "", true);
-//    BOOST_TEST_CHECKPOINT("Created dummy node 2");
-//    dummyNode2.nVersion = 1;
-//    Misbehaving(dummyNode2.GetId(), 50);
-//    BOOST_TEST_CHECKPOINT("Dummy node 2 misbehaving");
-//    SendMessages(&dummyNode2, false);
-//    BOOST_TEST_CHECKPOINT("Dummy node 2 send messages");
-//    BOOST_CHECK(!CNode::IsBanned(addr2)); // 2 not banned yet...
-//    BOOST_TEST_CHECKPOINT("Address 2 is not banned");
-//    BOOST_CHECK(CNode::IsBanned(addr1));  // ... but 1 still should be
-//    BOOST_TEST_CHECKPOINT("But 1 still is");
-//    Misbehaving(dummyNode2.GetId(), 50);
-//    BOOST_TEST_CHECKPOINT("Address 2 misbehaving again");
-//    SendMessages(&dummyNode2, false);
-//    BOOST_TEST_CHECKPOINT("Dummy node 2 send messages again");
-//    BOOST_CHECK(CNode::IsBanned(addr2));
-//    BOOST_TEST_CHECKPOINT("Address 2 is banned");
 
+    CAddress addr2(ip(0xa0b0c002));
+    CNode dummyNode2(INVALID_SOCKET, addr2, "", true);
+    dummyNode2.nVersion = 1;
+    Misbehaving(dummyNode2.GetId(), 50);
+    SendMessages(&dummyNode2, false);
+    BOOST_CHECK(!CNode::IsBanned(addr2)); // 2 not banned yet...
+    BOOST_CHECK(CNode::IsBanned(addr1));  // ... but 1 still should be
+    Misbehaving(dummyNode2.GetId(), 50);
+    SendMessages(&dummyNode2, false);
+    BOOST_CHECK(CNode::IsBanned(addr2));
 }
 
 BOOST_AUTO_TEST_CASE(DoS_banscore)
 {
     CNode::ClearBanned();
-    BOOST_TEST_CHECKPOINT("Cleared banned nodes");
     mapArgs["-banscore"] = "111"; // because 11 is my favorite number
-    BOOST_TEST_CHECKPOINT("Set banscore");
     CAddress addr1(ip(0xa0b0c001));
-    BOOST_TEST_CHECKPOINT("Created addres");
     CNode dummyNode1(INVALID_SOCKET, addr1, "", true);
-    BOOST_TEST_CHECKPOINT("Created dummy node");
     dummyNode1.nVersion = 1;
     Misbehaving(dummyNode1.GetId(), 100);
-    BOOST_TEST_CHECKPOINT("Node misbehaved");
     SendMessages(&dummyNode1, false);
-    BOOST_TEST_CHECKPOINT("Send messages");
     BOOST_CHECK(!CNode::IsBanned(addr1));
-    BOOST_TEST_CHECKPOINT("node is not banned");
     Misbehaving(dummyNode1.GetId(), 10);
-    BOOST_TEST_CHECKPOINT("Node misbehaved again");
     SendMessages(&dummyNode1, false);
-    BOOST_TEST_CHECKPOINT("Send messages again");
     BOOST_CHECK(!CNode::IsBanned(addr1));
-    BOOST_CHECK(!CNode::IsBanned(addr1));
-    BOOST_TEST_CHECKPOINT("node is not banned");
     Misbehaving(dummyNode1.GetId(), 1);
-    BOOST_TEST_CHECKPOINT("Node misbehaved again");
     SendMessages(&dummyNode1, false);
-    BOOST_TEST_CHECKPOINT("Send messages again");
     BOOST_CHECK(CNode::IsBanned(addr1));
-    BOOST_TEST_CHECKPOINT("Node is banned");
     mapArgs.erase("-banscore");
-    BOOST_TEST_CHECKPOINT("Erased banscore");
 }
 
 BOOST_AUTO_TEST_CASE(DoS_bantime)
 {
     CNode::ClearBanned();
-    BOOST_TEST_CHECKPOINT("Cleared banned nodes");
     int64_t nStartTime = GetTime();
-    BOOST_TEST_CHECKPOINT("Get time");
     SetMockTime(nStartTime); // Overrides future calls to GetTime()
-    BOOST_TEST_CHECKPOINT("Set mock time");
+
     CAddress addr(ip(0xa0b0c001));
-    BOOST_TEST_CHECKPOINT("Created addres");
     CNode dummyNode(INVALID_SOCKET, addr, "", true);
-    BOOST_TEST_CHECKPOINT("Created dummy node");
     dummyNode.nVersion = 1;
 
     Misbehaving(dummyNode.GetId(), 100);
-    BOOST_TEST_CHECKPOINT("Node misbehaved");
     SendMessages(&dummyNode, false);
-    BOOST_TEST_CHECKPOINT("Send messages");
     BOOST_CHECK(CNode::IsBanned(addr));
-    BOOST_TEST_CHECKPOINT("Node is banned");
+
     SetMockTime(nStartTime+60*60);
-    BOOST_TEST_CHECKPOINT("Updated start time");
     BOOST_CHECK(CNode::IsBanned(addr));
-    BOOST_TEST_CHECKPOINT("node is still banned");
+
     SetMockTime(nStartTime+60*60*24+1);
-    BOOST_TEST_CHECKPOINT("Updated start time with a day");
     BOOST_CHECK(!CNode::IsBanned(addr));
-    BOOST_TEST_CHECKPOINT("node is not banned");
 }
 
 CTransaction RandomOrphan()

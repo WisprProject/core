@@ -17,15 +17,12 @@
 
 uint256 CBlockHeader::GetHash() const
 {
-    if(nVersion > 6)
-        return Hash(BEGIN(nVersion), END(nNonce));
+    if(nVersion < 8)
+        return scrypt_blockhash(CVOIDBEGIN(nVersion));
 
-    return GetPoWHash();
+    return  Hash(BEGIN(nVersion), END(nAccumulatorCheckpoint));
 }
-uint256 CBlockHeader::GetPoWHash() const
-{
-    return scrypt_blockhash(CVOIDBEGIN(nVersion));
-}
+
 uint256 CBlock::BuildMerkleTree(bool* fMutated) const
 {
     /* WARNING! If you're reading this because you're learning about crypto

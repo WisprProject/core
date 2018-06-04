@@ -30,6 +30,7 @@
 #include <boost/thread/exceptions.hpp>
 #define CVOIDBEGIN(a)        ((const void*)&(a))
 
+
 //WISPR only features
 
 extern bool fMasterNode;

@@ -43,16 +43,17 @@
 #define THIN_SP_UTF8 REAL_THIN_SP_UTF8
 #define THIN_SP_HTML HTML_HACK_SP
 
-/** Wispr unit definitions. Encapsulates parsing and formatting
+/** WISPR unit definitions. Encapsulates parsing and formatting
    and serves as list model for drop-down selection boxes.
 */
-class BitcoinUnits : public QAbstractListModel {
+class BitcoinUnits : public QAbstractListModel
+{
     Q_OBJECT
 
 public:
-    explicit BitcoinUnits(QObject *parent);
+    explicit BitcoinUnits(QObject* parent);
 
-    /** Wispr units.
+    /** WISPR units.
       @note Source: https://en.bitcoin.it/wiki/Units . Please add only sensible ones
      */
     enum Unit {
@@ -72,50 +73,30 @@ public:
     ///@{
 
     //! Get list of units, for drop-down box
-    static QList <Unit> availableUnits();
-
+    static QList<Unit> availableUnits();
     //! Is unit ID valid?
     static bool valid(int unit);
-
     //! Identifier, e.g. for image names
     static QString id(int unit);
-
     //! Short name
     static QString name(int unit);
-
     //! Longer description
     static QString description(int unit);
-
     //! Number of Satoshis (1e-8) per unit
     static qint64 factor(int unit);
-
     //! Number of decimals left
     static int decimals(int unit);
-
     //! Format as string
-    static QString
-    format(int unit, const CAmount &amount, bool plussign = false, SeparatorStyle separators = separatorStandard);
-
-    static QString
-    simpleFormat(int unit, const CAmount &amount, bool plussign = false, SeparatorStyle separators = separatorStandard);
-
+    static QString format(int unit, const CAmount& amount, bool plussign = false, SeparatorStyle separators = separatorStandard);
+    static QString simpleFormat(int unit, const CAmount& amount, bool plussign = false, SeparatorStyle separators = separatorStandard);
     //! Format as string (with unit)
-    static QString formatWithUnit(int unit, const CAmount &amount, bool plussign = false,
-                                  SeparatorStyle separators = separatorStandard);
-
-    static QString formatHtmlWithUnit(int unit, const CAmount &amount, bool plussign = false,
-                                      SeparatorStyle separators = separatorStandard);
-
+    static QString formatWithUnit(int unit, const CAmount& amount, bool plussign = false, SeparatorStyle separators = separatorStandard);
+    static QString formatHtmlWithUnit(int unit, const CAmount& amount, bool plussign = false, SeparatorStyle separators = separatorStandard);
     //! Format as string (with unit) but floor value up to "digits" settings
-    static QString floorWithUnit(int unit, const CAmount &amount, bool plussign = false,
-                                 SeparatorStyle separators = separatorStandard);
-
-    static QString floorHtmlWithUnit(int unit, const CAmount &amount, bool plussign = false,
-                                     SeparatorStyle separators = separatorStandard);
-
+    static QString floorWithUnit(int unit, const CAmount& amount, bool plussign = false, SeparatorStyle separators = separatorStandard);
+    static QString floorHtmlWithUnit(int unit, const CAmount& amount, bool plussign = false, SeparatorStyle separators = separatorStandard);
     //! Parse string to coin amount
-    static bool parse(int unit, const QString &value, CAmount *val_out);
-
+    static bool parse(int unit, const QString& value, CAmount* val_out);
     //! Gets title for amount column including current display unit if optionsModel reference available */
     static QString getAmountColumnTitle(int unit);
     ///@}
@@ -125,15 +106,14 @@ public:
     ///@{
     enum RoleIndex {
         /** Unit identifier */
-                UnitRole = Qt::UserRole
+        UnitRole = Qt::UserRole
     };
-
-    int rowCount(const QModelIndex &parent) const;
-
-    QVariant data(const QModelIndex &index, int role) const;
+    int rowCount(const QModelIndex& parent) const;
+    QVariant data(const QModelIndex& index, int role) const;
     ///@}
 
-    static QString removeSpaces(QString text) {
+    static QString removeSpaces(QString text)
+    {
         text.remove(' ');
         text.remove(QChar(THIN_SP_CP));
 #if (THIN_SP_CP != REAL_THIN_SP_CP)
@@ -146,9 +126,8 @@ public:
     static CAmount maxMoney();
 
 private:
-    QList <BitcoinUnits::Unit> unitlist;
+    QList<BitcoinUnits::Unit> unitlist;
 };
-
 typedef BitcoinUnits::Unit BitcoinUnit;
 
 #endif // BITCOIN_QT_BITCOINUNITS_H

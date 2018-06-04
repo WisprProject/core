@@ -34,10 +34,10 @@
 // delete s; // Must be done after thread is interrupted/joined.
 //
 
-class CScheduler {
+class CScheduler
+{
 public:
     CScheduler();
-
     ~CScheduler();
 
     typedef boost::function<void(void)> Function;
@@ -64,7 +64,7 @@ public:
     // Tell any threads running serviceQueue to stop as soon as they're
     // done servicing whatever task they're currently servicing (drain=false)
     // or when there is no work left to be done (drain=true)
-    void stop(bool drain = false);
+    void stop(bool drain=false);
 
     // Returns number of tasks waiting to be serviced,
     // and first and last task times
@@ -72,13 +72,12 @@ public:
                         boost::chrono::system_clock::time_point &last) const;
 
 private:
-    std::multimap <boost::chrono::system_clock::time_point, Function> taskQueue;
+    std::multimap<boost::chrono::system_clock::time_point, Function> taskQueue;
     boost::condition_variable newTaskScheduled;
     mutable boost::mutex newTaskMutex;
     int nThreadsServicingQueue;
     bool stopRequested;
     bool stopWhenEmpty;
-
     bool shouldStop() { return stopRequested || (stopWhenEmpty && taskQueue.empty()); }
 };
 

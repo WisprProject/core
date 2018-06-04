@@ -5,19 +5,23 @@
 #include "accumulatorcheckpoints.h"
 #include "accumulatorcheckpoints.json.h"
 
-namespace AccumulatorCheckpoints {
+namespace AccumulatorCheckpoints
+{
     std::map<int, Checkpoint> mapCheckpoints;
 
-    UniValue read_json(const std::string &jsondata) {
+    UniValue read_json(const std::string& jsondata)
+    {
         UniValue v;
 
-        if (!v.read(jsondata) || !v.isArray()) {
+        if (!v.read(jsondata) || !v.isArray())
+        {
             return UniValue(UniValue::VARR);
         }
         return v.get_array();
     }
 
-    bool LoadCheckpoints(const std::string &strNetwork) {
+    bool LoadCheckpoints(const std::string& strNetwork)
+    {
         UniValue v;
         if (strNetwork == "main")
             v = read_json(GetMainCheckpoints());
@@ -45,7 +49,7 @@ namespace AccumulatorCheckpoints {
 
             Checkpoint checkpoint;
             for (auto denom : libzerocoin::zerocoinDenomList) {
-                const UniValue &vDenomValue = find_value(o, std::to_string(denom));
+                const UniValue& vDenomValue = find_value(o, std::to_string(denom));
                 if (!vDenomValue.isStr()) {
                     return false;
                 }
@@ -59,7 +63,8 @@ namespace AccumulatorCheckpoints {
         return true;
     }
 
-    Checkpoint GetClosestCheckpoint(const int &nHeight, int &nHeightCheckpoint) {
+    Checkpoint GetClosestCheckpoint(const int& nHeight, int& nHeightCheckpoint)
+    {
         nHeightCheckpoint = -1;
         for (auto it : mapCheckpoints) {
             //only checkpoints that are less than the height requested (unless height is less than the first checkpoint)

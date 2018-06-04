@@ -4,16 +4,19 @@
 
 #include "blocksignature.h"
 #include "main.h"
+#include "zwspchain.h"
 
-bool SignBlockWithKey(CBlock &block, const CKey &key) {
+bool SignBlockWithKey(CBlock& block, const CKey& key)
+{
     if (!key.Sign(block.GetHash(), block.vchBlockSig))
         return error("%s: failed to sign block hash with key", __func__);
 
     return true;
 }
 
-bool GetKeyIDFromUTXO(const CTxOut &txout, CKeyID &keyID) {
-    std::vector <valtype> vSolutions;
+bool GetKeyIDFromUTXO(const CTxOut& txout, CKeyID& keyID)
+{
+    std::vector<valtype> vSolutions;
     txnouttype whichType;
     if (!Solver(txout.scriptPubKey, whichType, vSolutions))
         return false;
@@ -26,11 +29,12 @@ bool GetKeyIDFromUTXO(const CTxOut &txout, CKeyID &keyID) {
     return true;
 }
 
-bool SignBlock(CBlock &block, const CKeyStore &keystore) {
+bool SignBlock(CBlock& block, const CKeyStore& keystore)
+{
     CKeyID keyID;
     if (block.IsProofOfWork()) {
         bool fFoundID = false;
-        for (const CTxOut &txout :block.vtx[0].vout) {
+        for (const CTxOut& txout :block.vtx[0].vout) {
             if (!GetKeyIDFromUTXO(txout, keyID))
                 continue;
             fFoundID = true;
@@ -50,7 +54,8 @@ bool SignBlock(CBlock &block, const CKeyStore &keystore) {
     return SignBlockWithKey(block, key);
 }
 
-bool CheckBlockSignature(const CBlock &block) {
+bool CheckBlockSignature(const CBlock& block)
+{
     if (block.IsProofOfWork())
         return block.vchBlockSig.empty();
 
@@ -68,12 +73,12 @@ bool CheckBlockSignature(const CBlock &block) {
         pubkey = spend.getPubKey();
     } else {
         txnouttype whichType;
-        std::vector <valtype> vSolutions;
-        const CTxOut &txout = block.vtx[1].vout[1];
+        std::vector<valtype> vSolutions;
+        const CTxOut& txout = block.vtx[1].vout[1];
         if (!Solver(txout.scriptPubKey, whichType, vSolutions))
             return false;
         if (whichType == TX_PUBKEY || whichType == TX_PUBKEYHASH) {
-            valtype &vchPubKey = vSolutions[0];
+            valtype& vchPubKey = vSolutions[0];
             pubkey = CPubKey(vchPubKey);
         }
     }

@@ -12,17 +12,18 @@
 
 using namespace std;
 
-CMerkleBlock::CMerkleBlock(const CBlock &block, CBloomFilter &filter) {
+CMerkleBlock::CMerkleBlock(const CBlock& block, CBloomFilter& filter)
+{
     header = block.GetBlockHeader();
 
     vector<bool> vMatch;
-    vector <uint256> vHashes;
+    vector<uint256> vHashes;
 
     vMatch.reserve(block.vtx.size());
     vHashes.reserve(block.vtx.size());
 
     for (unsigned int i = 0; i < block.vtx.size(); i++) {
-        const uint256 &hash = block.vtx[i].GetHash();
+        const uint256& hash = block.vtx[i].GetHash();
         if (filter.IsRelevantAndUpdate(block.vtx[i])) {
             vMatch.push_back(true);
             vMatchedTxn.push_back(make_pair(i, hash));
@@ -34,7 +35,8 @@ CMerkleBlock::CMerkleBlock(const CBlock &block, CBloomFilter &filter) {
     txn = CPartialMerkleTree(vHashes, vMatch);
 }
 
-uint256 CPartialMerkleTree::CalcHash(int height, unsigned int pos, const std::vector <uint256> &vTxid) {
+uint256 CPartialMerkleTree::CalcHash(int height, unsigned int pos, const std::vector<uint256>& vTxid)
+{
     if (height == 0) {
         // hash at height 0 is the txids themself
         return vTxid[pos];
@@ -51,8 +53,8 @@ uint256 CPartialMerkleTree::CalcHash(int height, unsigned int pos, const std::ve
     }
 }
 
-void CPartialMerkleTree::TraverseAndBuild(int height, unsigned int pos, const std::vector <uint256> &vTxid,
-                                          const std::vector<bool> &vMatch) {
+void CPartialMerkleTree::TraverseAndBuild(int height, unsigned int pos, const std::vector<uint256>& vTxid, const std::vector<bool>& vMatch)
+{
     // determine whether this node is the parent of at least one matched txid
     bool fParentOfMatch = false;
     for (unsigned int p = pos << height; p < (pos + 1) << height && p < nTransactions; p++)
@@ -70,9 +72,8 @@ void CPartialMerkleTree::TraverseAndBuild(int height, unsigned int pos, const st
     }
 }
 
-uint256
-CPartialMerkleTree::TraverseAndExtract(int height, unsigned int pos, unsigned int &nBitsUsed, unsigned int &nHashUsed,
-                                       std::vector <uint256> &vMatch) {
+uint256 CPartialMerkleTree::TraverseAndExtract(int height, unsigned int pos, unsigned int& nBitsUsed, unsigned int& nHashUsed, std::vector<uint256>& vMatch)
+{
     if (nBitsUsed >= vBits.size()) {
         // overflowed the bits array - failure
         fBad = true;
@@ -86,7 +87,7 @@ CPartialMerkleTree::TraverseAndExtract(int height, unsigned int pos, unsigned in
             fBad = true;
             return 0;
         }
-        const uint256 &hash = vHash[nHashUsed++];
+        const uint256& hash = vHash[nHashUsed++];
         if (height == 0 && fParentOfMatch) // in case of height 0, we have a matched txid
             vMatch.push_back(hash);
         return hash;
@@ -102,8 +103,8 @@ CPartialMerkleTree::TraverseAndExtract(int height, unsigned int pos, unsigned in
     }
 }
 
-CPartialMerkleTree::CPartialMerkleTree(const std::vector <uint256> &vTxid, const std::vector<bool> &vMatch)
-        : nTransactions(vTxid.size()), fBad(false) {
+CPartialMerkleTree::CPartialMerkleTree(const std::vector<uint256>& vTxid, const std::vector<bool>& vMatch) : nTransactions(vTxid.size()), fBad(false)
+{
     // reset state
     vBits.clear();
     vHash.clear();
@@ -119,7 +120,8 @@ CPartialMerkleTree::CPartialMerkleTree(const std::vector <uint256> &vTxid, const
 
 CPartialMerkleTree::CPartialMerkleTree() : nTransactions(0), fBad(true) {}
 
-uint256 CPartialMerkleTree::ExtractMatches(std::vector <uint256> &vMatch) {
+uint256 CPartialMerkleTree::ExtractMatches(std::vector<uint256>& vMatch)
+{
     vMatch.clear();
     // An empty set will not work
     if (nTransactions == 0)

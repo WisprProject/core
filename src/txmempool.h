@@ -16,11 +16,13 @@
 
 class CAutoFile;
 
-inline double AllowFreeThreshold() {
+inline double AllowFreeThreshold()
+{
     return COIN * 1440 / 250;
 }
 
-inline bool AllowFree(double dPriority) {
+inline bool AllowFree(double dPriority)
+{
     // Large (in bytes) low-priority (new, small-coin) transactions
     // need a fee.
     return dPriority > AllowFreeThreshold();
@@ -33,7 +35,8 @@ static const unsigned int MEMPOOL_HEIGHT = 0x7FFFFFFF;
 /**
  * CTxMemPool stores these:
  */
-class CTxMemPoolEntry {
+class CTxMemPoolEntry
+{
 private:
     CTransaction tx;
     CAmount nFee;         //! Cached to avoid expensive parent-transaction lookups
@@ -44,47 +47,39 @@ private:
     unsigned int nHeight; //! Chain height when entering the mempool
 
 public:
-    CTxMemPoolEntry(const CTransaction &_tx, const CAmount &_nFee, int64_t _nTime, double _dPriority,
-                    unsigned int _nHeight);
-
+    CTxMemPoolEntry(const CTransaction& _tx, const CAmount& _nFee, int64_t _nTime, double _dPriority, unsigned int _nHeight);
     CTxMemPoolEntry();
+    CTxMemPoolEntry(const CTxMemPoolEntry& other);
 
-    CTxMemPoolEntry(const CTxMemPoolEntry &other);
-
-    const CTransaction &GetTx() const { return this->tx; }
-
+    const CTransaction& GetTx() const { return this->tx; }
     double GetPriority(unsigned int currentHeight) const;
-
     CAmount GetFee() const { return nFee; }
-
     size_t GetTxSize() const { return nTxSize; }
-
     int64_t GetTime() const { return nTime; }
-
     unsigned int GetHeight() const { return nHeight; }
 };
 
 class CMinerPolicyEstimator;
 
 /** An inpoint - a combination of a transaction and an index n into its vin */
-class CInPoint {
+class CInPoint
+{
 public:
-    const CTransaction *ptx;
+    const CTransaction* ptx;
     uint32_t n;
 
     CInPoint() { SetNull(); }
-
-    CInPoint(const CTransaction *ptxIn, uint32_t nIn) {
+    CInPoint(const CTransaction* ptxIn, uint32_t nIn)
+    {
         ptx = ptxIn;
         n = nIn;
     }
-
-    void SetNull() {
+    void SetNull()
+    {
         ptx = NULL;
-        n = (uint32_t) - 1;
+        n = (uint32_t)-1;
     }
-
-    bool IsNull() const { return (ptx == NULL && n == (uint32_t) - 1); }
+    bool IsNull() const { return (ptx == NULL && n == (uint32_t)-1); }
 };
 
 /**
@@ -97,23 +92,23 @@ public:
  * an input of a transaction in the pool, it is dropped,
  * as are non-standard transactions.
  */
-class CTxMemPool {
+class CTxMemPool
+{
 private:
     bool fSanityCheck; //! Normally false, true if -checkmempool or -regtest
     unsigned int nTransactionsUpdated;
-    CMinerPolicyEstimator *minerPolicyEstimator;
+    CMinerPolicyEstimator* minerPolicyEstimator;
 
     CFeeRate minRelayFee; //! Passed to constructor to avoid dependency on main
     uint64_t totalTxSize; //! sum of all mempool tx' byte sizes
 
 public:
     mutable CCriticalSection cs;
-    std::map <uint256, CTxMemPoolEntry> mapTx;
-    std::map <COutPoint, CInPoint> mapNextTx;
-    std::map <uint256, std::pair<double, CAmount>> mapDeltas;
+    std::map<uint256, CTxMemPoolEntry> mapTx;
+    std::map<COutPoint, CInPoint> mapNextTx;
+    std::map<uint256, std::pair<double, CAmount> > mapDeltas;
 
-    CTxMemPool(const CFeeRate &_minRelayFee);
-
+    CTxMemPool(const CFeeRate& _minRelayFee);
     ~CTxMemPool();
 
     /**
@@ -122,57 +117,44 @@ public:
      * all inputs are in the mapNextTx array). If sanity-checking is turned off,
      * check does nothing.
      */
-    void check(const CCoinsViewCache *pcoins) const;
-
+    void check(const CCoinsViewCache* pcoins) const;
     void setSanityCheck(bool _fSanityCheck) { fSanityCheck = _fSanityCheck; }
 
-    bool addUnchecked(const uint256 &hash, const CTxMemPoolEntry &entry);
-
-    void remove(const CTransaction &tx, std::list <CTransaction> &removed, bool fRecursive = false);
-
-    void removeCoinbaseSpends(const CCoinsViewCache *pcoins, unsigned int nMemPoolHeight);
-
-    void removeConflicts(const CTransaction &tx, std::list <CTransaction> &removed);
-
-    void removeForBlock(const std::vector <CTransaction> &vtx, unsigned int nBlockHeight,
-                        std::list <CTransaction> &conflicts);
-
+    bool addUnchecked(const uint256& hash, const CTxMemPoolEntry& entry);
+    void remove(const CTransaction& tx, std::list<CTransaction>& removed, bool fRecursive = false);
+    void removeCoinbaseSpends(const CCoinsViewCache* pcoins, unsigned int nMemPoolHeight);
+    void removeConflicts(const CTransaction& tx, std::list<CTransaction>& removed);
+    void removeForBlock(const std::vector<CTransaction>& vtx, unsigned int nBlockHeight, std::list<CTransaction>& conflicts);
     void clear();
-
-    void queryHashes(std::vector <uint256> &vtxid);
-
-    void getTransactions(std::set <uint256> &setTxid);
-
-    void pruneSpent(const uint256 &hash, CCoins &coins);
-
+    void queryHashes(std::vector<uint256>& vtxid);
+    void getTransactions(std::set<uint256>& setTxid);
+    void pruneSpent(const uint256& hash, CCoins& coins);
     unsigned int GetTransactionsUpdated() const;
-
     void AddTransactionsUpdated(unsigned int n);
 
     /** Affect CreateNewBlock prioritisation of transactions */
-    void PrioritiseTransaction(const uint256 hash, const std::string strHash, double dPriorityDelta,
-                               const CAmount &nFeeDelta);
-
-    void ApplyDeltas(const uint256 hash, double &dPriorityDelta, CAmount &nFeeDelta);
-
+    void PrioritiseTransaction(const uint256 hash, const std::string strHash, double dPriorityDelta, const CAmount& nFeeDelta);
+    void ApplyDeltas(const uint256 hash, double& dPriorityDelta, CAmount& nFeeDelta);
     void ClearPrioritisation(const uint256 hash);
 
-    unsigned long size() {
+    unsigned long size()
+    {
         LOCK(cs);
         return mapTx.size();
     }
-
-    uint64_t GetTotalTxSize() {
+    uint64_t GetTotalTxSize()
+    {
         LOCK(cs);
         return totalTxSize;
     }
 
-    bool exists(uint256 hash) {
+    bool exists(uint256 hash)
+    {
         LOCK(cs);
         return (mapTx.count(hash) != 0);
     }
 
-    bool lookup(uint256 hash, CTransaction &result) const;
+    bool lookup(uint256 hash, CTransaction& result) const;
 
     /** Estimate fee rate needed to get into the next nBlocks */
     CFeeRate estimateFee(int nBlocks) const;
@@ -181,25 +163,23 @@ public:
     double estimatePriority(int nBlocks) const;
 
     /** Write/Read estimates to disk */
-    bool WriteFeeEstimates(CAutoFile &fileout) const;
-
-    bool ReadFeeEstimates(CAutoFile &filein);
+    bool WriteFeeEstimates(CAutoFile& fileout) const;
+    bool ReadFeeEstimates(CAutoFile& filein);
 };
 
 /** 
  * CCoinsView that brings transactions from a memorypool into view.
  * It does not check for spendings by memory pool transactions.
  */
-class CCoinsViewMemPool : public CCoinsViewBacked {
+class CCoinsViewMemPool : public CCoinsViewBacked
+{
 protected:
-    CTxMemPool &mempool;
+    CTxMemPool& mempool;
 
 public:
-    CCoinsViewMemPool(CCoinsView *baseIn, CTxMemPool &mempoolIn);
-
-    bool GetCoins(const uint256 &txid, CCoins &coins) const;
-
-    bool HaveCoins(const uint256 &txid) const;
+    CCoinsViewMemPool(CCoinsView* baseIn, CTxMemPool& mempoolIn);
+    bool GetCoins(const uint256& txid, CCoins& coins) const;
+    bool HaveCoins(const uint256& txid) const;
 };
 
 #endif // BITCOIN_TXMEMPOOL_H

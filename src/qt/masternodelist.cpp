@@ -23,10 +23,11 @@
 
 CCriticalSection cs_masternodes;
 
-MasternodeList::MasternodeList(QWidget *parent) : QWidget(parent),
+MasternodeList::MasternodeList(QWidget* parent) : QWidget(parent),
                                                   ui(new Ui::MasternodeList),
                                                   clientModel(0),
-                                                  walletModel(0) {
+                                                  walletModel(0)
+{
     ui->setupUi(this);
 
     ui->startButton->setEnabled(false);
@@ -48,12 +49,10 @@ MasternodeList::MasternodeList(QWidget *parent) : QWidget(parent),
 
     ui->tableWidgetMyMasternodes->setContextMenuPolicy(Qt::CustomContextMenu);
 
-    QAction *startAliasAction = new QAction(tr("Start alias"), this);
+    QAction* startAliasAction = new QAction(tr("Start alias"), this);
     contextMenu = new QMenu();
     contextMenu->addAction(startAliasAction);
-    connect(ui->tableWidgetMyMasternodes, SIGNAL(customContextMenuRequested(
-    const QPoint&)), this, SLOT(showContextMenu(
-    const QPoint&)));
+    connect(ui->tableWidgetMyMasternodes, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(showContextMenu(const QPoint&)));
     connect(startAliasAction, SIGNAL(triggered()), this, SLOT(on_startButton_clicked()));
 
     timer = new QTimer(this);
@@ -65,35 +64,38 @@ MasternodeList::MasternodeList(QWidget *parent) : QWidget(parent),
     nTimeFilterUpdated = GetTime();
 }
 
-MasternodeList::~MasternodeList() {
+MasternodeList::~MasternodeList()
+{
     delete ui;
 }
 
-void MasternodeList::setClientModel(ClientModel *model) {
+void MasternodeList::setClientModel(ClientModel* model)
+{
     this->clientModel = model;
 }
 
-void MasternodeList::setWalletModel(WalletModel *model) {
+void MasternodeList::setWalletModel(WalletModel* model)
+{
     this->walletModel = model;
 }
 
-void MasternodeList::showContextMenu(const QPoint &point) {
-    QTableWidgetItem *item = ui->tableWidgetMyMasternodes->itemAt(point);
+void MasternodeList::showContextMenu(const QPoint& point)
+{
+    QTableWidgetItem* item = ui->tableWidgetMyMasternodes->itemAt(point);
     if (item) contextMenu->exec(QCursor::pos());
 }
 
-void MasternodeList::StartAlias(std::string strAlias) {
+void MasternodeList::StartAlias(std::string strAlias)
+{
     std::string strStatusHtml;
     strStatusHtml += "<center>Alias: " + strAlias;
 
-    BOOST_FOREACH(CMasternodeConfig::CMasternodeEntry
-    mne, masternodeConfig.getEntries()) {
+    BOOST_FOREACH (CMasternodeConfig::CMasternodeEntry mne, masternodeConfig.getEntries()) {
         if (mne.getAlias() == strAlias) {
             std::string strError;
             CMasternodeBroadcast mnb;
 
-            bool fSuccess = CMasternodeBroadcast::Create(mne.getIp(), mne.getPrivKey(), mne.getTxHash(),
-                                                         mne.getOutputIndex(), strError, mnb);
+            bool fSuccess = CMasternodeBroadcast::Create(mne.getIp(), mne.getPrivKey(), mne.getTxHash(), mne.getOutputIndex(), strError, mnb);
 
             if (fSuccess) {
                 strStatusHtml += "<br>Successfully started masternode.";
@@ -114,27 +116,26 @@ void MasternodeList::StartAlias(std::string strAlias) {
     updateMyNodeList(true);
 }
 
-void MasternodeList::StartAll(std::string strCommand) {
+void MasternodeList::StartAll(std::string strCommand)
+{
     int nCountSuccessful = 0;
     int nCountFailed = 0;
     std::string strFailedHtml;
 
-    BOOST_FOREACH(CMasternodeConfig::CMasternodeEntry
-    mne, masternodeConfig.getEntries()) {
+    BOOST_FOREACH (CMasternodeConfig::CMasternodeEntry mne, masternodeConfig.getEntries()) {
         std::string strError;
         CMasternodeBroadcast mnb;
 
         int nIndex;
-        if (!mne.castOutputIndex(nIndex))
+        if(!mne.castOutputIndex(nIndex))
             continue;
 
         CTxIn txin = CTxIn(uint256S(mne.getTxHash()), uint32_t(nIndex));
-        CMasternode * pmn = mnodeman.Find(txin);
+        CMasternode* pmn = mnodeman.Find(txin);
 
         if (strCommand == "start-missing" && pmn) continue;
 
-        bool fSuccess = CMasternodeBroadcast::Create(mne.getIp(), mne.getPrivKey(), mne.getTxHash(),
-                                                     mne.getOutputIndex(), strError, mnb);
+        bool fSuccess = CMasternodeBroadcast::Create(mne.getIp(), mne.getPrivKey(), mne.getTxHash(), mne.getOutputIndex(), strError, mnb);
 
         if (fSuccess) {
             nCountSuccessful++;
@@ -148,8 +149,7 @@ void MasternodeList::StartAll(std::string strCommand) {
     pwalletMain->Lock();
 
     std::string returnObj;
-    returnObj = strprintf("Successfully started %d masternodes, failed to start %d, total %d", nCountSuccessful,
-                          nCountFailed, nCountFailed + nCountSuccessful);
+    returnObj = strprintf("Successfully started %d masternodes, failed to start %d, total %d", nCountSuccessful, nCountFailed, nCountFailed + nCountSuccessful);
     if (nCountFailed > 0) {
         returnObj += strFailedHtml;
     }
@@ -161,7 +161,8 @@ void MasternodeList::StartAll(std::string strCommand) {
     updateMyNodeList(true);
 }
 
-void MasternodeList::updateMyMasternodeInfo(QString strAlias, QString strAddr, CMasternode *pmn) {
+void MasternodeList::updateMyMasternodeInfo(QString strAlias, QString strAddr, CMasternode* pmn)
+{
     LOCK(cs_mnlistupdate);
     bool fOldRowFound = false;
     int nNewRow = 0;
@@ -179,16 +180,13 @@ void MasternodeList::updateMyMasternodeInfo(QString strAlias, QString strAddr, C
         ui->tableWidgetMyMasternodes->insertRow(nNewRow);
     }
 
-    QTableWidgetItem *aliasItem = new QTableWidgetItem(strAlias);
-    QTableWidgetItem *addrItem = new QTableWidgetItem(pmn ? QString::fromStdString(pmn->addr.ToString()) : strAddr);
-    QTableWidgetItem *protocolItem = new QTableWidgetItem(QString::number(pmn ? pmn->protocolVersion : -1));
-    QTableWidgetItem *statusItem = new QTableWidgetItem(QString::fromStdString(pmn ? pmn->GetStatus() : "MISSING"));
-    GUIUtil::DHMSTableWidgetItem *activeSecondsItem = new GUIUtil::DHMSTableWidgetItem(
-            pmn ? (pmn->lastPing.sigTime - pmn->sigTime) : 0);
-    QTableWidgetItem *lastSeenItem = new QTableWidgetItem(
-            QString::fromStdString(DateTimeStrFormat("%Y-%m-%d %H:%M", pmn ? pmn->lastPing.sigTime : 0)));
-    QTableWidgetItem *pubkeyItem = new QTableWidgetItem(
-            QString::fromStdString(pmn ? CBitcoinAddress(pmn->pubKeyCollateralAddress.GetID()).ToString() : ""));
+    QTableWidgetItem* aliasItem = new QTableWidgetItem(strAlias);
+    QTableWidgetItem* addrItem = new QTableWidgetItem(pmn ? QString::fromStdString(pmn->addr.ToString()) : strAddr);
+    QTableWidgetItem* protocolItem = new QTableWidgetItem(QString::number(pmn ? pmn->protocolVersion : -1));
+    QTableWidgetItem* statusItem = new QTableWidgetItem(QString::fromStdString(pmn ? pmn->GetStatus() : "MISSING"));
+    GUIUtil::DHMSTableWidgetItem* activeSecondsItem = new GUIUtil::DHMSTableWidgetItem(pmn ? (pmn->lastPing.sigTime - pmn->sigTime) : 0);
+    QTableWidgetItem* lastSeenItem = new QTableWidgetItem(QString::fromStdString(DateTimeStrFormat("%Y-%m-%d %H:%M", pmn ? pmn->lastPing.sigTime : 0)));
+    QTableWidgetItem* pubkeyItem = new QTableWidgetItem(QString::fromStdString(pmn ? CBitcoinAddress(pmn->pubKeyCollateralAddress.GetID()).ToString() : ""));
 
     ui->tableWidgetMyMasternodes->setItem(nNewRow, 0, aliasItem);
     ui->tableWidgetMyMasternodes->setItem(nNewRow, 1, addrItem);
@@ -199,7 +197,8 @@ void MasternodeList::updateMyMasternodeInfo(QString strAlias, QString strAddr, C
     ui->tableWidgetMyMasternodes->setItem(nNewRow, 6, pubkeyItem);
 }
 
-void MasternodeList::updateMyNodeList(bool fForce) {
+void MasternodeList::updateMyNodeList(bool fForce)
+{
     static int64_t nTimeMyListUpdated = 0;
 
     // automatically update my masternode list only once in MY_MASTERNODELIST_UPDATE_SECONDS seconds,
@@ -211,14 +210,13 @@ void MasternodeList::updateMyNodeList(bool fForce) {
     nTimeMyListUpdated = GetTime();
 
     ui->tableWidgetMyMasternodes->setSortingEnabled(false);
-    BOOST_FOREACH(CMasternodeConfig::CMasternodeEntry
-    mne, masternodeConfig.getEntries()) {
+    BOOST_FOREACH (CMasternodeConfig::CMasternodeEntry mne, masternodeConfig.getEntries()) {
         int nIndex;
-        if (!mne.castOutputIndex(nIndex))
+        if(!mne.castOutputIndex(nIndex))
             continue;
 
         CTxIn txin = CTxIn(uint256S(mne.getTxHash()), uint32_t(nIndex));
-        CMasternode * pmn = mnodeman.Find(txin);
+        CMasternode* pmn = mnodeman.Find(txin);
         updateMyMasternodeInfo(QString::fromStdString(mne.getAlias()), QString::fromStdString(mne.getIp()), pmn);
     }
     ui->tableWidgetMyMasternodes->setSortingEnabled(true);
@@ -227,9 +225,10 @@ void MasternodeList::updateMyNodeList(bool fForce) {
     ui->secondsLabel->setText("0");
 }
 
-void MasternodeList::on_startButton_clicked() {
+void MasternodeList::on_startButton_clicked()
+{
     // Find selected node alias
-    QItemSelectionModel *selectionModel = ui->tableWidgetMyMasternodes->selectionModel();
+    QItemSelectionModel* selectionModel = ui->tableWidgetMyMasternodes->selectionModel();
     QModelIndexList selected = selectionModel->selectedRows();
 
     if (selected.count() == 0) return;
@@ -240,10 +239,9 @@ void MasternodeList::on_startButton_clicked() {
 
     // Display message box
     QMessageBox::StandardButton retval = QMessageBox::question(this, tr("Confirm masternode start"),
-                                                               tr("Are you sure you want to start masternode %1?").arg(
-                                                                       QString::fromStdString(strAlias)),
-                                                               QMessageBox::Yes | QMessageBox::Cancel,
-                                                               QMessageBox::Cancel);
+        tr("Are you sure you want to start masternode %1?").arg(QString::fromStdString(strAlias)),
+        QMessageBox::Yes | QMessageBox::Cancel,
+        QMessageBox::Cancel);
 
     if (retval != QMessageBox::Yes) return;
 
@@ -261,12 +259,13 @@ void MasternodeList::on_startButton_clicked() {
     StartAlias(strAlias);
 }
 
-void MasternodeList::on_startAllButton_clicked() {
+void MasternodeList::on_startAllButton_clicked()
+{
     // Display message box
     QMessageBox::StandardButton retval = QMessageBox::question(this, tr("Confirm all masternodes start"),
-                                                               tr("Are you sure you want to start ALL masternodes?"),
-                                                               QMessageBox::Yes | QMessageBox::Cancel,
-                                                               QMessageBox::Cancel);
+        tr("Are you sure you want to start ALL masternodes?"),
+        QMessageBox::Yes | QMessageBox::Cancel,
+        QMessageBox::Cancel);
 
     if (retval != QMessageBox::Yes) return;
 
@@ -284,19 +283,20 @@ void MasternodeList::on_startAllButton_clicked() {
     StartAll();
 }
 
-void MasternodeList::on_startMissingButton_clicked() {
+void MasternodeList::on_startMissingButton_clicked()
+{
     if (!masternodeSync.IsMasternodeListSynced()) {
         QMessageBox::critical(this, tr("Command is not available right now"),
-                              tr("You can't use this command until masternode list is synced"));
+            tr("You can't use this command until masternode list is synced"));
         return;
     }
 
     // Display message box
     QMessageBox::StandardButton retval = QMessageBox::question(this,
-                                                               tr("Confirm missing masternodes start"),
-                                                               tr("Are you sure you want to start MISSING masternodes?"),
-                                                               QMessageBox::Yes | QMessageBox::Cancel,
-                                                               QMessageBox::Cancel);
+        tr("Confirm missing masternodes start"),
+        tr("Are you sure you want to start MISSING masternodes?"),
+        QMessageBox::Yes | QMessageBox::Cancel,
+        QMessageBox::Cancel);
 
     if (retval != QMessageBox::Yes) return;
 
@@ -314,12 +314,14 @@ void MasternodeList::on_startMissingButton_clicked() {
     StartAll("start-missing");
 }
 
-void MasternodeList::on_tableWidgetMyMasternodes_itemSelectionChanged() {
+void MasternodeList::on_tableWidgetMyMasternodes_itemSelectionChanged()
+{
     if (ui->tableWidgetMyMasternodes->selectedItems().count() > 0) {
         ui->startButton->setEnabled(true);
     }
 }
 
-void MasternodeList::on_UpdateButton_clicked() {
+void MasternodeList::on_UpdateButton_clicked()
+{
     updateMyNodeList(true);
 }

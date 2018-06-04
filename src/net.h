@@ -38,7 +38,7 @@ class CNode;
 
 namespace boost
 {
-    class thread_group;
+class thread_group;
 } // namespace boost
 
 /** Time between pings automatically sent out for latency probing and keepalive (in seconds). */
@@ -263,12 +263,12 @@ public:
     std::string banReasonToString()
     {
         switch (banReason) {
-            case BanReasonNodeMisbehaving:
-                return "node misbehaving";
-            case BanReasonManuallyAdded:
-                return "manually added";
-            default:
-                return "unknown";
+        case BanReasonNodeMisbehaving:
+            return "node misbehaving";
+        case BanReasonManuallyAdded:
+            return "manually added";
+        default:
+            return "unknown";
         }
     }
 };
@@ -407,7 +407,7 @@ public:
     {
         unsigned int total = 0;
         BOOST_FOREACH (const CNetMessage& msg, vRecvMsg)
-                        total += msg.vRecv.size() + 24;
+            total += msg.vRecv.size() + 24;
         return total;
     }
 
@@ -419,7 +419,7 @@ public:
     {
         nRecvVersion = nVersionIn;
         BOOST_FOREACH (CNetMessage& msg, vRecvMsg)
-                        msg.SetVersion(nVersionIn);
+            msg.SetVersion(nVersionIn);
     }
 
     CNode* AddRef()
@@ -655,8 +655,8 @@ public:
     bool HasFulfilledRequest(std::string strRequest)
     {
         BOOST_FOREACH (std::string& type, vecRequestsFulfilled) {
-                        if (type == strRequest) return true;
-                    }
+            if (type == strRequest) return true;
+        }
         return false;
     }
 

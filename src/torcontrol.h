@@ -18,10 +18,8 @@
 extern const std::string DEFAULT_TOR_CONTROL;
 static const bool DEFAULT_LISTEN_ONION = true;
 
-void StartTorControl(boost::thread_group &threadGroup);
-
+void StartTorControl(boost::thread_group& threadGroup);
 void InterruptTorControl();
-
 void StopTorControl();
 
 #endif /* BITCOIN_TORCONTROL_H */

@@ -28,28 +28,18 @@ private:
 
 public:
     CMintPool();
-
     explicit CMintPool(uint32_t nCount);
-
-    void Add(const CBigNum &bnValue, const uint32_t &nCount);
-
-    void Add(const std::pair <uint256, uint32_t> &pMint, bool fVerbose = false);
-
-    bool Has(const CBigNum &bnValue);
-
-    void Remove(const CBigNum &bnValue);
-
-    void Remove(const uint256 &hashPubcoin);
-
-    std::pair <uint256, uint32_t> Get(const CBigNum &bnValue);
-
-    std::list <std::pair<uint256, uint32_t>> List();
-
+    void Add(const CBigNum& bnValue, const uint32_t& nCount);
+    void Add(const std::pair<uint256, uint32_t>& pMint, bool fVerbose = false);
+    bool Has(const CBigNum& bnValue);
+    void Remove(const CBigNum& bnValue);
+    void Remove(const uint256& hashPubcoin);
+    std::pair<uint256, uint32_t> Get(const CBigNum& bnValue);
+    std::list<std::pair<uint256, uint32_t> > List();
     void Reset();
 
-    bool Front(std::pair <uint256, uint32_t> &pMint);
-
-    bool Next(std::pair <uint256, uint32_t> &pMint);
+    bool Front(std::pair<uint256, uint32_t>& pMint);
+    bool Next(std::pair<uint256, uint32_t>& pMint);
 
     //The count of the next mint to generate will have be a mint that is already in the pool
     //therefore need to return the next value that has not been removed from the pool yet

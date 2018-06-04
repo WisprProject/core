@@ -19,16 +19,16 @@ using namespace std;
 using namespace boost;
 
 class CSporkMessage;
-
 class CSporkManager;
 
 CSporkManager sporkManager;
 
-std::map <uint256, CSporkMessage> mapSporks;
+std::map<uint256, CSporkMessage> mapSporks;
 std::map<int, CSporkMessage> mapSporksActive;
 
 // WISPR: on startup load spork values from previous session if they exist in the sporkDB
-void LoadSporksFromDB() {
+void LoadSporksFromDB()
+{
     for (int i = SPORK_START; i <= SPORK_END; ++i) {
         // Since not all spork IDs are in use, we have to exclude undefined IDs
         std::string strSpork = sporkManager.GetSporkNameByID(i);
@@ -57,7 +57,8 @@ void LoadSporksFromDB() {
     }
 }
 
-void ProcessSpork(CNode *pfrom, std::string &strCommand, CDataStream &vRecv) {
+void ProcessSpork(CNode* pfrom, std::string& strCommand, CDataStream& vRecv)
+{
     if (fLiteMode) return; //disable all obfuscation/masternode related functionality
 
     if (strCommand == "spork") {
@@ -75,18 +76,22 @@ void ProcessSpork(CNode *pfrom, std::string &strCommand, CDataStream &vRecv) {
         uint256 hash = spork.GetHash();
         if (mapSporksActive.count(spork.nSporkID)) {
             if (mapSporksActive[spork.nSporkID].nTimeSigned >= spork.nTimeSigned) {
-                if (fDebug)
-                    LogPrintf("%s : seen %s block %d \n", __func__, hash.ToString(), chainActive.Tip()->nHeight);
+                if (fDebug) LogPrintf("%s : seen %s block %d \n", __func__, hash.ToString(), chainActive.Tip()->nHeight);
                 return;
             } else {
-                if (fDebug)
-                    LogPrintf("%s : got updated spork %s block %d \n", __func__, hash.ToString(),
-                              chainActive.Tip()->nHeight);
+                if (fDebug) LogPrintf("%s : got updated spork %s block %d \n", __func__, hash.ToString(), chainActive.Tip()->nHeight);
             }
         }
 
-        LogPrintf("%s : new %s ID %d Time %d bestHeight %d\n", __func__, hash.ToString(), spork.nSporkID, spork.nValue,
-                  chainActive.Tip()->nHeight);
+        LogPrintf("%s : new %s ID %d Time %d bestHeight %d\n", __func__, hash.ToString(), spork.nSporkID, spork.nValue, chainActive.Tip()->nHeight);
+
+        if (spork.nTimeSigned >= Params().NewSporkStart()) {
+            if (!sporkManager.CheckSignature(spork, true)) {
+                LogPrintf("%s : Invalid Signature\n", __func__);
+                Misbehaving(pfrom->GetId(), 100);
+                return;
+            }
+        }
 
         if (!sporkManager.CheckSignature(spork)) {
             LogPrintf("%s : Invalid Signature\n", __func__);
@@ -113,7 +118,8 @@ void ProcessSpork(CNode *pfrom, std::string &strCommand, CDataStream &vRecv) {
 
 
 // grab the value of the spork on the network, or the default
-int64_t GetSporkValue(int nSporkID) {
+int64_t GetSporkValue(int nSporkID)
+{
     int64_t r = -1;
 
     if (mapSporksActive.count(nSporkID)) {
@@ -138,14 +144,16 @@ int64_t GetSporkValue(int nSporkID) {
 }
 
 // grab the spork value, and see if it's off
-bool IsSporkActive(int nSporkID) {
+bool IsSporkActive(int nSporkID)
+{
     int64_t r = GetSporkValue(nSporkID);
     if (r == -1) return false;
     return r < GetTime();
 }
 
 
-void ReprocessBlocks(int nBlocks) {
+void ReprocessBlocks(int nBlocks)
+{
     std::map<uint256, int64_t>::iterator it = mapRejectedBlocks.begin();
     while (it != mapRejectedBlocks.end()) {
         //use a window twice as large as is usual for the nBlocks we want to reset
@@ -154,7 +162,7 @@ void ReprocessBlocks(int nBlocks) {
             if (mi != mapBlockIndex.end() && (*mi).second) {
                 LOCK(cs_main);
 
-                CBlockIndex *pindex = (*mi).second;
+                CBlockIndex* pindex = (*mi).second;
                 LogPrintf("ReprocessBlocks - %s\n", (*it).first.ToString());
 
                 CValidationState state;
@@ -175,32 +183,30 @@ void ReprocessBlocks(int nBlocks) {
     }
 }
 
-bool CSporkManager::CheckSignature(CSporkMessage &spork, bool fCheckSigner) {
+bool CSporkManager::CheckSignature(CSporkMessage& spork, bool fCheckSigner)
+{
     //note: need to investigate why this is failing
-    std::string strMessage =
-            boost::lexical_cast<std::string>(spork.nSporkID) + boost::lexical_cast<std::string>(spork.nValue) +
-            boost::lexical_cast<std::string>(spork.nTimeSigned);
+    std::string strMessage = boost::lexical_cast<std::string>(spork.nSporkID) + boost::lexical_cast<std::string>(spork.nValue) + boost::lexical_cast<std::string>(spork.nTimeSigned);
     CPubKey pubkeynew(ParseHex(Params().SporkKey()));
     std::string errorMessage = "";
 
-    bool fValidWithNewKey = obfuScationSigner.VerifyMessage(pubkeynew, spork.vchSig, strMessage, errorMessage);
+    bool fValidWithNewKey = obfuScationSigner.VerifyMessage(pubkeynew, spork.vchSig,strMessage, errorMessage);
 
     if (fCheckSigner && !fValidWithNewKey)
         return false;
 
     // See if window is open that allows for old spork key to sign messages
-//    if (!fValidWithNewKey && GetAdjustedTime() < Params().RejectOldSporkKey()) {
-//        CPubKey pubkeyold(ParseHex(Params().SporkKeyOld()));
-//        return obfuScationSigner.VerifyMessage(pubkeyold, spork.vchSig, strMessage, errorMessage);
-//    }
+    if (!fValidWithNewKey && GetAdjustedTime() < Params().RejectOldSporkKey()) {
+        CPubKey pubkeyold(ParseHex(Params().SporkKeyOld()));
+        return obfuScationSigner.VerifyMessage(pubkeyold, spork.vchSig, strMessage, errorMessage);
+    }
 
     return fValidWithNewKey;
 }
 
-bool CSporkManager::Sign(CSporkMessage &spork) {
-    std::string strMessage =
-            boost::lexical_cast<std::string>(spork.nSporkID) + boost::lexical_cast<std::string>(spork.nValue) +
-            boost::lexical_cast<std::string>(spork.nTimeSigned);
+bool CSporkManager::Sign(CSporkMessage& spork)
+{
+    std::string strMessage = boost::lexical_cast<std::string>(spork.nSporkID) + boost::lexical_cast<std::string>(spork.nValue) + boost::lexical_cast<std::string>(spork.nTimeSigned);
 
     CKey key2;
     CPubKey pubkey2;
@@ -224,7 +230,8 @@ bool CSporkManager::Sign(CSporkMessage &spork) {
     return true;
 }
 
-bool CSporkManager::UpdateSpork(int nSporkID, int64_t nValue) {
+bool CSporkManager::UpdateSpork(int nSporkID, int64_t nValue)
+{
     CSporkMessage msg;
     msg.nSporkID = nSporkID;
     msg.nValue = nValue;
@@ -240,12 +247,14 @@ bool CSporkManager::UpdateSpork(int nSporkID, int64_t nValue) {
     return false;
 }
 
-void CSporkManager::Relay(CSporkMessage &msg) {
+void CSporkManager::Relay(CSporkMessage& msg)
+{
     CInv inv(MSG_SPORK, msg.GetHash());
     RelayInv(inv);
 }
 
-bool CSporkManager::SetPrivKey(std::string strPrivKey) {
+bool CSporkManager::SetPrivKey(std::string strPrivKey)
+{
     CSporkMessage msg;
 
     // Test signing successful, proceed
@@ -261,7 +270,8 @@ bool CSporkManager::SetPrivKey(std::string strPrivKey) {
     }
 }
 
-int CSporkManager::GetSporkIDByName(std::string strName) {
+int CSporkManager::GetSporkIDByName(std::string strName)
+{
     if (strName == "SPORK_2_SWIFTTX") return SPORK_2_SWIFTTX;
     if (strName == "SPORK_3_SWIFTTX_BLOCK_FILTERING") return SPORK_3_SWIFTTX_BLOCK_FILTERING;
     if (strName == "SPORK_5_MAX_VALUE") return SPORK_5_MAX_VALUE;
@@ -277,7 +287,8 @@ int CSporkManager::GetSporkIDByName(std::string strName) {
     return -1;
 }
 
-std::string CSporkManager::GetSporkNameByID(int id) {
+std::string CSporkManager::GetSporkNameByID(int id)
+{
     if (id == SPORK_2_SWIFTTX) return "SPORK_2_SWIFTTX";
     if (id == SPORK_3_SWIFTTX_BLOCK_FILTERING) return "SPORK_3_SWIFTTX_BLOCK_FILTERING";
     if (id == SPORK_5_MAX_VALUE) return "SPORK_5_MAX_VALUE";

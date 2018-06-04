@@ -25,21 +25,19 @@
 using namespace std;
 
 class CMasternode;
-
 class CMasternodeBroadcast;
-
 class CMasternodePing;
+extern map<int64_t, uint256> mapCacheBlockHashes;
 
-extern map <int64_t, uint256> mapCacheBlockHashes;
-
-bool GetBlockHash(uint256 &hash, int nBlockHeight);
+bool GetBlockHash(uint256& hash, int nBlockHeight);
 
 
 //
 // The Masternode Ping Class : Contains a different serialize method for sending pings from masternodes throughout the network
 //
 
-class CMasternodePing {
+class CMasternodePing
+{
 public:
     CTxIn vin;
     uint256 blockHash;
@@ -48,35 +46,33 @@ public:
     //removed stop
 
     CMasternodePing();
-
-    CMasternodePing(CTxIn &newVin);
+    CMasternodePing(CTxIn& newVin);
 
     ADD_SERIALIZE_METHODS;
 
-    template<typename Stream, typename Operation>
-    inline void SerializationOp(Stream &s, Operation ser_action, int nType, int nVersion) {
+    template <typename Stream, typename Operation>
+    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
+    {
         READWRITE(vin);
         READWRITE(blockHash);
         READWRITE(sigTime);
         READWRITE(vchSig);
     }
 
-    bool CheckAndUpdate(int &nDos, bool fRequireEnabled = true, bool fCheckSigTimeOnly = false);
-
-    bool Sign(CKey &keyMasternode, CPubKey &pubKeyMasternode);
-
-    bool VerifySignature(CPubKey &pubKeyMasternode, int &nDos);
-
+    bool CheckAndUpdate(int& nDos, bool fRequireEnabled = true, bool fCheckSigTimeOnly = false);
+    bool Sign(CKey& keyMasternode, CPubKey& pubKeyMasternode);
+    bool VerifySignature(CPubKey& pubKeyMasternode, int &nDos);
     void Relay();
 
-    uint256 GetHash() {
+    uint256 GetHash()
+    {
         CHashWriter ss(SER_GETHASH, PROTOCOL_VERSION);
         ss << vin;
         ss << sigTime;
         return ss.GetHash();
     }
 
-    void swap(CMasternodePing &first, CMasternodePing &second) // nothrow
+    void swap(CMasternodePing& first, CMasternodePing& second) // nothrow
     {
         // enable ADL (not necessary in our case, but good practice)
         using std::swap;
@@ -89,16 +85,17 @@ public:
         swap(first.vchSig, second.vchSig);
     }
 
-    CMasternodePing &operator=(CMasternodePing from) {
+    CMasternodePing& operator=(CMasternodePing from)
+    {
         swap(*this, from);
         return *this;
     }
-
-    friend bool operator==(const CMasternodePing &a, const CMasternodePing &b) {
+    friend bool operator==(const CMasternodePing& a, const CMasternodePing& b)
+    {
         return a.vin == b.vin && a.blockHash == b.blockHash;
     }
-
-    friend bool operator!=(const CMasternodePing &a, const CMasternodePing &b) {
+    friend bool operator!=(const CMasternodePing& a, const CMasternodePing& b)
+    {
         return !(a == b);
     }
 };
@@ -107,7 +104,8 @@ public:
 // The Masternode Class. For managing the Obfuscation process. It contains the input of the 10000 WSP, signature to prove
 // it's the one who own that ip address and code for calculating the payment election.
 //
-class CMasternode {
+class CMasternode
+{
 private:
     // critical section to protect the inner data structures
     mutable CCriticalSection cs;
@@ -150,13 +148,11 @@ public:
     int64_t nLastDseep; // temporary, do not save. Remove after migration to v12
 
     CMasternode();
-
-    CMasternode(const CMasternode &other);
-
-    CMasternode(const CMasternodeBroadcast &mnb);
+    CMasternode(const CMasternode& other);
+    CMasternode(const CMasternodeBroadcast& mnb);
 
 
-    void swap(CMasternode &first, CMasternode &second) // nothrow
+    void swap(CMasternode& first, CMasternode& second) // nothrow
     {
         // enable ADL (not necessary in our case, but good practice)
         using std::swap;
@@ -181,16 +177,17 @@ public:
         swap(first.nLastScanningErrorBlockHeight, second.nLastScanningErrorBlockHeight);
     }
 
-    CMasternode &operator=(CMasternode from) {
+    CMasternode& operator=(CMasternode from)
+    {
         swap(*this, from);
         return *this;
     }
-
-    friend bool operator==(const CMasternode &a, const CMasternode &b) {
+    friend bool operator==(const CMasternode& a, const CMasternode& b)
+    {
         return a.vin == b.vin;
     }
-
-    friend bool operator!=(const CMasternode &a, const CMasternode &b) {
+    friend bool operator!=(const CMasternode& a, const CMasternode& b)
+    {
         return !(a.vin == b.vin);
     }
 
@@ -198,8 +195,9 @@ public:
 
     ADD_SERIALIZE_METHODS;
 
-    template<typename Stream, typename Operation>
-    inline void SerializationOp(Stream &s, Operation ser_action, int nType, int nVersion) {
+    template <typename Stream, typename Operation>
+    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
+    {
         LOCK(cs);
 
         READWRITE(vin);
@@ -222,9 +220,10 @@ public:
 
     int64_t SecondsSincePayment();
 
-    bool UpdateFromNewBroadcast(CMasternodeBroadcast &mnb);
+    bool UpdateFromNewBroadcast(CMasternodeBroadcast& mnb);
 
-    inline uint64_t SliceHash(uint256 &hash, int slice) {
+    inline uint64_t SliceHash(uint256& hash, int slice)
+    {
         uint64_t n = 0;
         memcpy(&n, &hash + slice * 64, 64);
         return n;
@@ -232,26 +231,31 @@ public:
 
     void Check(bool forceCheck = false);
 
-    bool IsBroadcastedWithin(int seconds) {
+    bool IsBroadcastedWithin(int seconds)
+    {
         return (GetAdjustedTime() - sigTime) < seconds;
     }
 
-    bool IsPingedWithin(int seconds, int64_t now = -1) {
+    bool IsPingedWithin(int seconds, int64_t now = -1)
+    {
         now == -1 ? now = GetAdjustedTime() : now;
 
         return (lastPing == CMasternodePing()) ? false : now - lastPing.sigTime < seconds;
     }
 
-    void Disable() {
+    void Disable()
+    {
         sigTime = 0;
         lastPing = CMasternodePing();
     }
 
-    bool IsEnabled() {
+    bool IsEnabled()
+    {
         return activeState == MASTERNODE_ENABLED;
     }
 
-    int GetMasternodeInputAge() {
+    int GetMasternodeInputAge()
+    {
         if (chainActive.Tip() == NULL) return 0;
 
         if (cacheInputAge == 0) {
@@ -264,7 +268,8 @@ public:
 
     std::string GetStatus();
 
-    std::string Status() {
+    std::string Status()
+    {
         std::string strStatus = "ACTIVE";
 
         if (activeState == CMasternode::MASTERNODE_ENABLED) strStatus = "ENABLED";
@@ -277,7 +282,6 @@ public:
     }
 
     int64_t GetLastPaid();
-
     bool IsValidNetAddr();
 };
 
@@ -286,32 +290,26 @@ public:
 // The Masternode Broadcast Class : Contains a different serialize method for sending masternodes through the network
 //
 
-class CMasternodeBroadcast : public CMasternode {
+class CMasternodeBroadcast : public CMasternode
+{
 public:
     CMasternodeBroadcast();
-
     CMasternodeBroadcast(CService newAddr, CTxIn newVin, CPubKey newPubkey, CPubKey newPubkey2, int protocolVersionIn);
+    CMasternodeBroadcast(const CMasternode& mn);
 
-    CMasternodeBroadcast(const CMasternode &mn);
-
-    bool CheckAndUpdate(int &nDoS);
-
-    bool CheckInputsAndAdd(int &nDos);
-
-    bool Sign(CKey &keyCollateralAddress);
-
+    bool CheckAndUpdate(int& nDoS);
+    bool CheckInputsAndAdd(int& nDos);
+    bool Sign(CKey& keyCollateralAddress);
     bool VerifySignature();
-
     void Relay();
-
     std::string GetOldStrMessage();
-
     std::string GetNewStrMessage();
 
     ADD_SERIALIZE_METHODS;
 
-    template<typename Stream, typename Operation>
-    inline void SerializationOp(Stream &s, Operation ser_action, int nType, int nVersion) {
+    template <typename Stream, typename Operation>
+    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
+    {
         READWRITE(vin);
         READWRITE(addr);
         READWRITE(pubKeyCollateralAddress);
@@ -323,7 +321,8 @@ public:
         READWRITE(nLastDsq);
     }
 
-    uint256 GetHash() {
+    uint256 GetHash()
+    {
         CHashWriter ss(SER_GETHASH, PROTOCOL_VERSION);
         ss << sigTime;
         ss << pubKeyCollateralAddress;
@@ -331,14 +330,9 @@ public:
     }
 
     /// Create Masternode broadcast, needs to be relayed manually after that
-    static bool Create(CTxIn vin, CService service, CKey keyCollateralAddressNew, CPubKey pubKeyCollateralAddressNew,
-                       CKey keyMasternodeNew, CPubKey pubKeyMasternodeNew, std::string &strErrorRet,
-                       CMasternodeBroadcast &mnbRet);
-
-    static bool Create(std::string strService, std::string strKey, std::string strTxHash, std::string strOutputIndex,
-                       std::string &strErrorRet, CMasternodeBroadcast &mnbRet, bool fOffline = false);
-
-    static bool CheckDefaultPort(std::string strService, std::string &strErrorRet, std::string strContext);
+    static bool Create(CTxIn vin, CService service, CKey keyCollateralAddressNew, CPubKey pubKeyCollateralAddressNew, CKey keyMasternodeNew, CPubKey pubKeyMasternodeNew, std::string& strErrorRet, CMasternodeBroadcast& mnbRet);
+    static bool Create(std::string strService, std::string strKey, std::string strTxHash, std::string strOutputIndex, std::string& strErrorRet, CMasternodeBroadcast& mnbRet, bool fOffline = false);
+    static bool CheckDefaultPort(std::string strService, std::string& strErrorRet, std::string strContext);
 };
 
 #endif

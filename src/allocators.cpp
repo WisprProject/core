@@ -19,18 +19,17 @@
 // but, in practice, memory that has been VirtualLock'd almost never gets written to
 // the pagefile except in rare circumstances where memory is extremely low.
 #else
-
 #include <limits.h> // for PAGESIZE
 #include <sys/mman.h>
 #include <unistd.h> // for sysconf
-
 #endif
 
-LockedPageManager *LockedPageManager::_instance = NULL;
+LockedPageManager* LockedPageManager::_instance = NULL;
 boost::once_flag LockedPageManager::init_flag = BOOST_ONCE_INIT;
 
 /** Determine system page size in bytes */
-static inline size_t GetSystemPageSize() {
+static inline size_t GetSystemPageSize()
+{
     size_t page_size;
 #if defined(WIN32)
     SYSTEM_INFO sSysInfo;
@@ -44,7 +43,8 @@ static inline size_t GetSystemPageSize() {
     return page_size;
 }
 
-bool MemoryPageLocker::Lock(const void *addr, size_t len) {
+bool MemoryPageLocker::Lock(const void* addr, size_t len)
+{
 #ifdef WIN32
     return VirtualLock(const_cast<void*>(addr), len) != 0;
 #else
@@ -52,7 +52,8 @@ bool MemoryPageLocker::Lock(const void *addr, size_t len) {
 #endif
 }
 
-bool MemoryPageLocker::Unlock(const void *addr, size_t len) {
+bool MemoryPageLocker::Unlock(const void* addr, size_t len)
+{
 #ifdef WIN32
     return VirtualUnlock(const_cast<void*>(addr), len) != 0;
 #else
@@ -60,5 +61,6 @@ bool MemoryPageLocker::Unlock(const void *addr, size_t len) {
 #endif
 }
 
-LockedPageManager::LockedPageManager() : LockedPageManagerBase<MemoryPageLocker>(GetSystemPageSize()) {
+LockedPageManager::LockedPageManager() : LockedPageManagerBase<MemoryPageLocker>(GetSystemPageSize())
+{
 }

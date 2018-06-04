@@ -30,35 +30,33 @@ using namespace std;
 using namespace boost;
 
 class CConsensusVote;
-
 class CTransaction;
-
 class CTransactionLock;
 
 static const int MIN_SWIFTTX_PROTO_VERSION = 70103;
 
-extern map <uint256, CTransaction> mapTxLockReq;
-extern map <uint256, CTransaction> mapTxLockReqRejected;
-extern map <uint256, CConsensusVote> mapTxLockVote;
-extern map <uint256, CTransactionLock> mapTxLocks;
-extern std::map <COutPoint, uint256> mapLockedInputs;
+extern map<uint256, CTransaction> mapTxLockReq;
+extern map<uint256, CTransaction> mapTxLockReqRejected;
+extern map<uint256, CConsensusVote> mapTxLockVote;
+extern map<uint256, CTransactionLock> mapTxLocks;
+extern std::map<COutPoint, uint256> mapLockedInputs;
 extern int nCompleteTXLocks;
 
 
 int64_t CreateNewLock(CTransaction tx);
 
-bool IsIXTXValid(const CTransaction &txCollateral);
+bool IsIXTXValid(const CTransaction& txCollateral);
 
 // if two conflicting locks are approved by the network, they will cancel out
-bool CheckForConflictingLocks(CTransaction &tx);
+bool CheckForConflictingLocks(CTransaction& tx);
 
-void ProcessMessageSwiftTX(CNode *pfrom, std::string &strCommand, CDataStream &vRecv);
+void ProcessMessageSwiftTX(CNode* pfrom, std::string& strCommand, CDataStream& vRecv);
 
 //check if we need to vote on this transaction
-void DoConsensusVote(CTransaction &tx, int64_t nBlockHeight);
+void DoConsensusVote(CTransaction& tx, int64_t nBlockHeight);
 
 //process consensus vote message
-bool ProcessConsensusVote(CNode *pnode, CConsensusVote &ctx);
+bool ProcessConsensusVote(CNode* pnode, CConsensusVote& ctx);
 
 // keep transaction locks in memory for an hour
 void CleanTransactionLocksList();
@@ -68,7 +66,8 @@ int GetTransactionLockSignatures(uint256 txHash);
 
 int64_t GetAverageVoteTime();
 
-class CConsensusVote {
+class CConsensusVote
+{
 public:
     CTxIn vinMasternode;
     uint256 txHash;
@@ -78,13 +77,13 @@ public:
     uint256 GetHash() const;
 
     bool SignatureValid();
-
     bool Sign();
 
     ADD_SERIALIZE_METHODS;
 
-    template<typename Stream, typename Operation>
-    inline void SerializationOp(Stream &s, Operation ser_action, int nType, int nVersion) {
+    template <typename Stream, typename Operation>
+    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
+    {
         READWRITE(txHash);
         READWRITE(vinMasternode);
         READWRITE(vchMasterNodeSignature);
@@ -92,21 +91,21 @@ public:
     }
 };
 
-class CTransactionLock {
+class CTransactionLock
+{
 public:
     int nBlockHeight;
     uint256 txHash;
-    std::vector <CConsensusVote> vecConsensusVotes;
+    std::vector<CConsensusVote> vecConsensusVotes;
     int nExpiration;
     int nTimeout;
 
     bool SignaturesValid();
-
     int CountSignatures();
+    void AddSignature(CConsensusVote& cv);
 
-    void AddSignature(CConsensusVote &cv);
-
-    uint256 GetHash() {
+    uint256 GetHash()
+    {
         return txHash;
     }
 };

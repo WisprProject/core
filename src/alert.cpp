@@ -25,10 +25,11 @@
 
 using namespace std;
 
-map <uint256, CAlert> mapAlerts;
+map<uint256, CAlert> mapAlerts;
 CCriticalSection cs_mapAlerts;
 
-void CUnsignedAlert::SetNull() {
+void CUnsignedAlert::SetNull()
+{
     nVersion = 1;
     nRelayUntil = 0;
     nExpiration = 0;
@@ -45,79 +46,87 @@ void CUnsignedAlert::SetNull() {
     strReserved.clear();
 }
 
-std::string CUnsignedAlert::ToString() const {
+std::string CUnsignedAlert::ToString() const
+{
     std::string strSetCancel;
-    for (auto &n: setCancel)
+    for (auto& n: setCancel)
         strSetCancel += strprintf("%d ", n);
     std::string strSetSubVer;
-    BOOST_FOREACH(std::string
-    str, setSubVer)
-    strSetSubVer += "\"" + str + "\" ";
+    BOOST_FOREACH (std::string str, setSubVer)
+        strSetSubVer += "\"" + str + "\" ";
     return strprintf(
-            "CAlert(\n"
-            "    nVersion     = %d\n"
-            "    nRelayUntil  = %d\n"
-            "    nExpiration  = %d\n"
-            "    nID          = %d\n"
-            "    nCancel      = %d\n"
-            "    setCancel    = %s\n"
-            "    nMinVer      = %d\n"
-            "    nMaxVer      = %d\n"
-            "    setSubVer    = %s\n"
-            "    nPriority    = %d\n"
-            "    strComment   = \"%s\"\n"
-            "    strStatusBar = \"%s\"\n"
-            ")\n",
-            nVersion,
-            nRelayUntil,
-            nExpiration,
-            nID,
-            nCancel,
-            strSetCancel,
-            nMinVer,
-            nMaxVer,
-            strSetSubVer,
-            nPriority,
-            strComment,
-            strStatusBar);
+        "CAlert(\n"
+        "    nVersion     = %d\n"
+        "    nRelayUntil  = %d\n"
+        "    nExpiration  = %d\n"
+        "    nID          = %d\n"
+        "    nCancel      = %d\n"
+        "    setCancel    = %s\n"
+        "    nMinVer      = %d\n"
+        "    nMaxVer      = %d\n"
+        "    setSubVer    = %s\n"
+        "    nPriority    = %d\n"
+        "    strComment   = \"%s\"\n"
+        "    strStatusBar = \"%s\"\n"
+        ")\n",
+        nVersion,
+        nRelayUntil,
+        nExpiration,
+        nID,
+        nCancel,
+        strSetCancel,
+        nMinVer,
+        nMaxVer,
+        strSetSubVer,
+        nPriority,
+        strComment,
+        strStatusBar);
 }
 
-void CAlert::SetNull() {
+void CAlert::SetNull()
+{
     CUnsignedAlert::SetNull();
     vchMsg.clear();
     vchSig.clear();
 }
 
-bool CAlert::IsNull() const {
+bool CAlert::IsNull() const
+{
     return (nExpiration == 0);
 }
 
-uint256 CAlert::GetHash() const {
+uint256 CAlert::GetHash() const
+{
     return Hash(this->vchMsg.begin(), this->vchMsg.end());
 }
 
-bool CAlert::IsInEffect() const {
+bool CAlert::IsInEffect() const
+{
     return (GetAdjustedTime() < nExpiration);
 }
 
-bool CAlert::Cancels(const CAlert &alert) const {
+bool CAlert::Cancels(const CAlert& alert) const
+{
     if (!IsInEffect())
         return false; // this was a no-op before 31403
     return (alert.nID <= nCancel || setCancel.count(alert.nID));
 }
 
-bool CAlert::AppliesTo(int nVersion, std::string strSubVerIn) const {
+bool CAlert::AppliesTo(int nVersion, std::string strSubVerIn) const
+{
     // TODO: rework for client-version-embedded-in-strSubVer ?
     return (IsInEffect() &&
             nMinVer <= nVersion && nVersion <= nMaxVer &&
             (setSubVer.empty() || setSubVer.count(strSubVerIn)));
 }
 
-bool CAlert::AppliesToMe() const {
+bool CAlert::AppliesToMe() const
+{
     return AppliesTo(PROTOCOL_VERSION, FormatSubVersion(CLIENT_NAME, CLIENT_VERSION, std::vector<std::string>()));
 }
 
-bool CAlert::RelayTo(CNode *pnode) const {
+bool CAlert::RelayTo(CNode* pnode) const
+{
     if (!IsInEffect())
         return false;
     // don't relay to nodes which haven't sent their version message
@@ -135,18 +144,20 @@ bool CAlert::RelayTo(CNode *pnode) const {
     return false;
 }
 
-bool CAlert::CheckSignature() const {
+bool CAlert::CheckSignature() const
+{
     CPubKey key(Params().AlertKey());
     if (!key.Verify(Hash(vchMsg.begin(), vchMsg.end()), vchSig))
         return error("CAlert::CheckSignature() : verify signature failed");
 
     // Now unserialize the data
     CDataStream sMsg(vchMsg, SER_NETWORK, PROTOCOL_VERSION);
-    sMsg >> *(CUnsignedAlert *) this;
+    sMsg >> *(CUnsignedAlert*)this;
     return true;
 }
 
-CAlert CAlert::getAlertByHash(const uint256 &hash) {
+CAlert CAlert::getAlertByHash(const uint256& hash)
+{
     CAlert retval;
     {
         LOCK(cs_mapAlerts);
@@ -157,7 +168,8 @@ CAlert CAlert::getAlertByHash(const uint256 &hash) {
     return retval;
 }
 
-bool CAlert::ProcessAlert(bool fThread) {
+bool CAlert::ProcessAlert(bool fThread)
+{
     if (!CheckSignature())
         return false;
     if (!IsInEffect())
@@ -187,7 +199,7 @@ bool CAlert::ProcessAlert(bool fThread) {
         LOCK(cs_mapAlerts);
         // Cancel previous alerts
         for (map<uint256, CAlert>::iterator mi = mapAlerts.begin(); mi != mapAlerts.end();) {
-            const CAlert &alert = (*mi).second;
+            const CAlert& alert = (*mi).second;
             if (Cancels(alert)) {
                 LogPrint("alert", "cancelling alert %d\n", alert.nID);
                 uiInterface.NotifyAlertChanged((*mi).first, CT_DELETED);
@@ -201,9 +213,8 @@ bool CAlert::ProcessAlert(bool fThread) {
         }
 
         // Check if this alert has been cancelled
-        BOOST_FOREACH(PAIRTYPE(const uint256, CAlert) & item, mapAlerts)
-        {
-            const CAlert &alert = item.second;
+        BOOST_FOREACH (PAIRTYPE(const uint256, CAlert) & item, mapAlerts) {
+            const CAlert& alert = item.second;
             if (alert.Cancels(*this)) {
                 LogPrint("alert", "alert already cancelled by %d\n", alert.nID);
                 return false;
@@ -223,7 +234,8 @@ bool CAlert::ProcessAlert(bool fThread) {
     return true;
 }
 
-void CAlert::Notify(const std::string &strMessage, bool fThread) {
+void CAlert::Notify(const std::string& strMessage, bool fThread)
+{
     std::string strCmd = GetArg("-alertnotify", "");
     if (strCmd.empty()) return;
 

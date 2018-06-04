@@ -18,11 +18,8 @@
 #include <QMimeData>
 #include <QMouseEvent>
 #include <QPixmap>
-
 #if QT_VERSION < 0x050000
-
 #include <QUrl>
-
 #endif
 
 #if defined(HAVE_CONFIG_H)
@@ -33,29 +30,32 @@
 #include <qrencode.h>
 #endif
 
-QRImageWidget::QRImageWidget(QWidget *parent) : QLabel(parent), contextMenu(0) {
+QRImageWidget::QRImageWidget(QWidget* parent) : QLabel(parent), contextMenu(0)
+{
     contextMenu = new QMenu();
-    QAction *saveImageAction = new QAction(tr("&Save Image..."), this);
+    QAction* saveImageAction = new QAction(tr("&Save Image..."), this);
     connect(saveImageAction, SIGNAL(triggered()), this, SLOT(saveImage()));
     contextMenu->addAction(saveImageAction);
-    QAction *copyImageAction = new QAction(tr("&Copy Image"), this);
+    QAction* copyImageAction = new QAction(tr("&Copy Image"), this);
     connect(copyImageAction, SIGNAL(triggered()), this, SLOT(copyImage()));
     contextMenu->addAction(copyImageAction);
 }
 
-QImage QRImageWidget::exportImage() {
+QImage QRImageWidget::exportImage()
+{
     if (!pixmap())
         return QImage();
     return pixmap()->toImage().scaled(EXPORT_IMAGE_SIZE, EXPORT_IMAGE_SIZE);
 }
 
-void QRImageWidget::mousePressEvent(QMouseEvent *event) {
+void QRImageWidget::mousePressEvent(QMouseEvent* event)
+{
     if (event->button() == Qt::LeftButton && pixmap()) {
         event->accept();
-        QMimeData *mimeData = new QMimeData;
+        QMimeData* mimeData = new QMimeData;
         mimeData->setImageData(exportImage());
 
-        QDrag *drag = new QDrag(this);
+        QDrag* drag = new QDrag(this);
         drag->setMimeData(mimeData);
         drag->exec();
     } else {
@@ -63,7 +63,8 @@ void QRImageWidget::mousePressEvent(QMouseEvent *event) {
     }
 }
 
-void QRImageWidget::saveImage() {
+void QRImageWidget::saveImage()
+{
     if (!pixmap())
         return;
     QString fn = GUIUtil::getSaveFileName(this, tr("Save QR Code"), QString(), tr("PNG Image (*.png)"), NULL);
@@ -72,21 +73,24 @@ void QRImageWidget::saveImage() {
     }
 }
 
-void QRImageWidget::copyImage() {
+void QRImageWidget::copyImage()
+{
     if (!pixmap())
         return;
     QApplication::clipboard()->setImage(exportImage());
 }
 
-void QRImageWidget::contextMenuEvent(QContextMenuEvent *event) {
+void QRImageWidget::contextMenuEvent(QContextMenuEvent* event)
+{
     if (!pixmap())
         return;
     contextMenu->exec(event->globalPos());
 }
 
-ReceiveRequestDialog::ReceiveRequestDialog(QWidget *parent) : QDialog(parent),
+ReceiveRequestDialog::ReceiveRequestDialog(QWidget* parent) : QDialog(parent),
                                                               ui(new Ui::ReceiveRequestDialog),
-                                                              model(0) {
+                                                              model(0)
+{
     ui->setupUi(this);
 
 #ifndef USE_QRCODE
@@ -97,11 +101,13 @@ ReceiveRequestDialog::ReceiveRequestDialog(QWidget *parent) : QDialog(parent),
     connect(ui->btnSaveAs, SIGNAL(clicked()), ui->lblQRCode, SLOT(saveImage()));
 }
 
-ReceiveRequestDialog::~ReceiveRequestDialog() {
+ReceiveRequestDialog::~ReceiveRequestDialog()
+{
     delete ui;
 }
 
-void ReceiveRequestDialog::setModel(OptionsModel *model) {
+void ReceiveRequestDialog::setModel(OptionsModel* model)
+{
     this->model = model;
 
     if (model)
@@ -111,12 +117,14 @@ void ReceiveRequestDialog::setModel(OptionsModel *model) {
     update();
 }
 
-void ReceiveRequestDialog::setInfo(const SendCoinsRecipient &info) {
+void ReceiveRequestDialog::setInfo(const SendCoinsRecipient& info)
+{
     this->info = info;
     update();
 }
 
-void ReceiveRequestDialog::update() {
+void ReceiveRequestDialog::update()
+{
     if (!model)
         return;
     QString target = info.label;
@@ -133,8 +141,7 @@ void ReceiveRequestDialog::update() {
     html += "<a style=\"color:#5B4C7C;\" href=\"" + uri + "\">" + GUIUtil::HtmlEscape(uri) + "</a><br>";
     html += "<b>" + tr("Address") + "</b>: " + GUIUtil::HtmlEscape(info.address) + "<br>";
     if (info.amount)
-        html += "<b>" + tr("Amount") + "</b>: " + BitcoinUnits::formatWithUnit(model->getDisplayUnit(), info.amount) +
-                "<br>";
+        html += "<b>" + tr("Amount") + "</b>: " + BitcoinUnits::formatWithUnit(model->getDisplayUnit(), info.amount) + "<br>";
     if (!info.label.isEmpty())
         html += "<b>" + tr("Label") + "</b>: " + GUIUtil::HtmlEscape(info.label) + "<br>";
     if (!info.message.isEmpty())
@@ -171,10 +178,12 @@ void ReceiveRequestDialog::update() {
 #endif
 }
 
-void ReceiveRequestDialog::on_btnCopyURI_clicked() {
+void ReceiveRequestDialog::on_btnCopyURI_clicked()
+{
     GUIUtil::setClipboard(GUIUtil::formatBitcoinURI(info));
 }
 
-void ReceiveRequestDialog::on_btnCopyAddress_clicked() {
+void ReceiveRequestDialog::on_btnCopyAddress_clicked()
+{
     GUIUtil::setClipboard(info.address);
 }

@@ -12,32 +12,33 @@
 
 class CBlockIndex;
 
-/**
+/** 
  * Block-chain checkpoints are compiled-in sanity checks.
  * They are updated every release or three.
  */
-namespace Checkpoints {
-    typedef std::map<int, uint256> MapCheckpoints;
+namespace Checkpoints
+{
+typedef std::map<int, uint256> MapCheckpoints;
 
-    struct CCheckpointData {
-        const MapCheckpoints *mapCheckpoints;
-        int64_t nTimeLastCheckpoint;
-        int64_t nTransactionsLastCheckpoint;
-        double fTransactionsPerDay;
-    };
+struct CCheckpointData {
+    const MapCheckpoints* mapCheckpoints;
+    int64_t nTimeLastCheckpoint;
+    int64_t nTransactionsLastCheckpoint;
+    double fTransactionsPerDay;
+};
 
 //! Returns true if block passes checkpoint checks
-    bool CheckBlock(int nHeight, const uint256 &hash, bool fMatchesCheckpoint = false);
+bool CheckBlock(int nHeight, const uint256& hash, bool fMatchesCheckpoint = false);
 
 //! Return conservative estimate of total number of blocks, 0 if unknown
-    int GetTotalBlocksEstimate();
+int GetTotalBlocksEstimate();
 
 //! Returns last CBlockIndex* in mapBlockIndex that is a checkpoint
-    CBlockIndex *GetLastCheckpoint();
+CBlockIndex* GetLastCheckpoint();
 
-    double GuessVerificationProgress(CBlockIndex *pindex, bool fSigchecks = true);
+double GuessVerificationProgress(CBlockIndex* pindex, bool fSigchecks = true);
 
-    extern bool fEnabled;
+extern bool fEnabled;
 
 } //namespace Checkpoints
 

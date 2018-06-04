@@ -6,32 +6,23 @@
 #define WISPR_STAKEINPUT_H
 
 class CKeyStore;
-
 class CWallet;
-
 class CWalletTx;
 
-class CStakeInput {
+class CStakeInput
+{
 protected:
-    CBlockIndex *pindexFrom;
+    CBlockIndex* pindexFrom;
 
 public:
-    virtual ~CStakeInput() {};
-
-    virtual CBlockIndex *GetIndexFrom() = 0;
-
-    virtual bool CreateTxIn(CWallet *pwallet, CTxIn &txIn, uint256 hashTxOut = 0) = 0;
-
-    virtual bool GetTxFrom(CTransaction &tx) = 0;
-
+    virtual ~CStakeInput(){};
+    virtual CBlockIndex* GetIndexFrom() = 0;
+    virtual bool CreateTxIn(CWallet* pwallet, CTxIn& txIn, uint256 hashTxOut = 0) = 0;
+    virtual bool GetTxFrom(CTransaction& tx) = 0;
     virtual CAmount GetValue() = 0;
-
-    virtual bool CreateTxOuts(CWallet *pwallet, vector <CTxOut> &vout, CAmount nTotal) = 0;
-
-    virtual bool GetModifier(uint64_t &nStakeModifier) = 0;
-
+    virtual bool CreateTxOuts(CWallet* pwallet, vector<CTxOut>& vout, CAmount nTotal) = 0;
+    virtual bool GetModifier(uint64_t& nStakeModifier) = 0;
     virtual bool IsZWSP() = 0;
-
     virtual CDataStream GetUniqueness() = 0;
 };
 
@@ -39,7 +30,8 @@ public:
 // zWSPStake can take two forms
 // 1) the stake candidate, which is a zcmint that is attempted to be staked
 // 2) a staked zwsp, which is a zcspend that has successfully staked
-class CZWspStake : public CStakeInput {
+class CZWspStake : public CStakeInput
+{
 private:
     uint32_t nChecksum;
     bool fMint;
@@ -47,65 +39,50 @@ private:
     uint256 hashSerial;
 
 public:
-    explicit CZWspStake(libzerocoin::CoinDenomination denom, const uint256 &hashSerial) {
+    explicit CZWspStake(libzerocoin::CoinDenomination denom, const uint256& hashSerial)
+    {
         this->denom = denom;
         this->hashSerial = hashSerial;
         this->pindexFrom = nullptr;
         fMint = true;
     }
 
-    explicit CZWspStake(const libzerocoin::CoinSpend &spend);
+    explicit CZWspStake(const libzerocoin::CoinSpend& spend);
 
-    CBlockIndex *GetIndexFrom() override;
-
-    bool GetTxFrom(CTransaction &tx) override;
-
+    CBlockIndex* GetIndexFrom() override;
+    bool GetTxFrom(CTransaction& tx) override;
     CAmount GetValue() override;
-
-    bool GetModifier(uint64_t &nStakeModifier) override;
-
+    bool GetModifier(uint64_t& nStakeModifier) override;
     CDataStream GetUniqueness() override;
-
-    bool CreateTxIn(CWallet *pwallet, CTxIn &txIn, uint256 hashTxOut = 0) override;
-
-    bool CreateTxOuts(CWallet *pwallet, vector <CTxOut> &vout, CAmount nTotal) override;
-
-    bool MarkSpent(CWallet *pwallet, const uint256 &txid);
-
+    bool CreateTxIn(CWallet* pwallet, CTxIn& txIn, uint256 hashTxOut = 0) override;
+    bool CreateTxOuts(CWallet* pwallet, vector<CTxOut>& vout, CAmount nTotal) override;
+    bool MarkSpent(CWallet* pwallet, const uint256& txid);
     bool IsZWSP() override { return true; }
-
     int GetChecksumHeightFromMint();
-
     int GetChecksumHeightFromSpend();
-
     uint32_t GetChecksum();
 };
 
-class CWspStake : public CStakeInput {
+class CWspStake : public CStakeInput
+{
 private:
     CTransaction txFrom;
     unsigned int nPosition;
 public:
-    CWspStake() {
+    CWspStake()
+    {
         this->pindexFrom = nullptr;
     }
 
     bool SetInput(CTransaction txPrev, unsigned int n);
 
-    CBlockIndex *GetIndexFrom() override;
-
-    bool GetTxFrom(CTransaction &tx) override;
-
+    CBlockIndex* GetIndexFrom() override;
+    bool GetTxFrom(CTransaction& tx) override;
     CAmount GetValue() override;
-
-    bool GetModifier(uint64_t &nStakeModifier) override;
-
+    bool GetModifier(uint64_t& nStakeModifier) override;
     CDataStream GetUniqueness() override;
-
-    bool CreateTxIn(CWallet *pwallet, CTxIn &txIn, uint256 hashTxOut = 0) override;
-
-    bool CreateTxOuts(CWallet *pwallet, vector <CTxOut> &vout, CAmount nTotal) override;
-
+    bool CreateTxIn(CWallet* pwallet, CTxIn& txIn, uint256 hashTxOut = 0) override;
+    bool CreateTxOuts(CWallet* pwallet, vector<CTxOut>& vout, CAmount nTotal) override;
     bool IsZWSP() override { return false; }
 };
 

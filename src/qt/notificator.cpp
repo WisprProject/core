@@ -15,7 +15,6 @@
 #include <QSystemTrayIcon>
 #include <QTemporaryFile>
 #include <QVariant>
-
 #ifdef USE_DBUS
 #include <QtDBus>
 #include <stdint.h>
@@ -35,15 +34,14 @@
 const int FREEDESKTOP_NOTIFICATION_ICON_SIZE = 128;
 #endif
 
-Notificator::Notificator(const QString &programName, QSystemTrayIcon *trayicon, QWidget *parent) : QObject(parent),
+Notificator::Notificator(const QString& programName, QSystemTrayIcon* trayicon, QWidget* parent) : QObject(parent),
                                                                                                    parent(parent),
-                                                                                                   programName(
-                                                                                                           programName),
+                                                                                                   programName(programName),
                                                                                                    mode(None),
                                                                                                    trayIcon(trayicon)
 #ifdef USE_DBUS
-,
-interface(0)
+                                                                                                   ,
+                                                                                                   interface(0)
 #endif
 {
     if (trayicon && trayicon->supportsMessages()) {
@@ -64,7 +62,8 @@ interface(0)
 #endif
 }
 
-Notificator::~Notificator() {
+Notificator::~Notificator()
+{
 #ifdef USE_DBUS
     delete interface;
 #endif
@@ -211,21 +210,21 @@ void Notificator::notifyDBus(Class cls, const QString& title, const QString& tex
 }
 #endif
 
-void
-Notificator::notifySystray(Class cls, const QString &title, const QString &text, const QIcon &icon, int millisTimeout) {
+void Notificator::notifySystray(Class cls, const QString& title, const QString& text, const QIcon& icon, int millisTimeout)
+{
     Q_UNUSED(icon);
     QSystemTrayIcon::MessageIcon sicon = QSystemTrayIcon::NoIcon;
     switch (cls) // Set icon based on class
     {
-        case Information:
-            sicon = QSystemTrayIcon::Information;
-            break;
-        case Warning:
-            sicon = QSystemTrayIcon::Warning;
-            break;
-        case Critical:
-            sicon = QSystemTrayIcon::Critical;
-            break;
+    case Information:
+        sicon = QSystemTrayIcon::Information;
+        break;
+    case Warning:
+        sicon = QSystemTrayIcon::Warning;
+        break;
+    case Critical:
+        sicon = QSystemTrayIcon::Critical;
+        break;
     }
     trayIcon->showMessage(title, text, sicon, millisTimeout);
 }
@@ -240,26 +239,27 @@ void Notificator::notifyMacUserNotificationCenter(Class cls, const QString& titl
 
 #endif
 
-void Notificator::notify(Class cls, const QString &title, const QString &text, const QIcon &icon, int millisTimeout) {
+void Notificator::notify(Class cls, const QString& title, const QString& text, const QIcon& icon, int millisTimeout)
+{
     switch (mode) {
 #ifdef USE_DBUS
-        case Freedesktop:
-            notifyDBus(cls, title, text, icon, millisTimeout);
-            break;
+    case Freedesktop:
+        notifyDBus(cls, title, text, icon, millisTimeout);
+        break;
 #endif
-        case QSystemTray:
-            notifySystray(cls, title, text, icon, millisTimeout);
-            break;
+    case QSystemTray:
+        notifySystray(cls, title, text, icon, millisTimeout);
+        break;
 #ifdef Q_OS_MAC
-        case UserNotificationCenter:
-            notifyMacUserNotificationCenter(cls, title, text, icon);
-            break;
+    case UserNotificationCenter:
+        notifyMacUserNotificationCenter(cls, title, text, icon);
+        break;
 #endif
-        default:
-            if (cls == Critical) {
-                // Fall back to old fashioned pop-up dialog if critical and no other notification available
-                QMessageBox::critical(parent, title, text, QMessageBox::Ok, QMessageBox::Ok);
-            }
-            break;
+    default:
+        if (cls == Critical) {
+            // Fall back to old fashioned pop-up dialog if critical and no other notification available
+            QMessageBox::critical(parent, title, text, QMessageBox::Ok, QMessageBox::Ok);
+        }
+        break;
     }
 }

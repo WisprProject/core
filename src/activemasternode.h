@@ -21,24 +21,21 @@
 #define ACTIVE_MASTERNODE_STARTED 4
 
 // Responsible for activating the Masternode and pinging the network
-class CActiveMasternode {
+class CActiveMasternode
+{
 private:
     // critical section to protect the inner data structures
     mutable CCriticalSection cs;
 
     /// Ping Masternode
-    bool SendMasternodePing(std::string &errorMessage);
+    bool SendMasternodePing(std::string& errorMessage);
 
     /// Create Masternode broadcast, needs to be relayed manually after that
-    bool
-    CreateBroadcast(CTxIn vin, CService service, CKey key, CPubKey pubKey, CKey keyMasternode, CPubKey pubKeyMasternode,
-                    std::string &errorMessage, CMasternodeBroadcast &mnb);
+    bool CreateBroadcast(CTxIn vin, CService service, CKey key, CPubKey pubKey, CKey keyMasternode, CPubKey pubKeyMasternode, std::string& errorMessage, CMasternodeBroadcast &mnb);
 
     /// Get 10000 WSP input that can be used for the Masternode
-    bool
-    GetMasterNodeVin(CTxIn &vin, CPubKey &pubkey, CKey &secretKey, std::string strTxHash, std::string strOutputIndex);
-
-    bool GetVinFromOutput(COutput out, CTxIn &vin, CPubKey &pubkey, CKey &secretKey);
+    bool GetMasterNodeVin(CTxIn& vin, CPubKey& pubkey, CKey& secretKey, std::string strTxHash, std::string strOutputIndex);
+    bool GetVinFromOutput(COutput out, CTxIn& vin, CPubKey& pubkey, CKey& secretKey);
 
 public:
     // Initialized by init.cpp
@@ -52,26 +49,24 @@ public:
     int status;
     std::string notCapableReason;
 
-    CActiveMasternode() {
+    CActiveMasternode()
+    {
         status = ACTIVE_MASTERNODE_INITIAL;
     }
 
     /// Manage status of main Masternode
     void ManageStatus();
-
     std::string GetStatus();
 
     /// Create Masternode broadcast, needs to be relayed manually after that
-    bool CreateBroadcast(std::string strService, std::string strKey, std::string strTxHash, std::string strOutputIndex,
-                         std::string &errorMessage, CMasternodeBroadcast &mnb, bool fOffline = false);
+    bool CreateBroadcast(std::string strService, std::string strKey, std::string strTxHash, std::string strOutputIndex, std::string& errorMessage, CMasternodeBroadcast &mnb, bool fOffline = false);
 
     /// Get 10000 WSP input that can be used for the Masternode
-    bool GetMasterNodeVin(CTxIn &vin, CPubKey &pubkey, CKey &secretKey);
-
-    vector <COutput> SelectCoinsMasternode();
+    bool GetMasterNodeVin(CTxIn& vin, CPubKey& pubkey, CKey& secretKey);
+    vector<COutput> SelectCoinsMasternode();
 
     /// Enable cold wallet mode (run a Masternode with no funds)
-    bool EnableHotColdMasterNode(CTxIn &vin, CService &addr);
+    bool EnableHotColdMasterNode(CTxIn& vin, CService& addr);
 };
 
 #endif

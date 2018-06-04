@@ -9,7 +9,8 @@
 #include "stakeinput.h"
 #include "wallet.h"
 
-CZWspStake::CZWspStake(const libzerocoin::CoinSpend &spend) {
+CZWspStake::CZWspStake(const libzerocoin::CoinSpend& spend)
+{
     this->nChecksum = spend.getAccumulatorChecksum();
     this->denom = spend.getDenomination();
     uint256 nSerial = spend.getCoinSerialNumber().getuint256();
@@ -18,7 +19,8 @@ CZWspStake::CZWspStake(const libzerocoin::CoinSpend &spend) {
     fMint = false;
 }
 
-int CZWspStake::GetChecksumHeightFromMint() {
+int CZWspStake::GetChecksumHeightFromMint()
+{
     int nHeightChecksum = chainActive.Height() - Params().Zerocoin_RequiredStakeDepth();
 
     //Need to return the first occurance of this checksum in order for the validation process to identify a specific
@@ -28,18 +30,21 @@ int CZWspStake::GetChecksumHeightFromMint() {
     return GetChecksumHeight(nChecksum, denom);
 }
 
-int CZWspStake::GetChecksumHeightFromSpend() {
+int CZWspStake::GetChecksumHeightFromSpend()
+{
     return GetChecksumHeight(nChecksum, denom);
 }
 
-uint32_t CZWspStake::GetChecksum() {
+uint32_t CZWspStake::GetChecksum()
+{
     return nChecksum;
 }
 
 // The zWSP block index is the first appearance of the accumulator checksum that was used in the spend
 // note that this also means when staking that this checksum should be from a block that is beyond 60 minutes old and
 // 100 blocks deep.
-CBlockIndex *CZWspStake::GetIndexFrom() {
+CBlockIndex* CZWspStake::GetIndexFrom()
+{
     if (pindexFrom)
         return pindexFrom;
 
@@ -60,19 +65,21 @@ CBlockIndex *CZWspStake::GetIndexFrom() {
     return pindexFrom;
 }
 
-CAmount CZWspStake::GetValue() {
+CAmount CZWspStake::GetValue()
+{
     return denom * COIN;
 }
 
 //Use the first accumulator checkpoint that occurs 60 minutes after the block being staked from
-bool CZWspStake::GetModifier(uint64_t &nStakeModifier) {
-    CBlockIndex *pindex = GetIndexFrom();
+bool CZWspStake::GetModifier(uint64_t& nStakeModifier)
+{
+    CBlockIndex* pindex = GetIndexFrom();
     if (!pindex)
         return false;
 
     int64_t nTimeBlockFrom = pindex->GetBlockTime();
     while (true) {
-        if (pindex->GetBlockTime() - nTimeBlockFrom > 60 * 60) {
+        if (pindex->GetBlockTime() - nTimeBlockFrom > 60*60) {
             nStakeModifier = pindex->nAccumulatorCheckpoint.Get64();
             return true;
         }
@@ -84,15 +91,17 @@ bool CZWspStake::GetModifier(uint64_t &nStakeModifier) {
     }
 }
 
-CDataStream CZWspStake::GetUniqueness() {
+CDataStream CZWspStake::GetUniqueness()
+{
     //The unique identifier for a zWSP is a hash of the serial
     CDataStream ss(SER_GETHASH, 0);
     ss << hashSerial;
     return ss;
 }
 
-bool CZWspStake::CreateTxIn(CWallet *pwallet, CTxIn &txIn, uint256 hashTxOut) {
-    CBlockIndex *pindexCheckpoint = GetIndexFrom();
+bool CZWspStake::CreateTxIn(CWallet* pwallet, CTxIn& txIn, uint256 hashTxOut)
+{
+    CBlockIndex* pindexCheckpoint = GetIndexFrom();
     if (!pindexCheckpoint)
         return error("%s: failed to find checkpoint block index", __func__);
 
@@ -105,14 +114,14 @@ bool CZWspStake::CreateTxIn(CWallet *pwallet, CTxIn &txIn, uint256 hashTxOut) {
 
     int nSecurityLevel = 100;
     CZerocoinSpendReceipt receipt;
-    if (!pwallet->MintToTxIn(mint, nSecurityLevel, hashTxOut, txIn, receipt, libzerocoin::SpendType::STAKE,
-                             GetIndexFrom()))
+    if (!pwallet->MintToTxIn(mint, nSecurityLevel, hashTxOut, txIn, receipt, libzerocoin::SpendType::STAKE, GetIndexFrom()))
         return error("%s\n", receipt.GetStatusMessage());
 
     return true;
 }
 
-bool CZWspStake::CreateTxOuts(CWallet *pwallet, vector <CTxOut> &vout, CAmount nTotal) {
+bool CZWspStake::CreateTxOuts(CWallet* pwallet, vector<CTxOut>& vout, CAmount nTotal)
+{
     //Create an output returning the zWSP that was staked
     CTxOut outReward;
     libzerocoin::CoinDenomination denomStaked = libzerocoin::AmountToZerocoinDenomination(this->GetValue());
@@ -139,12 +148,14 @@ bool CZWspStake::CreateTxOuts(CWallet *pwallet, vector <CTxOut> &vout, CAmount n
     return true;
 }
 
-bool CZWspStake::GetTxFrom(CTransaction &tx) {
+bool CZWspStake::GetTxFrom(CTransaction& tx)
+{
     return false;
 }
 
-bool CZWspStake::MarkSpent(CWallet *pwallet, const uint256 &txid) {
-    CzWSPTracker *zwspTracker = pwallet->zwspTracker.get();
+bool CZWspStake::MarkSpent(CWallet *pwallet, const uint256& txid)
+{
+    CzWSPTracker* zwspTracker = pwallet->zwspTracker.get();
     CMintMeta meta;
     if (!zwspTracker->GetMetaFromStakeHash(hashSerial, meta))
         return error("%s: tracker does not have serialhash", __func__);
@@ -154,28 +165,33 @@ bool CZWspStake::MarkSpent(CWallet *pwallet, const uint256 &txid) {
 }
 
 //!WSP Stake
-bool CWspStake::SetInput(CTransaction txPrev, unsigned int n) {
+bool CWspStake::SetInput(CTransaction txPrev, unsigned int n)
+{
     this->txFrom = txPrev;
     this->nPosition = n;
     return true;
 }
 
-bool CWspStake::GetTxFrom(CTransaction &tx) {
+bool CWspStake::GetTxFrom(CTransaction& tx)
+{
     tx = txFrom;
     return true;
 }
 
-bool CWspStake::CreateTxIn(CWallet *pwallet, CTxIn &txIn, uint256 hashTxOut) {
+bool CWspStake::CreateTxIn(CWallet* pwallet, CTxIn& txIn, uint256 hashTxOut)
+{
     txIn = CTxIn(txFrom.GetHash(), nPosition);
     return true;
 }
 
-CAmount CWspStake::GetValue() {
+CAmount CWspStake::GetValue()
+{
     return txFrom.vout[nPosition].nValue;
 }
 
-bool CWspStake::CreateTxOuts(CWallet *pwallet, vector <CTxOut> &vout, CAmount nTotal) {
-    vector <valtype> vSolutions;
+bool CWspStake::CreateTxOuts(CWallet* pwallet, vector<CTxOut>& vout, CAmount nTotal)
+{
+    vector<valtype> vSolutions;
     txnouttype whichType;
     CScript scriptPubKeyKernel = txFrom.vout[nPosition].scriptPubKey;
     if (!Solver(scriptPubKeyKernel, whichType, vSolutions)) {
@@ -201,27 +217,28 @@ bool CWspStake::CreateTxOuts(CWallet *pwallet, vector <CTxOut> &vout, CAmount nT
     vout.emplace_back(CTxOut(0, scriptPubKey));
 
     // Calculate if we need to split the output
-    if (nTotal / 2 > (CAmount) (pwallet->nStakeSplitThreshold * COIN))
+    if (nTotal / 2 > (CAmount)(pwallet->nStakeSplitThreshold * COIN))
         vout.emplace_back(CTxOut(0, scriptPubKey));
 
     return true;
 }
 
-bool CWspStake::GetModifier(uint64_t &nStakeModifier) {
+bool CWspStake::GetModifier(uint64_t& nStakeModifier)
+{
     int nStakeModifierHeight = 0;
     int64_t nStakeModifierTime = 0;
     GetIndexFrom();
     if (!pindexFrom)
         return error("%s: failed to get index from", __func__);
 
-    if (!GetKernelStakeModifier(pindexFrom->GetBlockHash(), nStakeModifier, nStakeModifierHeight, nStakeModifierTime,
-                                false))
+    if (!GetKernelStakeModifier(pindexFrom->GetBlockHash(), nStakeModifier, nStakeModifierHeight, nStakeModifierTime, false))
         return error("CheckStakeKernelHash(): failed to get kernel stake modifier \n");
 
     return true;
 }
 
-CDataStream CWspStake::GetUniqueness() {
+CDataStream CWspStake::GetUniqueness()
+{
     //The unique identifier for a WSP stake is the outpoint
     CDataStream ss(SER_NETWORK, 0);
     ss << nPosition << txFrom.GetHash();
@@ -229,13 +246,14 @@ CDataStream CWspStake::GetUniqueness() {
 }
 
 //The block that the UTXO was added to the chain
-CBlockIndex *CWspStake::GetIndexFrom() {
+CBlockIndex* CWspStake::GetIndexFrom()
+{
     uint256 hashBlock = 0;
     CTransaction tx;
     if (GetTransaction(txFrom.GetHash(), tx, hashBlock, true)) {
         // If the index is in the chain, then set it as the "index from"
         if (mapBlockIndex.count(hashBlock)) {
-            CBlockIndex *pindex = mapBlockIndex.at(hashBlock);
+            CBlockIndex* pindex = mapBlockIndex.at(hashBlock);
             if (chainActive.Contains(pindex))
                 pindexFrom = pindex;
         }

@@ -26,18 +26,18 @@ enum bloomflags {
     BLOOM_UPDATE_NONE = 0,
     BLOOM_UPDATE_ALL = 1,
     // Only adds outpoints to the filter if the output is a pay-to-pubkey/pay-to-multisig script
-            BLOOM_UPDATE_P2PUBKEY_ONLY = 2,
+    BLOOM_UPDATE_P2PUBKEY_ONLY = 2,
     BLOOM_UPDATE_MASK = 3,
 };
 
 /**
  * BloomFilter is a probabilistic filter which SPV clients provide
  * so that we can filter the transactions we sends them.
- *
+ * 
  * This allows for significantly more efficient transaction and block downloads.
- *
+ * 
  * Because bloom filters are probabilistic, an SPV node can increase the false-
- * positive rate, making us send them transactions which aren't actually theirs,
+ * positive rate, making us send them transactions which aren't actually theirs, 
  * allowing clients to trade more bandwidth for more privacy by obfuscating which
  * keys are owned by them.
  */

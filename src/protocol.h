@@ -28,20 +28,20 @@
  * (4) size.
  * (4) checksum.
  */
-class CMessageHeader {
+class CMessageHeader
+{
 public:
     CMessageHeader();
-
-    CMessageHeader(const char *pszCommand, unsigned int nMessageSizeIn);
+    CMessageHeader(const char* pszCommand, unsigned int nMessageSizeIn);
 
     std::string GetCommand() const;
-
     bool IsValid() const;
 
     ADD_SERIALIZE_METHODS;
 
-    template<typename Stream, typename Operation>
-    inline void SerializationOp(Stream &s, Operation ser_action, int nType, int nVersion) {
+    template <typename Stream, typename Operation>
+    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
+    {
         READWRITE(FLATDATA(pchMessageStart));
         READWRITE(FLATDATA(pchCommand));
         READWRITE(nMessageSize);
@@ -72,12 +72,12 @@ enum {
     // NODE_BLOOM means the node is capable and willing to handle bloom-filtered connections.
     // Bitcoin Core nodes used to support this by default, without advertising this bit,
     // but no longer do as of protocol version 70011 (= NO_BLOOM_VERSION)
-            NODE_BLOOM = (1 << 2),
+    NODE_BLOOM = (1 << 2),
 
-    // NODE_BLOOM_WITHOUT_MN means the node has the same features as NODE_BLOOM with the only difference
-    // that the node doens't want to receive master nodes messages. (the 1<<3 was not picked as constant because on bitcoin 0.14 is witness and we want that update here )
+	// NODE_BLOOM_WITHOUT_MN means the node has the same features as NODE_BLOOM with the only difference
+	// that the node doens't want to receive master nodes messages. (the 1<<3 was not picked as constant because on bitcoin 0.14 is witness and we want that update here )
 
-    NODE_BLOOM_WITHOUT_MN = (1 << 4),
+	 NODE_BLOOM_WITHOUT_MN = (1 << 4),
 
     // Bits 24-31 are reserved for temporary experiments. Just pick a bit that
     // isn't getting used, or one not being used much, and notify the
@@ -89,18 +89,19 @@ enum {
 };
 
 /** A CService with information about it as peer */
-class CAddress : public CService {
+class CAddress : public CService
+{
 public:
     CAddress();
-
     explicit CAddress(CService ipIn, uint64_t nServicesIn = NODE_NETWORK);
 
     void Init();
 
     ADD_SERIALIZE_METHODS;
 
-    template<typename Stream, typename Operation>
-    inline void SerializationOp(Stream &s, Operation ser_action, int nType, int nVersion) {
+    template <typename Stream, typename Operation>
+    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
+    {
         if (ser_action.ForRead())
             Init();
         if (nType & SER_DISK)
@@ -109,7 +110,7 @@ public:
             (nVersion >= CADDR_TIME_VERSION && !(nType & SER_GETHASH)))
             READWRITE(nTime);
         READWRITE(nServices);
-        READWRITE(*(CService *) this);
+        READWRITE(*(CService*)this);
     }
 
     // TODO: make private (improves encapsulation)
@@ -124,30 +125,27 @@ public:
 };
 
 /** inv message data */
-class CInv {
+class CInv
+{
 public:
     CInv();
-
-    CInv(int typeIn, const uint256 &hashIn);
-
-    CInv(const std::string &strType, const uint256 &hashIn);
+    CInv(int typeIn, const uint256& hashIn);
+    CInv(const std::string& strType, const uint256& hashIn);
 
     ADD_SERIALIZE_METHODS;
 
-    template<typename Stream, typename Operation>
-    inline void SerializationOp(Stream &s, Operation ser_action, int nType, int nVersion) {
+    template <typename Stream, typename Operation>
+    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
+    {
         READWRITE(type);
         READWRITE(hash);
     }
 
-    friend bool operator<(const CInv &a, const CInv &b);
+    friend bool operator<(const CInv& a, const CInv& b);
 
     bool IsKnownType() const;
-
     bool IsMasterNodeType() const;
-
-    const char *GetCommand() const;
-
+    const char* GetCommand() const;
     std::string ToString() const;
 
     // TODO: make private (improves encapsulation)
@@ -161,7 +159,7 @@ enum {
     MSG_BLOCK,
     // Nodes may always request a MSG_FILTERED_BLOCK in a getdata, however,
     // MSG_FILTERED_BLOCK should not appear in any invs except as a part of getdata.
-            MSG_FILTERED_BLOCK,
+    MSG_FILTERED_BLOCK,
     MSG_TXLOCK_REQUEST,
     MSG_TXLOCK_VOTE,
     MSG_SPORK,

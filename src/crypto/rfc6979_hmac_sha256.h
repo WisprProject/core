@@ -11,7 +11,8 @@
 #include <stdlib.h>
 
 /** The RFC 6979 PRNG using HMAC-SHA256. */
-class RFC6979_HMAC_SHA256 {
+class RFC6979_HMAC_SHA256
+{
 private:
     unsigned char V[CHMAC_SHA256::OUTPUT_SIZE];
     unsigned char K[CHMAC_SHA256::OUTPUT_SIZE];
@@ -22,12 +23,12 @@ public:
      * Construct a new RFC6979 PRNG, using the given key and message.
      * The message is assumed to be already hashed.
      */
-    RFC6979_HMAC_SHA256(const unsigned char *key, size_t keylen, const unsigned char *msg, size_t msglen);
+    RFC6979_HMAC_SHA256(const unsigned char* key, size_t keylen, const unsigned char* msg, size_t msglen);
 
     /**
      * Generate a byte array.
      */
-    void Generate(unsigned char *output, size_t outputlen);
+    void Generate(unsigned char* output, size_t outputlen);
 
     ~RFC6979_HMAC_SHA256();
 };

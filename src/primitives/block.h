@@ -23,26 +23,28 @@ static const unsigned int MAX_BLOCK_SIZE_LEGACY = 1000000;
  * in the block is a special one that creates a new coin owned by the creator
  * of the block.
  */
-class CBlockHeader {
+class CBlockHeader
+{
 public:
     // header
-    static const int CURRENT_VERSION = 8;
-    int nVersion;
+    static const int32_t CURRENT_VERSION=8;
+    int32_t nVersion;
     uint256 hashPrevBlock;
     uint256 hashMerkleRoot;
-    unsigned int nTime;
-    unsigned int nBits;
-    unsigned int nNonce;
+    uint32_t nTime;
+    uint32_t nBits;
+    uint32_t nNonce;
     uint256 nAccumulatorCheckpoint;
 
-    CBlockHeader() {
+    CBlockHeader()
+    {
         SetNull();
     }
 
     ADD_SERIALIZE_METHODS;
 
-    template<typename Stream, typename Operation>
-    inline void SerializationOp(Stream &s, Operation ser_action, int nType, int nVersion) {
+    template <typename Stream, typename Operation>
+    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion) {
         READWRITE(this->nVersion);
         nVersion = this->nVersion;
         READWRITE(hashPrevBlock);
@@ -52,11 +54,12 @@ public:
         READWRITE(nNonce);
 
         //zerocoin active, header changes to include accumulator checksum
-        if (nVersion > 7)
+        if(nVersion > 7)
             READWRITE(nAccumulatorCheckpoint);
     }
 
-    void SetNull() {
+    void SetNull()
+    {
         nVersion = CBlockHeader::CURRENT_VERSION;
         hashPrevBlock.SetNull();
         hashMerkleRoot.SetNull();
@@ -66,51 +69,56 @@ public:
         nAccumulatorCheckpoint = 0;
     }
 
-    bool IsNull() const {
+    bool IsNull() const
+    {
         return (nBits == 0);
     }
 
     uint256 GetHash() const;
-    uint256 GetPoWHash() const;
 
-    int64_t GetBlockTime() const {
-        return (int64_t) nTime;
+    int64_t GetBlockTime() const
+    {
+        return (int64_t)nTime;
     }
 };
 
 
-class CBlock : public CBlockHeader {
+class CBlock : public CBlockHeader
+{
 public:
     // network and disk
-    std::vector <CTransaction> vtx;
+    std::vector<CTransaction> vtx;
 
     // ppcoin: block signature - signed by one of the coin base txout[N]'s owner
     std::vector<unsigned char> vchBlockSig;
 
     // memory only
     mutable CScript payee;
-    mutable std::vector <uint256> vMerkleTree;
+    mutable std::vector<uint256> vMerkleTree;
 
-    CBlock() {
+    CBlock()
+    {
         SetNull();
     }
 
-    CBlock(const CBlockHeader &header) {
+    CBlock(const CBlockHeader &header)
+    {
         SetNull();
-        *((CBlockHeader *) this) = header;
+        *((CBlockHeader*)this) = header;
     }
 
     ADD_SERIALIZE_METHODS;
 
-    template<typename Stream, typename Operation>
-    inline void SerializationOp(Stream &s, Operation ser_action, int nType, int nVersion) {
-        READWRITE(*(CBlockHeader *) this);
+    template <typename Stream, typename Operation>
+    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion) {
+        READWRITE(*(CBlockHeader*)this);
         READWRITE(vtx);
-        if (vtx.size() > 1 && vtx[1].IsCoinStake())
-            READWRITE(vchBlockSig);
+	if(vtx.size() > 1 && vtx[1].IsCoinStake())
+		READWRITE(vchBlockSig);
     }
 
-    void SetNull() {
+    void SetNull()
+    {
         CBlockHeader::SetNull();
         vtx.clear();
         vMerkleTree.clear();
@@ -118,46 +126,46 @@ public:
         vchBlockSig.clear();
     }
 
-    CBlockHeader GetBlockHeader() const {
+    CBlockHeader GetBlockHeader() const
+    {
         CBlockHeader block;
-        block.nVersion = nVersion;
-        block.hashPrevBlock = hashPrevBlock;
+        block.nVersion       = nVersion;
+        block.hashPrevBlock  = hashPrevBlock;
         block.hashMerkleRoot = hashMerkleRoot;
-        block.nTime = nTime;
-        block.nBits = nBits;
-        block.nNonce = nNonce;
+        block.nTime          = nTime;
+        block.nBits          = nBits;
+        block.nNonce         = nNonce;
         block.nAccumulatorCheckpoint = nAccumulatorCheckpoint;
         return block;
     }
 
     // ppcoin: two types of block: proof-of-work or proof-of-stake
-    bool IsProofOfStake() const {
+    bool IsProofOfStake() const
+    {
         return (vtx.size() > 1 && vtx[1].IsCoinStake());
     }
 
-    bool IsProofOfWork() const {
+    bool IsProofOfWork() const
+    {
         return !IsProofOfStake();
     }
 
     bool IsZerocoinStake() const;
 
-    std::pair<COutPoint, unsigned int> GetProofOfStake() const {
-        return IsProofOfStake() ? std::make_pair(vtx[1].vin[0].prevout, nTime) : std::make_pair(COutPoint(),
-                                                                                                (unsigned int) 0);
+    std::pair<COutPoint, unsigned int> GetProofOfStake() const
+    {
+        return IsProofOfStake()? std::make_pair(vtx[1].vin[0].prevout, nTime) : std::make_pair(COutPoint(), (unsigned int)0);
     }
 
     // Build the in-memory merkle tree for this block and return the merkle root.
     // If non-NULL, *mutated is set to whether mutation was detected in the merkle
     // tree (a duplication of transactions in the block leading to an identical
     // merkle root).
-    uint256 BuildMerkleTree(bool *mutated = NULL) const;
+    uint256 BuildMerkleTree(bool* mutated = NULL) const;
 
-    std::vector <uint256> GetMerkleBranch(int nIndex) const;
-
-    static uint256 CheckMerkleBranch(uint256 hash, const std::vector <uint256> &vMerkleBranch, int nIndex);
-
+    std::vector<uint256> GetMerkleBranch(int nIndex) const;
+    static uint256 CheckMerkleBranch(uint256 hash, const std::vector<uint256>& vMerkleBranch, int nIndex);
     std::string ToString() const;
-
     void print() const;
 };
 
@@ -166,29 +174,33 @@ public:
  * other node doesn't have the same branch, it can find a recent common trunk.
  * The further back it is, the further before the fork it may be.
  */
-struct CBlockLocator {
-    std::vector <uint256> vHave;
+struct CBlockLocator
+{
+    std::vector<uint256> vHave;
 
     CBlockLocator() {}
 
-    CBlockLocator(const std::vector <uint256> &vHaveIn) {
+    CBlockLocator(const std::vector<uint256>& vHaveIn)
+    {
         vHave = vHaveIn;
     }
 
     ADD_SERIALIZE_METHODS;
 
-    template<typename Stream, typename Operation>
-    inline void SerializationOp(Stream &s, Operation ser_action, int nType, int nVersion) {
+    template <typename Stream, typename Operation>
+    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion) {
         if (!(nType & SER_GETHASH))
             READWRITE(nVersion);
         READWRITE(vHave);
     }
 
-    void SetNull() {
+    void SetNull()
+    {
         vHave.clear();
     }
 
-    bool IsNull() {
+    bool IsNull()
+    {
         return vHave.empty();
     }
 };

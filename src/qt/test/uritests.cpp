@@ -10,7 +10,8 @@
 
 #include <QUrl>
 
-void URITests::uriTests() {
+void URITests::uriTests()
+{
     SendCoinsRecipient rv;
     QUrl uri;
     uri.setUrl(QString("wispr:D72dLgywmL73JyTwQBfuU29CADz9yCJ99v?req-dontexist="));

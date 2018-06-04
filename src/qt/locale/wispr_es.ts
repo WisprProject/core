@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>Create a new address</source>
-        <translation>Crear una nueva dirección</translation>
+        <translation>Crear nueva dirección</translation>
     </message>
     <message>
         <source>&amp;New</source>
@@ -47,7 +47,7 @@
     </message>
     <message>
         <source>Choose the address to receive coins with</source>
-        <translation>Escoja la dirección con las cual recibirá las monedas</translation>
+        <translation>Escoja la dirección en la cual recibirá las monedas</translation>
     </message>
     <message>
         <source>C&amp;hoose</source>
@@ -55,19 +55,19 @@
     </message>
     <message>
         <source>Sending addresses</source>
-        <translation>Enviando direcciones</translation>
+        <translation>Direcciones de envío</translation>
     </message>
     <message>
         <source>Receiving addresses</source>
-        <translation>Recibiendo direcciones</translation>
+        <translation>Direcciones de recepción</translation>
     </message>
     <message>
-        <source>These are your Wispr addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Estas son sus direcciones Wispr para realizar pagos. Siempre verifique la cantidad y la dirección de recepción antes de enviar monedas.</translation>
+        <source>These are your WISPR addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Estas son sus direcciones WISPR para realizar pagos. Verifique siempre la cantidad y la dirección de recepción antes de enviar monedas.</translation>
     </message>
     <message>
-        <source>These are your Wispr addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Estas son sus direcciones Wispr para recibir pagos. Es recomendable usar una nueva dirección de recepción para cada transacción.</translation>
+        <source>These are your WISPR addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>Estas son sus direcciones WISPR para recibir pagos. Es recomendable usar una nueva dirección de recepción para cada transacción.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -75,7 +75,7 @@
     </message>
     <message>
         <source>Copy &amp;Label</source>
-        <translation>Copiar y Etiquetar</translation>
+        <translation>Copiar etiqueta</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
@@ -95,7 +95,7 @@
     </message>
     <message>
         <source>There was an error trying to save the address list to %1. Please try again.</source>
-        <translation>Hubo un error intentando guardar la lista de direcciones %1. Por favor intente nuevamente</translation>
+        <translation>Ha habido un error intentando guardar la lista de direcciones %1. Por favor inténtelo de nuevo.</translation>
     </message>
 </context>
 <context>
@@ -136,7 +136,7 @@
         <translation>Sirve para desactivar el envío de dinero cuando la cuenta del SO está comprometida. No provee de una seguridad real</translation>
     </message>
     <message>
-        <source>For anonymization and staking only</source>
+        <source>For anonymization, automint, and staking only</source>
         <translation>Para anonimización y staking solamente</translation>
     </message>
     <message>
@@ -145,23 +145,23 @@
     </message>
     <message>
         <source>Encrypt wallet</source>
-        <translation>Encriptar la Wallet</translation>
+        <translation>Cifrar monedero</translation>
     </message>
     <message>
         <source>This operation needs your wallet passphrase to unlock the wallet.</source>
-        <translation>Esta operación requiere su contraseña para desbloquear la Wallet</translation>
+        <translation>Esta operación requiere su contraseña para desbloquear el monedero</translation>
     </message>
     <message>
         <source>Unlock wallet</source>
-        <translation>Desbloquear wallet</translation>
+        <translation>Desbloquear monedero</translation>
     </message>
     <message>
         <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
-        <translation>Esta operación requiere su contraseña para desbloquear la Wallet</translation>
+        <translation>Esta operación requiere su contraseña para descifrar el monedero</translation>
     </message>
     <message>
         <source>Decrypt wallet</source>
-        <translation>Desencriptar Wallet</translation>
+        <translation>Descifrar monedero</translation>
     </message>
     <message>
         <source>Change passphrase</source>
@@ -169,55 +169,55 @@
     </message>
     <message>
         <source>Enter the old and new passphrase to the wallet.</source>
-        <translation>Ingrese la antigua y nueva contraseña para la Wallet</translation>
+        <translation>Ingrese la antigua y la nueva contraseña para el monedero</translation>
     </message>
     <message>
         <source>Confirm wallet encryption</source>
-        <translation>Confirmar la encriptación de la Wallet</translation>
+        <translation>Confirme el cifrado del monedero</translation>
     </message>
     <message>
-        <source>Wispr will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your WSPs from being stolen by malware infecting your computer.</source>
-        <translation>Wispr se cerrará ahora para finalizar el proceso de encriptación. Recuerde que encriptar su Wallet no previene completamente que tus WSPs sean robados mediante malware infectando su ordenador.</translation>
+        <source>WISPR will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your WSPs from being stolen by malware infecting your computer.</source>
+        <translation>WISPR se cerrará para finalizar el proceso de cifrado. Recuerde que cifrar su monedero no garantiza que sus WSPs no sean robados mediante malware de su ordenador.</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
-        <translation>¿Esta seguro de que desea encriptar tu Wallet?</translation>
+        <translation>¿Está seguro de que desea cifrar su monedero?</translation>
     </message>
     <message>
         <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR WSP&lt;/b&gt;!</source>
-        <translation>Atención: Si encripta su Wallet y pierde su contraseña, perderá &lt;b&gt; TODOS SUS WSP&lt;/b&gt;!</translation>
+        <translation>Atención: Si cifra su monedero y pierde su contraseña, perderá &lt;b&gt; TODOS SUS WSP&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Wallet encrypted</source>
-        <translation>Wallet encriptada</translation>
+        <translation>Monedero cifrado</translation>
     </message>
     <message>
         <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
-        <translation>IMPORTANTE: Cualquier backup anterior que haya realizado de su Wallet debe ser reemplazado por el nuevo archivo de Wallet encriptado. Por razones de seguridad, las copias anteriores de seguridad de la Wallet sin encriptar pasaran a ser obsoletas tan pronto empiece a utilizar la nueva Wallet encriptada.</translation>
+        <translation>IMPORTANTE: Cualquier copia de seguridad anterior que haya realizado de su monedero debe ser reemplazada por la nueva copia de seguridad cifrada. Por razones de seguridad, las copias de seguridad anteriores del monedero sin cifrar pasarán a ser obsoletas tan pronto empiece a utilizar el nuevo monedero cifrado.</translation>
     </message>
     <message>
         <source>Wallet encryption failed</source>
-        <translation>La encriptación de la Wallet ha fallado</translation>
+        <translation>El cifrado del monedero ha fallado</translation>
     </message>
     <message>
         <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
-        <translation>La encriptación de la wallet ha fallado debido a un error interno. Tu wallet no ha sido encriptada.</translation>
+        <translation>El cifrado del monedero ha fallado debido a un error interno. Su monedero no ha sido cifrado.</translation>
     </message>
     <message>
         <source>The supplied passphrases do not match.</source>
-        <translation>Las contraseñas suministradas no coinciden.</translation>
+        <translation>Las contraseñas introducidas no coinciden.</translation>
     </message>
     <message>
         <source>Wallet unlock failed</source>
-        <translation>Fallo en el desbloqueo de la wallet</translation>
+        <translation>Desbloqueo del monedero fallido</translation>
     </message>
     <message>
         <source>The passphrase entered for the wallet decryption was incorrect.</source>
-        <translation>La contraseña introducida para la desencriptación de la wallet es incorrecta.</translation>
+        <translation>La contraseña introducida para el descifrado del monedero es incorrecta.</translation>
     </message>
     <message>
         <source>Wallet decryption failed</source>
-        <translation>Fallo en la desencriptación de la wallet</translation>
+        <translation>Descifrado del monedero fallido</translation>
     </message>
     <message>
         <source>Wallet passphrase was successfully changed.</source>
@@ -225,7 +225,18 @@
     </message>
     <message>
         <source>Warning: The Caps Lock key is on!</source>
-        <translation>Atención: La tecla Mayúsculas está encendida!</translation>
+        <translation>Aviso: La tecla Mayúsculas está encendida!</translation>
+    </message>
+</context>
+<context>
+    <name>BanTableModel</name>
+    <message>
+        <source>IP/Netmask</source>
+        <translation>IP/Máscara de Red</translation>
+    </message>
+    <message>
+        <source>Banned Until</source>
+        <translation>Suspendido hasta</translation>
     </message>
 </context>
 <context>
@@ -236,23 +247,23 @@
     </message>
     <message>
         <source>&amp;BIP 38 Encrypt</source>
-        <translation>&amp;Encriptación BIP 38</translation>
-    </message>
-    <message>
-        <source>Enter a Wispr Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</source>
-        <translation>Introduzca la dirección Wispr que querría encriptar usando BIP 38. Introduzca una contraseña en la caja central. Clickee en encriptar para computar la clave privada encriptada.</translation>
+        <translation>&amp;Cifrado BIP 38</translation>
     </message>
     <message>
         <source>Address:</source>
         <translation>Dirección:</translation>
     </message>
     <message>
-        <source>The Wispr address to sign the message with</source>
-        <translation>La dirección Wispr con la que firmar el mensaje</translation>
+        <source>Enter a WISPR Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</source>
+        <translation>Introduzca la dirección WISPR que querría cifrar usando BIP 38. Introduzca una contraseña en el campo central. Haga clic en cifrar para generar la clave privada cifrada.</translation>
+    </message>
+    <message>
+        <source>The WISPR address to encrypt</source>
+        <translation>La dirección WISPR a cifrar</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
-        <translation>Escoge una dirección usada previamente</translation>
+        <translation>Escoja una dirección usada previamente</translation>
     </message>
     <message>
         <source>Alt+A</source>
@@ -260,7 +271,7 @@
     </message>
     <message>
         <source>Paste address from clipboard</source>
-        <translation>Pegar dirección desde el clipboard</translation>
+        <translation>Pegar dirección desde el portapapeles</translation>
     </message>
     <message>
         <source>Alt+P</source>
@@ -272,23 +283,31 @@
     </message>
     <message>
         <source>Encrypted Key:</source>
-        <translation>Clave Encriptada:</translation>
+        <translation>Clave cifrada:</translation>
     </message>
     <message>
         <source>Copy the current signature to the system clipboard</source>
-        <translation>Copiar la firma actual al clipboard del sistema</translation>
+        <translation>Copiar la firma actual al portapapeles del sistema</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Wispr address</source>
-        <translation>Firmar el mensaje para demostrar que eres el propietario de esta dirección Wispr</translation>
+        <source>Encrypt the private key for this WISPR address</source>
+        <translation>Cifrar la llave privada para esta dirección WISPR</translation>
+    </message>
+    <message>
+        <source>Reset all fields</source>
+        <translation>Limpiar todos los campos</translation>
+    </message>
+    <message>
+        <source>The encrypted private key</source>
+        <translation>La llave privada cifrada</translation>
+    </message>
+    <message>
+        <source>Decrypt the entered key using the passphrase</source>
+        <translation>Descifrar la llave ingresada usando la frase de contraseña</translation>
     </message>
     <message>
         <source>Encrypt &amp;Key</source>
-        <translation>Encriptar &amp; Clave</translation>
-    </message>
-    <message>
-        <source>Reset all sign message fields</source>
-        <translation>Resetear todos los campos de firma de mensaje</translation>
+        <translation>Cifrar &amp;Clave</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>
@@ -296,39 +315,27 @@
     </message>
     <message>
         <source>&amp;BIP 38 Decrypt</source>
-        <translation>&amp;Desencriptación BIP 38</translation>
+        <translation>&amp;Descifrado BIP 38</translation>
     </message>
     <message>
         <source>Enter the BIP 38 encrypted private key. Enter the passphrase in the middle box. Click Decrypt Key to compute the private key. After the key is decrypted, clicking 'Import Address' will add this private key to the wallet.</source>
-        <translation>Introducir la clave encriptada privada BIP 38. Introducir la contraseña en la caja central. Pulsar en Desencriptar Clave para computar la clave privada. Después de que la clave sea desencriptada, pulsando en 'Importar Dirección' añadirá esta clave privada a la wallet.</translation>
-    </message>
-    <message>
-        <source>The Wispr address the message was signed with</source>
-        <translation>La dirección Wispr con la que el mensaje fue firmado</translation>
-    </message>
-    <message>
-        <source>Verify the message to ensure it was signed with the specified Wispr address</source>
-        <translation>Verificar el mensaje para asegurarse que fue firmado con la dirección Wispr especificada</translation>
+        <translation>Introduzca la clave cifrada privada BIP 38. Introduzca la contraseña en el campo central. Haga clic en descifrar clave para generar la clave privada. Después de que la clave sea descifrada, pulsando en 'Importar dirección' añadirá esta clave privada al monedero.</translation>
     </message>
     <message>
         <source>Decrypt &amp;Key</source>
-        <translation>Desencriptar &amp; Clave</translation>
-    </message>
-    <message>
-        <source>Reset all verify message fields</source>
-        <translation>Resetear todos los campos de verificación de mensaje</translation>
+        <translation>Descifrar &amp;Clave</translation>
     </message>
     <message>
         <source>Decrypted Key:</source>
-        <translation>Clave desencriptada</translation>
+        <translation>Clave descifrada:</translation>
     </message>
     <message>
         <source>Import Address</source>
-        <translation>Importar Dirección</translation>
+        <translation>Importar dirección</translation>
     </message>
     <message>
         <source>Click "Decrypt Key" to compute key</source>
-        <translation>Clickar "Desencriptar Clave" para computar la clave</translation>
+        <translation>Haga clic en "Descifrar clave" para generar la clave</translation>
     </message>
     <message>
         <source>The entered passphrase is invalid. </source>
@@ -344,15 +351,15 @@
     </message>
     <message>
         <source>Please check the address and try again.</source>
-        <translation>Por favor comprobar la dirección y probar de nuevo.</translation>
+        <translation>Por favor compruebe la dirección e inténtelo de nuevo.</translation>
     </message>
     <message>
         <source>The entered address does not refer to a key.</source>
-        <translation>La dirección introducido no se refiere a ninguna clave.</translation>
+        <translation>La dirección introducida no se refiere a ninguna clave.</translation>
     </message>
     <message>
         <source>Wallet unlock was cancelled.</source>
-        <translation>El desbloqueo de la wallet fue cancelado.</translation>
+        <translation>El desbloqueo del monedero fue cancelado.</translation>
     </message>
     <message>
         <source>Private key for the entered address is not available.</source>
@@ -360,23 +367,23 @@
     </message>
     <message>
         <source>Failed to decrypt.</source>
-        <translation>Fallo en la desencriptación</translation>
+        <translation>Falló el descifrado</translation>
     </message>
     <message>
         <source>Please check the key and passphrase and try again.</source>
-        <translation>Por favor comprobar la clave y la contraseña y probar de nuevo.</translation>
+        <translation>Por favor compruebe la clave y la contraseña e inténtelo de nuevo.</translation>
     </message>
     <message>
         <source>Data Not Valid.</source>
-        <translation>Datos No Válidos.</translation>
+        <translation>Datos no válidos.</translation>
     </message>
     <message>
         <source>Please try again.</source>
-        <translation>Por favor intentar de nuevo.</translation>
+        <translation>Por favor inténtelo de nuevo.</translation>
     </message>
     <message>
         <source>Please wait while key is imported</source>
-        <translation>Por favor esperar mientras se importa la clave</translation>
+        <translation>Por favor espere mientras la clave es importada</translation>
     </message>
     <message>
         <source>Key Already Held By Wallet</source>
@@ -424,6 +431,10 @@
     <message>
         <source>Browse transaction history</source>
         <translation>Navegar por el historial de transacciones</translation>
+    </message>
+    <message>
+        <source>Privacy Actions for zWSP</source>
+        <translation>Acciones de privacidad para zWSP</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -483,7 +494,7 @@
     </message>
     <message>
         <source>Unlock wallet</source>
-        <translation>Desbloquear wallet</translation>
+        <translation>Desbloquear monedero</translation>
     </message>
     <message>
         <source>&amp;Lock Wallet</source>
@@ -566,6 +577,30 @@
         <translation>Mostrar la lista de las direcciones y etiquetas usadas</translation>
     </message>
     <message>
+        <source>&amp;Multisignature creation...</source>
+        <translation>Creación multifirmas ...</translation>
+    </message>
+    <message>
+        <source>Create a new multisignature address and add it to this wallet</source>
+        <translation>Crear una nueva dirección multifirma y agregarla a esta cartera</translation>
+    </message>
+    <message>
+        <source>&amp;Multisignature spending...</source>
+        <translation>Gasto multifirmas...</translation>
+    </message>
+    <message>
+        <source>Spend from a multisignature address</source>
+        <translation>Gastar desde una dirección multifirmas</translation>
+    </message>
+    <message>
+        <source>&amp;Multisignature signing...</source>
+        <translation>Firma multifirmas...</translation>
+    </message>
+    <message>
+        <source>Sign with a multisignature address</source>
+        <translation>Firmar con una dirección multifirmas</translation>
+    </message>
+    <message>
         <source>Open &amp;URI...</source>
         <translation>Abrir &amp;URI...</translation>
     </message>
@@ -575,11 +610,19 @@
     </message>
     <message numerus="yes">
         <source>Processed %n blocks of transaction history.</source>
-        <translation><numerusform>Procesados %n bloque del histórico de transacciones.</numerusform><numerusform>Procesados %n bloques del histórico de transacciones.</numerusform></translation>
+        <translation><numerusform>Procesados %n bloques del histórico de transacciones.</numerusform><numerusform>Procesados %n bloques del histórico de transacciones.</numerusform></translation>
     </message>
     <message>
         <source>Synchronizing additional data: %p%</source>
         <translation>Sincronizando datos adicionales: %p%</translation>
+    </message>
+    <message>
+        <source>%1 behind. Scanning block %2</source>
+        <translation>%1 detrás. Escaneando bloque %2</translation>
+    </message>
+    <message>
+        <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt; for anonymization and staking only</source>
+        <translation>El monedero está &lt;b&gt;cifrado&lt;/b&gt; y actualmente &lt;b&gt;desbloqueado&lt;/b&gt; para anonimato y prueba de participación.</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -602,16 +645,20 @@
         <translation>Herramienta de pestañas</translation>
     </message>
     <message>
-        <source>Wispr Core</source>
-        <translation>Núcleo Wispr</translation>
+        <source>WISPR Core</source>
+        <translation>Núcleo WISPR</translation>
     </message>
     <message>
-        <source>Send coins to a Wispr address</source>
-        <translation>Enviar coins a una dirección Wispr</translation>
+        <source>Send coins to a WISPR address</source>
+        <translation>Enviar coins a una dirección WISPR</translation>
     </message>
     <message>
         <source>Request payments (generates QR codes and wispr: URIs)</source>
         <translation>Solicitud de pago (genera un código QR y URIs)</translation>
+    </message>
+    <message>
+        <source>&amp;Privacy</source>
+        <translation>&amp;Privacidad</translation>
     </message>
     <message>
         <source>&amp;Masternodes</source>
@@ -622,24 +669,24 @@
         <translation>Explorar nodos maestros</translation>
     </message>
     <message>
-        <source>&amp;About Wispr Core</source>
-        <translation>&amp;Sobre el núcleo de Wispr</translation>
+        <source>&amp;About WISPR Core</source>
+        <translation>&amp;Sobre el núcleo de WISPR</translation>
     </message>
     <message>
-        <source>Show information about Wispr Core</source>
-        <translation>Mostrar información sobre el núcleo de Wispr</translation>
+        <source>Show information about WISPR Core</source>
+        <translation>Mostrar información sobre el núcleo de WISPR</translation>
     </message>
     <message>
-        <source>Modify configuration options for Wispr</source>
-        <translation>Modificar las opciones de configuración de Wispr</translation>
+        <source>Modify configuration options for WISPR</source>
+        <translation>Modificar las opciones de configuración de WISPR</translation>
     </message>
     <message>
-        <source>Sign messages with your Wispr addresses to prove you own them</source>
-        <translation>Firmar mensajes con sus direcciones Wispr para demostrar que le pertenecen</translation>
+        <source>Sign messages with your WISPR addresses to prove you own them</source>
+        <translation>Firmar mensajes con sus direcciones WISPR para demostrar que le pertenecen</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Wispr addresses</source>
-        <translation>Verificar mensajes para asegurar que están firmados con la dirección Wispr especificada</translation>
+        <source>Verify messages to ensure they were signed with specified WISPR addresses</source>
+        <translation>Verificar mensajes para asegurar que están firmados con la dirección WISPR especificada</translation>
     </message>
     <message>
         <source>&amp;BIP38 tool</source>
@@ -670,8 +717,8 @@
         <translation>Abrir Fichero de Configuración de Nodos Maestros</translation>
     </message>
     <message>
-        <source>Open a Wispr: URI or payment request</source>
-        <translation>Abrir un Wispr: URI o solicitud de pago</translation>
+        <source>Open a WISPR: URI or payment request</source>
+        <translation>Abrir un WISPR: URI o solicitud de pago</translation>
     </message>
     <message>
         <source>&amp;Blockchain explorer</source>
@@ -682,16 +729,16 @@
         <translation>Ventana del explorador de bloques</translation>
     </message>
     <message>
-        <source>Show the Wispr Core help message to get a list with possible Wispr command-line options</source>
-        <translation>Mostrar la ayuda de Wispr Core para obtener una lista de posibles opciones en línea de comandos</translation>
+        <source>Show the WISPR Core help message to get a list with possible WISPR command-line options</source>
+        <translation>Mostrar la ayuda de WISPR Core para obtener una lista de posibles opciones en línea de comandos</translation>
     </message>
     <message>
-        <source>Wispr Core client</source>
-        <translation>Cliente Wispr Core</translation>
+        <source>WISPR Core client</source>
+        <translation>Cliente WISPR Core</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Wispr network</source>
-        <translation><numerusform>%n conexión(es) activa a la red Wispr</numerusform><numerusform>%n conexion(es) activas a la red Wispr</numerusform></translation>
+        <source>%n active connection(s) to WISPR network</source>
+        <translation><numerusform>%n conexión(es) activas a la red WISPR</numerusform><numerusform>%n conexión(es) activas a la red WISPR</numerusform></translation>
     </message>
     <message>
         <source>Synchronizing with network...</source>
@@ -715,15 +762,15 @@
     </message>
     <message numerus="yes">
         <source>%n hour(s)</source>
-        <translation><numerusform>%n hora</numerusform><numerusform>%n horas</numerusform></translation>
+        <translation><numerusform>%n horas</numerusform><numerusform>%n horas</numerusform></translation>
     </message>
     <message numerus="yes">
         <source>%n day(s)</source>
-        <translation><numerusform>%n día</numerusform><numerusform>%n días</numerusform></translation>
+        <translation><numerusform>%n días</numerusform><numerusform>%n días</numerusform></translation>
     </message>
     <message numerus="yes">
         <source>%n week(s)</source>
-        <translation><numerusform>%n semana</numerusform><numerusform>%n semanas</numerusform></translation>
+        <translation><numerusform>%n semanas</numerusform><numerusform>%n semanas</numerusform></translation>
     </message>
     <message>
         <source>%1 and %2</source>
@@ -731,11 +778,7 @@
     </message>
     <message numerus="yes">
         <source>%n year(s)</source>
-        <translation><numerusform>%n año</numerusform><numerusform>%n años</numerusform></translation>
-    </message>
-    <message>
-        <source>%1 behind</source>
-        <translation>%1 detrás</translation>
+        <translation><numerusform>%n años</numerusform><numerusform>%n años</numerusform></translation>
     </message>
     <message>
         <source>Catching up...</source>
@@ -806,12 +849,16 @@ MultiEnvío: %1</translation>
 MultiEnvío: %1</translation>
     </message>
     <message>
-        <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt;</source>
-        <translation>El monedero está &lt;b&gt;encriptado&lt;/b&gt; y actualmente &lt;b&gt;desbloqueado&lt;/b&gt;</translation>
+        <source>AutoMint is currently enabled and set to </source>
+        <translation>AutoMint está actualmente habilitado y configurado</translation>
     </message>
     <message>
-        <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt; for anonimization and staking only</source>
-        <translation>El monedero está &lt;b&gt;encriptado&lt;/b&gt; y actualmente &lt;b&gt;desbloqueado&lt;/b&gt; sólo para anonimato y prueba de participación.</translation>
+        <source>AutoMint is disabled</source>
+        <translation>AutoMint está desactivado</translation>
+    </message>
+    <message>
+        <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt;</source>
+        <translation>El monedero está &lt;b&gt;encriptado&lt;/b&gt; y actualmente &lt;b&gt;desbloqueado&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;locked&lt;/b&gt;</source>
@@ -823,6 +870,14 @@ MultiEnvío: %1</translation>
     <message>
         <source>Blockchain Explorer</source>
         <translation>Explorador de Cadena de Bloques</translation>
+    </message>
+    <message>
+        <source>Back</source>
+        <translation>Atrás</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>Adelante</translation>
     </message>
     <message>
         <source>Address / Block / Transaction</source>
@@ -844,8 +899,8 @@ MultiEnvío: %1</translation>
 <context>
     <name>ClientModel</name>
     <message>
-        <source>Total: %1 (OBF compatible: %2 / Enabled: %3)</source>
-        <translation>Total: %1 (Ofuscación compatible: %2 / Activado: %3)</translation>
+        <source>Total: %1 (IPv4: %2 / IPv6: %3 / Tor: %4 / Unknown: %5)</source>
+        <translation>Total: %1 (IPv4: %2 / IPv6: %3 / Tor: %4 / Desconocido: %5)</translation>
     </message>
     <message>
         <source>Network Alert</source>
@@ -923,8 +978,8 @@ MultiEnvío: %1</translation>
         <translation>Recibido con dirección</translation>
     </message>
     <message>
-        <source>DS Rounds</source>
-        <translation>Rondas DS:</translation>
+        <source>Type</source>
+        <translation>Tipo</translation>
     </message>
     <message>
         <source>Date</source>
@@ -999,10 +1054,6 @@ MultiEnvío: %1</translation>
         <translation>Por favor cambie a "Modo de Lista" para utilizar esta función.</translation>
     </message>
     <message>
-        <source>Non-anonymized input selected. &lt;b&gt;Obfuscation will be disabled.&lt;/b&gt;&lt;br&gt;&lt;br&gt;If you still want to use Obfuscation, please deselect all non-nonymized inputs first and then check Obfuscation checkbox again.</source>
-        <translation>Has seleccionado una entrada que no ha sido anonimizada. &lt;b&gt;La Ofuscación será deshabilitada.&lt;/b&gt;&lt;br&gt;&lt;br&gt;Si todavía quiere utilizar la Ofuscación, por favor primero deseleccione todas las entrada no anonimizadas y entonces marque la casilla de Ofuscación de nuevo.</translation>
-    </message>
-    <message>
         <source>highest</source>
         <translation>la más alta</translation>
     </message>
@@ -1017,14 +1068,6 @@ MultiEnvío: %1</translation>
     <message>
         <source>medium-high</source>
         <translation>medio-alta</translation>
-    </message>
-    <message>
-        <source>Can vary +/- %1 duff(s) per input.</source>
-        <translation>Puede variar +/- %1 duff(s) por entrada.</translation>
-    </message>
-    <message>
-        <source>n/a</source>
-        <translation>n/a</translation>
     </message>
     <message>
         <source>medium</source>
@@ -1087,6 +1130,10 @@ MultiEnvío: %1</translation>
         <translation>Esta etiqueta se vuelve roja, si algún destinatario recibe una cantidad menor que %1.</translation>
     </message>
     <message>
+        <source>Can vary +/- %1 uwsp per input.</source>
+        <translation>Pode variar +/- %1 uwsp por entrada.</translation>
+    </message>
+    <message>
         <source>(no label)</source>
         <translation>(sin etiqueta)</translation>
     </message>
@@ -1138,8 +1185,8 @@ MultiEnvío: %1</translation>
         <translation>Editar dirección de envío</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Wispr address.</source>
-        <translation>La dirección introducida "%1" no es una dirección Wispr válida.</translation>
+        <source>The entered address "%1" is not a valid WISPR address.</source>
+        <translation>La dirección introducida "%1" no es una dirección WISPR válida.</translation>
     </message>
     <message>
         <source>The entered address "%1" is already in the address book.</source>
@@ -1184,16 +1231,16 @@ MultiEnvío: %1</translation>
         <translation>versión</translation>
     </message>
     <message>
-        <source>Wispr Core</source>
-        <translation>Núcleo Wispr</translation>
+        <source>WISPR Core</source>
+        <translation>Núcleo WISPR</translation>
     </message>
     <message>
         <source>(%1-bit)</source>
         <translation>(%1-bit)</translation>
     </message>
     <message>
-        <source>About Wispr Core</source>
-        <translation>Acerca de Wispr Core</translation>
+        <source>About WISPR Core</source>
+        <translation>Acerca de WISPR Core</translation>
     </message>
     <message>
         <source>Command-line options</source>
@@ -1239,16 +1286,16 @@ MultiEnvío: %1</translation>
         <translation>Bienvenido/a</translation>
     </message>
     <message>
-        <source>Welcome to Wispr Core.</source>
-        <translation>Bienvenido/a a Wispr Core.</translation>
+        <source>Welcome to WISPR Core.</source>
+        <translation>Bienvenido/a a WISPR Core.</translation>
     </message>
     <message>
-        <source>As this is the first time the program is launched, you can choose where Wispr Core will store its data.</source>
-        <translation>Al ser la primera vez que se inicia el programa, usted puede elegir dónde guardará Wispr Core sus datos.</translation>
+        <source>As this is the first time the program is launched, you can choose where WISPR Core will store its data.</source>
+        <translation>Al ser la primera vez que se inicia el programa, usted puede elegir dónde guardará WISPR Core sus datos.</translation>
     </message>
     <message>
-        <source>Wispr Core will download and store a copy of the Wispr block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
-        <translation>Wispr Core descargará y guardará una copia de la cadena de bloques Wispr. Por lo menos %1GB de datos serán guardados en esta carpeta, y crecerá con el tiempo. El monedero también se guardará en esta carpeta.</translation>
+        <source>WISPR Core will download and store a copy of the WISPR block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
+        <translation>WISPR Core descargará y guardará una copia de la cadena de bloques WISPR. Por lo menos %1GB de datos serán guardados en esta carpeta, y crecerá con el tiempo. El monedero también se guardará en esta carpeta.</translation>
     </message>
     <message>
         <source>Use the default data directory</source>
@@ -1259,8 +1306,8 @@ MultiEnvío: %1</translation>
         <translation>Usar una carpeta de datos personalizada:</translation>
     </message>
     <message>
-        <source>Wispr Core</source>
-        <translation>Núcleo Wispr</translation>
+        <source>WISPR Core</source>
+        <translation>Núcleo WISPR</translation>
     </message>
     <message>
         <source>Error: Specified data directory "%1" cannot be created.</source>
@@ -1286,8 +1333,8 @@ MultiEnvío: %1</translation>
         <translation>Formulario</translation>
     </message>
     <message>
-        <source>My Masternodes</source>
-        <translation>Mis Nodos Maestros</translation>
+        <source>MASTERNODES</source>
+        <translation>MASTERNODES</translation>
     </message>
     <message>
         <source>Note: Status of your masternodes in local wallet can potentially be slightly incorrect.&lt;br /&gt;Always wait for wallet to sync additional data and then double check from another node&lt;br /&gt;if your node should be running but you still see "MISSING" in "Status" field.</source>
@@ -1401,12 +1448,12 @@ MultiEnvío: %1</translation>
         <translation>Introduzca Dirección a la cual Enviar</translation>
     </message>
     <message>
-        <source>MultiSend allows you to automatically send up to 100% of your stake or masternode reward to a list of other Wispr addresses after it matures.
-To Add: enter percentage to give and Wispr address to add to the MultiSend vector.
+        <source>MultiSend allows you to automatically send up to 100% of your stake or masternode reward to a list of other WISPR addresses after it matures.
+To Add: enter percentage to give and WISPR address to add to the MultiSend vector.
 To Delete: Enter address to delete and press delete.
 MultiSend will not be activated unless you have clicked Activate</source>
-        <translation>MultiEnvío le permite enviar automáticamente hasta el 100% de recompensa de participación o de nodo maestro a una lista de otras direcciones Wispr después de su maduración.
-Para Añadir: introduzca porcentaje a enviar y las direcciones Wispr a añadir al vector MultiEnvío.
+        <translation>MultiEnvío le permite enviar automáticamente hasta el 100% de recompensa de participación o de nodo maestro a una lista de otras direcciones WISPR después de su maduración.
+Para Añadir: introduzca porcentaje a enviar y las direcciones WISPR a añadir al vector MultiEnvío.
 Para Eliminar: Introduzca la dirección a eliminar y pulse la tecla delete.
 MultiEnvío no se activará a menos que haga usted click en Activar</translation>
     </message>
@@ -1451,6 +1498,14 @@ MultiEnvío no se activará a menos que haga usted click en Activar</translation
         <translation>Dirección:</translation>
     </message>
     <message>
+        <source>Label:</source>
+        <translation>Etiqueta:</translation>
+    </message>
+    <message>
+        <source>Enter a label for this address to add it to your address book</source>
+        <translation>Introduzca una etiqueta para esta dirección para añadirla a su libreta de direcciones</translation>
+    </message>
+    <message>
         <source>Delete Address From MultiSend Vector</source>
         <translation>Borrar Dirección De Vector MultiEnvío</translation>
     </message>
@@ -1483,6 +1538,10 @@ MultiEnvío no se activará a menos que haga usted click en Activar</translation
         <translation>Enviar Para Recomensas De Nodos Maestros</translation>
     </message>
     <message>
+        <source>(no label)</source>
+        <translation>(sin etiqueta)</translation>
+    </message>
+    <message>
         <source>The entered address:
 </source>
         <translation>La dirección introducida:
@@ -1505,6 +1564,12 @@ Por favor compruebe la dirección e inténtelo de nuevo.</translation>
         <translation>Por favor Introduzca 1 - 100 por ciento.</translation>
     </message>
     <message>
+        <source>Saved the MultiSend to memory, but failed saving properties to the database.
+</source>
+        <translation>Salvou o MultiSend na memória, mas não salvou as propriedades no banco de dados.
+</translation>
+    </message>
+    <message>
         <source>MultiSend Vector
 </source>
         <translation>Vector MultiEnvío
@@ -1519,6 +1584,177 @@ Por favor compruebe la dirección e inténtelo de nuevo.</translation>
 </source>
         <translation>No se pudo localizar la dirección
 </translation>
+    </message>
+</context>
+<context>
+    <name>MultisigDialog</name>
+    <message>
+        <source>Multisignature Address Interactions</source>
+        <translation>Interacciones de direcciones multifirmas</translation>
+    </message>
+    <message>
+        <source>Create MultiSignature &amp;Address</source>
+        <translation>Crear una dirección multifirma</translation>
+    </message>
+    <message>
+        <source>How many people must sign to verify a transaction</source>
+        <translation>Cuántas personas deben firmar para verificar una transacción</translation>
+    </message>
+    <message>
+        <source>Enter the minimum number of signatures required to sign transactions</source>
+        <translation>Entra el número mínimo de firmas requerido para firmar la transacción</translation>
+    </message>
+    <message>
+        <source>Address Label:</source>
+        <translation>Etiqueta de dirección</translation>
+    </message>
+    <message>
+        <source>Add another address that could sign to verify a transaction from the multisig address.</source>
+        <translation>Agrega otra dirección que pueda firmar para verificar la transacción desde la dirección multifirmas</translation>
+    </message>
+    <message>
+        <source>&amp;Add Address / Key</source>
+        <translation>Agrega dirección / Llave</translation>
+    </message>
+    <message>
+        <source>Local addresses or public keys that can sign:</source>
+        <translation>Direcciones locales o llaves publicas que puedan firmar:</translation>
+    </message>
+    <message>
+        <source>Create a new multisig address</source>
+        <translation>Crea una nueva dirección multifirmas</translation>
+    </message>
+    <message>
+        <source>C&amp;reate</source>
+        <translation>Crear</translation>
+    </message>
+    <message>
+        <source>Status:</source>
+        <translation>Estado:</translation>
+    </message>
+    <message>
+        <source>Use below to quickly import an address by its redeem. Don't forget to add a label before clicking import!
+Keep in mind, the wallet will rescan the blockchain to find transactions containing the new address.
+Please be patient after clicking import.</source>
+        <translation>Use debajo para importar rápidamente una dirección al canjearla. ¡No olvide agregar una etiqueta antes de hacer clic en importar!
+Tenga en cuenta que la billetera volverá a explorar la cadena de bloques para buscar transacciones que contengan la nueva dirección.
+Por favor, tenga paciencia después de hacer clic en importar.</translation>
+    </message>
+    <message>
+        <source>&amp;Import Redeem</source>
+        <translation>Importar Canje</translation>
+    </message>
+    <message>
+        <source>&amp;Create MultiSignature Tx</source>
+        <translation>Crear transacción multifirmas</translation>
+    </message>
+    <message>
+        <source>Inputs:</source>
+        <translation>Entradas:</translation>
+    </message>
+    <message>
+        <source>Coin Control</source>
+        <translation>Control de moneda</translation>
+    </message>
+    <message>
+        <source>Quantity Selected:</source>
+        <translation>Cantidad Seleccionada:</translation>
+    </message>
+    <message>
+        <source>0</source>
+        <translation>0</translation>
+    </message>
+    <message>
+        <source>Amount:</source>
+        <translation>Cantidad:</translation>
+    </message>
+    <message>
+        <source>Add an input to fund the outputs</source>
+        <translation>Agregue una entrada para financiar las salidas</translation>
+    </message>
+    <message>
+        <source>Add a Raw Input</source>
+        <translation>Agregar una entrada sin procesar</translation>
+    </message>
+    <message>
+        <source>Address / Amount:</source>
+        <translation>Dirección / Cantidad:</translation>
+    </message>
+    <message>
+        <source>Add destinations to send WSP to</source>
+        <translation>Agregue los destinos para enviar WSP</translation>
+    </message>
+    <message>
+        <source>Add &amp;Destination</source>
+        <translation>Agregar destino</translation>
+    </message>
+    <message>
+        <source>Create a transaction object using the given inputs to the given outputs</source>
+        <translation>Crear un objeto de transacción usando las entradas dadas a las salidas dadas</translation>
+    </message>
+    <message>
+        <source>Cr&amp;eate</source>
+        <translation>Crear</translation>
+    </message>
+    <message>
+        <source>&amp;Sign MultiSignature Tx</source>
+        <translation>Firmar transacción multifirmas</translation>
+    </message>
+    <message>
+        <source>Transaction Hex:</source>
+        <translation>Hexadecimal de transacción:</translation>
+    </message>
+    <message>
+        <source>Sign the transaction from this wallet or from provided private keys</source>
+        <translation>Firma la transacción desde esta cartera o desde llaves privadas provistas</translation>
+    </message>
+    <message>
+        <source>S&amp;ign</source>
+        <translation>Firmar</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;DISABLED until transaction has been signed enough times.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;DESACTIVADO hasta que la transacción se haya firmado suficientes veces.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Co&amp;mmit</source>
+        <translation>Confirmar</translation>
+    </message>
+    <message>
+        <source>Add private keys to sign the transaction with</source>
+        <translation>Agregar llaves privadas para firmar la transacción</translation>
+    </message>
+    <message>
+        <source>Add Private &amp;Key</source>
+        <translation>Agregar llave privada</translation>
+    </message>
+    <message>
+        <source>Sign with only private keys (Not Recommened)</source>
+        <translation>Firmar solo con llaves privadas (No Recomendado)</translation>
+    </message>
+    <message>
+        <source>Invalid Tx Hash.</source>
+        <translation>Hash de transacción inválido</translation>
+    </message>
+    <message>
+        <source>Vout position must be positive.</source>
+        <translation>La posición de Vout debe ser positiva.</translation>
+    </message>
+    <message>
+        <source>Maximum possible addresses reached. (15)</source>
+        <translation>Máxima cantidad de direcciones posibles alcanzadas. (15)</translation>
+    </message>
+    <message>
+        <source>Vout Position: </source>
+        <translation>Posición Vout:</translation>
+    </message>
+    <message>
+        <source>Amount: </source>
+        <translation>Cantidad:</translation>
+    </message>
+    <message>
+        <source>Maximum (15)</source>
+        <translation>Máximo (15)</translation>
     </message>
 </context>
 <context>
@@ -1576,16 +1812,16 @@ Por favor compruebe la dirección e inténtelo de nuevo.</translation>
         <translation>Configuración de Ofuscación</translation>
     </message>
     <message>
-        <source>Obfuscation was successfully set to basic (%1 and 2 rounds). You can change this at any time by opening Wispr's configuration screen.</source>
-        <translation>La Ofuscación se configuró correctamente en modo básico (%1 y 2 rondas). Puedes cambiar esto en cualquier momento accediendo a la ventana de configuración de Wispr.</translation>
+        <source>Obfuscation was successfully set to basic (%1 and 2 rounds). You can change this at any time by opening WISPR's configuration screen.</source>
+        <translation>La Ofuscación se configuró correctamente en modo básico (%1 y 2 rondas). Puedes cambiar esto en cualquier momento accediendo a la ventana de configuración de WISPR.</translation>
     </message>
     <message>
-        <source>Obfuscation was successfully set to high (%1 and 8 rounds). You can change this at any time by opening Wispr's configuration screen.</source>
-        <translation>La Ofuscación se activó correctamente en modo alto (%1 y 8 rondas). Usted puede cambiar esto en cualquier momento abriendo la ventana de configuración de Wispr.</translation>
+        <source>Obfuscation was successfully set to high (%1 and 8 rounds). You can change this at any time by opening WISPR's configuration screen.</source>
+        <translation>La Ofuscación se activó correctamente en modo alto (%1 y 8 rondas). Usted puede cambiar esto en cualquier momento abriendo la ventana de configuración de WISPR.</translation>
     </message>
     <message>
-        <source>Obfuscation was successfully set to maximum (%1 and 16 rounds). You can change this at any time by opening Wispr's configuration screen.</source>
-        <translation>La Ofuscación se activó correctamente en su grado máximo (%1 y 16 rondas). Usted puede cambiar ésto en cualquier momento en la ventana de configuración de Wispr.</translation>
+        <source>Obfuscation was successfully set to maximum (%1 and 16 rounds). You can change this at any time by opening WISPR's configuration screen.</source>
+        <translation>La Ofuscación se activó correctamente en su grado máximo (%1 y 16 rondas). Usted puede cambiar ésto en cualquier momento en la ventana de configuración de WISPR.</translation>
     </message>
 </context>
 <context>
@@ -1646,8 +1882,8 @@ Por favor compruebe la dirección e inténtelo de nuevo.</translation>
         <translation>Si deselecciona el gasto de cambio no confirmado, las entradas de una transacción&lt;br/&gt;no podrán ser usadas hasta que esa transacción tenga al menos una confirmación.&lt;br/&gt;Esto también afecta a cómo se calcula su balance actual.</translation>
     </message>
     <message>
-        <source>Automatically open the Wispr client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Abrir automáticamente el puerto del cliente Wispr en el enrutador. Ésto sólo funciona si su enrutador soporta UPnP y esta función está activada.</translation>
+        <source>Automatically open the WISPR client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Abrir automáticamente el puerto del cliente WISPR en el enrutador. Ésto sólo funciona si su enrutador soporta UPnP y esta función está activada.</translation>
     </message>
     <message>
         <source>Accept connections from outside</source>
@@ -1666,28 +1902,12 @@ Por favor compruebe la dirección e inténtelo de nuevo.</translation>
         <translation>Experto</translation>
     </message>
     <message>
-        <source>Automatically start Wispr after logging in to the system.</source>
-        <translation>Arrancar Wispr automáticamente después de identificarse en Windows.</translation>
+        <source>Automatically start WISPR after logging in to the system.</source>
+        <translation>Arrancar WISPR automáticamente después de identificarse en Windows.</translation>
     </message>
     <message>
-        <source>&amp;Start Wispr on system login</source>
-        <translation>&amp;Arrancar Wispr al inicio del sistema</translation>
-    </message>
-    <message>
-        <source>This setting determines the amount of individual masternodes that an input will be anonymized through.&lt;br/&gt;More rounds of anonymization gives a higher degree of privacy, but also costs more in fees.</source>
-        <translation>Esta configuración determina la cantidad máxima de nodos maestros individuales a través de los cuales una entrada se anonimizará.&lt;br/&gt;Más rondas de anonimización ofrecen un mayor grado de privacidad, pero también cuesta más en comisiones.</translation>
-    </message>
-    <message>
-        <source>Obfuscation rounds to use</source>
-        <translation>Rondas de Ofuscación a utilizar</translation>
-    </message>
-    <message>
-        <source>This amount acts as a threshold to turn off Obfuscation once it's reached.</source>
-        <translation>Esta cantidad actúa como un techo para desactivar la Ofuscación una vez alcanzado.</translation>
-    </message>
-    <message>
-        <source>Amount of Wispr to keep anonymized</source>
-        <translation>Cantidad de Wispr a mantener anonimizados</translation>
+        <source>&amp;Start WISPR on system login</source>
+        <translation>&amp;Arrancar WISPR al inicio del sistema</translation>
     </message>
     <message>
         <source>Whether to show coin control features or not.</source>
@@ -1714,8 +1934,8 @@ Por favor compruebe la dirección e inténtelo de nuevo.</translation>
         <translation>&amp;Red</translation>
     </message>
     <message>
-        <source>The user interface language can be set here. This setting will take effect after restarting Wispr.</source>
-        <translation>El idioma de interface de usuario puede seleccionarse aquí. Este ajuste tomará efecto después de reiniciar Wispr.</translation>
+        <source>The user interface language can be set here. This setting will take effect after restarting WISPR.</source>
+        <translation>El idioma de interface de usuario puede seleccionarse aquí. Este ajuste tomará efecto después de reiniciar WISPR.</translation>
     </message>
     <message>
         <source>Language missing or translation incomplete? Help contributing translations here:
@@ -1728,8 +1948,36 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
         <translation>Mapear un puerto utilizando &amp;UPnP</translation>
     </message>
     <message>
-        <source>Connect to the Wispr network through a SOCKS5 proxy.</source>
-        <translation>Conectar a la red Wispr mediante un proxy SOCKS5.</translation>
+        <source>Enable automatic minting of WSP units to zWSP</source>
+        <translation>Ative a cunhagem automática de unidades WSP para zWSP</translation>
+    </message>
+    <message>
+        <source>Enable zWSP Automint</source>
+        <translation>Ativar zWSP Automint</translation>
+    </message>
+    <message>
+        <source>Percentage of incoming WSP which get automatically converted to zWSP via Zerocoin Protocol (min: 10%)</source>
+        <translation>Porcentaje de WSPs entrantes que serán automáticamente convertidos a zWSP a través del Protocolo Zerocoin (mín: 10%)</translation>
+    </message>
+    <message>
+        <source>Percentage of autominted zWSP</source>
+        <translation>Porcentaje de zWSP autogenerados</translation>
+    </message>
+    <message>
+        <source>Wait with automatic conversion to Zerocoin until enough WSP for this denomination is available</source>
+        <translation>Retrasar la conversión automática a Zerocoin hasta que hayan suficientes WSP disponibles para este tamaño de billete</translation>
+    </message>
+    <message>
+        <source>Preferred Automint zWSP Denomination</source>
+        <translation>Tamaño de billete zWSP preferido en la creación automática de dinero</translation>
+    </message>
+    <message>
+        <source>Stake split threshold:</source>
+        <translation>Limite de divisão da estaca:</translation>
+    </message>
+    <message>
+        <source>Connect to the WISPR network through a SOCKS5 proxy.</source>
+        <translation>Conectar a la red WISPR mediante un proxy SOCKS5.</translation>
     </message>
     <message>
         <source>Proxy &amp;IP:</source>
@@ -1792,6 +2040,10 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
         <translation>Dígitos decimales</translation>
     </message>
     <message>
+        <source>Hide empty balances</source>
+        <translation>Ocultar saldos vazios</translation>
+    </message>
+    <message>
         <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
         <translation>Direcciones web de terceras partes (p.e. un explorador de bloques) que aparecen en la pestaña de transacciones como objetos contextuales del menú. %s en la dirección web es reemplazada por el identificador de la transacción. Múltiples direcciones web están separadas por una barra vertical (|).</translation>
     </message>
@@ -1818,6 +2070,10 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
     <message>
         <source>&amp;Cancel</source>
         <translation>&amp;Cancelar</translation>
+    </message>
+    <message>
+        <source>Any</source>
+        <translation>Qualquer</translation>
     </message>
     <message>
         <source>default</source>
@@ -1847,6 +2103,14 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
         <source>The supplied proxy address is invalid.</source>
         <translation>La dirección proxy indicada es inválida.</translation>
     </message>
+    <message>
+        <source>The supplied proxy port is invalid.</source>
+        <translation>A porta do proxy fornecida é inválida.</translation>
+    </message>
+    <message>
+        <source>The supplied proxy settings are invalid.</source>
+        <translation>As configurações de proxy fornecidas são inválidas.</translation>
+    </message>
 </context>
 <context>
     <name>OverviewPage</name>
@@ -1861,6 +2125,14 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
     <message>
         <source>Your current spendable balance</source>
         <translation>Tu balance actualmente disponible</translation>
+    </message>
+    <message>
+        <source>Total Balance, including all unavailable coins.</source>
+        <translation>Saldo Total, incluindo todas as moedas indisponíveis.</translation>
+    </message>
+    <message>
+        <source>WSP Balance</source>
+        <translation>Balance WSP</translation>
     </message>
     <message>
         <source>Pending:</source>
@@ -1879,12 +2151,32 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
         <translation>Recompensa de participación o de nodo maestro que aún no ha madurado</translation>
     </message>
     <message>
-        <source>Balances</source>
-        <translation>Balances</translation>
+        <source>Current locked balance in watch-only addresses</source>
+        <translation>Saldo bloqueado atual em endereços somente para assistir</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Wispr network after a connection is established, but this process has not completed yet.</source>
-        <translation>La información mostrada puede estar desactualizada. Su monedero se sincroniza automáticamente con la red Wispr después de establecer una conexión, pero este proceso aún no se ha completado.</translation>
+        <source>Your current WISPR balance, unconfirmed and immature transactions included</source>
+        <translation>Seu saldo atual da WISPR, transações não confirmadas e imaturas incluídas</translation>
+    </message>
+    <message>
+        <source>zWSP Balance</source>
+        <translation>Balanço zWSP</translation>
+    </message>
+    <message>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the WISPR network after a connection is established, but this process has not completed yet.</source>
+        <translation>La información mostrada puede estar desactualizada. Su monedero se sincroniza automáticamente con la red WISPR después de establecer una conexión, pero este proceso aún no se ha completado.</translation>
+    </message>
+    <message>
+        <source>OVERVIEW</source>
+        <translation>VISÃO GERAL</translation>
+    </message>
+    <message>
+        <source>Combined Balance (including unconfirmed and immature coins)</source>
+        <translation>Saldos combinados (incluidas las monedas no confirmadas e inmaduras)</translation>
+    </message>
+    <message>
+        <source>Combined Balance</source>
+        <translation>Saldo Combinado</translation>
     </message>
     <message>
         <source>Unconfirmed transactions to watch-only addresses</source>
@@ -1897,10 +2189,6 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
     <message>
         <source>Total:</source>
         <translation>Total:</translation>
-    </message>
-    <message>
-        <source>Your current total balance</source>
-        <translation>Su balance total actual</translation>
     </message>
     <message>
         <source>Current total balance in watch-only addresses</source>
@@ -1919,155 +2207,50 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
         <translation>Disponible:</translation>
     </message>
     <message>
-        <source>Status:</source>
-        <translation>Estado:</translation>
+        <source>Locked WSP or Masternode collaterals. These are excluded from zWSP minting.</source>
+        <translation>Bloqueado WSP o Masternode colaterales. Estos están excluidos de la zWSP minting.</translation>
     </message>
     <message>
-        <source>Obfuscation Balance:</source>
-        <translation>Balance de Ofuscación:</translation>
+        <source>Locked:</source>
+        <translation>Bloqueado:</translation>
     </message>
     <message>
-        <source>0 WSP / 0 Rounds</source>
-        <translation>0 WSP / 0 Rondas</translation>
+        <source>Unconfirmed:</source>
+        <translation>Sin confirmar:</translation>
     </message>
     <message>
-        <source>Enabled/Disabled</source>
-        <translation>Activado/Desactivado</translation>
-    </message>
-    <message>
-        <source>Try to manually submit a Obfuscation request.</source>
-        <translation>Intentar enviar manualmente una solicitud de Ofuscación.</translation>
-    </message>
-    <message>
-        <source>Reset the current status of Obfuscation (can interrupt Obfuscation if it's in the process of Mixing, which can cost you money!)</source>
-        <translation>Reiniciar el estado actual de Ofuscación (puede interrumpir la Ofuscación si está en el proceso de Mezcla, que puede costarle dinero!)</translation>
-    </message>
-    <message>
-        <source>Obfuscation</source>
-        <translation>Ofuscación</translation>
-    </message>
-    <message>
-        <source>Completion:</source>
-        <translation>Completado:</translation>
-    </message>
-    <message>
-        <source>Amount and Rounds:</source>
-        <translation>Cantidad y Rondas:</translation>
-    </message>
-    <message>
-        <source>Submitted Denom:</source>
-        <translation>Denominación Enviada:</translation>
-    </message>
-    <message>
-        <source>n/a</source>
-        <translation>n/a</translation>
+        <source>Your current zWSP balance, unconfirmed and immature zWSP included.</source>
+        <translation>Seu saldo atual do zWSP, zWSP não confirmado e imaturo incluído.</translation>
     </message>
     <message>
         <source>Recent transactions</source>
         <translation>Transacciones recientes</translation>
     </message>
     <message>
-        <source>Start/Stop Mixing</source>
-        <translation>Empezar/Parar Mezcla</translation>
-    </message>
-    <message>
-        <source>The denominations you submitted to the Masternode.&lt;br&gt;To mix, other users must submit the exact same denominations.</source>
-        <translation>Las denominaciones que enviaste al Nodo Maestro.&lt;br&gt;Para mezclar, otros usuarios deben enviar exactamente las mismas denominaciones.</translation>
-    </message>
-    <message>
-        <source>(Last Message)</source>
-        <translation>(Último Mensaje)</translation>
-    </message>
-    <message>
-        <source>Try Mix</source>
-        <translation>Intentar Mezclar</translation>
-    </message>
-    <message>
-        <source>Reset</source>
-        <translation>Reiniciar</translation>
-    </message>
-    <message>
         <source>out of sync</source>
         <translation>desincronizado</translation>
     </message>
     <message>
-        <source>Disabled</source>
-        <translation>Desactivado</translation>
-    </message>
-    <message>
-        <source>No inputs detected</source>
-        <translation>No se detectan entradas</translation>
-    </message>
-    <message numerus="yes">
-        <source>%n Rounds</source>
-        <translation><numerusform>%n Ronda</numerusform><numerusform>%n Rondas</numerusform></translation>
-    </message>
-    <message>
-        <source>Not enough compatible inputs to anonymize &lt;span style='color:red;'&gt;%1&lt;/span&gt;,&lt;br&gt;will anonymize &lt;span style='color:red;'&gt;%2&lt;/span&gt; instead</source>
-        <translation>No hay suficientes entradas compatibles para anonimizar &lt;span style='color:red;'&gt;%1&lt;/span&gt;,&lt;br&gt;anonimizará &lt;span style='color:red;'&gt;%2&lt;/span&gt; en su lugar
-</translation>
-    </message>
-    <message>
-        <source>Overall progress</source>
-        <translation>Progreso total</translation>
-    </message>
-    <message>
-        <source>Denominated</source>
-        <translation>Nominadas</translation>
-    </message>
-    <message>
-        <source>Anonymized</source>
-        <translation>Anonimizadas</translation>
-    </message>
-    <message numerus="yes">
-        <source>Denominated inputs have %5 of %n rounds on average</source>
-        <translation><numerusform>La entrada denominada tiene %5 de %n rondas de promedio</numerusform><numerusform>Las entradas seleccionadas tienen %5 de %n rondas de promedio</numerusform></translation>
-    </message>
-    <message>
-        <source>Last Obfuscation message:
+        <source>Current percentage of zWSP.
+If AutoMint is enabled this percentage will settle around the configured AutoMint percentage (default = 10%).
 </source>
-        <translation>Último mensaje de Ofuscación:
+        <translation>Porcentaje actual de zWSP.
+Si AutoMint está habilitado, este porcentaje se establecerá alrededor del porcentaje de AutoMint configurado (predeterminado = 10%).
 </translation>
     </message>
     <message>
-        <source>Obfuscation was successfully reset.</source>
-        <translation>La Ofuscación fue reiniciada satisfactoriamente.</translation>
+        <source>AutoMint is currently enabled and set to </source>
+        <translation>AutoMint está actualmente habilitado y configurado</translation>
     </message>
     <message>
-        <source>If you don't want to see internal Obfuscation fees/transactions select "Most Common" as Type on the "Transactions" tab.</source>
-        <translation>Si no quiere ver aquí las operaciones internas de Ofuscación seleccione "Las Más Comunes" como el Tipo en la pestaña de "Transacciones".</translation>
+        <source>To disable AutoMint add 'enablezeromint=0' in wispr.conf.</source>
+        <translation>Para desactivar AutoMint agrega 'enablezeromint=0' en wispr.conf.</translation>
     </message>
     <message>
-        <source>Obfuscation requires at least %1 to use.</source>
-        <translation>La Ofuscación requiere como mínimo %1 para usarse.</translation>
-    </message>
-    <message>
-        <source>Wallet is locked and user declined to unlock. Disabling Obfuscation.</source>
-        <translation>El Monedero está bloqueado y el usuario declinó su desbloqueo. Desactivando Ofuscación.</translation>
-    </message>
-    <message>
-        <source>Found enough compatible inputs to anonymize %1</source>
-        <translation>Se encontraron suficientes entradas compatibles para anonimizar %1</translation>
-    </message>
-    <message>
-        <source>Start Obfuscation</source>
-        <translation>Comenzar Ofuscación</translation>
-    </message>
-    <message>
-        <source>Stop Obfuscation</source>
-        <translation>Parar Ofuscación</translation>
-    </message>
-    <message>
-        <source>Mixed</source>
-        <translation>Mezcladas</translation>
-    </message>
-    <message>
-        <source>Enabled</source>
-        <translation>Activado</translation>
-    </message>
-    <message>
-        <source>N/A</source>
-        <translation>N/A</translation>
+        <source>AutoMint is currently disabled.
+To enable AutoMint change 'enablezeromint=0' to 'enablezeromint=1' in wispr.conf</source>
+        <translation>AutoMint está actualmente desactivado.
+Para habilitar AutoMint cambie 'enablezeromint = 0' a 'enablezeromint = 1' en wispr.conf</translation>
     </message>
 </context>
 <context>
@@ -2097,8 +2280,8 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
         <translation>No se puede iniciar wispr: módulo click-to-pay</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid Wispr address or malformed URI parameters.</source>
-        <translation>¡El identificador de la dirección no puede ser analizado! Esto puede ser causado por una dirección Wispr inválida o parámetros del identificador malformados.</translation>
+        <source>URI cannot be parsed! This can be caused by an invalid WISPR address or malformed URI parameters.</source>
+        <translation>¡El identificador de la dirección no puede ser analizado! Esto puede ser causado por una dirección WISPR inválida o parámetros del identificador malformados.</translation>
     </message>
     <message>
         <source>Payment request file cannot be read! This can be caused by an invalid payment request file.</source>
@@ -2177,14 +2360,624 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
     </message>
 </context>
 <context>
+    <name>PrivacyDialog</name>
+    <message>
+        <source>Zerocoin Actions:</source>
+        <translation>Acciones Zerocoin:</translation>
+    </message>
+    <message>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the WISPR network after a connection is established, but this process has not completed yet.</source>
+        <translation>La información mostrada puede estar desactualizada. Su monedero se sincroniza automáticamente con la red WISPR después de establecer una conexión, pero este proceso aún no se ha completado.</translation>
+    </message>
+    <message>
+        <source>Mint Zerocoin</source>
+        <translation>Creación de moneda Zerocoin</translation>
+    </message>
+    <message>
+        <source>0</source>
+        <translation>0</translation>
+    </message>
+    <message>
+        <source>zWSP</source>
+        <translation>zWSP</translation>
+    </message>
+    <message>
+        <source>Available for minting are coins which are confirmed and not locked or Masternode collaterals.</source>
+        <translation>Disponibles para minting son monedas que están confirmadas y no bloqueadas o Masternode colaterales.</translation>
+    </message>
+    <message>
+        <source>Available for Minting:</source>
+        <translation>Disponible para Creación de moneda:</translation>
+    </message>
+    <message>
+        <source>0.000 000 00 WSP</source>
+        <translation>0.000 000 00 WSP</translation>
+    </message>
+    <message>
+        <source>Reset Zerocoin Wallet DB. Deletes transactions that did not make it into the blockchain.</source>
+        <translation>Resetear la base de datos del monedero Zerocoin. Esta opción borra transacciones que no consiguieron salir publicadas en la cadena de bloques.</translation>
+    </message>
+    <message>
+        <source>Reset</source>
+        <translation>Reiniciar</translation>
+    </message>
+    <message>
+        <source>Coin Control...</source>
+        <translation>Control de Monedas...</translation>
+    </message>
+    <message>
+        <source>Quantity:</source>
+        <translation>Cantidad:</translation>
+    </message>
+    <message>
+        <source>Amount:</source>
+        <translation>Cantidad:</translation>
+    </message>
+    <message>
+        <source>Rescan the complete blockchain for  Zerocoin mints and their meta-data.</source>
+        <translation>Reescanear la cadena de bloques entera buscando creación de moneda Zerocoin y otros meta-datos.</translation>
+    </message>
+    <message>
+        <source>ReScan</source>
+        <translation>ReeScanear</translation>
+    </message>
+    <message>
+        <source>Status and/or Mesages from the last Mint Action.</source>
+        <translation>Estado y/o Mensajes de la última Acción de Creación de moneda.</translation>
+    </message>
+    <message>
+        <source>PRIVACY</source>
+        <translation>PRIVACIDADE</translation>
+    </message>
+    <message>
+        <source>Quantity Selected:</source>
+        <translation>Cantidad Seleccionada:</translation>
+    </message>
+    <message>
+        <source>Spend Zerocoin. Without 'Pay To:' address creates payments to yourself.</source>
+        <translation>Gastar Zerocoin. Sin direcciones "Pagar a:", esto creará pagos a usted mismo.</translation>
+    </message>
+    <message>
+        <source>Spend Zerocoin</source>
+        <translation>Gastar Zerocoin</translation>
+    </message>
+    <message>
+        <source>Available (mature and spendable) zWSP for spending</source>
+        <translation>ZWSP disponible (maduro y gastable) para gastar</translation>
+    </message>
+    <message>
+        <source>Available Balance:</source>
+        <translation>Balance disponible:</translation>
+    </message>
+    <message>
+        <source>Available (mature and spendable) zWSP for spending
+
+zWSP are mature when they have more than 20 confirmations AND more than 2 mints of the same denomination after them were minted</source>
+        <translation>ZWSP disponible (maduro y gastable) para gastar
+
+zWSP son maduros cuando tienen más de 20 confirmaciones Y más de 2 mints de la misma denominación después de ellos fueron minted</translation>
+    </message>
+    <message>
+        <source>0 zWSP</source>
+        <translation>0 zWSP</translation>
+    </message>
+    <message>
+        <source>Security Level for Zerocoin Transactions. More is better, but needs more time and resources.</source>
+        <translation>Nivel de Seguridad para Transacciones Zerocoin. Cuanto más mejor, pero necesitará más tiempo y recursos.</translation>
+    </message>
+    <message>
+        <source>Security Level:</source>
+        <translation>Nivel de Seguridad:</translation>
+    </message>
+    <message>
+        <source>Security Level 1 - 100 (default: 42)</source>
+        <translation>Nivel de Seguridad 1 - 100 (por defecto: 42)</translation>
+    </message>
+    <message>
+        <source>Pay &amp;To:</source>
+        <translation>Pagar &amp;A:</translation>
+    </message>
+    <message>
+        <source>The WISPR address to send the payment to. Creates local payment to yourself when empty.</source>
+        <translation>La dirección WISPR a la que enviar el pago. Si se deja en blanco, crea un pago a usted mismo.</translation>
+    </message>
+    <message>
+        <source>Choose previously used address</source>
+        <translation>Escoja una dirección usada previamente</translation>
+    </message>
+    <message>
+        <source>Alt+A</source>
+        <translation>Alt + A</translation>
+    </message>
+    <message>
+        <source>Paste address from clipboard</source>
+        <translation>Pegar dirección desde el portapapeles</translation>
+    </message>
+    <message>
+        <source>Alt+P</source>
+        <translation>Alt + P</translation>
+    </message>
+    <message>
+        <source>&amp;Label:</source>
+        <translation>&amp;Etiqueta:</translation>
+    </message>
+    <message>
+        <source>Enter a label for this address to add it to the list of used addresses</source>
+        <translation>Introduzca una etiqueta para esta dirección para añadirla a la lista de direcciones utilizadas</translation>
+    </message>
+    <message>
+        <source>A&amp;mount:</source>
+        <translation>Ca&amp;ntidad:</translation>
+    </message>
+    <message>
+        <source>Convert Change to Zerocoin (might cost additional fees)</source>
+        <translation>Convertir el Cambio a Zerocoin (puede costar alguna tasa adicional)</translation>
+    </message>
+    <message>
+        <source>If checked, the wallet tries to minimize the returning change instead of minimizing the number of spent denominations.</source>
+        <translation>Si está marcado, el monedero intenta minimizar el cambio de vuelta en lugar de minimizar el número de billetes necesarios.</translation>
+    </message>
+    <message>
+        <source>Minimize Change</source>
+        <translation>Minimizar Cambio</translation>
+    </message>
+    <message>
+        <source>Information about the available Zerocoin funds.</source>
+        <translation>Información sobre los fondos Zerocoin disponibles.</translation>
+    </message>
+    <message>
+        <source>Zerocoin Stats:</source>
+        <translation>Estadísticas Zerocoin:</translation>
+    </message>
+    <message>
+        <source>Total Balance including unconfirmed and immature zWSP</source>
+        <translation>Balance total incluyendo zWSP no confirmado e inmaduro</translation>
+    </message>
+    <message>
+        <source>Total Zerocoin  Balance:</source>
+        <translation>Balance total de Zerocoin:</translation>
+    </message>
+    <message>
+        <source>Denominations with value 1:</source>
+        <translation>Billetes con valor 1:</translation>
+    </message>
+    <message>
+        <source>Denom. with value 1:</source>
+        <translation>Billetes con valor 1:</translation>
+    </message>
+    <message>
+        <source>Show the current status of automatic zWSP minting.
+
+To change the status (restart required):
+- enable: add 'enablezeromint=1' to wispr.conf
+- disable: add 'enablezeromint=0' to wispr.conf
+
+To change the percentage (no restart required):
+- menu Settings-&gt;Options-&gt;Percentage of autominted zWSP
+
+</source>
+        <translation>Mostrar o status atual do zWSP minting automático.
+
+Para alterar o status (reinicialização obrigatória): 
+- enable: adicione 'enablezeromint = 1' ao wispr.conf
+- disable: adiciona 'enablezeromint = 0' ao wispr.conf
+
+Para alterar a porcentagem (não é necessário reiniciar): 
+- menu Configurações-&gt; Opções-&gt; Porcentagem de zWSPs automáticos
+</translation>
+    </message>
+    <message>
+        <source>AutoMint Status</source>
+        <translation>Status de AutoMint</translation>
+    </message>
+    <message>
+        <source>Global Supply:</source>
+        <translation>Abastecimento Global:</translation>
+    </message>
+    <message>
+        <source>Denom. 1:</source>
+        <translation>Denom. 1:</translation>
+    </message>
+    <message>
+        <source>Denom. 5:</source>
+        <translation>Denom. 5:</translation>
+    </message>
+    <message>
+        <source>Denom. 10:</source>
+        <translation>Denom. 10:</translation>
+    </message>
+    <message>
+        <source>Denom. 50:</source>
+        <translation>Denom. 50:</translation>
+    </message>
+    <message>
+        <source>Denom. 100:</source>
+        <translation>Denom. 100:</translation>
+    </message>
+    <message>
+        <source>Denom. 500:</source>
+        <translation>Denom. 500:</translation>
+    </message>
+    <message>
+        <source>Denom. 1000:</source>
+        <translation>Denom. 1000:</translation>
+    </message>
+    <message>
+        <source>Denom. 5000:</source>
+        <translation>Denom. 5000:</translation>
+    </message>
+    <message>
+        <source>0 x</source>
+        <translation>0 x</translation>
+    </message>
+    <message>
+        <source>Denominations with value 5:</source>
+        <translation>Billetes con valor 5:</translation>
+    </message>
+    <message>
+        <source>Denom. with value 5:</source>
+        <translation>Billetes con valor 5:</translation>
+    </message>
+    <message>
+        <source>Denominations with value 10:</source>
+        <translation>Billetes con valor 10:</translation>
+    </message>
+    <message>
+        <source>Denom. with value 10:</source>
+        <translation>Billetes con valor 10:</translation>
+    </message>
+    <message>
+        <source>Denominations with value 50:</source>
+        <translation>Billetes con valor 50:</translation>
+    </message>
+    <message>
+        <source>Denom. with value 50:</source>
+        <translation>Billetes con valor 50:</translation>
+    </message>
+    <message>
+        <source>Denominations with value 100:</source>
+        <translation>Billetes con valor 100:</translation>
+    </message>
+    <message>
+        <source>Denom. with value 100:</source>
+        <translation>Billetes con valor 100:</translation>
+    </message>
+    <message>
+        <source>Denominations with value 500:</source>
+        <translation>Billetes con valor 500:</translation>
+    </message>
+    <message>
+        <source>Denom. with value 500:</source>
+        <translation>Billetes con valor 500:</translation>
+    </message>
+    <message>
+        <source>Denominations with value 1000:</source>
+        <translation>Billetes con valor 1000:</translation>
+    </message>
+    <message>
+        <source>Denom. with value 1000:</source>
+        <translation>Billetes con valor 1000:</translation>
+    </message>
+    <message>
+        <source>Denominations with value 5000:</source>
+        <translation>Billetes con valor 5000:</translation>
+    </message>
+    <message>
+        <source>Denom. with value 5000:</source>
+        <translation>Billetes con valor 5000:</translation>
+    </message>
+    <message>
+        <source>Priority:</source>
+        <translation>Prioridad:</translation>
+    </message>
+    <message>
+        <source>TextLabel</source>
+        <translation>EtiquetaDeTexto</translation>
+    </message>
+    <message>
+        <source>Fee:</source>
+        <translation>Comisión:</translation>
+    </message>
+    <message>
+        <source>Dust:</source>
+        <translation>Calderilla:</translation>
+    </message>
+    <message>
+        <source>no</source>
+        <translation>no</translation>
+    </message>
+    <message>
+        <source>Bytes:</source>
+        <translation>Octetos:</translation>
+    </message>
+    <message>
+        <source>Insufficient funds!</source>
+        <translation>¡Fondos insuficientes!</translation>
+    </message>
+    <message>
+        <source>Coins automatically selected</source>
+        <translation>Monedas seleccionadas automáticamente</translation>
+    </message>
+    <message>
+        <source>medium</source>
+        <translation>media</translation>
+    </message>
+    <message>
+        <source>Coin Control Features</source>
+        <translation>Funciones de Control de Monedas</translation>
+    </message>
+    <message>
+        <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address.</source>
+        <translation>Si esto está activado, pero la dirección de cambio está vacía o es inválida, el cambio será mandado a una nueva dirección generada.</translation>
+    </message>
+    <message>
+        <source>Custom change address</source>
+        <translation>Dirección de cambio personalizada</translation>
+    </message>
+    <message>
+        <source>Amount After Fee:</source>
+        <translation>Cantidad Después de Tasas:</translation>
+    </message>
+    <message>
+        <source>Change:</source>
+        <translation>Cambio:</translation>
+    </message>
+    <message>
+        <source>out of sync</source>
+        <translation>desincronizado</translation>
+    </message>
+    <message>
+        <source>Mint Status: Okay</source>
+        <translation>Estado de Creación de Moneda: Ok</translation>
+    </message>
+    <message>
+        <source>Copy quantity</source>
+        <translation>Copiar cantidad</translation>
+    </message>
+    <message>
+        <source>Copy amount</source>
+        <translation>Copiar cantidad</translation>
+    </message>
+    <message>
+        <source> &lt;b&gt;enabled&lt;/b&gt;.</source>
+        <translation>&lt;b&gt;ativado&lt;/b&gt;.</translation>
+    </message>
+    <message>
+        <source> &lt;b&gt;disabled&lt;/b&gt;.</source>
+        <translation>&lt;b&gt;Desativado&lt;/b&gt;.</translation>
+    </message>
+    <message>
+        <source> Configured target percentage: &lt;b&gt;</source>
+        <translation>Porcentagem de segmentação configurada:&lt;b&gt;</translation>
+    </message>
+    <message>
+        <source>zWSP is currently disabled due to maintenance.</source>
+        <translation>zWSP actualmente está desactivado debido al mantenimiento.</translation>
+    </message>
+    <message>
+        <source>zWSP is currently undergoing maintenance.</source>
+        <translation>zWSP se encuentra actualmente en mantenimiento.</translation>
+    </message>
+    <message>
+        <source>Denom. with value &lt;b&gt;1&lt;/b&gt;:</source>
+        <translation>Billetes con valor &lt;b&gt; 1&lt;/b&gt;:</translation>
+    </message>
+    <message>
+        <source>Denom. with value &lt;b&gt;5&lt;/b&gt;:</source>
+        <translation>Billetes con valor &lt;b&gt; 5&lt;/b&gt;:</translation>
+    </message>
+    <message>
+        <source>Denom. with value &lt;b&gt;10&lt;/b&gt;:</source>
+        <translation>Billetes con valor &lt;b&gt; 10&lt;/b&gt;:</translation>
+    </message>
+    <message>
+        <source>Denom. with value &lt;b&gt;50&lt;/b&gt;:</source>
+        <translation>Billetes con valor &lt;b&gt;50&lt;/b&gt;:</translation>
+    </message>
+    <message>
+        <source>Denom. with value &lt;b&gt;100&lt;/b&gt;:</source>
+        <translation>Billetes con valor &lt;b&gt;100&lt;/b&gt;:</translation>
+    </message>
+    <message>
+        <source>Denom. with value &lt;b&gt;500&lt;/b&gt;:</source>
+        <translation>Billetes con valor &lt;b&gt;500&lt;/b&gt;:</translation>
+    </message>
+    <message>
+        <source>Denom. with value &lt;b&gt;1000&lt;/b&gt;:</source>
+        <translation>Billetes con valor &lt;b&gt;1000&lt;/b&gt;:</translation>
+    </message>
+    <message>
+        <source>Denom. with value &lt;b&gt;5000&lt;/b&gt;:</source>
+        <translation>Billetes con valor &lt;b&gt;5000&lt;/b&gt;:</translation>
+    </message>
+    <message>
+        <source>AutoMint Status:</source>
+        <translation>Status AutoMint:</translation>
+    </message>
+    <message>
+        <source>Denom. &lt;b&gt;1&lt;/b&gt;:</source>
+        <translation>Denom. &lt;b&gt;1&lt;/b&gt;:</translation>
+    </message>
+    <message>
+        <source>Denom. &lt;b&gt;5&lt;/b&gt;:</source>
+        <translation>Denom. &lt;b&gt;5&lt;/b&gt;:</translation>
+    </message>
+    <message>
+        <source>Denom. &lt;b&gt;10&lt;/b&gt;:</source>
+        <translation>Denom. &lt;b&gt;10&lt;/b&gt;:</translation>
+    </message>
+    <message>
+        <source>Denom. &lt;b&gt;50&lt;/b&gt;:</source>
+        <translation>Denom. &lt;b&gt;50&lt;/b&gt;:</translation>
+    </message>
+    <message>
+        <source>Denom. &lt;b&gt;100&lt;/b&gt;:</source>
+        <translation>Denom. &lt;b&gt;100&lt;/b&gt;:</translation>
+    </message>
+    <message>
+        <source>Denom. &lt;b&gt;500&lt;/b&gt;:</source>
+        <translation>Denom. &lt;b&gt;500&lt;/b&gt;:</translation>
+    </message>
+    <message>
+        <source>Denom. &lt;b&gt;1000&lt;/b&gt;:</source>
+        <translation>Denom. &lt;b&gt;1000&lt;/b&gt;:</translation>
+    </message>
+    <message>
+        <source>Denom. &lt;b&gt;5000&lt;/b&gt;:</source>
+        <translation>Denom. &lt;b&gt;5000&lt;/b&gt;:</translation>
+    </message>
+    <message>
+        <source>Error: Your wallet is locked. Please enter the wallet passphrase first.</source>
+        <translation>Error: Tu monedero está bloqueado. Por favor, primero introduzca la clave de desbloqueo.</translation>
+    </message>
+    <message>
+        <source>Message: Enter an amount &gt; 0.</source>
+        <translation>Mensaje: Introduzca una cantidad &gt; 0.</translation>
+    </message>
+    <message>
+        <source>Minting </source>
+        <translation>Creando moneda</translation>
+    </message>
+    <message>
+        <source>Successfully minted </source>
+        <translation>Monedas creadas correctamente</translation>
+    </message>
+    <message>
+        <source> zWSP in </source>
+        <translation>zWSP en</translation>
+    </message>
+    <message>
+        <source> sec. Used denominations:
+</source>
+        <translation>seg. Billetes usados:
+</translation>
+    </message>
+    <message>
+        <source>Starting ResetMintZerocoin: rescanning complete blockchain, this will need up to 30 minutes depending on your hardware. 
+Please be patient...</source>
+        <translation>Ejecutando ResetMintZerocoin: reescaneando la cadena de bloques entera, esto necesitará hasta media hora dependiendo de su hardware.
+Por favor espere...</translation>
+    </message>
+    <message>
+        <source>Duration: </source>
+        <translation>Duración:</translation>
+    </message>
+    <message>
+        <source> sec.
+</source>
+        <translation>seg.
+</translation>
+    </message>
+    <message>
+        <source>Starting ResetSpentZerocoin: </source>
+        <translation>Iniciando ResetSpentZerocoin:</translation>
+    </message>
+    <message>
+        <source>No 'Pay To' address provided, creating local payment</source>
+        <translation>No se especificó drección 'Pagar A', por lo que asumimos un pago local</translation>
+    </message>
+    <message>
+        <source>Invalid Wispr Address</source>
+        <translation>Dirección Wispr Inválida</translation>
+    </message>
+    <message>
+        <source>Invalid Send Amount</source>
+        <translation>Cantidad a Enviar Inválida</translation>
+    </message>
+    <message>
+        <source>Confirm additional Fees</source>
+        <translation>Confirmar Tasas adicionales</translation>
+    </message>
+    <message>
+        <source>Are you sure you want to send?&lt;br /&gt;&lt;br /&gt;</source>
+        <translation>¿Está seguro que desea enviar?&lt;br /&gt;&lt;br /&gt;</translation>
+    </message>
+    <message>
+        <source> to address </source>
+        <translation>a la dirección</translation>
+    </message>
+    <message>
+        <source> to a newly generated (unused and therefore anonymous) local address &lt;br /&gt;</source>
+        <translation>a una dirección local recién generada (no utilizada y, por lo tanto, anónima)&lt;br /&gt;</translation>
+    </message>
+    <message>
+        <source>with Security Level </source>
+        <translation>con Nivel de Seguridad</translation>
+    </message>
+    <message>
+        <source>Confirm send coins</source>
+        <translation>Confirmar enviar monedas</translation>
+    </message>
+    <message>
+        <source>Spending Zerocoin.
+Computationally expensive, might need several minutes depending on the selected Security Level and your hardware. 
+Please be patient...</source>
+        <translation>Gastando Zerocoin.
+Esto es computacionalmente intensivo, puede necesitar varios minutos dependiendo del Nivel de Seguridad elegido y el hardware de su máquina.
+Por favor tenga paciencia...</translation>
+    </message>
+    <message>
+        <source>Too much inputs (</source>
+        <translation>Demasiadas entradas (</translation>
+    </message>
+    <message>
+        <source>) needed. 
+Maximum allowed: </source>
+        <translation>) necesario.
+Máximo permitido:</translation>
+    </message>
+    <message>
+        <source>
+Either mint higher denominations (so fewer inputs are needed) or reduce the amount to spend.</source>
+        <translation>
+También mint las denominaciones más altas (por lo tanto, se necesitan menos datos) o reduzca la cantidad a gastar.</translation>
+    </message>
+    <message>
+        <source>Spend Zerocoin failed with status = </source>
+        <translation>Gastar Zerocoin falló con estado =</translation>
+    </message>
+    <message>
+        <source>denomination: </source>
+        <translation>billete:</translation>
+    </message>
+    <message>
+        <source>serial: </source>
+        <translation>serial:</translation>
+    </message>
+    <message>
+        <source>Spend is 1 of : </source>
+        <translation>Gasto 1 de :</translation>
+    </message>
+    <message>
+        <source>value out: </source>
+        <translation>valor salida:</translation>
+    </message>
+    <message>
+        <source>address: </source>
+        <translation>dirección:</translation>
+    </message>
+    <message>
+        <source>Sending successful, return code: </source>
+        <translation>Envío correcto, código devuelto: </translation>
+    </message>
+    <message>
+        <source>txid: </source>
+        <translation>txid:</translation>
+    </message>
+    <message>
+        <source>fee: </source>
+        <translation>tasa:</translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <source>Amount</source>
         <translation>Cantidad</translation>
     </message>
     <message>
-        <source>Enter a Wispr address (e.g. %1)</source>
-        <translation>Introduzca una dirección Wispr (p.e. %1)</translation>
+        <source>Enter a WISPR address (e.g. %1)</source>
+        <translation>Introduzca una dirección WISPR (p.e. %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -2205,6 +2998,10 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
     <message>
         <source>NETWORK</source>
         <translation>RED</translation>
+    </message>
+    <message>
+        <source>BLOOM</source>
+        <translation>BLOOM</translation>
     </message>
     <message>
         <source>UNKNOWN</source>
@@ -2317,8 +3114,8 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
         <translation>Cadena de bloques</translation>
     </message>
     <message>
-        <source>Open the Wispr debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation>Abrir el fichero de depuración Wispr en el directorio actual de datos. Esto puede llevar unos segundos para ficheros de depuración grandes.</translation>
+        <source>Open the WISPR debug log file from the current data directory. This can take a few seconds for large log files.</source>
+        <translation>Abrir el fichero de depuración WISPR en el directorio actual de datos. Esto puede llevar unos segundos para ficheros de depuración grandes.</translation>
     </message>
     <message>
         <source>Number of Masternodes</source>
@@ -2357,8 +3154,16 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
         <translation>&amp;Nodos conectados</translation>
     </message>
     <message>
+        <source>Banned peers</source>
+        <translation>Pares proibidos</translation>
+    </message>
+    <message>
         <source>Select a peer to view detailed information.</source>
         <translation>Seleccione un nodo conectado para ver información detallada.</translation>
+    </message>
+    <message>
+        <source>Whitelisted</source>
+        <translation>Whitelisted</translation>
     </message>
     <message>
         <source>Direction</source>
@@ -2375,14 +3180,6 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
     <message>
         <source>Services</source>
         <translation>Servicios</translation>
-    </message>
-    <message>
-        <source>Starting Height</source>
-        <translation>Altura de inicio</translation>
-    </message>
-    <message>
-        <source>Sync Height</source>
-        <translation>Altura de sincronía</translation>
     </message>
     <message>
         <source>Ban Score</source>
@@ -2417,8 +3214,36 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
         <translation>Reparar &amp;Monedero</translation>
     </message>
     <message>
+        <source>Delete local Blockchain Folders</source>
+        <translation>Eliminar directorios locales de Blockchain</translation>
+    </message>
+    <message>
         <source>Wallet In Use:</source>
         <translation>Monedero En Uso:</translation>
+    </message>
+    <message>
+        <source>Starting Block</source>
+        <translation>Bloco de partida</translation>
+    </message>
+    <message>
+        <source>Synced Headers</source>
+        <translation>Cabeçalhos sincronizados</translation>
+    </message>
+    <message>
+        <source>Synced Blocks</source>
+        <translation>Blocos sincronizados</translation>
+    </message>
+    <message>
+        <source>The duration of a currently outstanding ping.</source>
+        <translation>A duração de um ping atualmente pendente.</translation>
+    </message>
+    <message>
+        <source>Ping Wait</source>
+        <translation>Espera de Ping</translation>
+    </message>
+    <message>
+        <source>Time Offset</source>
+        <translation>Compensação Temporal</translation>
     </message>
     <message>
         <source>Salvage wallet</source>
@@ -2461,6 +3286,14 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
         <translation>Reconstruir el índice de la cadena de bloques desde los archivos blk000??.dat actuales.</translation>
     </message>
     <message>
+        <source>-resync:</source>
+        <translation>resincronizando:</translation>
+    </message>
+    <message>
+        <source>Deletes all local blockchain folders so the wallet synchronizes from scratch.</source>
+        <translation>Eliminar todos los directorios locales de blockchain y sincronizar la cartera desde el principio</translation>
+    </message>
+    <message>
         <source>The buttons below will restart the wallet with command-line options to repair the wallet, fix issues with corrupt blockhain files or missing/obsolete transactions.</source>
         <translation>Los botones de más abajo reiniciarán el programa con comandos especiales para reparar el monedero, solucionar problemas con cadenas de bloques corruptas o buscar transacciones obsoletas o perdidas</translation>
     </message>
@@ -2485,8 +3318,56 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
         <translation>Fuera:</translation>
     </message>
     <message>
-        <source>Welcome to the Wispr RPC console.</source>
-        <translation>Bienvenido a la consola RPC de Wispr.</translation>
+        <source>Welcome to the WISPR RPC console.</source>
+        <translation>Bienvenido a la consola RPC de WISPR.</translation>
+    </message>
+    <message>
+        <source>&amp;Disconnect Node</source>
+        <translation>&amp; Disconnect Node</translation>
+    </message>
+    <message>
+        <source>Ban Node for</source>
+        <translation>Nó de proibição para</translation>
+    </message>
+    <message>
+        <source>1 &amp;hour</source>
+        <translation>1 &amp;hour</translation>
+    </message>
+    <message>
+        <source>1 &amp;day</source>
+        <translation>1 &amp;day</translation>
+    </message>
+    <message>
+        <source>1 &amp;week</source>
+        <translation>1 &amp;week</translation>
+    </message>
+    <message>
+        <source>1 &amp;year</source>
+        <translation>1 &amp;year</translation>
+    </message>
+    <message>
+        <source>&amp;Unban Node</source>
+        <translation>&amp; Unban Node</translation>
+    </message>
+    <message>
+        <source>This will delete your local blockchain folders and the wallet will synchronize the complete Blockchain from scratch.&lt;br /&gt;&lt;br /&gt;</source>
+        <translation>Esto eliminará las carpetas de blockchain locales y la cartera sincronizará la cadena de bloques completa desde cero.&lt;br /&gt;&lt;br /&gt;</translation>
+    </message>
+    <message>
+        <source>This needs quite some time and downloads a lot of data.&lt;br /&gt;&lt;br /&gt;</source>
+        <translation>Esto requiere bastante tiempo y descarga una gran cantidad de datos.&lt;br /&gt;&lt;br /&gt;</translation>
+    </message>
+    <message>
+        <source>Your transactions and funds will be visible again after the download has completed.&lt;br /&gt;&lt;br /&gt;</source>
+        <translation>Sus transacciones y fondos serán visibles nuevamente después de que se haya completado la descarga.&lt;br /&gt;&lt;br /&gt;</translation>
+    </message>
+    <message>
+        <source>Do you want to continue?.&lt;br /&gt;</source>
+        <translation>¿Desea continuar?.&lt;br /&gt;</translation>
+    </message>
+    <message>
+        <source>Confirm resync Blockchain</source>
+        <translation>Confirmar resincronización de Blockchain</translation>
     </message>
     <message>
         <source>Use up and down arrows to navigate history, and &lt;b&gt;Ctrl-L&lt;/b&gt; to clear screen.</source>
@@ -2513,6 +3394,10 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
         <translation>%1 GB</translation>
     </message>
     <message>
+        <source>(node id: %1)</source>
+        <translation>(node id: %1)</translation>
+    </message>
+    <message>
         <source>via %1</source>
         <translation>via %1</translation>
     </message>
@@ -2529,12 +3414,16 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
         <translation>Salientes</translation>
     </message>
     <message>
-        <source>Unknown</source>
-        <translation>Desconocido</translation>
+        <source>Yes</source>
+        <translation>sí</translation>
     </message>
     <message>
-        <source>Fetching...</source>
-        <translation>Descargando...</translation>
+        <source>No</source>
+        <translation>Não</translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation>Desconocido</translation>
     </message>
 </context>
 <context>
@@ -2556,12 +3445,16 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
         <translation>Una etiqueta opcional a asociar con la nueva dirección de recepción.</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Wispr network.</source>
-        <translation>Un mensaje opcional a adjuntar a la solicitud de pago, que será mostrado cuando se abra la solicitud. Nota: El mensaje no se envía junto al pago por la red Wispr.</translation>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the WISPR network.</source>
+        <translation>Un mensaje opcional a adjuntar a la solicitud de pago, que será mostrado cuando se abra la solicitud. Nota: El mensaje no se envía junto al pago por la red WISPR.</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened.&lt;br&gt;Note: The message will not be sent with the payment over the Wispr network.</source>
-        <translation>Un mensaje opcional a adjuntar a la solicitud de pago, que será mostrado cuando se abra la solicitud. &lt;br&gt;Nota: El mensaje no se envía junto al pago por la red Wispr.</translation>
+        <source>RECEIVE</source>
+        <translation>RECEBER</translation>
+    </message>
+    <message>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened.&lt;br&gt;Note: The message will not be sent with the payment over the WISPR network.</source>
+        <translation>Un mensaje opcional a adjuntar a la solicitud de pago, que será mostrado cuando se abra la solicitud. &lt;br&gt;Nota: El mensaje no se envía junto al pago por la red WISPR.</translation>
     </message>
     <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</source>
@@ -2717,16 +3610,12 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
         <translation>Enviar Monedas</translation>
     </message>
     <message>
+        <source>SEND</source>
+        <translation>ENVIAR</translation>
+    </message>
+    <message>
         <source>Coin Control Features</source>
         <translation>Funciones de Control de Monedas</translation>
-    </message>
-    <message>
-        <source>Inputs...</source>
-        <translation>Entradas...</translation>
-    </message>
-    <message>
-        <source>automatically selected</source>
-        <translation>seleccionadas automáticamente</translation>
     </message>
     <message>
         <source>Insufficient funds!</source>
@@ -2813,10 +3702,6 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
         <translation>Minimizar</translation>
     </message>
     <message>
-        <source>Obfuscation</source>
-        <translation>Ofuscación</translation>
-    </message>
-    <message>
         <source>per kilobyte</source>
         <translation>por kilobyte</translation>
     </message>
@@ -2837,8 +3722,20 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
         <translation>(La comisión automática no se ha inicializado todavía. Esto normalmente necesita unos cuantos bloques...)</translation>
     </message>
     <message>
+        <source>SwiftX</source>
+        <translation>SwiftX</translation>
+    </message>
+    <message>
         <source>Confirmation time:</source>
         <translation>Tiempo de confirmación:</translation>
+    </message>
+    <message>
+        <source>Open Coin Control...</source>
+        <translation>Abrir Control de Monedas...</translation>
+    </message>
+    <message>
+        <source>Coins automatically selected</source>
+        <translation>Monedas seleccionadas automáticamente</translation>
     </message>
     <message>
         <source>If the custom fee is set to 1000 uWSPs and the transaction is only 250 bytes, then "per kilobyte" only pays 250 uWSPs in fee,&lt;br /&gt;while "at least" pays 1000 uWSPs. For transactions bigger than a kilobyte both pay by kilobyte.</source>
@@ -2849,8 +3746,8 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
         <translation>Si la comisión personalizada se fija en 1000 uWSPs y la transacción necesita sólo 250 bytes, entonces la opción "por kilobyte" sólo pagará 250 uWSPs de comisión,&lt;br/&gt;mientras "por lo menos" pagará 1000 uWSPs. Para transacciones que midan más de un kilobyte ambas pagan por kilobyte.</translation>
     </message>
     <message>
-        <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks.&lt;br /&gt;But be aware that this can end up in a never confirming transaction once there is more demand for Wispr transactions than the network can process.</source>
-        <translation>Pagar sólo la comisión mínima está bien mientras haya menos volumen de transacciones que espacio en los bloques.&lt;br/&gt;Pero tenga en cuenta que esto podría acabar en una transacción que nunca se confirme si hay más demanda de transacciones Wispr de las que la red puede procesar.</translation>
+        <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks.&lt;br /&gt;But be aware that this can end up in a never confirming transaction once there is more demand for WISPR transactions than the network can process.</source>
+        <translation>Pagar sólo la comisión mínima está bien mientras haya menos volumen de transacciones que espacio en los bloques.&lt;br/&gt;Pero tenga en cuenta que esto podría acabar en una transacción que nunca se confirme si hay más demanda de transacciones WISPR de las que la red puede procesar.</translation>
     </message>
     <message>
         <source>normal</source>
@@ -2897,8 +3794,8 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
         <translation>Añadir Destinata&amp;rio</translation>
     </message>
     <message>
-        <source>SwiftTX</source>
-        <translation>SwiftTX</translation>
+        <source>Anonymized WSP</source>
+        <translation>WSP anonimizados</translation>
     </message>
     <message>
         <source>Balance:</source>
@@ -2945,24 +3842,8 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
         <translation>La herramienta de división de bloques no funciona con varias direcciones. Inténtelo otra vez.</translation>
     </message>
     <message>
-        <source>using</source>
-        <translation>usando</translation>
-    </message>
-    <message>
-        <source>anonymous funds</source>
-        <translation>fondos anónimos</translation>
-    </message>
-    <message>
-        <source>Warning: Invalid Wispr address</source>
-        <translation>Advertencia: Direcciones Wispr inválidas</translation>
-    </message>
-    <message>
-        <source>any available funds (not recommended)</source>
-        <translation>cualquier fondo disponible (no recomendado)</translation>
-    </message>
-    <message>
-        <source>and SwiftTX</source>
-        <translation>y SwiftTX</translation>
+        <source>Warning: Invalid WISPR address</source>
+        <translation>Advertencia: Direcciones WISPR inválidas</translation>
     </message>
     <message>
         <source>%1 to %2</source>
@@ -2990,15 +3871,15 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
     </message>
     <message numerus="yes">
         <source>Estimated to begin confirmation within %n block(s).</source>
-        <translation><numerusform>Estimamos que empezará la confirmación en %n bloque.</numerusform><numerusform>Estimamos que empezará la confirmación en %n bloques.</numerusform></translation>
+        <translation><numerusform>Estimamos que empezará la confirmación en %n bloques.</numerusform><numerusform>Estimamos que empezará la confirmación en %n bloques.</numerusform></translation>
     </message>
     <message>
         <source>The recipient address is not valid, please recheck.</source>
         <translation>La dirección de destino no es válida, por favor compruébelo de nuevo.</translation>
     </message>
     <message>
-        <source>(obfuscation requires this amount to be rounded up to the nearest %1).</source>
-        <translation>(la ofuscación requiere redondear hacia arriba esta cantidad al %1 más cercano).</translation>
+        <source>using SwiftX</source>
+        <translation>usando o SwiftX</translation>
     </message>
     <message>
         <source> split into %1 outputs using the UTXO splitter.</source>
@@ -3037,6 +3918,10 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
         <translation>Error: El monedero se desbloqueó sólo para anonimizar monedas.</translation>
     </message>
     <message>
+        <source>Error: The wallet was unlocked only to anonymize coins. Unlock canceled.</source>
+        <translation>Error: El monedero ya fue desbloqueado para anonimizar monedas. El desbloqueo total se ha cancelado.</translation>
+    </message>
+    <message>
         <source>Pay only the minimum fee of %1</source>
         <translation>Pagar sólo la comisión mínima de %1</translation>
     </message>
@@ -3060,12 +3945,12 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
         <translation>Pagar &amp;A:</translation>
     </message>
     <message>
-        <source>The Wispr address to send the payment to</source>
-        <translation>La dirección Wispr a la cual enviar el pago</translation>
+        <source>The WISPR address to send the payment to</source>
+        <translation>La dirección WISPR a la cual enviar el pago</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
-        <translation>Escoge una dirección usada previamente</translation>
+        <translation>Escoja una dirección usada previamente</translation>
     </message>
     <message>
         <source>Alt+A</source>
@@ -3073,7 +3958,7 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
     </message>
     <message>
         <source>Paste address from clipboard</source>
-        <translation>Pegar dirección desde el clipboard</translation>
+        <translation>Pegar dirección desde el portapapeles</translation>
     </message>
     <message>
         <source>Alt+P</source>
@@ -3100,8 +3985,8 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
         <translation>Mensaje:</translation>
     </message>
     <message>
-        <source>A message that was attached to the Wispr: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Wispr network.</source>
-        <translation>Un mensaje adjunto al Wispr: En recurso web especificado será guardado junto a la transacción para su referencia. Nota: Este mensaje no se enviará por la red Wispr.</translation>
+        <source>A message that was attached to the WISPR: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the WISPR network.</source>
+        <translation>Un mensaje adjunto al WISPR: En recurso web especificado será guardado junto a la transacción para su referencia. Nota: Este mensaje no se enviará por la red WISPR.</translation>
     </message>
     <message>
         <source>This is an unverified payment request.</source>
@@ -3127,8 +4012,8 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
 <context>
     <name>ShutdownWindow</name>
     <message>
-        <source>Wispr Core is shutting down...</source>
-        <translation>El programa Wispr se está cerrando...</translation>
+        <source>WISPR Core is shutting down...</source>
+        <translation>El programa WISPR se está cerrando...</translation>
     </message>
     <message>
         <source>Do not shut down the computer until this window disappears.</source>
@@ -3150,12 +4035,12 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
         <translation>Usted puede firmar mensajes con su dirección para probar que son auténticos. Tenga cuidado con firmar algo corto o vago como "hola", pues los ataques de phising pueden engañarle para que firme su identidad para ellos. Sólo firme textos detallados con los que esté de acuerdo.</translation>
     </message>
     <message>
-        <source>The Wispr address to sign the message with</source>
-        <translation>La dirección Wispr con la que firmar el mensaje</translation>
+        <source>The WISPR address to sign the message with</source>
+        <translation>La dirección WISPR con la que desee firmar el mensaje</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
-        <translation>Escoge una dirección usada previamente</translation>
+        <translation>Escoja una dirección usada previamente</translation>
     </message>
     <message>
         <source>Alt+A</source>
@@ -3163,7 +4048,7 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
     </message>
     <message>
         <source>Paste address from clipboard</source>
-        <translation>Pegar dirección desde el clipboard</translation>
+        <translation>Pegar dirección desde el portapapeles</translation>
     </message>
     <message>
         <source>Alt+P</source>
@@ -3179,19 +4064,19 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
     </message>
     <message>
         <source>Copy the current signature to the system clipboard</source>
-        <translation>Copiar la firma actual al clipboard del sistema</translation>
+        <translation>Copiar la firma actual al portapapeles del sistema</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Wispr address</source>
-        <translation>Firmar el mensaje para demostrar que eres el propietario de esta dirección Wispr</translation>
+        <source>Sign the message to prove you own this WISPR address</source>
+        <translation>Firme el mensaje para demostrar que eres el propietario de esta dirección WISPR</translation>
     </message>
     <message>
-        <source>The Wispr address the message was signed with</source>
-        <translation>La dirección Wispr con la que el mensaje fue firmado</translation>
+        <source>The WISPR address the message was signed with</source>
+        <translation>La dirección WISPR con la que se firmó el mensaje</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Wispr address</source>
-        <translation>Verificar el mensaje para asegurarse que fue firmado con la dirección Wispr especificada</translation>
+        <source>Verify the message to ensure it was signed with the specified WISPR address</source>
+        <translation>Verifica el mensaje para asegurar que fue firmado con la dirección WISPR especificada</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>
@@ -3199,7 +4084,7 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
     </message>
     <message>
         <source>Reset all sign message fields</source>
-        <translation>Resetear todos los campos de firma de mensaje</translation>
+        <translation>Limpiar todos los campos de firma de mensaje</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>
@@ -3219,7 +4104,7 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
     </message>
     <message>
         <source>Reset all verify message fields</source>
-        <translation>Resetear todos los campos de verificación de mensaje</translation>
+        <translation>Limpiar todos los campos de verificación de mensaje</translation>
     </message>
     <message>
         <source>Click "Sign Message" to generate signature</source>
@@ -3231,15 +4116,15 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
     </message>
     <message>
         <source>Please check the address and try again.</source>
-        <translation>Por favor comprobar la dirección y probar de nuevo.</translation>
+        <translation>Por favor compruebe la dirección e inténtelo de nuevo.</translation>
     </message>
     <message>
         <source>The entered address does not refer to a key.</source>
-        <translation>La dirección introducido no se refiere a ninguna clave.</translation>
+        <translation>La dirección introducida no se refiere a ninguna clave.</translation>
     </message>
     <message>
         <source>Wallet unlock was cancelled.</source>
-        <translation>El desbloqueo de la wallet fue cancelado.</translation>
+        <translation>El desbloqueo del monedero fue cancelado.</translation>
     </message>
     <message>
         <source>Private key for the entered address is not available.</source>
@@ -3277,8 +4162,8 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
 <context>
     <name>SplashScreen</name>
     <message>
-        <source>Wispr Core</source>
-        <translation>Núcleo Wispr</translation>
+        <source>WISPR Core</source>
+        <translation>Núcleo WISPR</translation>
     </message>
     <message>
         <source>Version %1</source>
@@ -3293,8 +4178,8 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
         <translation>Los desarrolladores de Dash Core</translation>
     </message>
     <message>
-        <source>The Wispr Core developers</source>
-        <translation>Los desarrolladores de Wispr Core</translation>
+        <source>The WISPR Core developers</source>
+        <translation>Los desarrolladores de WISPR Core</translation>
     </message>
     <message>
         <source>[testnet]</source>
@@ -3312,7 +4197,7 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
     <name>TransactionDesc</name>
     <message numerus="yes">
         <source>Open for %n more block(s)</source>
-        <translation><numerusform>Abierto para %n bloque más</numerusform><numerusform>Abierto para %n bloques más</numerusform></translation>
+        <translation><numerusform>Abierto para %n bloques más</numerusform><numerusform>Abierto para %n bloques más</numerusform></translation>
     </message>
     <message>
         <source>Open until %1</source>
@@ -3321,18 +4206,6 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
     <message>
         <source>conflicted</source>
         <translation>conflictivo (bloque huérfano?)</translation>
-    </message>
-    <message>
-        <source>%1/offline (verified via swifttx)</source>
-        <translation>%1/offline (verificado via swifttx)</translation>
-    </message>
-    <message>
-        <source>%1/confirmed (verified via swifttx)</source>
-        <translation>%1/confirmado (verificado via swifttx)</translation>
-    </message>
-    <message>
-        <source>%1 confirmations (verified via swifttx)</source>
-        <translation>%1 confirmaciones (verificado via swifttx)</translation>
     </message>
     <message>
         <source>%1/offline</source>
@@ -3347,23 +4220,35 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
         <translation>%1 confirmaciones</translation>
     </message>
     <message>
-        <source>%1/offline (SwiftTX verification in progress - %2 of %3 signatures)</source>
+        <source>%1/offline (verified via SwiftX)</source>
+        <translation>%1/offline (verificado via swifttx)</translation>
+    </message>
+    <message>
+        <source>%1/confirmed (verified via SwiftX)</source>
+        <translation>%1/confirmado (verificado via swifttx)</translation>
+    </message>
+    <message>
+        <source>%1 confirmations (verified via SwiftX)</source>
+        <translation>%1 confirmaciones (verificado via swifttx)</translation>
+    </message>
+    <message>
+        <source>%1/offline (SwiftX verification in progress - %2 of %3 signatures)</source>
         <translation>%1/offline (verificación SwiftTX en marcha - %2 de %3 firmas)</translation>
     </message>
     <message>
-        <source>%1/confirmed (SwiftTX verification in progress - %2 of %3 signatures )</source>
+        <source>%1/confirmed (SwiftX verification in progress - %2 of %3 signatures )</source>
         <translation>%1/confirmado (verificación SwiftTX en marcha - %2 de %3 firmas)</translation>
     </message>
     <message>
-        <source>%1 confirmations (SwiftTX verification in progress - %2 of %3 signatures)</source>
+        <source>%1 confirmations (SwiftX verification in progress - %2 of %3 signatures)</source>
         <translation>%1 confirmaciones (verificación SwiftTX en marcha - %2 de %3 firmas)</translation>
     </message>
     <message>
-        <source>%1/offline (SwiftTX verification failed)</source>
+        <source>%1/offline (SwiftX verification failed)</source>
         <translation>%1/offline (falló la verificación SwiftTX)</translation>
     </message>
     <message>
-        <source>%1/confirmed (SwiftTX verification failed)</source>
+        <source>%1/confirmed (SwiftX verification failed)</source>
         <translation>%1/confirmado (falló la verificación SwiftTX)</translation>
     </message>
     <message>
@@ -3376,7 +4261,7 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
     </message>
     <message numerus="yes">
         <source>, broadcast through %n node(s)</source>
-        <translation><numerusform>, retransmitido a través de %n nodo</numerusform><numerusform>, retransmitido a través de %n nodos</numerusform></translation>
+        <translation><numerusform>, retransmitido a través de %n nodos</numerusform><numerusform>, retransmitido a través de %n nodos</numerusform></translation>
     </message>
     <message>
         <source>Date</source>
@@ -3420,7 +4305,7 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
     </message>
     <message numerus="yes">
         <source>matures in %n more block(s)</source>
-        <translation><numerusform>madura en %n bloque más</numerusform><numerusform>madura en %n bloques más</numerusform></translation>
+        <translation><numerusform>madura en %n bloques más</numerusform><numerusform>madura en %n bloques más</numerusform></translation>
     </message>
     <message>
         <source>not accepted</source>
@@ -3522,7 +4407,7 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
     </message>
     <message numerus="yes">
         <source>Open for %n more block(s)</source>
-        <translation><numerusform>Abierto para %n bloque más</numerusform><numerusform>Abierto para %n bloques más</numerusform></translation>
+        <translation><numerusform>Abierto para %n bloques más</numerusform><numerusform>Abierto para %n bloques más</numerusform></translation>
     </message>
     <message>
         <source>Open until %1</source>
@@ -3586,7 +4471,7 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
     </message>
     <message>
         <source>Obfuscation Create Denominations</source>
-        <translation>Ofuscación Crea Denominaciones</translation>
+        <translation>Ofuscación Crea Billetes</translation>
     </message>
     <message>
         <source>Sent to</source>
@@ -3599,10 +4484,6 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
     <message>
         <source>Payment to yourself</source>
         <translation>Pago a usted mismo</translation>
-    </message>
-    <message>
-        <source>Minted</source>
-        <translation>Creación de moneda</translation>
     </message>
     <message>
         <source>Mined</source>
@@ -3688,26 +4569,6 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
         <translation>Enviado a</translation>
     </message>
     <message>
-        <source>Obfuscated</source>
-        <translation>Ofuscado</translation>
-    </message>
-    <message>
-        <source>Obfuscation Make Collateral Inputs</source>
-        <translation>La Ofuscación Crea Entradas Colaterales</translation>
-    </message>
-    <message>
-        <source>Obfuscation Create Denominations</source>
-        <translation>Ofuscación Crea Denominaciones</translation>
-    </message>
-    <message>
-        <source>Obfuscation Denominate</source>
-        <translation>Ofuscación Denominada</translation>
-    </message>
-    <message>
-        <source>Obfuscation Collateral Payment</source>
-        <translation>Pago Colateral de Ofuscación</translation>
-    </message>
-    <message>
         <source>To yourself</source>
         <translation>A usted mismo</translation>
     </message>
@@ -3722,6 +4583,18 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
     <message>
         <source>Masternode Reward</source>
         <translation>Recompensa de Nodo Maestro</translation>
+    </message>
+    <message>
+        <source>Zerocoin Mint</source>
+        <translation>Creación de moneda Zerocoin</translation>
+    </message>
+    <message>
+        <source>Zerocoin Spend</source>
+        <translation>Gasto de Zerocoin</translation>
+    </message>
+    <message>
+        <source>Zerocoin Spend to Self</source>
+        <translation>Pago Zerocoin a tí mismo</translation>
     </message>
     <message>
         <source>Other</source>
@@ -3841,12 +4714,16 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
         <translation>Enviar Monedas</translation>
     </message>
     <message>
-        <source>SwiftTX doesn't support sending values that high yet. Transactions are currently limited to %1 WSP.</source>
+        <source>SwiftX doesn't support sending values that high yet. Transactions are currently limited to %1 WSP.</source>
         <translation>SwiftTX no soporta el envío de importes tan altos todavía. Las transacciones están actualmente limitadas a %1 WSP.</translation>
     </message>
 </context>
 <context>
     <name>WalletView</name>
+    <message>
+        <source>HISTORY</source>
+        <translation>HISTÓRIA</translation>
+    </message>
     <message>
         <source>&amp;Export</source>
         <translation>&amp;Exportar</translation>
@@ -3867,21 +4744,28 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
         <source>Wallet Data (*.dat)</source>
         <translation>Datos del Monedero (*.dat)</translation>
     </message>
+</context>
+<context>
+    <name>ZWspControlDialog</name>
     <message>
-        <source>Backup Failed</source>
-        <translation>La copia de seguridad Falló</translation>
+        <source>Quantity</source>
+        <translation>Cantidad</translation>
     </message>
     <message>
-        <source>There was an error trying to save the wallet data to %1.</source>
-        <translation>Hubo un error intentando guardar los datos del monedero a %1.</translation>
+        <source>0</source>
+        <translation>0</translation>
     </message>
     <message>
-        <source>Backup Successful</source>
-        <translation>Copia de Seguridad Satisfactoria</translation>
+        <source>zWSP</source>
+        <translation>zWSP</translation>
     </message>
     <message>
-        <source>The wallet data was successfully saved to %1.</source>
-        <translation>Los datos del monedero se guardaron correctamente a %1.</translation>
+        <source>Select/Deselect All</source>
+        <translation>Seleccionar/Deseleccionar Todos</translation>
+    </message>
+    <message>
+        <source>Is Spendable</source>
+        <translation>Es Gastable</translation>
     </message>
 </context>
 <context>
@@ -3893,10 +4777,6 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
     <message>
         <source>Allow JSON-RPC connections from specified source. Valid for &lt;ip&gt; are a single IP (e.g. 1.2.3.4), a network/netmask (e.g. 1.2.3.4/255.255.255.0) or a network/CIDR (e.g. 1.2.3.4/24). This option can be specified multiple times</source>
         <translation>Permitir conexiones JSON-RPC  desde la fuente especificada. Valido para &lt;ip&gt; sea una única IP (ej: 1.2.3.4), una red/mascara de red (ej: 1.2.3.4/255.255.255.0) o una red/CIDR (ej: 1.2.3.4/24). Esta opción puede ser especificada múltiples veces.</translation>
-    </message>
-    <message>
-        <source>An error occurred while setting up the RPC address %s port %u for listening: %s</source>
-        <translation>Un error ocurrió mientras se ajustaba la dirección RPC %s puerto %u para escucha en: %s</translation>
     </message>
     <message>
         <source>Bind to given address and always listen on it. Use [host]:port notation for IPv6</source>
@@ -3911,8 +4791,12 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
         <translation>Escuchar únicamente a la tarjeta de red indicada para conexiones JSON-RPC. Use la notación [host]:puerto para IPv6. Esta opción puede ser especificada varias veces (por defecto: escuchar en todas las tarjetas de red)</translation>
     </message>
     <message>
-        <source>Cannot obtain a lock on data directory %s. Wispr Core is probably already running.</source>
-        <translation>No se puede obtener un bloqueo sobre el directorio de datos %s. Wispr Core esta probablemente en ejecución.</translation>
+        <source>Calculated accumulator checkpoint is not what is recorded by block index</source>
+        <translation>El punto de chequeo del acumulador que hemos calculado no coincide con lo guardado en el índice de bloques</translation>
+    </message>
+    <message>
+        <source>Cannot obtain a lock on data directory %s. WISPR Core is probably already running.</source>
+        <translation>No se puede obtener un bloqueo sobre el directorio de datos %s. WISPR Core esta probablemente en ejecución.</translation>
     </message>
     <message>
         <source>Change automatic finalized budget voting behavior. mode=auto: Vote for only exact finalized budget match to my generated budget. (string, default: auto)</source>
@@ -3931,10 +4815,6 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
         <translation>Borrar todas las transacciones del monedero y solo recuperar partes de la cadena de bloque a traves de -rescan al inicio.</translation>
     </message>
     <message>
-        <source>Disable all Wispr specific functionality (Masternodes, Obfuscation, SwiftTX, Budgeting) (0-1, default: %u)</source>
-        <translation>Desabilitar toda la funcionalidad especifica Wispr (Masternodes, Obfuscation, SwiftTX, Budgeting) (0-1, predeterminado: %u)</translation>
-    </message>
-    <message>
         <source>Distributed under the MIT software license, see the accompanying file COPYING or &lt;http://www.opensource.org/licenses/mit-license.php&gt;.</source>
         <translation>Distribuido bajo licencia MIT software license, ver el archivo adjunto COPYING or &lt;http://www.opensource.org/licenses/mit-license.php&gt;</translation>
     </message>
@@ -3943,20 +4823,16 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
         <translation>Activar la función de administración de sporks con la llave privada apropiada.</translation>
     </message>
     <message>
-        <source>Enable swifttx, show confirmations for locked transactions (bool, default: %s)</source>
-        <translation>Activar swifttx, mostrar confirmaciones para transacciones bloqueadas (bool, predeterminado: %s)</translation>
-    </message>
-    <message>
-        <source>Enable use of automated obfuscation for funds stored in this wallet (0-1, default: %u)</source>
-        <translation>Activar el uso de ofuscación automatica para fondos guardados en este monedero (0-1, predeterminado: %u)</translation>
-    </message>
-    <message>
         <source>Enter regression test mode, which uses a special chain in which blocks can be solved instantly.</source>
         <translation>Entrar en el modo prueba de regresión, el cual usa una cadena especial en el cual los bloques pueden ser resueltos instantaneamente.</translation>
     </message>
     <message>
         <source>Error: Listening for incoming connections failed (listen returned error %s)</source>
         <translation>Error: La escucha para conexiones entrantes falló (la escucha retorno error %s)</translation>
+    </message>
+    <message>
+        <source>Error: The transaction is larger than the maximum allowed transaction size!</source>
+        <translation>Erro: a transação é maior que o tamanho máximo permitido da transação!</translation>
     </message>
     <message>
         <source>Error: Unsupported argument -socks found. Setting SOCKS version isn't possible anymore, only SOCKS5 proxies are supported.</source>
@@ -3991,16 +4867,16 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
         <translation>Se encontró salidas denominadas sin confirmar, se esperará hasta que se confirmen para continuar.</translation>
     </message>
     <message>
-        <source>How thorough the block verification of -checkblocks is (0-4, default: %u)</source>
-        <translation>Cuán exhaustiva es la verificación de bloque de -checkblocks (0-4, predeterminado: %u)</translation>
-    </message>
-    <message>
         <source>If paytxfee is not set, include enough fee so transactions begin confirmation on average within n blocks (default: %u)</source>
         <translation>Si paytxfee no esta definido, incluir suficiente comisión de manera que la transacción se vuelva confirmada en promedio dentro de n bloques (predeterminado: %u)</translation>
     </message>
     <message>
         <source>In this mode -genproclimit controls how many blocks are generated immediately.</source>
         <translation>En este modo -genproclimit controla cuantos bloques son generados inmediatamente.</translation>
+    </message>
+    <message>
+        <source>Insufficient or insufficient confirmed funds, you might need to wait a few minutes and try again.</source>
+        <translation>Fondos insuficientes o fondos confirmados insuficientes, es posible que tenga que esperar unos minutos y volver a intentarlo.</translation>
     </message>
     <message>
         <source>Invalid amount for -maxtxfee=&lt;amount&gt;: '%s' (must be at least the minrelay fee of %s to prevent stuck transactions)</source>
@@ -4039,12 +4915,12 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
         <translation>Saluda de información de depuración (predeterminado: %u, proveyendo &lt;category&gt; es opcional)</translation>
     </message>
     <message>
-        <source>Provide liquidity to Obfuscation by infrequently mixing coins on a continual basis (0-100, default: %u, 1=very frequent, high fees, 100=very infrequent, low fees)</source>
-        <translation>Proporcionar liquidez a la Ofuscación mezclando infrecuentemente las monedas continuamente (0-100, predeterminado: %u, 1=muy frecuente, altas comisiones, 100=muy infrecuente, bajas comisiones)</translation>
-    </message>
-    <message>
         <source>Query for peer addresses via DNS lookup, if low on addresses (default: 1 unless -connect)</source>
         <translation>Consultar por direcciones de pares vía búsqueda en DNS, si cantidad de direcciones esta bajo (predeterminado: 1 a menos que se utilice -connect)</translation>
+    </message>
+    <message>
+        <source>Randomize credentials for every proxy connection. This enables Tor stream isolation (default: %u)</source>
+        <translation>Credenciales aleatorias para cada conexión proxy. Esto habilita el aislamiento del flujos de datos Tor (por defecto: %u)</translation>
     </message>
     <message>
         <source>Require high priority for relaying free or low-fee transactions (default:%u)</source>
@@ -4075,40 +4951,12 @@ https://www.transifex.com/wispr-project/wispr-project-translations</translation>
         <translation>Soportar filtrado de bloques y transacciones con filtros bloom (por defecto: %u)</translation>
     </message>
     <message>
-        <source>SwiftTX requires inputs with at least 6 confirmations, you might need to wait a few minutes and try again.</source>
-        <translation>SwiftTX requiere entradas con hasta 6 confirmaciones, es posible que debas esperar unos minutos e intentar nuevamente.</translation>
-    </message>
-    <message>
         <source>This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit &lt;https://www.openssl.org/&gt; and cryptographic software written by Eric Young and UPnP software written by Thomas Bernard.</source>
         <translation>Este producto incluye software desarrollado por el Proyecto OpenSSL para uso en OpenSSL Toolkit &lt;https://www.openssl.org/&gt; y software de cifrado escrito por Eric Young y software de UPnP escrito por Thomas Bernard.</translation>
     </message>
     <message>
-        <source>To use wisprd, or the -server option to wispr-qt, you must set an rpcpassword in the configuration file:
-%s
-It is recommended you use the following random password:
-rpcuser=wisprrpc
-rpcpassword=%s
-(you do not need to remember this password)
-The username and password MUST NOT be the same.
-If the file does not exist, create it with owner-readable-only file permissions.
-It is also recommended to set alertnotify so you are notified of problems;
-for example: alertnotify=echo %%s | mail -s "Wispr Alert" admin@foo.com
-</source>
-        <translation>Para usar wisprd, o la opción -server de wispr-qt, debes definir un rpcpassword en el archivo de configuración:
-%s
-Es recomendado que uses la siguiente contraseña aleatoria:
-rpcuser=wispr
-rpcrpcpassword=%s
-(No necesitas recordar esta contraseña)
-El nombre de usuario y contraseña NO DEBEN ser los mismos.
-Si el archivo no existe, crearlo con permisos de solo lectura para el propietario.
-También es recomendado definir alertnotify de manera que seas notificado de problemas;
-por ejemplo: alertnotify=echo %%s | mail -s "Wispr Alert" admin@foo.com
-</translation>
-    </message>
-    <message>
-        <source>Unable to bind to %s on this computer. Wispr Core is probably already running.</source>
-        <translation>Imposible conectar a %s en esta computadora. Es probable que Wispr Core ya este corriendo.</translation>
+        <source>Unable to bind to %s on this computer. WISPR Core is probably already running.</source>
+        <translation>Imposible conectar a %s en esta computadora. Es probable que WISPR Core ya este corriendo.</translation>
     </message>
     <message>
         <source>Unable to locate enough Obfuscation denominated funds for this transaction.</source>
@@ -4135,8 +4983,8 @@ por ejemplo: alertnotify=echo %%s | mail -s "Wispr Alert" admin@foo.com
         <translation>Advertencia: -paytxfee esta muy alta! Esta es la comisión de transacción que pagarás si envías una transacción.</translation>
     </message>
     <message>
-        <source>Warning: Please check that your computer's date and time are correct! If your clock is wrong Wispr Core will not work properly.</source>
-        <translation>Advertencia: Por favor verifique que la fecha y hora de su computadora sean correctas! Si su reloj esta fuera de hora Wispr Core no funcionará adecuadamente.</translation>
+        <source>Warning: Please check that your computer's date and time are correct! If your clock is wrong WISPR Core will not work properly.</source>
+        <translation>Advertencia: Por favor verifique que la fecha y hora de su computadora sean correctas! Si su reloj esta fuera de hora WISPR Core no funcionará adecuadamente.</translation>
     </message>
     <message>
         <source>Warning: The network does not appear to fully agree! Some miners appear to be experiencing issues.</source>
@@ -4167,8 +5015,8 @@ por ejemplo: alertnotify=echo %%s | mail -s "Wispr Alert" admin@foo.com
         <translation>Debes especificar un masternodeprivkey en la configuración. Por favor mira la documentación por ayuda.</translation>
     </message>
     <message>
-        <source>(17000 could be used only on mainnet)</source>
-        <translation>(17000 puede ser utilizado solo en mainnet)</translation>
+        <source>(51472 could be used only on mainnet)</source>
+        <translation>(51472 puede ser utilizado solo en mainnet)</translation>
     </message>
     <message>
         <source>(default: %s)</source>
@@ -4179,8 +5027,8 @@ por ejemplo: alertnotify=echo %%s | mail -s "Wispr Alert" admin@foo.com
         <translation>(predeterminado: 1)</translation>
     </message>
     <message>
-        <source>(must be 17000 for mainnet)</source>
-        <translation>(debe ser 17000 para un mainnet)</translation>
+        <source>(must be 51472 for mainnet)</source>
+        <translation>(debe ser 51472 para un mainnet)</translation>
     </message>
     <message>
         <source>Accept command line and JSON-RPC commands</source>
@@ -4193,10 +5041,6 @@ por ejemplo: alertnotify=echo %%s | mail -s "Wispr Alert" admin@foo.com
     <message>
         <source>Accept public REST requests (default: %u)</source>
         <translation>Aceptar peticiones públicas REST (predeterminado: %u)</translation>
-    </message>
-    <message>
-        <source>Acceptable ciphers (default: %s)</source>
-        <translation>Métodos de cifrado aceptables (predeterminado: %s)</translation>
     </message>
     <message>
         <source>Add a node to connect to and attempt to keep the connection open</source>
@@ -4219,8 +5063,16 @@ por ejemplo: alertnotify=echo %%s | mail -s "Wispr Alert" admin@foo.com
         <translation>Intentar recuperar claves privadas desde un wallet.dat dañado</translation>
     </message>
     <message>
+        <source>Automatically create Tor hidden service (default: %d)</source>
+        <translation>Crear automáticamente servicio Tor oculto (por defecto: %d)</translation>
+    </message>
+    <message>
         <source>Block creation options:</source>
         <translation>Opciones de creación de bloque:</translation>
+    </message>
+    <message>
+        <source>Calculating missing accumulators...</source>
+        <translation>Calculando acumuladores pendientes...</translation>
     </message>
     <message>
         <source>Can't denominate: no compatible inputs left.</source>
@@ -4283,16 +5135,12 @@ por ejemplo: alertnotify=echo %%s | mail -s "Wispr Alert" admin@foo.com
         <translation>Copyright (C) 2014-%i The Dash Core Developers</translation>
     </message>
     <message>
-        <source>Copyright (C) 2015-%i The Wispr Core Developers</source>
-        <translation>Copyright (C) 2015-%i The Wispr Core Developers</translation>
+        <source>Copyright (C) 2015-%i The WISPR Core Developers</source>
+        <translation>Copyright (C) 2015-%i The WISPR Core Developers</translation>
     </message>
     <message>
         <source>Corrupted block database detected</source>
         <translation>Se detectó base de datos de bloques dañado</translation>
-    </message>
-    <message>
-        <source>Could not parse -rpcbind value %s as network address</source>
-        <translation>El valor %s de -rpcbind no pudo ser leído como una dirección de red.</translation>
     </message>
     <message>
         <source>Could not parse masternode.conf</source>
@@ -4301,6 +5149,14 @@ por ejemplo: alertnotify=echo %%s | mail -s "Wispr Alert" admin@foo.com
     <message>
         <source>Debugging/Testing options:</source>
         <translation>Opciones de Depuración/Pruebas:</translation>
+    </message>
+    <message>
+        <source>Delete blockchain folders and resync from scratch</source>
+        <translation>Eliminar directorios de Blockchain y resincronizar desde el principio</translation>
+    </message>
+    <message>
+        <source>Disable OS notifications for incoming transactions (default: %u)</source>
+        <translation>Desactivar notificaciones del sistema para transacciones extrantes (por defecto: %u)</translation>
     </message>
     <message>
         <source>Disable safemode, override a real safe mode event (default: %u)</source>
@@ -4321,6 +5177,18 @@ por ejemplo: alertnotify=echo %%s | mail -s "Wispr Alert" admin@foo.com
     <message>
         <source>Done loading</source>
         <translation>Realizando carga</translation>
+    </message>
+    <message>
+        <source>Enable automatic Zerocoin minting (0-1, default: %u)</source>
+        <translation>Habilitar creación automática de Zerocoin (0-1, por defecto: %u)</translation>
+    </message>
+    <message>
+        <source>Enable publish hash transaction (locked via SwiftX) in &lt;address&gt;</source>
+        <translation>Activar inclusión del hash de la transacción (fijada mediante SwiftTX) en &lt;address&gt;</translation>
+    </message>
+    <message>
+        <source>Enable publish raw transaction (locked via SwiftX) in &lt;address&gt;</source>
+        <translation>Activar inclusión de la transacción en bruto (fijada mediante SwiftTX) en &lt;address&gt;</translation>
     </message>
     <message>
         <source>Enable the client to act as a masternode (0-1, default: %u)</source>
@@ -4355,8 +5223,8 @@ por ejemplo: alertnotify=echo %%s | mail -s "Wispr Alert" admin@foo.com
         <translation>Error al cargar wallet.dat: Billetera dañada</translation>
     </message>
     <message>
-        <source>Error loading wallet.dat: Wallet requires newer version of Wispr Core</source>
-        <translation>Error al cargar wallet.dat: La Billetera requiere una nueva versión del Núcleo Wispr</translation>
+        <source>Error loading wallet.dat: Wallet requires newer version of WISPR Core</source>
+        <translation>Error al cargar wallet.dat: La Billetera requiere una nueva versión del Núcleo WISPR</translation>
     </message>
     <message>
         <source>Error opening block database</source>
@@ -4397,6 +5265,10 @@ por ejemplo: alertnotify=echo %%s | mail -s "Wispr Alert" admin@foo.com
     <message>
         <source>Error: You already have pending entries in the Obfuscation pool</source>
         <translation>Error: Ya tienes entradas pendientes en el pool de Ofuscación</translation>
+    </message>
+    <message>
+        <source>Failed to calculate accumulator checkpoint</source>
+        <translation>Error al calcular el punto de control del acumulador</translation>
     </message>
     <message>
         <source>Failed to listen on any port. Use -listen=0 if you want this.</source>
@@ -4467,24 +5339,24 @@ por ejemplo: alertnotify=echo %%s | mail -s "Wispr Alert" admin@foo.com
         <translation>Información</translation>
     </message>
     <message>
-        <source>Initialization sanity check failed. Wispr Core is shutting down.</source>
-        <translation>La prueba de salud de inicialización ha fallado. Wispr Core se cerrará.</translation>
+        <source>Initialization sanity check failed. WISPR Core is shutting down.</source>
+        <translation>La prueba de salud de inicialización ha fallado. WISPR Core se cerrará.</translation>
     </message>
     <message>
         <source>Input is not valid.</source>
         <translation>La entrada no es válida.</translation>
     </message>
     <message>
+        <source>Insufficient funds</source>
+        <translation>Fondos insuficientes</translation>
+    </message>
+    <message>
         <source>Insufficient funds.</source>
         <translation>Fondos insuficientes.</translation>
     </message>
     <message>
-        <source>Invalid -onion address: '%s'</source>
-        <translation>Dirección -onion inválida: '%s'</translation>
-    </message>
-    <message>
-        <source>Invalid -proxy address: '%s'</source>
-        <translation>Dirección -proxy inválida: '%s'</translation>
+        <source>Invalid -onion address or hostname: '%s'</source>
+        <translation>Dirección o nombre de equipo -onion inválido: '%s'</translation>
     </message>
     <message>
         <source>Invalid amount for -maxtxfee=&lt;amount&gt;: '%s'</source>
@@ -4511,6 +5383,10 @@ por ejemplo: alertnotify=echo %%s | mail -s "Wispr Alert" admin@foo.com
         <translation>Importe inválido para -reservebalance=&lt;amount&gt;</translation>
     </message>
     <message>
+        <source>Invalid amount</source>
+        <translation>Cantidad incorrecta</translation>
+    </message>
+    <message>
         <source>Invalid masternodeprivkey. Please see documenation.</source>
         <translation>Valor de masternodeprivkey es inválido. Por favor ver la documentación.</translation>
     </message>
@@ -4531,8 +5407,76 @@ por ejemplo: alertnotify=echo %%s | mail -s "Wispr Alert" admin@foo.com
         <translation>Script inválido detectado.</translation>
     </message>
     <message>
+        <source>Percentage of automatically minted Zerocoin  (1-100, default: %u)</source>
+        <translation>Porcentaje de Zerocoin creadas automáticamente (10-100, por defecto: %u)</translation>
+    </message>
+    <message>
+        <source>Reindex the WSP and zWSP money supply statistics</source>
+        <translation>Reindexar as estatísticas de fornecimento de dinheiro WSP e zWSP</translation>
+    </message>
+    <message>
+        <source>SwiftX options:</source>
+        <translation>Opciones SwiftX:</translation>
+    </message>
+    <message>
         <source>This is a pre-release test build - use at your own risk - do not use for staking or merchant applications!</source>
         <translation>Esto es una versión pre-release de prueba - use bajo su propia responsabilidad - ¡No lo utilice para recompensa de participación ni aplicaciones de comercio!</translation>
+    </message>
+    <message>
+        <source> mints deleted
+</source>
+        <translation>creaciones de moneda borradas
+</translation>
+    </message>
+    <message>
+        <source> mints updated, </source>
+        <translation>creaciones de moneda actualizadas,</translation>
+    </message>
+    <message>
+        <source> unconfirmed transactions removed
+</source>
+        <translation>transacciones sin confirmar eliminadas
+</translation>
+    </message>
+    <message>
+        <source>Disable all WISPR specific functionality (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</source>
+        <translation>Desabilitar toda la funcionalidad especifica WISPR (Masternodes, Obfuscation, SwiftTX, Budgeting) (0-1, predeterminado: %u)</translation>
+    </message>
+    <message>
+        <source>Enable SwiftX, show confirmations for locked transactions (bool, default: %s)</source>
+        <translation>Activar swifttx, mostrar confirmaciones para transacciones bloqueadas (bool, predeterminado: %s)</translation>
+    </message>
+    <message>
+        <source>Error: The transaction was rejected! This might happen if some of the coins in your wallet were already spent, such as if you used a copy of wallet.dat and coins were spent in the copy but not marked as spent here.</source>
+        <translation>¡La transacción fue rechazada! Esto puede ocurrir si alguna de sus monedas ya se gastó con anterioridad, por ejemplo, si estuvo usted usando una copia de su monedero wallet.dat y gastó allí monedas pero no las marcó como gastadas aquí.</translation>
+    </message>
+    <message>
+        <source>Error: This transaction requires a transaction fee of at least %s because of its amount, complexity, or use of recently received funds!</source>
+        <translation>Error: ¡Esta transacción requiere una tasa de al menos %s debido a la cantidad enviada, su complejidad, o el uso de fondos recibidos recientemente!</translation>
+    </message>
+    <message>
+        <source>Error: Unsupported argument -checklevel found. Checklevel must be level 4.</source>
+        <translation>Error: Se ha especificado un argumento no soportado -checklevel. El Checklevel debe ser siempre 4. </translation>
+    </message>
+    <message>
+        <source>Execute command when the best block changes and its size is over (%s in cmd is replaced by block hash, %d with the block size)</source>
+        <translation>Execute o comando quando o melhor bloco for alterado e seu tamanho terminar (%s em cmd é substituído por hash de bloco, %d com o tamanho do bloco)</translation>
+    </message>
+    <message>
+        <source>Failed to find coin set amongst held coins with less than maxNumber of Spends</source>
+        <translation>Não foi possível encontrar o conjunto de moedas entre as moedas retidas com menos de um máximo de gastos</translation>
+    </message>
+    <message>
+        <source>In rare cases, a spend with 7 coins exceeds our maximum allowable transaction size, please retry spend using 6 or less coins</source>
+        <translation>Em casos raros, um gasto com 7 moedas excede nosso tamanho máximo de transação permitido. Repita o investimento usando 6 moedas ou menos</translation>
+    </message>
+    <message>
+        <source>Preferred Denomination for automatically minted Zerocoin  (1/5/10/50/100/500/1000/5000), 0 for no preference. default: %u)</source>
+        <translation>Tamaño de Billete Zerocoin Preferido para los Zerocoin creados automáticamente (1/5/10/50/100/500/1000/5000), poner 0 si no tiene preferencias. Por defecto: %u) </translation>
+    </message>
+    <message>
+        <source>SwiftX requires inputs with at least 6 confirmations, you might need to wait a few minutes and try again.</source>
+        <translation>SwiftX requiere entradas con al menos 6 confirmaciones, es posible que deba esperar unos minutos e intente de nuevo.</translation>
     </message>
     <message>
         <source>&lt;category&gt; can be:</source>
@@ -4541,6 +5485,10 @@ por ejemplo: alertnotify=echo %%s | mail -s "Wispr Alert" admin@foo.com
     <message>
         <source>Attempt to force blockchain corruption recovery</source>
         <translation>Intentar forzar la recuperación de la cadena de bloques corrupta</translation>
+    </message>
+    <message>
+        <source>CoinSpend: Accumulator witness does not verify</source>
+        <translation>CoinSpend: testemunha do acumulador não verifica</translation>
     </message>
     <message>
         <source>Display the stake modifier calculations in the debug.log file.</source>
@@ -4555,20 +5503,12 @@ por ejemplo: alertnotify=echo %%s | mail -s "Wispr Alert" admin@foo.com
         <translation>Activar inclusión del hash del bloque en &lt;address&gt;</translation>
     </message>
     <message>
-        <source>Enable publish hash transaction (locked via SwiftTX) in &lt;address&gt;</source>
-        <translation>Activar inclusión del hash de la transacción (fijada mediante SwiftTX) en &lt;address&gt;</translation>
-    </message>
-    <message>
         <source>Enable publish hash transaction in &lt;address&gt;</source>
         <translation>Activar inclusión del hash de la transacción en &lt;address&gt;</translation>
     </message>
     <message>
         <source>Enable publish raw block in &lt;address&gt;</source>
         <translation>Activar inclusión del bloque en bruto en &lt;address&gt;</translation>
-    </message>
-    <message>
-        <source>Enable publish raw transaction (locked via SwiftTX) in &lt;address&gt;</source>
-        <translation>Activar inclusión de la transacción en bruto (fijada mediante SwiftTX) en &lt;address&gt;</translation>
     </message>
     <message>
         <source>Enable publish raw transaction in &lt;address&gt;</source>
@@ -4579,8 +5519,28 @@ por ejemplo: alertnotify=echo %%s | mail -s "Wispr Alert" admin@foo.com
         <translation>Activar funcionalidad de recompensa por participación (0-1, por defecto: %u)</translation>
     </message>
     <message>
-        <source>Keep N WSP anonymized (default: %u)</source>
-        <translation>Mantener N WSP anonimizados (predeterminado: %u)</translation>
+        <source>Error: A fatal internal error occurred, see debug.log for details</source>
+        <translation>Error: Un error interno fatal a ocurrido, ver debug.log para mas detalles</translation>
+    </message>
+    <message>
+        <source>Error: No valid utxo!</source>
+        <translation>Erro: Nenhum utxo válido!</translation>
+    </message>
+    <message>
+        <source>Failed to create mint</source>
+        <translation>Falha ao criar hortelã</translation>
+    </message>
+    <message>
+        <source>Failed to deserialize</source>
+        <translation>Falha ao desserializar</translation>
+    </message>
+    <message>
+        <source>Failed to select a zerocoin</source>
+        <translation>Falha ao selecionar um zerocoin</translation>
+    </message>
+    <message>
+        <source>Failed to write coin serial number into wallet</source>
+        <translation>Falha ao gravar o número de série da moeda na carteira</translation>
     </message>
     <message>
         <source>Keep at most &lt;n&gt; unconnectable transactions in memory (default: %u)</source>
@@ -4631,6 +5591,10 @@ por ejemplo: alertnotify=echo %%s | mail -s "Wispr Alert" admin@foo.com
         <translation>Cargando cache de pagos de nodos maestros</translation>
     </message>
     <message>
+        <source>Loading sporks...</source>
+        <translation>Cargando sporks...</translation>
+    </message>
+    <message>
         <source>Loading wallet... (%3.2f %%)</source>
         <translation>Cargando monedero: (%3.2f %%)</translation>
     </message>
@@ -4639,12 +5603,20 @@ por ejemplo: alertnotify=echo %%s | mail -s "Wispr Alert" admin@foo.com
         <translation>Cargando monedero...</translation>
     </message>
     <message>
+        <source>Location of the auth cookie (default: data dir)</source>
+        <translation>Localização do cookie de autenticação (padrão: data dir)</translation>
+    </message>
+    <message>
         <source>Lock is already in place.</source>
         <translation>Bloqueo esta en su lugar.</translation>
     </message>
     <message>
         <source>Lock masternodes from masternode configuration file (default: %u)</source>
         <translation>Bloquear nodos maestros desde el archivo de configuración de nodo maestro (predeterminado: %u)</translation>
+    </message>
+    <message>
+        <source>Lookup(): Invalid -proxy address or hostname: '%s'</source>
+        <translation>Pesquisa (): Endereço de proxy ou nome de host inválido: '%s'</translation>
     </message>
     <message>
         <source>Maintain at most &lt;n&gt; connections to peers (default: %u)</source>
@@ -4671,12 +5643,20 @@ por ejemplo: alertnotify=echo %%s | mail -s "Wispr Alert" admin@foo.com
         <translation>Máximo buffer de envío por conexión, &lt;n&gt;*1000 bytes (predeterminado: %u)</translation>
     </message>
     <message>
+        <source>Mint did not make it into blockchain</source>
+        <translation>Mint não fez isso em blockchain</translation>
+    </message>
+    <message>
         <source>Missing input transaction information.</source>
         <translation>Información de transacciones de entrada perdidas.</translation>
     </message>
     <message>
         <source>Mixing in progress...</source>
         <translation>Mezcla en progreso...</translation>
+    </message>
+    <message>
+        <source>Need address because change is not exact</source>
+        <translation>Precisa de endereço porque a mudança não é exata</translation>
     </message>
     <message>
         <source>Need to specify a port with -whitebind: '%s'</source>
@@ -4696,7 +5676,7 @@ por ejemplo: alertnotify=echo %%s | mail -s "Wispr Alert" admin@foo.com
     </message>
     <message>
         <source>No matching denominations found for mixing.</source>
-        <translation>No hay denominaciones emparejadas encontradas para mezclado.</translation>
+        <translation>No hemos encontrado billetes coincidentes para mezclado.</translation>
     </message>
     <message>
         <source>Node relay options:</source>
@@ -4727,10 +5707,6 @@ por ejemplo: alertnotify=echo %%s | mail -s "Wispr Alert" admin@foo.com
         <translation>La Ofuscación está sin uso.</translation>
     </message>
     <message>
-        <source>Obfuscation options:</source>
-        <translation>Opciones de Ofuscacion:</translation>
-    </message>
-    <message>
         <source>Obfuscation request complete:</source>
         <translation>Pedido de Ofuscacion completado:</translation>
     </message>
@@ -4755,6 +5731,14 @@ por ejemplo: alertnotify=echo %%s | mail -s "Wispr Alert" admin@foo.com
         <translation>Contraseña para conexiones JSON-RPC</translation>
     </message>
     <message>
+        <source>isValid(): Invalid -proxy address or hostname: '%s'</source>
+        <translation>isValid (): Endereço de proxy ou nome de host inválido: '%s'</translation>
+    </message>
+    <message>
+        <source>Preparing for resync...</source>
+        <translation>Preparando para resincronizar...</translation>
+    </message>
+    <message>
         <source>Prepend debug output with timestamp (default: %u)</source>
         <translation>Agregar timestamp a la salida de depuración (predeterminado: %u)</translation>
     </message>
@@ -4763,16 +5747,8 @@ por ejemplo: alertnotify=echo %%s | mail -s "Wispr Alert" admin@foo.com
         <translation>Mostrar versión y salir</translation>
     </message>
     <message>
-        <source>RPC SSL options: (see the Bitcoin Wiki for SSL setup instructions)</source>
-        <translation>Opciones RPC SSL: (ver el Bitcoin Wiki para instrucciones de instalación SSL)</translation>
-    </message>
-    <message>
         <source>RPC server options:</source>
         <translation>Opciones del servidor RPC:</translation>
-    </message>
-    <message>
-        <source>RPC support for HTTP persistent connections (default: %d)</source>
-        <translation>Soporte RPC para conexiones persistentes HTTP (predeterminado %d)</translation>
     </message>
     <message>
         <source>Randomly drop 1 of every &lt;n&gt; network messages</source>
@@ -4791,6 +5767,10 @@ por ejemplo: alertnotify=echo %%s | mail -s "Wispr Alert" admin@foo.com
         <translation>Recibir y mostrar alertas de red P2P (predeterminado: %u)</translation>
     </message>
     <message>
+        <source>Reindex the accumulator database</source>
+        <translation>Reindexar la base de datos del acumulador</translation>
+    </message>
+    <message>
         <source>Relay and mine data carrier transactions (default: %u)</source>
         <translation>Transmitir y minar datos de transacciones enviadas (predeterminado: %u)</translation>
     </message>
@@ -4807,6 +5787,14 @@ por ejemplo: alertnotify=echo %%s | mail -s "Wispr Alert" admin@foo.com
         <translation>Reescaneado...</translation>
     </message>
     <message>
+        <source>ResetMintZerocoin finished: </source>
+        <translation>ResetMintZerocoin finalizado:</translation>
+    </message>
+    <message>
+        <source>ResetSpentZerocoin finished: </source>
+        <translation>ResetSpentZerocoin finalizado:</translation>
+    </message>
+    <message>
         <source>Run a thread to flush wallet periodically (default: %u)</source>
         <translation>Ejecutar un hilo de ejecución para nivelar el monedero periódicamente (predeterminado: %u)</translation>
     </message>
@@ -4817,14 +5805,6 @@ por ejemplo: alertnotify=echo %%s | mail -s "Wispr Alert" admin@foo.com
     <message>
         <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
         <translation>Enviar transacciones como transacciones cero-comisión si es posible (predeterminado: %u)</translation>
-    </message>
-    <message>
-        <source>Server certificate file (default: %s)</source>
-        <translation>Archivo certificado del servidor (predeterminado: %s)</translation>
-    </message>
-    <message>
-        <source>Server private key (default: %s)</source>
-        <translation>Clave privada del servidor (predeterminado: %s)</translation>
     </message>
     <message>
         <source>Session not complete!</source>
@@ -4853,6 +5833,10 @@ por ejemplo: alertnotify=echo %%s | mail -s "Wispr Alert" admin@foo.com
     <message>
         <source>Set minimum block size in bytes (default: %u)</source>
         <translation>Ajustar el tamaño mínimo de bloque en bytes (predeterminado: %u)</translation>
+    </message>
+    <message>
+        <source>Set the Maximum reorg depth (default: %u)</source>
+        <translation>Establezca la profundidad máxima de reorganización (valor predeterminado: %u)</translation>
     </message>
     <message>
         <source>Set the masternode private key</source>
@@ -4915,6 +5899,10 @@ por ejemplo: alertnotify=echo %%s | mail -s "Wispr Alert" admin@foo.com
         <translation>Especifique su propia dirección pública</translation>
     </message>
     <message>
+        <source>Spend Valid</source>
+        <translation>Gastar Válido</translation>
+    </message>
+    <message>
         <source>Spend unconfirmed change when sending transactions (default: %u)</source>
         <translation>Gastar cambio no confirmado cuando se envían transacciones (predeterminado: %u)</translation>
     </message>
@@ -4937,10 +5925,6 @@ por ejemplo: alertnotify=echo %%s | mail -s "Wispr Alert" admin@foo.com
     <message>
         <source>Submitted to masternode, waiting in queue %s</source>
         <translation>Enviado a masternode, quedando en espera %s</translation>
-    </message>
-    <message>
-        <source>SwiftTX options:</source>
-        <translation>Opciones SwiftTX:</translation>
     </message>
     <message>
         <source>Synchronization failed</source>
@@ -4971,6 +5955,22 @@ por ejemplo: alertnotify=echo %%s | mail -s "Wispr Alert" admin@foo.com
         <translation>Sincronizando con la red... </translation>
     </message>
     <message>
+        <source>The coin spend has been used</source>
+        <translation>O gasto com moedas foi usado</translation>
+    </message>
+    <message>
+        <source>The new spend coin transaction did not verify</source>
+        <translation>A nova transação de moeda de gasto não foi confirmada</translation>
+    </message>
+    <message>
+        <source>The selected mint coin is an invalid coin</source>
+        <translation>A moeda de hortelã selecionada é uma moeda inválida</translation>
+    </message>
+    <message>
+        <source>The transaction did not verify</source>
+        <translation>A transação não verificou</translation>
+    </message>
+    <message>
         <source>This help message</source>
         <translation>Este mensaje de ayuda</translation>
     </message>
@@ -4989,6 +5989,26 @@ por ejemplo: alertnotify=echo %%s | mail -s "Wispr Alert" admin@foo.com
     <message>
         <source>Threshold for disconnecting misbehaving peers (default: %u)</source>
         <translation>Limite para desconexión de peers de mal desempeño (predeterminado: %u)</translation>
+    </message>
+    <message>
+        <source>Too many spends needed</source>
+        <translation>Gastos demais são necessários</translation>
+    </message>
+    <message>
+        <source>Tor control port password (default: empty)</source>
+        <translation>Contraseña del puerto de control Tor (por defecto: vacío)</translation>
+    </message>
+    <message>
+        <source>Tor control port to use if onion listening enabled (default: %s)</source>
+        <translation>Puerto de control Tor a utilizar si está activada la escucha Onion (por defecto: %s)</translation>
+    </message>
+    <message>
+        <source>Transaction Created</source>
+        <translation>Transação Criada</translation>
+    </message>
+    <message>
+        <source>Transaction Mint Started</source>
+        <translation>Cotação de transação iniciada</translation>
     </message>
     <message>
         <source>Transaction amount too small</source>
@@ -5023,12 +6043,28 @@ por ejemplo: alertnotify=echo %%s | mail -s "Wispr Alert" admin@foo.com
         <translation>Transmitiendo la transacción final.</translation>
     </message>
     <message>
+        <source>Try to spend with a higher security level to include more coins</source>
+        <translation>Tente gastar com um nível de segurança mais alto para incluir mais moedas</translation>
+    </message>
+    <message>
+        <source>Trying to spend an already spent serial #, try again.</source>
+        <translation>Tentando gastar um número de série já gasto, tente novamente.</translation>
+    </message>
+    <message>
         <source>Unable to bind to %s on this computer (bind returned error %s)</source>
         <translation>Imposible enlazar %s en esta computadora (enlace retorna error %s)</translation>
     </message>
     <message>
+        <source>Unable to find transaction containing mint</source>
+        <translation>Não é possível encontrar transações contendo hortelã</translation>
+    </message>
+    <message>
         <source>Unable to sign spork message, wrong key?</source>
         <translation>Imposible firmar el mensaje spork, ¿llave equivocada?</translation>
+    </message>
+    <message>
+        <source>Unable to start HTTP server. See debug log for details.</source>
+        <translation>Não é possível iniciar o servidor HTTP. Veja o log de depuração para detalhes.</translation>
     </message>
     <message>
         <source>Unknown network specified in -onlynet: '%s'</source>
@@ -5043,20 +6079,16 @@ por ejemplo: alertnotify=echo %%s | mail -s "Wispr Alert" admin@foo.com
         <translation>Actualizar el monedero al formato ultimo</translation>
     </message>
     <message>
-        <source>Use N separate masternodes to anonymize funds  (2-8, default: %u)</source>
-        <translation>Utilizar N nodos maestros distintos para anonimizar fondos (2-8, predeterminado: %u)</translation>
-    </message>
-    <message>
-        <source>Use OpenSSL (https) for JSON-RPC connections</source>
-        <translation>Usar OpenSSL (https) para conexiones JSON-RPC</translation>
-    </message>
-    <message>
         <source>Use UPnP to map the listening port (default: %u)</source>
         <translation>Usar UPnP para mapear el puerto de escucha (predeterminado: %u)</translation>
     </message>
     <message>
         <source>Use UPnP to map the listening port (default: 1 when listening)</source>
         <translation>Usar UPnP para mapear el puerto de escucha (predeterminado: 1 cuando esta en escucha)</translation>
+    </message>
+    <message>
+        <source>Use a custom max chain reorganization depth (default: %u)</source>
+        <translation>Utilice una profundidad de reorganización de cadena máxima personalizada (valor predeterminado: %u)</translation>
     </message>
     <message>
         <source>Use the test network</source>
@@ -5087,8 +6119,8 @@ por ejemplo: alertnotify=echo %%s | mail -s "Wispr Alert" admin@foo.com
         <translation>Monedero bloqueado.</translation>
     </message>
     <message>
-        <source>Wallet needed to be rewritten: restart Wispr Core to complete</source>
-        <translation>Monedero necesita ser reescrito: reinicie Wispr Core para completar</translation>
+        <source>Wallet needed to be rewritten: restart WISPR Core to complete</source>
+        <translation>Monedero necesita ser reescrito: reinicie WISPR Core para completar</translation>
     </message>
     <message>
         <source>Wallet options:</source>
@@ -5119,6 +6151,10 @@ por ejemplo: alertnotify=echo %%s | mail -s "Wispr Alert" admin@foo.com
         <translation>Probando...</translation>
     </message>
     <message>
+        <source>You don't have enough Zerocoins in your wallet</source>
+        <translation>Você não tem Zerocoins suficientes na sua carteira</translation>
+    </message>
+    <message>
         <source>You need to rebuild the database using -reindex to change -txindex</source>
         <translation>Usted necesita reconstruir la base de datos usando -reindex para cambiar -txindex</translation>
     </message>
@@ -5139,12 +6175,16 @@ por ejemplo: alertnotify=echo %%s | mail -s "Wispr Alert" admin@foo.com
         <translation>Opciones de notificación ZeroMQ:</translation>
     </message>
     <message>
+        <source>Zerocoin options:</source>
+        <translation>Opciones Zerocoin:</translation>
+    </message>
+    <message>
         <source>on startup</source>
         <translation>al inicio</translation>
     </message>
     <message>
         <source>wallet.dat corrupt, salvage failed</source>
-        <translation>wallet.dat esta corrupto, guardado falló</translation>
+        <translation>wallet.dat esta corrupto, fallo al guardar</translation>
     </message>
 </context>
 </TS>

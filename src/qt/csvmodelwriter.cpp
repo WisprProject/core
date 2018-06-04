@@ -9,15 +9,18 @@
 #include <QFile>
 #include <QTextStream>
 
-CSVModelWriter::CSVModelWriter(const QString &filename, QObject *parent) : QObject(parent),
-                                                                           filename(filename), model(0) {
+CSVModelWriter::CSVModelWriter(const QString& filename, QObject* parent) : QObject(parent),
+                                                                           filename(filename), model(0)
+{
 }
 
-void CSVModelWriter::setModel(const QAbstractItemModel *model) {
+void CSVModelWriter::setModel(const QAbstractItemModel* model)
+{
     this->model = model;
 }
 
-void CSVModelWriter::addColumn(const QString &title, int column, int role) {
+void CSVModelWriter::addColumn(const QString& title, int column, int role)
+{
     Column col;
     col.title = title;
     col.column = column;
@@ -26,21 +29,25 @@ void CSVModelWriter::addColumn(const QString &title, int column, int role) {
     columns.append(col);
 }
 
-static void writeValue(QTextStream &f, const QString &value) {
+static void writeValue(QTextStream& f, const QString& value)
+{
     QString escaped = value;
     escaped.replace('"', "\"\"");
     f << "\"" << escaped << "\"";
 }
 
-static void writeSep(QTextStream &f) {
+static void writeSep(QTextStream& f)
+{
     f << ",";
 }
 
-static void writeNewline(QTextStream &f) {
+static void writeNewline(QTextStream& f)
+{
     f << "\n";
 }
 
-bool CSVModelWriter::write() {
+bool CSVModelWriter::write()
+{
     QFile file(filename);
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
         return false;

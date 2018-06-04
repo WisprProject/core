@@ -11,7 +11,8 @@
 #include "masternodeman.h"
 
 
-class CObfuScationRelay {
+class CObfuScationRelay
+{
 public:
     CTxIn vinMasternode;
     vector<unsigned char> vchSig;
@@ -22,14 +23,13 @@ public:
     CTxOut out;
 
     CObfuScationRelay();
-
-    CObfuScationRelay(CTxIn &vinMasternodeIn, vector<unsigned char> &vchSigIn, int nBlockHeightIn, int nRelayTypeIn,
-                      CTxIn &in2, CTxOut &out2);
+    CObfuScationRelay(CTxIn& vinMasternodeIn, vector<unsigned char>& vchSigIn, int nBlockHeightIn, int nRelayTypeIn, CTxIn& in2, CTxOut& out2);
 
     ADD_SERIALIZE_METHODS;
 
-    template<typename Stream, typename Operation>
-    inline void SerializationOp(Stream &s, Operation ser_action, int nType, int nVersion) {
+    template <typename Stream, typename Operation>
+    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
+    {
         READWRITE(vinMasternode);
         READWRITE(vchSig);
         READWRITE(vchSig2);
@@ -42,11 +42,8 @@ public:
     std::string ToString();
 
     bool Sign(std::string strSharedKey);
-
     bool VerifyMessage(std::string strSharedKey);
-
     void Relay();
-
     void RelayThroughNode(int nRank);
 };
 

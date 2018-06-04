@@ -13,7 +13,6 @@
 #include "serialize.h"
 #include "uint256.h"
 #include "version.h"
-#include <stdint.h>
 
 /** Errors thrown by the bignum class */
 class bignum_error : public std::runtime_error
@@ -88,11 +87,9 @@ public:
     CBigNum(short n)            { bn = BN_new(); if (n >= 0) setulong(n); else setint64(n); }
     CBigNum(int n)              { bn = BN_new(); if (n >= 0) setulong(n); else setint64(n); }
     CBigNum(long n)             { bn = BN_new(); if (n >= 0) setulong(n); else setint64(n); }
-    CBigNum(unsigned long long n) {bn = BN_new(); setuint64(n); }
-    CBigNum(long long n)          { bn = BN_new(); setint64(n); }
-//#ifdef __APPLE__
-//    CBigNum(int64_t n)            { bn = BN_new(); setint64(n); }
-//#endif
+#ifdef __APPLE__	
+    CBigNum(int64_t n)            { bn = BN_new(); setint64(n); }
+#endif
     CBigNum(unsigned char n)    { bn = BN_new(); setulong(n); }
     CBigNum(unsigned short n)   { bn = BN_new(); setulong(n); }
     CBigNum(unsigned int n)     { bn = BN_new(); setulong(n); }

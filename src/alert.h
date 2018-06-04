@@ -16,12 +16,10 @@
 #include <string>
 
 class CAlert;
-
 class CNode;
-
 class uint256;
 
-extern std::map <uint256, CAlert> mapAlerts;
+extern std::map<uint256, CAlert> mapAlerts;
 extern CCriticalSection cs_mapAlerts;
 
 /** Alerts are for notifying old versions if they become too obsolete and
@@ -30,7 +28,8 @@ extern CCriticalSection cs_mapAlerts;
  * not read the entire buffer if the alert is for a newer version, but older
  * versions can still relay the original data.
  */
-class CUnsignedAlert {
+class CUnsignedAlert
+{
 public:
     int nVersion;
     int64_t nRelayUntil; // when newer nodes stop relaying to newer nodes
@@ -40,7 +39,7 @@ public:
     std::set<int> setCancel;
     int nMinVer;                     // lowest version inclusive
     int nMaxVer;                     // highest version inclusive
-    std::set <std::string> setSubVer; // empty matches all
+    std::set<std::string> setSubVer; // empty matches all
     int nPriority;
 
     // Actions
@@ -50,8 +49,9 @@ public:
 
     ADD_SERIALIZE_METHODS;
 
-    template<typename Stream, typename Operation>
-    inline void SerializationOp(Stream &s, Operation ser_action, int nType, int nVersion) {
+    template <typename Stream, typename Operation>
+    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
+    {
         READWRITE(this->nVersion);
         nVersion = this->nVersion;
         READWRITE(nRelayUntil);
@@ -75,48 +75,42 @@ public:
 };
 
 /** An alert is a combination of a serialized CUnsignedAlert and a signature. */
-class CAlert : public CUnsignedAlert {
+class CAlert : public CUnsignedAlert
+{
 public:
     std::vector<unsigned char> vchMsg;
     std::vector<unsigned char> vchSig;
 
-    CAlert() {
+    CAlert()
+    {
         SetNull();
     }
 
     ADD_SERIALIZE_METHODS;
 
-    template<typename Stream, typename Operation>
-    inline void SerializationOp(Stream &s, Operation ser_action, int nType, int nVersion) {
+    template <typename Stream, typename Operation>
+    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
+    {
         READWRITE(vchMsg);
         READWRITE(vchSig);
     }
 
     void SetNull();
-
     bool IsNull() const;
-
     uint256 GetHash() const;
-
     bool IsInEffect() const;
-
-    bool Cancels(const CAlert &alert) const;
-
+    bool Cancels(const CAlert& alert) const;
     bool AppliesTo(int nVersion, std::string strSubVerIn) const;
-
     bool AppliesToMe() const;
-
-    bool RelayTo(CNode *pnode) const;
-
+    bool RelayTo(CNode* pnode) const;
     bool CheckSignature() const;
-
     bool ProcessAlert(bool fThread = true); // fThread means run -alertnotify in a free-running thread
-    static void Notify(const std::string &strMessage, bool fThread);
+    static void Notify(const std::string& strMessage, bool fThread);
 
     /*
      * Get copy of (active) alert object by hash. Returns a null alert if it is not found.
      */
-    static CAlert getAlertByHash(const uint256 &hash);
+    static CAlert getAlertByHash(const uint256& hash);
 };
 
 #endif // BITCOIN_ALERT_H

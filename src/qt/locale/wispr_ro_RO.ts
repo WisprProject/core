@@ -61,6 +61,9 @@
     <name>AskPassphraseDialog</name>
     </context>
 <context>
+    <name>BanTableModel</name>
+    </context>
+<context>
     <name>Bip38ToolDialog</name>
     </context>
 <context>
@@ -94,6 +97,9 @@
     <name>MultiSendDialog</name>
     </context>
 <context>
+    <name>MultisigDialog</name>
+    </context>
+<context>
     <name>ObfuscationConfig</name>
     </context>
 <context>
@@ -110,6 +116,9 @@
     </context>
 <context>
     <name>PeerTableModel</name>
+    </context>
+<context>
+    <name>PrivacyDialog</name>
     </context>
 <context>
     <name>QObject</name>
@@ -178,6 +187,9 @@
         <source>Export the data in the current tab to a file</source>
         <translation>Exportă datele din fila curentă într-un fișier</translation>
     </message>
+    </context>
+<context>
+    <name>ZWspControlDialog</name>
     </context>
 <context>
     <name>wispr-core</name>

@@ -11,35 +11,32 @@
 #include "privacydialog.h"
 
 class CZerocoinMint;
-
 class WalletModel;
 
 namespace Ui {
-    class ZWspControlDialog;
+class ZWspControlDialog;
 }
 
-class ZWspControlDialog : public QDialog {
+class ZWspControlDialog : public QDialog
+{
     Q_OBJECT
 
 public:
     explicit ZWspControlDialog(QWidget *parent);
-
     ~ZWspControlDialog();
 
-    void setModel(WalletModel *model);
+    void setModel(WalletModel* model);
 
-    static std::set <std::string> setSelectedMints;
-    static std::set <CMintMeta> setMints;
-
-    static std::vector <CMintMeta> GetSelectedMints();
+    static std::set<std::string> setSelectedMints;
+    static std::set<CMintMeta> setMints;
+    static std::vector<CMintMeta> GetSelectedMints();
 
 private:
     Ui::ZWspControlDialog *ui;
-    WalletModel *model;
-    PrivacyDialog *privacyDialog;
+    WalletModel* model;
+    PrivacyDialog* privacyDialog;
 
     void updateList();
-
     void updateLabels();
 
     enum {
@@ -51,14 +48,8 @@ private:
         COLUMN_ISSPENDABLE
     };
 
-private
-    slots:
-            void
-    updateSelection(QTreeWidgetItem
-    * item,
-    int column
-    );
-
+private slots:
+    void updateSelection(QTreeWidgetItem* item, int column);
     void ButtonAllClicked();
 };
 
