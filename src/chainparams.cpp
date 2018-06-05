@@ -54,8 +54,8 @@ static void convertSeed6(std::vector<CAddress>& vSeedsOut, const SeedSpec6* data
 static Checkpoints::MapCheckpoints mapCheckpoints =
         boost::assign::map_list_of
                 (0, uint256("0x0000ec93e0a3fe0aafa3be7dafe1290f5fca039a4037dd5174bc3dd7a35d67f0"))
-                (14317, uint256("50929653a7146de37b82b9125e55ea03aa4ae062ce3a2e3098026eea07e5bc81")) // 125.000 Coin Burn Confirmation
-                (50000, uint256("b177127054381243141e809bbfb2d568aeae2dd9b3c486e54f0989d4546d0d80")) // Block 50.000
+                (14317, uint256("0x50929653a7146de37b82b9125e55ea03aa4ae062ce3a2e3098026eea07e5bc81")) // 125.000 Coin Burn Confirmation
+                (50000, uint256("0xb177127054381243141e809bbfb2d568aeae2dd9b3c486e54f0989d4546d0d80")) // Block 50.000
                 (75000, uint256("06f162fe22851c400c1532a6d49d7894640ea0aa292fad5f02f348480da6b20d")) // Block 75.000
                 (100000, uint256("ed8cccfb51c901af271892966160686177a05f101bd3fd517d5b82274a8f6611")) // Block 100.000
                 (125000, uint256("76d5412ec389433de6cd22345209c859b4c18b6d8f8893df479c9f7520d19901")) // Block 125.000
@@ -227,7 +227,7 @@ public:
         nMintRequiredConfirmations = 20; //the maximum amount of confirmations until accumulated in 19
         nRequiredAccumulation = 1;
         nDefaultSecurityLevel = 100; //full security level for accumulators
-        nZerocoinHeaderVersion = 4; //Block headers must be this version once zerocoin is active
+        nZerocoinHeaderVersion = 8; //Block headers must be this version once zerocoin is active
         nZerocoinRequiredStakeDepth = 200; //The required confirmations for a zwsp to be stakable
 
         nBudget_Fee_Confirmations = 6; // Number of confirmations for the finalization fee
@@ -366,11 +366,10 @@ public:
         nRejectBlockOutdatedMajority = 950;
         nToCheckBlockUpgradeMajority = 1000;
         nMinerThreads = 1;
-        nTargetTimespan = 24 * 60 * 60; // WISPR: 1 day
+        nTargetTimespan = 1 * 60; // WISPR: 1 day
         nTargetSpacing = 1 * 60;        // WISPR: 1 minutes
         bnProofOfWorkLimit = ~uint256(0) >> 1;
         genesis.nTime = 1411111111;
-        genesis.nVersion = 1;
         genesis.nBits  = bnProofOfWorkLimit.GetCompact();
         genesis.nNonce = 2;
 
@@ -378,7 +377,7 @@ public:
         nDefaultPort = 17004;
         printf("Req net\n");
         printf("genesis = %s\n", genesis.ToString().c_str());
-        assert(hashGenesisBlock == uint256("0302157c185ae0018bb60f0c506087be772aa2015150f994cc1a6db55e8e23bd"));
+      //  assert(hashGenesisBlock == uint256("0x523dda6d336047722cbaf1c5dce622298af791bac21b33bf6e2d5048b2a13e3d"));
 
         vFixedSeeds.clear(); //! Testnet mode doesn't have any fixed seeds.
         vSeeds.clear();      //! Testnet mode doesn't have any DNS seeds.
