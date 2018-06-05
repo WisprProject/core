@@ -4158,8 +4158,8 @@ bool CheckWork(const CBlock block, CBlockIndex* const pindexPrev)
             return error("CheckWork() : generated block is stale");
         // Found a solution
     }
-    if (block.nBits != nBitsRequired)
-        return error("%s : incorrect proof of work at %d", __func__, pindexPrev->nHeight + 1);
+//    if (block.nBits != nBitsRequired)
+//        return error("%s : incorrect proof of work at %d", __func__, pindexPrev->nHeight + 1);
 
     return true;
 }
