@@ -7,7 +7,6 @@
 #include "uint256.h"
 
 #include "utilstrencodings.h"
-#include "libzerocoin/bignum.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -273,13 +272,21 @@ template std::string base_uint<512>::ToStringReverseEndian() const;
 // through an intermediate MPI representation.
 uint256& uint256::SetCompact(unsigned int nCompact, bool* pfNegative, bool* pfOverflow)
 {
-    unsigned int nSize = nCompact >> 24;
-    std::vector<unsigned char> vch(4 + nSize);
-    vch[3] = nSize;
-    if (nSize >= 1) vch[4] = (nCompact >> 16) & 0xff;
-    if (nSize >= 2) vch[5] = (nCompact >> 8) & 0xff;
-    if (nSize >= 3) vch[6] = (nCompact >> 0) & 0xff;
-    BN_mpi2bn(&vch[0], vch.size(), this);
+    int nSize = nCompact >> 24;
+    uint32_t nWord = nCompact & 0x007fffff;
+    if (nSize <= 3) {
+        nWord >>= 8 * (3 - nSize);
+        *this = nWord;
+    } else {
+        *this = nWord;
+        *this <<= 8 * (nSize - 3);
+    }
+    if (pfNegative)
+        *pfNegative = nWord != 0 && (nCompact & 0x00800000) != 0;
+    if (pfOverflow)
+        *pfOverflow = nWord != 0 && ((nSize > 34) ||
+                                        (nWord > 0xff && nSize > 33) ||
+                                        (nWord > 0xffff && nSize > 32));
     return *this;
 }
 

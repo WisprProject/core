@@ -13,6 +13,8 @@
 #include "primitives/block.h"
 #include "uint256.h"
 #include "util.h"
+#include "libzerocoin/bignum.h"
+
 
 #include <math.h>
 
@@ -113,21 +115,21 @@ bool CheckProofOfWork(uint256 hash, unsigned int nBits)
 {
     bool fNegative;
     bool fOverflow;
-    uint256 bnTarget;
+    CBigNum bnTarget;
 
     if (Params().SkipProofOfWorkCheck())
         return true;
 
-    bnTarget.SetCompact(nBits, &fNegative, &fOverflow);
+    bnTarget.SetCompact(nBits);
     printf("nBits = %08x\n", nBits);
     printf("bnTarget=%s\n", bnTarget.ToString().c_str());
     printf("hash=%s\n", hash.ToString().c_str());
     // Check range
-    if (fNegative || bnTarget == 0 || fOverflow || bnTarget > Params().ProofOfWorkLimit())
+    if (fNegative || bnTarget == 0 || fOverflow || bnTarget.getuint256() > Params().ProofOfWorkLimit())
         return error("CheckProofOfWork() : nBits below minimum work");
 
     // Check proof of work matches claimed amount
-    if (hash > bnTarget)
+    if (hash > bnTarget.getuint256())
         return error("CheckProofOfWork() : hash doesn't match nBits");
 
     return true;
