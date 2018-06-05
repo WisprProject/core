@@ -298,15 +298,7 @@ bool stakeTargetHit(uint256 hashProofOfStake, int64_t nValueIn, uint256 bnTarget
     // Now check if proof-of-stake hash meets target protocol
     return hashProofOfStake > (bnCoinDayWeight * bnTargetPerCoinDay);
 }
-//test hash vs target
-bool stakeTargetHit(uint256 hashProofOfStake, int64_t nValueIn, uint256 bnTargetPerCoinDay)
-{
-    //get the stake weight - weight is equal to coin amount
-    uint256 bnCoinDayWeight = uint256(nValueIn) / 100;
 
-    // Now check if proof-of-stake hash meets target protocol
-    return hashProofOfStake < (bnCoinDayWeight * bnTargetPerCoinDay);
-}
 bool CheckStake(const CDataStream& ssUniqueID, CAmount nValueIn, const uint64_t nStakeModifier, const uint256& bnTarget,
                 unsigned int nTimeBlockFrom, unsigned int& nTimeTx, uint256& hashProofOfStake)
 {
