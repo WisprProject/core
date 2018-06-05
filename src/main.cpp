@@ -4140,27 +4140,25 @@ bool CheckWork(const CBlock block, CBlockIndex* const pindexPrev)
     uint256 hashTarget;
     hashTarget.SetCompact(block.nBits);
 
+    printf("indexPrev null assertion\n");
     if (pindexPrev == NULL)
         return error("%s : null pindexPrev for block %s", __func__, block.GetHash().ToString().c_str());
 
 //    unsigned int nBitsRequired = GetNextWorkRequired(pindexPrev, &block);
 
     if(block.IsProofOfWork()) {
+        printf("Block is proof of work\n");
         if (hashProof > hashTarget)
             return error("CheckWork() : proof-of-work not meeting target");
 
-        //// debug print
-//        LogPrintf("CheckWork() : new proof-of-work block found  \n  proof hash: %s  \ntarget: %s\n", hashProof.GetHex(),
-//                  hashTarget.GetHex());
-//        LogPrintf("%s\n", block.ToString());
-//        LogPrintf("generated %s\n", FormatMoney(block.vtx[0].vout[0].nValue));
-
+        printf("Check for stale block\n");
         if (block.hashPrevBlock != chainActive.Tip()->GetBlockHash())
             return error("CheckWork() : generated block is stale");
-        // Found a solution
     }
 //    if (block.nBits != nBitsRequired)
 //        return error("%s : incorrect proof of work at %d", __func__, pindexPrev->nHeight + 1);
+
+    printf("End of check work\n");
 
     return true;
 }
