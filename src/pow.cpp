@@ -122,7 +122,7 @@ bool CheckProofOfWork(uint256 hash, unsigned int nBits)
 
     bnTarget.SetCompact(nBits);
     printf("nBits = %08x\n", nBits);
-    printf("bnTarget=%s\n", bnTarget.ToString().c_str());
+    printf("bnTarget=%s\n", bnTarget.getuint256().ToString().c_str());
     printf("hash=%s\n", hash.ToString().c_str());
     // Check range
     if (fNegative || bnTarget == 0 || fOverflow || bnTarget.getuint256() > Params().ProofOfWorkLimit())

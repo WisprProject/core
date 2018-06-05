@@ -328,19 +328,12 @@ public:
     CBigNum& SetCompact(unsigned int nCompact)
     {
         unsigned int nSize = nCompact >> 24;
-        bool fNegative     =(nCompact & 0x00800000) != 0;
-        unsigned int nWord = nCompact & 0x007fffff;
-        if (nSize <= 3)
-        {
-            nWord >>= 8*(3-nSize);
-            BN_set_word(bn, nWord);
-        }
-        else
-        {
-            BN_set_word(bn, nWord);
-            BN_lshift(bn, bn, 8*(nSize-3));
-        }
-        BN_set_negative(bn, fNegative);
+        std::vector<unsigned char> vch(4 + nSize);
+        vch[3] = nSize;
+        if (nSize >= 1) vch[4] = (nCompact >> 16) & 0xff;
+        if (nSize >= 2) vch[5] = (nCompact >> 8) & 0xff;
+        if (nSize >= 3) vch[6] = (nCompact >> 0) & 0xff;
+        BN_mpi2bn(&vch[0], vch.size(), this);
         return *this;
     }
 
