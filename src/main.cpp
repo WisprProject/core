@@ -4423,7 +4423,7 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
     int nHeight = pindex->nHeight;
 
     // Write block to history file
-     strprintf("Write block to history file");
+     printf("Write block to history file");
     try {
         unsigned int nBlockSize = ::GetSerializeSize(block, SER_DISK, CLIENT_VERSION);
         CDiskBlockPos blockPos;
@@ -4437,10 +4437,10 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
         if (!ReceivedBlockTransactions(block, state, pindex, blockPos))
             return error("AcceptBlock() : ReceivedBlockTransactions failed");
     } catch (std::runtime_error& e) {
-        strprintf("Write block to history failed");
+        printf("Write block to history failed");
         return state.Abort(std::string("System error: ") + e.what());
     }
-    strprintf("End of accept block");
+    printf("End of accept block");
     return true;
 }
 
