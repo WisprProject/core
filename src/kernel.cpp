@@ -428,6 +428,7 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
 
     unsigned int nBlockFromTime = blockprev.nTime;
     unsigned int nTxTime = block.nTime;
+    uint256 hashBlock;
     CTransaction txPrev;
     if (GetTransaction(txin.prevout.hash, txPrev, hashBlock, true) && !CheckStake(txPrev, txin.prevout, tx.nTime, hashProofOfStake))
     {
