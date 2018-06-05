@@ -418,10 +418,10 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
 
         //verify signature and script
         // Verify signature
-        if (!VerifySignatureOld(txPrev, tx, 0, SCRIPT_VERIFY_NONE, 0))
-            return error("CheckProofOfStake() : VerifySignature failed on coinstake %s", tx.GetHash().ToString());
-//        if (!VerifyScript(txin.scriptSig, txPrev.vout[txin.prevout.n].scriptPubKey, STANDARD_SCRIPT_VERIFY_FLAGS, TransactionSignatureChecker(&tx, 0)))
-//            return error("CheckProofOfStake() : VerifySignature failed on coinstake %s", tx.GetHash().ToString().c_str());
+//        if (!VerifySignatureOld(txPrev, tx, 0, SCRIPT_VERIFY_NONE, 0))
+//            return error("CheckProofOfStake() : VerifySignature failed on coinstake %s", tx.GetHash().ToString());
+        if (!VerifyScript(txin.scriptSig, txPrev.vout[txin.prevout.n].scriptPubKey, SCRIPT_VERIFY_NONE, TransactionSignatureChecker(&tx, 0)))
+            return error("CheckProofOfStake() : VerifySignature failed on coinstake %s", tx.GetHash().ToString().c_str());
 
         CWspStake* wspInput = new CWspStake();
         wspInput->SetInput(txPrev, txin.prevout.n);
