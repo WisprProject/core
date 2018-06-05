@@ -428,7 +428,8 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
 
     unsigned int nBlockFromTime = blockprev.nTime;
     unsigned int nTxTime = block.nTime;
-    if (!CheckStake(txPrev, txin.prevout, tx.nTime, hashProofOfStake))
+    CTransaction txPrev;
+    if (GetTransaction(txin.prevout.hash, txPrev, hashBlock, true) && !CheckStake(txPrev, txin.prevout, tx.nTime, hashProofOfStake))
     {
         return error("CheckProofOfStake() : INFO: check kernel failed on coinstake %s, hashProof=%s \n",
                      tx.GetHash().GetHex(), hashProofOfStake.GetHex());
