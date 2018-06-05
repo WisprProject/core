@@ -4387,6 +4387,7 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
         if (block.GetHash() != Params().HashGenesisBlock() && !CheckWork(block, pindexPrev))
             return false;
 //    }
+    printf("if block is proof of stake\n");
     if (block.IsProofOfStake() && pindex->nHeight > 450) {
         printf("Check stake\n");
         uint256 hashProofOfStake = 0;
@@ -4408,7 +4409,7 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
             mapProofOfStake.insert(make_pair(hash, hashProofOfStake));
     }
 
-    printf("Acceot block header\n");
+    printf("Accept block header\n");
     if (!AcceptBlockHeader(block, state, &pindex))
         return false;
 
@@ -4560,6 +4561,7 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
         CBlockIndex* pindex = NULL;
         bool ret = AcceptBlock (*pblock, state, &pindex, dbp, checked);
         if (pindex && pfrom) {
+            printf("Map block source\n");
             mapBlockSource[pindex->GetBlockHash ()] = pfrom->GetId ();
         }
         printf("Check block index\n");
