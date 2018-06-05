@@ -317,7 +317,7 @@ bool CheckStake(const CDataStream& ssUniqueID, CAmount nValueIn, const uint64_t 
 
     return stakeTargetHit(hashProofOfStake, nValueIn, bnTarget);
 }
-bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout, unsigned int nTimeTx, uint256& hashProofOfStake)
+bool CheckStake(uint256 bnStakeModifierV2, const CTransaction& txPrev, const COutPoint& prevout, unsigned int nTimeTx, uint256& hashProofOfStake)
 {
     CDataStream ss(SER_GETHASH, 0);
     ss << bnStakeModifierV2;
@@ -430,7 +430,7 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
     unsigned int nTxTime = block.nTime;
     uint256 hashBlock;
     CTransaction txPrev;
-    if (GetTransaction(txin.prevout.hash, txPrev, hashBlock, true) && !CheckStake(txPrev, txin.prevout, tx.nTime, hashProofOfStake))
+    if (GetTransaction(txin.prevout.hash, txPrev, hashBlock, true) && !CheckStake(pindex->bnStakeModifierV2, txPrev, txin.prevout, tx.nTime, hashProofOfStake))
     {
         return error("CheckProofOfStake() : INFO: check kernel failed on coinstake %s, hashProof=%s \n",
                      tx.GetHash().GetHex(), hashProofOfStake.GetHex());
