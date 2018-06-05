@@ -4152,7 +4152,7 @@ bool CheckWork(const CBlock block, CBlockIndex* const pindexPrev)
     LogPrintf("%s\n", block->ToString());
     LogPrintf("generated %s\n", FormatMoney(block->vtx[0].vout[0].nValue));
 
-    if (block->hashPrevBlock != hashBestChain)
+    if (block->hashPrevBlock != chainActive.Tip()->GetBlockHash())
         return error("CheckWork() : generated block is stale");
     // Found a solution
     return true;
