@@ -12,6 +12,7 @@
 #include "crypto/sha256.h"
 #include "eccryptoverify.h"
 #include "pubkey.h"
+#include "libzerocoin/bignum.h"
 #include "script/script.h"
 #include "uint256.h"
 
@@ -51,7 +52,13 @@ bool CastToBool(const valtype& vch)
     }
     return false;
 }
-
+static const valtype vchFalse(0);
+static const valtype vchZero(0);
+static const valtype vchTrue(1, 1);
+static const CBigNum bnZero(0);
+static const CBigNum bnOne(1);
+static const CBigNum bnFalse(0);
+static const CBigNum bnTrue(1);
 /**
  * Script is a stack machine (like Forth) that evaluates a predicate
  * returning a bool indicating valid or not.  There are no loops.
@@ -1823,6 +1830,79 @@ bool TransactionSignatureChecker::CheckSig(const vector<unsigned char>& vchSigIn
 
     return true;
 }
+CBigNum CastToBigNum(const valtype& vch, const size_t nMaxNumSize = nDefaultMaxNumSize)
+{
+    if (vch.size() > nMaxNumSize)
+        throw runtime_error("CastToBigNum() : overflow");
+    // Get rid of extra leading zeros
+    return CBigNum(CBigNum(vch).getvch());
+}
+bool CastToBool(const valtype& vch)
+{
+    for (unsigned int i = 0; i < vch.size(); i++)
+    {
+        if (vch[i] != 0)
+        {
+            // Can be negative zero
+            if (i == vch.size()-1 && vch[i] == 0x80)
+                return false;
+            return true;
+        }
+    }
+    return false;
+}
+bool CheckSig(vector<unsigned char> vchSig, const vector<unsigned char> &vchPubKey, const CScript &scriptCode,
+              const CTransaction& txTo, unsigned int nIn, int nHashType, int flags)
+{
+    static CSignatureCache signatureCache;
+
+    CPubKey pubkey(vchPubKey);
+    if (!pubkey.IsValid())
+        return false;
+
+    // Hash type is one byte tacked on to the end of the signature
+    if (vchSig.empty())
+        return false;
+    if (nHashType == 0)
+        nHashType = vchSig.back();
+    else if (nHashType != vchSig.back())
+        return false;
+    vchSig.pop_back();
+
+    uint256 sighash = SignatureHash(scriptCode, txTo, nIn, nHashType);
+
+    if (signatureCache.Get(sighash, vchSig, pubkey))
+        return true;
+
+    if (!pubkey.Verify(sighash, vchSig))
+        return false;
+
+    if (!(flags & SCRIPT_VERIFY_NOCACHE))
+        signatureCache.Set(sighash, vchSig, pubkey);
+
+    return true;
+}
+bool static CheckSignatureEncoding(const valtype &vchSig, unsigned int flags) {
+    // Empty signature. Not strictly DER encoded, but allowed to provide a
+    // compact way to provide an invalid signature for use with CHECK(MULTI)SIG
+    if ((flags & SCRIPT_VERIFY_ALLOW_EMPTY_SIG) && vchSig.size() == 0) {
+        return true;
+    }
+    if (!IsLowDERSignature(vchSig)) {
+        return false;
+    } else if (!(flags & SCRIPT_VERIFY_FIX_HASHTYPE) && !IsDefinedHashtypeSignature(vchSig)) {
+        return false;
+    }
+    return true;
+}
+
+bool static CheckPubKeyEncoding(const valtype &vchSig) {
+    if (!IsCompressedOrUncompressedPubKey(vchSig)) {
+        return false;
+    }
+    return true;
+}
+
 bool VerifyScriptOld(const CScript& scriptSig, const CScript& scriptPubKey, const CTransaction& txTo, unsigned int nIn,
                   unsigned int flags, int nHashType)
 {
