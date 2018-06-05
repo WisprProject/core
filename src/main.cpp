@@ -4150,10 +4150,10 @@ bool CheckWork(const CBlock block, CBlockIndex* const pindexPrev)
             return error("CheckWork() : proof-of-work not meeting target");
 
         //// debug print
-        LogPrintf("CheckWork() : new proof-of-work block found  \n  proof hash: %s  \ntarget: %s\n", hashProof.GetHex(),
-                  hashTarget.GetHex());
-        LogPrintf("%s\n", block.ToString());
-        LogPrintf("generated %s\n", FormatMoney(block.vtx[0].vout[0].nValue));
+//        LogPrintf("CheckWork() : new proof-of-work block found  \n  proof hash: %s  \ntarget: %s\n", hashProof.GetHex(),
+//                  hashTarget.GetHex());
+//        LogPrintf("%s\n", block.ToString());
+//        LogPrintf("generated %s\n", FormatMoney(block.vtx[0].vout[0].nValue));
 
         if (block.hashPrevBlock != chainActive.Tip()->GetBlockHash())
             return error("CheckWork() : generated block is stale");
