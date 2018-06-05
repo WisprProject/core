@@ -197,7 +197,7 @@ void CECKey::GetPubKey(std::vector<unsigned char>& pubkey, bool fCompressed)
 
 bool CECKey::SetPubKey(const unsigned char* pubkey, size_t size)
 {
-    printf("Set pub key");
+    printf("Set pub key\n");
     return o2i_ECPublicKey(&pkey, &pubkey, size) != NULL;
 }
 
@@ -220,7 +220,7 @@ bool CECKey::Verify(const uint256& hash, const std::vector<unsigned char>& vchSi
          * conservative.
          */
         ECDSA_SIG_free(norm_sig);
-        printf("d2i is null");
+        printf("d2i is null\n");
         return false;
     }
     int derlen = i2d_ECDSA_SIG(norm_sig, &norm_der);
