@@ -4139,20 +4139,28 @@ bool CheckWork(const CBlock block, CBlockIndex* const pindexPrev)
     uint256 hashTarget;
     hashTarget.SetCompact(block.nBits);
 
-    if(!block.IsProofOfWork())
-        return error("CheckWork() : %s is not a proof-of-work block", hashBlock.GetHex());
+    if (pindexPrev == NULL)
+        return error("%s : null pindexPrev for block %s", __func__, block.GetHash().ToString().c_str());
 
-    if (hashProof > hashTarget)
-        return error("CheckWork() : proof-of-work not meeting target");
+    unsigned int nBitsRequired = GetNextWorkRequired(pindexPrev, &block);
 
-    //// debug print
-    LogPrintf("CheckWork() : new proof-of-work block found  \n  proof hash: %s  \ntarget: %s\n", hashProof.GetHex(), hashTarget.GetHex());
-    LogPrintf("%s\n", block.ToString());
-    LogPrintf("generated %s\n", FormatMoney(block.vtx[0].vout[0].nValue));
+    if(block.IsProofOfWork()) {
+        if (hashProof > hashTarget)
+            return error("CheckWork() : proof-of-work not meeting target");
 
-    if (block.hashPrevBlock != chainActive.Tip()->GetBlockHash())
-        return error("CheckWork() : generated block is stale");
-    // Found a solution
+        //// debug print
+        LogPrintf("CheckWork() : new proof-of-work block found  \n  proof hash: %s  \ntarget: %s\n", hashProof.GetHex(),
+                  hashTarget.GetHex());
+        LogPrintf("%s\n", block.ToString());
+        LogPrintf("generated %s\n", FormatMoney(block.vtx[0].vout[0].nValue));
+
+        if (block.hashPrevBlock != chainActive.Tip()->GetBlockHash())
+            return error("CheckWork() : generated block is stale");
+        // Found a solution
+    }
+    if (block.nBits != nBitsRequired)
+        return error("%s : incorrect proof of work at %d", __func__, pindexPrev->nHeight + 1);
+
     return true;
 }
 
@@ -4370,9 +4378,10 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
         }
     }
 
-    if (block.GetHash() != Params().HashGenesisBlock() && !CheckWork(block, pindexPrev))
-        return false;
-
+//    if(!block.IsProofOfStake() && pindex->nHeight < 450) {
+        if (block.GetHash() != Params().HashGenesisBlock() && !CheckWork(block, pindexPrev))
+            return false;
+//    }
     if (block.IsProofOfStake()) {
         uint256 hashProofOfStake = 0;
         unique_ptr<CStakeInput> stake;
