@@ -17,10 +17,10 @@
 
 uint256 CBlockHeader::GetHash() const
 {
-    if(nVersion < 8)
+    if(nVersion < 7)
         return scrypt_blockhash(CVOIDBEGIN(nVersion));
 
-    return  Hash(BEGIN(nVersion), END(nAccumulatorCheckpoint));
+    return  Hash(BEGIN(nVersion), END(nNonce));
 }
 
 uint256 CBlock::BuildMerkleTree(bool* fMutated) const
