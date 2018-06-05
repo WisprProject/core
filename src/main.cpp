@@ -4357,17 +4357,22 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
     CBlockIndex*& pindex = *ppindex;
 
     // Get prev block index
+    printf("Get prev block index\n");
     CBlockIndex* pindexPrev = NULL;
     if (block.GetHash() != Params().HashGenesisBlock()) {
+
+        printf("map block index\n");
         BlockMap::iterator mi = mapBlockIndex.find(block.hashPrevBlock);
         if (mi == mapBlockIndex.end())
             return state.DoS(0, error("%s : prev block %s not found", __func__, block.hashPrevBlock.ToString().c_str()), 0, "bad-prevblk");
         pindexPrev = (*mi).second;
         if (pindexPrev->nStatus & BLOCK_FAILED_MASK) {
             //If this "invalid" block is an exact match from the checkpoints, then reconsider it
+            printf("Is invalid block a checkpoint?\n");
             if (Checkpoints::CheckBlock(pindexPrev->nHeight, block.hashPrevBlock, true)) {
                 LogPrintf("%s : Reconsidering block %s height %d\n", __func__, pindexPrev->GetBlockHash().GetHex(), pindexPrev->nHeight);
                 CValidationState statePrev;
+                printf("Reconsider block\n");
                 ReconsiderBlock(statePrev, pindexPrev);
                 if (statePrev.IsValid()) {
                     ActivateBestChain(statePrev);
@@ -4380,10 +4385,12 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
     }
 
 //    if(!block.IsProofOfStake() && pindex->nHeight < 450) {
+    printf("Check work\n");
         if (block.GetHash() != Params().HashGenesisBlock() && !CheckWork(block, pindexPrev))
             return false;
 //    }
     if (block.IsProofOfStake() && pindex->nHeight > 450) {
+        printf("Check stake\n");
         uint256 hashProofOfStake = 0;
         unique_ptr<CStakeInput> stake;
 
@@ -4403,6 +4410,7 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
             mapProofOfStake.insert(make_pair(hash, hashProofOfStake));
     }
 
+    printf("Acceot block header\n");
     if (!AcceptBlockHeader(block, state, &pindex))
         return false;
 
@@ -4417,6 +4425,7 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
             pindex->nStatus |= BLOCK_FAILED_VALID;
             setDirtyBlockIndex.insert(pindex);
         }
+        printf("Contextual block failed\n");
         return false;
     }
 
