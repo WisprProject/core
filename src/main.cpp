@@ -1807,10 +1807,8 @@ double ConvertBitsToDouble(unsigned int nBits)
 
 int64_t GetBlockValue(int nHeight)
 {
-    if (Params().NetworkID() == CBaseChainParams::TESTNET) {
-        if (nHeight < 450 && nHeight > 0)
-            return 125000 * COIN;
-    }
+    if (nHeight < 450 && nHeight > 0)
+        return 125000 * COIN;
 
     int64_t nSubsidy = 0;
     if (nHeight == 0) {
