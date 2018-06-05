@@ -324,7 +324,7 @@ bool CheckStake(uint256 bnStakeModifierV2, const CTransaction& txPrev, const COu
     ss << txPrev.nTime << prevout.hash << prevout.n << nTimeTx;
 //    LogPrintf("%s: modifier:%d nTimeBlockFrom:%d nTimeTx:%d hash:%s\n", __func__, bnStakeModifierV2, prevout.hash, prevout.n, hashProofOfStake.GetHex());
 
-    return stakeTargetHit(hashProofOfStake, nValueIn, bnTarget);
+    return stakeTargetHit(hashProofOfStake, txPrev.vout[prevout.n].nValue, bnTarget);
 }
 
 bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockFrom, unsigned int& nTimeTx, uint256& hashProofOfStake)
