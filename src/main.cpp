@@ -4423,7 +4423,7 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
     int nHeight = pindex->nHeight;
 
     // Write block to history file
-     printf("Write block to history file");
+     printf("Write block to history file\n");
     try {
         unsigned int nBlockSize = ::GetSerializeSize(block, SER_DISK, CLIENT_VERSION);
         CDiskBlockPos blockPos;
@@ -4437,10 +4437,10 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
         if (!ReceivedBlockTransactions(block, state, pindex, blockPos))
             return error("AcceptBlock() : ReceivedBlockTransactions failed");
     } catch (std::runtime_error& e) {
-        printf("Write block to history failed");
+        printf("Write block to history failed\n");
         return state.Abort(std::string("System error: ") + e.what());
     }
-    printf("End of accept block");
+    printf("End of accept block\n");
     return true;
 }
 
@@ -4549,16 +4549,19 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
         }
 
         // Store to disk
+        printf("Store to disk");
         CBlockIndex* pindex = NULL;
         bool ret = AcceptBlock (*pblock, state, &pindex, dbp, checked);
         if (pindex && pfrom) {
             mapBlockSource[pindex->GetBlockHash ()] = pfrom->GetId ();
         }
+        printf("Check block index");
         CheckBlockIndex ();
         if (!ret)
             return error ("%s : AcceptBlock FAILED", __func__);
     }
 
+    printf("Activate best chain");
     if (!ActivateBestChain(state, pblock, checked))
         return error("%s : ActivateBestChain failed", __func__);
 
@@ -4582,7 +4585,7 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
 
     LogPrintf("%s : ACCEPTED Block %ld in %ld milliseconds with size=%d\n", __func__, GetHeight(), GetTimeMillis() - nStartTime,
               pblock->GetSerializeSize(SER_DISK, CLIENT_VERSION));
-
+    printf("End of process new block");
     return true;
 }
 
