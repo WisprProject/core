@@ -197,14 +197,16 @@ void CECKey::GetPubKey(std::vector<unsigned char>& pubkey, bool fCompressed)
 
 bool CECKey::SetPubKey(const unsigned char* pubkey, size_t size)
 {
+    printf("Set pub key");
     return o2i_ECPublicKey(&pkey, &pubkey, size) != NULL;
 }
 
 bool CECKey::Verify(const uint256& hash, const std::vector<unsigned char>& vchSig)
 {
-    if (vchSig.empty())
+    if (vchSig.empty()) {
+        printf("vchSig is empty");
         return false;
-
+    }
     // New versions of OpenSSL will reject non-canonical DER signatures. de/re-serialize first.
     unsigned char* norm_der = NULL;
     ECDSA_SIG* norm_sig = ECDSA_SIG_new();
@@ -218,6 +220,7 @@ bool CECKey::Verify(const uint256& hash, const std::vector<unsigned char>& vchSi
          * conservative.
          */
         ECDSA_SIG_free(norm_sig);
+        printf("d2i is null");
         return false;
     }
     int derlen = i2d_ECDSA_SIG(norm_sig, &norm_der);
@@ -225,6 +228,7 @@ bool CECKey::Verify(const uint256& hash, const std::vector<unsigned char>& vchSi
     if (derlen <= 0)
         return false;
 
+    printf("ECDSA_verify");
     // -1 = error, 0 = bad sig, 1 = good
     bool ret = ECDSA_verify(0, (unsigned char*)&hash, sizeof(hash), norm_der, derlen, pkey) == 1;
     OPENSSL_free(norm_der);
