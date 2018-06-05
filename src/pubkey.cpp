@@ -16,18 +16,18 @@
 bool CPubKey::Verify(const uint256& hash, const std::vector<unsigned char>& vchSig) const
 {
     if (!IsValid())
-        return false;
+        printf("Key length not valid");
 #ifdef USE_SECP256K1
     if (secp256k1_ecdsa_verify((const unsigned char*)&hash, 32, &vchSig[0], vchSig.size(), begin(), size()) != 1)
-        return false;
+        printf("SECP is not valid");
 #else
     CECKey key;
     if (!key.SetPubKey(begin(), size()))
-        return false;
+        printf("setPubKey is not valid");
     if (!key.Verify(hash, vchSig))
-        return false;
+        printf("Key verify  is not valid");
 #endif
-    return true;
+    return false;
 }
 
 bool CPubKey::RecoverCompact(const uint256& hash, const std::vector<unsigned char>& vchSig)
