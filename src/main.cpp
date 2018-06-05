@@ -4382,14 +4382,14 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
         if (block.GetHash() != Params().HashGenesisBlock() && !CheckWork(block, pindexPrev))
             return false;
 //    }
-    if (block.IsProofOfStake()) {
+    if (block.IsProofOfStake() && pindex->nHeight > 450) {
         uint256 hashProofOfStake = 0;
         unique_ptr<CStakeInput> stake;
 
 //        if (!CheckProofOfStakeOld(pindexPrev,  vtx[1], block.nBits, hashProof, targetProofOfStake))
 //            return state.DoS(100, error("%s: proof of stake check failed", __func__));
-//        if (!CheckProofOfStake(block, hashProofOfStake, stake))
-//            return state.DoS(100, error("%s: proof of stake check failed", __func__));
+        if (!CheckProofOfStake(block, hashProofOfStake, stake))
+            return state.DoS(100, error("%s: proof of stake check failed", __func__));
 
         if (!stake)
             return error("%s: null stake ptr", __func__);
