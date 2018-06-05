@@ -1062,6 +1062,19 @@ bool TransactionSignatureChecker::VerifySignature(const std::vector<unsigned cha
 {
     return pubkey.Verify(sighash, vchSig);
 }
+bool TransactionSignatureChecker::VerifySignatureOld(const CTransaction& txFrom, const CTransaction& txTo, unsigned int nIn, unsigned int flags, int nHashType)
+{
+    assert(nIn < txTo.vin.size());
+    const CTxIn& txin = txTo.vin[nIn];
+    if (txin.prevout.n >= txFrom.vout.size())
+        return false;
+    const CTxOut& txout = txFrom.vout[txin.prevout.n];
+
+    if (txin.prevout.hash != txFrom.GetHash())
+        return false;
+
+    return VerifyScriptOld(txin.scriptSig, txout.scriptPubKey, txTo, nIn, flags, nHashType);
+}
 
 bool TransactionSignatureChecker::CheckSig(const vector<unsigned char>& vchSigIn, const vector<unsigned char>& vchPubKey, const CScript& scriptCode) const
 {
@@ -1083,7 +1096,42 @@ bool TransactionSignatureChecker::CheckSig(const vector<unsigned char>& vchSigIn
 
     return true;
 }
+bool TransactionSignatureChecker::VerifyScriptOld(const CScript& scriptSig, const CScript& scriptPubKey, const CTransaction& txTo, unsigned int nIn,
+                  unsigned int flags, int nHashType)
+{
+    vector<vector<unsigned char> > stack, stackCopy;
+    if (!EvalScript(stack, scriptSig, txTo, nIn, flags, nHashType))
+        return false;
 
+    stackCopy = stack;
+
+    if (!EvalScript(stack, scriptPubKey, txTo, nIn, flags, nHashType))
+        return false;
+    if (stack.empty())
+        return false;
+
+    if (CastToBool(stack.back()) == false)
+        return false;
+
+    // Additional validation for spend-to-script-hash transactions:
+    if (scriptPubKey.IsPayToScriptHash())
+    {
+        if (!scriptSig.IsPushOnly()) // scriptSig must be literals-only
+            return false;            // or validation fails
+
+        const valtype& pubKeySerialized = stackCopy.back();
+        CScript pubKey2(pubKeySerialized.begin(), pubKeySerialized.end());
+        popstack(stackCopy);
+
+        if (!EvalScript(stackCopy, pubKey2, txTo, nIn, flags, nHashType))
+            return false;
+        if (stackCopy.empty())
+            return false;
+        return CastToBool(stackCopy.back());
+    }
+
+    return true;
+}
 bool VerifyScript(const CScript& scriptSig, const CScript& scriptPubKey, unsigned int flags, const BaseSignatureChecker& checker, ScriptError* serror)
 {
     set_error(serror, SCRIPT_ERR_UNKNOWN_ERROR);

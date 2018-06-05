@@ -4388,7 +4388,7 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
             return false;
 //    }
     printf("if block is proof of stake\n");
-    if (block.IsProofOfStake() && pindex->nHeight > 450) {
+    if (block.IsProofOfStake()) {
         printf("Check stake\n");
         uint256 hashProofOfStake = 0;
         unique_ptr<CStakeInput> stake;
