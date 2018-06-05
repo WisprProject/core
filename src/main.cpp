@@ -4136,12 +4136,12 @@ bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bo
 
 bool CheckWork(const CBlock block, CBlockIndex* const pindexPrev)
 {
-    uint256 hashBlock = block->GetHash();
-    uint256 hashProof = block->GetPoWHash();
+    uint256 hashBlock = block.GetHash();
+    uint256 hashProof = block.GetPoWHash();
     uint256 hashTarget;
-    hashTarget.SetCompact(block->nBits);
+    hashTarget.SetCompact(block.nBits);
 
-    if(!block->IsProofOfWork())
+    if(!block.IsProofOfWork())
         return error("CheckWork() : %s is not a proof-of-work block", hashBlock.GetHex());
 
     if (hashProof > hashTarget)
@@ -4149,10 +4149,10 @@ bool CheckWork(const CBlock block, CBlockIndex* const pindexPrev)
 
     //// debug print
     LogPrintf("CheckWork() : new proof-of-work block found  \n  proof hash: %s  \ntarget: %s\n", hashProof.GetHex(), hashTarget.GetHex());
-    LogPrintf("%s\n", block->ToString());
-    LogPrintf("generated %s\n", FormatMoney(block->vtx[0].vout[0].nValue));
+    LogPrintf("%s\n", block.ToString());
+    LogPrintf("generated %s\n", FormatMoney(block.vtx[0].vout[0].nValue));
 
-    if (block->hashPrevBlock != chainActive.Tip()->GetBlockHash())
+    if (block.hashPrevBlock != chainActive.Tip()->GetBlockHash())
         return error("CheckWork() : generated block is stale");
     // Found a solution
     return true;
