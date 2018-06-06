@@ -105,7 +105,7 @@ std::string EncodeBase58(const unsigned char* pbegin, const unsigned char* pend)
     CBigNum rem;
     while (bn > bn0)
     {
-        if (!BN_div(&dv.bn, &rem.b, &bn.bn, &bn58.bn, pctx))
+        if (!BN_div(dv.bn, rem.b, bn.bn, bn58.bn, pctx))
             throw bignum_error("EncodeBase58 : BN_div failed");
         bn = dv;
         unsigned int c = rem.getulong();
