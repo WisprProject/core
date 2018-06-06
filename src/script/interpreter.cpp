@@ -1091,6 +1091,7 @@ uint256 SignatureHash(const CScript& scriptCode, const CTransaction& txTo, unsig
     // Serialize and hash
     CHashWriter ss(SER_GETHASH, 0);
     ss << txTmp << nHashType;
+    printf("SignatureHash() : hash=%s \n", ss.GetHash().ToString().c_str());
     return ss.GetHash();
 }
 //uint256 SignatureHash(const CScript& scriptCode, const CTransaction& txTo, unsigned int nIn, int nHashType)
