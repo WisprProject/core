@@ -21,7 +21,8 @@ EXTRA_DIST += \
 	test/data/txcreatesign.hex
 
 JSON_TEST_FILES = \
-  test/data/script_valid.json \
+  test/data/
+  script_valid.json \
   test/data/base58_keys_valid.json \
   test/data/sig_canonical.json \
   test/data/sig_noncanonical.json \
@@ -60,6 +61,7 @@ BITCOIN_TESTS =\
   test/key_tests.cpp \
   test/main_tests.cpp \
   test/mempool_tests.cpp \
+  test/miner_tests.cpp \
   test/mruset_tests.cpp \
   test/multisig_tests.cpp \
   test/netbase_tests.cpp \
