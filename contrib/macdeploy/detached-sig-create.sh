@@ -2,7 +2,7 @@
 set -e
 
 ROOTDIR=dist
-BUNDLE=${ROOTDIR}/Pivx-Qt.app
+BUNDLE=${ROOTDIR}/Wispr-Qt.app
 CODESIGN=codesign
 TEMPDIR=sign.temp
 TEMPLIST=${TEMPDIR}/signatures.txt
@@ -10,7 +10,7 @@ OUT=signature.tar.gz
 
 if [ ! -n "$1" ]; then
   echo "usage: $0 <codesign args>"
-  echo "example: $0 -s MyIdentity"
+  echo "example: $0 -s MyIdentity"F-
   exit 1
 fi
 

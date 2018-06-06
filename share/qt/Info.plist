@@ -17,7 +17,7 @@
   <string>APPL</string>
 
   <key>CFBundleGetInfoString</key>
-  <string>2.3.1, Copyright © 2009-2017 The Bitcoin Core developers, 2014-2017 The Dash Core developers, 2015-2017 The Pivx Core developers</string>
+  <string>2.3.1, Copyright © 2009-2017 The Bitcoin Core developers, 2014-2017 The Dash Core developers, 2015-2017 The Wispr Core developers</string>
 
   <key>CFBundleShortVersionString</key>
   <string>2.3.1</string>
@@ -32,7 +32,7 @@
   <string>Wispr-Qt</string>
 
   <key>CFBundleIdentifier</key>
-  <string>io.wispr.Pivx-Qt</string>
+  <string>io.wispr.Wispr-Qt</string>
 
   <key>CFBundleURLTypes</key>
   <array>
@@ -40,7 +40,7 @@
       <key>CFBundleTypeRole</key>
       <string>Editor</string>
       <key>CFBundleURLName</key>
-      <string>io.wispr.PivxPayment</string>
+      <string>io.wispr.WisprPayment</string>
       <key>CFBundleURLSchemes</key>
       <array>
         <string>wispr</string>
@@ -54,7 +54,7 @@
       <key>UTTypeIdentifier</key>
       <string>io.wispr.paymentrequest</string>
       <key>UTTypeDescription</key>
-      <string>Pivx payment request</string>
+      <string>Wispr payment request</string>
       <key>UTTypeConformsTo</key>
       <array>
         <string>public.data</string>

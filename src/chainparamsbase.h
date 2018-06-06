@@ -1,4 +1,5 @@
 // Copyright (c) 2014 The Bitcoin developers
+// Copyright (c) 2017 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -10,7 +11,7 @@
 
 /**
  * CBaseChainParams defines the base parameters (shared between wispr-cli and wisprd)
- * of a given instance of the Pivx system.
+ * of a given instance of the Wispr system.
  */
 class CBaseChainParams
 {

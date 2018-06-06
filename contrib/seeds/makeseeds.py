@@ -6,9 +6,9 @@
 # Generate seeds.txt from Pieter's DNS seeder
 #
 
-NSEEDS=512
+NSEEDS = 512
 
-MAX_SEEDS_PER_ASN=2
+MAX_SEEDS_PER_ASN = 2
 
 MIN_BLOCKS = 615801
 
@@ -26,12 +26,13 @@ import collections
 PATTERN_IPV4 = re.compile(r"^((\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})):(\d+)$")
 PATTERN_IPV6 = re.compile(r"^\[([0-9a-z:]+)\]:(\d+)$")
 PATTERN_ONION = re.compile(r"^([abcdefghijklmnopqrstuvwxyz234567]{16}\.onion):(\d+)$")
-PATTERN_AGENT = re.compile(r"^(/PIVXCore:2.2.(0|1|99)/)$")
+PATTERN_AGENT = re.compile(r"^(/WISPRCore:2.2.(0|1|99)/)$")
+
 
 def parseline(line):
     sline = line.split()
     if len(sline) < 11:
-       return None
+        return None
     m = PATTERN_IPV4.match(sline[0])
     sortkey = None
     ip = None
@@ -47,18 +48,18 @@ def parseline(line):
                 port = int(m.group(2))
         else:
             net = 'ipv6'
-            if m.group(1) in ['::']: # Not interested in localhost
+            if m.group(1) in ['::']:  # Not interested in localhost
                 return None
             ipstr = m.group(1)
-            sortkey = ipstr # XXX parse IPv6 into number, could use name_to_ipv6 from generate-seeds
+            sortkey = ipstr  # XXX parse IPv6 into number, could use name_to_ipv6 from generate-seeds
             port = int(m.group(2))
     else:
         # Do IPv4 sanity check
         ip = 0
-        for i in range(0,4):
-            if int(m.group(i+2)) < 0 or int(m.group(i+2)) > 255:
+        for i in range(0, 4):
+            if int(m.group(i + 2)) < 0 or int(m.group(i + 2)) > 255:
                 return None
-            ip = ip + (int(m.group(i+2)) << (8*(3-i)))
+            ip = ip + (int(m.group(i + 2)) << (8 * (3 - i)))
         if ip == 0:
             return None
         net = 'ipv4'
@@ -98,12 +99,14 @@ def parseline(line):
         'sortkey': sortkey,
     }
 
+
 def filtermultiport(ips):
     '''Filter out hosts with more nodes per IP'''
     hist = collections.defaultdict(list)
     for ip in ips:
         hist[ip['sortkey']].append(ip)
-    return [value[0] for (key,value) in list(hist.items()) if len(value)==1]
+    return [value[0] for (key, value) in list(hist.items()) if len(value) == 1]
+
 
 # Based on Greg Maxwell's seed_filter.py
 def filterbyasn(ips, max_per_asn, max_total):
@@ -119,7 +122,9 @@ def filterbyasn(ips, max_per_asn, max_total):
         if len(result) == max_total:
             break
         try:
-            asn = int([x.to_text() for x in dns.resolver.query('.'.join(reversed(ip['ip'].split('.'))) + '.origin.asn.cymru.com', 'TXT').response.answer][0].split('\"')[1].split(' ')[0])
+            asn = int([x.to_text() for x in
+                       dns.resolver.query('.'.join(reversed(ip['ip'].split('.'))) + '.origin.asn.cymru.com',
+                                          'TXT').response.answer][0].split('\"')[1].split(' ')[0])
             if asn not in asn_count:
                 asn_count[asn] = 0
             if asn_count[asn] == max_per_asn:
@@ -135,6 +140,7 @@ def filterbyasn(ips, max_per_asn, max_total):
     result.extend(ips_ipv6)
     result.extend(ips_onion)
     return result
+
 
 def main():
     lines = sys.stdin.readlines()
@@ -166,6 +172,7 @@ def main():
             print('[%s]:%i' % (ip['ip'], ip['port']))
         else:
             print('%s:%i' % (ip['ip'], ip['port']))
+
 
 if __name__ == '__main__':
     main()

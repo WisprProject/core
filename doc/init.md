@@ -89,7 +89,7 @@ use old versions of Upstart and do not supply the start-stop-daemon uitility.
 Copy wisprd.init to /etc/init.d/wisprd. Test by running "service wisprd start".
 
 Using this script, you can adjust the path and flags to the wisprd program by
-setting the PIVXD and FLAGS environment variables in the file
+setting the WISPRD and FLAGS environment variables in the file
 /etc/sysconfig/wisprd. You can also use the DAEMONOPTS environment variable here.
 
 5. Auto-respawn

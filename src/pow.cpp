@@ -1,5 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
+// Copyright (c) 2014-2015 The Dash developers
+// Copyright (c) 2015-2017 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -11,7 +13,6 @@
 #include "primitives/block.h"
 #include "uint256.h"
 #include "util.h"
-
 #include <math.h>
 
 
@@ -117,7 +118,9 @@ bool CheckProofOfWork(uint256 hash, unsigned int nBits)
         return true;
 
     bnTarget.SetCompact(nBits, &fNegative, &fOverflow);
-
+    printf("nBits = %08x\n", nBits);
+    printf("bnTarget=%s\n", bnTarget.ToString().c_str());
+    printf("hash=%s\n", hash.ToString().c_str());
     // Check range
     if (fNegative || bnTarget == 0 || fOverflow || bnTarget > Params().ProofOfWorkLimit())
         return error("CheckProofOfWork() : nBits below minimum work");

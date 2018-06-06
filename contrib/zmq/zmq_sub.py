@@ -25,26 +25,26 @@ try:
         sequence = "Unknown";
 
         if len(msg[-1]) == 4:
-          msgSequence = struct.unpack('<I', msg[-1])[-1]
-          sequence = str(msgSequence)
+            msgSequence = struct.unpack('<I', msg[-1])[-1]
+            sequence = str(msgSequence)
 
         if topic == "hashblock":
-            print('- HASH BLOCK ('+sequence+') -')
+            print('- HASH BLOCK (' + sequence + ') -')
             print(binascii.hexlify(body).decode("utf-8"))
         elif topic == "hashtx":
-            print ('- HASH TX ('+sequence+') -')
+            print ('- HASH TX (' + sequence + ') -')
             print(binascii.hexlify(body).decode("utf-8"))
         elif topic == "hashtxlock":
-            print('- HASH TX LOCK ('+sequence+') -')
+            print('- HASH TX LOCK (' + sequence + ') -')
             print(binascii.hexlify(body).decode("utf-8"))
         elif topic == "rawblock":
-            print('- RAW BLOCK HEADER ('+sequence+') -')
+            print('- RAW BLOCK HEADER (' + sequence + ') -')
             print(binascii.hexlify(body[:80]).decode("utf-8"))
         elif topic == "rawtx":
-            print('- RAW TX ('+sequence+') -')
+            print('- RAW TX (' + sequence + ') -')
             print(binascii.hexlify(body).decode("utf-8"))
         elif topic == "rawtxlock":
-            print('- RAW TX LOCK ('+sequence+') -')
+            print('- RAW TX LOCK (' + sequence + ') -')
             print(binascii.hexlify(body).decode("utf-8"))
 
 except KeyboardInterrupt:

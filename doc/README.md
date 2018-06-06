@@ -3,7 +3,7 @@ Wispr Core
 
 Setup
 ---------------------
-[Wispr Core](http://wispr.org/wallet) is the original Wispr client and it builds the backbone of the network. However, it downloads and stores the entire history of Wispr transactions; depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more. Thankfully you only have to do this once.
+[Wispr Core](http://wispr.tech/wallet) is the original Wispr client and it builds the backbone of the network. However, it downloads and stores the entire history of Wispr transactions; depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more. Thankfully you only have to do this once.
 
 Running
 ---------------------
@@ -28,8 +28,8 @@ Drag Wispr-Qt to your applications folder, and then run Wispr-Qt.
 
 * See the documentation at the [Wispr Wiki](https://en.bitcoin.it/wiki/Main_Page) ***TODO***
 for help and more information.
-* Ask for help on [BitcoinTalk](https://bitcointalk.org/index.php?topic=1262920.0) or on the [Wispr Forum](http://forum.wispr.org/).
-* Join one of our Slack groups [Wispr Slack Groups](https://wispr.org/slack-logins/).
+* Ask for help on [BitcoinTalk](https://bitcointalk.org/index.php?topic=1262920.0) or on the [Wispr Forum](http://forum.wispr.tech/).
+* Join one of our Slack groups [Wispr Slack Groups](https://wispr.tech/slack-logins/).
 
 Building
 ---------------------
@@ -41,7 +41,7 @@ The following are developer notes on how to build Wispr on your native platform.
 
 Development
 ---------------------
-The Pivx repo's [root README](https://github.com/Wispr-Project/Wispr/blob/master/README.md) contains relevant information on the development process and automated testing.
+The Wispr repo's [root README](https://github.com/Wispr-Project/Wispr/blob/master/README.md) contains relevant information on the development process and automated testing.
 
 - [Developer Notes](developer-notes.md)
 - [Multiwallet Qt Development](multiwallet-qt.md)
@@ -55,7 +55,7 @@ The Pivx repo's [root README](https://github.com/Wispr-Project/Wispr/blob/master
 
 ### Resources
 
-* Discuss on the [BitcoinTalk](https://bitcointalk.org/index.php?topic=1262920.0) or the [Wispr](http://forum.wispr.org/) forum.
+* Discuss on the [BitcoinTalk](https://bitcointalk.org/index.php?topic=1262920.0) or the [Wispr](http://forum.wispr.tech/) forum.
 * Join the [Wispr-Dev](https://wispr-dev.slack.com/) Slack group ([Sign-Up](https://wispr-dev.herokuapp.com/)).
 
 ### Miscellaneous

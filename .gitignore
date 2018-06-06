@@ -1,4 +1,6 @@
 .gitignore
+.idea/
+CMakeLists.txt
 *.sublime-project
 *.sublime-workspace
 todo.txt
@@ -82,7 +84,7 @@ src/qt/test/moc*.cpp
 *.qm
 Makefile
 wispr-qt
-Wispr-Qt.app
+WISPR-Qt.app
 
 # Unit-tests
 Makefile.test

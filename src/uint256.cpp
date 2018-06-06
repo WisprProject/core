@@ -1,5 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
+// Copyright (c) 2017 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -269,7 +270,7 @@ template std::string base_uint<512>::ToStringReverseEndian() const;
 
 // This implementation directly uses shifts instead of going
 // through an intermediate MPI representation.
-uint256& uint256::SetCompact(uint32_t nCompact, bool* pfNegative, bool* pfOverflow)
+uint256& uint256::SetCompact(unsigned int nCompact, bool* pfNegative, bool* pfOverflow)
 {
     int nSize = nCompact >> 24;
     uint32_t nWord = nCompact & 0x007fffff;

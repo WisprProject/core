@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The Wispr developers
+// Copyright (c) 2015-2017 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -20,8 +20,8 @@ QList<BitcoinUnits::Unit> BitcoinUnits::availableUnits()
 {
     QList<BitcoinUnits::Unit> unitlist;
     unitlist.append(WSP);
-    unitlist.append(mPIV);
-    unitlist.append(uPIV);
+    unitlist.append(mWSP);
+    unitlist.append(uWSP);
     return unitlist;
 }
 
@@ -29,8 +29,8 @@ bool BitcoinUnits::valid(int unit)
 {
     switch (unit) {
     case WSP:
-    case mPIV:
-    case uPIV:
+    case mWSP:
+    case uWSP:
         return true;
     default:
         return false;
@@ -42,9 +42,9 @@ QString BitcoinUnits::id(int unit)
     switch (unit) {
     case WSP:
         return QString("wispr");
-    case mPIV:
+    case mWSP:
         return QString("mwispr");
-    case uPIV:
+    case uWSP:
         return QString::fromUtf8("uwispr");
     default:
         return QString("???");
@@ -57,21 +57,21 @@ QString BitcoinUnits::name(int unit)
         switch (unit) {
         case WSP:
             return QString("WSP");
-        case mPIV:
-            return QString("mPIV");
-        case uPIV:
-            return QString::fromUtf8("μPIV");
+        case mWSP:
+            return QString("mWSP");
+        case uWSP:
+            return QString::fromUtf8("μWSP");
         default:
             return QString("???");
         }
     } else {
         switch (unit) {
         case WSP:
-            return QString("tPIV");
-        case mPIV:
-            return QString("mtPIV");
-        case uPIV:
-            return QString::fromUtf8("μtPIV");
+            return QString("tWSP");
+        case mWSP:
+            return QString("mtWSP");
+        case uWSP:
+            return QString::fromUtf8("μtWSP");
         default:
             return QString("???");
         }
@@ -84,9 +84,9 @@ QString BitcoinUnits::description(int unit)
         switch (unit) {
         case WSP:
             return QString("WSP");
-        case mPIV:
+        case mWSP:
             return QString("Milli-WSP (1 / 1" THIN_SP_UTF8 "000)");
-        case uPIV:
+        case uWSP:
             return QString("Micro-WSP (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
         default:
             return QString("???");
@@ -94,11 +94,11 @@ QString BitcoinUnits::description(int unit)
     } else {
         switch (unit) {
         case WSP:
-            return QString("TestPIVs");
-        case mPIV:
-            return QString("Milli-TestPIV (1 / 1" THIN_SP_UTF8 "000)");
-        case uPIV:
-            return QString("Micro-TestPIV (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+            return QString("TestWSPs");
+        case mWSP:
+            return QString("Milli-TestWSP (1 / 1" THIN_SP_UTF8 "000)");
+        case uWSP:
+            return QString("Micro-TestWSP (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
         default:
             return QString("???");
         }
@@ -110,9 +110,9 @@ qint64 BitcoinUnits::factor(int unit)
     switch (unit) {
     case WSP:
         return 100000000;
-    case mPIV:
+    case mWSP:
         return 100000;
-    case uPIV:
+    case uWSP:
         return 100;
     default:
         return 100000000;
@@ -124,9 +124,9 @@ int BitcoinUnits::decimals(int unit)
     switch (unit) {
     case WSP:
         return 8;
-    case mPIV:
+    case mWSP:
         return 5;
-    case uPIV:
+    case uWSP:
         return 2;
     default:
         return 0;
