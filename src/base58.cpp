@@ -83,36 +83,41 @@ std::string DecodeBase58(const char* psz)
 
 std::string EncodeBase58(const unsigned char* pbegin, const unsigned char* pend)
 {
-    // Skip & count leading zeroes.
-    int zeroes = 0;
-    while (pbegin != pend && *pbegin == 0) {
-        pbegin++;
-        zeroes++;
-    }
-    // Allocate enough space in big-endian base58 representation.
-    std::vector<unsigned char> b58((pend - pbegin) * 138 / 100 + 1); // log(256) / log(58), rounded up.
-    // Process the bytes.
-    while (pbegin != pend) {
-        int carry = *pbegin;
-        // Apply "b58 = b58 * 256 + ch".
-        for (std::vector<unsigned char>::reverse_iterator it = b58.rbegin(); it != b58.rend(); it++) {
-            carry += 256 * (*it);
-            *it = carry % 58;
-            carry /= 58;
-        }
-        assert(carry == 0);
-        pbegin++;
-    }
-    // Skip leading zeroes in base58 result.
-    std::vector<unsigned char>::iterator it = b58.begin();
-    while (it != b58.end() && *it == 0)
-        it++;
-    // Translate the result into a string.
+    CAutoBN_CTX pctx;
+    CBigNum bn58 = 58;
+    CBigNum bn0 = 0;
+
+    // Convert big endian data to little endian
+    // Extra zero at the end make sure bignum will interpret as a positive number
+    std::vector<unsigned char> vchTmp(pend-pbegin+1, 0);
+    reverse_copy(pbegin, pend, vchTmp.begin());
+
+    // Convert little endian data to bignum
+    CBigNum bn;
+    bn.setvch(vchTmp);
+
+    // Convert bignum to std::string
     std::string str;
-    str.reserve(zeroes + (b58.end() - it));
-    str.assign(zeroes, '1');
-    while (it != b58.end())
-        str += pszBase58[*(it++)];
+    // Expected size increase from base58 conversion is approximately 137%
+    // use 138% to be safe
+    str.reserve((pend - pbegin) * 138 / 100 + 1);
+    CBigNum dv;
+    CBigNum rem;
+    while (bn > bn0)
+    {
+        if (!BN_div(&dv, &rem, &bn, &bn58, pctx))
+            throw bignum_error("EncodeBase58 : BN_div failed");
+        bn = dv;
+        unsigned int c = rem.getulong();
+        str += pszBase58[c];
+    }
+
+    // Leading zeroes encoded as base58 zeros
+    for (const unsigned char* p = pbegin; p < pend && *p == 0; p++)
+        str += pszBase58[0];
+
+    // Convert little endian std::string to big endian
+    reverse(str.begin(), str.end());
     return str;
 }
 
