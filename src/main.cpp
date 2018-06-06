@@ -1863,7 +1863,7 @@ int64_t GetMasternodePayment(int nHeight, int64_t blockValue, int nMasternodeCou
         //When zWSP is staked, masternode only gets 2 WSP
         ret = 4 * COIN;
         if (isZWSPStake)
-            ret = 4 * COIN;
+            ret = 3 * COIN;
     }
 
     return ret;
