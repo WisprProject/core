@@ -1055,7 +1055,7 @@ uint256 SignatureHash(const CScript& scriptCode, const CTransaction& txTo, unsig
     // Serialize and hash
     CHashWriter ss(SER_GETHASH, 0);
     ss << txTmp << nHashType;
-    printf("SignatureHashOld() : hash=%s \n", ss.GetHash().ToString().c_str());
+    printf("SignatureHash() : hash=%s \n", ss.GetHash().ToString().c_str());
     return ss.GetHash();
 }
 
