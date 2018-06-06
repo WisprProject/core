@@ -1093,30 +1093,7 @@ uint256 SignatureHash(CScript scriptCode, const CTransaction& txTo, unsigned int
     ss << txTmp << nHashType;
     return ss.GetHash();
 }
-//uint256 SignatureHash(const CScript& scriptCode, const CTransaction& txTo, unsigned int nIn, int nHashType)
-//{
-//    if (nIn >= txTo.vin.size()) {
-//        //  nIn out of range
-//        return 1;
-//    }
-//
-//    // Check for invalid use of SIGHASH_SINGLE
-//    if ((nHashType & 0x1f) == SIGHASH_SINGLE) {
-//        if (nIn >= txTo.vout.size()) {
-//            //  nOut out of range
-//            return 1;
-//        }
-//    }
-//
-//    // Wrapper to serialize only the necessary parts of the transaction being signed
-//    CTransactionSignatureSerializer txTmp(txTo, scriptCode, nIn, nHashType);
-//
-//    // Serialize and hash
-//    CHashWriter ss(SER_GETHASH, 0);
-//    ss << txTmp << nHashType;
-//    printf("SignatureHash() : hash=%s \n", ss.GetHash().ToString().c_str());
-//    return ss.GetHash();
-//}
+
 
 bool TransactionSignatureChecker::VerifySignature(const std::vector<unsigned char>& vchSig, const CPubKey& pubkey, const uint256& sighash) const
 {
