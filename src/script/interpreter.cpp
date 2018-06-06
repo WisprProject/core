@@ -1041,15 +1041,15 @@ uint256 SignatureHash(const CScript& scriptCode, const CTransaction& txTo, unsig
         return 1;
     }
     CTransaction txTmp(txTo);
-
+    CScript script(scriptCode);
     // In case concatenating two scripts ends up with two codeseparators,
     // or an extra one at the end, this prevents all those possible incompatibilities.
-    scriptCode.FindAndDelete(CScript(OP_CODESEPARATOR));
+    script.FindAndDelete(CScript(OP_CODESEPARATOR));
 
     // Blank out other inputs' signatures
     for (unsigned int i = 0; i < txTmp.vin.size(); i++)
         txTmp.vin[i].scriptSig = CScript();
-    txTmp.vin[nIn].scriptSig = scriptCode;
+    txTmp.vin[nIn].scriptSig = script;
 
     // Blank out some of the outputs
     if ((nHashType & 0x1f) == SIGHASH_NONE)
