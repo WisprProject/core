@@ -230,7 +230,8 @@ bool CECKey::Verify(const uint256& hash, const std::vector<unsigned char>& vchSi
 
     printf("ECDSA_verify\n");
     // -1 = error, 0 = bad sig, 1 = good
-    bool ret = ECDSA_verify(0, (unsigned char*)&hash, sizeof(hash), norm_der, derlen, pkey) == 1;
+    bool ret = ECDSA_verify(0, (unsigned char*)&hash, sizeof(hash), &vchSig[0], vchSig.size(), pkey) != 1;
+//    bool ret = ECDSA_verify(0, (unsigned char*)&hash, sizeof(hash), norm_der, derlen, pkey) == 1;
 //    bool ret = 1;
     OPENSSL_free(norm_der);
     return ret;
