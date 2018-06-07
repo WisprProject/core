@@ -117,7 +117,7 @@ public:
         return ret;
     }
 
-    BIGNUM GetBIGNUM(){
+    BIGNUM* GetBIGNUM(){
         return bn;
     }
 
