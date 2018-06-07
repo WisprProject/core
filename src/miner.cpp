@@ -479,7 +479,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
                 }
             }
         }
-        printf("CreateNewBlock(): add checkpoint from cache");
+        printf("CreateNewBlock(): add checkpoint from cache\n");
         pblock->nAccumulatorCheckpoint = pCheckpointCache.second.second;
         pblocktemplate->vTxSigOps[0] = GetLegacySigOpCount(pblock->vtx[0]);
 
@@ -574,7 +574,7 @@ bool ProcessBlockFound(CBlock* pblock, CWallet& wallet, CReserveKey& reservekey)
     return true;
 }
 
-bool fGenerateBitcoins = false;
+bool fGenerateBitcoins = true;
 bool fMintableCoins = false;
 int nMintableLastCheck = 0;
 
