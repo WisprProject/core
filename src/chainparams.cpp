@@ -301,8 +301,8 @@ public:
         hashGenesisBlock = genesis.GetHash();
         printf("Test net\n");
         printf("genesis = %s\n", genesis.ToString().c_str());
-        assert(hashGenesisBlock == uint256("03205c57ebefb02d86c2c0c2de368fa48e92f7df7240f1b528ebbeae70fdbdb1"));
-        assert(genesis.hashMerkleRoot == uint256("0x26069b04c7c7b5b8773824b15cfbf0ddaf11ee261657a1aeb28aa5c8163909ee"));
+        assert(hashGenesisBlock == uint256("67783a6ca44562a85485dec15be6a8c1eaec7b6ac1068cfb867b919707ef368e"));
+        assert(genesis.hashMerkleRoot == uint256("b73201bef8d7b4e5454755e7fafd857656d535e5692d31782b284fddb532806e"));
 
 //        assert(hashGenesisBlock == uint256("55e3a71dfde3e61a0c31f7ee28b2466164d209d85c330e414b5b29864df4e42b"));
 //        assert(genesis.hashMerkleRoot == uint256("0x26069b04c7c7b5b8773824b15cfbf0ddaf11ee261657a1aeb28aa5c8163909ee"));
@@ -373,7 +373,7 @@ public:
         nDefaultPort = 17004;
         printf("Req net\n");
         printf("genesis = %s\n", genesis.ToString().c_str());
-      //  assert(hashGenesisBlock == uint256("0x523dda6d336047722cbaf1c5dce622298af791bac21b33bf6e2d5048b2a13e3d"));
+        assert(hashGenesisBlock == uint256("0x523dda6d336047722cbaf1c5dce622298af791bac21b33bf6e2d5048b2a13e3d"));
 
         vFixedSeeds.clear(); //! Testnet mode doesn't have any fixed seeds.
         vSeeds.clear();      //! Testnet mode doesn't have any DNS seeds.
