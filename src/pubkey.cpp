@@ -34,7 +34,7 @@ bool CPubKey::RecoverCompact(const uint256& hash, const std::vector<unsigned cha
 {
     if (vchSig.size() != 65)
         return false;
-    int recid = (vchSig[0] - 27) & 3;
+    int recid = (vchSig[0] - 27) & ~4;
     bool fComp = ((vchSig[0] - 27) & 4) != 0;
 #ifdef USE_SECP256K1
     int pubkeylen = 65;

@@ -70,6 +70,7 @@ public:
         }
     }
 
+
     CBigNum& operator=(const CBigNum& b)
     {
         if (!BN_copy(bn, b.bn))
@@ -114,6 +115,10 @@ public:
             throw bignum_error("CBigNum:rand element : BN_rand_range failed");
         }
         return ret;
+    }
+
+    BIGNUM* GetBIGNUM(){
+        return bn;
     }
 
     /** Generates a cryptographically secure random k-bit number

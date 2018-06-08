@@ -16,6 +16,7 @@
 #define BITCOIN_BASE58_H
 
 #include "chainparams.h"
+#include "libzerocoin/bignum.h"
 #include "key.h"
 #include "pubkey.h"
 #include "script/script.h"

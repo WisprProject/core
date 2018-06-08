@@ -195,8 +195,6 @@ public:
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1, 145);
         base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x04)(0x88)(0xB2)(0x1E).convert_to_container<std::vector<unsigned char> >();
         base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x04)(0x88)(0xAD)(0xE4).convert_to_container<std::vector<unsigned char> >();
-        // 	BIP44 coin type is from https://github.com/satoshilabs/slips/blob/master/slip-0044.md
-        base58Prefixes[EXT_COIN_TYPE] = boost::assign::list_of(0x80)(0x00)(0x00)(0x77).convert_to_container<std::vector<unsigned char> >();
 
         convertSeed6(vFixedSeeds, pnSeed6_main, ARRAYLEN(pnSeed6_main));
 
@@ -284,27 +282,28 @@ public:
 
         CMutableTransaction txNew2;
         txNew2.nVersion = 1;
-        txNew2.nTime = 1512932225;
+        txNew2.nTime = 1528378203;
         txNew2.nLockTime = 0;
         txNew2.vin.resize(1);
         txNew2.vout.resize(1);
         txNew2.vin[0].scriptSig = CScript() << 0 << CScriptNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
-        txNew2.vout[0].SetEmpty();
+        txNew2.vout[0].nValue = 125000 * COIN;
+        txNew2.vout[0].scriptPubKey = CScript() << ParseHex("0433f2952f9002c9088a19607e3d4a54d3d9dfe1cf5c78168b8ba6524fb19fc5d7d3202948e6b8b09e98c425875af6af78fd4f64ff07d97a9ae31ebda5162fbac3") << OP_CHECKSIG;
         genesis.SetNull();
         //! Modify the testnet genesis block so the timestamp is valid for a later start.
         genesis.vtx.push_back(txNew2);
         genesis.hashPrevBlock = 0;
         genesis.hashMerkleRoot = genesis.BuildMerkleTree();
         genesis.nVersion = 1;
-        genesis.nTime    = 1512932225;
+        genesis.nTime    = 1528378203;
         genesis.nBits    = bnProofOfWorkLimit.GetCompact();
         genesis.nNonce   = 142000;
 
         hashGenesisBlock = genesis.GetHash();
         printf("Test net\n");
         printf("genesis = %s\n", genesis.ToString().c_str());
-        assert(hashGenesisBlock == uint256("03205c57ebefb02d86c2c0c2de368fa48e92f7df7240f1b528ebbeae70fdbdb1"));
-        assert(genesis.hashMerkleRoot == uint256("0x26069b04c7c7b5b8773824b15cfbf0ddaf11ee261657a1aeb28aa5c8163909ee"));
+        assert(hashGenesisBlock == uint256("c04bcba53bbd3a476ce8ee4dba0d9ed74ebc8632715090d62e848652187fa074"));
+        assert(genesis.hashMerkleRoot == uint256("9fe4384f6df13f43a537e6a302d46c4e0b21e8d6072af5a83d28577f92eac2d4"));
 
 //        assert(hashGenesisBlock == uint256("55e3a71dfde3e61a0c31f7ee28b2466164d209d85c330e414b5b29864df4e42b"));
 //        assert(genesis.hashMerkleRoot == uint256("0x26069b04c7c7b5b8773824b15cfbf0ddaf11ee261657a1aeb28aa5c8163909ee"));
@@ -320,8 +319,6 @@ public:
         base58Prefixes[SECRET_KEY]     = std::vector<unsigned char>(1, 239);
         base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x04)(0x35)(0x87)(0xCF).convert_to_container<std::vector<unsigned char> >();
         base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x04)(0x35)(0x83)(0x94).convert_to_container<std::vector<unsigned char> >();
-        // Testnet wispr BIP44 coin type is '1' (All coin's testnet default)
-        base58Prefixes[EXT_COIN_TYPE] = boost::assign::list_of(0x80)(0x00)(0x00)(0x01).convert_to_container<std::vector<unsigned char> >();
 
         convertSeed6(vFixedSeeds, pnSeed6_test, ARRAYLEN(pnSeed6_test));
 
@@ -329,7 +326,7 @@ public:
         fAllowMinDifficultyBlocks = true;
         fDefaultConsistencyChecks = false;
         fRequireStandard = true;
-        fMineBlocksOnDemand = false;
+        fMineBlocksOnDemand = true;
         fTestnetToBeDeprecatedFieldRPC = true;
 
         nPoolMaxTransactions = 2;
@@ -377,7 +374,7 @@ public:
         nDefaultPort = 17004;
         printf("Req net\n");
         printf("genesis = %s\n", genesis.ToString().c_str());
-      //  assert(hashGenesisBlock == uint256("0x523dda6d336047722cbaf1c5dce622298af791bac21b33bf6e2d5048b2a13e3d"));
+        assert(hashGenesisBlock == uint256("af3b7eb4e439a7e535883b57000468073b2350f617f5cdcb0090326a91bcc410"));
 
         vFixedSeeds.clear(); //! Testnet mode doesn't have any fixed seeds.
         vSeeds.clear();      //! Testnet mode doesn't have any DNS seeds.
