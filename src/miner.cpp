@@ -432,6 +432,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
             }
         }else if (!fProofOfStake && nHeight < 450) {
             txNew.vout[0].nValue = GetBlockValue(nHeight);
+            txNew.vin[0].scriptSig = CScript() << nHeight << OP_0;
             //Make payee
             if (txNew.vout.size() > 1) {
                 pblock->payee = txNew.vout[1].scriptPubKey;
