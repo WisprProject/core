@@ -639,6 +639,7 @@ void BitcoinMiner(CWallet* pwallet, bool fProofOfStake)
         //
         // Create new block
         //
+        LogPrintf("WISPRMiner: create new block\n");
         unsigned int nTransactionsUpdatedLast = mempool.GetTransactionsUpdated();
         CBlockIndex* pindexPrev = chainActive.Tip();
         if (!pindexPrev)
@@ -713,11 +714,13 @@ void BitcoinMiner(CWallet* pwallet, bool fProofOfStake)
                 }
                 pblock->nNonce += 1;
                 nHashesDone += 1;
+                LogPrintf("WISPRMiner: chech nNonce\n");
                 if ((pblock->nNonce & 0xFF) == 0)
                     break;
             }
 
             // Meter hashes/sec
+                LogPrintf("WISPRMiner: Meter hashes per sec\n");
             static int64_t nHashCounter;
             if (nHPSTimerStart == 0) {
                 nHPSTimerStart = GetTimeMillis();
@@ -745,17 +748,22 @@ void BitcoinMiner(CWallet* pwallet, bool fProofOfStake)
             boost::this_thread::interruption_point();
             // Regtest mode doesn't require peers
             if (vNodes.empty() && Params().MiningRequiresPeers())
+            LogPrintf("WISPRMiner: no peers\n");
                 break;
             if (pblock->nNonce >= 0xffff0000)
+            LogPrintf("WISPRMiner: nonce to larger\n");
                 break;
             if (mempool.GetTransactionsUpdated() != nTransactionsUpdatedLast && GetTime() - nStart > 60)
+            LogPrintf("WISPRMiner: time to large.\n");
                 break;
             if (pindexPrev != chainActive.Tip())
+            LogPrintf("WISPRMiner: Not the active tip.\n");
                 break;
 
             // Update nTime every few seconds
             UpdateTime(pblock, pindexPrev);
             if (Params().AllowMinDifficultyBlocks()) {
+            LogPrintf("WISPRMiner: AllowMinDifficultyBlocks.\n");
                 // Changing pblock->nTime can change work required on testnet:
                 hashTarget.SetCompact(pblock->nBits);
             }
