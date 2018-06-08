@@ -422,7 +422,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
             }
         }
 
-        if (!fProofOfStake && nHeight > 450) {
+        if (!fProofOfStake && nHeight > Params().LAST_POW_BLOCK()) {
             //Masternode and general budget payments
             FillBlockPayee(txNew, nFees, fProofOfStake, false);
 
@@ -430,7 +430,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
             if (txNew.vout.size() > 1) {
                 pblock->payee = txNew.vout[1].scriptPubKey;
             }
-        }else if (!fProofOfStake && nHeight <= 450) {
+        }else if (!fProofOfStake && nHeight <= Params().LAST_POW_BLOCK()) {
             txNew.vout[0].nValue = GetBlockValue(nHeight);
             txNew.vin[0].scriptSig = CScript() << nHeight << OP_0;
             //Make payee
