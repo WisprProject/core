@@ -3942,8 +3942,8 @@ bool CheckWork(const CBlock block, CBlockIndex* const pindexPrev)
 
     if(block.IsProofOfWork()) {
         printf("Block is proof of work\n");
-        if (hashProof > hashTarget)
-            return error("CheckWork() : proof-of-work not meeting target");
+//        if (hashProof > hashTarget)
+//            return error("CheckWork() : proof-of-work not meeting target");
 
         printf("Check for stale block\n");
         if (block.hashPrevBlock != chainActive.Tip()->GetBlockHash())
