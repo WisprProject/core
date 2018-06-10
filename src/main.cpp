@@ -4395,22 +4395,30 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
 bool TestBlockValidity(CValidationState& state, const CBlock& block, CBlockIndex* const pindexPrev, bool fCheckPOW, bool fCheckMerkleRoot)
 {
     AssertLockHeld(cs_main);
+    printf("TestBlockValidity(): Assert current tip\n");
     assert(pindexPrev == chainActive.Tip());
 
+    printf("TestBlockValidity(): Create new view cache\n");
     CCoinsViewCache viewNew(pcoinsTip);
+    printf("TestBlockValidity(): Create index dummy\n");
     CBlockIndex indexDummy(block);
     indexDummy.pprev = pindexPrev;
     indexDummy.nHeight = pindexPrev->nHeight + 1;
 
     // NOTE: CheckBlockHeader is called by CheckBlock
+    printf("TestBlockValidity(): call ContextualCheckBlockHeader\n");
     if (!ContextualCheckBlockHeader(block, state, pindexPrev))
         return false;
+    printf("TestBlockValidity(): call CheckBlock\n");
     if (!CheckBlock(block, state, fCheckPOW, fCheckMerkleRoot))
         return false;
+    printf("TestBlockValidity(): call ContextualCheckBlock\n");
     if (!ContextualCheckBlock(block, state, pindexPrev))
         return false;
+    printf("TestBlockValidity(): call ConnectBlock\n");
     if (!ConnectBlock(block, state, &indexDummy, viewNew, true))
         return false;
+    printf("TestBlockValidity(): Assert state is valid\n");
     assert(state.IsValid());
 
     return true;
