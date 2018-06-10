@@ -473,10 +473,12 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
                 if (pindexPrev->nHeight + 1 >= Params().Zerocoin_Block_V2_Start()) {
                     printf("CreateNewBlock(): Map accumulators\n");
                     AccumulatorMap mapAccumulators(Params().Zerocoin_Params(false));
+                    printf("CreateNewBlock(): Accumulator map created\n");
                     if (fZerocoinActive && !CalculateAccumulatorCheckpoint(nHeight, nCheckpoint, mapAccumulators)) {
                         LogPrintf("%s: failed to get accumulator checkpoint\n", __func__);
                     } else {
                         // the next time the accumulator checkpoint should be recalculated ( the next height that is multiple of 10)
+                        printf("CreateNewBlock(): Set the height for the next checkpoint\n");
                         pCheckpointCache.first = nHeight + (10 - (nHeight % 10));
 
                         // the block hash of the last block used in the accumulator checkpoint calc. This will handle reorg situations.
