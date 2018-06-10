@@ -714,7 +714,6 @@ void BitcoinMiner(CWallet* pwallet, bool fProofOfStake)
                 }
                 pblock->nNonce += 1;
                 nHashesDone += 1;
-                LogPrintf("WISPRMiner: chech nNonce\n");
                 if ((pblock->nNonce & 0xFF) == 0)
                     break;
             }
