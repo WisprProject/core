@@ -232,26 +232,31 @@ bool InitializeAccumulators(const int nHeight, int& nHeightCheckpoint, Accumulat
 bool CalculateAccumulatorCheckpoint(int nHeight, uint256& nCheckpoint, AccumulatorMap& mapAccumulators)
 {
     if (nHeight < Params().Zerocoin_Block_V2_Start()) {
+        printf("CalculateAccumulatorCheckPoint(): Block height is lower then start of Zerocoin V2.\n");
         nCheckpoint = 0;
         return true;
     }
 
     //the checkpoint is updated every ten blocks, return current active checkpoint if not update block
+    printf("CalculateAccumulatorCheckPoint(): The checkpoint is updated every ten blocks.\n");
     if (nHeight % 10 != 0) {
         nCheckpoint = chainActive[nHeight - 1]->nAccumulatorCheckpoint;
         return true;
     }
 
     //set the accumulators to last checkpoint value
+    printf("CalculateAccumulatorCheckPoint(): Set the accumulators to last checkpoint value.\n");
     int nHeightCheckpoint;
     mapAccumulators.Reset();
     if (!InitializeAccumulators(nHeight, nHeightCheckpoint, mapAccumulators))
         return error("%s: failed to initialize accumulators", __func__);
 
     //Whether this should filter out invalid/fraudulent outpoints
+    printf("CalculateAccumulatorCheckPoint(): Whether this should filter out invalid outpoint.\n");
     bool fFilterInvalid = nHeight >= Params().Zerocoin_Block_RecalculateAccumulators();
 
     //Accumulate all coins over the last ten blocks that havent been accumulated (height - 20 through height - 11)
+    printf("CalculateAccumulatorCheckPoint(): Accumulate all coin the the last ten blocks.\n");
     int nTotalMintsFound = 0;
     CBlockIndex *pindex = chainActive[nHeightCheckpoint - 20];
 
@@ -287,6 +292,7 @@ bool CalculateAccumulatorCheckpoint(int nHeight, uint256& nCheckpoint, Accumulat
     }
 
     // if there were no new mints found, the accumulator checkpoint will be the same as the last checkpoint
+    printf("CalculateAccumulatorCheckPoint(): if there were no new mints found, the accumulator checkpoint will be the same as the last checkpoint.\n");
     if (nTotalMintsFound == 0)
         nCheckpoint = chainActive[nHeight - 1]->nAccumulatorCheckpoint;
     else
