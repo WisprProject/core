@@ -140,7 +140,7 @@ public:
         nZerocoinStartHeight = 257790;
         nZerocoinStartTime = 1530532800; // July 2, 2018
         nBlockEnforceSerialRange = 257790; //Enforce serial range starting this block
-        nBlockRecalculateAccumulators = 257790; //Trigger a recalculation of accumulators
+//        nBlockRecalculateAccumulators = 257790; //Trigger a recalculation of accumulators
 //        nBlockFirstFraudulent = 891737; //First block that bad serials emerged
         nBlockLastGoodCheckpoint = 257790; //Last valid accumulator checkpoint
         nBlockEnforceInvalidUTXO = 257790; //Start enforcing the invalid UTXO's
@@ -270,7 +270,7 @@ public:
         nZerocoinStartHeight = 1;
         nZerocoinStartTime = 1528559439; // July 2, 2018
         nBlockEnforceSerialRange = 1; //Enforce serial range starting this block
-        nBlockRecalculateAccumulators = 750; //Trigger a recalculation of accumulators
+//        nBlockRecalculateAccumulators = 750; //Trigger a recalculation of accumulators
 //        nBlockFirstFraudulent = 250000; //First block that bad serials emerged
         nBlockLastGoodCheckpoint = 750; //Last valid accumulator checkpoint
         nBlockEnforceInvalidUTXO = 750; //Start enforcing the invalid UTXO's

@@ -2494,8 +2494,8 @@ bool RecalculateWSPSupply(int nHeightStart)
         nSupplyPrev = pindex->nMoneySupply;
 
         // Add fraudulent funds to the supply and remove any recovered funds.
-        if (pindex->nHeight == Params().Zerocoin_Block_RecalculateAccumulators()) {
-            LogPrintf("%s : Original money supply=%s\n", __func__, FormatMoney(pindex->nMoneySupply));
+//        if (pindex->nHeight == Params().Zerocoin_Block_RecalculateAccumulators()) {
+//            LogPrintf("%s : Original money supply=%s\n", __func__, FormatMoney(pindex->nMoneySupply));
 
 //            pindex->nMoneySupply += Params().InvalidAmountFiltered();
 //            LogPrintf("%s : Adding filtered funds to supply + %s : supply=%s\n", __func__, FormatMoney(Params().InvalidAmountFiltered()), FormatMoney(pindex->nMoneySupply));
@@ -2503,7 +2503,7 @@ bool RecalculateWSPSupply(int nHeightStart)
 //            CAmount nLocked = GetInvalidUTXOValue();
 //            pindex->nMoneySupply -= nLocked;
 //            LogPrintf("%s : Removing locked from supply - %s : supply=%s\n", __func__, FormatMoney(nLocked), FormatMoney(pindex->nMoneySupply));
-        }
+//        }
 
         assert(pblocktree->WriteBlockIndex(CDiskBlockIndex(pindex)));
 
@@ -2564,7 +2564,8 @@ bool ReindexAccumulators(list<uint256>& listMissingCheckpoints, string& strError
 bool UpdateZWSPSupply(const CBlock& block, CBlockIndex* pindex)
 {
     std::list<CZerocoinMint> listMints;
-    bool fFilterInvalid = pindex->nHeight >= Params().Zerocoin_Block_RecalculateAccumulators();
+    bool fFilterInvalid = false;
+//    bool fFilterInvalid = pindex->nHeight >= Params().Zerocoin_Block_RecalculateAccumulators();
     BlockToZerocoinMintList(block, listMints, fFilterInvalid);
     std::list<libzerocoin::CoinDenomination> listSpends = ZerocoinSpendListFromBlock(block, fFilterInvalid);
 
@@ -2825,12 +2826,12 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
     }
 
     //A one-time event where money supply counts were off and recalculated on a certain block.
-    printf("ConnectBlock(): A one-time event where money supply counts were off and recalculated on a certain block.\n");
-    if (pindex->nHeight == Params().Zerocoin_Block_RecalculateAccumulators() + 1) {
-        RecalculateZWSPMinted();
-        RecalculateZWSPSpent();
-        RecalculateWSPSupply(Params().Zerocoin_StartHeight());
-    }
+//    printf("ConnectBlock(): A one-time event where money supply counts were off and recalculated on a certain block.\n");
+//    if (pindex->nHeight == Params().Zerocoin_Block_RecalculateAccumulators() + 1) {
+//        RecalculateZWSPMinted();
+//        RecalculateZWSPSpent();
+//        RecalculateWSPSupply(Params().Zerocoin_StartHeight());
+//    }
 
     //Track zWSP money supply in the block index
     printf("ConnectBlock(): Track zWSP money supply in the block index\n");
