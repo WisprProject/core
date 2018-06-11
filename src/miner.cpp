@@ -462,9 +462,12 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         //Calculate the accumulator checkpoint only if the previous cached checkpoint need to be updated
         printf("CreateNewBlock(): Calculate the accumulator checkpoint only if the previous cached checkpoint need to be updated\n");
         uint256 nCheckpoint;
-        if(nHeight % 10 == 0) {
             printf("CreateNewBlock(): Height is higher then 10\n");
-            uint256 hashBlockLastAccumulated = chainActive[nHeight - (nHeight % 10) - 10]->GetBlockHash();
+            if(nHeight > 10) {
+                uint256 hashBlockLastAccumulated = chainActive[nHeight - (nHeight % 10) - 10]->GetBlockHash();
+            }else{
+                uint256 hashBlockLastAccumulated = chainActive[0]->GetBlockHash();
+            }
             printf("CreateNewBlock(): Check if the accumulator needs to be updated\n");
             if (nHeight >= pCheckpointCache.first || pCheckpointCache.second.first != hashBlockLastAccumulated) {
                 //For the period before v2 activation, zWSP will be disabled and previous block's checkpoint is all that will be needed
@@ -488,7 +491,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
                     }
                 }
             }
-        }
+
         printf("CreateNewBlock(): add checkpoint from cache\n");
         pblock->nAccumulatorCheckpoint = pCheckpointCache.second.second;
         printf("CreateNewBlock(): Checkpoint set\n");
