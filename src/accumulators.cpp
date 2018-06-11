@@ -259,6 +259,7 @@ bool CalculateAccumulatorCheckpoint(int nHeight, uint256& nCheckpoint, Accumulat
     //Accumulate all coins over the last ten blocks that havent been accumulated (height - 20 through height - 11)
     printf("CalculateAccumulatorCheckPoint(): Accumulate all coin the the last ten blocks.\n");
     int nTotalMintsFound = 0;
+    strprintf("nHeightCheckpoint = %i\n", nHeightCheckpoint);
     CBlockIndex *pindex = chainActive[nHeightCheckpoint - 20];
 
     printf("CalculateAccumulatorCheckPoint(): while nHeight < 10.\n");
