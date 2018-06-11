@@ -444,7 +444,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         LogPrintf("CreateNewBlock(): total size %u\n", nBlockSize);
 
         // Compute final coinbase transaction.
-        printf("CreateNewBlock(): compute final ccoinbase transaction\n");
+//        printf("CreateNewBlock(): compute final ccoinbase transaction\n");
         pblock->vtx[0].vin[0].scriptSig = CScript() << nHeight << OP_0;
         if (!fProofOfStake) {
             pblock->vtx[0] = txNew;
@@ -452,7 +452,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         }
 
         // Fill in header
-        printf("CreateNewBlock(): fill headeer\n");
+//        printf("CreateNewBlock(): fill headeer\n");
         pblock->hashPrevBlock = pindexPrev->GetBlockHash();
         if (!fProofOfStake)
             UpdateTime(pblock, pindexPrev);
@@ -460,46 +460,46 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         pblock->nNonce = 0;
 
         //Calculate the accumulator checkpoint only if the previous cached checkpoint need to be updated
-        printf("CreateNewBlock(): Calculate the accumulator checkpoint only if the previous cached checkpoint need to be updated\n");
+//        printf("CreateNewBlock(): Calculate the accumulator checkpoint only if the previous cached checkpoint need to be updated\n");
         uint256 nCheckpoint;
         uint256 hashBlockLastAccumulated;
-        printf("CreateNewBlock(): Height is higher then 10\n");
+//        printf("CreateNewBlock(): Height is higher then 10\n");
          if(nHeight > 10) {
               hashBlockLastAccumulated = chainActive[nHeight - (nHeight % 10) - 10]->GetBlockHash();
          }else{
               hashBlockLastAccumulated = chainActive[0]->GetBlockHash();
          }
-            printf("CreateNewBlock(): Check if the accumulator needs to be updated\n");
+//            printf("CreateNewBlock(): Check if the accumulator needs to be updated\n");
             if (nHeight >= pCheckpointCache.first || pCheckpointCache.second.first != hashBlockLastAccumulated) {
                 //For the period before v2 activation, zWSP will be disabled and previous block's checkpoint is all that will be needed
-                printf("CreateNewBlock(): Check for zerocoin V2 start\n");
+//                printf("CreateNewBlock(): Check for zerocoin V2 start\n");
                 pCheckpointCache.second.second = pindexPrev->nAccumulatorCheckpoint;
                 if (pindexPrev->nHeight + 1 >= Params().Zerocoin_Block_V2_Start()) {
-                    printf("CreateNewBlock(): Map accumulators\n");
+//                    printf("CreateNewBlock(): Map accumulators\n");
                     AccumulatorMap mapAccumulators(Params().Zerocoin_Params(false));
-                    printf("CreateNewBlock(): Accumulator map created\n");
+//                    printf("CreateNewBlock(): Accumulator map created\n");
                     if (fZerocoinActive && !CalculateAccumulatorCheckpoint(nHeight, nCheckpoint, mapAccumulators)) {
                         LogPrintf("%s: failed to get accumulator checkpoint\n", __func__);
                     } else {
                         // the next time the accumulator checkpoint should be recalculated ( the next height that is multiple of 10)
-                        printf("CreateNewBlock(): Set the height for the next checkpoint\n");
+//                        printf("CreateNewBlock(): Set the height for the next checkpoint\n");
                         pCheckpointCache.first = nHeight + (10 - (nHeight % 10));
 
                         // the block hash of the last block used in the accumulator checkpoint calc. This will handle reorg situations.
-                        printf("CreateNewBlock(): Use block hash of the last block for the checkpoint\n");
+//                        printf("CreateNewBlock(): Use block hash of the last block for the checkpoint\n");
                         pCheckpointCache.second.first = hashBlockLastAccumulated;
                         pCheckpointCache.second.second = nCheckpoint;
                     }
                 }
             }
 
-        printf("CreateNewBlock(): add checkpoint from cache\n");
+//        printf("CreateNewBlock(): add checkpoint from cache\n");
         pblock->nAccumulatorCheckpoint = pCheckpointCache.second.second;
-        printf("CreateNewBlock(): Checkpoint set\n");
+//        printf("CreateNewBlock(): Checkpoint set\n");
         pblocktemplate->vTxSigOps[0] = GetLegacySigOpCount(pblock->vtx[0]);
-        printf("CreateNewBlock(): Legacy sigop set\n");
+//        printf("CreateNewBlock(): Legacy sigop set\n");
         CValidationState state;
-        printf("CreateNewBlock(): check validity\n");
+//        printf("CreateNewBlock(): check validity\n");
         if (!TestBlockValidity(state, *pblock, pindexPrev, false, false)) {
             LogPrintf("CreateNewBlock() : TestBlockValidity failed\n");
             mempool.clear();

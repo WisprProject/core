@@ -2933,6 +2933,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
     // The following split & combine thresholds are important to security
     // Should not be adjusted if you don't understand the consequences
     //int64_t nCombineThreshold = 0;
+    printf("CreateCoinStake(): start");
     txNew.vin.clear();
     txNew.vout.clear();
 
