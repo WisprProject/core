@@ -262,7 +262,7 @@ bool CalculateAccumulatorCheckpoint(int nHeight, uint256& nCheckpoint, Accumulat
     strprintf("nHeightCheckpoint = %i\n", nHeightCheckpoint);
     CBlockIndex *pindex = chainActive[nHeightCheckpoint - 20];
 
-    strprintf("Index height = %i, with height %i\n", pindex->nHeight + 1, nHeight);
+    strprintf("Index height = %i, with height %i\n", pindex->nHeight, nHeight);
     printf("CalculateAccumulatorCheckPoint(): while nHeight < 10.\n");
     while (pindex->nHeight < nHeight - 10) {
         // checking whether we should stop this process due to a shutdown request
