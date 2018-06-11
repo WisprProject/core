@@ -264,10 +264,12 @@ bool CalculateAccumulatorCheckpoint(int nHeight, uint256& nCheckpoint, Accumulat
     printf("CalculateAccumulatorCheckPoint(): while nHeight < 10.\n");
     while (pindex->nHeight < nHeight - 10) {
         // checking whether we should stop this process due to a shutdown request
+        printf("CalculateAccumulatorCheckPoint(): Checking whether we should stop this process due to a shutdown request.\n");
         if (ShutdownRequested())
             return false;
 
         //make sure this block is eligible for accumulation
+        printf("CalculateAccumulatorCheckPoint(): make sure this block is eligible for accumulation.\n");
         if (pindex->nHeight < Params().Zerocoin_StartHeight()) {
             pindex = chainActive[pindex->nHeight + 1];
             continue;
