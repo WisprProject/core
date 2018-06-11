@@ -143,6 +143,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         bool fStakeFound = false;
         if (nSearchTime >= nLastCoinStakeSearchTime) {
             unsigned int nTxNewTime = 0;
+            printf("CreateNewBlock(): Check for coinstake");
             if (pwallet->CreateCoinStake(*pwallet, pblock->nBits, nSearchTime - nLastCoinStakeSearchTime, txCoinStake, nTxNewTime)) {
                 pblock->nTime = nTxNewTime;
                 pblock->vtx[0].vout[0].SetEmpty();
