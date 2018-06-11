@@ -2152,6 +2152,7 @@ bool CWallet::MintableCoins()
     CAmount nZwspBalance = GetZerocoinBalance(false);
 
     // Regular WSP
+     printf("MintableCoins(): Check balance\n");
     if (nBalance > 0) {
         if (mapArgs.count("-reservebalance") && !ParseMoney(mapArgs["-reservebalance"], nReserveBalance))
             return error("%s : invalid reserve balance amount", __func__);
