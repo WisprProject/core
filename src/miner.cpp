@@ -609,7 +609,7 @@ void BitcoinMiner(CWallet* pwallet, bool fProofOfStake)
 
     while (fGenerateBitcoins || fProofOfStake) {
         if (fProofOfStake) {
-            printf("BitcoinMiner(): ProofOfStake");
+            printf("BitcoinMiner(): ProofOfStake\n");
             //control the amount of times the client will check for mintable coins
             if ((GetTime() - nMintableLastCheck > 5 * 60)) // 5 minute check time
             {
@@ -637,13 +637,15 @@ void BitcoinMiner(CWallet* pwallet, bool fProofOfStake)
                 if (!fGenerateBitcoins && !fProofOfStake)
                     continue;
             }
-
+            printf("BitcoinMiner(): While no mintable coins continues\n");
             if (mapHashedBlocks.count(chainActive.Tip()->nHeight)) //search our map of hashed blocks, see if bestblock has been hashed yet
             {
                 if (GetTime() - mapHashedBlocks[chainActive.Tip()->nHeight] < max(pwallet->nHashInterval, (unsigned int)1)) // wait half of the nHashDrift with max wait of 3 minutes
                 {
                     MilliSleep(5000);
                     continue;
+                    printf("BitcoinMiner(): MapHashedBlock continues\n");
+
                 }
             }
         }
