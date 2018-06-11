@@ -462,7 +462,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         //Calculate the accumulator checkpoint only if the previous cached checkpoint need to be updated
         printf("CreateNewBlock(): Calculate the accumulator checkpoint only if the previous cached checkpoint need to be updated\n");
         uint256 nCheckpoint;
-        if(nHeight >= 20) {
+        if(nHeight % 10 == 0) {
             printf("CreateNewBlock(): Height is higher then 10\n");
             uint256 hashBlockLastAccumulated = chainActive[nHeight - (nHeight % 10) - 10]->GetBlockHash();
             printf("CreateNewBlock(): Check if the accumulator needs to be updated\n");
