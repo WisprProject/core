@@ -261,6 +261,7 @@ bool CalculateAccumulatorCheckpoint(int nHeight, uint256& nCheckpoint, Accumulat
     int nTotalMintsFound = 0;
     CBlockIndex *pindex = chainActive[nHeightCheckpoint - 20];
 
+    printf("CalculateAccumulatorCheckPoint(): while nHeight < 10.\n");
     while (pindex->nHeight < nHeight - 10) {
         // checking whether we should stop this process due to a shutdown request
         if (ShutdownRequested())
@@ -273,6 +274,7 @@ bool CalculateAccumulatorCheckpoint(int nHeight, uint256& nCheckpoint, Accumulat
         }
 
         //grab mints from this block
+        printf("CalculateAccumulatorCheckPoint(): grab mints from this block.\n");
         CBlock block;
         if(!ReadBlockFromDisk(block, pindex))
             return error("%s: failed to read block from disk", __func__);
