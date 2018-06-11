@@ -302,8 +302,8 @@ public:
         hashGenesisBlock = genesis.GetHash();
         printf("Test net\n");
         printf("genesis = %s\n", genesis.ToString().c_str());
-        assert(hashGenesisBlock == uint256("eee1c7e55d2969a9ab6f66492fc463fe779d2f1be029e690dfd0ac4dc245f083"));
-        assert(genesis.hashMerkleRoot == uint256("7d8d05e0d3cbbef841a072d424e3172e77e5f52c7819fe04c2fc869ce506724d"));
+        assert(hashGenesisBlock == uint256("c72af97ceb4c7a5fc7b5ee366f13c0593c77a61f9eff73345184c36f0a8e2003"));
+        assert(genesis.hashMerkleRoot == uint256("885eb0e858c8373cbc4c6dbcec1be10165b9a7051366d6d936ae7ad36e659baf"));
 
 //        assert(hashGenesisBlock == uint256("55e3a71dfde3e61a0c31f7ee28b2466164d209d85c330e414b5b29864df4e42b"));
 //        assert(genesis.hashMerkleRoot == uint256("0x26069b04c7c7b5b8773824b15cfbf0ddaf11ee261657a1aeb28aa5c8163909ee"));
