@@ -633,6 +633,7 @@ void BitcoinMiner(CWallet* pwallet, bool fProofOfStake)
                         fMintableCoins = pwallet->MintableCoins();
                     }
                 }
+                printf("BitcoinMiner(): While no mintable coins sleep\n");
                 MilliSleep(5000);
                 if (!fGenerateBitcoins && !fProofOfStake)
                     continue;
@@ -761,16 +762,16 @@ void BitcoinMiner(CWallet* pwallet, bool fProofOfStake)
             boost::this_thread::interruption_point();
             // Regtest mode doesn't require peers
             if (vNodes.empty() && Params().MiningRequiresPeers())
-            LogPrintf("WISPRMiner: no peers\n");
+//            LogPrintf("WISPRMiner: no peers\n");
                 break;
             if (pblock->nNonce >= 0xffff0000)
-            LogPrintf("WISPRMiner: nonce to larger\n");
+//            LogPrintf("WISPRMiner: nonce to larger\n");
                 break;
             if (mempool.GetTransactionsUpdated() != nTransactionsUpdatedLast && GetTime() - nStart > 60)
-            LogPrintf("WISPRMiner: time to large.\n");
+//            LogPrintf("WISPRMiner: time to large.\n");
                 break;
             if (pindexPrev != chainActive.Tip())
-            LogPrintf("WISPRMiner: Not the active tip.\n");
+//            LogPrintf("WISPRMiner: Not the active tip.\n");
                 break;
 
             // Update nTime every few seconds
