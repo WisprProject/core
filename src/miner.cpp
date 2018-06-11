@@ -633,7 +633,7 @@ void BitcoinMiner(CWallet* pwallet, bool fProofOfStake)
                         fMintableCoins = pwallet->MintableCoins();
                     }
                 }
-                printf("BitcoinMiner(): While no mintable coins sleep\n");
+                printf("BitcoinMiner(): While no mintable coins || wallet is locked || nodes are empty || masternodes arent synced || balances are too high or low sleep\n");
                 MilliSleep(5000);
                 if (!fGenerateBitcoins && !fProofOfStake)
                     continue;
