@@ -282,7 +282,7 @@ public:
 
         CMutableTransaction txNew2;
         txNew2.nVersion = 1;
-        txNew2.nTime = 1528559319;
+        txNew2.nTime = 1528739124;
         txNew2.nLockTime = 0;
         txNew2.vin.resize(1);
         txNew2.vout.resize(1);
@@ -295,7 +295,7 @@ public:
         genesis.hashPrevBlock = 0;
         genesis.hashMerkleRoot = genesis.BuildMerkleTree();
         genesis.nVersion = 1;
-        genesis.nTime    = 1528559319;
+        genesis.nTime    = 1528739124;
         genesis.nBits    = bnProofOfWorkLimit.GetCompact();
         genesis.nNonce   = 142000;
 
