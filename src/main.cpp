@@ -3974,8 +3974,8 @@ bool CheckWork(const CBlock block, CBlockIndex* const pindexPrev)
         if (block.hashPrevBlock != chainActive.Tip()->GetBlockHash())
             return error("CheckWork() : generated block is stale");
     }
-    if (block.nBits != nBitsRequired)
-        return error("%s : incorrect proof of work at %d", __func__, pindexPrev->nHeight + 1);
+//    if (block.nBits != nBitsRequired)
+//        return error("%s : incorrect proof of work at %d", __func__, pindexPrev->nHeight + 1);
 
 //    printf("End of check work\n");
 
