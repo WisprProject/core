@@ -239,7 +239,7 @@ bool CalculateAccumulatorCheckpoint(int nHeight, uint256& nCheckpoint, Accumulat
 
     //the checkpoint is updated every ten blocks, return current active checkpoint if not update block
     printf("CalculateAccumulatorCheckPoint(): The checkpoint is updated every ten blocks.\n");
-    if (nHeight % 10 != 0 || nHeight < 21) {
+    if (nHeight % 10 != 0) {
         nCheckpoint = chainActive[nHeight - 1]->nAccumulatorCheckpoint;
         return true;
     }
