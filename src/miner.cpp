@@ -633,25 +633,25 @@ void BitcoinMiner(CWallet* pwallet, bool fProofOfStake)
                         fMintableCoins = pwallet->MintableCoins();
                     }
                 }
-                printf("vNodes empty: %s\n", vNodes.empty() ? "true" : "false");
-                printf("Wallet is locked: %s\n", pwallet->IsLocked() ? "true" : "false");
-                printf("IfMintableCoin: %s\n", fMintableCoins ? "true" : "false");
-                printf("Wallet balance is higher then zero and lower then or equal to reserve balacne: %s\n", (pwallet->GetBalance() > 0 && nReserveBalance >= pwallet->GetBalance()) ? "true" : "false");
-                printf("MasterNodes are synced: %s\n", masternodeSync.IsSynced() ? "true" : "false");
-
-                printf("BitcoinMiner(): sleep\n");
+//                printf("vNodes empty: %s\n", vNodes.empty() ? "true" : "false");
+//                printf("Wallet is locked: %s\n", pwallet->IsLocked() ? "true" : "false");
+//                printf("IfMintableCoin: %s\n", fMintableCoins ? "true" : "false");/
+//                printf("Wallet balance is higher then zero and lower then or equal to reserve balacne: %s\n", (pwallet->GetBalance() > 0 && nReserveBalance >= pwallet->GetBalance()) ? "true" : "false");
+//                printf("MasterNodes are synced: %s\n", masternodeSync.IsSynced() ? "true" : "false");
+//
+//                printf("BitcoinMiner(): sleep\n");
                 MilliSleep(5000);
                 if (!fGenerateBitcoins && !fProofOfStake)
                     continue;
             }
-            printf("BitcoinMiner(): While no mintable coins continues\n");
+//            printf("BitcoinMiner(): While no mintable coins continues\n");
             if (mapHashedBlocks.count(chainActive.Tip()->nHeight)) //search our map of hashed blocks, see if bestblock has been hashed yet
             {
                 if (GetTime() - mapHashedBlocks[chainActive.Tip()->nHeight] < max(pwallet->nHashInterval, (unsigned int)1)) // wait half of the nHashDrift with max wait of 3 minutes
                 {
                     MilliSleep(5000);
                     continue;
-                    printf("BitcoinMiner(): MapHashedBlock continues\n");
+//                    printf("BitcoinMiner(): MapHashedBlock continues\n");
 
                 }
             }
