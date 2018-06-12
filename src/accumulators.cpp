@@ -187,18 +187,18 @@ bool InitializeAccumulators(const int nHeight, int& nHeightCheckpoint, Accumulat
         return error("%s: height is below zerocoin activated", __func__);
 
     //On a specific block, a recalculation of the accumulators will be forced
-//    if (nHeight == Params().Zerocoin_Block_RecalculateAccumulators()) {
-//        mapAccumulators.Reset();
-//        if (!mapAccumulators.Load(chainActive[Params().Zerocoin_Block_LastGoodCheckpoint()]->nAccumulatorCheckpoint))
-//            return error("%s: failed to reset to previous checkpoint when recalculating accumulators", __func__);
-//
+    if (nHeight == Params().Zerocoin_Block_RecalculateAccumulators()) {
+        mapAccumulators.Reset();
+        if (!mapAccumulators.Load(chainActive[Params().Zerocoin_Block_LastGoodCheckpoint()]->nAccumulatorCheckpoint))
+            return error("%s: failed to reset to previous checkpoint when recalculating accumulators", __func__);
+
         // Erase the checkpoints from the period of time that bad mints were being made
-//        if (!EraseCheckpoints(Params().Zerocoin_Block_LastGoodCheckpoint() + 1, nHeight))
-//            return error("%s : failed to erase Checkpoints while recalculating checkpoints", __func__);
-//
-//        nHeightCheckpoint = Params().Zerocoin_Block_LastGoodCheckpoint();
-//        return true;
-//    }
+        if (!EraseCheckpoints(Params().Zerocoin_Block_LastGoodCheckpoint() + 1, nHeight))
+            return error("%s : failed to erase Checkpoints while recalculating checkpoints", __func__);
+
+        nHeightCheckpoint = Params().Zerocoin_Block_LastGoodCheckpoint();
+        return true;
+    }
 
     if (nHeight >= Params().Zerocoin_Block_V2_Start()) {
         //after v2_start, accumulators need to use v2 params
@@ -232,54 +232,41 @@ bool InitializeAccumulators(const int nHeight, int& nHeightCheckpoint, Accumulat
 bool CalculateAccumulatorCheckpoint(int nHeight, uint256& nCheckpoint, AccumulatorMap& mapAccumulators)
 {
     if (nHeight < Params().Zerocoin_Block_V2_Start()) {
-        printf("CalculateAccumulatorCheckPoint(): Block height is lower then start of Zerocoin V2.\n");
         nCheckpoint = 0;
         return true;
     }
 
     //the checkpoint is updated every ten blocks, return current active checkpoint if not update block
-    printf("CalculateAccumulatorCheckPoint(): The checkpoint is updated every ten blocks.\n");
     if (nHeight % 10 != 0) {
         nCheckpoint = chainActive[nHeight - 1]->nAccumulatorCheckpoint;
         return true;
     }
 
     //set the accumulators to last checkpoint value
-    printf("CalculateAccumulatorCheckPoint(): Set the accumulators to last checkpoint value.\n");
     int nHeightCheckpoint;
     mapAccumulators.Reset();
     if (!InitializeAccumulators(nHeight, nHeightCheckpoint, mapAccumulators))
         return error("%s: failed to initialize accumulators", __func__);
 
     //Whether this should filter out invalid/fraudulent outpoints
-    printf("CalculateAccumulatorCheckPoint(): Whether this should filter out invalid outpoint.\n");
-//    bool fFilterInvalid = nHeight >= Params().Zerocoin_Block_RecalculateAccumulators();
-    bool fFilterInvalid = false;
+    bool fFilterInvalid = nHeight >= Params().Zerocoin_Block_RecalculateAccumulators();
 
     //Accumulate all coins over the last ten blocks that havent been accumulated (height - 20 through height - 11)
-    printf("CalculateAccumulatorCheckPoint(): Accumulate all coin the the last ten blocks.\n");
     int nTotalMintsFound = 0;
-//    strprintf("nHeightCheckpoint = %i\n", nHeightCheckpoint);
     CBlockIndex *pindex = chainActive[nHeightCheckpoint - 20];
 
-//    strprintf("Index height = %i, with height %i\n", pindex->nHeight, nHeight);
-//    strprintf("With height %i\n", nHeight);
-    printf("CalculateAccumulatorCheckPoint(): while nHeight < 10.\n");
     while (pindex->nHeight < nHeight - 10) {
         // checking whether we should stop this process due to a shutdown request
-        printf("CalculateAccumulatorCheckPoint(): Checking whether we should stop this process due to a shutdown request.\n");
         if (ShutdownRequested())
             return false;
 
         //make sure this block is eligible for accumulation
-        printf("CalculateAccumulatorCheckPoint(): make sure this block is eligible for accumulation.\n");
         if (pindex->nHeight < Params().Zerocoin_StartHeight()) {
             pindex = chainActive[pindex->nHeight + 1];
             continue;
         }
 
         //grab mints from this block
-        printf("CalculateAccumulatorCheckPoint(): grab mints from this block.\n");
         CBlock block;
         if(!ReadBlockFromDisk(block, pindex))
             return error("%s: failed to read block from disk", __func__);
@@ -300,7 +287,6 @@ bool CalculateAccumulatorCheckpoint(int nHeight, uint256& nCheckpoint, Accumulat
     }
 
     // if there were no new mints found, the accumulator checkpoint will be the same as the last checkpoint
-    printf("CalculateAccumulatorCheckPoint(): if there were no new mints found, the accumulator checkpoint will be the same as the last checkpoint.\n");
     if (nTotalMintsFound == 0)
         nCheckpoint = chainActive[nHeight - 1]->nAccumulatorCheckpoint;
     else
@@ -312,8 +298,7 @@ bool CalculateAccumulatorCheckpoint(int nHeight, uint256& nCheckpoint, Accumulat
 
 bool InvalidCheckpointRange(int nHeight)
 {
-    return false;
-//    return nHeight > Params().Zerocoin_Block_LastGoodCheckpoint() && nHeight < Params().Zerocoin_Block_RecalculateAccumulators();
+    return nHeight > Params().Zerocoin_Block_LastGoodCheckpoint() && nHeight < Params().Zerocoin_Block_RecalculateAccumulators();
 }
 
 bool ValidateAccumulatorCheckpoint(const CBlock& block, CBlockIndex* pindex, AccumulatorMap& mapAccumulators)

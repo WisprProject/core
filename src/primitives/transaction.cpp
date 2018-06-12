@@ -131,7 +131,7 @@ CTransaction &CTransaction::operator=(const CTransaction &tx) {
     *const_cast<std::vector <CTxIn> *>(&vin) = tx.vin;
     *const_cast<std::vector <CTxOut> *>(&vout) = tx.vout;
     *const_cast<uint32_t *>(&nLockTime) = tx.nLockTime;
-    *const_cast<uint32_t *>(&nTime) = tx.nTime;
+    *const_cast<unsigned int *>(&nTime) = tx.nTime;
     *const_cast<uint256 *>(&hash) = tx.hash;
     return *this;
 }

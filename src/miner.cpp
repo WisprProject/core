@@ -114,12 +114,12 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         pblock->nVersion = GetArg("-blockversion", pblock->nVersion);
 
     // Make sure to create the correct block version after zerocoin is enabled
-    bool fZerocoinActive = GetAdjustedTime() >= Params().Zerocoin_StartTime() && !pblock->IsProofOfWork();
-    if (fZerocoinActive) {
+    bool fZerocoinActive = GetAdjustedTime() >= Params().Zerocoin_StartTime();
+    if (fZerocoinActive)
         pblock->nVersion = 8;
-    }else{
+    else
         pblock->nVersion = 7;
-    }
+
     // Create coinbase tx
     CMutableTransaction txNew;
     txNew.vin.resize(1);
@@ -143,7 +143,6 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         bool fStakeFound = false;
         if (nSearchTime >= nLastCoinStakeSearchTime) {
             unsigned int nTxNewTime = 0;
-            printf("CreateNewBlock(): Check for coinstake");
             if (pwallet->CreateCoinStake(*pwallet, pblock->nBits, nSearchTime - nLastCoinStakeSearchTime, txCoinStake, nTxNewTime)) {
                 pblock->nTime = nTxNewTime;
                 pblock->vtx[0].vout[0].SetEmpty();
@@ -445,7 +444,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         LogPrintf("CreateNewBlock(): total size %u\n", nBlockSize);
 
         // Compute final coinbase transaction.
-//        printf("CreateNewBlock(): compute final ccoinbase transaction\n");
+        printf("CreateNewBlock(): compute final ccoinbase transaction\n");
         pblock->vtx[0].vin[0].scriptSig = CScript() << nHeight << OP_0;
         if (!fProofOfStake) {
             pblock->vtx[0] = txNew;
@@ -453,7 +452,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         }
 
         // Fill in header
-//        printf("CreateNewBlock(): fill headeer\n");
+        printf("CreateNewBlock(): fill headeer\n");
         pblock->hashPrevBlock = pindexPrev->GetBlockHash();
         if (!fProofOfStake)
             UpdateTime(pblock, pindexPrev);
@@ -461,46 +460,37 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         pblock->nNonce = 0;
 
         //Calculate the accumulator checkpoint only if the previous cached checkpoint need to be updated
-//        printf("CreateNewBlock(): Calculate the accumulator checkpoint only if the previous cached checkpoint need to be updated\n");
+        printf("CreateNewBlock(): Calculate the accumulator checkpoint only if the previous cached checkpoint need to be updated\n");
         uint256 nCheckpoint;
-//        uint256 hashBlockLastAccumulated;
-//        printf("CreateNewBlock(): Height is higher then 10\n");
-         if(nHeight > 10) {
-             uint256 hashBlockLastAccumulated = chainActive[nHeight - (nHeight % 10) - 10]->GetBlockHash();
-//         }else{
-//              hashBlockLastAccumulated = chainActive[0]->GetBlockHash();
-//         }
-//            printf("CreateNewBlock(): Check if the accumulator needs to be updated\n");
+        if(nHeight > 10) {
+            uint256 hashBlockLastAccumulated = chainActive[nHeight - (nHeight % 10) - 10]->GetBlockHash();
+            printf("CreateNewBlock(): Check if the accumulator needs to be updated\n");
             if (nHeight >= pCheckpointCache.first || pCheckpointCache.second.first != hashBlockLastAccumulated) {
                 //For the period before v2 activation, zWSP will be disabled and previous block's checkpoint is all that will be needed
-//                printf("CreateNewBlock(): Check for zerocoin V2 start\n");
+                printf("CreateNewBlock(): Check for zerocoin V2 start\n");
                 pCheckpointCache.second.second = pindexPrev->nAccumulatorCheckpoint;
                 if (pindexPrev->nHeight + 1 >= Params().Zerocoin_Block_V2_Start()) {
-//                    printf("CreateNewBlock(): Map accumulators\n");
+                    printf("CreateNewBlock(): Map accumulators\n");
                     AccumulatorMap mapAccumulators(Params().Zerocoin_Params(false));
-//                    printf("CreateNewBlock(): Accumulator map created\n");
                     if (fZerocoinActive && !CalculateAccumulatorCheckpoint(nHeight, nCheckpoint, mapAccumulators)) {
                         LogPrintf("%s: failed to get accumulator checkpoint\n", __func__);
                     } else {
                         // the next time the accumulator checkpoint should be recalculated ( the next height that is multiple of 10)
-//                        printf("CreateNewBlock(): Set the height for the next checkpoint\n");
                         pCheckpointCache.first = nHeight + (10 - (nHeight % 10));
 
                         // the block hash of the last block used in the accumulator checkpoint calc. This will handle reorg situations.
-//                        printf("CreateNewBlock(): Use block hash of the last block for the checkpoint\n");
+                        printf("CreateNewBlock(): Use block hash of the last block for the checkpoint\n");
                         pCheckpointCache.second.first = hashBlockLastAccumulated;
                         pCheckpointCache.second.second = nCheckpoint;
                     }
                 }
             }
-    }
-//        printf("CreateNewBlock(): add checkpoint from cache\n");
+        }
+        printf("CreateNewBlock(): add checkpoint from cache\n");
         pblock->nAccumulatorCheckpoint = pCheckpointCache.second.second;
-//        printf("CreateNewBlock(): Checkpoint set\n");
         pblocktemplate->vTxSigOps[0] = GetLegacySigOpCount(pblock->vtx[0]);
-//        printf("CreateNewBlock(): Legacy sigop set\n");
+
         CValidationState state;
-//        printf("CreateNewBlock(): check validity\n");
         if (!TestBlockValidity(state, *pblock, pindexPrev, false, false)) {
             LogPrintf("CreateNewBlock() : TestBlockValidity failed\n");
             mempool.clear();
@@ -609,7 +599,6 @@ void BitcoinMiner(CWallet* pwallet, bool fProofOfStake)
 
     while (fGenerateBitcoins || fProofOfStake) {
         if (fProofOfStake) {
-//            printf("BitcoinMiner(): ProofOfStake\n");
             //control the amount of times the client will check for mintable coins
             if ((GetTime() - nMintableLastCheck > 5 * 60)) // 5 minute check time
             {
@@ -625,7 +614,6 @@ void BitcoinMiner(CWallet* pwallet, bool fProofOfStake)
             while (vNodes.empty() || pwallet->IsLocked() || !fMintableCoins || (pwallet->GetBalance() > 0 && nReserveBalance >= pwallet->GetBalance()) || !masternodeSync.IsSynced()) {
                 nLastCoinStakeSearchInterval = 0;
                 // Do a separate 1 minute check here to ensure fMintableCoins is updated
-//            printf("BitcoinMiner(): Seperate one minute check");
                 if (!fMintableCoins) {
                     if (GetTime() - nMintableLastCheck > 1 * 60) // 1 minute check time
                     {
@@ -633,26 +621,17 @@ void BitcoinMiner(CWallet* pwallet, bool fProofOfStake)
                         fMintableCoins = pwallet->MintableCoins();
                     }
                 }
-//                printf("vNodes empty: %s\n", vNodes.empty() ? "true" : "false");
-//                printf("Wallet is locked: %s\n", pwallet->IsLocked() ? "true" : "false");
-//                printf("IfMintableCoin: %s\n", fMintableCoins ? "true" : "false");/
-//                printf("Wallet balance is higher then zero and lower then or equal to reserve balacne: %s\n", (pwallet->GetBalance() > 0 && nReserveBalance >= pwallet->GetBalance()) ? "true" : "false");
-//                printf("MasterNodes are synced: %s\n", masternodeSync.IsSynced() ? "true" : "false");
-//
-//                printf("BitcoinMiner(): sleep\n");
                 MilliSleep(5000);
                 if (!fGenerateBitcoins && !fProofOfStake)
                     continue;
             }
-//            printf("BitcoinMiner(): While no mintable coins continues\n");
+
             if (mapHashedBlocks.count(chainActive.Tip()->nHeight)) //search our map of hashed blocks, see if bestblock has been hashed yet
             {
                 if (GetTime() - mapHashedBlocks[chainActive.Tip()->nHeight] < max(pwallet->nHashInterval, (unsigned int)1)) // wait half of the nHashDrift with max wait of 3 minutes
                 {
                     MilliSleep(5000);
                     continue;
-//                    printf("BitcoinMiner(): MapHashedBlock continues\n");
-
                 }
             }
         }
@@ -735,6 +714,7 @@ void BitcoinMiner(CWallet* pwallet, bool fProofOfStake)
                 }
                 pblock->nNonce += 1;
                 nHashesDone += 1;
+                LogPrintf("WISPRMiner: chech nNonce\n");
                 if ((pblock->nNonce & 0xFF) == 0)
                     break;
             }
@@ -768,16 +748,16 @@ void BitcoinMiner(CWallet* pwallet, bool fProofOfStake)
             boost::this_thread::interruption_point();
             // Regtest mode doesn't require peers
             if (vNodes.empty() && Params().MiningRequiresPeers())
-//            LogPrintf("WISPRMiner: no peers\n");
+            LogPrintf("WISPRMiner: no peers\n");
                 break;
             if (pblock->nNonce >= 0xffff0000)
-//            LogPrintf("WISPRMiner: nonce to larger\n");
+            LogPrintf("WISPRMiner: nonce to larger\n");
                 break;
             if (mempool.GetTransactionsUpdated() != nTransactionsUpdatedLast && GetTime() - nStart > 60)
-//            LogPrintf("WISPRMiner: time to large.\n");
+            LogPrintf("WISPRMiner: time to large.\n");
                 break;
             if (pindexPrev != chainActive.Tip())
-//            LogPrintf("WISPRMiner: Not the active tip.\n");
+            LogPrintf("WISPRMiner: Not the active tip.\n");
                 break;
 
             // Update nTime every few seconds

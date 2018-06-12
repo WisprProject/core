@@ -202,7 +202,7 @@ private:
     void UpdateHash() const;
 
 public:
-    static const int32_t CURRENT_VERSION = 1;
+    static const int32_t CURRENT_VERSION = 2;
 
     // The local variables are made const to prevent unintended modification
     // without updating the cached hash value. However, CTransaction is not
@@ -210,7 +210,7 @@ public:
     // and bypass the constness. This is safe, as they update the entire
     // structure, including the hash.
     const int32_t nVersion;
-    uint32_t nTime;
+    unsigned int nTime;
     std::vector <CTxIn> vin;
     std::vector <CTxOut> vout;
     const uint32_t nLockTime;
@@ -229,7 +229,7 @@ public:
     inline void SerializationOp(Stream &s, Operation ser_action, int nType, int nVersion) {
         READWRITE(*const_cast<int32_t *>(&this->nVersion));
         nVersion = this->nVersion;
-        READWRITE(*const_cast<uint32_t *>(&nTime));
+        READWRITE(*const_cast<unsigned int *>(&nTime));
         READWRITE(*const_cast<std::vector <CTxIn> *>(&vin));
         READWRITE(*const_cast<std::vector <CTxOut> *>(&vout));
         READWRITE(*const_cast<uint32_t *>(&nLockTime));
@@ -304,7 +304,7 @@ public:
 /** A mutable version of CTransaction. */
 struct CMutableTransaction {
     int32_t nVersion;
-    uint32_t nTime;
+    unsigned int nTime;
     std::vector <CTxIn> vin;
     std::vector <CTxOut> vout;
     uint32_t nLockTime;
