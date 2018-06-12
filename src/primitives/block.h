@@ -28,12 +28,12 @@ class CBlockHeader
 public:
     // header
     static const int32_t CURRENT_VERSION=7;
-    int nVersion;
+    int32_t nVersion;
     uint256 hashPrevBlock;
     uint256 hashMerkleRoot;
-    unsigned int nTime;
-    unsigned int nBits;
-    unsigned int nNonce;
+    int32_t nTime;
+    int32_t nBits;
+    int32_t nNonce;
     uint256 nAccumulatorCheckpoint;
 
     CBlockHeader()
