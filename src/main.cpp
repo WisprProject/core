@@ -3963,19 +3963,19 @@ bool CheckWork(const CBlock block, CBlockIndex* const pindexPrev)
     if (pindexPrev == NULL)
         return error("%s : null pindexPrev for block %s", __func__, block.GetHash().ToString().c_str());
 
-//    unsigned int nBitsRequired = GetNextWorkRequired(pindexPrev, &block);
+    unsigned int nBitsRequired = GetNextWorkRequired(pindexPrev, &block);
 
     if(block.IsProofOfWork()) {
 //        printf("Block is proof of work\n");
-//        if (hashProof > hashTarget)
-//            return error("CheckWork() : proof-of-work not meeting target");
+        if (hashProof > hashTarget)
+            return error("CheckWork() : proof-of-work not meeting target");
 
 //        printf("Check for stale block\n");
         if (block.hashPrevBlock != chainActive.Tip()->GetBlockHash())
             return error("CheckWork() : generated block is stale");
     }
-//    if (block.nBits != nBitsRequired)
-//        return error("%s : incorrect proof of work at %d", __func__, pindexPrev->nHeight + 1);
+    if (block.nBits != nBitsRequired)
+        return error("%s : incorrect proof of work at %d", __func__, pindexPrev->nHeight + 1);
 
 //    printf("End of check work\n");
 
