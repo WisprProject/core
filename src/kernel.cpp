@@ -276,10 +276,10 @@ bool GetKernelStakeModifier(uint256 hashBlockFrom, uint64_t& nStakeModifier, int
     printf("Block index next = %i\n", pindexNext->nHeight);
     // loop to find the stake modifier later by a selection interval
     while (nStakeModifierTime < pindexFrom->GetBlockTime() + nStakeModifierSelectionInterval) {
-        if (!pindexNext) {
+//        if (!pindexNext) {
             // Should never happen
-            return error("Null pindexNext\n");
-        }
+//            return error("Null pindexNext\n");
+//        }
 
         pindex = pindexNext;
         pindexNext = chainActive[pindexNext->nHeight + 1];
