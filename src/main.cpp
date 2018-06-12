@@ -4100,7 +4100,7 @@ bool AcceptBlockHeader(const CBlock& block, CValidationState& state, CBlockIndex
         return true;
     }
 
-    if (!CheckBlockHeader(block, state, block.IsProofOfWork())) {
+    if (!CheckBlockHeader(block, state, false)) {
         LogPrintf("AcceptBlockHeader(): CheckBlockHeader failed \n");
         return false;
     }
