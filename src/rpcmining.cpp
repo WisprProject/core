@@ -156,7 +156,7 @@ UniValue setgenerate(const UniValue& params, bool fHelp)
     // -regtest mode: don't return until nGenProcLimit blocks are generated
     if (fGenerate && Params().MineBlocksOnDemand()) {
         int nHeightStart = 0;
-        int nHeightEnd = Params().LAST_POW_BLOCK();
+        int nHeightEnd = Params().LAST_POW_BLOCK() + 1;
         int nHeight = 0;
         int nGenerate = (nGenProcLimit > 0 ? nGenProcLimit : 1);
         CReserveKey reservekey(pwalletMain);
