@@ -31,9 +31,9 @@ public:
     int32_t nVersion;
     uint256 hashPrevBlock;
     uint256 hashMerkleRoot;
-    int32_t nTime;
-    int32_t nBits;
-    int32_t nNonce;
+    uint32_t nTime;
+    uint32_t nBits;
+    uint32_t nNonce;
     uint256 nAccumulatorCheckpoint;
 
     CBlockHeader()
