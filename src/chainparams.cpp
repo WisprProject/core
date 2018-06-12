@@ -266,17 +266,17 @@ public:
         nLastPOWBlock = 450;
         nMaturity = 15;
         nMasternodeCountDrift = 4;
-        nModifierUpdateBlock = 451; //approx Mon, 17 Apr 2017 04:00:00 GMT
+        nModifierUpdateBlock = 500; //approx Mon, 17 Apr 2017 04:00:00 GMT
         nMaxMoneyOut = 120000000 * COIN;
-        nZerocoinStartHeight = 451;
+        nZerocoinStartHeight = 500;
         nZerocoinStartTime = 1528559439; // July 2, 2018
-        nBlockEnforceSerialRange = 451; //Enforce serial range starting this block
+        nBlockEnforceSerialRange = 1; //Enforce serial range starting this block
 //        nBlockRecalculateAccumulators = 750; //Trigger a recalculation of accumulators
 //        nBlockFirstFraudulent = 250000; //First block that bad serials emerged
 //        nBlockLastGoodCheckpoint = 451; //Last valid accumulator checkpoint
-        nBlockEnforceInvalidUTXO = 451; //Start enforcing the invalid UTXO's
+        nBlockEnforceInvalidUTXO = 500; //Start enforcing the invalid UTXO's
 //        nInvalidAmountFiltered = 0; //Amount of invalid coins filtered through exchanges, that should be considered valid
-        nBlockZerocoinV2 = 451; //!> The block that zerocoin v2 becomes active
+        nBlockZerocoinV2 = 500; //!> The block that zerocoin v2 becomes active
 //        nEnforceNewSporkKey = 1521604800; //!> Sporks signed after Wednesday, March 21, 2018 4:00:00 AM GMT must use the new spork key
 //        nRejectOldSporkKey = 1522454400; //!> Reject old spork key after Saturday, March 31, 2018 12:00:00 AM GMT
         const char* pszTimestamp = "I would rather be without a state than without a voice";
@@ -298,7 +298,7 @@ public:
         genesis.nVersion = 1;
         genesis.nTime    = 1528739124;
         genesis.nBits    = bnProofOfWorkLimit.GetCompact();
-        genesis.nNonce   = 142000;
+        genesis.nNonce   = 36156;
 
         hashGenesisBlock = genesis.GetHash();
         printf("Test net\n");
