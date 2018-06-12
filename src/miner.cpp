@@ -115,11 +115,9 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
 
     // Make sure to create the correct block version after zerocoin is enabled
     bool fZerocoinActive = GetAdjustedTime() >= Params().Zerocoin_StartTime() && !pblock->IsProofOfWork();
-    if(pblock->IsProofOfWork()){
-        pblock->nVersion = 6;
-    }else if (fZerocoinActive) {
+    if (fZerocoinActive) {
         pblock->nVersion = 8;
-    } else{
+    }else{
         pblock->nVersion = 7;
     }
     // Create coinbase tx
