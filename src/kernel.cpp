@@ -32,7 +32,7 @@ unsigned int getIntervalVersion(bool fTestNet)
 
 // Hard checkpoints of stake modifiers to ensure they are deterministic
 static std::map<int, unsigned int> mapStakeModifierCheckpoints =
-    boost::assign::map_list_of(0, 0xfd11f4e7u);
+        boost::assign::map_list_of(0, 0xfd11f4e7u);
 
 // Get time weight
 int64_t GetWeight(int64_t nIntervalBeginning, int64_t nIntervalEnd)
@@ -76,11 +76,11 @@ static int64_t GetStakeModifierSelectionInterval()
 // already selected blocks in vSelectedBlocks, and with timestamp up to
 // nSelectionIntervalStop.
 static bool SelectBlockFromCandidates(
-    vector<pair<int64_t, uint256> >& vSortedByTimestamp,
-    map<uint256, const CBlockIndex*>& mapSelectedBlocks,
-    int64_t nSelectionIntervalStop,
-    uint64_t nStakeModifierPrev,
-    const CBlockIndex** pindexSelected)
+        vector<pair<int64_t, uint256> >& vSortedByTimestamp,
+        map<uint256, const CBlockIndex*>& mapSelectedBlocks,
+        int64_t nSelectionIntervalStop,
+        uint64_t nStakeModifierPrev,
+        const CBlockIndex** pindexSelected)
 {
     bool fModifierV2 = false;
     bool fFirstRun = true;
@@ -226,7 +226,7 @@ bool ComputeNextStakeModifier(const CBlockIndex* pindexPrev, uint64_t& nStakeMod
         mapSelectedBlocks.insert(make_pair(pindex->GetBlockHash(), pindex));
         if (GetBoolArg("-printstakemodifier", false))
             LogPrintf("ComputeNextStakeModifier: selected round %d stop=%s height=%d bit=%d\n",
-                nRound, DateTimeStrFormat("%Y-%m-%d %H:%M:%S", nSelectionIntervalStop).c_str(), pindex->nHeight, pindex->GetStakeEntropyBit());
+                      nRound, DateTimeStrFormat("%Y-%m-%d %H:%M:%S", nSelectionIntervalStop).c_str(), pindex->nHeight, pindex->GetStakeEntropyBit());
     }
 
     // Print selection map for visualization of the selected blocks
@@ -269,15 +269,12 @@ bool GetKernelStakeModifier(uint256 hashBlockFrom, uint64_t& nStakeModifier, int
     nStakeModifierTime = pindexFrom->GetBlockTime();
     int64_t nStakeModifierSelectionInterval = GetStakeModifierSelectionInterval();
     const CBlockIndex* pindex = pindexFrom;
-//    printf("Chain tip = %i\n", chainActive.Tip()->nHeight);
-//    printf("Block index number = %i\n", pindexFrom->nHeight);
-//    printf("Block index trying to get = %i\n", pindexFrom->nHeight + 1);
     CBlockIndex* pindexNext = chainActive[pindexFrom->nHeight + 1];
-//    printf("Block index next = %i\n", pindexNext->nHeight);
+
     // loop to find the stake modifier later by a selection interval
     while (nStakeModifierTime < pindexFrom->GetBlockTime() + nStakeModifierSelectionInterval) {
         if (!pindexNext) {
-//             Should never happen
+            // Should never happen
             return error("Null pindexNext\n");
         }
 
