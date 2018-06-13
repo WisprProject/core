@@ -276,6 +276,8 @@ bool GetKernelStakeModifier(uint256 hashBlockFrom, uint64_t& nStakeModifier, int
         if (!pindexNext) {
             // Should never happen
             return error("Null pindexNext\n");
+        }else{
+            printf("GetKernelStakeModifier(): Succeeds now, pindexNext is not null\n");
         }
 
         pindex = pindexNext;
