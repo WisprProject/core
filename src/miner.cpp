@@ -114,7 +114,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         pblock->nVersion = GetArg("-blockversion", pblock->nVersion);
 
     // Make sure to create the correct block version after zerocoin is enabled
-    bool fZerocoinActive = GetAdjustedTime() >= Params().Zerocoin_StartTime();
+    bool fZerocoinActive = GetAdjustedTime() >= Params().Zerocoin_StartTime() && !pblock->IsProofOfWork();
     if (fZerocoinActive)
         pblock->nVersion = 8;
     else
@@ -599,6 +599,7 @@ void BitcoinMiner(CWallet* pwallet, bool fProofOfStake)
 
     while (fGenerateBitcoins || fProofOfStake) {
         if (fProofOfStake) {
+            printf("BitcoinMiner(): ProofOfStake\n");
             //control the amount of times the client will check for mintable coins
             if ((GetTime() - nMintableLastCheck > 5 * 60)) // 5 minute check time
             {
@@ -621,6 +622,13 @@ void BitcoinMiner(CWallet* pwallet, bool fProofOfStake)
                         fMintableCoins = pwallet->MintableCoins();
                     }
                 }
+                printf("vNodes empty: %s\n", vNodes.empty() ? "true" : "false");
+                printf("Wallet is locked: %s\n", pwallet->IsLocked() ? "true" : "false");
+                printf("IfMintableCoin: %s\n", fMintableCoins ? "true" : "false");/
+                printf("Wallet balance is higher then zero and lower then or equal to reserve balacne: %s\n", (pwallet->GetBalance() > 0 && nReserveBalance >= pwallet->GetBalance()) ? "true" : "false");
+                printf("MasterNodes are synced: %s\n", masternodeSync.IsSynced() ? "true" : "false");
+
+                printf("BitcoinMiner(): sleep\n");
                 MilliSleep(5000);
                 if (!fGenerateBitcoins && !fProofOfStake)
                     continue;
