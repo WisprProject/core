@@ -86,7 +86,7 @@ bool GetAccumulatorValueFromDB(uint256 nCheckpoint, CoinDenomination denom, CBig
 void AddAccumulatorChecksum(const uint32_t nChecksum, const CBigNum &bnValue)
 {
     //Since accumulators are switching at v2, stop databasing v1 because its useless. Only focus on v2.
-    if (chainActive.Height() >= Params().Zerocoin_Block_V2_Start()) {
+    if (chainActive.Height() >= Params().Zerocoin_StartHeight()) {
         zerocoinDB->WriteAccumulatorValue(nChecksum, bnValue);
         mapAccumulatorValues.insert(make_pair(nChecksum, bnValue));
     }
@@ -200,12 +200,12 @@ bool InitializeAccumulators(const int nHeight, int& nHeightCheckpoint, Accumulat
         return true;
     }
 
-    if (nHeight >= Params().Zerocoin_Block_V2_Start()) {
+    if (nHeight >= Params().Zerocoin_StartHeight()) {
         //after v2_start, accumulators need to use v2 params
         mapAccumulators.Reset(Params().Zerocoin_Params(false));
 
         // 20 after v2 start is when the new checkpoints will be in the block, so don't need to load hard checkpoints
-        if (nHeight <= Params().Zerocoin_Block_V2_Start() + 20) {
+        if (nHeight <= Params().Zerocoin_StartHeight() + 20) {
             //Load hard coded checkpointed value
             AccumulatorCheckpoints::Checkpoint checkpoint = AccumulatorCheckpoints::GetClosestCheckpoint(nHeight,
                                                                                                          nHeightCheckpoint);
@@ -231,7 +231,7 @@ bool InitializeAccumulators(const int nHeight, int& nHeightCheckpoint, Accumulat
 //Get checkpoint value for a specific block height
 bool CalculateAccumulatorCheckpoint(int nHeight, uint256& nCheckpoint, AccumulatorMap& mapAccumulators)
 {
-    if (nHeight < Params().Zerocoin_Block_V2_Start()) {
+    if (nHeight < Params().Zerocoin_StartHeight()) {
         nCheckpoint = 0;
         return true;
     }
@@ -305,7 +305,7 @@ bool ValidateAccumulatorCheckpoint(const CBlock& block, CBlockIndex* pindex, Acc
 {
     //V1 accumulators are completely phased out by the time this code hits the public and begins generating new checkpoints
     //It is VERY IMPORTANT that when this is being run and height < v2_start, then zWSP need to be disabled at the same time!!
-    if (pindex->nHeight < Params().Zerocoin_Block_V2_Start() || fVerifyingBlocks)
+    if (pindex->nHeight < Params().Zerocoin_StartHeight() || fVerifyingBlocks)
         return true;
 
     if (pindex->nHeight % 10 == 0) {
@@ -394,7 +394,7 @@ bool GetAccumulatorValue(int& nHeight, const libzerocoin::CoinDenomination denom
 
     //Every situation except for about 20 blocks should use this method
     uint256 nCheckpointBeforeMint = chainActive[nHeight]->nAccumulatorCheckpoint;
-    if (nHeight > Params().Zerocoin_Block_V2_Start() + 20)
+    if (nHeight > Params().Zerocoin_StartHeight() + 20)
         return GetAccumulatorValueFromDB(nCheckpointBeforeMint, denom, bnAccValue);
 
     int nHeightCheckpoint = 0;

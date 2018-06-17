@@ -943,7 +943,7 @@ CAmount CBudgetManager::GetTotalBudget(int nHeight)
 //        nSubsidy = 15 * COIN;
 //    } else if (nHeight <= 647999 && nHeight >= 604800) {
 //        nSubsidy = 10 * COIN;
-//    } else if (nHeight >= Params().Zerocoin_Block_V2_Start()) {
+//    } else if (nHeight >= Params().Zerocoin_StartHeight()) {
 //        nSubsidy = 10 * COIN;
 //    } else {
 //        nSubsidy = 5 * COIN;

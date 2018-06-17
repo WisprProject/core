@@ -145,7 +145,7 @@ public:
         nBlockLastGoodCheckpoint = 257790; //Last valid accumulator checkpoint
         nBlockEnforceInvalidUTXO = 257790; //Start enforcing the invalid UTXO's
 //        nInvalidAmountFiltered = 268200*COIN; //Amount of invalid coins filtered through exchanges, that should be considered valid
-        nBlockZerocoinV2 = 257790; //!> The block that zerocoin v2 becomes active - roughly Tuesday, May 8, 2018 4:00:00 AM GMT
+//        nBlockZerocoinV2 = 257790; //!> The block that zerocoin v2 becomes active - roughly Tuesday, May 8, 2018 4:00:00 AM GMT
 //        nEnforceNewSporkKey = 200000; //!> Sporks signed after (GMT): Tuesday, May 1, 2018 7:00:00 AM GMT must use the new spork key
 //        nRejectOldSporkKey = 200000; //!> Fully reject old spork key after (GMT): Friday, June 1, 2018 12:00:00 AM
 
@@ -278,7 +278,7 @@ public:
         nBlockLastGoodCheckpoint = 257790; //Last valid accumulator checkpoint
         nBlockEnforceInvalidUTXO = 257790; //Start enforcing the invalid UTXO's
 //        nInvalidAmountFiltered = 0; //Amount of invalid coins filtered through exchanges, that should be considered valid
-        nBlockZerocoinV2 = 257790; //!> The block that zerocoin v2 becomes active
+//        nBlockZerocoinV2 = 257790; //!> The block that zerocoin v2 becomes active
 //        nEnforceNewSporkKey = 1521604800; //!> Sporks signed after Wednesday, March 21, 2018 4:00:00 AM GMT must use the new spork key
 //        nRejectOldSporkKey = 1522454400; //!> Reject old spork key after Saturday, March 31, 2018 12:00:00 AM GMT
         const char* pszTimestamp = "I would rather be without a state than without a voice";

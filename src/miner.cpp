@@ -469,7 +469,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
                 //For the period before v2 activation, zWSP will be disabled and previous block's checkpoint is all that will be needed
                 printf("CreateNewBlock(): Check for zerocoin V2 start\n");
                 pCheckpointCache.second.second = pindexPrev->nAccumulatorCheckpoint;
-                if (pindexPrev->nHeight + 1 >= Params().Zerocoin_Block_V2_Start()) {
+                if (pindexPrev->nHeight + 1 >= Params().Zerocoin_StartHeight()) {
                     printf("CreateNewBlock(): Map accumulators\n");
                     AccumulatorMap mapAccumulators(Params().Zerocoin_Params(false));
                     if (fZerocoinActive && !CalculateAccumulatorCheckpoint(nHeight, nCheckpoint, mapAccumulators)) {
