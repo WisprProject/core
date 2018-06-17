@@ -142,7 +142,7 @@ public:
         nBlockEnforceSerialRange = 257790; //Enforce serial range starting this block
 //        nBlockRecalculateAccumulators = 257790; //Trigger a recalculation of accumulators
 //        nBlockFirstFraudulent = 891737; //First block that bad serials emerged
-        nBlockLastGoodCheckpoint = 257790; //Last valid accumulator checkpoint
+//        nBlockLastGoodCheckpoint = 257790; //Last valid accumulator checkpoint
         nBlockEnforceInvalidUTXO = 257790; //Start enforcing the invalid UTXO's
 //        nInvalidAmountFiltered = 268200*COIN; //Amount of invalid coins filtered through exchanges, that should be considered valid
 //        nBlockZerocoinV2 = 257790; //!> The block that zerocoin v2 becomes active - roughly Tuesday, May 8, 2018 4:00:00 AM GMT
@@ -275,7 +275,7 @@ public:
         nBlockEnforceSerialRange = 257790; //Enforce serial range starting this block
 //        nBlockRecalculateAccumulators = 257790; //Trigger a recalculation of accumulators
 //        nBlockFirstFraudulent = 250000; //First block that bad serials emerged
-        nBlockLastGoodCheckpoint = 257790; //Last valid accumulator checkpoint
+//        nBlockLastGoodCheckpoint = 257790; //Last valid accumulator checkpoint
         nBlockEnforceInvalidUTXO = 257790; //Start enforcing the invalid UTXO's
 //        nInvalidAmountFiltered = 0; //Amount of invalid coins filtered through exchanges, that should be considered valid
 //        nBlockZerocoinV2 = 257790; //!> The block that zerocoin v2 becomes active
