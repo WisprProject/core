@@ -136,7 +136,7 @@ public:
 
         /** Height or Time Based Activations **/
         nLastPOWBlock = 450;
-        nModifierUpdateBlock = 257790;
+//        nModifierUpdateBlock = 257790;
         nZerocoinStartHeight = 257790;
         nZerocoinStartTime = 1530532800; // July 2, 2018
         nBlockEnforceSerialRange = 257790; //Enforce serial range starting this block
@@ -268,7 +268,7 @@ public:
         nLastPOWBlock = 450;
         nMaturity = 1;
         nMasternodeCountDrift = 4;
-        nModifierUpdateBlock = 257790; //approx Mon, 17 Apr 2017 04:00:00 GMT
+//        nModifierUpdateBlock = 257790; //approx Mon, 17 Apr 2017 04:00:00 GMT
         nMaxMoneyOut = 120000000 * COIN;
         nZerocoinStartHeight = 257790;
         nZerocoinStartTime = 1530532800; // July 2, 2018
