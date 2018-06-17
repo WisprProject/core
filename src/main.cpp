@@ -3937,25 +3937,25 @@ bool CheckWork(const CBlock block, CBlockIndex* const pindexPrev)
     uint256 hashTarget;
     hashTarget.SetCompact(block.nBits);
 
-    printf("indexPrev null assertion\n");
+//    printf("indexPrev null assertion\n");
     if (pindexPrev == NULL)
         return error("%s : null pindexPrev for block %s", __func__, block.GetHash().ToString().c_str());
 
 //    unsigned int nBitsRequired = GetNextWorkRequired(pindexPrev, &block);
 
     if(block.IsProofOfWork()) {
-        printf("Block is proof of work\n");
+//        printf("Block is proof of work\n");
 //        if (hashProof > hashTarget)
 //            return error("CheckWork() : proof-of-work not meeting target");
 
-        printf("Check for stale block\n");
+//        printf("Check for stale block\n");
         if (block.hashPrevBlock != chainActive.Tip()->GetBlockHash())
             return error("CheckWork() : generated block is stale");
     }
 //    if (block.nBits != nBitsRequired)
 //        return error("%s : incorrect proof of work at %d", __func__, pindexPrev->nHeight + 1);
 
-    printf("End of check work\n");
+//    printf("End of check work\n");
 
     return true;
 }
@@ -4152,22 +4152,22 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
     CBlockIndex*& pindex = *ppindex;
 
     // Get prev block index
-    printf("Get prev block index\n");
+//    printf("Get prev block index\n");
     CBlockIndex* pindexPrev = NULL;
     if (block.GetHash() != Params().HashGenesisBlock()) {
 
-        printf("map block index\n");
+//        printf("map block index\n");
         BlockMap::iterator mi = mapBlockIndex.find(block.hashPrevBlock);
         if (mi == mapBlockIndex.end())
             return state.DoS(0, error("%s : prev block %s not found", __func__, block.hashPrevBlock.ToString().c_str()), 0, "bad-prevblk");
         pindexPrev = (*mi).second;
         if (pindexPrev->nStatus & BLOCK_FAILED_MASK) {
             //If this "invalid" block is an exact match from the checkpoints, then reconsider it
-            printf("Is invalid block a checkpoint?\n");
+//            printf("Is invalid block a checkpoint?\n");
             if (Checkpoints::CheckBlock(pindexPrev->nHeight, block.hashPrevBlock, true)) {
                 LogPrintf("%s : Reconsidering block %s height %d\n", __func__, pindexPrev->GetBlockHash().GetHex(), pindexPrev->nHeight);
                 CValidationState statePrev;
-                printf("Reconsider block\n");
+//                printf("Reconsider block\n");
                 ReconsiderBlock(statePrev, pindexPrev);
                 if (statePrev.IsValid()) {
                     ActivateBestChain(statePrev);
@@ -4180,13 +4180,13 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
     }
 
 //    if(!block.IsProofOfStake() && pindex->nHeight < 450) {
-    printf("Check work\n");
+//    printf("Check work\n");
         if (block.GetHash() != Params().HashGenesisBlock() && !CheckWork(block, pindexPrev))
             return false;
 //    }
-    printf("if block is proof of stake\n");
+//    printf("if block is proof of stake\n");
     if (block.IsProofOfStake()) {
-        printf("Check stake\n");
+//        printf("Check stake\n");
         uint256 hashProofOfStake = 0;
         unique_ptr<CStakeInput> stake;
 
@@ -4206,7 +4206,7 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
             mapProofOfStake.insert(make_pair(hash, hashProofOfStake));
     }
 
-    printf("Accept block header\n");
+//    printf("Accept block header\n");
     if (!AcceptBlockHeader(block, state, &pindex))
         return false;
 
@@ -4221,14 +4221,14 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
             pindex->nStatus |= BLOCK_FAILED_VALID;
             setDirtyBlockIndex.insert(pindex);
         }
-        printf("Contextual block failed\n");
+//        printf("Contextual block failed\n");
         return false;
     }
 
     int nHeight = pindex->nHeight;
 
     // Write block to history file
-     printf("Write block to history file\n");
+//     printf("Write block to history file\n");
     try {
         unsigned int nBlockSize = ::GetSerializeSize(block, SER_DISK, CLIENT_VERSION);
         CDiskBlockPos blockPos;
@@ -4242,10 +4242,10 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
         if (!ReceivedBlockTransactions(block, state, pindex, blockPos))
             return error("AcceptBlock() : ReceivedBlockTransactions failed");
     } catch (std::runtime_error& e) {
-        printf("Write block to history failed\n");
+//        printf("Write block to history failed\n");
         return state.Abort(std::string("System error: ") + e.what());
     }
-    printf("End of accept block\n");
+//    printf("End of accept block\n");
     return true;
 }
 
@@ -4354,20 +4354,20 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
         }
 
         // Store to disk
-        printf("Store to disk\n");
+//        printf("Store to disk\n");
         CBlockIndex* pindex = NULL;
         bool ret = AcceptBlock (*pblock, state, &pindex, dbp, checked);
         if (pindex && pfrom) {
-            printf("Map block source\n");
+//            printf("Map block source\n");
             mapBlockSource[pindex->GetBlockHash ()] = pfrom->GetId ();
         }
-        printf("Check block index\n");
+//        printf("Check block index\n");
         CheckBlockIndex ();
         if (!ret)
             return error ("%s : AcceptBlock FAILED", __func__);
     }
 
-    printf("Activate best chain\n");
+//    printf("Activate best chain\n");
     if (!ActivateBestChain(state, pblock, checked))
         return error("%s : ActivateBestChain failed", __func__);
 
@@ -4391,7 +4391,7 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
 
     LogPrintf("%s : ACCEPTED Block %ld in %ld milliseconds with size=%d\n", __func__, GetHeight(), GetTimeMillis() - nStartTime,
               pblock->GetSerializeSize(SER_DISK, CLIENT_VERSION));
-    printf("End of process new block\n");
+//    printf("End of process new block\n");
     return true;
 }
 
