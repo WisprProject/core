@@ -122,7 +122,7 @@ public:
 //    int Zerocoin_Block_FirstFraudulent() const { return nBlockFirstFraudulent; }
 //    int Zerocoin_Block_LastGoodCheckpoint() const { return nBlockLastGoodCheckpoint; }
     int Zerocoin_StartTime() const { return nZerocoinStartTime; }
-    int Block_Enforce_Invalid() const { return nBlockEnforceInvalidUTXO; }
+//    int Block_Enforce_Invalid() const { return nBlockEnforceInvalidUTXO; }
 //    int Zerocoin_Block_V2_Start() const { return nBlockZerocoinV2; }
 //    CAmount InvalidAmountFiltered() const { return nInvalidAmountFiltered; };
 
@@ -186,7 +186,7 @@ protected:
 //    int nBlockRecalculateAccumulators;
 //    int nBlockFirstFraudulent;
 //    int nBlockLastGoodCheckpoint;
-    int nBlockEnforceInvalidUTXO;
+//    int nBlockEnforceInvalidUTXO;
 //    int nBlockZerocoinV2;
 };
 
