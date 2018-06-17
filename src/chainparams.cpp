@@ -139,7 +139,7 @@ public:
 //        nModifierUpdateBlock = 257790;
         nZerocoinStartHeight = 257790;
         nZerocoinStartTime = 1530532800; // July 2, 2018
-        nBlockEnforceSerialRange = 257790; //Enforce serial range starting this block
+//        nBlockEnforceSerialRange = 257790; //Enforce serial range starting this block
 //        nBlockRecalculateAccumulators = 257790; //Trigger a recalculation of accumulators
 //        nBlockFirstFraudulent = 891737; //First block that bad serials emerged
 //        nBlockLastGoodCheckpoint = 257790; //Last valid accumulator checkpoint
@@ -272,7 +272,7 @@ public:
         nMaxMoneyOut = 120000000 * COIN;
         nZerocoinStartHeight = 257790;
         nZerocoinStartTime = 1530532800; // July 2, 2018
-        nBlockEnforceSerialRange = 257790; //Enforce serial range starting this block
+//        nBlockEnforceSerialRange = 257790; //Enforce serial range starting this block
 //        nBlockRecalculateAccumulators = 257790; //Trigger a recalculation of accumulators
 //        nBlockFirstFraudulent = 250000; //First block that bad serials emerged
 //        nBlockLastGoodCheckpoint = 257790; //Last valid accumulator checkpoint
