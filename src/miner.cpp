@@ -621,7 +621,7 @@ void BitcoinMiner(CWallet* pwallet, bool fProofOfStake)
                         fMintableCoins = pwallet->MintableCoins();
                     }
                 }
-                printf("vNodes empty: %s, Wallet is locked: %s, IfMintableCoin: %s, Wallet balance: %s, MasterNodes are synced: %s\n", vNodes.empty() ? "true" : "false", pwallet->IsLocked() ? "true" : "false", fMintableCoins ? "true" : "false", (pwallet->GetBalance() > 0 && nReserveBalance >= pwallet->GetBalance()) ? "true" : "false"), masternodeSync.IsSynced() ? "true" : "false");
+                printf("vNodes empty: %s, Wallet is locked: %s, IfMintableCoin: %s, Wallet balance: %s, MasterNodes are synced: %s\n", vNodes.empty() ? "true" : "false", pwallet->IsLocked() ? "true" : "false", fMintableCoins ? "true" : "false", (pwallet->GetBalance() > 0 && nReserveBalance >= pwallet->GetBalance()) ? "true" : "false"), masternodeSync.IsSynced() ? "true" : "false";);
                 MilliSleep(5000);
                 if (!fGenerateBitcoins && !fProofOfStake)
                     continue;
