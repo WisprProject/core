@@ -426,6 +426,8 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
     unsigned int nTxTime = block.nTime;
     uint256 hashBlock;
     CTransaction txPrev;
+    CBaseChainParams::Network network = NetworkIdFromCommandLine();
+    fTestNet = network == CBaseChainParams::TESTNET;
     if(fTestNet || pindex->nHeight > 257790){
         if (!CheckStake(stake->GetUniqueness(), stake->GetValue(), nStakeModifier, bnTargetPerCoinDay, nBlockFromTime,
                                                                                        nTxTime, hashProofOfStake))
