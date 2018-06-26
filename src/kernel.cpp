@@ -426,7 +426,6 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
     unsigned int nTxTime = block.nTime;
     uint256 hashBlock;
     CTransaction txPrev;
-    fTestNet = true;
     if(fTestNet || pindex->nHeight > 257790){
         if (!CheckStake(stake->GetUniqueness(), stake->GetValue(), nStakeModifier, bnTargetPerCoinDay, nBlockFromTime,
                                                                                        nTxTime, hashProofOfStake))
@@ -437,7 +436,7 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
     }else{
         if (GetTransaction(txin.prevout.hash, txPrev, hashBlock, true) && !CheckStake(pindex->bnStakeModifierV2, txPrev, txin.prevout, tx.nTime, hashProofOfStake, bnTargetPerCoinDay))
         {
-            return error("CheckProofOfStake() : INFO: check kernel failed on coinstake %s, hashProof=%s \n",
+            return error("CheckProofOfStake() : INFO: old bnStakeModifierV2 check kernel failed on coinstake %s, hashProof=%s \n",
                          tx.GetHash().GetHex(), hashProofOfStake.GetHex());
         }
     }
