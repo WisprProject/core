@@ -266,7 +266,7 @@ public:
         nTargetTimespan = 1 * 60; // WISPR: 1 day
         nTargetSpacing = 1 * 60;  // WISPR: 1 minute
         nLastPOWBlock = 450;
-        nMaturity = 1;
+        nMaturity = 10;
         nMasternodeCountDrift = 4;
 //        nModifierUpdateBlock = 257790; //approx Mon, 17 Apr 2017 04:00:00 GMT
         nMaxMoneyOut = 120000000 * COIN;
