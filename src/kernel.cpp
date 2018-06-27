@@ -316,9 +316,9 @@ bool CheckStake(const uint256& bnStakeModifierV2, const CTransaction& txPrev, co
 {
     CDataStream ss(SER_GETHASH, 0);
     ss << bnStakeModifierV2;
-    ss << txPrev.nTime << prevout.hash << prevout.n << ssUniqueID << nTimeTx;
+    ss << txPrev.nTime << prevout.hash << prevout.n << nTimeTx;
     hashProofOfStake = Hash(ss.begin(), ss.end());
-//    LogPrintf("%s: modifier:%d nTimeBlockFrom:%d nTimeTx:%d hash:%s\n", __func__, bnStakeModifierV2, prevout.hash, prevout.n, hashProofOfStake.GetHex());
+    LogPrintf("bnStakeModifierV2: %s: modifier:%d nTimeBlockFrom:%d nTimeTx:%d hash:%s\n", __func__, bnStakeModifierV2, prevout.hash, prevout.n, hashProofOfStake.GetHex());
 
     return stakeTargetHit(hashProofOfStake, nValueIn, bnTarget);
 }
