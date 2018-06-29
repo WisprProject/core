@@ -122,6 +122,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
 
     // Create coinbase tx
     CMutableTransaction txNew;
+    txNew.nTime = GetAdjustedTime();
     txNew.vin.resize(1);
     txNew.vin[0].prevout.SetNull();
     txNew.vout.resize(1);
@@ -398,6 +399,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
             UpdateCoins(tx, state, view, txundo, nHeight);
 
             // Added
+            tx.nTime = GetAdjustedTime();
             pblock->vtx.push_back(tx);
             pblocktemplate->vTxFees.push_back(nTxFees);
             pblocktemplate->vTxSigOps.push_back(nTxSigOps);

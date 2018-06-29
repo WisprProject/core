@@ -91,7 +91,7 @@ std::string CTxOut::ToString() const {
                      GetHash().ToString());
 }
 
-CMutableTransaction::CMutableTransaction() : nVersion(CTransaction::CURRENT_VERSION), nLockTime(0), nTime(GetAdjustedTime()) {}
+CMutableTransaction::CMutableTransaction() : nVersion(CTransaction::CURRENT_VERSION), nLockTime(0), nTime(0) {}
 
 CMutableTransaction::CMutableTransaction(const CTransaction &tx) : nVersion(tx.nVersion), vin(tx.vin), vout(tx.vout),
                                                                    nLockTime(tx.nLockTime), nTime(tx.nTime) {}
