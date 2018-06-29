@@ -216,15 +216,7 @@ public:
     const uint32_t nLockTime;
 
     /** Construct a CTransaction that qualifies as IsNull() */
-    CTransaction()
-     {
-        SetNull();
-     }
-
-    void SetNull()
-    {
-        nTime = GetAdjustedTime();
-    }
+    CTransaction();
 
     /** Convert a CMutableTransaction into a CTransaction. */
     CTransaction(const CMutableTransaction &tx);
