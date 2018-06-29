@@ -216,9 +216,7 @@ public:
     const uint32_t nLockTime;
 
     /** Construct a CTransaction that qualifies as IsNull() */
-    CTransaction(){
-        nTime = GetAdjustedTime();
-    };
+    CTransaction();
 
     /** Convert a CMutableTransaction into a CTransaction. */
     CTransaction(const CMutableTransaction &tx);
@@ -311,9 +309,7 @@ struct CMutableTransaction {
     std::vector <CTxOut> vout;
     uint32_t nLockTime;
 
-    CMutableTransaction(){
-        nTime = GetAdjustedTime();
-    };
+    CMutableTransaction();
 
     CMutableTransaction(const CTransaction &tx);
 
