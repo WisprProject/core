@@ -11,7 +11,7 @@
 #include "script/script.h"
 #include "serialize.h"
 #include "uint256.h"
-
+#include "timedata.h"
 #include <list>
 
 class CTransaction;
