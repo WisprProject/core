@@ -11,7 +11,6 @@
 #include "script/script.h"
 #include "serialize.h"
 #include "uint256.h"
-#include "timedata.h"
 #include <list>
 
 class CTransaction;
@@ -309,17 +308,8 @@ struct CMutableTransaction {
     std::vector <CTxOut> vout;
     uint32_t nLockTime;
 
-    CMutableTransaction(){
-        SetNull();
-    };
-    void SetNull()
-    {
-        nVersion = CTransaction::CURRENT_VERSION;
-        nTime = GetAdjustedTime();
-        vin.clear();
-        vout.clear();
-        nLockTime = 0;
-    }
+    CMutableTransaction();
+
     CMutableTransaction(const CTransaction &tx);
 
     ADD_SERIALIZE_METHODS;
