@@ -9,7 +9,6 @@
 
 #include "chain.h"
 #include "hash.h"
-#include "timedata.h"
 #include "main.h"
 #include "tinyformat.h"
 #include "utilstrencodings.h"
@@ -92,7 +91,7 @@ std::string CTxOut::ToString() const {
                      GetHash().ToString());
 }
 
-CMutableTransaction::CMutableTransaction() : nVersion(CTransaction::CURRENT_VERSION), nLockTime(0), nTime(std::GetAdjustedTime()) {}
+CMutableTransaction::CMutableTransaction() : nVersion(CTransaction::CURRENT_VERSION), nLockTime(0), nTime(0) {}
 
 CMutableTransaction::CMutableTransaction(const CTransaction &tx) : nVersion(tx.nVersion), vin(tx.vin), vout(tx.vout),
                                                                    nLockTime(tx.nLockTime), nTime(tx.nTime) {}
@@ -120,7 +119,7 @@ void CTransaction::UpdateHash() const {
     *const_cast<uint256 *>(&hash) = SerializeHash(*this);
 }
 
-CTransaction::CTransaction() : hash(), nVersion(CTransaction::CURRENT_VERSION), vin(), vout(), nLockTime(0), nTime(std::GetAdjustedTime()) {}
+CTransaction::CTransaction() : hash(), nVersion(CTransaction::CURRENT_VERSION), vin(), vout(), nLockTime(0), nTime(0) {}
 
 CTransaction::CTransaction(const CMutableTransaction &tx) : nVersion(tx.nVersion), vin(tx.vin), vout(tx.vout),
                                                             nLockTime(tx.nLockTime), nTime(tx.nTime) {
