@@ -223,11 +223,7 @@ public:
 
     void SetNull()
     {
-        nVersion = CTransaction::CURRENT_VERSION;
         nTime = GetAdjustedTime();
-        vin.clear();
-        vout.clear();
-        nLockTime = 0;
     }
 
     /** Convert a CMutableTransaction into a CTransaction. */
