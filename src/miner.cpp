@@ -135,8 +135,12 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
 
     if (fProofOfStake) {
         boost::this_thread::interruption_point();
-        pblock->nTime = GetAdjustedTime();
         CBlockIndex* pindexPrev = chainActive.Tip();
+        if(pblock->nVersion == 7){
+            pblock->nTime =  max(pindexPrev->GetPastTimeLimit()+1, pblock->GetMaxTransactionTime());
+        }else{
+            pblock->nTime = GetAdjustedTime();
+        }
         pblock->nBits = GetNextWorkRequired(pindexPrev, pblock);
         CMutableTransaction txCoinStake;
         int64_t nSearchTime = pblock->nTime; // search to current time

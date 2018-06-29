@@ -157,7 +157,13 @@ public:
     {
         return IsProofOfStake()? std::make_pair(vtx[1].vin[0].prevout, nTime) : std::make_pair(COutPoint(), (unsigned int)0);
     }
-
+    int64_t GetMaxTransactionTime() const
+    {
+        int64_t maxTransactionTime = 0;
+        BOOST_FOREACH(const CTransaction& tx, vtx)
+        maxTransactionTime = std::max(maxTransactionTime, (int64_t)tx.nTime);
+        return maxTransactionTime;
+    }
     // Build the in-memory merkle tree for this block and return the merkle root.
     // If non-NULL, *mutated is set to whether mutation was detected in the merkle
     // tree (a duplication of transactions in the block leading to an identical
