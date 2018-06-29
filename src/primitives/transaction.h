@@ -202,7 +202,7 @@ private:
     void UpdateHash() const;
 
 public:
-    static const int32_t CURRENT_VERSION = 2;
+    static const int32_t CURRENT_VERSION = 1;
 
     // The local variables are made const to prevent unintended modification
     // without updating the cached hash value. However, CTransaction is not
@@ -216,7 +216,9 @@ public:
     const uint32_t nLockTime;
 
     /** Construct a CTransaction that qualifies as IsNull() */
-    CTransaction();
+    CTransaction(){
+        nTime = GetAdjustedTime();
+    };
 
     /** Convert a CMutableTransaction into a CTransaction. */
     CTransaction(const CMutableTransaction &tx);
@@ -309,7 +311,9 @@ struct CMutableTransaction {
     std::vector <CTxOut> vout;
     uint32_t nLockTime;
 
-    CMutableTransaction();
+    CMutableTransaction(){
+        nTime = GetAdjustedTime();
+    };
 
     CMutableTransaction(const CTransaction &tx);
 
