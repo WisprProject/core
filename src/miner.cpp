@@ -137,7 +137,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         boost::this_thread::interruption_point();
         CBlockIndex* pindexPrev = chainActive.Tip();
         if(pblock->nVersion < 8){
-            printf('Old block time');
+            printf("old block time");
             pblock->nTime =  max(pindexPrev->GetPastTimeLimit() + 1, pblock->GetMaxTransactionTime());
         }else{
             pblock->nTime = GetAdjustedTime();
