@@ -216,7 +216,19 @@ public:
     const uint32_t nLockTime;
 
     /** Construct a CTransaction that qualifies as IsNull() */
-    CTransaction();
+    CTransaction()
+     {
+        SetNull();
+     }
+
+    void SetNull()
+    {
+        nVersion = CTransaction::CURRENT_VERSION;
+        nTime = GetAdjustedTime();
+        vin.clear();
+        vout.clear();
+        nLockTime = 0;
+    }
 
     /** Convert a CMutableTransaction into a CTransaction. */
     CTransaction(const CMutableTransaction &tx);
@@ -309,8 +321,17 @@ struct CMutableTransaction {
     std::vector <CTxOut> vout;
     uint32_t nLockTime;
 
-    CMutableTransaction();
-
+    CMutableTransaction(){
+        SetNull();
+    };
+    void SetNull()
+    {
+        nVersion = CTransaction::CURRENT_VERSION;
+        nTime = GetAdjustedTime();
+        vin.clear();
+        vout.clear();
+        nLockTime = 0;
+    }
     CMutableTransaction(const CTransaction &tx);
 
     ADD_SERIALIZE_METHODS;
