@@ -153,8 +153,8 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
             nLastCoinStakeSearchTime = nSearchTime;
         }
         if(pblock->nVersion < 8){
-            printf("old block time");
             pblock->nTime =  max(pindexPrev->GetPastTimeLimit() + 1, pblock->GetMaxTransactionTime());
+            printf("old block time, %u\n", pblock->nTime);
         }else{
             pblock->nTime = GetAdjustedTime();
         }
