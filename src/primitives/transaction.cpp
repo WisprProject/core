@@ -11,7 +11,6 @@
 #include "hash.h"
 #include "main.h"
 #include "tinyformat.h"
-#include "timedata.h"
 #include "utilstrencodings.h"
 #include "transaction.h"
 
