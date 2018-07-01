@@ -1813,7 +1813,7 @@ int64_t GetBlockValue(int nHeight)
     int64_t nSubsidy = 0;
     if (nHeight == 0) {
         nSubsidy = 125000 * COIN;
-    } else if (nHeight < 257790) {
+    } else if (nHeight < 270000) {
         nSubsidy = 5 * COIN;
     } else {
         nSubsidy = 10 * COIN;
@@ -1844,7 +1844,7 @@ CAmount GetSeeSaw(const CAmount& blockValue, int nMasternodeCount, int nHeight)
     CAmount ret = 0;
     if (mNodeCoins == 0) {
         ret = 0;
-    } else if (nHeight > 257790) {
+    } else if (nHeight > 270000) {
      ret = blockValue * 0.4;
     }
     return ret;
