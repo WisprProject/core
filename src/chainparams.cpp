@@ -136,16 +136,16 @@ public:
 
         /** Height or Time Based Activations **/
         nLastPOWBlock = 450;
-//        nModifierUpdateBlock = 257790;
-        nZerocoinStartHeight = 257790;
-        nZerocoinStartTime = 1530532800; // July 2, 2018
-//        nBlockEnforceSerialRange = 257790; //Enforce serial range starting this block
-//        nBlockRecalculateAccumulators = 257790; //Trigger a recalculation of accumulators
+//        nModifierUpdateBlock = 270000;
+        nZerocoinStartHeight = 270000;
+        nZerocoinStartTime = 1533241426; // July 2, 2018
+//        nBlockEnforceSerialRange = 270000; //Enforce serial range starting this block
+//        nBlockRecalculateAccumulators = 270000; //Trigger a recalculation of accumulators
 //        nBlockFirstFraudulent = 891737; //First block that bad serials emerged
-//        nBlockLastGoodCheckpoint = 257790; //Last valid accumulator checkpoint
-//        nBlockEnforceInvalidUTXO = 257790; //Start enforcing the invalid UTXO's
+//        nBlockLastGoodCheckpoint = 270000; //Last valid accumulator checkpoint
+//        nBlockEnforceInvalidUTXO = 270000; //Start enforcing the invalid UTXO's
 //        nInvalidAmountFiltered = 268200*COIN; //Amount of invalid coins filtered through exchanges, that should be considered valid
-//        nBlockZerocoinV2 = 257790; //!> The block that zerocoin v2 becomes active - roughly Tuesday, May 8, 2018 4:00:00 AM GMT
+//        nBlockZerocoinV2 = 270000; //!> The block that zerocoin v2 becomes active - roughly Tuesday, May 8, 2018 4:00:00 AM GMT
 //        nEnforceNewSporkKey = 200000; //!> Sporks signed after (GMT): Tuesday, May 1, 2018 7:00:00 AM GMT must use the new spork key
 //        nRejectOldSporkKey = 200000; //!> Fully reject old spork key after (GMT): Friday, June 1, 2018 12:00:00 AM
 
@@ -214,7 +214,7 @@ public:
 //        strSporkKeyOld = "04B433E6598390C992F4F022F20D3B4CBBE691652EE7C48243B81701CBDB7CC7D7BF0EE09E154E6FCBF2043D65AF4E9E97B89B5DBAF830D83B9B7F469A6C45A717";
 //        strObfuscationPoolDummyAddress = "D87q2gC9j6nNrnzCsg4aY6bHMLsT9nUhEw";
         strObfuscationPoolDummyAddress = "WYCSnxDBqGkcruCwreLtBfpXtSMgoo5yUJ";
-        nStartMasternodePayments =1530532800; // July 2, 2018
+        nStartMasternodePayments =1533241426; // July 2, 2018
 
         /** Zerocoin */
         zerocoinModulus = "25195908475657893494027183240048398571429282126204032027777137836043662020707595556264018525880784"
@@ -268,17 +268,17 @@ public:
         nLastPOWBlock = 450;
         nMaturity = 10;
         nMasternodeCountDrift = 4;
-//        nModifierUpdateBlock = 257790; //approx Mon, 17 Apr 2017 04:00:00 GMT
+//        nModifierUpdateBlock = 270000; //approx Mon, 17 Apr 2017 04:00:00 GMT
         nMaxMoneyOut = 120000000 * COIN;
-        nZerocoinStartHeight = 257790;
-        nZerocoinStartTime = 1530532800; // July 2, 2018
-//        nBlockEnforceSerialRange = 257790; //Enforce serial range starting this block
-//        nBlockRecalculateAccumulators = 257790; //Trigger a recalculation of accumulators
+        nZerocoinStartHeight = 270000;
+        nZerocoinStartTime = 1533241426; // July 2, 2018
+//        nBlockEnforceSerialRange = 270000; //Enforce serial range starting this block
+//        nBlockRecalculateAccumulators = 270000; //Trigger a recalculation of accumulators
 //        nBlockFirstFraudulent = 250000; //First block that bad serials emerged
-//        nBlockLastGoodCheckpoint = 257790; //Last valid accumulator checkpoint
-//        nBlockEnforceInvalidUTXO = 257790; //Start enforcing the invalid UTXO's
+//        nBlockLastGoodCheckpoint = 270000; //Last valid accumulator checkpoint
+//        nBlockEnforceInvalidUTXO = 270000; //Start enforcing the invalid UTXO's
 //        nInvalidAmountFiltered = 0; //Amount of invalid coins filtered through exchanges, that should be considered valid
-//        nBlockZerocoinV2 = 257790; //!> The block that zerocoin v2 becomes active
+//        nBlockZerocoinV2 = 270000; //!> The block that zerocoin v2 becomes active
 //        nEnforceNewSporkKey = 1521604800; //!> Sporks signed after Wednesday, March 21, 2018 4:00:00 AM GMT must use the new spork key
 //        nRejectOldSporkKey = 1522454400; //!> Reject old spork key after Saturday, March 31, 2018 12:00:00 AM GMT
         const char* pszTimestamp = "I would rather be without a state than without a voice";
