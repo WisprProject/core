@@ -436,7 +436,7 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
                          tx.GetHash().GetHex(), hashProofOfStake.GetHex());
         }
     }else{
-            LogPrintf("bnStakeModifierV2: nTimeBlockFrom:%d nTimeTx:%d\n", nTimeBlockFrom, nTimeTx);
+            LogPrintf("bnStakeModifierV2: nTimeBlockFrom:%d nTimeTx:%d\n", nBlockFromTime, tx.nTime);
         if (GetTransaction(txin.prevout.hash, txPrev, hashBlock, true) && !CheckStake(pindex->bnStakeModifierV2, txPrev, txin.prevout, tx.nTime, hashProofOfStake, bnTargetPerCoinDay, stake->GetUniqueness(), stake->GetValue()))
         {
             return error("CheckProofOfStake() : INFO: old bnStakeModifierV2 check kernel failed on coinstake %s, hashProof=%s \n",
