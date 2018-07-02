@@ -182,7 +182,7 @@ protected:
     int nZerocoinStartHeight;
     int nZerocoinStartTime;
     int nZerocoinRequiredStakeDepth;
-    uint256 bnProofOfStakeLimit = ~uint256(0) >> 48 ;
+    uint256 bnProofOfStakeLimit = ~uint256(0) >> 24 ;
 //    int nBlockEnforceSerialRange;
 //    int nBlockRecalculateAccumulators;
 //    int nBlockFirstFraudulent;
