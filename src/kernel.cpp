@@ -301,7 +301,14 @@ bool stakeTargetHit(uint256 hashProofOfStake, int64_t nValueIn, uint256 bnTarget
     // Now check if proof-of-stake hash meets target protocol
     return hashProofOfStake > (bnCoinDayWeight * bnTargetPerCoinDay);
 }
+bool stakeTargetHitOld(uint256 hashProofOfStake, int64_t nValueIn, uint256 bnTargetPerCoinDay)
+{
+    //get the stake weight - weight is equal to coin amount
+    uint256 bnCoinDayWeight = uint256(nValueIn);
 
+    // Now check if proof-of-stake hash meets target protocol
+    return hashProofOfStake > (bnCoinDayWeight * bnTargetPerCoinDay);
+}
 bool CheckStake(const CDataStream& ssUniqueID, CAmount nValueIn, const uint64_t nStakeModifier, const uint256& bnTarget,
                 unsigned int nTimeBlockFrom, unsigned int& nTimeTx, uint256& hashProofOfStake)
 {
@@ -320,7 +327,7 @@ bool CheckStake(const uint256& bnStakeModifierV2, const CTransaction& txPrev, co
     hashProofOfStake = Hash(ss.begin(), ss.end());
 //    LogPrintf("bnStakeModifierV2: nTimeBlockFrom:%d nTimeTx:%d\n", __func__, nTimeBlockFrom, nTimeTx);
 
-    return stakeTargetHit(hashProofOfStake, nValueIn, bnTarget);
+    return stakeTargetHitOld(hashProofOfStake, nValueIn, bnTarget);
 }
 
 bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockFrom, unsigned int& nTimeTx, uint256& hashProofOfStake)
