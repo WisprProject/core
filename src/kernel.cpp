@@ -360,6 +360,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
         CBlockIndex* pindex = stakeInput->GetIndexFrom();
         CBlockHeader block = pindex->GetBlockHeader();
 
+        uint256 hashBlock;
         const CTransaction tx = block.vtx[1];
         const CTxIn& txin = tx.vin[0];
         GetTransaction(txin.prevout.hash, txPrev, hashBlock, true);
