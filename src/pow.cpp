@@ -18,48 +18,39 @@
 
 unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader* pblock)
 {
-    /* current difficulty formula, wispr - DarkGravity v3, written by Evan Duffield - evan@dashpay.io */
-    const CBlockIndex* BlockLastSolved = pindexLast;
-    const CBlockIndex* BlockReading = pindexLast;
-    int64_t nActualTimespan = 0;
-    int64_t LastBlockTime = 0;
-    int64_t PastBlocksMin = 24;
-    int64_t PastBlocksMax = 24;
-    int64_t CountBlocks = 0;
-    uint256 PastDifficultyAverage;
-    uint256 PastDifficultyAveragePrev;
+    uint256 bnTargetLimit = fProofOfStake ? GetProofOfStakeLimit(pindexLast->nHeight) : Params().ProofOfWorkLimit();
 
-    if (BlockLastSolved == NULL || BlockLastSolved->nHeight == 0 || BlockLastSolved->nHeight < PastBlocksMin) {
-        return Params().ProofOfWorkLimit().GetCompact();
-    }
+    if (pindexLast == NULL)
+        return bnTargetLimit.GetCompact(); // genesis block
 
-//    if (pindexLast->nHeight > Params().LAST_POW_BLOCK()) {
-        uint256 bnTargetLimit = pindexLast->nHeight > Params().LAST_POW_BLOCK() ? (~uint256(0) >> 48) : Params().ProofOfWorkLimit();
-        int64_t nTargetSpacing = 64;
-        int64_t nTargetTimespan = 16 * 60;
+    const CBlockIndex* pindexPrev = pindexLast->pprev;
+    if (pindexPrev->pprev == NULL)
+        return bnTargetLimit.GetCompact(); // first block
+    const CBlockIndex* pindexPrevPrev = pindexPrev->pprev;
+    if (pindexPrevPrev->pprev == NULL)
+        return bnTargetLimit.GetCompact(); // second block
 
-        int64_t nActualSpacing = 0;
-        if (pindexLast->nHeight != 0)
-            nActualSpacing = pindexLast->pprev->GetBlockTime() - pindexLast->pprev->pprev->GetBlockTime();
+        int64_t nTargetTimespan = Params().TargetTimespan();
+    int64_t nTargetSpacing = Params().TargetSpacing();
+    int64_t nActualSpacing = pindexPrev->GetBlockTime() - pindexPrevPrev->GetBlockTime();
 
-        if (nActualSpacing < 0)
-            nActualSpacing = nTargetSpacing;
-        if (nActualSpacing > nTargetSpacing * 10)
-            nActualSpacing = nTargetSpacing * 10;
+    if (nActualSpacing < 0)
+        nActualSpacing = nTargetSpacing;
+    if (nActualSpacing > nTargetSpacing * 10)
+        nActualSpacing = nTargetSpacing * 10;
 
-        // ppcoin: target change every block
-        // ppcoin: retarget with exponential moving toward target spacing
-        uint256 bnNew;
-        bnNew.SetCompact(pindexLast->pprev->nBits);
+    // ppcoin: target change every block
+    // ppcoin: retarget with exponential moving toward target spacing
+    uint256 bnNew;
+    bnNew.SetCompact(pindexPrev->nBits);
+    int64_t nInterval = nTargetTimespan / nTargetSpacing;
+    bnNew *= ((nInterval - 1) * nTargetSpacing + nActualSpacing + nActualSpacing);
+    bnNew /= ((nInterval + 1) * nTargetSpacing);
 
-        int64_t nInterval = nTargetTimespan / nTargetSpacing;
-        bnNew *= ((nInterval - 1) * nTargetSpacing + nActualSpacing + nActualSpacing);
-        bnNew /= ((nInterval + 1) * nTargetSpacing);
+    if (bnNew <= 0 || bnNew > bnTargetLimit)
+        bnNew = bnTargetLimit;
 
-        if (bnNew <= 0 || bnNew > bnTargetLimit)
-            bnNew = bnTargetLimit;
-
-        return bnNew.GetCompact();
+    return bnNew.GetCompact();
 //    }
 
 //    for (unsigned int i = 1; BlockReading && BlockReading->nHeight > 0; i++) {
