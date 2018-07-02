@@ -32,6 +32,7 @@ unsigned int GetNextTargetRequired(const CBlockIndex* pindexLast, bool fProofOfS
         return bnTargetLimit.GetCompact(); // second block
 
     int64_t nTargetSpacing = Params().TargetSpacing();
+    int64_t nTargetTimespan = Params().TargetTimespan();
     int64_t nActualSpacing = pindexPrev->GetBlockTime() - pindexPrevPrev->GetBlockTime();
 
     if (nActualSpacing < 0)
