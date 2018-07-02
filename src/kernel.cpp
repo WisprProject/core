@@ -318,7 +318,7 @@ bool CheckStake(const uint256& bnStakeModifierV2, const CTransaction& txPrev, co
     ss << bnStakeModifierV2;
     ss << txPrev.nTime << prevout.hash << prevout.n << ssUniqueID << nTimeTx;
     hashProofOfStake = Hash(ss.begin(), ss.end());
-//    LogPrintf("bnStakeModifierV2: %s: modifier:%d nTimeBlockFrom:%d nTimeTx:%d hash:%s\n", __func__, bnStakeModifierV2, prevout.hash, prevout.n, hashProofOfStake.GetHex());
+    LogPrintf("bnStakeModifierV2: nTimeBlockFrom:%d nTimeTx:%d\n", __func__, nTimeBlockFrom, nTimeTx);
 
     return stakeTargetHit(hashProofOfStake, nValueIn, bnTarget);
 }
