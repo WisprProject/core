@@ -40,7 +40,7 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
 
         int64_t nActualSpacing = 0;
         if (pindexLast->nHeight != 0)
-            nActualSpacing = pindexLast->GetBlockTime() - pindexLast->pprev->GetBlockTime();
+            nActualSpacing = pindexLast->pprev->GetBlockTime() - pindexLast->pprev->pprev->GetBlockTime();
 
         if (nActualSpacing < 0)
             nActualSpacing = nTargetSpacing;
