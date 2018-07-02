@@ -366,12 +366,13 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
 
         // if stake hash does not meet the target then continue to next iteration
         CBlockIndex* pindex = stakeInput->GetIndexFrom();
+        CBlockIndex* pindexPrev = pindex->pprev;
 //        CBlockHeader block = pindex->GetBlockHeader();
 
         CBlock block;
         uint256 hashBlock;
         CTransaction txPrev;
-        ReadBlockFromDisk(block, pindex);
+        ReadBlockFromDisk(block, pindexPrev);
         const CTransaction tx = block.vtx[1];
         const CTxIn& txin = tx.vin[0];
         GetTransaction(txin.prevout.hash, txPrev, hashBlock, true);
@@ -380,7 +381,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
                 continue;
         }else{
             LogPrintf("Stake(): bnStakeModifierV2: nTimeBlockFrom:%d nTimeTx:%d\n", block.GetBlockTime(), nTryTime);
-            if (!CheckStake(pindex->bnStakeModifierV2, txPrev, txin.prevout, nTryTime, hashProofOfStake, bnTargetPerCoinDay, ssUniqueID, nValueIn))
+            if (!CheckStake(pindexPrev->bnStakeModifierV2, txPrev, txin.prevout, nTryTime, hashProofOfStake, bnTargetPerCoinDay, ssUniqueID, nValueIn))
             {
                 continue;
             }
@@ -435,6 +436,7 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
     }
 
     CBlockIndex* pindex = stake->GetIndexFrom();
+    CBlockIndex* pprev = pindex->pprev;
     if (!pindex)
         return error("%s: Failed to find the block index", __func__);
 
@@ -465,7 +467,7 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
         }
     }else{
             LogPrintf("bnStakeModifierV2: nTimeBlockFrom:%d nTimeTx:%d\n", block.GetBlockTime(), tx.nTime);
-        if (GetTransaction(txin.prevout.hash, txPrev, hashBlock, true) && !CheckStake(pindex->bnStakeModifierV2, txPrev, txin.prevout, tx.nTime, hashProofOfStake, bnTargetPerCoinDay, stake->GetUniqueness(), stake->GetValue()))
+        if (GetTransaction(txin.prevout.hash, txPrev, hashBlock, true) && !CheckStake(pprev->bnStakeModifierV2, txPrev, txin.prevout, tx.nTime, hashProofOfStake, bnTargetPerCoinDay, stake->GetUniqueness(), stake->GetValue()))
         {
             return error("CheckProofOfStake() : INFO: old bnStakeModifierV2 check kernel failed on coinstake %s, hashProof=%s \n",
                          tx.GetHash().GetHex(), hashProofOfStake.GetHex());
