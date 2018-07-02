@@ -972,8 +972,8 @@ bool ContextualCheckZerocoinSpend(const CTransaction& tx, const CoinSpend& spend
 
     //Reject serial's that are not in the acceptable value range
     bool fUseV1Params = spend.getVersion() < libzerocoin::PrivateCoin::PUBKEY_VERSION;
-    if (pindex->nHeight > Params().Zerocoin_Block_EnforceSerialRange() &&
-        !spend.HasValidSerial(Params().Zerocoin_Params(fUseV1Params)))
+//    if (pindex->nHeight > Params().Zerocoin_Block_EnforceSerialRange() &&
+        if(!spend.HasValidSerial(Params().Zerocoin_Params(fUseV1Params)))
         return error("%s : zWSP spend with serial %s from tx %s is not in valid range\n", __func__,
                      spend.getCoinSerialNumber().GetHex(), tx.GetHash().GetHex());
 
