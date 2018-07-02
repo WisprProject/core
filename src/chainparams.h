@@ -51,7 +51,7 @@ public:
     int GetDefaultPort() const { return nDefaultPort; }
     const uint256& ProofOfWorkLimit() const { return bnProofOfWorkLimit; }
     const uint256& ProofOfStakeLimit() const { return bnProofOfWorkLimit; }
-    CBigNum GetProofOfStakeLimit() const {return bnProofOfStakeLimitBig; }
+    CBigNum GetProofOfStakeLimit() {return bnProofOfStakeLimitBig; }
     int SubsidyHalvingInterval() const { return nSubsidyHalvingInterval; }
     /** Used to check majorities for block version upgrade */
     int EnforceBlockUpgradeMajority() const { return nEnforceBlockUpgradeMajority; }
