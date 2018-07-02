@@ -19,7 +19,7 @@ CBigNum bnProofOfStakeLimit(~uint256(0) >> 48);
 
 unsigned int GetNextTargetRequired(const CBlockIndex* pindexLast, bool fProofOfStake)
 {
-    CBigNum bnProofOfWorkLimitBig = Params().ProofOfWorkLimit();
+    CBigNum bnProofOfWorkLimitBig = CBigNum(~uint256(0) >> 16);
     CBigNum bnTargetLimit = fProofOfStake ? bnProofOfStakeLimit : bnProofOfWorkLimitBig;
 
     if (pindexLast == NULL)
