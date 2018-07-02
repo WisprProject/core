@@ -34,16 +34,18 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
     }
 
     if (pindexLast->nHeight > Params().LAST_POW_BLOCK()) {
-        uint256 bnTargetLimit = (~uint256(0) >> 24);
-        int64_t nTargetSpacing = 60;
-        int64_t nTargetTimespan = 60 * 40;
+        uint256 bnTargetLimit = (~uint256(0) >> 48);
+        int64_t nTargetSpacing = 64;
+        int64_t nTargetTimespan = 16 * 60;
 
         int64_t nActualSpacing = 0;
         if (pindexLast->nHeight != 0)
             nActualSpacing = pindexLast->GetBlockTime() - pindexLast->pprev->GetBlockTime();
 
         if (nActualSpacing < 0)
-            nActualSpacing = 1;
+            nActualSpacing = nTargetSpacing;
+        if (nActualSpacing > nTargetSpacing * 10)
+            nActualSpacing = nTargetSpacing * 10;
 
         // ppcoin: target change every block
         // ppcoin: retarget with exponential moving toward target spacing

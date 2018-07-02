@@ -128,8 +128,8 @@ public:
         nRejectBlockOutdatedMajority = 950;
         nToCheckBlockUpgradeMajority = 1000;
         nMinerThreads = 0;
-        nTargetTimespan = 1 * 60; // WISPR: 1 day
-        nTargetSpacing = 1 * 60;  // WISPR: 1 minute
+        nTargetTimespan =  16 * 60; // WISPR: 1 day
+        nTargetSpacing = 64;  // WISPR: 1 minute
         nMaturity = 100;
         nMasternodeCountDrift = 20;
         nMaxMoneyOut = 120000000 * COIN;
@@ -263,8 +263,8 @@ public:
         nRejectBlockOutdatedMajority = 75;
         nToCheckBlockUpgradeMajority = 100;
         nMinerThreads = 0;
-        nTargetTimespan = 1 * 60; // WISPR: 1 day
-        nTargetSpacing = 1 * 60;  // WISPR: 1 minute
+        nTargetTimespan =  16 * 60; // WISPR: 1 day
+        nTargetSpacing = 64;  // WISPR: 1 minute
         nLastPOWBlock = 450;
         nMaturity = 10;
         nMasternodeCountDrift = 4;
@@ -372,8 +372,8 @@ public:
         nRejectBlockOutdatedMajority = 950;
         nToCheckBlockUpgradeMajority = 1000;
         nMinerThreads = 1;
-        nTargetTimespan = 1 * 60; // WISPR: 1 day
-        nTargetSpacing = 1 * 60;        // WISPR: 1 minutes
+        nTargetTimespan = 16 * 60; // WISPR: 1 day
+        nTargetSpacing = 64;        // WISPR: 1 minutes
         bnProofOfWorkLimit = ~uint256(0) >> 1;
         genesis.nTime = 1411111111;
         genesis.nBits  = bnProofOfWorkLimit.GetCompact();

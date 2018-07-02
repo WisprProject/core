@@ -10,8 +10,8 @@
 
 
 // MODIFIER_INTERVAL: time to elapse before new modifier is computed
-static const unsigned int MODIFIER_INTERVAL = 60;
-static const unsigned int MODIFIER_INTERVAL_TESTNET = 60;
+static const unsigned int MODIFIER_INTERVAL = 10 * 60;
+static const unsigned int MODIFIER_INTERVAL_TESTNET = 10 * 60;
 extern unsigned int nModifierInterval;
 extern unsigned int getIntervalVersion(bool fTestNet);
 
