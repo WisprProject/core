@@ -33,8 +33,8 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
         return Params().ProofOfWorkLimit().GetCompact();
     }
 
-    if (pindexLast->nHeight > Params().LAST_POW_BLOCK()) {
-        uint256 bnTargetLimit = (~uint256(0) >> 48);
+//    if (pindexLast->nHeight > Params().LAST_POW_BLOCK()) {
+        uint256 bnTargetLimit = pindexLast->nHeight > Params().LAST_POW_BLOCK() ? (~uint256(0) >> 48) : Params().ProofOfWorkLimit();
         int64_t nTargetSpacing = 64;
         int64_t nTargetTimespan = 16 * 60;
 
@@ -60,54 +60,54 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
             bnNew = bnTargetLimit;
 
         return bnNew.GetCompact();
-    }
+//    }
 
-    for (unsigned int i = 1; BlockReading && BlockReading->nHeight > 0; i++) {
-        if (PastBlocksMax > 0 && i > PastBlocksMax) {
-            break;
-        }
-        CountBlocks++;
-
-        if (CountBlocks <= PastBlocksMin) {
-            if (CountBlocks == 1) {
-                PastDifficultyAverage.SetCompact(BlockReading->nBits);
-            } else {
-                PastDifficultyAverage = ((PastDifficultyAveragePrev * CountBlocks) + (uint256().SetCompact(BlockReading->nBits))) / (CountBlocks + 1);
-            }
-            PastDifficultyAveragePrev = PastDifficultyAverage;
-        }
-
-        if (LastBlockTime > 0) {
-            int64_t Diff = (LastBlockTime - BlockReading->GetBlockTime());
-            nActualTimespan += Diff;
-        }
-        LastBlockTime = BlockReading->GetBlockTime();
-
-        if (BlockReading->pprev == NULL) {
-            assert(BlockReading);
-            break;
-        }
-        BlockReading = BlockReading->pprev;
-    }
-
-    uint256 bnNew(PastDifficultyAverage);
-
-    int64_t _nTargetTimespan = CountBlocks * Params().TargetSpacing();
-
-    if (nActualTimespan < _nTargetTimespan / 3)
-        nActualTimespan = _nTargetTimespan / 3;
-    if (nActualTimespan > _nTargetTimespan * 3)
-        nActualTimespan = _nTargetTimespan * 3;
-
-    // Retarget
-    bnNew *= nActualTimespan;
-    bnNew /= _nTargetTimespan;
-
-    if (bnNew > Params().ProofOfWorkLimit()) {
-        bnNew = Params().ProofOfWorkLimit();
-    }
-
-    return bnNew.GetCompact();
+//    for (unsigned int i = 1; BlockReading && BlockReading->nHeight > 0; i++) {
+//        if (PastBlocksMax > 0 && i > PastBlocksMax) {
+//            break;
+//        }
+//        CountBlocks++;
+//
+//        if (CountBlocks <= PastBlocksMin) {
+//            if (CountBlocks == 1) {
+//                PastDifficultyAverage.SetCompact(BlockReading->nBits);
+//            } else {
+//                PastDifficultyAverage = ((PastDifficultyAveragePrev * CountBlocks) + (uint256().SetCompact(BlockReading->nBits))) / (CountBlocks + 1);
+//            }
+//            PastDifficultyAveragePrev = PastDifficultyAverage;
+//        }
+//
+//        if (LastBlockTime > 0) {
+//            int64_t Diff = (LastBlockTime - BlockReading->GetBlockTime());
+//            nActualTimespan += Diff;
+//        }
+//        LastBlockTime = BlockReading->GetBlockTime();
+//
+//        if (BlockReading->pprev == NULL) {
+//            assert(BlockReading);
+//            break;
+//        }
+//        BlockReading = BlockReading->pprev;
+//    }
+//
+//    uint256 bnNew(PastDifficultyAverage);
+//
+//    int64_t _nTargetTimespan = CountBlocks * Params().TargetSpacing();
+//
+//    if (nActualTimespan < _nTargetTimespan / 3)
+//        nActualTimespan = _nTargetTimespan / 3;
+//    if (nActualTimespan > _nTargetTimespan * 3)
+//        nActualTimespan = _nTargetTimespan * 3;
+//
+//    // Retarget
+//    bnNew *= nActualTimespan;
+//    bnNew /= _nTargetTimespan;
+//
+//    if (bnNew > Params().ProofOfWorkLimit()) {
+//        bnNew = Params().ProofOfWorkLimit();
+//    }
+//
+//    return bnNew.GetCompact();
 }
 
 bool CheckProofOfWork(uint256 hash, unsigned int nBits)
