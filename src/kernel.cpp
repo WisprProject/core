@@ -354,6 +354,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
     int nHashDrift = 30;
     CDataStream ssUniqueID = stakeInput->GetUniqueness();
     CAmount nValueIn = stakeInput->GetValue();
+    fTestNet = Params().NetworkID() == CBaseChainParams::TESTNET;
     for (int i = 0; i < nHashDrift; i++) //iterate the hashing
     {
         //new block came in, move on
@@ -378,7 +379,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
             if (!CheckStake(ssUniqueID, nValueIn, nStakeModifier, bnTargetPerCoinDay, nTimeBlockFrom, nTryTime, hashProofOfStake))
                 continue;
         }else{
-            LogPrintf("bnStakeModifierV2: nTimeBlockFrom:%d nTimeTx:%d\n", block.GetBlockTime(), tx.nTime);
+            LogPrintf("Stake(): bnStakeModifierV2: nTimeBlockFrom:%d nTimeTx:%d\n", block.GetBlockTime(), nTryTime);
             if (!CheckStake(pindex->bnStakeModifierV2, txPrev, txin.prevout, nTryTime, hashProofOfStake, bnTargetPerCoinDay, ssUniqueID, nValueIn))
             {
                 continue;

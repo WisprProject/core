@@ -8,7 +8,9 @@
 #define BITCOIN_MINER_H
 
 #include <stdint.h>
-
+// To decrease granularity of timestamp
+// Supposed to be 2^n-1
+static const int STAKE_TIMESTAMP_MASK = 15;
 class CBlock;
 class CBlockHeader;
 class CBlockIndex;
