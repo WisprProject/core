@@ -16,7 +16,7 @@ std::set<std::string> ZWspControlDialog::setSelectedMints;
 std::set<CMintMeta> ZWspControlDialog::setMints;
 
 ZWspControlDialog::ZWspControlDialog(QWidget *parent) :
-    QDialog(parent),
+    QDialog(parent, Qt::WindowSystemMenuHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint),
     ui(new Ui::ZWspControlDialog),
     model(0)
 {
