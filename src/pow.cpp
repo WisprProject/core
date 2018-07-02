@@ -15,9 +15,11 @@
 #include "uint256.h"
 #include "util.h"
 #include <math.h>
+CBigNum bnProofOfStakeLimit(~uint256(0) >> 48);
+
 unsigned int GetNextTargetRequired(const CBlockIndex* pindexLast, bool fProofOfStake)
 {
-    CBigNum bnTargetLimit = fProofOfStake ? Params().GetProofOfStakeLimit() : Params().ProofOfWorkLimit();
+    CBigNum bnTargetLimit = fProofOfStake ? bnProofOfStakeLimit : Params().ProofOfWorkLimit();
 
     if (pindexLast == NULL)
         return bnTargetLimit.GetCompact(); // genesis block

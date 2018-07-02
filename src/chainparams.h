@@ -51,7 +51,7 @@ public:
     int GetDefaultPort() const { return nDefaultPort; }
     const uint256& ProofOfWorkLimit() const { return bnProofOfWorkLimit; }
     const uint256& ProofOfStakeLimit() const { return bnProofOfWorkLimit; }
-    CBigNum GetProofOfStakeLimit() {return bnProofOfStakeLimitBig; }
+//    CBigNum GetProofOfStakeLimit() {return bnProofOfStakeLimitBig; }
     int SubsidyHalvingInterval() const { return nSubsidyHalvingInterval; }
     /** Used to check majorities for block version upgrade */
     int EnforceBlockUpgradeMajority() const { return nEnforceBlockUpgradeMajority; }
@@ -184,7 +184,7 @@ protected:
     int nZerocoinStartTime;
     int nZerocoinRequiredStakeDepth;
     uint256 bnProofOfStakeLimit = ~uint256(0) >> 24 ;
-    CBigNum bnProofOfStakeLimitBig= (~uint256(0) >> 48);
+//    CBigNum bnProofOfStakeLimitBig= (~uint256(0) >> 48);
 
 //    int nBlockEnforceSerialRange;
 //    int nBlockRecalculateAccumulators;
