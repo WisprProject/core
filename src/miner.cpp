@@ -508,7 +508,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
 //            pwalletMain->AddToWallet(wtx);
 //        }
     }
-    prinf("CreateNewBlock(): Release block");
+    printf("CreateNewBlock(): Release block");
     return pblocktemplate.release();
 }
 
