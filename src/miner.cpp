@@ -446,7 +446,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         LogPrintf("CreateNewBlock(): total size %u\n", nBlockSize);
 
         // Compute final coinbase transaction.
-//        printf("CreateNewBlock(): compute final ccoinbase transaction\n");
+        printf("CreateNewBlock(): compute final ccoinbase transaction\n");
         pblock->vtx[0].vin[0].scriptSig = CScript() << nHeight << OP_0;
         if (!fProofOfStake) {
             pblock->vtx[0] = txNew;
@@ -508,7 +508,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
 //            pwalletMain->AddToWallet(wtx);
 //        }
     }
-
+    prinf("CreateNewBlock(): Release block");
     return pblocktemplate.release();
 }
 
