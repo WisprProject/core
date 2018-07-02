@@ -22,7 +22,7 @@
 #include <QScrollBar>
 #include <QTextDocument>
 
-ReceiveCoinsDialog::ReceiveCoinsDialog(QWidget* parent) : QDialog(parent, Qt::WindowSystemMenuHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint),
+ReceiveCoinsDialog::ReceiveCoinsDialog(QWidget* parent) : QDialog(parent),
                                                           ui(new Ui::ReceiveCoinsDialog),
                                                           model(0)
 {

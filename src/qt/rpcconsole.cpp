@@ -258,7 +258,7 @@ void RPCExecutor::request(const QString& command)
     }
 }
 
-RPCConsole::RPCConsole(QWidget* parent) : QDialog(parent, Qt::WindowSystemMenuHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint),
+RPCConsole::RPCConsole(QWidget* parent) : QDialog(parent),
                                           ui(new Ui::RPCConsole),
                                           clientModel(0),
                                           historyPtr(0),

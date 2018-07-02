@@ -259,14 +259,8 @@ std::string ReindexZerocoinDB()
         return _("Failed to wipe zerocoinDB");
     }
 
-    uiInterface.ShowProgress(_("Reindexing zerocoin database..."), 0);
-
     CBlockIndex* pindex = chainActive[Params().Zerocoin_StartHeight()];
-    std::vector<std::pair<libzerocoin::CoinSpend, uint256> > vSpendInfo;
-    std::vector<std::pair<libzerocoin::PublicCoin, uint256> > vMintInfo;
     while (pindex) {
-        uiInterface.ShowProgress(_("Reindexing zerocoin database..."), std::max(1, std::min(99, (int)((double)(pindex->nHeight - Params().Zerocoin_StartHeight()) / (double)(chainActive.Height() - Params().Zerocoin_StartHeight()) * 100))));
-
         if (pindex->nHeight % 1000 == 0)
             LogPrintf("Reindexing zerocoin : block %d...\n", pindex->nHeight);
 
@@ -289,7 +283,7 @@ std::string ReindexZerocoinDB()
                                 continue;
 
                             libzerocoin::CoinSpend spend = TxInToZerocoinSpend(in);
-                            vSpendInfo.push_back(make_pair(spend, txid));
+                            zerocoinDB->WriteCoinSpend(spend.getCoinSerialNumber(), txid);
                         }
                     }
 
@@ -302,30 +296,14 @@ std::string ReindexZerocoinDB()
                             CValidationState state;
                             libzerocoin::PublicCoin coin(Params().Zerocoin_Params(pindex->nHeight < Params().Zerocoin_StartHeight()));
                             TxOutToPublicCoin(out, coin, state);
-                            vMintInfo.push_back(make_pair(coin, txid));
+                            zerocoinDB->WriteCoinMint(coin, txid);
                         }
                     }
                 }
             }
         }
-
-        // Flush the zerocoinDB to disk every 100 blocks
-        if (pindex->nHeight % 100 == 0) {
-            if ((!vSpendInfo.empty() && !zerocoinDB->WriteCoinSpendBatch(vSpendInfo)) || (!vMintInfo.empty() && !zerocoinDB->WriteCoinMintBatch(vMintInfo)))
-                return _("Error writing zerocoinDB to disk");
-            vSpendInfo.clear();
-            vMintInfo.clear();
-        }
-
         pindex = chainActive.Next(pindex);
     }
-    uiInterface.ShowProgress("", 100);
-
-    // Final flush to disk in case any remaining information exists
-    if ((!vSpendInfo.empty() && !zerocoinDB->WriteCoinSpendBatch(vSpendInfo)) || (!vMintInfo.empty() && !zerocoinDB->WriteCoinMintBatch(vMintInfo)))
-        return _("Error writing zerocoinDB to disk");
-
-    uiInterface.ShowProgress("", 100);
 
     return "";
 }

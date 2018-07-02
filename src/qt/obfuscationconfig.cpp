@@ -17,7 +17,7 @@
 #include <QPushButton>
 #include <QSettings>
 
-ObfuscationConfig::ObfuscationConfig(QWidget* parent) : QDialog(parent, Qt::WindowSystemMenuHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint),
+ObfuscationConfig::ObfuscationConfig(QWidget* parent) : QDialog(parent),
                                                         ui(new Ui::ObfuscationConfig),
                                                         model(0)
 {

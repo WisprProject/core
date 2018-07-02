@@ -69,7 +69,6 @@ public:
     bool LoadBlockIndexGuts();
 };
 
-/** Zerocoin database (zerocoin/) */
 class CZerocoinDB : public CLevelDBWrapper
 {
 public:
@@ -80,12 +79,10 @@ private:
     void operator=(const CZerocoinDB&);
 
 public:
-    /** Write zWSP mints to the zerocoinDB in a batch */
-    bool WriteCoinMintBatch(const std::vector<std::pair<libzerocoin::PublicCoin, uint256> >& mintInfo);
+    bool WriteCoinMint(const libzerocoin::PublicCoin& pubCoin, const uint256& txHash);
     bool ReadCoinMint(const CBigNum& bnPubcoin, uint256& txHash);
     bool ReadCoinMint(const uint256& hashPubcoin, uint256& hashTx);
-    /** Write zWSP spends to the zerocoinDB in a batch */
-    bool WriteCoinSpendBatch(const std::vector<std::pair<libzerocoin::CoinSpend, uint256> >& spendInfo);
+    bool WriteCoinSpend(const CBigNum& bnSerial, const uint256& txHash);
     bool ReadCoinSpend(const CBigNum& bnSerial, uint256& txHash);
     bool ReadCoinSpend(const uint256& hashSerial, uint256 &txHash);
     bool EraseCoinMint(const CBigNum& bnPubcoin);

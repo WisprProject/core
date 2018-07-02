@@ -20,7 +20,7 @@
 
 #include <QClipboard>
 
-Bip38ToolDialog::Bip38ToolDialog(QWidget* parent) : QDialog(parent, Qt::WindowSystemMenuHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint),
+Bip38ToolDialog::Bip38ToolDialog(QWidget* parent) : QDialog(parent),
                                                     ui(new Ui::Bip38ToolDialog),
                                                     model(0)
 {

@@ -25,7 +25,7 @@
 #include <primitives/deterministicmint.h>
 #include <accumulators.h>
 
-PrivacyDialog::PrivacyDialog(QWidget* parent) : QDialog(parent, Qt::WindowSystemMenuHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint | Qt::WindowCloseButtonHint),
+PrivacyDialog::PrivacyDialog(QWidget* parent) : QDialog(parent),
                                                           ui(new Ui::PrivacyDialog),
                                                           walletModel(0),
                                                           currentBalance(-1)

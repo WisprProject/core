@@ -16,7 +16,7 @@
 using namespace std;
 using namespace boost;
 
-MultiSendDialog::MultiSendDialog(QWidget* parent) : QDialog(parent, Qt::WindowSystemMenuHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint),
+MultiSendDialog::MultiSendDialog(QWidget* parent) : QDialog(parent),
                                                     ui(new Ui::MultiSendDialog),
                                                     model(0)
 {

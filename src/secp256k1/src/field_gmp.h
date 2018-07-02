@@ -1,15 +1,18 @@
 /**********************************************************************
- * Copyright (c) 2015 Andrew Poelstra                                 *
+ * Copyright (c) 2013, 2014 Pieter Wuille                             *
  * Distributed under the MIT software license, see the accompanying   *
  * file COPYING or http://www.opensource.org/licenses/mit-license.php.*
  **********************************************************************/
 
-#ifndef SECP256K1_SCALAR_REPR_H
-#define SECP256K1_SCALAR_REPR_H
+#ifndef _SECP256K1_FIELD_REPR_
+#define _SECP256K1_FIELD_REPR_
 
-#include <stdint.h>
+#include <gmp.h>
 
-/** A scalar modulo the group order of the secp256k1 curve. */
-typedef uint32_t secp256k1_scalar;
+#define FIELD_LIMBS ((256 + GMP_NUMB_BITS - 1) / GMP_NUMB_BITS)
 
-#endif /* SECP256K1_SCALAR_REPR_H */
+typedef struct {
+    mp_limb_t n[FIELD_LIMBS+1];
+} secp256k1_fe_t;
+
+#endif

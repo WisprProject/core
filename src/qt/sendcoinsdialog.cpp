@@ -28,7 +28,7 @@
 #include <QSettings>
 #include <QTextDocument>
 
-SendCoinsDialog::SendCoinsDialog(QWidget* parent) : QDialog(parent, Qt::WindowSystemMenuHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint),
+SendCoinsDialog::SendCoinsDialog(QWidget* parent) : QDialog(parent),
                                                     ui(new Ui::SendCoinsDialog),
                                                     clientModel(0),
                                                     model(0),

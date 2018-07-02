@@ -446,7 +446,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         LogPrintf("CreateNewBlock(): total size %u\n", nBlockSize);
 
         // Compute final coinbase transaction.
-        printf("CreateNewBlock(): compute final ccoinbase transaction\n");
+//        printf("CreateNewBlock(): compute final ccoinbase transaction\n");
         pblock->vtx[0].vin[0].scriptSig = CScript() << nHeight << OP_0;
         if (!fProofOfStake) {
             pblock->vtx[0] = txNew;
@@ -508,7 +508,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
 //            pwalletMain->AddToWallet(wtx);
 //        }
     }
-    printf("CreateNewBlock(): Release block");
+
     return pblocktemplate.release();
 }
 
@@ -627,11 +627,11 @@ void BitcoinMiner(CWallet* pwallet, bool fProofOfStake)
                         fMintableCoins = pwallet->MintableCoins();
                     }
                 }
-                printf("vNodes empty: %s\n", vNodes.empty() ? "true" : "false");
-                printf("Wallet is locked: %s\n", pwallet->IsLocked() ? "true" : "false");
-                printf("IfMintableCoin: %s\n", fMintableCoins ? "true" : "false");
-                printf("Wallet balance is higher then zero and lower then or equal to reserve balance: %s\n", (pwallet->GetBalance() > 0 && nReserveBalance >= pwallet->GetBalance()) ? "true" : "false");
-                printf("MasterNodes are synced: %s\n", masternodeSync.IsSynced() ? "true" : "false");
+//                printf("vNodes empty: %s\n", vNodes.empty() ? "true" : "false");
+//                printf("Wallet is locked: %s\n", pwallet->IsLocked() ? "true" : "false");
+//                printf("IfMintableCoin: %s\n", fMintableCoins ? "true" : "false");
+//                printf("Wallet balance is higher then zero and lower then or equal to reserve balance: %s\n", (pwallet->GetBalance() > 0 && nReserveBalance >= pwallet->GetBalance()) ? "true" : "false");
+//                printf("MasterNodes are synced: %s\n", masternodeSync.IsSynced() ? "true" : "false");
 
                 MilliSleep(5000);
                 if (!fGenerateBitcoins && !fProofOfStake)

@@ -12,7 +12,7 @@
 
 #include <QUrl>
 
-OpenURIDialog::OpenURIDialog(QWidget* parent) : QDialog(parent, Qt::WindowSystemMenuHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint),
+OpenURIDialog::OpenURIDialog(QWidget* parent) : QDialog(parent),
                                                 ui(new Ui::OpenURIDialog)
 {
     ui->setupUi(this);

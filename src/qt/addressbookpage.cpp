@@ -22,7 +22,7 @@
 #include <QMessageBox>
 #include <QSortFilterProxyModel>
 
-AddressBookPage::AddressBookPage(Mode mode, Tabs tab, QWidget* parent) : QDialog(parent, Qt::WindowSystemMenuHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint),
+AddressBookPage::AddressBookPage(Mode mode, Tabs tab, QWidget* parent) : QDialog(parent),
                                                                          ui(new Ui::AddressBookPage),
                                                                          model(0),
                                                                          mode(mode),

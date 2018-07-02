@@ -10,6 +10,7 @@
 #include "crypto/ripemd160.h"
 #include "crypto/sha1.h"
 #include "crypto/sha256.h"
+#include "eccryptoverify.h"
 #include "pubkey.h"
 #include "script/script.h"
 #include "uint256.h"
@@ -165,14 +166,13 @@ bool static IsLowDERSignature(const valtype &vchSig, ScriptError* serror) {
     if (!IsValidSignatureEncoding(vchSig)) {
         return set_error(serror, SCRIPT_ERR_SIG_DER);
     }
-    // https://bitcoin.stackexchange.com/a/12556:
-    //     Also note that inside transaction signatures, an extra hashtype byte
-    //     follows the actual signature data.
-    std::vector<unsigned char> vchSigCopy(vchSig.begin(), vchSig.begin() + vchSig.size() - 1);
+    unsigned int nLenR = vchSig[3];
+    unsigned int nLenS = vchSig[5+nLenR];
+    const unsigned char *S = &vchSig[6+nLenR];
     // If the S value is above the order of the curve divided by two, its
     // complement modulo the order could have been used instead, which is
     // one byte shorter when encoded correctly.
-    if (!CPubKey::CheckLowS(vchSigCopy))
+    if (!eccrypto::CheckSignatureElement(S, nLenS, true))
         return set_error(serror, SCRIPT_ERR_SIG_HIGH_S);
 
     return true;
@@ -1033,7 +1033,6 @@ namespace {
     };
 
 } // anon namespace
-
 uint256 SignatureHash(const CScript& scriptCode, const CTransaction& txTo, unsigned int nIn, int nHashType)
 {
     if (nIn >= txTo.vin.size())
@@ -1095,6 +1094,30 @@ uint256 SignatureHash(const CScript& scriptCode, const CTransaction& txTo, unsig
 //    printf("SignatureHash() : hash=%s \n", ss.GetHash().ToString().c_str());
     return ss.GetHash();
 }
+//uint256 SignatureHash(const CScript& scriptCode, const CTransaction& txTo, unsigned int nIn, int nHashType)
+//{
+//    if (nIn >= txTo.vin.size()) {
+//        //  nIn out of range
+//        return 1;
+//    }
+//
+//    // Check for invalid use of SIGHASH_SINGLE
+//    if ((nHashType & 0x1f) == SIGHASH_SINGLE) {
+//        if (nIn >= txTo.vout.size()) {
+//            //  nOut out of range
+//            return 1;
+//        }
+//    }
+//
+//    // Wrapper to serialize only the necessary parts of the transaction being signed
+//    CTransactionSignatureSerializer txTmp(txTo, scriptCode, nIn, nHashType);
+//
+//    // Serialize and hash
+//    CHashWriter ss(SER_GETHASH, 0);
+//    ss << txTmp << nHashType;
+//    printf("SignatureHash() : hash=%s \n", ss.GetHash().ToString().c_str());
+//    return ss.GetHash();
+//}
 
 bool TransactionSignatureChecker::VerifySignature(const std::vector<unsigned char>& vchSig, const CPubKey& pubkey, const uint256& sighash) const
 {
