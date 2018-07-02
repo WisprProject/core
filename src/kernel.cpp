@@ -357,8 +357,24 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
         nTryTime = nTimeTx + nHashDrift - i;
 
         // if stake hash does not meet the target then continue to next iteration
-        if (!CheckStake(ssUniqueID, nValueIn, nStakeModifier, bnTargetPerCoinDay, nTimeBlockFrom, nTryTime, hashProofOfStake))
-            continue;
+        CBlockIndex* pindex = stakeInput->GetIndexFrom();
+        CBlockHeader block = pindex->GetBlockHeader();
+
+        const CTransaction tx = block.vtx[1];
+        const CTxIn& txin = tx.vin[0];
+        GetTransaction(txin.prevout.hash, txPrev, hashBlock, true);
+        if(fTestNet || pindex->nHeight > 270000){
+            if (!CheckStake(ssUniqueID, nValueIn, nStakeModifier, bnTargetPerCoinDay, nTimeBlockFrom, nTryTime, hashProofOfStake))
+                continue;
+        }else{
+            LogPrintf("bnStakeModifierV2: nTimeBlockFrom:%d nTimeTx:%d\n", block.GetBlockTime(), tx.nTime);
+            if (!CheckStake(pindex->bnStakeModifierV2, txPrev, txin.prevout, nTryTime, hashProofOfStake, bnTargetPerCoinDay, ssUniqueID, nValueIn))
+            {
+                continue;
+            }
+        }
+//        if (!CheckStake(ssUniqueID, nValueIn, nStakeModifier, bnTargetPerCoinDay, nTimeBlockFrom, nTryTime, hashProofOfStake))
+//            continue;
 
         fSuccess = true; // if we make it this far then we have successfully created a stake hash
         //LogPrintf("%s: hashproof=%s\n", __func__, hashProofOfStake.GetHex());
@@ -426,8 +442,8 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
     unsigned int nTxTime = block.nTime;
     uint256 hashBlock;
     CTransaction txPrev;
-    CBaseChainParams::Network network = NetworkIdFromCommandLine();
-    fTestNet = network == CBaseChainParams::TESTNET;
+//    CBaseChainParams::Network network = NetworkIdFromCommandLine();
+    fTestNet = Params().NetworkID() == CBaseChainParams::TESTNET;
     if(fTestNet || pindex->nHeight > 270000){
         if (!CheckStake(stake->GetUniqueness(), stake->GetValue(), nStakeModifier, bnTargetPerCoinDay, nBlockFromTime,
                                                                                        nTxTime, hashProofOfStake))
