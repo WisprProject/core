@@ -362,6 +362,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
 
         CBlock block;
         uint256 hashBlock;
+        CTransaction txPrev;
         ReadBlockFromDisk(block, pindex);
         const CTransaction tx = block.vtx[1];
         const CTxIn& txin = tx.vin[0];
