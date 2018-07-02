@@ -318,7 +318,7 @@ bool CheckStake(const uint256& bnStakeModifierV2, const CTransaction& txPrev, co
     ss << bnStakeModifierV2;
     ss << txPrev.nTime << prevout.hash << prevout.n << ssUniqueID << nTimeTx;
     hashProofOfStake = Hash(ss.begin(), ss.end());
-    LogPrintf("bnStakeModifierV2: nTimeBlockFrom:%d nTimeTx:%d\n", __func__, nTimeBlockFrom, nTimeTx);
+//    LogPrintf("bnStakeModifierV2: nTimeBlockFrom:%d nTimeTx:%d\n", __func__, nTimeBlockFrom, nTimeTx);
 
     return stakeTargetHit(hashProofOfStake, nValueIn, bnTarget);
 }
@@ -436,6 +436,7 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
                          tx.GetHash().GetHex(), hashProofOfStake.GetHex());
         }
     }else{
+            LogPrintf("bnStakeModifierV2: nTimeBlockFrom:%d nTimeTx:%d\n", nTimeBlockFrom, nTimeTx);
         if (GetTransaction(txin.prevout.hash, txPrev, hashBlock, true) && !CheckStake(pindex->bnStakeModifierV2, txPrev, txin.prevout, tx.nTime, hashProofOfStake, bnTargetPerCoinDay, stake->GetUniqueness(), stake->GetValue()))
         {
             return error("CheckProofOfStake() : INFO: old bnStakeModifierV2 check kernel failed on coinstake %s, hashProof=%s \n",
