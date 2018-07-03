@@ -398,7 +398,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
 
         // if stake hash does not meet the target then continue to next iteration
         CBlockIndex* pindex = stakeInput->GetIndexFrom();
-//        CBlockIndex* pindexPrev = pindex->pprev;
+        CBlockIndex* pindexPrev = pindex->pprev;
 //        CBlockHeader block = pindex->GetBlockHeader();
 
         CBlock block;
@@ -415,8 +415,8 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
             map<uint256, CBlockIndex*>::iterator mi = mapBlockIndex.find(block.hashPrevBlock);
 //            if (mi == mapBlockIndex.end())
 //                return error("AcceptBlock() : prev block not found");
-            CBlockIndex* pindexPrev = (*mi).second;
-            if (!CheckStake(txPrev, txin.prevout, tx.nTime, hashProofOfStake, nValueIn, pindexPrev, nBits))
+//            CBlockIndex* pindexPrev = (*mi).second;
+            if (!CheckStake(txPrev, txin.prevout, tx.nTime, hashProofOfStake, nValueIn, (*mi).second, nBits))
             {
                 continue;
             }
