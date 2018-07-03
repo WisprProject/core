@@ -4189,7 +4189,9 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
 //        printf("Check stake\n");
         uint256 hashProofOfStake = 0;
         unique_ptr<CStakeInput> stake;
+        uint256 hashBlock = pblock->GetHash();
 
+        printf("AcceptBlock() : %s", hashBlock.GetHex());
 //        if (!CheckProofOfStakeOld(pindexPrev,  vtx[1], block.nBits, hashProof, targetProofOfStake))
 //            return state.DoS(100, error("%s: proof of stake check failed", __func__));
         if (!CheckProofOfStake(block, hashProofOfStake, stake))
