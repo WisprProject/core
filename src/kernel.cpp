@@ -349,6 +349,7 @@ bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
     ss << txPrev.nTime << prevout.hash << prevout.n << nTimeTx;
     hashProofOfStake = Hash(ss.begin(), ss.end());
 
+    unsigned int nTimeBlockFrom = pindexPrev->GetBlockTime();
     LogPrintf("CheckStakeKernelHash() : using modifier 0x%016x at height=%d timestamp=%s for block from timestamp=%s\n",
               nStakeModifier, nStakeModifierHeight,
               DateTimeStrFormat("%Y-%m-%d %H:%M:%S", nStakeModifierTime),
