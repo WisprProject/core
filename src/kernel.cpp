@@ -490,6 +490,7 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
             return error("CheckProofOfStake() : INFO: check kernel failed on coinstake %s, hashProof=%s \n",
                          tx.GetHash().GetHex(), hashProofOfStake.GetHex());
         }
+        printf("Check proof of stake new is successfull for block %s\n", hashProofOfStake.ToString().c_str());
 //    }else{
 //            printf("old modifier block hash %s\n", block.GetHash().ToString().c_str());
 //            LogPrintf("bnStakeModifierV2: nTimeBlockFrom:%d nTimeTx:%d\n", block.GetBlockTime(), tx.nTime);
