@@ -338,7 +338,7 @@ bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
 
     targetProofOfStake = bnTarget.getuint256();
 
-//    uint64_t nStakeModifier = pindexPrev->nStakeModifier;
+    uint64_t nStakeModifier = pindexPrev->nStakeModifier;
     uint256 bnStakeModifierV2 = pindexPrev->bnStakeModifierV2;
 //    int nStakeModifierHeight = pindexPrev->nHeight;
 //    int64_t nStakeModifierTime = pindexPrev->nTime;
@@ -348,6 +348,15 @@ bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
     ss << bnStakeModifierV2;
     ss << txPrev.nTime << prevout.hash << prevout.n << nTimeTx;
     hashProofOfStake = Hash(ss.begin(), ss.end());
+
+    LogPrintf("CheckStakeKernelHash() : using modifier 0x%016x at height=%d timestamp=%s for block from timestamp=%s\n",
+              nStakeModifier, nStakeModifierHeight,
+              DateTimeStrFormat(nStakeModifierTime),
+              DateTimeStrFormat(nTimeBlockFrom));
+    LogPrintf("CheckStakeKernelHash() : check modifier=0x%016x nTimeBlockFrom=%u nTimeTxPrev=%u nPrevout=%u nTimeTx=%u hashProof=%s\n",
+              nStakeModifier,
+              nTimeBlockFrom, txPrev.nTime, prevout.n, nTimeTx,
+              hashProofOfStake.ToString());
 
     return stakeTargetHitOld(hashProofOfStake, nValueIn, bnTarget);
 }
