@@ -4148,7 +4148,7 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
 {
     AssertLockHeld(cs_main);
 
-    CBlockIndex*& pindex = *ppindex;
+    CBlockIndex* pindex = *ppindex;
     uint256 hashProof = 0;
     // Get prev block index
 //    printf("Get prev block index\n");
@@ -4211,10 +4211,10 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
     }
     if(block.IsProofOfWork()){
         hashProof = block.GetPoWHash();
-        pindex->hashProofOfStake = hashProof;
+//        pindex->hashProofOfStake = hashProof;
     }
-//    pindex->hashProofOfStake = hashProof;
-//    printf("Accept block header\n");
+    pindex->hashProofOfStake = hashProof;
+    printf("Accept block header\n");
     if (!AcceptBlockHeader(block, state, &pindex))
         return false;
 
