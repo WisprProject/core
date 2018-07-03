@@ -414,7 +414,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
         }else{
             map<uint256, CBlockIndex*>::iterator mi = mapBlockIndex.find(hashPrevBlock);
             if (mi == mapBlockIndex.end())
-                return DoS(10, error("AcceptBlock() : prev block not found"));
+                return error("AcceptBlock() : prev block not found");
             CBlockIndex* pindexPrev = (*mi).second;
             if (!CheckStake(txPrev, txin.prevout, tx.nTime, hashProofOfStake, nValueIn, pindexPrev, nBits))
             {
@@ -508,7 +508,7 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
     }else{
         map<uint256, CBlockIndex*>::iterator mi = mapBlockIndex.find(hashPrevBlock);
         if (mi == mapBlockIndex.end())
-            return DoS(10, error("AcceptBlock() : prev block not found"));
+            return error("AcceptBlock() : prev block not found");
         CBlockIndex* pindexPrev = (*mi).second;
 //        int nHeight = pindexPrev->nHeight+1;
 
