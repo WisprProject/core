@@ -328,11 +328,11 @@ bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
 
     if (nTimeTx < txPrev.nTime)  // Transaction timestamp violation
         return error("CheckStakeKernelHash() : nTime violation");
+    uint256 targetProofOfStake = 0;
 
     // Base target
     CBigNum bnTarget;
     bnTarget.SetCompact(nBits);
-
     // Weighted target
 //    int64_t nValueIn = txPrev.vout[prevout.n].nValue;
 
