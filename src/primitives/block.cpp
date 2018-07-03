@@ -17,12 +17,13 @@
 
 uint256 CBlockHeader::GetHash() const
 {
-    if(nVersion < 7)
+    if(nVersion > 7){
+        return Hash(BEGIN(nVersion), END(nAccumulatorCheckpoint));
+    }else if(IsProofOfWork()){
         return GetPoWHash();
-    else if (nVersion == 7)
+    }else if(IsProofOfStake()){
         return  Hash(BEGIN(nVersion), END(nNonce));
-
-    return Hash(BEGIN(nVersion), END(nAccumulatorCheckpoint));
+    }
 }
 uint256 CBlockHeader::GetPoWHash() const
 {
