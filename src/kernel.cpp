@@ -270,13 +270,13 @@ bool GetKernelStakeModifier(uint256 hashBlockFrom, uint64_t& nStakeModifier, int
         return error("GetKernelStakeModifier() : block not indexed");
 
     const CBlockIndex* pindexFrom = mapBlockIndex[hashBlockFrom];
-    printf("CBlockIndex pindexFrom: %s\n", pindexFrom->ToString().c_str());
+//    printf("CBlockIndex pindexFrom: %s\n", pindexFrom->ToString().c_str());
     nStakeModifierHeight = pindexFrom->nHeight;
     nStakeModifierTime = pindexFrom->GetBlockTime();
     int64_t nStakeModifierSelectionInterval = GetStakeModifierSelectionInterval();
     const CBlockIndex* pindex = pindexFrom;
     CBlockIndex* pindexNext = chainActive[pindexFrom->nHeight + 1];
-    printf("CBlockIndex pindexNext: %s\n", pindexNext->ToString().c_str());
+//    printf("CBlockIndex pindexNext: %s\n", pindexNext->ToString().c_str());
     // loop to find the stake modifier later by a selection interval
 
     while (nStakeModifierTime < pindexFrom->GetBlockTime() + nStakeModifierSelectionInterval) {
@@ -285,13 +285,13 @@ bool GetKernelStakeModifier(uint256 hashBlockFrom, uint64_t& nStakeModifier, int
             return error("Null pindexNext\n");
         }
         pindex = pindexNext;
-        if(chainActive.Tip()->nHeight < pindexNext->nHeight + 1){
-            pindexNext = chainActive[pindexNext->nHeight + 1];
-            if (pindex->GeneratedStakeModifier()) {
-                nStakeModifierHeight = pindex->nHeight;
-                nStakeModifierTime = pindex->GetBlockTime();
-            }
+//        if(chainActive.Tip()->nHeight < pindexNext->nHeight + 1){
+        pindexNext = chainActive[pindexNext->nHeight + 1];
+        if (pindex->GeneratedStakeModifier()) {
+            nStakeModifierHeight = pindex->nHeight;
+            nStakeModifierTime = pindex->GetBlockTime();
         }
+//        }
 
     }
     nStakeModifier = pindex->nStakeModifier;
