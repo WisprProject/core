@@ -17,17 +17,28 @@
 
 uint256 CBlockHeader::GetHash() const
 {
-    if(nVersion > 7){
+    if(nVersion >= 8){
         return Hash(BEGIN(nVersion), END(nAccumulatorCheckpoint));
-    }else if(IsProofOfWork()){
-        return GetPoWHash();
-    }else if(IsProofOfStake()){
+    } else if ( nVersion == 7 ) {
         return  Hash(BEGIN(nVersion), END(nNonce));
+    } else {
+        return GetPoWHash();
     }
 }
 uint256 CBlockHeader::GetPoWHash() const
 {
     return scrypt_blockhash(CVOIDBEGIN(nVersion));
+}
+
+uint256 CBlockHeader::GetHashForType(bool fProofOfStake = false) const
+{
+    if(nVersion > 7){
+        return Hash(BEGIN(nVersion), END(nAccumulatorCheckpoint));
+    } else if (!fProofOfStake) {
+        return GetPoWHash();
+    } else if (fProofOfStake){
+        return  Hash(BEGIN(nVersion), END(nNonce));
+    }
 }
 
 uint256 CBlock::BuildMerkleTree(bool* fMutated) const
