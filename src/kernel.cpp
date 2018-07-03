@@ -440,7 +440,6 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
     }
 
     CBlockIndex* pindex = stake->GetIndexFrom();
-    CBlockIndex* pprev = pindex->pprev;
     if (!pindex)
         return error("%s: Failed to find the block index", __func__);
 
