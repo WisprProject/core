@@ -482,8 +482,8 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
     bnTargetPerCoinDay.SetCompact(block.nBits);
 
     uint64_t nStakeModifier = pindex->nStakeModifier;
-//    if (!stake->GetModifier(nStakeModifier))
-//        return error("CheckProofOfStake(): failed to get modifier for stake input\n");
+    if (!stake->GetModifier(nStakeModifier))
+        return error("CheckProofOfStake(): failed to get modifier for stake input\n");
 //    return error("%s failed to get modifier for stake input\n", __func__);
 
     unsigned int nBlockFromTime = blockprev.nTime;
