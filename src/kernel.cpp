@@ -488,9 +488,11 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
 
     uint64_t nStakeModifier = pindex->nStakeModifier;
     printf("CBlockIndex: %s\n", pindex->ToString().c_str());
-    if (!stake->GetModifier(nStakeModifier))
-        return error("CheckProofOfStake(): failed to get modifier for stake input\n");
-//    return error("%s failed to get modifier for stake input\n", __func__);
+    if(pindex->nHeight > Params().LAST_POW_BLOCK()){
+        if (!stake->GetModifier(nStakeModifier))
+            return error("CheckProofOfStake(): failed to get modifier for stake input\n");
+    //    return error("%s failed to get modifier for stake input\n", __func__);
+    }
 
     unsigned int nBlockFromTime = blockprev.nTime;
     unsigned int nTxTime = block.nTime;
