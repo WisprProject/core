@@ -502,22 +502,22 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
 //    CBaseChainParams::Network network = NetworkIdFromCommandLine();
 //    fTestNet = Params().NetworkID() == CBaseChainParams::TESTNET;
 
-    if(pindex->nHeight > 270000){
-        if (!CheckStake(stake->GetUniqueness(), stake->GetValue(), nStakeModifier, bnTargetPerCoinDay, nBlockFromTime,
-                                                                                       nTxTime, hashProofOfStake))
-        {
-            return error("CheckProofOfStake() : INFO: check kernel failed on coinstake %s, hashProof=%s \n",
-                         tx.GetHash().GetHex(), hashProofOfStake.GetHex());
-        }
-        printf("Check proof of stake new is successfull for block %s\n", hashProofOfStake.ToString().c_str());
-    }else{
-        if (!CheckStake(txPrev, txin.prevout, tx.nTime, hashProofOfStake, stake->GetValue(), pindex, block.nBits))
-        {
-            return error("CheckProofOfStake() : INFO: old bnStakeModifierV2 check kernel failed on coinstake %s, hashProof=%s \n",
-                         tx.GetHash().GetHex(), hashProofOfStake.ToString().c_str());
-        }
-        printf("Check proof of stake old is successfull for block %s\n", hashProofOfStake.ToString().c_str());
-    }
+//    if(pindex->nHeight > 270000){
+//        if (!CheckStake(stake->GetUniqueness(), stake->GetValue(), nStakeModifier, bnTargetPerCoinDay, nBlockFromTime,
+//                                                                                       nTxTime, hashProofOfStake))
+//        {
+//            return error("CheckProofOfStake() : INFO: check kernel failed on coinstake %s, hashProof=%s \n",
+//                         tx.GetHash().GetHex(), hashProofOfStake.GetHex());
+//        }
+//        printf("Check proof of stake new is successfull for block %s\n", hashProofOfStake.ToString().c_str());
+//    }else{
+//        if (!CheckStake(txPrev, txin.prevout, tx.nTime, hashProofOfStake, stake->GetValue(), pindex, block.nBits))
+//        {
+//            return error("CheckProofOfStake() : INFO: old bnStakeModifierV2 check kernel failed on coinstake %s, hashProof=%s \n",
+//                         tx.GetHash().GetHex(), hashProofOfStake.ToString().c_str());
+//        }
+//        printf("Check proof of stake old is successfull for block %s\n", hashProofOfStake.ToString().c_str());
+//    }
 
 
     return true;
