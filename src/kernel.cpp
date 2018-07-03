@@ -487,7 +487,7 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
     bnTargetPerCoinDay.SetCompact(block.nBits);
 
     uint64_t nStakeModifier = pindex->nStakeModifier;
-    printf("CBlockIndex: %s\n", pindex->ToString().c_str());
+//    printf("CBlockIndex: %s\n", pindex->ToString().c_str());
     if(pindex->nHeight > Params().LAST_POW_BLOCK()){
         if (!stake->GetModifier(nStakeModifier))
             return error("CheckProofOfStake(): failed to get modifier for stake input\n");
