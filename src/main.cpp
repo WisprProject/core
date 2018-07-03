@@ -4206,6 +4206,7 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
         uint256 hash = block.GetHash();
         if(!mapProofOfStake.count(hash)) // add to mapProofOfStake
             mapProofOfStake.insert(make_pair(hash, hashProofOfStake));
+        pindex->hashProofOfStake = hashProofOfStake;
     }
 
 //    printf("Accept block header\n");
