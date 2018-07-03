@@ -62,6 +62,13 @@ static int64_t GetStakeModifierSelectionIntervalSection(int nSection)
     return a;
 }
 
+// ppcoin: find last block index up to pindex
+const CBlockIndex* GetLastBlockIndex(const CBlockIndex* pindex, bool fProofOfStake)
+{
+    while (pindex && pindex->pprev && (pindex->IsProofOfStake() != fProofOfStake))
+        pindex = pindex->pprev;
+    return pindex;
+}
 // Get stake modifier selection interval (in seconds)
 static int64_t GetStakeModifierSelectionInterval()
 {
@@ -278,18 +285,16 @@ bool GetKernelStakeModifier(uint256 hashBlockFrom, uint64_t& nStakeModifier, int
 
     // loop to find the stake modifier later by a selection interval
     while (nStakeModifierTime < pindexFrom->GetBlockTime() + nStakeModifierSelectionInterval) {
-        if (pindexNext) {
-            pindex = pindexNext;
-            pindexNext = chainActive[pindexNext->nHeight + 1];
-            if (pindex->GeneratedStakeModifier()) {
-                nStakeModifierHeight = pindex->nHeight;
-                nStakeModifierTime = pindex->GetBlockTime();
-            }
-        }else{
+        if (!pindexNext) {
             // Should never happen
             return error("Null pindexNext\n");
         }
-
+        pindex = pindexNext;
+        pindexNext = chainActive[pindexNext->nHeight + 1];
+        if (pindex->GeneratedStakeModifier()) {
+            nStakeModifierHeight = pindex->nHeight;
+            nStakeModifierTime = pindex->GetBlockTime();
+        }
 
     }
     nStakeModifier = pindex->nStakeModifier;
