@@ -16,7 +16,13 @@
 #include "util.h"
 #include <math.h>
 CBigNum bnProofOfStakeLimit(~uint256(0) >> 48);
-
+// ppcoin: find last block index up to pindex
+const CBlockIndex* GetLastBlockIndex(const CBlockIndex* pindex, bool fProofOfStake)
+{
+    while (pindex && pindex->pprev && (pindex->IsProofOfStake() != fProofOfStake))
+        pindex = pindex->pprev;
+    return pindex;
+}
 unsigned int GetNextTargetRequired(const CBlockIndex* pindexLast, bool fProofOfStake)
 {
     CBigNum bnProofOfWorkLimitBig = CBigNum(~uint256(0) >> 16);
