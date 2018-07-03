@@ -471,9 +471,9 @@ public:
         } else {
             const_cast<CDiskBlockIndex*>(this)->prevoutStake.SetNull();
             const_cast<CDiskBlockIndex*>(this)->nStakeTime = 0;
-            const_cast<CDiskBlockIndex*>(this)->hashProofOfStake = GetProofOfStakeHash();
+//            const_cast<CDiskBlockIndex*>(this)->hashProofOfStake = GetProofOfStakeHash();
         }
-
+        READWRITE(hashProofOfStake);
         // block header
         READWRITE(this->nVersion);
         READWRITE(hashPrev);
