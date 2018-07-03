@@ -4207,10 +4207,11 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
             mapProofOfStake.insert(make_pair(hash, hashProofOfStake));
 //            pindex->hashProofOfStake = hashProofOfStake;
         hashProof = hashProofOfStake;
-    pindex->hashProofOfStake = hashProof;
+//    pindex->hashProofOfStake = hashProof;
     }
     if(block.IsProofOfWork()){
         hashProof = block.GetPoWHash();
+        pindex->hashProofOfStake = hashProof;
     }
 //    pindex->hashProofOfStake = hashProof;
 //    printf("Accept block header\n");
