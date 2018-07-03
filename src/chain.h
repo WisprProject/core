@@ -443,7 +443,6 @@ public:
     }
 
     ADD_SERIALIZE_METHODS;
-
     template <typename Stream, typename Operation>
     inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
     {
@@ -466,6 +465,7 @@ public:
         READWRITE(nFlags);
         READWRITE(nStakeModifier);
         READWRITE(bnStakeModifierV2);
+
         if (IsProofOfStake()) {
             READWRITE(prevoutStake);
             READWRITE(nStakeTime);
