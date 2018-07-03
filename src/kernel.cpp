@@ -334,7 +334,7 @@ bool CheckStake(const uint256& bnStakeModifierV2, const CTransaction& txPrev, co
     bnTarget.SetCompact(nBits);
 
     // Weighted target
-    int64_t nValueIn = txPrev.vout[prevout.n].nValue;
+//    int64_t nValueIn = txPrev.vout[prevout.n].nValue;
 
     targetProofOfStake = bnTarget.getuint256();
 
