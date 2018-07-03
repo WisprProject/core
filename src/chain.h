@@ -243,13 +243,13 @@ public:
         nFlags = 0;
         nStakeModifier = 0;
         nStakeModifierChecksum = 0;
-        hashProofOfStake = uint256();
-
         if (block.IsProofOfStake()) {
+            hashProofOfStake = uint256();
             SetProofOfStake();
             prevoutStake = block.vtx[1].vin[0].prevout;
             nStakeTime = block.vtx[1].nTime;
         } else {
+            hashProofOfStake = block.GetPoWHash();
             prevoutStake.SetNull();
             nStakeTime = 0;
         }
