@@ -322,7 +322,7 @@ bool CheckStake(const CDataStream& ssUniqueID, CAmount nValueIn, const uint64_t 
 
     return stakeTargetHit(hashProofOfStake, nValueIn, bnTarget);
 }
-bool CheckStake(const uint256& bnStakeModifierV2, const CTransaction& txPrev, const COutPoint& prevout, unsigned int nTimeTx, uint256& hashProofOfStake, const uint256& bnTarget, const CDataStream& ssUniqueID, CAmount nValueIn)
+bool CheckStake(const uint256& bnStakeModifierV2, const CTransaction& txPrev, const COutPoint& prevout, unsigned int nTimeTx, uint256& hashProofOfStake, const uint256& bnTarget, CAmount nValueIn)
 {
     CDataStream ss(SER_GETHASH, 0);
     ss << bnStakeModifierV2;
@@ -384,7 +384,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
                 continue;
         }else{
             LogPrintf("Stake(): bnStakeModifierV2: nTimeBlockFrom:%d nTimeTx:%d\n", block.GetBlockTime(), nTryTime);
-            if (!CheckStake(pindexPrev->bnStakeModifierV2, txPrev, txin.prevout, nTryTime, hashProofOfStake, bnTargetPerCoinDay, ssUniqueID, nValueIn))
+            if (!CheckStake(pindexPrev->bnStakeModifierV2, txPrev, txin.prevout, nTryTime, hashProofOfStake, bnTargetPerCoinDay, nValueIn))
             {
                 continue;
             }
@@ -470,7 +470,7 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
         }
     }else{
             LogPrintf("bnStakeModifierV2: nTimeBlockFrom:%d nTimeTx:%d\n", block.GetBlockTime(), tx.nTime);
-        if (GetTransaction(txin.prevout.hash, txPrev, hashBlock, true) && !CheckStake(pindex->pprev->bnStakeModifierV2, txPrev, txin.prevout, tx.nTime, hashProofOfStake, bnTargetPerCoinDay, stake->GetUniqueness(), stake->GetValue()))
+        if (GetTransaction(txin.prevout.hash, txPrev, hashBlock, false) && !CheckStake(pindex->pprev->bnStakeModifierV2, txPrev, txin.prevout, tx.nTime, hashProofOfStake, bnTargetPerCoinDay, stake->GetValue()))
         {
             return error("CheckProofOfStake() : INFO: old bnStakeModifierV2 check kernel failed on coinstake %s, hashProof=%s \n",
                          tx.GetHash().GetHex(), hashProofOfStake.GetHex());
