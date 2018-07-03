@@ -476,8 +476,8 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
 
     unsigned int nBlockFromTime = blockprev.nTime;
     unsigned int nTxTime = block.nTime;
-    uint256 hashBlock;
-    CTransaction txPrev;
+//    uint256 hashBlock;
+//    CTransaction txPrev;
 //    CBaseChainParams::Network network = NetworkIdFromCommandLine();
 //    fTestNet = Params().NetworkID() == CBaseChainParams::TESTNET;
 
@@ -489,10 +489,6 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
                          tx.GetHash().GetHex(), hashProofOfStake.GetHex());
         }
     }else{
-        if(GetTransaction(txin.prevout.hash, txPrev, hashBlock, false)){
-            return error("CheckProofOfStake() : INFO: old bnStakeModifierV2 txin could not be found %s\n",
-                         txPrev.GetHash().GetHex());
-        }
             printf("old modifier block hash %s\n", block.GetHash().ToString().c_str());
             LogPrintf("bnStakeModifierV2: nTimeBlockFrom:%d nTimeTx:%d\n", block.GetBlockTime(), tx.nTime);
         if (!CheckStake(txPrev, txin.prevout, tx.nTime, hashProofOfStake, stake->GetValue(), pindex->pprev, block.nBits))
