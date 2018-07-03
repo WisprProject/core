@@ -500,7 +500,11 @@ public:
         block.nBits = nBits;
         block.nNonce = nNonce;
         block.nAccumulatorCheckpoint = nAccumulatorCheckpoint;
-        return block.GetHash();
+        if(IsProofOfWork()){
+            return block.GetPoWHash();
+        }else if(IsProofOfStake()){
+            return block.GetHash();
+        }
     }
 
 
