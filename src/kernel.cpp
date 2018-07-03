@@ -488,11 +488,12 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
 
     uint64_t nStakeModifier = pindex->nStakeModifier;
     printf("CBlockIndex: %s\n", pindex->ToString().c_str());
-    if(pindex->nHeight > Params().LAST_POW_BLOCK()){
+//    if(pindex->nHeight > Params().LAST_POW_BLOCK()){
         if (!stake->GetModifier(nStakeModifier))
              printf("CheckProofOfStake(): failed to get modifier for stake input\n");
+            nStakeModifier = chainActive.Tip()->nStakeModifier;
     //    return error("%s failed to get modifier for stake input\n", __func__);
-    }
+//    }
 
     unsigned int nBlockFromTime = blockprev.nTime;
     unsigned int nTxTime = block.nTime;
