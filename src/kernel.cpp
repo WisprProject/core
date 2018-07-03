@@ -412,7 +412,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
             if (!CheckStake(ssUniqueID, nValueIn, nStakeModifier, bnTargetPerCoinDay, nTimeBlockFrom, nTryTime, hashProofOfStake))
                 continue;
         }else{
-            map<uint256, CBlockIndex*>::iterator mi = mapBlockIndex.find(hashPrevBlock);
+            map<uint256, CBlockIndex*>::iterator mi = mapBlockIndex.find(block.hashPrevBlock);
 //            if (mi == mapBlockIndex.end())
 //                return error("AcceptBlock() : prev block not found");
             CBlockIndex* pindexPrev = (*mi).second;
@@ -506,7 +506,7 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
         }
         printf("Check proof of stake new is successfull for block %s\n", hashProofOfStake.ToString().c_str());
     }else{
-        map<uint256, CBlockIndex*>::iterator mi = mapBlockIndex.find(hashPrevBlock);
+        map<uint256, CBlockIndex*>::iterator mi = mapBlockIndex.find(block.hashPrevBlock);
 //        if (mi == mapBlockIndex.end())
 //            return error("AcceptBlock() : prev block not found");
         CBlockIndex* pindexPrev = (*mi).second;
