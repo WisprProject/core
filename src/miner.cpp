@@ -470,17 +470,14 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         pblock->nNonce = 0;
 
         //Calculate the accumulator checkpoint only if the previous cached checkpoint need to be updated
-//        printf("CreateNewBlock(): Calculate the accumulator checkpoint only if the previous cached checkpoint need to be updated\n");
         uint256 nCheckpoint;
+
         if(nHeight > 10) {
             uint256 hashBlockLastAccumulated = chainActive[nHeight - (nHeight % 10) - 10]->GetBlockHash();
-//            printf("CreateNewBlock(): Check if the accumulator needs to be updated\n");
             if (nHeight >= pCheckpointCache.first || pCheckpointCache.second.first != hashBlockLastAccumulated) {
                 //For the period before v2 activation, zWSP will be disabled and previous block's checkpoint is all that will be needed
-//                printf("CreateNewBlock(): Check for zerocoin V2 start\n");
                 pCheckpointCache.second.second = pindexPrev->nAccumulatorCheckpoint;
                 if (pindexPrev->nHeight + 1 >= Params().Zerocoin_StartHeight()) {
-//                    printf("CreateNewBlock(): Map accumulators\n");
                     AccumulatorMap mapAccumulators(Params().Zerocoin_Params(false));
                     if (fZerocoinActive && !CalculateAccumulatorCheckpoint(nHeight, nCheckpoint, mapAccumulators)) {
                         LogPrintf("%s: failed to get accumulator checkpoint\n", __func__);
@@ -489,7 +486,6 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
                         pCheckpointCache.first = nHeight + (10 - (nHeight % 10));
 
                         // the block hash of the last block used in the accumulator checkpoint calc. This will handle reorg situations.
-//                        printf("CreateNewBlock(): Use block hash of the last block for the checkpoint\n");
                         pCheckpointCache.second.first = hashBlockLastAccumulated;
                         pCheckpointCache.second.second = nCheckpoint;
                     }
@@ -501,7 +497,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         pblocktemplate->vTxSigOps[0] = GetLegacySigOpCount(pblock->vtx[0]);
 
         CValidationState state;
-        if (!TestBlockValidity(state, *pblock, pindexPrev, false, false)) {
+        if (!TestBlockValidity(state, *pblock, pindexPrev, pblock->IsProofOfWork(), false)) {
             LogPrintf("CreateNewBlock() : TestBlockValidity failed\n");
             mempool.clear();
             return NULL;
