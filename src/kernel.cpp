@@ -281,9 +281,9 @@ bool GetKernelStakeModifier(uint256 hashBlockFrom, uint64_t& nStakeModifier, int
                 nStakeModifierHeight = pindex->nHeight;
                 nStakeModifierTime = pindex->GetBlockTime();
             }
-        }else{
-            // Should never happen
-            return error("Null pindexNext\n");
+//        }else{
+//            // Should never happen
+//            return error("Null pindexNext\n");
         }
 
 
