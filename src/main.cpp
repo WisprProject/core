@@ -4213,7 +4213,7 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
         hashProof = block.GetPoWHash();
 //        pindex->hashProofOfStake = hashProof;
     }
-    pindex->hashProofOfStake = hashProof;
+//    pindex->hashProofOfStake = hashProof;
     printf("Accept block header\n");
     if (!AcceptBlockHeader(block, state, &pindex))
         return false;

@@ -468,12 +468,12 @@ public:
         if (IsProofOfStake()) {
             READWRITE(prevoutStake);
             READWRITE(nStakeTime);
+//            READWRITE(hashProofOfStake);
         } else {
             const_cast<CDiskBlockIndex*>(this)->prevoutStake.SetNull();
             const_cast<CDiskBlockIndex*>(this)->nStakeTime = 0;
-//            const_cast<CDiskBlockIndex*>(this)->hashProofOfStake = GetProofOfStakeHash();
+            const_cast<CDiskBlockIndex*>(this)->hashProofOfStake = GetProofOfWorkHash();
         }
-        READWRITE(hashProofOfStake);
         // block header
         READWRITE(this->nVersion);
         READWRITE(hashPrev);
@@ -503,7 +503,7 @@ public:
         return block.GetHash();
     }
 
-    uint256 GetProofOfStakeHash() const
+    uint256 GetProofOfWorkHash() const
     {
         CBlockHeader block;
         block.nVersion = nVersion;
@@ -513,11 +513,7 @@ public:
         block.nBits = nBits;
         block.nNonce = nNonce;
         block.nAccumulatorCheckpoint = nAccumulatorCheckpoint;
-        if(IsProofOfWork()){
-            return block.GetPoWHash();
-        }else if(IsProofOfStake()){
-            return block.GetHash();
-        }
+        return block.GetPoWHash();
     }
 
     std::string ToString() const
