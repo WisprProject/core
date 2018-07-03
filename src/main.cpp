@@ -3607,7 +3607,7 @@ CBlockIndex* AddToBlockIndex(const CBlock& block)
             if (!mapProofOfStake.count(hash))
                 LogPrintf("AddToBlockIndex() : hashProofOfStake not found in map \n");
         }
-        pindexNew->hashProof =  hash;
+//        pindexNew->hashProofOfStake =  hash;
         // ppcoin: compute stake modifier
         uint64_t nStakeModifier = 0;
         bool fGeneratedStakeModifier = false;
