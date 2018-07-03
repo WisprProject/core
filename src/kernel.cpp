@@ -480,7 +480,6 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
     CTransaction txPrev;
 //    CBaseChainParams::Network network = NetworkIdFromCommandLine();
 //    fTestNet = Params().NetworkID() == CBaseChainParams::TESTNET;
-    GetTransaction(txin.prevout.hash, txPrev, hashBlock, false);
 
     if(pindex->nHeight > 270000){
         if (!CheckStake(stake->GetUniqueness(), stake->GetValue(), nStakeModifier, bnTargetPerCoinDay, nBlockFromTime,
@@ -490,8 +489,9 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
                          tx.GetHash().GetHex(), hashProofOfStake.GetHex());
         }
     }else{
+            printf("old modifier block hash %s", block.GetHash().ToString().c_str());
             LogPrintf("bnStakeModifierV2: nTimeBlockFrom:%d nTimeTx:%d\n", block.GetBlockTime(), tx.nTime);
-        if (!CheckStake(txPrev, txin.prevout, tx.nTime, hashProofOfStake, stake->GetValue(), pindex->pprev, block.nBits))
+        if (GetTransaction(txin.prevout.hash, txPrev, hashBlock, false) && !CheckStake(txPrev, txin.prevout, tx.nTime, hashProofOfStake, stake->GetValue(), pindex->pprev, block.nBits))
         {
             printf("old modifier block hash %s", hashProofOfStake.ToString().c_str());
             return error("CheckProofOfStake() : INFO: old bnStakeModifierV2 check kernel failed on coinstake %s, hashProof=%s \n",
