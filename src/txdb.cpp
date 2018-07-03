@@ -263,7 +263,7 @@ bool CBlockTreeDB::LoadBlockIndexGuts()
                 pindexNew->hashProofOfStake = diskindex.hashProofOfStake;
 
                 if (pindexNew->IsProofOfWork()) {
-                    if (!CheckProofOfWork(pindexNew->GetBlockHash(), pindexNew->nBits))
+                    if (!CheckProofOfWork(pindexNew->GetBlockHeader().GetPoWHash(), pindexNew->nBits))
                         return error("LoadBlockIndex() : CheckProofOfWork failed: %s", pindexNew->ToString());
                 }
                 // ppcoin: build setStakeSeen
