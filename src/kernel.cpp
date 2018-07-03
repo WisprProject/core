@@ -270,6 +270,7 @@ bool GetKernelStakeModifier(uint256 hashBlockFrom, uint64_t& nStakeModifier, int
         return error("GetKernelStakeModifier() : block not indexed");
 
     const CBlockIndex* pindexFrom = mapBlockIndex[hashBlockFrom];
+    printf("CBlockIndex pindexFrom: %s\n", pindexFrom->ToString().c_str());
     nStakeModifierHeight = pindexFrom->nHeight;
     nStakeModifierTime = pindexFrom->GetBlockTime();
     int64_t nStakeModifierSelectionInterval = GetStakeModifierSelectionInterval();
@@ -483,6 +484,7 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
     bnTargetPerCoinDay.SetCompact(block.nBits);
 
     uint64_t nStakeModifier = pindex->nStakeModifier;
+    printf("CBlockIndex: %s\n", pindex->ToString().c_str());
     if (!stake->GetModifier(nStakeModifier))
         return error("CheckProofOfStake(): failed to get modifier for stake input\n");
 //    return error("%s failed to get modifier for stake input\n", __func__);
