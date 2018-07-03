@@ -730,7 +730,7 @@ void BitcoinMiner(CWallet* pwallet, bool fProofOfStake)
                 }
                 pblock->nNonce += 1;
                 nHashesDone += 1;
-                LogPrintf("WISPRMiner: chech nNonce\n");
+                LogPrintf("WISPRMiner: check nNonce\n");
                 if ((pblock->nNonce & 0xFF) == 0)
                     break;
             }
@@ -775,7 +775,7 @@ void BitcoinMiner(CWallet* pwallet, bool fProofOfStake)
             // Update nTime every few seconds
             UpdateTime(pblock, pindexPrev);
             if (Params().AllowMinDifficultyBlocks()) {
-            LogPrintf("WISPRMiner: AllowMinDifficultyBlocks.\n");
+                LogPrintf("WISPRMiner: AllowMinDifficultyBlocks.\n");
                 // Changing pblock->nTime can change work required on testnet:
                 hashTarget.SetCompact(pblock->nBits);
             }
