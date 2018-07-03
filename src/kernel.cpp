@@ -285,9 +285,9 @@ bool GetKernelStakeModifier(uint256 hashBlockFrom, uint64_t& nStakeModifier, int
             return error("Null pindexNext\n");
         }
         pindex = pindexNext;
-        if(chainActive.Tip()->nHeight < pindexNext->nHeight + 1){
+//        if(chainActive.Tip()->nHeight < pindexNext->nHeight + 1){
             pindexNext = chainActive[pindexNext->nHeight + 1];
-        }
+//        }
         if (pindex->GeneratedStakeModifier()) {
             nStakeModifierHeight = pindex->nHeight;
             nStakeModifierTime = pindex->GetBlockTime();
@@ -354,15 +354,15 @@ bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
     hashProofOfStake = Hash(ss.begin(), ss.end());
 
     unsigned int nTimeBlockFrom = pindexPrev->GetBlockTime();
-    LogPrintf("CheckStakeKernelHash() : using modifier 0x%016x at height=%d timestamp=%s for block from timestamp=%s\n",
-              nStakeModifier, nStakeModifierHeight,
-              DateTimeStrFormat("%Y-%m-%d %H:%M:%S", nStakeModifierTime),
-              DateTimeStrFormat("%Y-%m-%d %H:%M:%S", nTimeBlockFrom));
-    LogPrintf("CheckStakeKernelHash() : check modifier=0x%016x nTimeBlockFrom=%u nTimeTxPrev=%u nPrevout=%u nTimeTx=%u hashProof=%s\n",
-              nStakeModifier,
-              nTimeBlockFrom, txPrev.nTime, prevout.n, nTimeTx,
-              hashProofOfStake.ToString());
-
+//    LogPrintf("CheckStakeKernelHash() : using modifier 0x%016x at height=%d timestamp=%s for block from timestamp=%s\n",
+//              nStakeModifier, nStakeModifierHeight,
+//              DateTimeStrFormat("%Y-%m-%d %H:%M:%S", nStakeModifierTime),
+//              DateTimeStrFormat("%Y-%m-%d %H:%M:%S", nTimeBlockFrom));
+//    LogPrintf("CheckStakeKernelHash() : check modifier=0x%016x nTimeBlockFrom=%u nTimeTxPrev=%u nPrevout=%u nTimeTx=%u hashProof=%s\n",
+//              nStakeModifier,
+//              nTimeBlockFrom, txPrev.nTime, prevout.n, nTimeTx,
+//              hashProofOfStake.ToString());
+//
     return stakeTargetHitOld(hashProofOfStake, nValueIn, bnTarget);
 }
 
@@ -487,7 +487,7 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
     bnTargetPerCoinDay.SetCompact(block.nBits);
 
     uint64_t nStakeModifier = pindex->nStakeModifier;
-//    printf("CBlockIndex: %s\n", pindex->ToString().c_str());
+    printf("CBlockIndex: %s\n", pindex->ToString().c_str());
     if(pindex->nHeight > Params().LAST_POW_BLOCK()){
         if (!stake->GetModifier(nStakeModifier))
             return error("CheckProofOfStake(): failed to get modifier for stake input\n");
