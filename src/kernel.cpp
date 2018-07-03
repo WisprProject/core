@@ -412,11 +412,11 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
             if (!CheckStake(ssUniqueID, nValueIn, nStakeModifier, bnTargetPerCoinDay, nTimeBlockFrom, nTryTime, hashProofOfStake))
                 continue;
         }else{
-            map<uint256, CBlockIndex*>::iterator mi = mapBlockIndex.find(pindexPrev->GetBlockHeader().hashPrevBlock);
+//            map<uint256, CBlockIndex*>::iterator mi = mapBlockIndex.find(pindexPrev->GetBlockHeader().hashPrevBlock);
 //            if (mi == mapBlockIndex.end())
 //                return error("AcceptBlock() : prev block not found");
 //            CBlockIndex* pindexPrev = (*mi).second;
-            if (!CheckStake(txPrev, txin.prevout, tx.nTime, hashProofOfStake, nValueIn, (*mi).second, nBits))
+            if (!CheckStake(txPrev, txin.prevout, tx.nTime, hashProofOfStake, nValueIn, pindexPrev, nBits))
             {
                 continue;
             }
@@ -506,13 +506,13 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
         }
         printf("Check proof of stake new is successfull for block %s\n", hashProofOfStake.ToString().c_str());
     }else{
-        map<uint256, CBlockIndex*>::iterator mi = mapBlockIndex.find(pindex->GetBlockHeader().hashPrevBlock);
+//        map<uint256, CBlockIndex*>::iterator mi = mapBlockIndex.find(pindex->GetBlockHeader().hashPrevBlock);
 //        if (mi == mapBlockIndex.end())
 //            return error("AcceptBlock() : prev block not found");
-        CBlockIndex* pindexPrev = (*mi).second;
+//        CBlockIndex* pindexPrev = (*mi).second;
 //        int nHeight = pindexPrev->nHeight+1;
 
-        if (!CheckStake(txPrev, txin.prevout, tx.nTime, hashProofOfStake, stake->GetValue(), pindexPrev, block.nBits))
+        if (!CheckStake(txPrev, txin.prevout, tx.nTime, hashProofOfStake, stake->GetValue(), pindex->pprev, block.nBits))
         {
             return error("CheckProofOfStake() : INFO: old bnStakeModifierV2 check kernel failed on coinstake %s, hashProof=%s \n",
                          tx.GetHash().GetHex(), hashProofOfStake.ToString().c_str());
