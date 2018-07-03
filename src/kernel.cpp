@@ -285,10 +285,12 @@ bool GetKernelStakeModifier(uint256 hashBlockFrom, uint64_t& nStakeModifier, int
             return error("Null pindexNext\n");
         }
         pindex = pindexNext;
-        pindexNext = chainActive[pindexNext->nHeight + 1];
-        if (pindex->GeneratedStakeModifier()) {
-            nStakeModifierHeight = pindex->nHeight;
-            nStakeModifierTime = pindex->GetBlockTime();
+        if(chainActive.Tip()->nHeight < pindexNext->nHeight + 1){
+            pindexNext = chainActive[pindexNext->nHeight + 1];
+            if (pindex->GeneratedStakeModifier()) {
+                nStakeModifierHeight = pindex->nHeight;
+                nStakeModifierTime = pindex->GetBlockTime();
+            }
         }
 
     }
