@@ -432,6 +432,8 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
     const CTxIn& txin = tx.vin[0];
 
     //Construct the stakeinput object
+    uint256 hashBlock;
+    CTransaction txPrev;
     if (tx.IsZerocoinSpend()) {
         libzerocoin::CoinSpend spend = TxInToZerocoinSpend(txin);
         if (spend.getSpendType() != libzerocoin::SpendType::STAKE)
@@ -440,8 +442,8 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
         stake = std::unique_ptr<CStakeInput>(new CZWspStake(spend));
     } else {
         // First try finding the previous transaction in database
-        uint256 hashBlock;
-        CTransaction txPrev;
+//        uint256 hashBlock;
+//        CTransaction txPrev;
         if (!GetTransaction(txin.prevout.hash, txPrev, hashBlock, true))
             return error("CheckProofOfStake() : INFO: read txPrev failed");
 
