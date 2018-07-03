@@ -321,7 +321,7 @@ bool CheckStake(const CDataStream& ssUniqueID, CAmount nValueIn, const uint64_t 
 
     return stakeTargetHit(hashProofOfStake, nValueIn, bnTarget);
 }
-bool CheckStake(const uint256& bnStakeModifierV2, const CTransaction& txPrev, const COutPoint& prevout,
+bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
         unsigned int nTimeTx, uint256& hashProofOfStake, CAmount nValueIn, CBlockIndex* pindexPrev,
         unsigned int nBits)
 {
@@ -403,7 +403,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
                 continue;
         }else{
             LogPrintf("Stake(): bnStakeModifierV2: nTimeBlockFrom:%d nTimeTx:%d\n", block.GetBlockTime(), nTryTime);
-            if (!CheckStake(pindexPrev->bnStakeModifierV2, txPrev, txin.prevout, nTryTime, hashProofOfStake, nValueIn, pindexPrev, nBits))
+            if (!CheckStake(txPrev, txin.prevout, nTryTime, hashProofOfStake, nValueIn, pindexPrev, nBits))
             {
                 continue;
             }
@@ -489,7 +489,7 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
         }
     }else{
             LogPrintf("bnStakeModifierV2: nTimeBlockFrom:%d nTimeTx:%d\n", block.GetBlockTime(), tx.nTime);
-        if (GetTransaction(txin.prevout.hash, txPrev, hashBlock, false) && !CheckStake(pindex->pprev->bnStakeModifierV2, txPrev, txin.prevout, tx.nTime, hashProofOfStake, stake->GetValue(), pindex->pprev, block.nBits))
+        if (GetTransaction(txin.prevout.hash, txPrev, hashBlock, false) && !CheckStake(txPrev, txin.prevout, tx.nTime, hashProofOfStake, stake->GetValue(), pindex->pprev, block.nBits))
         {
             return error("CheckProofOfStake() : INFO: old bnStakeModifierV2 check kernel failed on coinstake %s, hashProof=%s \n",
                          tx.GetHash().GetHex(), hashProofOfStake.GetHex());
