@@ -113,7 +113,7 @@ static bool SelectBlockFromCandidates(
             hashProof = pindex->IsProofOfStake() ? 0 : pindex->GetBlockHash();
 
         CDataStream ss(SER_GETHASH, 0);
-        ss << pindex->hashProofOfStake << nStakeModifierPrev;
+        ss << pindex->hashProof << nStakeModifierPrev;
         uint256 hashSelection = Hash(ss.begin(), ss.end());
 
         // the selection hash is divided by 2**32 so that proof-of-stake block
