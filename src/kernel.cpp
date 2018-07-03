@@ -445,14 +445,15 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
     // Read block header
     CBlock blockprev;
     if (!ReadBlockFromDisk(blockprev, pindex->GetBlockPos()))
-        return error("CheckProofOfStake(): INFO: failed to find block");
+        return error("CheckProofOfStake(): INFO: failed to find block\n");
 
     uint256 bnTargetPerCoinDay;
     bnTargetPerCoinDay.SetCompact(block.nBits);
 
-    uint64_t nStakeModifier = 0;
-    if (!stake->GetModifier(nStakeModifier))
-        return error("%s failed to get modifier for stake input\n", __func__);
+    uint64_t nStakeModifier = pindex->nStakeModifier;
+//    if (!stake->GetModifier(nStakeModifier))
+//        return error("CheckProofOfStake(): failed to get modifier for stake input\n");
+//    return error("%s failed to get modifier for stake input\n", __func__);
 
     unsigned int nBlockFromTime = blockprev.nTime;
     unsigned int nTxTime = block.nTime;
