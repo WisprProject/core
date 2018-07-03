@@ -338,10 +338,10 @@ bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
 
     targetProofOfStake = bnTarget.getuint256();
 
-    uint64_t nStakeModifier = pindexPrev->nStakeModifier;
+//    uint64_t nStakeModifier = pindexPrev->nStakeModifier;
     uint256 bnStakeModifierV2 = pindexPrev->bnStakeModifierV2;
-    int nStakeModifierHeight = pindexPrev->nHeight;
-    int64_t nStakeModifierTime = pindexPrev->nTime;
+//    int nStakeModifierHeight = pindexPrev->nHeight;
+//    int64_t nStakeModifierTime = pindexPrev->nTime;
 
     // Calculate hash
     CDataStream ss(SER_GETHASH, 0);
