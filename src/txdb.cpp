@@ -261,7 +261,6 @@ bool CBlockTreeDB::LoadBlockIndexGuts()
                 pindexNew->prevoutStake = diskindex.prevoutStake;
                 pindexNew->nStakeTime = diskindex.nStakeTime;
                 pindexNew->hashProofOfStake = diskindex.hashProofOfStake;
-                pindexNew->hashProof = diskindex.hashProof;
 
                 if (pindexNew->IsProofOfWork()) {
                     if (!CheckProofOfWork(pindexNew->GetBlockHeader().GetPoWHash(), pindexNew->nBits))

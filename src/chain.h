@@ -165,7 +165,6 @@ public:
     COutPoint prevoutStake;
     unsigned int nStakeTime;
     uint256 hashProofOfStake;
-    uint256 hashProof;
     int64_t nMint;
     int64_t nMoneySupply;
 
@@ -207,7 +206,6 @@ public:
         nStakeModifierChecksum = 0;
         prevoutStake.SetNull();
         nStakeTime = 0;
-        hashProof = 0;
         nVersion = 0;
         hashMerkleRoot = uint256();
         nTime = 0;
@@ -246,7 +244,6 @@ public:
         nStakeModifier = 0;
         nStakeModifierChecksum = 0;
         hashProofOfStake = uint256();
-        hashProof = uint256();
 
         if (block.IsProofOfStake()) {
             SetProofOfStake();
@@ -482,7 +479,6 @@ public:
         READWRITE(hashPrev);
         READWRITE(hashNext);
         READWRITE(hashMerkleRoot);
-        READWRITE(hashProof);
         READWRITE(nTime);
         READWRITE(nBits);
         READWRITE(nNonce);
