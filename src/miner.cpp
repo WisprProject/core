@@ -478,7 +478,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         if(pblock->nVersion < 8){
             pblock->nBits = GetNextWorkRequired(pindexPrev, pblock);
         }else{
-            pblock->nBits = GetNextTargetRequired(pindexPrev, pblock->IsProofOfStake());
+            pblock->nBits = GetNextTargetRequired(pindexPrev, fProofOfStake);
         }
         pblock->nNonce = 0;
 
