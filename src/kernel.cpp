@@ -531,7 +531,7 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
             return error("AddToBlockIndex() : ComputeNextStakeModifier() failed");
         pindex->SetStakeModifier(nStakeModifier, fGeneratedStakeModifier);
         pindex->bnStakeModifierV2 = ComputeStakeModifier(pindex->pprev, block.IsProofOfWork() ? block.GetHash() : block.vtx[1].vin[0].prevout.hash);
-        if (!CheckStake(txPrev, txin.prevout, tx.nTime, hashProofOfStake, nValueIn, stake->GetIndexFrom()->pprev, block.nBits))
+        if (!CheckStake(txPrev, txin.prevout, tx.nTime, hashProofOfStake, nValueIn, pindex, block.nBits))
         {
             return error("CheckProofOfStake() : INFO: old bnStakeModifierV2 check kernel failed on coinstake %s, hashProof=%s \n",
                          tx.GetHash().GetHex(), hashProofOfStake.ToString().c_str());
