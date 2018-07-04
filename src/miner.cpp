@@ -94,7 +94,11 @@ void UpdateTime(CBlockHeader* pblock, const CBlockIndex* pindexPrev)
 
     // Updating time can change work required on testnet:
     if (Params().AllowMinDifficultyBlocks())
-        pblock->nBits = GetNextWorkRequired(pindexPrev, pblock);
+        if(pblock->nVersion < 8){
+            pblock->nBits = GetNextWorkRequired(pindexPrev, pblock);
+        }else{
+            pblock->nBits = GetNextTargetRequired(pindexPrev, pblock->IsProofOfStake());
+        }
 }
 
 std::pair<int, std::pair<uint256, uint256> > pCheckpointCache;
@@ -138,7 +142,12 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         boost::this_thread::interruption_point();
         CBlockIndex* pindexPrev = chainActive.Tip();
         pblock->nTime = GetAdjustedTime();
-        pblock->nBits = GetNextWorkRequired(pindexPrev, pblock);
+        if(pblock->nVersion < 8){
+            pblock->nBits = GetNextWorkRequired(pindexPrev, pblock);
+        }else{
+            pblock->nBits = GetNextTargetRequired(pindexPrev, fProofOfStake);
+        }
+//        pblock->nBits = GetNextWorkRequired(pindexPrev, pblock);
         CMutableTransaction txCoinStake;
         txCoinStake.nTime = GetAdjustedTime();
         txCoinStake.nTime &= ~STAKE_TIMESTAMP_MASK;
@@ -466,7 +475,11 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         if (!fProofOfStake)
             UpdateTime(pblock, pindexPrev);
 
-        pblock->nBits = GetNextWorkRequired(pindexPrev, pblock);
+        if(pblock->nVersion < 8){
+            pblock->nBits = GetNextWorkRequired(pindexPrev, pblock);
+        }else{
+            pblock->nBits = GetNextTargetRequired(pindexPrev, pblock->IsProofOfStake());
+        }
         pblock->nNonce = 0;
 
         //Calculate the accumulator checkpoint only if the previous cached checkpoint need to be updated
