@@ -243,13 +243,12 @@ public:
         nFlags = 0;
         nStakeModifier = 0;
         nStakeModifierChecksum = 0;
+        hashProofOfStake = 0;
         if (block.IsProofOfStake()) {
-            hashProofOfStake = uint256();
             SetProofOfStake();
             prevoutStake = block.vtx[1].vin[0].prevout;
             nStakeTime = block.vtx[1].nTime;
         } else {
-            hashProofOfStake = block.GetPoWHash();
             prevoutStake.SetNull();
             nStakeTime = 0;
         }
@@ -471,7 +470,6 @@ public:
         } else {
             const_cast<CDiskBlockIndex*>(this)->prevoutStake.SetNull();
             const_cast<CDiskBlockIndex*>(this)->nStakeTime = 0;
-            const_cast<CDiskBlockIndex*>(this)->hashProofOfStake = GetProofOfWorkHash();
         }
         READWRITE(hashProofOfStake);
         // block header
