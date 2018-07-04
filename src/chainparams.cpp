@@ -272,15 +272,7 @@ public:
         nMaxMoneyOut = 120000000 * COIN;
         nZerocoinStartHeight = 270000;
         nZerocoinStartTime = 1533241426; // July 2, 2018
-//        nBlockEnforceSerialRange = 270000; //Enforce serial range starting this block
-//        nBlockRecalculateAccumulators = 270000; //Trigger a recalculation of accumulators
-//        nBlockFirstFraudulent = 250000; //First block that bad serials emerged
-//        nBlockLastGoodCheckpoint = 270000; //Last valid accumulator checkpoint
-//        nBlockEnforceInvalidUTXO = 270000; //Start enforcing the invalid UTXO's
-//        nInvalidAmountFiltered = 0; //Amount of invalid coins filtered through exchanges, that should be considered valid
-//        nBlockZerocoinV2 = 270000; //!> The block that zerocoin v2 becomes active
-//        nEnforceNewSporkKey = 1521604800; //!> Sporks signed after Wednesday, March 21, 2018 4:00:00 AM GMT must use the new spork key
-//        nRejectOldSporkKey = 1522454400; //!> Reject old spork key after Saturday, March 31, 2018 12:00:00 AM GMT
+
         const char* pszTimestamp = "I would rather be without a state than without a voice";
 
         CMutableTransaction txNew2;
@@ -292,7 +284,7 @@ public:
         txNew2.vin[0].scriptSig = CScript() << 0 << CScriptNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
         txNew2.vout[0].nValue = 125000 * COIN;
         txNew2.vout[0].scriptPubKey = CScript() << ParseHex("0433f2952f9002c9088a19607e3d4a54d3d9dfe1cf5c78168b8ba6524fb19fc5d7d3202948e6b8b09e98c425875af6af78fd4f64ff07d97a9ae31ebda5162fbac3") << OP_CHECKSIG;
-        genesis.SetNull();
+//        genesis.SetNull();
         //! Modify the testnet genesis block so the timestamp is valid for a later start.
         genesis.vtx.push_back(txNew2);
         genesis.hashPrevBlock = 0;
@@ -308,10 +300,6 @@ public:
         assert(hashGenesisBlock == uint256("9f83225981d4fd62db0913739d3fefe75398d677111fe007d612ea40b42dfd1f"));
         assert(genesis.hashMerkleRoot == uint256("9fe4384f6df13f43a537e6a302d46c4e0b21e8d6072af5a83d28577f92eac2d4"));
 
-//        assert(hashGenesisBlock == uint256("55e3a71dfde3e61a0c31f7ee28b2466164d209d85c330e414b5b29864df4e42b"));
-//        assert(genesis.hashMerkleRoot == uint256("0x26069b04c7c7b5b8773824b15cfbf0ddaf11ee261657a1aeb28aa5c8163909ee"));
-//        assert(hashGenesisBlock == uint256("eaed1be0a78bd8f6e6ad58d227ec0ac6cbbcca53886871d56a93d7bb4f8fa71a"));
-
         vFixedSeeds.clear();
         vSeeds.clear();
         vSeeds.push_back(CDNSSeedData("wispr.tech", "testnet-seed.wispr.tech"));     // Primary DNS Seeder for testnet wispr
@@ -324,10 +312,6 @@ public:
         base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x35, 0x83, 0x94};
         // Testnet pivx BIP44 coin type is '1' (All coin's testnet default)
         base58Prefixes[EXT_COIN_TYPE] = {0x80, 0x00, 0x00, 0x01};
-//        base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x04)(0x35)(0x87)(0xCF).convert_to_container<std::vector<unsigned char> >();
-//        base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x04)(0x35)(0x83)(0x94).convert_to_container<std::vector<unsigned char> >();
-//         Testnet pivx BIP44 coin type is '1' (All coin's testnet default)
-//        base58Prefixes[EXT_COIN_TYPE] = boost::assign::list_of(0x80)(0x00)(0x00)(0x01).convert_to_container<std::vector<unsigned char> >();
 
         convertSeed6(vFixedSeeds, pnSeed6_test, ARRAYLEN(pnSeed6_test));
 
@@ -340,9 +324,8 @@ public:
 
         nPoolMaxTransactions = 2;
         strSporkKey = "04A8B319388C0F8588D238B9941DC26B26D3F9465266B368A051C5C100F79306A557780101FE2192FE170D7E6DEFDCBEE4C8D533396389C0DAFFDBC842B002243C";
-//        strSporkKeyOld = "04348C2F50F90267E64FACC65BFDC9D0EB147D090872FB97ABAE92E9A36E6CA60983E28E741F8E7277B11A7479B626AC115BA31463AC48178A5075C5A9319D4A38";
         strObfuscationPoolDummyAddress = "mbTYaNZm7TaPt5Du65aPsL8FNTktufYydC";
-        nStartMasternodePayments = 1528877162; // July 2, 2018
+        nStartMasternodePayments = 1533241426; // July 2, 2018
         nBudget_Fee_Confirmations = 3; // Number of confirmations for the finalization fee. We have to make this very short
         // here because we only have a 8 block finalization window on testnet
     }
