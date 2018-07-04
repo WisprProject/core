@@ -439,6 +439,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
             }
 //            LogPrintf("Stake(): bnStakeModifierV2: nTimeBlockFrom:%d nTimeTx:%d\n", block.GetBlockTime(), nTryTime);
         }
+        pindex->hashProofOfStake = hashProofOfStake;
 //        pindex->hashProofOfStake = hashProofOfStake;
 //        if (!CheckStake(ssUniqueID, nValueIn, nStakeModifier, bnTargetPerCoinDay, nTimeBlockFrom, nTryTime, hashProofOfStake))
 //            continue;
@@ -448,7 +449,6 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
         nTimeTx = nTryTime;
         break;
     }
-    pindex->hashProofOfStake = hashProofOfStake;
     mapHashedBlocks.clear();
     mapHashedBlocks[chainActive.Tip()->nHeight] = GetTime(); //store a time stamp of when we last hashed on this block
     return fSuccess;
