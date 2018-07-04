@@ -50,9 +50,9 @@ public:
     const std::vector<unsigned char>& AlertKey() const { return vAlertPubKey; }
     int GetDefaultPort() const { return nDefaultPort; }
     const uint256& ProofOfWorkLimit() const { return bnProofOfWorkLimit; }
-    const uint256& ProofOfWorkLimitBig() const { return bnProofOfWorkLimitBig; }
+    const CBigNum& ProofOfWorkLimitBig() const { return bnProofOfWorkLimitBig; }
     const uint256& ProofOfStakeLimit() const { return bnProofOfStakeLimit; }
-    const uint256& ProofOfStakeLimitBig() const { return bnProofOfStakeLimitBig; }
+    const CBigNum& ProofOfStakeLimitBig() const { return bnProofOfStakeLimitBig; }
 //    CBigNum GetProofOfStakeLimit() {return bnProofOfStakeLimitBig; }
     int SubsidyHalvingInterval() const { return nSubsidyHalvingInterval; }
     /** Used to check majorities for block version upgrade */
