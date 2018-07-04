@@ -137,20 +137,10 @@ public:
 
         /** Height or Time Based Activations **/
         nLastPOWBlock = 450;
-//        nModifierUpdateBlock = 270000;
         nZerocoinStartHeight = 270000;
         nZerocoinStartTime = 1533241426; // July 2, 2018
         nNewProtocolStartHeight = 300000;
         nNewProtocolStartTime = 1533241426;
-//        nBlockEnforceSerialRange = 270000; //Enforce serial range starting this block
-//        nBlockRecalculateAccumulators = 270000; //Trigger a recalculation of accumulators
-//        nBlockFirstFraudulent = 891737; //First block that bad serials emerged
-//        nBlockLastGoodCheckpoint = 270000; //Last valid accumulator checkpoint
-//        nBlockEnforceInvalidUTXO = 270000; //Start enforcing the invalid UTXO's
-//        nInvalidAmountFiltered = 268200*COIN; //Amount of invalid coins filtered through exchanges, that should be considered valid
-//        nBlockZerocoinV2 = 270000; //!> The block that zerocoin v2 becomes active - roughly Tuesday, May 8, 2018 4:00:00 AM GMT
-//        nEnforceNewSporkKey = 200000; //!> Sporks signed after (GMT): Tuesday, May 1, 2018 7:00:00 AM GMT must use the new spork key
-//        nRejectOldSporkKey = 200000; //!> Fully reject old spork key after (GMT): Friday, June 1, 2018 12:00:00 AM
 
         /**
          * Build the genesis block. Note that the output of the genesis coinbase cannot
@@ -210,7 +200,7 @@ public:
         nPoolMaxTransactions = 3;
         strSporkKey = "0499A7AF4806FC6DE640D23BC5936C29B77ADF2174B4F45492727F897AE63CF8D27B2F05040606E0D14B547916379FA10716E344E745F880EDC037307186AA25B7";
         strObfuscationPoolDummyAddress = "WYCSnxDBqGkcruCwreLtBfpXtSMgoo5yUJ";
-        nStartMasternodePayments =1533241426; // July 2, 2018
+        nStartMasternodePayments = 1533241426; // July 2, 2018
 
         /** Zerocoin */
         zerocoinModulus = "25195908475657893494027183240048398571429282126204032027777137836043662020707595556264018525880784"

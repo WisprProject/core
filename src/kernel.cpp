@@ -393,7 +393,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
 
     CBlockIndex* pindexFrom = stakeInput->GetIndexFrom();
     int64_t nModifierTime = 0;
-    if(pindexFrom->nHeight > 270000){
+    if(pindexFrom->nHeight > Params().NEW_PROTOCOLS_STARTHEIGHT()){
         if (!stakeInput->GetModifier(nStakeModifier))
             return error("failed to get kernel stake modifier");
     }else{
@@ -429,7 +429,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
         const CTransaction tx = block.vtx[1];
         const CTxIn& txin = tx.vin[0];
         GetTransaction(txin.prevout.hash, txPrev, hashBlock, true);
-        if(pindex->nHeight > 270000){
+        if(pindex->nHeight > Params().NEW_PROTOCOLS_STARTHEIGHT()){
             if (!CheckStake(ssUniqueID, nValueIn, nStakeModifier, bnTargetPerCoinDay, nTimeBlockFrom, nTryTime, hashProofOfStake))
                 continue;
         }else{
@@ -512,7 +512,7 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
 //    CBaseChainParams::Network network = NetworkIdFromCommandLine();
 //    fTestNet = Params().NetworkID() == CBaseChainParams::TESTNET;
     int64_t nValueIn = txPrev.vout[txin.prevout.n].nValue;
-    if(pindex->nHeight > 270000){
+    if(pindex->nHeight > Params().NEW_PROTOCOLS_STARTHEIGHT()){
         if (!stake->GetModifier(nStakeModifier)) {
             printf("CheckProofOfStake(): failed to get modifier for stake input\n");
             //    return error("%s failed to get modifier for stake input\n", __func__);
