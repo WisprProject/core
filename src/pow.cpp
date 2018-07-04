@@ -243,7 +243,8 @@ bool CheckProofOfWork(uint256 hash, unsigned int nBits)
     bool fNegative;
     bool fOverflow;
     uint256 bnTarget;
-
+    CBigNum bnTargetOld;
+    bnTargetOld.SetCompact(nBits);
     if (Params().SkipProofOfWorkCheck())
         return true;
 
@@ -256,7 +257,7 @@ bool CheckProofOfWork(uint256 hash, unsigned int nBits)
         return error("CheckProofOfWork() : nBits below minimum work");
 
     // Check proof of work matches claimed amount
-    if (hash > bnTarget)
+    if (hash > bnTargetOld.getuint256())
         return error("CheckProofOfWork() : hash doesn't match nBits");
 
     return true;
