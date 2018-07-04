@@ -183,12 +183,12 @@ protected:
     int nZerocoinHeaderVersion;
     int64_t nBudget_Fee_Confirmations;
     int nZerocoinStartHeight;
-    int nZerocoinStartHeight;
-
     int nNewProtocolStartHeight;
+
+    int nZerocoinStartTime;
     int nNewProtocolStartTime;
     int nZerocoinRequiredStakeDepth;
-    uint256 bnProofOfStakeLimit = ~uint256(0) >> 24 ;
+    uint256 bnProofOfStakeLimit = ~uint256(0) >> 48 ;
 //    CBigNum bnProofOfStakeLimitBig= (~uint256(0) >> 48);
 
 //    int nBlockEnforceSerialRange;
