@@ -15,7 +15,7 @@
 #include "uint256.h"
 #include "util.h"
 #include <math.h>
-CBigNum bnProofOfStakeLimit(~uint256(0) >> 48);
+CBigNum bnProofOfStakeLimitBig(~uint256(0) >> 48);
 // ppcoin: find last block index up to pindex
 const CBlockIndex* GetLastBlockIndex(const CBlockIndex* pindex, bool fProofOfStake)
 {
@@ -25,7 +25,7 @@ const CBlockIndex* GetLastBlockIndex(const CBlockIndex* pindex, bool fProofOfSta
 }
 unsigned int GetNextTargetRequired(const CBlockIndex* pindexLast, bool fProofOfStake)
 {
-    CBigNum bnTargetLimit = fProofOfStake ? Params().ProofOfStakeLimit() : Params().ProofOfWorkLimit();
+    CBigNum bnTargetLimit = fProofOfStake ? Params().ProofOfStakeLimitBig() : Params().ProofOfWorkLimitBig();
 
     if (pindexLast == NULL)
         return bnTargetLimit.GetCompact(); // genesis block

@@ -50,7 +50,9 @@ public:
     const std::vector<unsigned char>& AlertKey() const { return vAlertPubKey; }
     int GetDefaultPort() const { return nDefaultPort; }
     const uint256& ProofOfWorkLimit() const { return bnProofOfWorkLimit; }
+    const uint256& ProofOfWorkLimitBig() const { return bnProofOfWorkLimitBig; }
     const uint256& ProofOfStakeLimit() const { return bnProofOfStakeLimit; }
+    const uint256& ProofOfStakeLimitBig() const { return bnProofOfStakeLimitBig; }
 //    CBigNum GetProofOfStakeLimit() {return bnProofOfStakeLimitBig; }
     int SubsidyHalvingInterval() const { return nSubsidyHalvingInterval; }
     /** Used to check majorities for block version upgrade */
@@ -189,7 +191,8 @@ protected:
     int nNewProtocolStartTime;
     int nZerocoinRequiredStakeDepth;
     uint256 bnProofOfStakeLimit = ~uint256(0) >> 48 ;
-//    CBigNum bnProofOfStakeLimitBig= (~uint256(0) >> 48);
+    CBigNum bnProofOfWorkLimitBig = CBigNum(bnProofOfWorkLimit);
+    CBigNum bnProofOfStakeLimitBig= CBigNum(bnProofOfStakeLimit);
 
 //    int nBlockEnforceSerialRange;
 //    int nBlockRecalculateAccumulators;
