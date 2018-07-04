@@ -286,7 +286,7 @@ public:
         genesis.nVersion = 1;
         genesis.nTime    = 1512932225;
         genesis.nBits    = bnProofOfWorkLimit.GetCompact();
-        genesis.nNonce   = 36156;
+        genesis.nNonce   = 142000;
 
         hashGenesisBlock = genesis.GetHash();
         printf("Test net\n");
