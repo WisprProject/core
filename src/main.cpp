@@ -3933,8 +3933,8 @@ bool CheckWork(const CBlock block, CBlockIndex* const pindexPrev)
 {
     uint256 hashBlock = block.GetHash();
     uint256 hashProof = block.GetPoWHash();
-    uint256 hashTarget = uint256().SetCompact(block.nBits);
-//    hashTarget.SetCompact(block.nBits);
+    uint256 hashTarget;
+    hashTarget.SetCompact(block.nBits);
 
 //    printf("indexPrev null assertion\n");
     if (pindexPrev == NULL)
@@ -3945,12 +3945,9 @@ bool CheckWork(const CBlock block, CBlockIndex* const pindexPrev)
     }else{
        nBitsRequired  = GetNextTargetRequired(pindexPrev, block.IsProofOfStake());
     }
-//    unsigned int nBitsRequired = GetNextWorkRequired(pindexPrev, &block);
 
-    if (block.IsProofOfWork()) {
-//        double n1 = ConvertBitsToDouble(block.nBits);
-//        double n2 = ConvertBitsToDouble(nBitsRequired);
-
+    if (!block.IsProofOfStake()) {
+        LogPrintf("Block is proof of  work at %d", pindexPrev->nHeight+1);
         if (hashProof > hashTarget)
             return error("%s : incorrect proof of work - at %d", __func__, pindexPrev->nHeight + 1);
 
