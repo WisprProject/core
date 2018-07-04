@@ -3933,7 +3933,7 @@ bool CheckWork(const CBlock block, CBlockIndex* const pindexPrev)
 {
     uint256 hashBlock = block.GetHash();
     uint256 hashProof = block.GetPoWHash();
-    uint256 hashTarget = CBigNum().SetCompact(block.nBits).getuint256();
+    uint256 hashTarget = uint256().SetCompact(block.nBits);
 //    hashTarget.SetCompact(block.nBits);
 
 //    printf("indexPrev null assertion\n");
