@@ -122,6 +122,7 @@ public:
         vAlertPubKey=ParseHex("04a2b4f239f3f1f4439ef384d0e1927f42d1b33963400735fa0db35946816d2ddce9588dae345108f4ed295d7f2df826fe63bfa0ee7f3bde18805a8465386edb4c");
         nDefaultPort = 17000;
         bnProofOfWorkLimit = ~uint256(0) >> 16; // WISPR starting difficulty is 1 / 2^12
+        bnProofOfStakeLimit = ~uint256(0) >> 48;
         nSubsidyHalvingInterval = 0;
         nMaxReorganizationDepth = 500;
         nEnforceBlockUpgradeMajority = 750;
@@ -252,8 +253,8 @@ public:
         pchMessageStart[3] = 0x78;
         vAlertPubKey=ParseHex("0433f2952f9002c9088a19607e3d4a54d3d9dfe1cf5c78168b8ba6524fb19fc5d7d3202948e6b8b09e98c425875af6af78fd4f64ff07d97a9ae31ebda5162fbac3");
         nDefaultPort = 17002;
-        bnProofOfWorkLimit = ~uint256(0) >> 16; // WISPR starting difficulty is 1 / 2^12
-
+//        bnProofOfWorkLimit = ~uint256(0) >> 16; // WISPR starting difficulty is 1 / 2^12
+//        bnProofOfStakeLimit = ~uint256(0) >> 48;
         nEnforceBlockUpgradeMajority = 51;
         nRejectBlockOutdatedMajority = 75;
         nToCheckBlockUpgradeMajority = 100;

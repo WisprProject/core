@@ -190,7 +190,7 @@ protected:
     int nZerocoinStartTime;
     int nNewProtocolStartTime;
     int nZerocoinRequiredStakeDepth;
-    uint256 bnProofOfStakeLimit = ~uint256(0) >> 48 ;
+    uint256 bnProofOfStakeLimit;
     CBigNum bnProofOfWorkLimitBig = CBigNum(bnProofOfWorkLimit);
     CBigNum bnProofOfStakeLimitBig= CBigNum(bnProofOfStakeLimit);
 

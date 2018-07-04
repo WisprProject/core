@@ -3946,11 +3946,11 @@ bool CheckWork(const CBlock block, CBlockIndex* const pindexPrev)
        nBitsRequired  = GetNextTargetRequired(pindexPrev, block.IsProofOfStake());
     }
 
-    if (!block.IsProofOfStake()) {
+    if (block.IsProofOfWork()) {
         LogPrintf("Block is proof of  work at %d", pindexPrev->nHeight+1);
-        if (hashProof > hashTarget)
+        if (hashProof > hashTarget){
             return error("%s : incorrect proof of work - at %d", __func__, pindexPrev->nHeight + 1);
-
+        }
         return true;
     }
 
