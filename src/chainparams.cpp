@@ -270,21 +270,21 @@ public:
         nNewProtocolStartTime = 1533241426;
         const char* pszTimestamp = "I would rather be without a state than without a voice";
 
-        CMutableTransaction txNew2;
-        txNew2.nVersion = 1;
-        txNew2.nTime = 1528378203;
-        txNew2.nLockTime = 0;
-        txNew2.vin.resize(1);
-        txNew2.vout.resize(1);
-        txNew2.vin[0].scriptSig = CScript() << 0 << CScriptNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
-        txNew2.vout[0].nValue = 125000 * COIN;
-        txNew2.vout[0].scriptPubKey = CScript() << ParseHex("0433f2952f9002c9088a19607e3d4a54d3d9dfe1cf5c78168b8ba6524fb19fc5d7d3202948e6b8b09e98c425875af6af78fd4f64ff07d97a9ae31ebda5162fbac3") << OP_CHECKSIG;
+        CMutableTransaction txNew;
+        txNew.nVersion = 1;
+        txNew.nTime = 1512932225;
+        txNew.nLockTime = 0;
+        txNew.vin.resize(1);
+        txNew.vout.resize(1);
+        txNew.vin[0].scriptSig = CScript() << 0 << CScriptNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
+        txNew.vout[0].nValue = 125000 * COIN;
+        txNew.vout[0].scriptPubKey = CScript() << ParseHex("0433f2952f9002c9088a19607e3d4a54d3d9dfe1cf5c78168b8ba6524fb19fc5d7d3202948e6b8b09e98c425875af6af78fd4f64ff07d97a9ae31ebda5162fbac3") << OP_CHECKSIG;
         //! Modify the testnet genesis block so the timestamp is valid for a later start.
-        genesis.vtx.push_back(txNew2);
+        genesis.vtx.push_back(txNew);
         genesis.hashPrevBlock = 0;
         genesis.hashMerkleRoot = genesis.BuildMerkleTree();
         genesis.nVersion = 1;
-        genesis.nTime    = 1528378203;
+        genesis.nTime    = 1512932225;
         genesis.nBits    = bnProofOfWorkLimit.GetCompact();
         genesis.nNonce   = 36156;
 
@@ -292,8 +292,10 @@ public:
         printf("Test net\n");
         printf("genesis = %s\n", genesis.ToString().c_str());
         printf("genesis.hashMerkleRoot = %s\n", genesis.hashMerkleRoot.ToString().c_str());
-        assert(hashGenesisBlock == uint256("aa921e8e473163cb916da878f7224521fbc1f73b460db9145b6ca76e76357c85"));
-        assert(genesis.hashMerkleRoot == uint256("9fe4384f6df13f43a537e6a302d46c4e0b21e8d6072af5a83d28577f92eac2d4"));
+
+        assert(hashGenesisBlock == uint256("03205c57ebefb02d86c2c0c2de368fa48e92f7df7240f1b528ebbeae70fdbdb1"));
+        assert(genesis.hashMerkleRoot == uint256("0x26069b04c7c7b5b8773824b15cfbf0ddaf11ee261657a1aeb28aa5c8163909ee"));
+
 
         vFixedSeeds.clear();
         vSeeds.clear();
