@@ -25,7 +25,7 @@ const CBlockIndex* GetLastBlockIndex(const CBlockIndex* pindex, bool fProofOfSta
 }
 unsigned int GetNextTargetRequired(const CBlockIndex* pindexLast, bool fProofOfStake)
 {
-    CBigNum bnTargetLimit = fProofOfStake ? Params().ProofOfStakeLimitBig() : Params().ProofOfWorkLimitBig();
+    uint256 bnTargetLimit = fProofOfStake ? Params().ProofOfStakeLimit() : Params().ProofOfWorkLimit();
 
     if (pindexLast == NULL)
         return bnTargetLimit.GetCompact(); // genesis block
@@ -48,7 +48,7 @@ unsigned int GetNextTargetRequired(const CBlockIndex* pindexLast, bool fProofOfS
 
     // ppcoin: target change every block
     // ppcoin: retarget with exponential moving toward target spacing
-    CBigNum bnNew;
+    uint256 bnNew;
     bnNew.SetCompact(pindexPrev->nBits);
     int64_t nInterval = nTargetTimespan / nTargetSpacing;
     bnNew *= ((nInterval - 1) * nTargetSpacing + nActualSpacing + nActualSpacing);
