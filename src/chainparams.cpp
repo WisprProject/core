@@ -139,6 +139,8 @@ public:
 //        nModifierUpdateBlock = 270000;
         nZerocoinStartHeight = 270000;
         nZerocoinStartTime = 1533241426; // July 2, 2018
+        nNewProtocolStartHeight = 300000;
+        nNewProtocolStartTime = 1533241426;
 //        nBlockEnforceSerialRange = 270000; //Enforce serial range starting this block
 //        nBlockRecalculateAccumulators = 270000; //Trigger a recalculation of accumulators
 //        nBlockFirstFraudulent = 891737; //First block that bad serials emerged
@@ -170,10 +172,8 @@ public:
         txNew.vout[0].nValue = 125000 * COIN;
         txNew.vout[0].scriptPubKey = CScript() << ParseHex("0433f2952f9002c9088a19607e3d4a54d3d9dfe1cf5c78168b8ba6524fb19fc5d7d3202948e6b8b09e98c425875af6af78fd4f64ff07d97a9ae31ebda5162fbac3") << OP_CHECKSIG;
         printf("Main net\n");
-//        printf("genesis.GetHash = %s\n", txNew.GetHash().ToString().c_str());
         genesis.vtx.push_back(txNew);
         genesis.hashPrevBlock = 0;
-//        genesis.hashMerkleRoot = uint256("bcd0064f46daed0b3c1ccff16656a0da04b5509924118b7c13d21c81d62ec521");
         genesis.hashMerkleRoot = genesis.BuildMerkleTree();
         genesis.nVersion = 1;
         genesis.nTime = 1513403825;
@@ -181,9 +181,6 @@ public:
         genesis.nNonce = 36156;
 
         hashGenesisBlock = genesis.GetHash();
-//        printf("genesis.nBits = %s\n", to_string(genesis.nBits).c_str());
-//        printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
-//        printf("genesis.hashMerkleRoot = %s\n", genesis.hashMerkleRoot.ToString().c_str());
         printf("genesis = %s\n", genesis.ToString().c_str());
         assert(hashGenesisBlock == uint256("0x0000ec93e0a3fe0aafa3be7dafe1290f5fca039a4037dd5174bc3dd7a35d67f0"));
         assert(genesis.hashMerkleRoot == uint256("0xbcd0064f46daed0b3c1ccff16656a0da04b5509924118b7c13d21c81d62ec521"));
@@ -211,8 +208,6 @@ public:
 
         nPoolMaxTransactions = 3;
         strSporkKey = "0499A7AF4806FC6DE640D23BC5936C29B77ADF2174B4F45492727F897AE63CF8D27B2F05040606E0D14B547916379FA10716E344E745F880EDC037307186AA25B7";
-//        strSporkKeyOld = "04B433E6598390C992F4F022F20D3B4CBBE691652EE7C48243B81701CBDB7CC7D7BF0EE09E154E6FCBF2043D65AF4E9E97B89B5DBAF830D83B9B7F469A6C45A717";
-//        strObfuscationPoolDummyAddress = "D87q2gC9j6nNrnzCsg4aY6bHMLsT9nUhEw";
         strObfuscationPoolDummyAddress = "WYCSnxDBqGkcruCwreLtBfpXtSMgoo5yUJ";
         nStartMasternodePayments =1533241426; // July 2, 2018
 
@@ -268,11 +263,11 @@ public:
         nLastPOWBlock = 450;
         nMaturity = 10;
         nMasternodeCountDrift = 4;
-//        nModifierUpdateBlock = 270000; //approx Mon, 17 Apr 2017 04:00:00 GMT
         nMaxMoneyOut = 120000000 * COIN;
         nZerocoinStartHeight = 270000;
         nZerocoinStartTime = 1533241426; // July 2, 2018
-
+        nNewProtocolStartHeight = 300000;
+        nNewProtocolStartTime = 1533241426;
         const char* pszTimestamp = "I would rather be without a state than without a voice";
 
         CMutableTransaction txNew2;
@@ -284,7 +279,6 @@ public:
         txNew2.vin[0].scriptSig = CScript() << 0 << CScriptNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
         txNew2.vout[0].nValue = 125000 * COIN;
         txNew2.vout[0].scriptPubKey = CScript() << ParseHex("0433f2952f9002c9088a19607e3d4a54d3d9dfe1cf5c78168b8ba6524fb19fc5d7d3202948e6b8b09e98c425875af6af78fd4f64ff07d97a9ae31ebda5162fbac3") << OP_CHECKSIG;
-//        genesis.SetNull();
         //! Modify the testnet genesis block so the timestamp is valid for a later start.
         genesis.vtx.push_back(txNew2);
         genesis.hashPrevBlock = 0;

@@ -119,6 +119,8 @@ public:
 //    int ModifierUpgradeBlock() const { return nModifierUpdateBlock; }
     int LAST_POW_BLOCK() const { return nLastPOWBlock; }
     int Zerocoin_StartHeight() const { return nZerocoinStartHeight; }
+    int NEW_PROTOCOLS_STARTHEIGHT() const { return nNewProtocolStartHeight; }
+    int NEW_PROTOCOLS_STARTTIME() const { return nNewProtocolStartTime; }
 //    int Zerocoin_Block_EnforceSerialRange() const { return nBlockEnforceSerialRange; }
 //    int Zerocoin_Block_RecalculateAccumulators() const { return nBlockRecalculateAccumulators; }
 //    int Zerocoin_Block_FirstFraudulent() const { return nBlockFirstFraudulent; }
@@ -181,7 +183,10 @@ protected:
     int nZerocoinHeaderVersion;
     int64_t nBudget_Fee_Confirmations;
     int nZerocoinStartHeight;
-    int nZerocoinStartTime;
+    int nZerocoinStartHeight;
+
+    int nNewProtocolStartHeight;
+    int nNewProtocolStartTime;
     int nZerocoinRequiredStakeDepth;
     uint256 bnProofOfStakeLimit = ~uint256(0) >> 24 ;
 //    CBigNum bnProofOfStakeLimitBig= (~uint256(0) >> 48);
