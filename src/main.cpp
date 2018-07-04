@@ -4220,7 +4220,7 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
 //        pindex->hashProofOfStake = hashProof;
     }
 //    pindex->hashProofOfStake = hashProof;
-    printf("Accept block header\n");
+//    printf("Accept block header\n");
     if (!AcceptBlockHeader(block, state, &pindex))
         return false;
 
