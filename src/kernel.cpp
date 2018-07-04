@@ -361,6 +361,8 @@ bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
               bnStakeModifierV2.ToString());
     LogPrintf("CheckStakeKernelHash() : using modifier 0x%016x at height=%ds\n",
               nStakeModifier, nStakeModifierHeight);
+    LogPrintf("CheckStakeKernelHash() : nBits = %08x\n",
+              nBits);
     LogPrintf("CheckStakeKernelHash() : nTimeTxPrev=%u nPrevout=%u nTimeTx=%u prevoutHash=%s \n",txPrev.nTime, prevout.n, nTimeTx, prevout.hash.ToString());
     LogPrintf("CheckStakeKernelHash() : hashProofOfStake=%s \n", hashProofOfStake.ToString());
 //    LogPrintf("CheckStakeKernelHash() : using modifier 0x%016x at height=%d timestamp=%s for block from timestamp=%s\n",
