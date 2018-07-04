@@ -291,7 +291,8 @@ public:
         hashGenesisBlock = genesis.GetHash();
         printf("Test net\n");
         printf("genesis = %s\n", genesis.ToString().c_str());
-        assert(hashGenesisBlock == uint256("9f83225981d4fd62db0913739d3fefe75398d677111fe007d612ea40b42dfd1f"));
+        printf("genesis.hashMerkleRoot = %s\n", genesis.hashMerkleRoot.ToString().c_str());
+        assert(hashGenesisBlock == uint256("aa921e8e473163cb916da878f7224521fbc1f73b460db9145b6ca76e76357c85"));
         assert(genesis.hashMerkleRoot == uint256("9fe4384f6df13f43a537e6a302d46c4e0b21e8d6072af5a83d28577f92eac2d4"));
 
         vFixedSeeds.clear();
