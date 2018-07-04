@@ -4214,7 +4214,7 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
             mapProofOfStake.insert(make_pair(hash, hashProofOfStake));
     }else{
         if(block.IsProofOfWork()){
-            hashProofOfStake = block.GetPoWHash();
+            uint256 hashProofOfStake = block.GetPoWHash();
             uint256 hash = block.GetHash();
             if(!mapProofOfStake.count(hash)) // add to mapProofOfStake
                 mapProofOfStake.insert(make_pair(hash, hashProofOfStake));
