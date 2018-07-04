@@ -3943,11 +3943,11 @@ bool CheckWork(const CBlock block, CBlockIndex* const pindexPrev)
     unsigned int nBitsRequired = GetNextWorkRequired(pindexPrev, &block);
 
     if (block.IsProofOfWork()) {
-        double n1 = ConvertBitsToDouble(block.nBits);
-        double n2 = ConvertBitsToDouble(nBitsRequired);
+//        double n1 = ConvertBitsToDouble(block.nBits);
+//        double n2 = ConvertBitsToDouble(nBitsRequired);
 
-        if (abs(n1 - n2) > n1 * 0.5)
-            return error("%s : incorrect proof of work (DGW pre-fork) - %f %f %f at %d", __func__, abs(n1 - n2), n1, n2, pindexPrev->nHeight + 1);
+        if (hashProof > hashTarget)
+            return error("%s : incorrect proof of work - at %d", __func__, pindexPrev->nHeight + 1);
 
         return true;
     }
