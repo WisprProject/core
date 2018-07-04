@@ -521,7 +521,8 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
 //            pwalletMain->AddToWallet(wtx);
 //        }
     }
-        printf("CreateNewBlock(): release block\n");
+//        printf("CreateNewBlock(): release block\n");
+    pblock->nTime = max(pindexPrev->GetPastTimeLimit() + 1, pblock->GetMaxTransactionTime());
     return pblocktemplate.release();
 }
 
