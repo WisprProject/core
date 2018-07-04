@@ -139,11 +139,10 @@ public:
 
         /** Height or Time Based Activations **/
         nLastPOWBlock = 450;
-        nZerocoinStartHeight = 270000;
-        nZerocoinStartTime = 1533241426; // July 2, 2018
         nNewProtocolStartHeight = 300000;
         nNewProtocolStartTime = 1533241426;
-
+        nZerocoinStartHeight = nNewProtocolStartHeight;
+        nZerocoinStartTime = nNewProtocolStartTime;
         /**
          * Build the genesis block. Note that the output of the genesis coinbase cannot
          * be spent as it did not originally exist in the database.
@@ -202,7 +201,7 @@ public:
         nPoolMaxTransactions = 3;
         strSporkKey = "0499A7AF4806FC6DE640D23BC5936C29B77ADF2174B4F45492727F897AE63CF8D27B2F05040606E0D14B547916379FA10716E344E745F880EDC037307186AA25B7";
         strObfuscationPoolDummyAddress = "WYCSnxDBqGkcruCwreLtBfpXtSMgoo5yUJ";
-        nStartMasternodePayments = 1533241426; // July 2, 2018
+        nStartMasternodePayments = nNewProtocolStartTime; // July 2, 2018
 
         /** Zerocoin */
         zerocoinModulus = "25195908475657893494027183240048398571429282126204032027777137836043662020707595556264018525880784"
@@ -257,10 +256,10 @@ public:
         nMaturity = 10;
         nMasternodeCountDrift = 4;
         nMaxMoneyOut = 120000000 * COIN;
-        nZerocoinStartHeight = 270000;
-        nZerocoinStartTime = 1533241426; // July 2, 2018
         nNewProtocolStartHeight = 300000;
         nNewProtocolStartTime = 1533241426;
+        nZerocoinStartHeight = nNewProtocolStartHeight;
+        nZerocoinStartTime = nNewProtocolStartTime; // July 2, 2018
         const char* pszTimestamp = "I would rather be without a state than without a voice";
         genesis.SetNull();
         CMutableTransaction txNew2;
@@ -317,7 +316,7 @@ public:
         nPoolMaxTransactions = 2;
         strSporkKey = "04A8B319388C0F8588D238B9941DC26B26D3F9465266B368A051C5C100F79306A557780101FE2192FE170D7E6DEFDCBEE4C8D533396389C0DAFFDBC842B002243C";
         strObfuscationPoolDummyAddress = "mbTYaNZm7TaPt5Du65aPsL8FNTktufYydC";
-        nStartMasternodePayments = 1533241426; // July 2, 2018
+        nStartMasternodePayments = nNewProtocolStartTime; // July 2, 2018
         nBudget_Fee_Confirmations = 3; // Number of confirmations for the finalization fee. We have to make this very short
         // here because we only have a 8 block finalization window on testnet
     }
