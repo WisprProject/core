@@ -527,7 +527,7 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
         printf("Check proof of stake new is successfull for block %s\n", hashProofOfStake.ToString().c_str());
     }else{
         bool fGeneratedStakeModifier = false;
-        if (!ComputeNextStakeModifier(pindex->pprev, nStakeModifier, fGeneratedStakeModifier))
+        if (!ComputeNextStakeModifier(pindex, nStakeModifier, fGeneratedStakeModifier))
             return error("AddToBlockIndex() : ComputeNextStakeModifier() failed");
         pindex->SetStakeModifier(nStakeModifier, fGeneratedStakeModifier);
         pindex->bnStakeModifierV2 = ComputeStakeModifier(pindex->pprev, block.IsProofOfWork() ? block.GetHash() : block.vtx[1].vin[0].prevout.hash);
