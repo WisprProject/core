@@ -4259,7 +4259,7 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
 //        printf("Write block to history failed\n");
         return state.Abort(std::string("System error: ") + e.what());
     }
-    printf("End of accept block\n");
+//    printf("End of accept block\n");
     return true;
 }
 
