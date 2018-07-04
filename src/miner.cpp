@@ -97,7 +97,7 @@ void UpdateTime(CBlockHeader* pblock, const CBlockIndex* pindexPrev)
         if(pblock->nVersion < 8){
             pblock->nBits = GetNextWorkRequired(pindexPrev, pblock);
         }else{
-            pblock->nBits = GetNextTargetRequired(pindexPrev, pblock->IsProofOfStake());
+            pblock->nBits = GetNextTargetRequired(pindexPrev, false);
         }
 }
 
