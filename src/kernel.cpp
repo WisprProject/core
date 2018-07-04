@@ -354,14 +354,14 @@ bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
     hashProofOfStake = Hash(ss.begin(), ss.end());
 
     unsigned int nTimeBlockFrom = pindexPrev->GetBlockTime();
-//    LogPrintf("CheckStakeKernelHash() : using modifier 0x%016x at height=%d timestamp=%s for block from timestamp=%s\n",
-//              nStakeModifier, nStakeModifierHeight,
-//              DateTimeStrFormat("%Y-%m-%d %H:%M:%S", nStakeModifierTime),
-//              DateTimeStrFormat("%Y-%m-%d %H:%M:%S", nTimeBlockFrom));
-//    LogPrintf("CheckStakeKernelHash() : check modifier=0x%016x nTimeBlockFrom=%u nTimeTxPrev=%u nPrevout=%u nTimeTx=%u hashProof=%s\n",
-//              nStakeModifier,
-//              nTimeBlockFrom, txPrev.nTime, prevout.n, nTimeTx,
-//              hashProofOfStake.ToString());
+    LogPrintf("CheckStakeKernelHash() : using modifier 0x%016x at height=%d timestamp=%s for block from timestamp=%s\n",
+              nStakeModifier, nStakeModifierHeight,
+              DateTimeStrFormat("%Y-%m-%d %H:%M:%S", nStakeModifierTime),
+              DateTimeStrFormat("%Y-%m-%d %H:%M:%S", nTimeBlockFrom));
+    LogPrintf("CheckStakeKernelHash() : check modifier=0x%016x nTimeBlockFrom=%u nTimeTxPrev=%u nPrevout=%u nTimeTx=%u hashProof=%s\n",
+              nStakeModifier,
+              nTimeBlockFrom, txPrev.nTime, prevout.n, nTimeTx,
+              hashProofOfStake.ToString());
 //
     return stakeTargetHitOld(hashProofOfStake, nValueIn, bnTarget);
 }
@@ -522,7 +522,7 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
         }
         printf("Check proof of stake new is successfull for block %s\n", hashProofOfStake.ToString().c_str());
     }else{
-        if (!CheckStake(txPrev, txin.prevout, tx.nTime, hashProofOfStake, stake->GetValue(), pindex, block.nBits))
+        if (!CheckStake(txPrev, txin.prevout, tx.nTime, hashProofOfStake, stake->GetValue(), chainActive.Tip(), block.nBits))
         {
             return error("CheckProofOfStake() : INFO: old bnStakeModifierV2 check kernel failed on coinstake %s, hashProof=%s \n",
                          tx.GetHash().GetHex(), hashProofOfStake.ToString().c_str());
