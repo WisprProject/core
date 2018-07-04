@@ -466,7 +466,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         if (!fProofOfStake)
             UpdateTime(pblock, pindexPrev);
 
-        pblock->nBits = GetNextTargetRequired(pindexPrev, fProofOfStake);
+        pblock->nBits = GetNextTargetRequired(pindexPrev, pblock->IsProofOfStake());
         pblock->nNonce = 0;
 
         //Calculate the accumulator checkpoint only if the previous cached checkpoint need to be updated
