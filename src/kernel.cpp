@@ -345,7 +345,7 @@ bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
               bnStakeModifierV2.ToString());
     LogPrintf("CheckStakeKernelHash() : nBits = %08x\n",
               nBits);
-    LogPrintf("CheckStakeKernelHash() : nTimeTxPrev=%u nPrevout=%u nTimeTx=%u prevoutHash=%s \n",txPrev.nTime, prevout.n, nTimeTx, prevout.hash.ToString());
+    LogPrintf("CheckStakeKernelHash() : nTimeTxPrev=%u nPrevout=%u nTimeTx=%u prevoutHash=%s\n",txPrev.nTime, prevout.n, nTimeTx, prevout.hash.ToString());
     LogPrintf("CheckStakeKernelHash() : hashProofOfStake=%s \n", hashProofOfStake.ToString());
 //    LogPrintf("CheckStakeKernelHash() : using modifier 0x%016x at height=%d timestamp=%s for block from timestamp=%s\n",
 //            nStakeModifier, nStakeModifierHeight,
@@ -377,6 +377,8 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
 
     CBlockIndex* pindexFrom = stakeInput->GetIndexFrom();
     int64_t nModifierTime = 0;
+    if (!stakeInput->GetModifier(nStakeModifier)){
+    }
     if(pindexFrom->nHeight > Params().NEW_PROTOCOLS_STARTHEIGHT()){
         if (!stakeInput->GetModifier(nStakeModifier))
             return error("failed to get kernel stake modifier");
@@ -476,8 +478,9 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
     }
 
     CBlockIndex* pindex = stake->GetIndexFrom();
-    if (!pindex)
+    if (!pindex){
         return error("%s: Failed to find the block index", __func__);
+    }
 
     // Read block header
     CBlock blockprev;
@@ -495,12 +498,17 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
 //    CTransaction txPrev;
 //    CBaseChainParams::Network network = NetworkIdFromCommandLine();
 //    fTestNet = Params().NetworkID() == CBaseChainParams::TESTNET;
+    if (!stake->GetModifier(nStakeModifier)) {
+//            printf("CheckProofOfStake(): failed to get modifier for stake input\n");
+        //    return error("%s failed to get modifier for stake input\n", __func__);
+//            nStakeModifier = chainActive.Tip()->nStakeModifier;
+    }
     int64_t nValueIn = txPrev.vout[txin.prevout.n].nValue;
     if(pindex->nHeight > Params().NEW_PROTOCOLS_STARTHEIGHT()){
         if (!stake->GetModifier(nStakeModifier)) {
-            printf("CheckProofOfStake(): failed to get modifier for stake input\n");
+//            printf("CheckProofOfStake(): failed to get modifier for stake input\n");
             //    return error("%s failed to get modifier for stake input\n", __func__);
-            nStakeModifier = chainActive.Tip()->nStakeModifier;
+//            nStakeModifier = chainActive.Tip()->nStakeModifier;
         }
         if (!CheckStake(stake->GetUniqueness(), stake->GetValue(), nStakeModifier, bnTargetPerCoinDay, nBlockFromTime,
                                                                                        nTxTime, hashProofOfStake))
