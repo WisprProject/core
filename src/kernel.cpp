@@ -311,7 +311,6 @@ bool stakeTargetHitOld(uint256 hashProofOfStake, int64_t nValueIn, uint256 bnTar
 {
     //get the stake weight - weight is equal to coin amount
     uint256 bnCoinDayWeight = uint256(nValueIn);
-
     // Now check if proof-of-stake hash meets target protocol
     return  hashProofOfStake > (bnCoinDayWeight * bnTargetPerCoinDay);
 }
@@ -355,6 +354,7 @@ bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
 
     unsigned int nTimeBlockFrom = pindexPrev->GetBlockTime();
 
+    LogPrintf("%s : proof of stake - at %d", __func__, pindexPrev->nHeight + 1);
     LogPrintf("CheckStakeKernelHash() : using modifier %016x at height=%ds\n",
     nStakeModifier, nStakeModifierHeight);
     LogPrintf("CheckStakeKernelHash() : using bnStakeModifier %s\n",
