@@ -3939,11 +3939,11 @@ bool CheckWork(const CBlock block, CBlockIndex* const pindexPrev)
 //    printf("indexPrev null assertion\n");
     if (pindexPrev == NULL)
         return error("%s : null pindexPrev for block %s", __func__, block.GetHash().ToString().c_str());
-
+    unsigned int nBitsRequired;
     if(block->nVersion < 8){
-        unsigned int nBitsRequired  = GetNextWorkRequired(pindexPrev, block);
+         nBitsRequired  = GetNextWorkRequired(pindexPrev, block);
     }else{
-        unsigned int nBitsRequired  = GetNextTargetRequired(pindexPrev, block.IsProofOfStake());
+       nBitsRequired  = GetNextTargetRequired(pindexPrev, block.IsProofOfStake());
     }
 //    unsigned int nBitsRequired = GetNextWorkRequired(pindexPrev, &block);
 
