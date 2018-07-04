@@ -94,7 +94,7 @@ void UpdateTime(CBlockHeader* pblock, const CBlockIndex* pindexPrev)
 
     // Updating time can change work required on testnet:
     if (Params().AllowMinDifficultyBlocks())
-        if(pblock->nVersion < 8){
+        if(pblock->nVersion > 7){
             pblock->nBits = GetNextWorkRequired(pindexPrev, pblock);
         }else{
             pblock->nBits = GetNextTargetRequired(pindexPrev, false);
@@ -142,7 +142,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         boost::this_thread::interruption_point();
         CBlockIndex* pindexPrev = chainActive.Tip();
         pblock->nTime = GetAdjustedTime();
-        if(pblock->nVersion < 8){
+        if(pblock->nVersion > 7){
             pblock->nBits = GetNextWorkRequired(pindexPrev, pblock);
         }else{
             pblock->nBits = GetNextTargetRequired(pindexPrev, fProofOfStake);
@@ -475,7 +475,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         if (!fProofOfStake)
             UpdateTime(pblock, pindexPrev);
 
-        if(pblock->nVersion < 8){
+        if(pblock->nVersion > 7){
             pblock->nBits = GetNextWorkRequired(pindexPrev, pblock);
         }else{
             pblock->nBits = GetNextTargetRequired(pindexPrev, fProofOfStake);
