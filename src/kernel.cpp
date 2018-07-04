@@ -383,12 +383,12 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
     uint64_t nStakeModifier = 0;
 
     CBlockIndex* pindexFrom = stakeInput->GetIndexFrom();
-    int64_t nStakeModifierTime = 0;
+    int64_t nModifierTime = 0;
     if(pindexFrom->nHeight > 270000){
         if (!stakeInput->GetModifier(nStakeModifier))
             return error("failed to get kernel stake modifier");
     }else{
-        GetLastStakeModifier(pindexFrom, nStakeModifier, nStakeModifierTime);
+        GetLastStakeModifier(pindexFrom, nStakeModifier, nModifierTime);
     }
 
 
@@ -495,7 +495,7 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
     bnTargetPerCoinDay.SetCompact(block.nBits);
 
     uint64_t nStakeModifier = 0;
-    uint64_t nStakeModifierTime = 0;
+    uint64_t nModifierTime = 0;
     if(pindex->nHeight > 270000){
         if (!stake->GetModifier(nStakeModifier)) {
             printf("CheckProofOfStake(): failed to get modifier for stake input\n");
@@ -503,7 +503,7 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
         }
     //    return error("%s failed to get modifier for stake input\n", __func__);
     }else{
-        GetLastStakeModifier(pindex, nStakeModifier, nStakeModifierTime);
+        GetLastStakeModifier(pindex, nStakeModifier, nModifierTime);
     }
 
     unsigned int nBlockFromTime = blockprev.nTime;
