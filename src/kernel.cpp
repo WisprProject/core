@@ -355,12 +355,10 @@ bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
 
     unsigned int nTimeBlockFrom = pindexPrev->GetBlockTime();
 
-    LogPrintf("CheckStakeKernelHash() : using modifier 0x%016x at height=%ds\n",
+    LogPrintf("CheckStakeKernelHash() : using modifier  %08x at height=%ds\n",
     nStakeModifier, nStakeModifierHeight);
     LogPrintf("CheckStakeKernelHash() : using bnStakeModifier %s\n",
               bnStakeModifierV2.ToString());
-    LogPrintf("CheckStakeKernelHash() : using modifier 0x%016x at height=%ds\n",
-              nStakeModifier, nStakeModifierHeight);
     LogPrintf("CheckStakeKernelHash() : nBits = %08x\n",
               nBits);
     LogPrintf("CheckStakeKernelHash() : nTimeTxPrev=%u nPrevout=%u nTimeTx=%u prevoutHash=%s \n",txPrev.nTime, prevout.n, nTimeTx, prevout.hash.ToString());
@@ -450,7 +448,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
         nTimeTx = nTryTime;
         break;
     }
-
+    pindex->hashProofOfStake = hashProofOfStake;
     mapHashedBlocks.clear();
     mapHashedBlocks[chainActive.Tip()->nHeight] = GetTime(); //store a time stamp of when we last hashed on this block
     return fSuccess;
@@ -507,16 +505,6 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
 
     uint64_t nStakeModifier = 0;
     int64_t nStakeModifierTime = 0;
-    if(pindex->nHeight > 270000){
-        if (!stake->GetModifier(nStakeModifier)) {
-            printf("CheckProofOfStake(): failed to get modifier for stake input\n");
-            nStakeModifier = chainActive.Tip()->nStakeModifier;
-        }
-    //    return error("%s failed to get modifier for stake input\n", __func__);
-    }else{
-        GetLastStakeModifier(pindex, nStakeModifier, nStakeModifierTime);
-    }
-
     unsigned int nBlockFromTime = blockprev.nTime;
     unsigned int nTxTime = block.nTime;
 //    uint256 hashBlock;
@@ -525,6 +513,11 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
 //    fTestNet = Params().NetworkID() == CBaseChainParams::TESTNET;
     int64_t nValueIn = txPrev.vout[txin.prevout.n].nValue;
     if(pindex->nHeight > 270000){
+        if (!stake->GetModifier(nStakeModifier)) {
+            printf("CheckProofOfStake(): failed to get modifier for stake input\n");
+            //    return error("%s failed to get modifier for stake input\n", __func__);
+            nStakeModifier = chainActive.Tip()->nStakeModifier;
+        }
         if (!CheckStake(stake->GetUniqueness(), stake->GetValue(), nStakeModifier, bnTargetPerCoinDay, nBlockFromTime,
                                                                                        nTxTime, hashProofOfStake))
         {
@@ -533,6 +526,7 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
         }
         printf("Check proof of stake new is successfull for block %s\n", hashProofOfStake.ToString().c_str());
     }else{
+        GetLastStakeModifier(pindex, nStakeModifier, nStakeModifierTime);
         if (!CheckStake(txPrev, txin.prevout, tx.nTime, hashProofOfStake, nValueIn, stake->GetIndexFrom()->pprev, block.nBits))
         {
             return error("CheckProofOfStake() : INFO: old bnStakeModifierV2 check kernel failed on coinstake %s, hashProof=%s \n",
