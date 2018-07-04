@@ -3947,7 +3947,7 @@ bool CheckWork(const CBlock block, CBlockIndex* const pindexPrev)
     }
 
     if (block.IsProofOfWork()) {
-        LogPrintf("Block is proof of  work at %d", pindexPrev->nHeight+1);
+//        LogPrintf("Block is proof of  work at %d", pindexPrev->nHeight+1);
         if (hashProof > hashTarget){
             return error("%s : incorrect proof of work - at %d", __func__, pindexPrev->nHeight + 1);
         }
