@@ -355,7 +355,7 @@ bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
 
     unsigned int nTimeBlockFrom = pindexPrev->GetBlockTime();
 
-    LogPrintf("CheckStakeKernelHash() : using modifier %u at height=%ds\n",
+    LogPrintf("CheckStakeKernelHash() : using modifier %016x at height=%ds\n",
     nStakeModifier, nStakeModifierHeight);
     LogPrintf("CheckStakeKernelHash() : using bnStakeModifier %s\n",
               bnStakeModifierV2.ToString());
