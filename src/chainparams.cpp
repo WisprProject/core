@@ -269,7 +269,7 @@ public:
         nNewProtocolStartHeight = 300000;
         nNewProtocolStartTime = 1533241426;
         const char* pszTimestamp = "I would rather be without a state than without a voice";
-
+        genesis.SetNull();
         CMutableTransaction txNew;
         txNew.nVersion = 1;
         txNew.nTime = 1512932225;
