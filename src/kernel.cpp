@@ -381,8 +381,16 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
 
     //grab stake modifier
     uint64_t nStakeModifier = 0;
-    if (!stakeInput->GetModifier(nStakeModifier))
-        return error("failed to get kernel stake modifier");
+
+    CBlockIndex* pindexFrom = stakeInput->GetIndexFrom();
+    int64_t nStakeModifierTime = 0;
+    if(pindexFrom->nHeight > 270000){
+        if (!stakeInput->GetModifier(nStakeModifier))
+            return error("failed to get kernel stake modifier");
+    }else{
+        GetLastStakeModifier(pindexFrom, nStakeModifier, nStakeModifierTime);
+    }
+
 
     bool fSuccess = false;
     unsigned int nTryTime = 0;
@@ -486,38 +494,38 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
     uint256 bnTargetPerCoinDay;
     bnTargetPerCoinDay.SetCompact(block.nBits);
 
-    uint64_t nStakeModifier = pindex->nStakeModifier;
-    printf("CBlockIndex: %s\n", pindex->ToString().c_str());
-//    if(pindex->nHeight > Params().LAST_POW_BLOCK()){
-        if (!stake->GetModifier(nStakeModifier))
-             printf("CheckProofOfStake(): failed to get modifier for stake input\n");
-            nStakeModifier = chainActive.Tip()->nStakeModifier;
-    //    return error("%s failed to get modifier for stake input\n", __func__);
-//    }
+    uint64_t nStakeModifier = 0;
+    int64_t nStakeModifierTime = 0;
+    if(pindex->nHeight > 270000){
+        if (!stakeInput->GetModifier(nStakeModifier))
+            return error("failed to get kernel stake modifier");
+    }else{
+        GetLastStakeModifier(pindex, nStakeModifier, nStakeModifierTime);
+    }
 
     unsigned int nBlockFromTime = blockprev.nTime;
     unsigned int nTxTime = block.nTime;
-//    uint256 hashBlock;
-//    CTransaction txPrev;
+    uint256 hashBlock;
+    CTransaction txPrev;
 //    CBaseChainParams::Network network = NetworkIdFromCommandLine();
 //    fTestNet = Params().NetworkID() == CBaseChainParams::TESTNET;
 
-//    if(pindex->nHeight > 270000){
-//        if (!CheckStake(stake->GetUniqueness(), stake->GetValue(), nStakeModifier, bnTargetPerCoinDay, nBlockFromTime,
-//                                                                                       nTxTime, hashProofOfStake))
-//        {
-//            return error("CheckProofOfStake() : INFO: check kernel failed on coinstake %s, hashProof=%s \n",
-//                         tx.GetHash().GetHex(), hashProofOfStake.GetHex());
-//        }
-//        printf("Check proof of stake new is successfull for block %s\n", hashProofOfStake.ToString().c_str());
-//    }else{
-//        if (!CheckStake(txPrev, txin.prevout, tx.nTime, hashProofOfStake, stake->GetValue(), pindex, block.nBits))
-//        {
-//            return error("CheckProofOfStake() : INFO: old bnStakeModifierV2 check kernel failed on coinstake %s, hashProof=%s \n",
-//                         tx.GetHash().GetHex(), hashProofOfStake.ToString().c_str());
-//        }
-//        printf("Check proof of stake old is successfull for block %s\n", hashProofOfStake.ToString().c_str());
-//    }
+    if(pindex->nHeight > 270000){
+        if (!CheckStake(stake->GetUniqueness(), stake->GetValue(), nStakeModifier, bnTargetPerCoinDay, nBlockFromTime,
+                                                                                       nTxTime, hashProofOfStake))
+        {
+            return error("CheckProofOfStake() : INFO: check kernel failed on coinstake %s, hashProof=%s \n",
+                         tx.GetHash().GetHex(), hashProofOfStake.GetHex());
+        }
+        printf("Check proof of stake new is successfull for block %s\n", hashProofOfStake.ToString().c_str());
+    }else{
+        if (!CheckStake(txPrev, txin.prevout, tx.nTime, hashProofOfStake, stake->GetValue(), pindex, block.nBits))
+        {
+            return error("CheckProofOfStake() : INFO: old bnStakeModifierV2 check kernel failed on coinstake %s, hashProof=%s \n",
+                         tx.GetHash().GetHex(), hashProofOfStake.ToString().c_str());
+        }
+        printf("Check proof of stake old is successfull for block %s\n", hashProofOfStake.ToString().c_str());
+    }
 
 
     return true;
