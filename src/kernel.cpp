@@ -538,8 +538,10 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
         }
         printf("Check proof of stake old is successfull for block %s\n", hashProofOfStake.ToString().c_str());
     }
-
-
+    if(block.IsProofOfWork()){
+        hashProofOfStake = block.GetPoWHash();
+    }
+    pindex->hashProofOfStake = hashProofOfStake;
     return true;
 }
 
