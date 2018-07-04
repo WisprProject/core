@@ -495,18 +495,21 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
     bnTargetPerCoinDay.SetCompact(block.nBits);
 
     uint64_t nStakeModifier = 0;
-    int64_t nStakeModifierTime = 0;
+    uint64_t nStakeModifierTime = 0;
     if(pindex->nHeight > 270000){
-        if (!stakeInput->GetModifier(nStakeModifier))
-            return error("failed to get kernel stake modifier");
+        if (!stake->GetModifier(nStakeModifier)) {
+            printf("CheckProofOfStake(): failed to get modifier for stake input\n");
+            nStakeModifier = chainActive.Tip()->nStakeModifier;
+        }
+    //    return error("%s failed to get modifier for stake input\n", __func__);
     }else{
         GetLastStakeModifier(pindex, nStakeModifier, nStakeModifierTime);
     }
 
     unsigned int nBlockFromTime = blockprev.nTime;
     unsigned int nTxTime = block.nTime;
-    uint256 hashBlock;
-    CTransaction txPrev;
+//    uint256 hashBlock;
+//    CTransaction txPrev;
 //    CBaseChainParams::Network network = NetworkIdFromCommandLine();
 //    fTestNet = Params().NetworkID() == CBaseChainParams::TESTNET;
 
