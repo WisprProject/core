@@ -310,10 +310,10 @@ bool stakeTargetHit(uint256 hashProofOfStake, int64_t nValueIn, uint256 bnTarget
 bool stakeTargetHitOld(uint256 hashProofOfStake, int64_t nValueIn, CBigNum bnTargetPerCoinDay)
 {
     //get the stake weight - weight is equal to coin amount
-    CBigNum bnCoinDayWeight = CBigNum(nValueIn);
+    uint256 bnCoinDayWeight = uint256(nValueIn);
 
     // Now check if proof-of-stake hash meets target protocol
-    return  CBigNum(hashProofOfStake) > (bnCoinDayWeight * bnTargetPerCoinDay);
+    return  hashProofOfStake > (bnCoinDayWeight * bnTargetPerCoinDay);
 }
 bool CheckStake(const CDataStream& ssUniqueID, CAmount nValueIn, const uint64_t nStakeModifier, const uint256& bnTarget,
                 unsigned int nTimeBlockFrom, unsigned int& nTimeTx, uint256& hashProofOfStake)
@@ -335,12 +335,12 @@ bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
     uint256 targetProofOfStake = 0;
 
     // Base target
-    CBigNum bnTarget;
+    uint256 bnTarget;
     bnTarget.SetCompact(nBits);
     // Weighted target
 //    int64_t nValueIn = txPrev.vout[prevout.n].nValue;
 
-    targetProofOfStake = bnTarget.getuint256();
+    targetProofOfStake = bnTarget;
 
     uint64_t nStakeModifier = pindexPrev->nStakeModifier;
     uint256 bnStakeModifierV2 = pindexPrev->bnStakeModifierV2;
