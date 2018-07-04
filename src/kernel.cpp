@@ -307,7 +307,7 @@ bool stakeTargetHit(uint256 hashProofOfStake, int64_t nValueIn, uint256 bnTarget
     // Now check if proof-of-stake hash meets target protocol
     return hashProofOfStake > (bnCoinDayWeight * bnTargetPerCoinDay);
 }
-bool stakeTargetHitOld(uint256 hashProofOfStake, int64_t nValueIn, CBigNum bnTargetPerCoinDay)
+bool stakeTargetHitOld(uint256 hashProofOfStake, int64_t nValueIn, uint256 bnTargetPerCoinDay)
 {
     //get the stake weight - weight is equal to coin amount
     uint256 bnCoinDayWeight = uint256(nValueIn);
