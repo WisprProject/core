@@ -425,7 +425,6 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
             }
 //            LogPrintf("Stake(): bnStakeModifierV2: nTimeBlockFrom:%d nTimeTx:%d\n", block.GetBlockTime(), nTryTime);
         }
-        pindex->hashProofOfStake = hashProofOfStake;
 //        pindex->hashProofOfStake = hashProofOfStake;
 //        if (!CheckStake(ssUniqueID, nValueIn, nStakeModifier, bnTargetPerCoinDay, nTimeBlockFrom, nTryTime, hashProofOfStake))
 //            continue;
@@ -526,10 +525,7 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
         }
 //        printf("Check proof of stake old is successfull for block %s\n", hashProofOfStake.ToString().c_str());
     }
-    if(block.IsProofOfWork()){
-        hashProofOfStake = block.GetHash();
-    }
-    pindex->hashProofOfStake = hashProofOfStake;
+
     return true;
 }
 

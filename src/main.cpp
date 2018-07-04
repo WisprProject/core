@@ -3606,8 +3606,9 @@ CBlockIndex* AddToBlockIndex(const CBlock& block)
         if (pindexNew->IsProofOfStake()) {
             if (!mapProofOfStake.count(hash))
                 LogPrintf("AddToBlockIndex() : hashProofOfStake not found in map \n");
+            pindexNew->hashProofOfStake = mapProofOfStake[hash];
         }
-//        pindexNew->hashProofOfStake =  hash;
+
         // ppcoin: compute stake modifier
         uint64_t nStakeModifier = 0;
         bool fGeneratedStakeModifier = false;
@@ -4211,14 +4212,16 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
         uint256 hash = block.GetHash();
         if(!mapProofOfStake.count(hash)) // add to mapProofOfStake
             mapProofOfStake.insert(make_pair(hash, hashProofOfStake));
-//            pindex->hashProofOfStake = hashProofOfStake;
-        hashProof = hashProofOfStake;
-//    pindex->hashProofOfStake = hashProof;
+    }else{
+        if(block.IsProofOfWork()){
+            hashProofOfStake = block.GetPoWHash();
+            uint256 hash = block.GetHash();
+            if(!mapProofOfStake.count(hash)) // add to mapProofOfStake
+                mapProofOfStake.insert(make_pair(hash, hashProofOfStake));
+        }
+
     }
-    if(block.IsProofOfWork()){
-        hashProof = block.GetPoWHash();
-//        pindex->hashProofOfStake = hashProof;
-    }
+
 //    pindex->hashProofOfStake = hashProof;
 //    printf("Accept block header\n");
     if (!AcceptBlockHeader(block, state, &pindex))
