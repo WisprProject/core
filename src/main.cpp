@@ -3941,7 +3941,7 @@ bool CheckWork(const CBlock block, CBlockIndex* const pindexPrev)
         return error("%s : null pindexPrev for block %s", __func__, block.GetHash().ToString().c_str());
     unsigned int nBitsRequired;
     if(block->nVersion < 8){
-         nBitsRequired  = GetNextWorkRequired(pindexPrev, block);
+         nBitsRequired  = GetNextWorkRequired(pindexPrev, &block);
     }else{
        nBitsRequired  = GetNextTargetRequired(pindexPrev, block.IsProofOfStake());
     }
