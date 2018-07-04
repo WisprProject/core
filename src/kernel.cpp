@@ -519,7 +519,7 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
         printf("Check proof of stake new is successfull for block %s\n", hashProofOfStake.ToString().c_str());
     }else{
 //        GetLastStakeModifier(pindex, nStakeModifier, nStakeModifierTime);
-        if (!CheckStake(txPrev, txin.prevout, tx.nTime, hashProofOfStake, nValueIn, chainActive[chainActive.Height() -1], block.nBits))
+        if (!CheckStake(txPrev, txin.prevout, tx.nTime, hashProofOfStake, nValueIn, chainActive.Tip(true), block.nBits))
         {
             return error("CheckProofOfStake() : INFO: old bnStakeModifierV2 check kernel failed on coinstake %s, hashProof=%s \n",
                          tx.GetHash().GetHex(), hashProofOfStake.GetHex());
