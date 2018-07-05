@@ -641,11 +641,11 @@ void BitcoinMiner(CWallet* pwallet, bool fProofOfStake)
                         fMintableCoins = pwallet->MintableCoins();
                     }
                 }
-                LogPrintf("vNodes empty: %s\n", vNodes.empty() ? "true" : "false");
-                LogPrintf("Wallet is locked: %s\n", pwallet->IsLocked() ? "true" : "false");
-                LogPrintf("IfMintableCoin: %s\n", fMintableCoins ? "true" : "false");
-                LogPrintf("Wallet balance is higher then zero and lower then or equal to reserve balance: %s\n", (pwallet->GetBalance() > 0 && nReserveBalance >= pwallet->GetBalance()) ? "true" : "false");
-                LogPrintf("MasterNodes are synced: %s\n", masternodeSync.IsSynced() ? "true" : "false");
+//                LogPrintf("vNodes empty: %s\n", vNodes.empty() ? "true" : "false");
+//                LogPrintf("Wallet is locked: %s\n", pwallet->IsLocked() ? "true" : "false");
+//                LogPrintf("IfMintableCoin: %s\n", fMintableCoins ? "true" : "false");
+//                LogPrintf("Wallet balance is higher then zero and lower then or equal to reserve balance: %s\n", (pwallet->GetBalance() > 0 && nReserveBalance >= pwallet->GetBalance()) ? "true" : "false");
+//                LogPrintf("MasterNodes are synced: %s\n", masternodeSync.IsSynced() ? "true" : "false");
 
                 MilliSleep(5000);
                 if (!fGenerateBitcoins && !fProofOfStake)
