@@ -334,7 +334,7 @@ bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
     CBigNum bnTargetOld = bnTarget;
     bnTarget *= bnWeight;
 
-    targetProofOfStake = bnTarget.getuint256();
+    uint256 targetProofOfStake = bnTarget.getuint256();
 
     uint64_t nStakeModifier = pindexPrev->nStakeModifier;
     uint256 bnStakeModifierV2 = pindexPrev->bnStakeModifierV2;
