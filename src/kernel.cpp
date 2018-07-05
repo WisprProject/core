@@ -385,18 +385,8 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
 
     //grab stake modifier
     uint64_t nStakeModifier = 0;
-
-    CBlockIndex* pindexFrom = stakeInput->GetIndexFrom();
-    int64_t nModifierTime = 0;
-    if (!stakeInput->GetModifier(nStakeModifier)){
-    }
-    if(pindexFrom->nHeight > Params().NEW_PROTOCOLS_STARTHEIGHT()){
-        if (!stakeInput->GetModifier(nStakeModifier))
-            return error("failed to get kernel stake modifier");
-//    }else{
-//        GetLastStakeModifier(pindexFrom, nStakeModifier, nModifierTime);
-    }
-
+    if (!stakeInput->GetModifier(nStakeModifier))
+        return error("failed to get kernel stake modifier");
 
     bool fSuccess = false;
     unsigned int nTryTime = 0;
@@ -404,8 +394,14 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
     int nHashDrift = 30;
     CDataStream ssUniqueID = stakeInput->GetUniqueness();
 //    CAmount nValueIn = stakeInput->GetValue();
-
-//    fTestNet = Params().NetworkID() == CBaseChainParams::TESTNET;
+    CBlock block;
+    uint256 hashBlock;
+    CTransaction txPrev;
+    ReadBlockFromDisk(block, stakeInput->GetIndexFrom()->pprev);
+    const CTransaction tx = block.vtx[1];
+    const CTxIn& txin = tx.vin[0];
+    GetTransaction(txin.prevout.hash, txPrev, hashBlock, true);
+    int64_t nValueIn = txPrev.vout[txin.prevout.n].nValue;
     for (int i = 0; i < nHashDrift; i++) //iterate the hashing
     {
         //new block came in, move on
@@ -416,18 +412,6 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
         nTryTime = nTimeTx + nHashDrift - i;
 
         // if stake hash does not meet the target then continue to next iteration
-        CBlockIndex* pindex = stakeInput->GetIndexFrom();
-        CBlockIndex* pindexPrev = pindex->pprev;
-//        CBlockHeader block = pindex->GetBlockHeader();
-
-        CBlock block;
-        uint256 hashBlock;
-        CTransaction txPrev;
-        ReadBlockFromDisk(block, pindexPrev);
-        const CTransaction tx = block.vtx[1];
-        const CTxIn& txin = tx.vin[0];
-        GetTransaction(txin.prevout.hash, txPrev, hashBlock, true);
-        int64_t nValueIn = txPrev.vout[txin.prevout.n].nValue;
         if(pindex->nHeight > Params().NEW_PROTOCOLS_STARTHEIGHT()){
             if (!CheckStake(ssUniqueID, stakeInput->GetValue(), nStakeModifier, bnTargetPerCoinDay, nTimeBlockFrom, nTryTime, hashProofOfStake))
                 continue;
@@ -438,19 +422,18 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
             }
 //            LogPrintf("Stake(): bnStakeModifierV2: nTimeBlockFrom:%d nTimeTx:%d\n", block.GetBlockTime(), nTryTime);
         }
-//        pindex->hashProofOfStake = hashProofOfStake;
-//        if (!CheckStake(ssUniqueID, nValueIn, nStakeModifier, bnTargetPerCoinDay, nTimeBlockFrom, nTryTime, hashProofOfStake))
-//            continue;
 
         fSuccess = true; // if we make it this far then we have successfully created a stake hash
         //LogPrintf("%s: hashproof=%s\n", __func__, hashProofOfStake.GetHex());
         nTimeTx = nTryTime;
         break;
     }
+
     mapHashedBlocks.clear();
     mapHashedBlocks[chainActive.Tip()->nHeight] = GetTime(); //store a time stamp of when we last hashed on this block
     return fSuccess;
 }
+
 // Check kernel hash target and coinstake signature
 bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::unique_ptr<CStakeInput>& stake)
 {
