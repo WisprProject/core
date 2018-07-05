@@ -3614,7 +3614,7 @@ CBlockIndex* AddToBlockIndex(const CBlock& block)
         // ppcoin: compute stake modifier
         uint64_t nStakeModifier = 0;
         bool fGeneratedStakeModifier = false;
-        if (!ComputeNextStakeModifier(pindexBestHeader, nStakeModifier, fGeneratedStakeModifier))
+        if (!ComputeNextStakeModifier(pindexNew->pprev, nStakeModifier, fGeneratedStakeModifier))
             LogPrintf("AddToBlockIndex() : ComputeNextStakeModifier() failed \n");
         pindexNew->SetStakeModifier(nStakeModifier, fGeneratedStakeModifier);
         pindexNew->bnStakeModifierV2 = ComputeStakeModifier(pindexNew->pprev, block.IsProofOfWork() ? hash : block.vtx[1].vin[0].prevout.hash);
