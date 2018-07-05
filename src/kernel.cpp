@@ -303,7 +303,7 @@ bool stakeTargetHitOld(uint256 hashProofOfStake, int64_t nValueIn, uint256 bnTar
 {
     //get the stake weight - weight is equal to coin amount
     uint256 bnCoinDayWeight = uint256(nValueIn);
-    // Now check if proof-of-stake hash meets target protocol
+//     Now check if proof-of-stake hash meets target protocol
     return  hashProofOfStake > (bnCoinDayWeight * bnTargetPerCoinDay);
 }
 bool CheckStake(const CDataStream& ssUniqueID, CAmount nValueIn, const uint64_t nStakeModifier, const uint256& bnTarget,
@@ -355,6 +355,9 @@ bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
               nBits);
     LogPrintf("CheckStakeKernelHash() : nTimeTxPrev=%u nPrevout=%u nTimeTx=%u prevoutHash=%s\n",txPrev.nTime, prevout.n, nTimeTx, prevout.hash.ToString());
     LogPrintf("CheckStakeKernelHash() : hashProofOfStake=%s \n", hashProofOfStake.ToString());
+    LogPrintf("CheckStakeKernelHash() :  bnTarget=%s \n", bnTarget.ToString());
+    LogPrintf("CheckStakeKernelHash() :  bnCoinDayWeight=%s \n", uint256(nValueIn).ToString());
+    LogPrintf("CheckStakeKernelHash() :  bnTarget * bnCoinDayWeight=%s \n", (uint256(nValueIn) * bnTarget).ToString());
 //    LogPrintf("CheckStakeKernelHash() : using modifier 0x%016x at height=%d timestamp=%s for block from timestamp=%s\n",
 //            nStakeModifier, nStakeModifierHeight,
 //            DateTimeStrFormat("%Y-%m-%d %H:%M:%S", nStakeModifierTime),
@@ -528,8 +531,8 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
 //        GetLastStakeModifier(pindex, nStakeModifier, nStakeModifierTime);
         if (!CheckStake(txPrev, txin.prevout, tx.nTime, hashProofOfStake, nValueIn, chainActive.Tip(true), block.nBits))
         {
-//            return error("CheckProofOfStake() : INFO: old bnStakeModifierV2 check kernel failed on coinstake %s, hashProof=%s \n",
-//                         tx.GetHash().GetHex(), hashProofOfStake.GetHex());
+            return error("CheckProofOfStake() : INFO: old bnStakeModifierV2 check kernel failed on coinstake %s, hashProof=%s \n",
+                         tx.GetHash().GetHex(), hashProofOfStake.GetHex());
         }
 //        printf("Check proof of stake old is successfull for block %s\n", hashProofOfStake.ToString().c_str());
     }
