@@ -353,7 +353,7 @@ bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
     return true;
 }
 
-bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockFrom, unsigned int& nTimeTx, uint256& hashProofOfStake)
+bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockFrom, unsigned int& nTimeTx, uint256& hashProofOfStake, CMutableTransaction& txNew)
 {
     if (nTimeTx < nTimeBlockFrom)
         return error("CheckStakeKernelHash() : nTime violation");
@@ -403,8 +403,8 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
                 continue;
             }
         }else{
-            nTryTime = nTimeTx - n;
-            if (!CheckStake(txPrev, txin.prevout, nTryTime , hashProofOfStake, nValueIn, chainActive.Tip(true), nBits))
+//            nTryTime =  - n;
+            if (!CheckStake(txPrev, txin.prevout, txNew.nTime - n, hashProofOfStake, nValueIn, chainActive.Tip(true), nBits))
             {
                 continue;
             }
