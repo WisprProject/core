@@ -480,8 +480,8 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
     int64_t nStakeModifierTime = 0;
     unsigned int nBlockFromTime = blockprev.nTime;
     unsigned int nTxTime = block.nTime;
-    if (!stake->GetModifier(nStakeModifier))
-        return error("%s failed to get modifier for stake input\n", __func__);
+//    if (!stake->GetModifier(nStakeModifier))
+//        return error("%s failed to get modifier for stake input\n", __func__);
     int64_t nValueIn = txPrev.vout[txin.prevout.n].nValue;
     if(pindex->nHeight > Params().NEW_PROTOCOLS_STARTHEIGHT()){
         if (!stake->GetModifier(nStakeModifier)) {
