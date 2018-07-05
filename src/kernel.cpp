@@ -408,7 +408,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
             break;
 
         //hash this iteration
-        nTryTime = nTimeTx + nHashDrift - i;
+        nTryTime = nTimeTx - i;
 
         // if stake hash does not meet the target then continue to next iteration
         if(stakeInput->GetIndexFrom()->nHeight > Params().NEW_PROTOCOLS_STARTHEIGHT()){
