@@ -376,7 +376,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
     bool fSuccess = false;
     unsigned int nTryTime = 0;
     int nHeightStart = chainActive.Height();
-    int nHashDrift = 60;
+    int nHashDrift = 30;
     CDataStream ssUniqueID = stakeInput->GetUniqueness();
 //    CAmount nValueIn = stakeInput->GetValue();
     CBlock block;
@@ -388,21 +388,26 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
     GetTransaction(txin.prevout.hash, txPrev, hashBlock, true);
     int64_t nValueIn = txPrev.vout[txin.prevout.n].nValue;
     LogPrintf("Stake(): Checking for stake\n");
-    for (int i = 0; i < nHashDrift; i++) //iterate the hashing
+    static int nMaxStakeSearchInterval = 60;
+    int64_t nSearchInterval = 1;
+    for (unsigned int n=0; n < min(nSearchInterval,(int64_t)nMaxStakeSearchInterval); n++) //iterate the hashing
     {
         //new block came in, move on
         if (chainActive.Height() != nHeightStart)
             break;
 
         //hash this iteration
-        nTryTime = nTimeTx - i;
 
         // if stake hash does not meet the target then continue to next iteration
         if(stakeInput->GetIndexFrom()->nHeight > Params().NEW_PROTOCOLS_STARTHEIGHT()){
-            if (!CheckStake(ssUniqueID, stakeInput->GetValue(), nStakeModifier, bnTargetPerCoinDay, nTimeBlockFrom, nTryTime, hashProofOfStake))
+                nTryTime = nTimeTx + nHashDrift - n;
+            if (!CheckStake(ssUniqueID, stakeInput->GetValue(), nStakeModifier, bnTargetPerCoinDay, nTimeBlockFrom, nTryTime, hashProofOfStake)){
                 continue;
+            }else{
+                nTimeTx = nTryTime;
+            }
         }else{
-            if (!CheckStake(txPrev, txin.prevout, nTryTime, hashProofOfStake, nValueIn, chainActive.Tip(true), nBits))
+            if (!CheckStake(txPrev, txin.prevout, nTimeTx - n , hashProofOfStake, nValueIn, chainActive.Tip(true), nBits))
             {
                 continue;
             }
@@ -411,7 +416,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
 
         fSuccess = true; // if we make it this far then we have successfully created a stake hash
         LogPrintf("%s: hashproof=%s\n", __func__, hashProofOfStake.GetHex());
-        nTimeTx = nTryTime;
+//        nTimeTx = nTryTime;
         break;
     }
 
