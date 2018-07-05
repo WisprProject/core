@@ -414,6 +414,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
         }else{
             if (!CheckStake(txPrev, txin.prevout, tx.nTime, hashProofOfStake, nValueIn, chainActive.Tip(true), nBits))
             {
+               LogPrintf("Stake(): Stake not found, continue hashProofOfStake:%s\n", hashProofOfStake.ToString());
                 continue;
             }
 //            LogPrintf("Stake(): bnStakeModifierV2: nTimeBlockFrom:%d nTimeTx:%d\n", block.GetBlockTime(), nTryTime);
