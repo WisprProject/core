@@ -400,6 +400,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
     const CTxIn& txin = tx.vin[0];
     GetTransaction(txin.prevout.hash, txPrev, hashBlock, true);
     int64_t nValueIn = txPrev.vout[txin.prevout.n].nValue;
+    LogPrintf("Stake(): Checking for stake\n");
     for (int i = 0; i < nHashDrift; i++) //iterate the hashing
     {
         //new block came in, move on
@@ -416,7 +417,6 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
         }else{
             if (!CheckStake(txPrev, txin.prevout, tx.nTime, hashProofOfStake, nValueIn, chainActive.Tip(true), nBits, true))
             {
-               LogPrintf("Stake(): Stake not found, continue hashProofOfStake:%s\n", hashProofOfStake.ToString());
                 continue;
             }
 //            LogPrintf("Stake(): bnStakeModifierV2: nTimeBlockFrom:%d nTimeTx:%d\n", block.GetBlockTime(), nTryTime);
