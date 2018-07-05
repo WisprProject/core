@@ -404,7 +404,6 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
     int nHashDrift = 30;
     CDataStream ssUniqueID = stakeInput->GetUniqueness();
 //    CAmount nValueIn = stakeInput->GetValue();
-    int64_t nValueIn = txPrev.vout[txin.prevout.n].nValue;
 
 //    fTestNet = Params().NetworkID() == CBaseChainParams::TESTNET;
     for (int i = 0; i < nHashDrift; i++) //iterate the hashing
@@ -428,6 +427,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
         const CTransaction tx = block.vtx[1];
         const CTxIn& txin = tx.vin[0];
         GetTransaction(txin.prevout.hash, txPrev, hashBlock, true);
+        int64_t nValueIn = txPrev.vout[txin.prevout.n].nValue;
         if(pindex->nHeight > Params().NEW_PROTOCOLS_STARTHEIGHT()){
             if (!CheckStake(ssUniqueID, stakeInput->GetValue(), nStakeModifier, bnTargetPerCoinDay, nTimeBlockFrom, nTryTime, hashProofOfStake))
                 continue;
