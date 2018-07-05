@@ -3607,12 +3607,14 @@ CBlockIndex* AddToBlockIndex(const CBlock& block)
             if (!mapProofOfStake.count(hash))
                 LogPrintf("AddToBlockIndex() : hashProofOfStake not found in map \n");
             pindexNew->hashProofOfStake = mapProofOfStake[hash];
+        }else{
+            pindexNew->hashProofOfStake = block.GetPoWHash();
         }
 
         // ppcoin: compute stake modifier
         uint64_t nStakeModifier = 0;
         bool fGeneratedStakeModifier = false;
-        if (!ComputeNextStakeModifier(pindexNew, nStakeModifier, fGeneratedStakeModifier))
+        if (!ComputeNextStakeModifier(pindexBestHeader, nStakeModifier, fGeneratedStakeModifier))
             LogPrintf("AddToBlockIndex() : ComputeNextStakeModifier() failed \n");
         pindexNew->SetStakeModifier(nStakeModifier, fGeneratedStakeModifier);
         pindexNew->bnStakeModifierV2 = ComputeStakeModifier(pindexNew->pprev, block.IsProofOfWork() ? hash : block.vtx[1].vin[0].prevout.hash);
