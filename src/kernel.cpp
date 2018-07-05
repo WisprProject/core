@@ -317,21 +317,24 @@ bool CheckStake(const CDataStream& ssUniqueID, CAmount nValueIn, const uint64_t 
     return stakeTargetHit(hashProofOfStake, nValueIn, bnTarget);
 }
 bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
-        unsigned int nTimeTx, uint256& hashProofOfStake, CAmount nValueIn, CBlockIndex* pindexPrev,
+        unsigned int nTimeTx, uint256& hashProofOfStake, int64_t nValueIn, CBlockIndex* pindexPrev,
         unsigned int nBits)
 {
 
     if (nTimeTx < txPrev.nTime)  // Transaction timestamp violation
         return error("CheckStakeKernelHash() : nTime violation");
-    uint256 targetProofOfStake = 0;
 
     // Base target
-    uint256 bnTarget;
+    CBigNum bnTarget;
     bnTarget.SetCompact(nBits);
+
     // Weighted target
 //    int64_t nValueIn = txPrev.vout[prevout.n].nValue;
+    CBigNum bnWeight = CBigNum(nValueIn);
+    CBigNum bnTargetOld = bnTarget;
+    bnTarget *= bnWeight;
 
-    targetProofOfStake = bnTarget;
+    targetProofOfStake = bnTarget.getuint256();
 
     uint64_t nStakeModifier = pindexPrev->nStakeModifier;
     uint256 bnStakeModifierV2 = pindexPrev->bnStakeModifierV2;
@@ -344,30 +347,23 @@ bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
     ss << txPrev.nTime << prevout.hash << prevout.n << nTimeTx;
     hashProofOfStake = Hash(ss.begin(), ss.end());
 
-    unsigned int nTimeBlockFrom = pindexPrev->GetBlockTime();
-
-    LogPrintf("%s : proof of stake - at %d\n", __func__, pindexPrev->nHeight + 1);
     LogPrintf("CheckStakeKernelHash() : using modifier %016x at height=%ds\n",
-    nStakeModifier, nStakeModifierHeight);
+              nStakeModifier, nStakeModifierHeight);
     LogPrintf("CheckStakeKernelHash() : using bnStakeModifier %s\n",
               bnStakeModifierV2.ToString());
     LogPrintf("CheckStakeKernelHash() : nBits = %08x\n",
               nBits);
-    LogPrintf("CheckStakeKernelHash() : nTimeTxPrev=%u nPrevout=%u nTimeTx=%u prevoutHash=%s\n",txPrev.nTime, prevout.n, nTimeTx, prevout.hash.ToString());
+    LogPrintf("CheckStakeKernelHash() : nTimeTxPrev=%u nPrevout=%u nTimeTx=%u prevoutHash=%s \n",txPrev.nTime, prevout.n, nTimeTx, prevout.hash.ToString());
     LogPrintf("CheckStakeKernelHash() : hashProofOfStake=%s \n", hashProofOfStake.ToString());
-    LogPrintf("CheckStakeKernelHash() :  bnTarget=%s \n", bnTarget.ToString());
-    LogPrintf("CheckStakeKernelHash() :  bnCoinDayWeight=%s \n", uint256(nValueIn).ToString());
-    LogPrintf("CheckStakeKernelHash() :  bnTarget * bnCoinDayWeight=%s \n", (uint256(nValueIn) * bnTarget).ToString());
-//    LogPrintf("CheckStakeKernelHash() : using modifier 0x%016x at height=%d timestamp=%s for block from timestamp=%s\n",
-//            nStakeModifier, nStakeModifierHeight,
-//            DateTimeStrFormat("%Y-%m-%d %H:%M:%S", nStakeModifierTime),
-//            DateTimeStrFormat("%Y-%m-%d %H:%M:%S", nTimeBlockFrom));
-//    LogPrintf("CheckStakeKernelHash() : check modifier=0x%016x nTimeBlockFrom=%u nTimeTxPrev=%u nPrevout=%u nTimeTx=%u hashProof=%s\n",
-//              nStakeModifier,
-//              nTimeBlockFrom, txPrev.nTime, prevout.n, nTimeTx,
-//              hashProofOfStake.ToString());
-//
-    return stakeTargetHitOld(hashProofOfStake, nValueIn, bnTarget);
+    LogPrintf("CheckStakeKernelHash() :  bnTarget=%s \n", (bnTargetOld.getuint256()).ToString());
+    LogPrintf("CheckStakeKernelHash() :  bnCoinDayWeight=%s \n", (bnWeight.getuint256().ToString()));
+    LogPrintf("CheckStakeKernelHash() :  bnTarget * bnCoinDayWeight=%s \n", ((bnTarget.getuint256()).ToString()));
+
+    // Now check if proof-of-stake hash meets target protocol
+    if (CBigNum(hashProofOfStake) > bnTarget)
+        return false;
+
+    return true;
 }
 
 bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockFrom, unsigned int& nTimeTx, uint256& hashProofOfStake)
