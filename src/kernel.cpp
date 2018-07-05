@@ -347,7 +347,7 @@ bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
         LogPrintf("CheckStakeKernelHash() :  bnTarget * bnCoinDayWeight=%s \n", ((bnTarget.getuint256()).ToString()));
     }
     // Now check if proof-of-stake hash meets target protocol
-    if (hashProofOfStake > bnTarget.getuint256())
+    if (hashProofOfStake > (bnTarget.getuint256()))
         return false;
 
     return true;
@@ -401,11 +401,10 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
                 nTryTime = nTimeTx + nHashDrift - n;
             if (!CheckStake(ssUniqueID, stakeInput->GetValue(), nStakeModifier, bnTargetPerCoinDay, nTimeBlockFrom, nTryTime, hashProofOfStake)){
                 continue;
-            }else{
-                nTimeTx = nTryTime;
             }
         }else{
-            if (!CheckStake(txPrev, txin.prevout, nTimeTx - n , hashProofOfStake, nValueIn, chainActive.Tip(true), nBits))
+            nTryTime = nTimeTx - n;
+            if (!CheckStake(txPrev, txin.prevout, nTryTime , hashProofOfStake, nValueIn, chainActive.Tip(true), nBits))
             {
                 continue;
             }
@@ -414,7 +413,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
 
         fSuccess = true; // if we make it this far then we have successfully created a stake hash
         LogPrintf("%s: hashproof=%s\n", __func__, hashProofOfStake.GetHex());
-//        nTimeTx = nTryTime;
+        nTimeTx = nTryTime;
         break;
     }
 
