@@ -74,11 +74,11 @@ static int64_t GetStakeModifierSelectionInterval()
 // already selected blocks in vSelectedBlocks, and with timestamp up to
 // nSelectionIntervalStop.
 static bool SelectBlockFromCandidates(
-    vector<pair<int64_t, uint256> >& vSortedByTimestamp,
-    map<uint256, const CBlockIndex*>& mapSelectedBlocks,
-    int64_t nSelectionIntervalStop,
-    uint64_t nStakeModifierPrev,
-    const CBlockIndex** pindexSelected)
+        vector<pair<int64_t, uint256> >& vSortedByTimestamp,
+        map<uint256, const CBlockIndex*>& mapSelectedBlocks,
+        int64_t nSelectionIntervalStop,
+        uint64_t nStakeModifierPrev,
+        const CBlockIndex** pindexSelected)
 {
     bool fModifierV2 = false;
     bool fFirstRun = true;
@@ -95,8 +95,7 @@ static bool SelectBlockFromCandidates(
 
         //if the lowest block height (vSortedByTimestamp[0]) is >= switch height, use new modifier calc
         if (fFirstRun){
-//            fModifierV2 = pindex->nHeight >= Params().ModifierUpgradeBlock();
-            fModifierV2 = true;
+            fModifierV2 = pindex->nHeight >= Params().NEW_PROTOCOLS_STARTHEIGHT();
             fFirstRun = false;
         }
 
@@ -108,10 +107,10 @@ static bool SelectBlockFromCandidates(
         if(fModifierV2)
             hashProof = pindex->GetBlockHash();
         else
-            hashProof = pindex->IsProofOfStake() ? 0 : pindex->GetBlockHash();
+            hashProof = pindex->IsProofOfStake() ? pindex->hashProofOfStake : pindex->hashProofOfStake();
 
         CDataStream ss(SER_GETHASH, 0);
-        ss << pindex->hashProofOfStake << nStakeModifierPrev;
+        ss << hashProof << nStakeModifierPrev;
         uint256 hashSelection = Hash(ss.begin(), ss.end());
 
         // the selection hash is divided by 2**32 so that proof-of-stake block
