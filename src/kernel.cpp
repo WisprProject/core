@@ -344,7 +344,7 @@ bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
     CBigNum bnTargetOld = bnTarget;
     bnTarget *= bnWeight;
 
-    uint256 targetProofOfStake = bnTarget.getuint256();
+//    uint256 targetProofOfStake = bnTarget.getuint256();
 
     uint64_t nStakeModifier = pindexPrev->nStakeModifier;
     uint256 bnStakeModifierV2 = pindexPrev->bnStakeModifierV2;
@@ -361,8 +361,10 @@ bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
     if(ownBlock) {
         LogPrintf("%s : using modifier %016x at height=%ds\n",
                   function, nStakeModifier, nStakeModifierHeight);
-        LogPrintf("%s : using bnStakeModifier %s\n",
-                  function, bnStakeModifierV2.ToString());
+        LogPrintf("%s : using modifier %016x at height=%ds\n",
+                  function, nStakeModifier, nStakeModifierHeight);
+        LogPrintf("%s : using modifier time = %s\n",
+                  function,DateTimeStrFormat("%Y-%m-%d %H:%M:%S", nStakeModifierTime).c_str());
         LogPrintf("%s : nBits = %08x\n",function,
                   nBits);
         LogPrintf("%s : nTimeTxPrev=%u nPrevout=%u nTimeTx=%u prevoutHash=%s \n", function, txPrev.nTime,

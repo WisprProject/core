@@ -3932,7 +3932,6 @@ bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bo
 
 bool CheckWork(const CBlock block, CBlockIndex* const pindexPrev)
 {
-    uint256 hashBlock = block.GetHash();
     uint256 hashProof = block.GetPoWHash();
     uint256 hashTarget;
     hashTarget.SetCompact(block.nBits);
