@@ -484,6 +484,7 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
     unsigned int nBlockFromTime = blockprev.nTime;
     unsigned int nTxTime = block.nTime;
     int64_t nValueIn = txPrev.vout[txin.prevout.n].nValue;
+        printf("%s Current pindex height = %ds\n", __func__, pindex->nHeight);
     if(pindex->nHeight > Params().NEW_PROTOCOLS_STARTHEIGHT()){
         if (!stake->GetModifier(nStakeModifier))
             return error("%s failed to get modifier for stake input\n", __func__);
@@ -492,9 +493,8 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
             return error("CheckProofOfStake() : INFO: check kernel failed on coinstake %s, hashProof=%s \n",
                          tx.GetHash().GetHex(), hashProofOfStake.GetHex());
         }
-        printf("Check proof of stake new is successfull for block %s\n", hashProofOfStake.ToString().c_str());
     }else{
-        if (!CheckStake(txPrev, txin.prevout, tx.nTime, hashProofOfStake, nValueIn, chainActive.Height() < pindex->nHeight ? pindex->pprev : chainActive.Tip(true), block.nBits, true))
+        if (!CheckStake(txPrev, txin.prevout, tx.nTime, hashProofOfStake, nValueIn, pindex, block.nBits, true))
         {
             return error("CheckProofOfStake() : INFO: old bnStakeModifierV2 check kernel failed on coinstake %s, hashProof=%s \n",
                          tx.GetHash().GetHex(), hashProofOfStake.GetHex());
