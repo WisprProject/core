@@ -4155,25 +4155,20 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
 {
     AssertLockHeld(cs_main);
 
-    CBlockIndex* pindex = *ppindex;
-    uint256 hashProof = 0;
+    CBlockIndex*& pindex = *ppindex;
+
     // Get prev block index
-//    printf("Get prev block index\n");
     CBlockIndex* pindexPrev = NULL;
     if (block.GetHash() != Params().HashGenesisBlock()) {
-
-//        printf("map block index\n");
         BlockMap::iterator mi = mapBlockIndex.find(block.hashPrevBlock);
         if (mi == mapBlockIndex.end())
             return state.DoS(0, error("%s : prev block %s not found", __func__, block.hashPrevBlock.ToString().c_str()), 0, "bad-prevblk");
         pindexPrev = (*mi).second;
         if (pindexPrev->nStatus & BLOCK_FAILED_MASK) {
             //If this "invalid" block is an exact match from the checkpoints, then reconsider it
-//            printf("Is invalid block a checkpoint?\n");
             if (Checkpoints::CheckBlock(pindexPrev->nHeight, block.hashPrevBlock, true)) {
                 LogPrintf("%s : Reconsidering block %s height %d\n", __func__, pindexPrev->GetBlockHash().GetHex(), pindexPrev->nHeight);
                 CValidationState statePrev;
-//                printf("Reconsider block\n");
                 ReconsiderBlock(statePrev, pindexPrev);
                 if (statePrev.IsValid()) {
                     ActivateBestChain(statePrev);
@@ -4185,21 +4180,13 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
         }
     }
 
-//    if(!block.IsProofOfStake() && pindex->nHeight < 450) {
-//    printf("Check work\n");
-        if (block.GetHash() != Params().HashGenesisBlock() && !CheckWork(block, pindexPrev))
-            return false;
-//    }
-//    printf("if block is proof of stake\n");
+    if (block.GetHash() != Params().HashGenesisBlock() && !CheckWork(block, pindexPrev))
+        return false;
+
     if (block.IsProofOfStake()) {
-//        printf("Check stake\n");
         uint256 hashProofOfStake = 0;
         unique_ptr<CStakeInput> stake;
-        uint256 hashBlock = block.GetHash();
 
-//        printf("AcceptBlock() : %s\n", hashBlock.ToString().c_str());
-//        if (!CheckProofOfStakeOld(pindexPrev,  vtx[1], block.nBits, hashProof, targetProofOfStake))
-//            return state.DoS(100, error("%s: proof of stake check failed", __func__));
         if (!CheckProofOfStake(block, hashProofOfStake, stake))
             return state.DoS(100, error("%s: proof of stake check failed", __func__));
 
@@ -4212,18 +4199,13 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
         uint256 hash = block.GetHash();
         if(!mapProofOfStake.count(hash)) // add to mapProofOfStake
             mapProofOfStake.insert(make_pair(hash, hashProofOfStake));
-    }else{
-        if(block.IsProofOfWork()){
-            uint256 hashProofOfStake = block.GetPoWHash();
-            uint256 hash = block.GetHash();
-            if(!mapProofOfStake.count(hash)) // add to mapProofOfStake
-                mapProofOfStake.insert(make_pair(hash, hashProofOfStake));
-        }
-
     }
-
-//    pindex->hashProofOfStake = hashProof;
-//    printf("Accept block header\n");
+    if(block.IsProofOfWork()){
+        uint256 hashProofOfStake = block.GetPoWHash();
+        uint256 hash = block.GetHash();
+        if(!mapProofOfStake.count(hash)) // add to mapProofOfStake
+            mapProofOfStake.insert(make_pair(hash, hashProofOfStake));
+    }
     if (!AcceptBlockHeader(block, state, &pindex))
         return false;
 
@@ -4238,14 +4220,12 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
             pindex->nStatus |= BLOCK_FAILED_VALID;
             setDirtyBlockIndex.insert(pindex);
         }
-//        printf("Contextual block failed\n");
         return false;
     }
 
     int nHeight = pindex->nHeight;
 
     // Write block to history file
-//     printf("Write block to history file\n");
     try {
         unsigned int nBlockSize = ::GetSerializeSize(block, SER_DISK, CLIENT_VERSION);
         CDiskBlockPos blockPos;
@@ -4259,10 +4239,9 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
         if (!ReceivedBlockTransactions(block, state, pindex, blockPos))
             return error("AcceptBlock() : ReceivedBlockTransactions failed");
     } catch (std::runtime_error& e) {
-//        printf("Write block to history failed\n");
         return state.Abort(std::string("System error: ") + e.what());
     }
-//    printf("End of accept block\n");
+
     return true;
 }
 
