@@ -175,7 +175,7 @@ bool ComputeNextStakeModifier(const CBlockIndex* pindexPrev, uint64_t& nStakeMod
     if (pindexPrev->nHeight == 0) {
         //Give a stake modifier to the first block
         printf("%s Prev pindex height is 0\n", __func__);
-        fGeneratedStakeModifier = true;
+//        fGeneratedStakeModifier = true;
 //        nStakeModifier = uint64_t("stakemodifier");
         return true;
     }
