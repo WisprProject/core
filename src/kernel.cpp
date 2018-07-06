@@ -357,19 +357,20 @@ bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
     ss << txPrev.nTime << prevout.hash << prevout.n << nTimeTx;
     hashProofOfStake = Hash(ss.begin(), ss.end());
 
+    string function = __func__;
     if(ownBlock) {
         LogPrintf("%s : using modifier %016x at height=%ds\n",
-                  __func__, nStakeModifier, nStakeModifierHeight);
+                  function, nStakeModifier, nStakeModifierHeight);
         LogPrintf("%s : using bnStakeModifier %s\n",
-                  __func__, bnStakeModifierV2.ToString());
-        LogPrintf("%s : nBits = %08x\n",
+                  function, bnStakeModifierV2.ToString());
+        LogPrintf("%s : nBits = %08x\n",function,
                   nBits);
-        LogPrintf("%s : nTimeTxPrev=%u nPrevout=%u nTimeTx=%u prevoutHash=%s \n",__func__, txPrev.nTime,
+        LogPrintf("%s : nTimeTxPrev=%u nPrevout=%u nTimeTx=%u prevoutHash=%s \n", function, txPrev.nTime,
                   prevout.n, nTimeTx, prevout.hash.ToString());
-        LogPrintf("%s : hashProofOfStake=%s \n", __func__, hashProofOfStake.ToString());
-        LogPrintf("%s :  bnTarget=%s \n",__func__, (bnTargetOld.getuint256()).ToString());
-        LogPrintf("%s :  bnCoinDayWeight=%s \n",__func__, (bnWeight.getuint256().ToString()));
-        LogPrintf("%s :  bnTarget * bnCoinDayWeight=%s \n",__func__, ((bnTarget.getuint256()).ToString()));
+        LogPrintf("%s : hashProofOfStake=%s \n", function, hashProofOfStake.ToString());
+        LogPrintf("%s :  bnTarget=%s \n", function, (bnTargetOld.getuint256()).ToString());
+        LogPrintf("%s :  bnCoinDayWeight=%s \n", function, (bnWeight.getuint256().ToString()));
+        LogPrintf("%s :  bnTarget * bnCoinDayWeight=%s \n", function, ((bnTarget.getuint256()).ToString()));
     }
     // Now check if proof-of-stake hash meets target protocol
     if (CBigNum(hashProofOfStake) > bnTarget)
