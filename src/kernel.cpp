@@ -455,15 +455,10 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
         stake = std::unique_ptr<CStakeInput>(new CZWspStake(spend));
     } else {
         // First try finding the previous transaction in database
-//        uint256 hashBlock;
-//        CTransaction txPrev;
         if (!GetTransaction(txin.prevout.hash, txPrev, hashBlock, true))
             return error("CheckProofOfStake() : INFO: read txPrev failed");
 
         //verify signature and script
-        // Verify signature
-//        if (!VerifySignature(txPrev, tx, 0, SCRIPT_VERIFY_NONE, 0))
-//            return error("CheckProofOfStake() : VerifySignature failed on coinstake %s", tx.GetHash().ToString());
         if (!VerifyScript(txin.scriptSig, txPrev.vout[txin.prevout.n].scriptPubKey, SCRIPT_VERIFY_NONE, TransactionSignatureChecker(&tx, 0)))
             return error("CheckProofOfStake() : VerifySignature failed on coinstake %s", tx.GetHash().ToString().c_str());
 
@@ -473,50 +468,41 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
     }
 
     CBlockIndex* pindex = stake->GetIndexFrom();
-    if (!pindex){
+    if (!pindex)
         return error("%s: Failed to find the block index", __func__);
-    }
 
     // Read block header
     CBlock blockprev;
     if (!ReadBlockFromDisk(blockprev, pindex->GetBlockPos()))
-        return error("CheckProofOfStake(): INFO: failed to find block\n");
+        return error("CheckProofOfStake(): INFO: failed to find block");
 
     uint256 bnTargetPerCoinDay;
     bnTargetPerCoinDay.SetCompact(block.nBits);
 
     uint64_t nStakeModifier = 0;
-    int64_t nStakeModifierTime = 0;
-    unsigned int nBlockFromTime = blockprev.nTime;
-    unsigned int nTxTime = block.nTime;
     if (!stake->GetModifier(nStakeModifier))
         return error("%s failed to get modifier for stake input\n", __func__);
+
+    unsigned int nBlockFromTime = blockprev.nTime;
+    unsigned int nTxTime = block.nTime;
     int64_t nValueIn = txPrev.vout[txin.prevout.n].nValue;
     if(pindex->nHeight > Params().NEW_PROTOCOLS_STARTHEIGHT()){
-        if (!stake->GetModifier(nStakeModifier)) {
-//            printf("CheckProofOfStake(): failed to get modifier for stake input\n");
-            //    return error("%s failed to get modifier for stake input\n", __func__);
-//            nStakeModifier = chainActive.Tip()->nStakeModifier;
-        }
         if (!CheckStake(stake->GetUniqueness(), stake->GetValue(), nStakeModifier, bnTargetPerCoinDay, nBlockFromTime,
-                                                                                       nTxTime, hashProofOfStake))
-        {
+                        nTxTime, hashProofOfStake)) {
             return error("CheckProofOfStake() : INFO: check kernel failed on coinstake %s, hashProof=%s \n",
                          tx.GetHash().GetHex(), hashProofOfStake.GetHex());
         }
         printf("Check proof of stake new is successfull for block %s\n", hashProofOfStake.ToString().c_str());
     }else{
-//        GetLastStakeModifier(pindex, nStakeModifier, nStakeModifierTime);
         if (!CheckStake(txPrev, txin.prevout, tx.nTime, hashProofOfStake, nValueIn, chainActive.Tip(true), block.nBits, true))
         {
             return error("CheckProofOfStake() : INFO: old bnStakeModifierV2 check kernel failed on coinstake %s, hashProof=%s \n",
                          tx.GetHash().GetHex(), hashProofOfStake.GetHex());
         }
-//        printf("Check proof of stake old is successfull for block %s\n", hashProofOfStake.ToString().c_str());
     }
-
     return true;
 }
+
 
 // Check whether the coinstake timestamp meets protocol
 bool CheckCoinStakeTimestamp(int64_t nTimeBlock, int64_t nTimeTx)
