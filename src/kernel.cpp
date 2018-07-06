@@ -170,12 +170,12 @@ bool ComputeNextStakeModifier(const CBlockIndex* pindexPrev, uint64_t& nStakeMod
         fGeneratedStakeModifier = true;
         return true; // genesis block's modifier is 0
     }
-    if (pindexPrev->nHeight == 0) {
-        //Give a stake modifier to the first block
-        fGeneratedStakeModifier = true;
-        nStakeModifier = uint64_t("stakemodifier");
-        return true;
-    }
+//    if (pindexPrev->nHeight == 0) {
+//        //Give a stake modifier to the first block
+//        fGeneratedStakeModifier = true;
+//        nStakeModifier = uint64_t("stakemodifier");
+//        return true;
+//    }
 
     // First find current stake modifier and its generation block time
     // if it's not old enough, return the same stake modifier
