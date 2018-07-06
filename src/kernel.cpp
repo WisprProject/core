@@ -480,13 +480,13 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
     bnTargetPerCoinDay.SetCompact(block.nBits);
 
     uint64_t nStakeModifier = 0;
-    if (!stake->GetModifier(nStakeModifier))
-        return error("%s failed to get modifier for stake input\n", __func__);
 
     unsigned int nBlockFromTime = blockprev.nTime;
     unsigned int nTxTime = block.nTime;
     int64_t nValueIn = txPrev.vout[txin.prevout.n].nValue;
     if(pindex->nHeight > Params().NEW_PROTOCOLS_STARTHEIGHT()){
+        if (!stake->GetModifier(nStakeModifier))
+            return error("%s failed to get modifier for stake input\n", __func__);
         if (!CheckStake(stake->GetUniqueness(), stake->GetValue(), nStakeModifier, bnTargetPerCoinDay, nBlockFromTime,
                         nTxTime, hashProofOfStake)) {
             return error("CheckProofOfStake() : INFO: check kernel failed on coinstake %s, hashProof=%s \n",
