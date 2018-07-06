@@ -179,6 +179,11 @@ bool ComputeNextStakeModifier(const CBlockIndex* pindexPrev, uint64_t& nStakeMod
 //        nStakeModifier = uint64_t("stakemodifier");
         return true;
     }
+    if(pindexPrev->nHeight == 1){
+        fGeneratedStakeModifier = true;
+        nStakeModifier |= (((uint64_t)pindex->GetStakeEntropyBit()) << 2);
+        return true;
+    }
     LogPrintf("%s : using modifier %016x at height=%ds\n",
               __func__, pindexPrev->nStakeModifier, pindexPrev->nHeight);
     LogPrintf("%s : using bnStakeModifier %s\n",
