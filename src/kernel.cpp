@@ -354,9 +354,9 @@ bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
 
     if(ownBlock) {
         LogPrintf("%s : using modifier %016x at height=%ds\n",
-                  _func_, nStakeModifier, nStakeModifierHeight);
+                  __func__, nStakeModifier, nStakeModifierHeight);
         LogPrintf("%s : using bnStakeModifier %s\n",
-                  _func_, bnStakeModifierV2.ToString());
+                  __func__, bnStakeModifierV2.ToString());
         LogPrintf("%s : nBits = %08x\n",
                   nBits);
         LogPrintf("%s : nTimeTxPrev=%u nPrevout=%u nTimeTx=%u prevoutHash=%s \n",_func_, txPrev.nTime,
