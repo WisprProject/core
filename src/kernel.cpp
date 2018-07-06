@@ -359,7 +359,7 @@ bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
                   __func__, bnStakeModifierV2.ToString());
         LogPrintf("%s : nBits = %08x\n",
                   nBits);
-        LogPrintf("%s : nTimeTxPrev=%u nPrevout=%u nTimeTx=%u prevoutHash=%s \n",_func_, txPrev.nTime,
+        LogPrintf("%s : nTimeTxPrev=%u nPrevout=%u nTimeTx=%u prevoutHash=%s \n",__func__, txPrev.nTime,
                   prevout.n, nTimeTx, prevout.hash.ToString());
         LogPrintf("%s : hashProofOfStake=%s \n", __func__, hashProofOfStake.ToString());
         LogPrintf("%s :  bnTarget=%s \n",__func__, (bnTargetOld.getuint256()).ToString());
