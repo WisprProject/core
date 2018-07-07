@@ -500,9 +500,9 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
     unsigned int nBlockFromTime = blockprev.nTime;
     unsigned int nTxTime = block.nTime;
     int64_t nValueIn = txPrev.vout[txin.prevout.n].nValue;
-    printf("%s ChainActive tip = %ds\n", __func__, chainActive.Height());
-    printf("%s Current pindex height = %ds\n", __func__, pindex->nHeight);
-    printf("%s Prev pindex height = %ds\n", __func__, pindex->pprev->nHeight);
+//    printf("%s ChainActive tip = %ds\n", __func__, chainActive.Height());
+//    printf("%s Current pindex height = %ds\n", __func__, pindex->nHeight);
+//    printf("%s Prev pindex height = %ds\n", __func__, pindex->pprev->nHeight);
     if(pindex->nHeight > Params().NEW_PROTOCOLS_STARTHEIGHT()){
         if (!stake->GetModifier(nStakeModifier))
             return error("%s failed to get modifier for stake input\n", __func__);
