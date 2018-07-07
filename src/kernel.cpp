@@ -335,13 +335,13 @@ bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
         return error("CheckStakeKernelHash() : nTime violation");
 
     // Base target
-    CBigNum bnTarget;
+    uint256 bnTarget;
     bnTarget.SetCompact(nBits);
 
     // Weighted target
 //    int64_t nValueIn = txPrev.vout[prevout.n].nValue;
-    CBigNum bnWeight = CBigNum(nValueIn);
-    CBigNum bnTargetOld = bnTarget;
+    uint256 bnWeight = uint256(nValueIn);
+    uint256 bnTargetOld = bnTarget;
     bnTarget *= bnWeight;
 
 //    uint256 targetProofOfStake = bnTarget.getuint256();
@@ -375,7 +375,7 @@ bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
         LogPrintf("%s :  bnTarget * bnCoinDayWeight=%s \n", function, ((bnTarget.getuint256()).ToString()));
     }
     // Now check if proof-of-stake hash meets target protocol
-    if (CBigNum(hashProofOfStake) > bnTarget)
+    if (hashProofOfStake > bnTarget.getuint256())
         return false;
 
     return true;
