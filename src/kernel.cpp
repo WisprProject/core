@@ -372,7 +372,7 @@ bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
         LogPrintf("%s : hashProofOfStake=%s \n", function, hashProofOfStake.ToString());
         LogPrintf("%s :  bnTarget=%s \n", function, (bnTargetOld).ToString());
         LogPrintf("%s :  bnCoinDayWeight=%s \n", function, (bnWeight.ToString()));
-        LogPrintf("%s :  bnTarget * bnCoinDayWeight=%s \n", function, ((bnTarget.ToString()));
+        LogPrintf("%s :  bnTarget * bnCoinDayWeight=%s \n", function, (bnTarget.ToString()));
     }
     // Now check if proof-of-stake hash meets target protocol
     if (hashProofOfStake > bnTarget)
