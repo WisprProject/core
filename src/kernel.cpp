@@ -337,7 +337,7 @@ bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
     // Base target
     CBigNum bnTarget;
     bnTarget.SetCompact(nBits);
-
+    CBigNum bnTargetOld = bnTarget;
     // Weighted target
 //    int64_t nValueIn = txPrev.vout[prevout.n].nValue;
     CBigNum bnWeight = CBigNum(nValueIn);
