@@ -357,7 +357,9 @@ void CMasternodePayments::ProcessMessageMasternodePayments(CNode* pfrom, std::st
 
     if (fLiteMode) return; //disable all Obfuscation/Masternode related functionality
 
-
+    if(chainActive.Height() < Params().NEW_PROTOCOLS_STARTHEIGHT()){
+        return;
+    }
     if (strCommand == "mnget") { //Masternode Payments Request Sync
         if (fLiteMode) return;   //disable all Obfuscation/Masternode related functionality
 
