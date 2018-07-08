@@ -362,8 +362,8 @@ bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
                   function, (nStakeModifierHeight + 1));
         LogPrintf("%s : using modifier %016x at height=%ds\n",
                   function, nStakeModifier, nStakeModifierHeight);
-        LogPrintf("%s : using modifier %016x at height=%ds\n",
-                  function, nStakeModifier, nStakeModifierHeight);
+        LogPrintf("%s : using bnStakeModifierV2 %s\n",
+                  function, bnStakeModifierV2.ToString());
         LogPrintf("%s : using modifier time = %s\n",
                   function,DateTimeStrFormat("%Y-%m-%d %H:%M:%S", nStakeModifierTime).c_str());
         LogPrintf("%s : nBits = %08x\n",function,
