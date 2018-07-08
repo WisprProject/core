@@ -337,11 +337,11 @@ bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
     // Base target
     CBigNum bnTarget;
     bnTarget.SetCompact(nBits);
-    CBigNum bnTargetOld = bnTarget;
+//    CBigNum bnTargetOld = bnTarget;
     // Weighted target
     int64_t nValueIn2 = txPrev.vout[prevout.n].nValue;
     CBigNum bnWeight = CBigNum(nValueIn2);
-    bnTarget *= bnWeight;
+//    bnTarget *= bnWeight;
 
 //    uint256 targetProofOfStake = bnTarget.getuint256();
 
@@ -369,12 +369,12 @@ bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
         LogPrintf("%s : nTimeTxPrev=%u nPrevout=%u nTimeTx=%u prevoutHash=%s \n", function, txPrev.nTime,
                   prevout.n, nTimeTx, prevout.hash.ToString());
         LogPrintf("%s : hashProofOfStake=%s \n", function, hashProofOfStake.ToString());
-        LogPrintf("%s :  bnTarget=%s \n", function, (bnTargetOld.getuint256()).ToString());
+        LogPrintf("%s :  bnTarget=%s \n", function, (bnTarget.getuint256()).ToString());
         LogPrintf("%s :  bnCoinDayWeight=%s \n", function, (bnWeight.getuint256().ToString()));
-        LogPrintf("%s :  bnTarget * bnCoinDayWeight=%s \n", function, (bnTarget.getuint256().ToString()));
+        LogPrintf("%s :  bnTarget * bnCoinDayWeight=%s \n", function, ((bnTarget * bnWeight).getuint256().ToString()));
     }
     // Now check if proof-of-stake hash meets target protocol
-    if (CBigNum(hashProofOfStake) > bnTarget) {
+    if (CBigNum(hashProofOfStake) > (bnTarget * bnWeight)) {
         return false;
     }
     return true;
