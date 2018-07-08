@@ -358,6 +358,8 @@ bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
 
     string function = __func__;
     if(ownBlock) {
+        LogPrintf("%s : Checking block at height=%ds\n",
+                  function, (nStakeModifierHeight + 1));
         LogPrintf("%s : using modifier %016x at height=%ds\n",
                   function, nStakeModifier, nStakeModifierHeight);
         LogPrintf("%s : using modifier %016x at height=%ds\n",
