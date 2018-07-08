@@ -339,8 +339,8 @@ bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
     bnTarget.SetCompact(nBits);
     CBigNum bnTargetOld = bnTarget;
     // Weighted target
-//    int64_t nValueIn = txPrev.vout[prevout.n].nValue;
-    CBigNum bnWeight = CBigNum(nValueIn);
+    int64_t nValueIn2 = txPrev.vout[prevout.n].nValue;
+    CBigNum bnWeight = CBigNum(nValueIn2);
     bnTarget *= bnWeight;
 
 //    uint256 targetProofOfStake = bnTarget.getuint256();
