@@ -412,7 +412,7 @@ bool Stake(CStakeInput *stakeInput, unsigned int nBits, unsigned int nTimeBlockF
     bool fSuccess = false;
     unsigned int nTryTime = 0;
     int nHeightStart = chainActive.Height();
-    unsigned int nHashDrift = 60;
+    unsigned int nHashDrift = 30;
     CDataStream ssUniqueID = stakeInput->GetUniqueness();
 //    CAmount nValueIn = stakeInput->GetValue();
     LogPrintf("Stake(): Checking for stake\n");
@@ -420,14 +420,12 @@ bool Stake(CStakeInput *stakeInput, unsigned int nBits, unsigned int nTimeBlockF
 //    int64_t nSearchInterval = 1;
     CBlockIndex *pindex = stakeInput->GetIndexFrom();
     LogPrintf("Stake(): stake input height %ds\n", pindex->nHeight);
-    CBlock block;
+//    CBlock block;
     uint256 hashBlock;
     CTransaction txPrev;
-    ReadBlockFromDisk(block, pindex);
-//    blockHeader->
-    const CTransaction tx = block.vtx[1];
+//    ReadBlockFromDisk(block, pindex);
+//    const CTransaction tx = block.vtx[1];
     stakeInput->GetTxFrom(txPrev);
-//    GetTransaction(txin.prevout.hash, txPrev, hashBlock);
     const CTxIn &txin = txPrev.vin[0];
     int64_t nValueIn = txPrev.vout[txin.prevout.n].nValue;
     LogPrintf("%s : nBits = %08x nTimeTxPrev=%u nPrevout=%u "
@@ -451,9 +449,9 @@ bool Stake(CStakeInput *stakeInput, unsigned int nBits, unsigned int nTimeBlockF
 //            nTryTime =  - n;
             if (!CheckStake(txPrev, txin.prevout, (nTimeTx - i), hashProofOfStake, nValueIn, chainActive.Tip(),
                             nBits)) {
+                LogPrintf("%s: No stake found proof of hash hashproof=%s\n", __func__, hashProofOfStake.GetHex());
                 continue;
             }
-//            LogPrintf("Stake(): bnStakeModifierV2: nTimeBlockFrom:%d nTimeTx:%d\n", block.GetBlockTime(), nTryTime);
         }
 
         fSuccess = true; // if we make it this far then we have successfully created a stake hash
