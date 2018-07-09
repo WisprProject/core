@@ -433,7 +433,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
             }
         }else{
 //            nTryTime =  - n;
-            if (!CheckStake(txPrev, txin.prevout, txNew.nTime - n, hashProofOfStake, nValueIn, chainActive.Tip(true), nBits))
+            if (!CheckStake(txPrev, txin.prevout, txNew.nTime - n, hashProofOfStake, nValueIn, chainActive.Tip(true), nBits, true))
             {
                 continue;
             }
