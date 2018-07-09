@@ -170,11 +170,8 @@ bool ComputeNextStakeModifier(const CBlockIndex* pindexPrev, uint64_t& nStakeMod
         fGeneratedStakeModifier = true;
         return true; // genesis block's modifier is 0
     }
-    printf("%s ChainActive tip = %ds\n", __func__, chainActive.Height());
-    printf("%s Prev pindex height = %ds\n", __func__, pindexPrev->nHeight);
     if (pindexPrev->nHeight == 0) {
         //Give a stake modifier to the first block
-        printf("%s Prev pindex height is 0\n", __func__);
 //        fGeneratedStakeModifier = true;
 //        nStakeModifier = uint64_t("stakemodifier");
         return true;
@@ -184,12 +181,6 @@ bool ComputeNextStakeModifier(const CBlockIndex* pindexPrev, uint64_t& nStakeMod
         nStakeModifier |= (((uint64_t)pindexPrev->GetStakeEntropyBit()) << 1);
         return true;
     }
-    LogPrintf("%s : using modifier %016x at height=%ds\n",
-              __func__, pindexPrev->nStakeModifier, pindexPrev->nHeight);
-    LogPrintf("%s : using bnStakeModifier %s\n",
-              __func__, pindexPrev->bnStakeModifierV2.ToString());
-//    printf("%s ChainActive tip = %ds\n", __func__, chainActive.Height());
-//    printf("%s Prev pindex height = %ds\n", __func__, pindexPrev->nHeight);
     // First find current stake modifier and its generation block time
     // if it's not old enough, return the same stake modifier
     int64_t nModifierTime = 0;
