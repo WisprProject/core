@@ -467,7 +467,8 @@ bool Stake(CStakeInput *stakeInput, unsigned int nBits, unsigned int nTimeBlockF
     //grab difficulty
     uint256 bnTargetPerCoinDay;
     bnTargetPerCoinDay.SetCompact(nBits);
-
+    nTimeTx = GetAdjustedTime();
+    nTimeTx &= ~STAKE_TIMESTAMP_MASK;
     //grab stake modifier
     uint64_t nStakeModifier = 0;
     if (!stakeInput->GetModifier(nStakeModifier))
