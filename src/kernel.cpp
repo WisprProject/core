@@ -390,7 +390,71 @@ bool CheckStake(const CTransaction &txPrev, const COutPoint &prevout,
     }
     return true;
 }
+bool CheckStake(const CTransaction &txPrev, uint256 &txHash,
+                unsigned int nTimeTx, uint256 &hashProofOfStake, int64_t nValueIn, CBlockIndex *pindexPrev,
+                unsigned int nBits, bool ownBlock = false) {
+    hashProofOfStake = 0;
+    if (nTimeTx < txPrev.nTime)  // Transaction timestamp violation
+        return error("CheckStakeKernelHash() : nTime violation");
 
+    // Base target
+    CBigNum bnTarget;
+    bnTarget.SetCompact(nBits);
+    uint256 bnTarget_uint256;
+    bnTarget_uint256.SetCompact(nBits);
+    CBigNum bnWeight = CBigNum(nValueIn);
+    uint256 bnWeight_uint256 = uint256(nValueIn);
+
+    uint64_t nStakeModifier = pindexPrev->nStakeModifier;
+    uint256 bnStakeModifierV2 = pindexPrev->bnStakeModifierV2;
+    int nStakeModifierHeight = pindexPrev->nHeight;
+    int64_t nStakeModifierTime = pindexPrev->nTime;
+
+    // Calculate hash
+    CDataStream ss(SER_GETHASH, 0);
+    ss << bnStakeModifierV2;
+    ss << txPrev.nTime << txHash << 0 << nTimeTx;
+    hashProofOfStake = Hash(ss.begin(), ss.end());
+
+    string function = __func__;
+    if (ownBlock) {
+        LogPrintf("%s : Checking block at height=%ds\n",
+                  function, (nStakeModifierHeight + 1));
+//        LogPrintf("%s : using modifier %016x at height=%ds\n",
+//                  function, nStakeModifier, nStakeModifierHeight);
+//        LogPrintf("%s : using bnStakeModifierV2 %s\n",
+//                  function, bnStakeModifierV2.ToString());
+//        LogPrintf("%s : using modifier time = %s\n",
+//                  function,DateTimeStrFormat("%Y-%m-%d %H:%M:%S", nStakeModifierTime).c_str());
+        LogPrintf(
+                "%s : height=%ds, using modifier %016x, bnStakeModifierV2 %s\n nBits = %08x nTimeTxPrev=%u nPrevout=%u "
+                "nTimeTx=%u prevoutHash=%s \n hashProofOfStake=%s\n", function, nStakeModifierHeight, nStakeModifier,
+                bnStakeModifierV2.ToString(), nBits, txPrev.nTime,
+                0, nTimeTx, txHash.ToString(), (CBigNum(hashProofOfStake).getuint256().ToString()));
+        LogPrintf(
+                "%s : SIZEOF height=%ds, using modifier %ds, bnStakeModifierV2 %ds\n nBits = %ds nTimeTxPrev=%ds nPrevout=%ds "
+                "nTimeTx=%ds prevoutHash=%ds \n hashProofOfStake=%ds\n", function, sizeof(nStakeModifierHeight),
+                sizeof(nStakeModifier),
+                sizeof(bnStakeModifierV2), sizeof(nBits), sizeof(txPrev.nTime),
+                sizeof(0), sizeof(nTimeTx), sizeof(txHash),
+                sizeof((CBigNum(hashProofOfStake).getuint256())));
+        LogPrintf("%s :  bnTarget=%s \n bnCoinDayWeight=%s \n bnTarget * bnCoinDayWeight=%s \n", function,
+                  (bnTarget.getuint256()).ToString(), (bnWeight.getuint256().ToString()), (
+                          (bnTarget * bnWeight).getuint256().ToString()));
+        LogPrintf(
+                "%s :  bnTargetU_uint256=%s \n bnCoinDayWeight_uint256t=%s \n bnTarget_uint256 * bnCoinDayWeight_uint256=%s \n",
+                function,
+                bnTarget_uint256.ToString(), bnWeight_uint256.ToString(), (
+                        (bnTarget_uint256 * bnWeight_uint256).ToString()));
+//        LogPrintf("%s :  bnCoinDayWeight=%s \n", function, (bnWeight.getuint256().ToString()));
+//        LogPrintf("%s :  bnTarget * bnCoinDayWeight=%s \n", function, ((bnTarget * bnWeight).getuint256().ToString()));
+    }
+    // Now check if proof-of-stake hash meets target protocol
+    if (hashProofOfStake > (bnTarget_uint256 * bnWeight_uint256)) {
+        return false;
+    }
+    return true;
+}
 bool Stake(CStakeInput *stakeInput, unsigned int nBits, unsigned int nTimeBlockFrom, unsigned int &nTimeTx,
            uint256 &hashProofOfStake) {
     if (nTimeTx < nTimeBlockFrom)
@@ -425,6 +489,7 @@ bool Stake(CStakeInput *stakeInput, unsigned int nBits, unsigned int nTimeBlockF
     CTransaction txPrev;
     stakeInput->GetTxFrom(txPrev);
     const CTxIn &txin = txPrev.vin[0];
+    const CTxOut &txOut = txPrev.vout[0];
     uint256 prevTxHash = txPrev.GetHash();
 //    txPrev->
 //    int64_t nValueIn = txPrev.vout[txin.prevout.n].nValue;
@@ -449,7 +514,7 @@ bool Stake(CStakeInput *stakeInput, unsigned int nBits, unsigned int nTimeBlockF
                 continue;
             }
         } else {
-            if (!CheckStake(txPrev, txin.prevout, (nTimeTx - i), hashProofOfStake, stakeInput->GetValue(), chainActive.Tip(),
+            if (!CheckStake(txPrev, prevTxHash, (nTimeTx - i), hashProofOfStake, stakeInput->GetValue(), chainActive.Tip(),
                             nBits)) {
                 LogPrintf("%s: No stake found proof of hash hashproof=%s\n", __func__, (CBigNum(hashProofOfStake).getuint256().ToString()));
                 continue;
