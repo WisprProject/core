@@ -418,7 +418,7 @@ bool Stake(CStakeInput *stakeInput, unsigned int nBits, unsigned int nTimeBlockF
     LogPrintf("Stake(): Checking for stake\n");
     CBlockIndex *pindex = stakeInput->GetIndexFrom();
     LogPrintf("Stake(): stake input height %ds\n", pindex->nHeight);
-    CTransaction block;
+    CBlock block;
     ReadBlockFromDisk(block, pindex);
     const CTxIn &txin = block.vtx[1].vin[0];
     uint256 hashBlock;
