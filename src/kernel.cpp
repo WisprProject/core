@@ -460,7 +460,7 @@ bool Stake(CStakeInput *stakeInput, unsigned int nBits, unsigned int nTimeBlockF
             }
         } else {
 //            nTryTime =  - n;
-            if (!CheckProofOfStake(block, hashProofOfStake, stake(stakeInput))) {
+            if (!CheckProofOfStake(block, hashProofOfStake, stake)) {
                 LogPrintf("%s: No stake found proof of hash hashproof=%s\n", __func__, (CBigNum(hashProofOfStake).getuint256().ToString()));
                 continue;
             }
