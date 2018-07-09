@@ -420,11 +420,11 @@ bool Stake(CStakeInput *stakeInput, unsigned int nBits, unsigned int nTimeBlockF
     LogPrintf("Stake(): stake input height %ds\n", pindex->nHeight);
     CBlock block;
     ReadBlockFromDisk(block, pindex);
-    const CTxIn &txin = block.vtx[1].vin[0];
+//    const CTxIn &txin = block.vtx[1].vin[0];
     uint256 hashBlock;
     CTransaction txPrev;
     stakeInput->GetTxFrom(txPrev);
-//    const CTxIn &txin = txPrev.vin[0];
+    const CTxIn &txin = txPrev.vin[0];
 //    int64_t nValueIn = txPrev.vout[txin.prevout.n].nValue;
     LogPrintf("%s : nBits = %08x nTimeTxPrev=%u nPrevout=%u "
               "nTimeTx=%u prevoutHash=%s \n", __func__, nBits, txPrev.nTime,
