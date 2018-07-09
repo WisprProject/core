@@ -369,7 +369,7 @@ bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
     return true;
 }
 
-bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockFrom, unsigned int& nTimeTx, uint256& hashProofOfStake, CMutableTransaction& txNew)
+bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockFrom, unsigned int& nTimeTx, uint256& hashProofOfStake)
 {
     if (nTimeTx < nTimeBlockFrom)
         return error("CheckStakeKernelHash() : nTime violation");
