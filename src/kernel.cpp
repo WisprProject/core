@@ -420,7 +420,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
             break;
 
         //hash this iteration
-        nTryTime = txNew.nTime + nHashDrift - i;
+        nTryTime = nTimeTx + nHashDrift - i;
         // if stake hash does not meet the target then continue to next iteration
         if(stakeInput->GetIndexFrom()->nHeight > Params().NEW_PROTOCOLS_STARTHEIGHT()){
             if (!CheckStake(ssUniqueID, stakeInput->GetValue(), nStakeModifier, bnTargetPerCoinDay, nTimeBlockFrom, nTryTime, hashProofOfStake)){
@@ -437,7 +437,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
 
         fSuccess = true; // if we make it this far then we have successfully created a stake hash
         LogPrintf("%s: hashproof=%s\n", __func__, hashProofOfStake.GetHex());
-        txNew.nTime = nTryTime;
+//        txNew.nTime = nTryTime;
         nTimeTx = nTryTime;
         break;
     }
