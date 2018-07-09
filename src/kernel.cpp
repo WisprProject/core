@@ -396,7 +396,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
     bool fSuccess = false;
     unsigned int nTryTime = 0;
     int nHeightStart = chainActive.Height();
-    int nHashDrift = 30;
+    unsigned int nHashDrift = 60;
     CDataStream ssUniqueID = stakeInput->GetUniqueness();
 //    CAmount nValueIn = stakeInput->GetValue();
     CBlock block;
@@ -410,7 +410,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
     LogPrintf("Stake(): Checking for stake\n");
 //    static int nMaxStakeSearchInterval = 60;
 //    int64_t nSearchInterval = 1;
-    for (int i=0; i < nHashDrift; i++) //iterate the hashing
+    for (unsigned int i=0; i < nHashDrift; i++) //iterate the hashing
     {
         //new block came in, move on
         if (chainActive.Height() != nHeightStart)
