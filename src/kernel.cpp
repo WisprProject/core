@@ -417,23 +417,22 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
     LogPrintf("Stake(): Checking for stake\n");
     static int nMaxStakeSearchInterval = 60;
     int64_t nSearchInterval = 1;
-    for (unsigned int n=0; n < min(nSearchInterval,(int64_t)nMaxStakeSearchInterval); n++) //iterate the hashing
+    for (int i=0; i < nHashDrift; i++) //iterate the hashing
     {
         //new block came in, move on
         if (chainActive.Height() != nHeightStart)
             break;
 
         //hash this iteration
-
+        nTryTime = txNew.nTime + nHashDrift - i;
         // if stake hash does not meet the target then continue to next iteration
         if(stakeInput->GetIndexFrom()->nHeight > Params().NEW_PROTOCOLS_STARTHEIGHT()){
-                nTryTime = nTimeTx + nHashDrift - n;
             if (!CheckStake(ssUniqueID, stakeInput->GetValue(), nStakeModifier, bnTargetPerCoinDay, nTimeBlockFrom, nTryTime, hashProofOfStake)){
                 continue;
             }
         }else{
 //            nTryTime =  - n;
-            if (!CheckStake(txPrev, txin.prevout, txNew.nTime - n, hashProofOfStake, nValueIn, chainActive.Tip(true), nBits, true))
+            if (!CheckStake(txPrev, txin.prevout, nTryTime, hashProofOfStake, nValueIn, chainActive.Tip(true), nBits, true))
             {
                 continue;
             }
@@ -442,6 +441,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
 
         fSuccess = true; // if we make it this far then we have successfully created a stake hash
         LogPrintf("%s: hashproof=%s\n", __func__, hashProofOfStake.GetHex());
+        txNew.nTime = nTryTime;
         nTimeTx = nTryTime;
         break;
     }
