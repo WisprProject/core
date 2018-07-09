@@ -447,9 +447,9 @@ bool Stake(CStakeInput *stakeInput, unsigned int nBits, unsigned int nTimeBlockF
             }
         } else {
 //            nTryTime =  - n;
-            if (!CheckStake(txPrev, txin.prevout, (nTimeTx - i), hashProofOfStake, nValueIn, chainActive.Tip(),
+            if (!CheckStake(txPrev, txin.prevout, (nTimeTx - i), hashProofOfStake, stakeInput->GetValue(), chainActive.Tip(),
                             nBits)) {
-                LogPrintf("%s: No stake found proof of hash hashproof=%s\n", __func__, hashProofOfStake.GetHex());
+                LogPrintf("%s: No stake found proof of hash hashproof=%s\n", __func__, (CBigNum(hashProofOfStake).getuint256().ToString()));
                 continue;
             }
         }
