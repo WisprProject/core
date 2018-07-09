@@ -392,7 +392,7 @@ bool CheckStake(const CTransaction &txPrev, const COutPoint &prevout,
 }
 
 bool Stake(CStakeInput *stakeInput, unsigned int nBits, unsigned int nTimeBlockFrom, unsigned int &nTimeTx,
-           uint256 &hashProofOfStake) {
+           uint256 &hashProofOfStake, CBlockHeader blockHeader) {
     if (nTimeTx < nTimeBlockFrom)
         return error("CheckStakeKernelHash() : nTime violation");
 
@@ -418,15 +418,17 @@ bool Stake(CStakeInput *stakeInput, unsigned int nBits, unsigned int nTimeBlockF
     LogPrintf("Stake(): Checking for stake\n");
 //    static int nMaxStakeSearchInterval = 60;
 //    int64_t nSearchInterval = 1;
-    LogPrintf("Stake(): stake input height %ds\n", stakeInput->GetIndexFrom()->nHeight);
     CBlockIndex *pindex = stakeInput->GetIndexFrom();
+    LogPrintf("Stake(): stake input height %ds\n", pindex->nHeight);
     CBlock block;
     uint256 hashBlock;
     CTransaction txPrev;
-    ReadBlockFromDisk(block, pindex->GetBlockPos());
+    ReadBlockFromDisk(block, pindex);
+//    blockHeader->
     const CTransaction tx = block.vtx[1];
-    const CTxIn &txin = tx.vin[0];
-    GetTransaction(txin.prevout.hash, txPrev, hashBlock);
+    stakeInput->GetTxFrom(txPrev);
+//    GetTransaction(txin.prevout.hash, txPrev, hashBlock);
+    const CTxIn &txin = txPrev.tx.vin[0];
     int64_t nValueIn = txPrev.vout[txin.prevout.n].nValue;
     LogPrintf("%s : nBits = %08x nTimeTxPrev=%u nPrevout=%u "
               "nTimeTx=%u prevoutHash=%s \n", __func__, nBits, txPrev.nTime,
@@ -447,7 +449,7 @@ bool Stake(CStakeInput *stakeInput, unsigned int nBits, unsigned int nTimeBlockF
             }
         } else {
 //            nTryTime =  - n;
-            if (!CheckStake(txPrev, txin.prevout, (nTimeTx - i), hashProofOfStake, nValueIn, chainActive.Tip(true),
+            if (!CheckStake(txPrev, txin.prevout, (nTimeTx - i), hashProofOfStake, nValueIn, chainActive.Tip(),
                             nBits)) {
                 continue;
             }
