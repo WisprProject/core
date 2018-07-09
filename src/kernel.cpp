@@ -412,7 +412,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
     ReadBlockFromDisk(block, stakeInput->GetIndexFrom()->pprev);
     const CTransaction tx = block.vtx[1];
     const CTxIn& txin = tx.vin[0];
-    GetTransaction(txin.prevout.hash, txPrev, hashBlock, true);
+    GetTransaction(txin.prevout.hash, txPrev, hashBlock);
     int64_t nValueIn = txPrev.vout[txin.prevout.n].nValue;
     LogPrintf("Stake(): Checking for stake\n");
     static int nMaxStakeSearchInterval = 60;
@@ -513,7 +513,7 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
                          tx.GetHash().GetHex(), hashProofOfStake.GetHex());
         }
     }else{
-        if (!CheckStake(txPrev, txin.prevout, tx.nTime, hashProofOfStake, nValueIn, chainActive.Tip(), block.nBits, true))
+        if (!CheckStake(txPrev, txin.prevout, tx.nTime, hashProofOfStake, nValueIn, chainActive.Tip(), block.nBits))
         {
             return error("CheckProofOfStake() : INFO: old bnStakeModifierV2 check kernel failed on coinstake %s, hashProof=%s \n",
                          tx.GetHash().GetHex(), hashProofOfStake.GetHex());
