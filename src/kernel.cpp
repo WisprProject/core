@@ -337,13 +337,8 @@ bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
     // Base target
     CBigNum bnTarget;
     bnTarget.SetCompact(nBits);
-//    CBigNum bnTargetOld = bnTarget;
-    // Weighted target
     int64_t nValueIn2 = txPrev.vout[prevout.n].nValue;
     CBigNum bnWeight = CBigNum(nValueIn2);
-//    bnTarget *= bnWeight;
-
-//    uint256 targetProofOfStake = bnTarget.getuint256();
 
     uint64_t nStakeModifier = pindexPrev->nStakeModifier;
     uint256 bnStakeModifierV2 = pindexPrev->bnStakeModifierV2;
@@ -514,7 +509,7 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
                          tx.GetHash().GetHex(), hashProofOfStake.GetHex());
         }
     }else{
-        if (!CheckStake(txPrev, txin.prevout, tx.nTime, hashProofOfStake, nValueIn, chainActive.Tip(), block.nBits))
+        if (!CheckStake(txPrev, txin.prevout, tx.nTime, hashProofOfStake, nValueIn, chainActive.Tip(), block.nBits, true))
         {
             return error("CheckProofOfStake() : INFO: old bnStakeModifierV2 check kernel failed on coinstake %s, hashProof=%s \n",
                          tx.GetHash().GetHex(), hashProofOfStake.GetHex());
