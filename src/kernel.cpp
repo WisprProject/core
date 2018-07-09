@@ -412,7 +412,7 @@ bool Stake(CStakeInput *stakeInput, unsigned int nBits, unsigned int nTimeBlockF
     bool fSuccess = false;
     unsigned int nTryTime = 0;
     int nHeightStart = chainActive.Height();
-    unsigned int nHashDrift = 30;
+    int nHashDrift = 30;
     CDataStream ssUniqueID = stakeInput->GetUniqueness();
 //    CAmount nValueIn = stakeInput->GetValue();
     LogPrintf("Stake(): Checking for stake\n");
@@ -429,7 +429,7 @@ bool Stake(CStakeInput *stakeInput, unsigned int nBits, unsigned int nTimeBlockF
 
 
     unique_ptr<CStakeInput> stake;
-    for (unsigned int i = 0; i < nHashDrift; i++) //iterate the hashing
+    for ( int i = 0; i < nHashDrift; i++) //iterate the hashing
     {
         //new block came in, move on
         if (chainActive.Height() != nHeightStart)
@@ -438,23 +438,25 @@ bool Stake(CStakeInput *stakeInput, unsigned int nBits, unsigned int nTimeBlockF
         //hash this iteration
         nTryTime = nTimeTx + nHashDrift - i;
         // if stake hash does not meet the target then continue to next iteration
-        if (stakeInput->GetIndexFrom()->nHeight > Params().NEW_PROTOCOLS_STARTHEIGHT()) {
-            if (!CheckStake(ssUniqueID, stakeInput->GetValue(), nStakeModifier, bnTargetPerCoinDay, nTimeBlockFrom,
-                            nTryTime, hashProofOfStake)) {
-                continue;
-            }
-        } else {
-//            nTryTime =  - n;
-            if (!CheckStake(txPrev, txin.prevout, (nTimeTx - i), hashProofOfStake, stakeInput->GetValue(), chainActive.Tip(),
-                            nBits)) {
-                LogPrintf("%s: No stake found proof of hash hashproof=%s\n", __func__, (CBigNum(hashProofOfStake).getuint256().ToString()));
-                continue;
-            }
+        if (!CheckStake(ssUniqueID, stakeInput->GetValue(), nStakeModifier, bnTargetPerCoinDay, nTimeBlockFrom,
+                        nTryTime, hashProofOfStake)) {
+            continue;
         }
+//        if (stakeInput->GetIndexFrom()->nHeight > Params().NEW_PROTOCOLS_STARTHEIGHT()) {
+//            if (!CheckStake(ssUniqueID, stakeInput->GetValue(), nStakeModifier, bnTargetPerCoinDay, nTimeBlockFrom,
+//                            nTryTime, hashProofOfStake)) {
+//                continue;
+//            }
+//        } else {
+//            if (!CheckStake(txPrev, txin.prevout, (nTimeTx - i), hashProofOfStake, stakeInput->GetValue(), chainActive.Tip(),
+//                            nBits)) {
+//                LogPrintf("%s: No stake found proof of hash hashproof=%s\n", __func__, (CBigNum(hashProofOfStake).getuint256().ToString()));
+//                continue;
+//            }
+//        }
 
         fSuccess = true; // if we make it this far then we have successfully created a stake hash
         LogPrintf("%s: hashproof=%s\n", __func__, hashProofOfStake.GetHex());
-//        txNew.nTime = nTryTime;
         nTimeTx = nTryTime;
         break;
     }
