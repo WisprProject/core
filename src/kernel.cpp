@@ -416,6 +416,9 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
 //    static int nMaxStakeSearchInterval = 60;
 //    int64_t nSearchInterval = 1;
     LogPrintf("Stake(): stake input height %ds\n", stakeInput->GetIndexFrom()->nHeight);
+    LogPrintf("%s : nBits = %08x nTimeTxPrev=%u nPrevout=%u "
+              "nTimeTx=%u prevoutHash=%s \n", __func__, nBits, txPrev.nTime,
+              txin.prevout.n, nTimeTx, prevout.hash.ToString());
     for (unsigned int i=0; i < nHashDrift; i++) //iterate the hashing
     {
         //new block came in, move on
@@ -431,7 +434,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
             }
         }else{
 //            nTryTime =  - n;
-            if (!CheckStake(txPrev, txin.prevout, (nTimeTx - i), hashProofOfStake, nValueIn, chainActive.Tip(true), nBits, true))
+            if (!CheckStake(txPrev, txin.prevout, (nTimeTx - i), hashProofOfStake, nValueIn, chainActive.Tip(true), nBits))
             {
                 continue;
             }
