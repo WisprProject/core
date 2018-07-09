@@ -407,7 +407,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
     CBlock block;
     uint256 hashBlock;
     CTransaction txPrev;
-    ReadBlockFromDisk(block, stakeInput->GetIndexFrom()->pprev);
+    ReadBlockFromDisk(block, stakeInput->GetIndexFrom());
     const CTransaction tx = block.vtx[1];
     const CTxIn& txin = tx.vin[0];
     GetTransaction(txin.prevout.hash, txPrev, hashBlock);
@@ -415,6 +415,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
     LogPrintf("Stake(): Checking for stake\n");
 //    static int nMaxStakeSearchInterval = 60;
 //    int64_t nSearchInterval = 1;
+    LogPrintf("Stake(): stake input height %ds\n", stakeInput->GetIndexFrom()->nHeight);
     for (unsigned int i=0; i < nHashDrift; i++) //iterate the hashing
     {
         //new block came in, move on
@@ -430,7 +431,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
             }
         }else{
 //            nTryTime =  - n;
-            if (!CheckStake(txPrev, txin.prevout, nTryTime, hashProofOfStake, nValueIn, chainActive.Tip(true), nBits, true))
+            if (!CheckStake(txPrev, txin.prevout, (nTimeTx - i), hashProofOfStake, nValueIn, chainActive.Tip(true), nBits, true))
             {
                 continue;
             }
