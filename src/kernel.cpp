@@ -359,6 +359,11 @@ bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
                   "nTimeTx=%u prevoutHash=%s \n hashProofOfStake=%s\n", function,nStakeModifierHeight, nStakeModifier,
                   bnStakeModifierV2.ToString(), nBits, txPrev.nTime,
                   prevout.n, nTimeTx, prevout.hash.ToString(), (CBigNum(hashProofOfStake).getuint256().ToString()));
+        LogPrintf("%s : SIZEOF height=%ds, using modifier %ds, bnStakeModifierV2 %ds\n nBits = %ds nTimeTxPrev=%ds nPrevout=%ds "
+                  "nTimeTx=%ds prevoutHash=%ds \n hashProofOfStake=%ds\n", function, sizeof(nStakeModifierHeight),
+                  sizeof(nStakeModifier),
+                  sizeof(bnStakeModifierV2), sizeof(nBits), sizeof(txPrev.nTime),
+                  sizeof(prevout.n), sizeof(nTimeTx), sizeof(prevout.hash), sizeof((CBigNum(hashProofOfStake).getuint256())));
         LogPrintf("%s :  bnTarget=%s \n bnCoinDayWeight=%s \n bnTarget * bnCoinDayWeight=%s \n", function,
                 (bnTarget.getuint256()).ToString(), (bnWeight.getuint256().ToString()), (
                         (bnTarget * bnWeight).getuint256().ToString()));
