@@ -336,9 +336,9 @@ bool CheckStake(const CTransaction &txPrev, const COutPoint &prevout,
     bnTarget.SetCompact(nBits);
     uint256 bnTarget_uint256;
     bnTarget_uint256.SetCompact(nBits);
-    int64_t nValueIn2 = txPrev.vout[prevout.n].nValue;
-    CBigNum bnWeight = CBigNum(nValueIn2);
-    uint256 bnWeight_uint256 = uint256(nValueIn2);
+//    int64_t nValueIn2 = txPrev.vout[prevout.n].nValue;
+    CBigNum bnWeight = CBigNum(nValueIn);
+    uint256 bnWeight_uint256 = uint256(nValueIn);
 
     uint64_t nStakeModifier = pindexPrev->nStakeModifier;
     uint256 bnStakeModifierV2 = pindexPrev->bnStakeModifierV2;
@@ -418,11 +418,14 @@ bool Stake(CStakeInput *stakeInput, unsigned int nBits, unsigned int nTimeBlockF
     LogPrintf("Stake(): Checking for stake\n");
     CBlockIndex *pindex = stakeInput->GetIndexFrom();
     LogPrintf("Stake(): stake input height %ds\n", pindex->nHeight);
+    CTransaction block;
+    ReadBlockFromDisk(block, pindex);
+    const CTxIn &txin = block.vtx[1].vin[0];
     uint256 hashBlock;
     CTransaction txPrev;
     stakeInput->GetTxFrom(txPrev);
-    const CTxIn &txin = txPrev.vin[0];
-    int64_t nValueIn = txPrev.vout[txin.prevout.n].nValue;
+//    const CTxIn &txin = txPrev.vin[0];
+//    int64_t nValueIn = txPrev.vout[txin.prevout.n].nValue;
     LogPrintf("%s : nBits = %08x nTimeTxPrev=%u nPrevout=%u "
               "nTimeTx=%u prevoutHash=%s \n", __func__, nBits, txPrev.nTime,
               txin.prevout.n, nTimeTx, txin.prevout.hash.ToString());
@@ -438,22 +441,18 @@ bool Stake(CStakeInput *stakeInput, unsigned int nBits, unsigned int nTimeBlockF
         //hash this iteration
         nTryTime = nTimeTx + nHashDrift - i;
         // if stake hash does not meet the target then continue to next iteration
-        if (!CheckStake(ssUniqueID, stakeInput->GetValue(), nStakeModifier, bnTargetPerCoinDay, nTimeBlockFrom,
-                        nTryTime, hashProofOfStake)) {
-            continue;
+        if (stakeInput->GetIndexFrom()->nHeight > Params().NEW_PROTOCOLS_STARTHEIGHT()) {
+            if (!CheckStake(ssUniqueID, stakeInput->GetValue(), nStakeModifier, bnTargetPerCoinDay, nTimeBlockFrom,
+                            nTryTime, hashProofOfStake)) {
+                continue;
+            }
+        } else {
+            if (!CheckStake(txPrev, txin.prevout, (nTimeTx - i), hashProofOfStake, stakeInput->GetValue(), chainActive.Tip(),
+                            nBits)) {
+                LogPrintf("%s: No stake found proof of hash hashproof=%s\n", __func__, (CBigNum(hashProofOfStake).getuint256().ToString()));
+                continue;
+            }
         }
-//        if (stakeInput->GetIndexFrom()->nHeight > Params().NEW_PROTOCOLS_STARTHEIGHT()) {
-//            if (!CheckStake(ssUniqueID, stakeInput->GetValue(), nStakeModifier, bnTargetPerCoinDay, nTimeBlockFrom,
-//                            nTryTime, hashProofOfStake)) {
-//                continue;
-//            }
-//        } else {
-//            if (!CheckStake(txPrev, txin.prevout, (nTimeTx - i), hashProofOfStake, stakeInput->GetValue(), chainActive.Tip(),
-//                            nBits)) {
-//                LogPrintf("%s: No stake found proof of hash hashproof=%s\n", __func__, (CBigNum(hashProofOfStake).getuint256().ToString()));
-//                continue;
-//            }
-//        }
 
         fSuccess = true; // if we make it this far then we have successfully created a stake hash
         LogPrintf("%s: hashproof=%s\n", __func__, hashProofOfStake.GetHex());
