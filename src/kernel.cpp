@@ -328,8 +328,11 @@ bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
     // Base target
     CBigNum bnTarget;
     bnTarget.SetCompact(nBits);
+    uint256 bnTarget_uint256;
+    bnTarget_uint256.SetCompact(nBits);
     int64_t nValueIn2 = txPrev.vout[prevout.n].nValue;
     CBigNum bnWeight = CBigNum(nValueIn2);
+    uint256 bnWeight_uint256 = uint256(nValueIn2);
 
     uint64_t nStakeModifier = pindexPrev->nStakeModifier;
     uint256 bnStakeModifierV2 = pindexPrev->bnStakeModifierV2;
@@ -359,6 +362,9 @@ bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
         LogPrintf("%s :  bnTarget=%s \n bnCoinDayWeight=%s \n bnTarget * bnCoinDayWeight=%s \n", function,
                 (bnTarget.getuint256()).ToString(), (bnWeight.getuint256().ToString()), (
                         (bnTarget * bnWeight).getuint256().ToString()));
+        LogPrintf("%s :  bnTargetU_uint256=%s \n bnCoinDayWeight_uint256t=%s \n bnTarget_uint256 * bnCoinDayWeight_uint256=%s \n", function,
+                  bnTarget_uint256.ToString(), bnWeight_uint256.ToString(), (
+                          (bnTarget_uint256 * bnWeight_uint256).ToString()));
 //        LogPrintf("%s :  bnCoinDayWeight=%s \n", function, (bnWeight.getuint256().ToString()));
 //        LogPrintf("%s :  bnTarget * bnCoinDayWeight=%s \n", function, ((bnTarget * bnWeight).getuint256().ToString()));
     }
