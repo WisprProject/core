@@ -330,7 +330,7 @@ bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
         unsigned int nTimeTx, uint256& hashProofOfStake, int64_t nValueIn, CBlockIndex* pindexPrev,
         unsigned int nBits, bool ownBlock = false)
 {
-
+    hashProofOfStake=0;
     if (nTimeTx < txPrev.nTime)  // Transaction timestamp violation
         return error("CheckStakeKernelHash() : nTime violation");
 
