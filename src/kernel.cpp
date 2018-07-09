@@ -443,7 +443,7 @@ bool Stake(CStakeInput *stakeInput, unsigned int nBits, unsigned int nTimeBlockF
 //    if (!block.ReadFromDisk(txindex.pos.nFile, txindex.pos.nBlockPos, false))
 //        return false;
 
-
+    unique_ptr<CStakeInput> stake;
     for (unsigned int i = 0; i < nHashDrift; i++) //iterate the hashing
     {
         //new block came in, move on
@@ -460,7 +460,7 @@ bool Stake(CStakeInput *stakeInput, unsigned int nBits, unsigned int nTimeBlockF
             }
         } else {
 //            nTryTime =  - n;
-            if (!CheckProofOfStake(block, hashProofOfStake, std::unique_ptr<CStakeInput>(stakeInput))) {
+            if (!CheckProofOfStake(block, hashProofOfStake, stake(stakeInput))) {
                 LogPrintf("%s: No stake found proof of hash hashproof=%s\n", __func__, (CBigNum(hashProofOfStake).getuint256().ToString()));
                 continue;
             }
