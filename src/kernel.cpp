@@ -392,7 +392,7 @@ bool CheckStake(const CTransaction &txPrev, const COutPoint &prevout,
 }
 
 bool Stake(CStakeInput *stakeInput, unsigned int nBits, unsigned int nTimeBlockFrom, unsigned int &nTimeTx,
-           uint256 &hashProofOfStake, CBlockHeader blockHeader) {
+           uint256 &hashProofOfStake, CBlock* pblock) {
     if (nTimeTx < nTimeBlockFrom)
         return error("CheckStakeKernelHash() : nTime violation");
 
@@ -431,6 +431,18 @@ bool Stake(CStakeInput *stakeInput, unsigned int nBits, unsigned int nTimeBlockF
     LogPrintf("%s : nBits = %08x nTimeTxPrev=%u nPrevout=%u "
               "nTimeTx=%u prevoutHash=%s \n", __func__, nBits, txPrev.nTime,
               txin.prevout.n, nTimeTx, txin.prevout.hash.ToString());
+
+    CTransaction txPrev;
+    CTxIndex txindex;
+    if (!txPrev.ReadFromDisk(txdb, prevout, txindex))
+        return false;
+
+    // Read block header
+    CBlock block;
+    if (!block.ReadFromDisk(txindex.pos.nFile, txindex.pos.nBlockPos, false))
+        return false;
+
+
     for (unsigned int i = 0; i < nHashDrift; i++) //iterate the hashing
     {
         //new block came in, move on
@@ -447,11 +459,15 @@ bool Stake(CStakeInput *stakeInput, unsigned int nBits, unsigned int nTimeBlockF
             }
         } else {
 //            nTryTime =  - n;
-            if (!CheckStake(txPrev, txin.prevout, (nTimeTx - i), hashProofOfStake, stakeInput->GetValue(), chainActive.Tip(),
-                            nBits)) {
+            if (!CheckProofOfStake(pblock, hashProofOfStake, stakeInput)) {
                 LogPrintf("%s: No stake found proof of hash hashproof=%s\n", __func__, (CBigNum(hashProofOfStake).getuint256().ToString()));
                 continue;
             }
+//            if (!CheckStake(txPrev, txin.prevout, (nTimeTx - i), hashProofOfStake, stakeInput->GetValue(), chainActive.Tip(),
+//                            nBits)) {
+//                LogPrintf("%s: No stake found proof of hash hashproof=%s\n", __func__, (CBigNum(hashProofOfStake).getuint256().ToString()));
+//                continue;
+//            }
         }
 
         fSuccess = true; // if we make it this far then we have successfully created a stake hash

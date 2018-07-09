@@ -156,7 +156,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         bool fStakeFound = false;
         if (nSearchTime >= nLastCoinStakeSearchTime) {
             unsigned int nTxNewTime = 0;
-            if (pwallet->CreateCoinStake(*pwallet, pblock->nBits, nSearchTime - nLastCoinStakeSearchTime, txCoinStake, txCoinStake.nTime)) {
+            if (pwallet->CreateCoinStake(*pwallet, pblock->nBits, nSearchTime - nLastCoinStakeSearchTime, txCoinStake, txCoinStake.nTime, pblock)) {
                 pblock->nTime = pblock->vtx[0].nTime = txCoinStake.nTime;
 //                pblock->nTime = nTxNewTime;
                 pblock->vtx[0].vout[0].SetEmpty();
