@@ -460,7 +460,7 @@ bool Stake(CStakeInput *stakeInput, unsigned int nBits, unsigned int nTimeBlockF
             }
         } else {
 //            nTryTime =  - n;
-            if (!CheckProofOfStake(block, hashProofOfStake, stakeInput)) {
+            if (!CheckProofOfStake(block, hashProofOfStake, std::unique_ptr<CStakeInput>(stakeInput))) {
                 LogPrintf("%s: No stake found proof of hash hashproof=%s\n", __func__, (CBigNum(hashProofOfStake).getuint256().ToString()));
                 continue;
             }
