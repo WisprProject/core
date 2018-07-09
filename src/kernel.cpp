@@ -392,7 +392,7 @@ bool CheckStake(const CTransaction &txPrev, const COutPoint &prevout,
 }
 
 bool Stake(CStakeInput *stakeInput, unsigned int nBits, unsigned int nTimeBlockFrom, unsigned int &nTimeTx,
-           uint256 &hashProofOfStake, CBlock* pblock) {
+           uint256 &hashProofOfStake) {
     if (nTimeTx < nTimeBlockFrom)
         return error("CheckStakeKernelHash() : nTime violation");
 
@@ -423,7 +423,8 @@ bool Stake(CStakeInput *stakeInput, unsigned int nBits, unsigned int nTimeBlockF
 //    CBlock block;
     uint256 hashBlock;
     CTransaction txPrev;
-//    ReadBlockFromDisk(block, pindex);
+    CBlock block;
+    ReadBlockFromDisk(block, pindex);
 //    const CTransaction tx = block.vtx[1];
     stakeInput->GetTxFrom(txPrev);
     const CTxIn &txin = txPrev.vin[0];
@@ -432,15 +433,15 @@ bool Stake(CStakeInput *stakeInput, unsigned int nBits, unsigned int nTimeBlockF
               "nTimeTx=%u prevoutHash=%s \n", __func__, nBits, txPrev.nTime,
               txin.prevout.n, nTimeTx, txin.prevout.hash.ToString());
 
-    CTransaction txPrev;
-    CTxIndex txindex;
-    if (!txPrev.ReadFromDisk(txdb, prevout, txindex))
-        return false;
+//    CTransaction txPrev;
+//    CTxIndex txindex;
+//    if (!txPrev.ReadFromDisk(txdb, prevout, txindex))
+//        return false;
 
     // Read block header
-    CBlock block;
-    if (!block.ReadFromDisk(txindex.pos.nFile, txindex.pos.nBlockPos, false))
-        return false;
+//    CBlock block;
+//    if (!block.ReadFromDisk(txindex.pos.nFile, txindex.pos.nBlockPos, false))
+//        return false;
 
 
     for (unsigned int i = 0; i < nHashDrift; i++) //iterate the hashing
@@ -459,7 +460,7 @@ bool Stake(CStakeInput *stakeInput, unsigned int nBits, unsigned int nTimeBlockF
             }
         } else {
 //            nTryTime =  - n;
-            if (!CheckProofOfStake(pblock, hashProofOfStake, stakeInput)) {
+            if (!CheckProofOfStake(block, hashProofOfStake, stakeInput)) {
                 LogPrintf("%s: No stake found proof of hash hashproof=%s\n", __func__, (CBigNum(hashProofOfStake).getuint256().ToString()));
                 continue;
             }
