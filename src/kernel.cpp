@@ -418,7 +418,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
     LogPrintf("Stake(): stake input height %ds\n", stakeInput->GetIndexFrom()->nHeight);
     LogPrintf("%s : nBits = %08x nTimeTxPrev=%u nPrevout=%u "
               "nTimeTx=%u prevoutHash=%s \n", __func__, nBits, txPrev.nTime,
-              txin.prevout.n, nTimeTx, prevout.hash.ToString());
+              txin.prevout.n, nTimeTx, txin.prevout.hash.ToString());
     for (unsigned int i=0; i < nHashDrift; i++) //iterate the hashing
     {
         //new block came in, move on
