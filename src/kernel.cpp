@@ -360,20 +360,21 @@ bool CheckStake(const CTransaction& txPrev, const COutPoint& prevout,
     if(ownBlock) {
         LogPrintf("%s : Checking block at height=%ds\n",
                   function, (nStakeModifierHeight + 1));
-        LogPrintf("%s : using modifier %016x at height=%ds\n",
-                  function, nStakeModifier, nStakeModifierHeight);
-        LogPrintf("%s : using bnStakeModifierV2 %s\n",
-                  function, bnStakeModifierV2.ToString());
-        LogPrintf("%s : using modifier time = %s\n",
-                  function,DateTimeStrFormat("%Y-%m-%d %H:%M:%S", nStakeModifierTime).c_str());
-        LogPrintf("%s : nBits = %08x\n",function,
-                  nBits);
-        LogPrintf("%s : nTimeTxPrev=%u nPrevout=%u nTimeTx=%u prevoutHash=%s \n", function, txPrev.nTime,
-                  prevout.n, nTimeTx, prevout.hash.ToString());
-        LogPrintf("%s : hashProofOfStake=%s \n", function, hashProofOfStake.ToString());
-        LogPrintf("%s :  bnTarget=%s \n", function, (bnTarget.getuint256()).ToString());
-        LogPrintf("%s :  bnCoinDayWeight=%s \n", function, (bnWeight.getuint256().ToString()));
-        LogPrintf("%s :  bnTarget * bnCoinDayWeight=%s \n", function, ((bnTarget * bnWeight).getuint256().ToString()));
+//        LogPrintf("%s : using modifier %016x at height=%ds\n",
+//                  function, nStakeModifier, nStakeModifierHeight);
+//        LogPrintf("%s : using bnStakeModifierV2 %s\n",
+//                  function, bnStakeModifierV2.ToString());
+//        LogPrintf("%s : using modifier time = %s\n",
+//                  function,DateTimeStrFormat("%Y-%m-%d %H:%M:%S", nStakeModifierTime).c_str());
+        LogPrintf("%s : height=%ds, using modifier %016x, bnStakeModifierV2 %s\n nBits = %08x nTimeTxPrev=%u nPrevout=%u "
+                  "nTimeTx=%u prevoutHash=%s \n hashProofOfStake=%s\n", function,nStakeModifierHeight, nStakeModifier,
+                  bnStakeModifierV2.ToString(), nBits, txPrev.nTime,
+                  prevout.n, nTimeTx, prevout.hash.ToString(), (CBigNum(hashProofOfStake).getuint256().ToString()));
+        LogPrintf("%s :  bnTarget=%s \n bnCoinDayWeight=%s \n bnTarget * bnCoinDayWeight=%s \n", function,
+                (bnTarget.getuint256()).ToString(), (bnWeight.getuint256().ToString()), (
+                        (bnTarget * bnWeight).getuint256().ToString()));
+//        LogPrintf("%s :  bnCoinDayWeight=%s \n", function, (bnWeight.getuint256().ToString()));
+//        LogPrintf("%s :  bnTarget * bnCoinDayWeight=%s \n", function, ((bnTarget * bnWeight).getuint256().ToString()));
     }
     // Now check if proof-of-stake hash meets target protocol
     if (CBigNum(hashProofOfStake) > (bnTarget * bnWeight)) {
@@ -415,8 +416,8 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
     GetTransaction(txin.prevout.hash, txPrev, hashBlock);
     int64_t nValueIn = txPrev.vout[txin.prevout.n].nValue;
     LogPrintf("Stake(): Checking for stake\n");
-    static int nMaxStakeSearchInterval = 60;
-    int64_t nSearchInterval = 1;
+//    static int nMaxStakeSearchInterval = 60;
+//    int64_t nSearchInterval = 1;
     for (int i=0; i < nHashDrift; i++) //iterate the hashing
     {
         //new block came in, move on
