@@ -428,7 +428,7 @@ bool Stake(CStakeInput *stakeInput, unsigned int nBits, unsigned int nTimeBlockF
     const CTransaction tx = block.vtx[1];
     stakeInput->GetTxFrom(txPrev);
 //    GetTransaction(txin.prevout.hash, txPrev, hashBlock);
-    const CTxIn &txin = txPrev.tx.vin[0];
+    const CTxIn &txin = txPrev.vin[0];
     int64_t nValueIn = txPrev.vout[txin.prevout.n].nValue;
     LogPrintf("%s : nBits = %08x nTimeTxPrev=%u nPrevout=%u "
               "nTimeTx=%u prevoutHash=%s \n", __func__, nBits, txPrev.nTime,
