@@ -2984,9 +2984,9 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
 
         // Read block header
         CBlockHeader block = pindex->GetBlockHeader();
-        uint256 hashProofOfStake = 0;
-        nTxNewTime = GetAdjustedTime();
-        nTxNewTime &= ~STAKE_TIMESTAMP_MASK;
+        uint256 hashProofOfStake;
+//        nTxNewTime = GetAdjustedTime();
+//        nTxNewTime &= ~STAKE_TIMESTAMP_MASK;
         //iterates each utxo inside of CheckStakeKernelHash()
         if (Stake(stakeInput.get(), nBits, block.GetBlockTime(), nTxNewTime, hashProofOfStake)) {
             LOCK(cs_main);
