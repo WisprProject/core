@@ -4415,6 +4415,7 @@ bool TestBlockValidity(CValidationState& state, const CBlock& block, CBlockIndex
         return false;
     if (!ConnectBlock(block, state, &indexDummy, viewNew, true))
         return false;
+
     assert(state.IsValid());
 
     return true;
