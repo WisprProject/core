@@ -364,7 +364,7 @@ bool CheckStakeV1(unsigned int nTxPrevTime, const COutPoint &prevout,
 
     return stakeTargetHitOld(hashProofOfStake, bnTarget);
 }
-bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockFrom, unsigned int& nTimeTx, uint256& hashProofOfStake,CMutableTransaction& txNew)
+bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockFrom, unsigned int& nTimeTx, uint256& hashProofOfStake)
 {
     if (nTimeTx < nTimeBlockFrom)
         return error("Stake() : nTime violation");
