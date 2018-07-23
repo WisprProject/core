@@ -4114,13 +4114,14 @@ bool AcceptBlockHeader(const CBlock& block, CValidationState& state, CBlockIndex
         }
 
     }
-    pindex->bnStakeModifierV2 = ComputeStakeModifier(chainActive.Tip(), block.IsProofOfWork() ? hash : block.vtx[1].vin[0].prevout.hash);
 
     if (!ContextualCheckBlockHeader(block, state, pindexPrev))
         return false;
 
     if (pindex == NULL)
         pindex = AddToBlockIndex(block);
+
+    pindex->bnStakeModifierV2 = ComputeStakeModifier(chainActive.Tip(), block.IsProofOfWork() ? hash : block.vtx[1].vin[0].prevout.hash);
 
     if (ppindex)
         *ppindex = pindex;
