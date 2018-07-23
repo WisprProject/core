@@ -8,7 +8,7 @@
 
 #include "db.h"
 #include "kernel.h"
-#include "main.h"
+#include "main.cpp"
 #include "script/interpreter.h"
 #include "timedata.h"
 #include "util.h"
@@ -520,7 +520,7 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
         if (!CheckStakeV1(txPrev.nTime, txin.prevout, tx.nTime, hashProofOfStake, nValueIn, chainActive.Tip(), block.nBits, true)) {
             CValidationState state;
             DisconnectTip(state);
-            LogPrintf("Stake(): Reprocess blocks\n");
+            LogPrintf("Stake(): DisconnectTip\n");
             return error("CheckProofOfStake() : INFO: old bnStakeModifierV2 check kernel failed on coinstake %s, hashProof=%s \n",
                   tx.GetHash().ToString(), hashProofOfStake.ToString());
         }
