@@ -8,7 +8,6 @@
 
 #include "db.h"
 #include "kernel.h"
-#include "main.cpp"
 #include "script/interpreter.h"
 #include "timedata.h"
 #include "util.h"
