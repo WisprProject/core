@@ -80,6 +80,7 @@ public:
     bool GetTxFrom(CTransaction& tx) override;
     CAmount GetValue() override;
     bool GetModifier(uint64_t& nStakeModifier) override;
+    unsigned int GetPosition() override;
     CDataStream GetUniqueness() override;
     bool CreateTxIn(CWallet* pwallet, CTxIn& txIn, uint256 hashTxOut = 0) override;
     bool CreateTxOuts(CWallet* pwallet, vector<CTxOut>& vout, CAmount nTotal) override;

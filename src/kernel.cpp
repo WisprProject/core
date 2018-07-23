@@ -394,7 +394,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
     uint256 hashBlock;
     CTransaction txPrev;
     stakeInput->GetTxFrom(txPrev);
-//    const CTxIn &txin = txPrev.vin[0];
+    const CTxIn &txin = txPrev.vin[0];
     // Locate the transaction
     int nIndex;
     for (nIndex = 0; nIndex < (int)block.vtx.size(); nIndex++) {
@@ -409,7 +409,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
     LogPrintf(
             "%s : nPrevout=%u "
             "nTimeTx=%u prevoutHash=%s \n", __func__,
-             prev.n, nTimeTx, prev.hash.ToString());
+             txin.prevout.n, nTimeTx, txin.prevout.hash.ToString());
     nTryTime &= ~STAKE_TIMESTAMP_MASK;
     for (unsigned int i = 0; i < nHashDrift; i++) //iterate the hashing
     {

@@ -172,6 +172,10 @@ bool CWspStake::SetInput(CTransaction txPrev, unsigned int n)
     return true;
 }
 
+unsigned int CWspStake::GetPosition()
+{
+    return this->nPosition;
+}
 bool CWspStake::GetTxFrom(CTransaction& tx)
 {
     tx = txFrom;
