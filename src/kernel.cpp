@@ -561,6 +561,6 @@ void DeleteTip()
     CValidationState state;
     {
         LOCK(cs_main);
-        DisconnectBlocksAndReprocess(2);
+        DisconnectBlocksAndReprocess(1);
     }
 }

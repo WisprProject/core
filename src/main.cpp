@@ -3621,7 +3621,7 @@ CBlockIndex* AddToBlockIndex(const CBlock& block)
         if (!CheckStakeModifierCheckpoints(pindexNew->nHeight, pindexNew->nStakeModifierChecksum))
             LogPrintf("AddToBlockIndex() : Rejected by stake modifier checkpoint height=%d, modifier=%s \n", pindexNew->nHeight, boost::lexical_cast<std::string>(nStakeModifier));
     }
-    pindexNew->bnStakeModifierV2 = ComputeStakeModifier(pindexNew->pprev, block.IsProofOfWork() ? hash : block.vtx[1].vin[0].prevout.hash);
+//    pindexNew->bnStakeModifierV2 = ComputeStakeModifier(pindexNew->pprev, block.IsProofOfWork() ? hash : block.vtx[1].vin[0].prevout.hash);
     pindexNew->nChainWork = (pindexNew->pprev ? pindexNew->pprev->nChainWork : 0) + GetBlockProof(*pindexNew);
     pindexNew->RaiseValidity(BLOCK_VALID_TREE);
     if (pindexBestHeader == NULL || pindexBestHeader->nChainWork < pindexNew->nChainWork)
@@ -4114,6 +4114,7 @@ bool AcceptBlockHeader(const CBlock& block, CValidationState& state, CBlockIndex
         }
 
     }
+    pindex->bnStakeModifierV2 = ComputeStakeModifier(pindexPrev, block.IsProofOfWork() ? hash : block.vtx[1].vin[0].prevout.hash);
 
     if (!ContextualCheckBlockHeader(block, state, pindexPrev))
         return false;
