@@ -157,7 +157,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         if (nSearchTime >= nLastCoinStakeSearchTime) {
             unsigned int nTxNewTime = 0;
             if (pwallet->CreateCoinStake(*pwallet, pblock->nBits, nSearchTime - nLastCoinStakeSearchTime, txCoinStake, txCoinStake.nTime)) {
-                pblock->nTime = pblock->vtx[0].nTime = txCoinStake.nTime;
+                pblock->vtx[0].nTime = pblock->nTime = txCoinStake.nTime;
 //                pblock->nTime = nTxNewTime;
                 pblock->vtx[0].vout[0].SetEmpty();
                 pblock->vtx.push_back(CTransaction(txCoinStake));
@@ -473,6 +473,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         // Fill in header
 //        printf("CreateNewBlock(): fill headeer\n");
         pblock->hashPrevBlock = pindexPrev->GetBlockHash();
+        pblock->nTime = max(pindexPrev->GetPastTimeLimit() + 1, pblock->GetMaxTransactionTime());
         if (!fProofOfStake)
             UpdateTime(pblock, pindexPrev);
 
@@ -516,7 +517,6 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
             mempool.clear();
             return NULL;
         }
-        pblock->nTime = max(pindexPrev->GetPastTimeLimit() + 1, pblock->GetMaxTransactionTime());
 
 //        if (pblock->IsZerocoinStake()) {
 //            CWalletTx wtx(pwalletMain, pblock->vtx[1]);
