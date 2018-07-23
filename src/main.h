@@ -234,6 +234,7 @@ bool GetTransaction(const uint256& hash, CTransaction& tx, uint256& hashBlock, b
 /** Find the best known block, and make it the tip of the block chain */
 
 bool DisconnectBlocksAndReprocess(int blocks);
+bool DisconnectBlockAndInputs(CValidationState& state, CTransaction txLock);
 bool static DisconnectTip(CValidationState& state);
 
 // ***TODO***
