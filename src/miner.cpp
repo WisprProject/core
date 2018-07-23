@@ -150,14 +150,18 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         }
 //        pblock->nBits = GetNextWorkRequired(pindexPrev, pblock);
         CMutableTransaction txCoinStake;
-        txCoinStake.nTime = GetAdjustedTime();
-        txCoinStake.nTime &= ~STAKE_TIMESTAMP_MASK;
+//        txCoinStake.nTime = GetAdjustedTime();
+//        txCoinStake.nTime &= ~STAKE_TIMESTAMP_MASK;
         int64_t nSearchTime = pblock->nTime; // search to current time
         bool fStakeFound = false;
         if (nSearchTime >= nLastCoinStakeSearchTime) {
-            unsigned int nTxNewTime = 0;
-            if (pwallet->CreateCoinStake(*pwallet, pblock->nBits, nSearchTime - nLastCoinStakeSearchTime, txCoinStake, txCoinStake.nTime)) {
-                pblock->vtx[0].nTime = pblock->nTime = txCoinStake.nTime;
+            unsigned int nTxNewTime = GetAdjustedTime();
+            nTxNewTime &= ~STAKE_TIMESTAMP_MASK;
+            if (pwallet->CreateCoinStake(*pwallet, pblock->nBits, nSearchTime - nLastCoinStakeSearchTime, txCoinStake, nTxNewTime)) {
+                pblock->vtx[0].nTime = pblock->nTime = nTxNewTime;
+                pblock->nTime = nTxNewTime;
+                txCoinStake.nTime = nTxNewTime;
+                txNew.nTime = nTxNewTime;
 //                pblock->nTime = nTxNewTime;
                 pblock->vtx[0].vout[0].SetEmpty();
                 pblock->vtx.push_back(CTransaction(txCoinStake));
