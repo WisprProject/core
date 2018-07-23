@@ -23,6 +23,7 @@ public:
     virtual bool CreateTxOuts(CWallet* pwallet, vector<CTxOut>& vout, CAmount nTotal) = 0;
     virtual bool GetModifier(uint64_t& nStakeModifier) = 0;
     virtual bool IsZWSP() = 0;
+    virtual unsigned int GetPosition() = 0;
     virtual CDataStream GetUniqueness() = 0;
 };
 
