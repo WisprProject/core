@@ -523,7 +523,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
             return NULL;
         }
         if (pblock->IsProofOfStake() && !CheckCoinStakeTimestamp(pblock->GetBlockTime(), (int64_t)pblock->vtx[1].nTime)){
-            LogPrintf("CreateNewBlock() : coinstake timestamp violation nTimeBlock=%d nTimeTx=%u", pblock->GetBlockTime(), block->vtx[1].nTime);
+            LogPrintf("CreateNewBlock() : coinstake timestamp violation nTimeBlock=%d nTimeTx=%u", pblock->GetBlockTime(), pblock->vtx[1].nTime);
             return NULL;
         }
 //        if (pblock->IsZerocoinStake()) {
