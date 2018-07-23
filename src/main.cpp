@@ -81,6 +81,8 @@ unsigned int nCoinCacheSize = 5000;
 bool fAlerts = DEFAULT_ALERTS;
 
 unsigned int nStakeMinAge = 8 * 60 * 60;
+unsigned int nModifierInterval = 10 * 60; // time to elapse before new modifier is computed
+
 int64_t nReserveBalance = 0;
 
 /** Fees smaller than this (in uwsp) are considered zero fee (for relaying and mining)
