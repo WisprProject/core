@@ -431,7 +431,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
             nTryTime = nTimeTx + nHashDrift - i;
             if (!CheckStakeV1(txPrev.nTime, prev, nTryTime, hashProofOfStake, nValueIn, chainActive.Tip(),
                               nBits)) {
-                LogPrintf("%s: No stake found proof of hash hashproof=%s\n", __func__, hashProofOfStake.ToString());
+//                LogPrintf("%s: No stake found proof of hash hashproof=%s\n", __func__, hashProofOfStake.ToString());
                 continue;
             }
         }
