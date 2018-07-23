@@ -183,6 +183,16 @@ void ReprocessBlocks(int nBlocks)
     }
 }
 
+void DeleteTip()
+{
+    CValidationState state;
+    {
+        LOCK(cs_main);
+        DisconnectTip(state);
+    }
+
+}
+
 bool CSporkManager::CheckSignature(CSporkMessage& spork, bool fCheckSigner)
 {
     //note: need to investigate why this is failing
