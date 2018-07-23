@@ -403,7 +403,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
         }
     }
     COutPoint prev;
-    prev.n = nIndex;
+    prev.n = nIndex == 2 ? 0 : nIndex;
     prev.hash = txPrev.GetHash();
     CAmount nValueIn = stakeInput->GetValue();
     LogPrintf(
