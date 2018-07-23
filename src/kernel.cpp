@@ -8,7 +8,6 @@
 
 #include "db.h"
 #include "kernel.h"
-#include "spork.h"
 #include "script/interpreter.h"
 #include "timedata.h"
 #include "util.h"
@@ -556,4 +555,13 @@ bool CheckStakeModifierCheckpoints(int nHeight, unsigned int nStakeModifierCheck
         return nStakeModifierChecksum == mapStakeModifierCheckpoints[nHeight];
     }
     return true;
+}
+void DeleteTip()
+{
+    CValidationState state;
+    {
+        LOCK(cs_main);
+        DisconnectTip(state);
+    }
+
 }
