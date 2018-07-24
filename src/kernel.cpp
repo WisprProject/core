@@ -532,7 +532,7 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
 bool CheckCoinStakeTimestamp(int64_t nTimeBlock, int64_t nTimeTx)
 {
     // v0.3 protocol
-    int64_t mask = (nTimeTx & STAKE_TIMESTAMP_MASK);
+    int mask = (nTimeTx & STAKE_TIMESTAMP_MASK);
     LogPrintf('CheckCoinStakeTimestamp(): %d\n', mask);
     return (nTimeBlock == nTimeTx) && ((nTimeTx & STAKE_TIMESTAMP_MASK) == 0);
 }
