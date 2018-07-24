@@ -260,6 +260,7 @@ bool GetNodeStateStats(NodeId nodeid, CNodeStateStats& stats);
 void Misbehaving(NodeId nodeid, int howmuch);
 /** Flush all state, indexes and buffers to disk. */
 void FlushStateToDisk();
+void PushGetBlocks(CNode* pnode, CBlockIndex* pindexBegin, uint256 hashEnd);
 
 
 /** (try to) add transaction to memory pool **/

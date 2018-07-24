@@ -3494,6 +3494,13 @@ bool ActivateBestChain(CValidationState& state, CBlock* pblock, bool fAlreadyChe
 {
     CBlockIndex* pindexNewTip = NULL;
     CBlockIndex* pindexMostWork = NULL;
+    // Switch to new best branch
+//    if (!Reorganize(txdb, pindexIntermediate))
+//    {
+//        txdb.TxnAbort();
+//        InvalidChainFound(pindexNew);
+//        return error("SetBestChain() : Reorganize failed");
+//    }
     do {
         boost::this_thread::interruption_point();
 
