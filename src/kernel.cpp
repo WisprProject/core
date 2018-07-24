@@ -497,14 +497,6 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
     uint64_t nStakeModifier = 0;
 
     int64_t nValueIn = txPrev.vout[txin.prevout.n].nValue;
-    LogPrintf("Stake(): stake input height %d\n", pindex->nHeight);
-    LogPrintf("Stake(): stake blockFromTime %u\n", blockprev.nTime);
-    LogPrintf("Stake(): stake TxTime %u\n", block.nTime);
-//    uint256 hsp = uint256("02a441aace4b4291dbaf78b7e49f5ecc2fe336328df09921f1f3d65cca7dc93d");
-//    uint256 weight =  uint256("0b5e56b0e5f0b800000000000000000000000000000000000000000000000000");
-//    if(hsp > weight){
-//        LogPrintf("Larger then is true not false\n");
-//    }
     unsigned int nBlockFromTime = blockprev.nTime;
     unsigned int nTxTime = block.nTime;
     if (pindex->nHeight > Params().NEW_PROTOCOLS_STARTHEIGHT()) {
@@ -517,10 +509,7 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
         }
 
     } else {
-//        uint256 bnTargetPerC = bnTargetPerCoinDay.GetCompact();
-        if (!CheckStakeV1(txPrev.nTime, txin.prevout, tx.nTime, hashProofOfStake, nValueIn, chainActive.Tip(), block.nBits, true)) {
-//            DeleteTip();
-//            LogPrintf("Stake(): Delete Tip\n");
+        if (!CheckStakeV1(txPrev.nTime, txin.prevout, tx.nTime, hashProofOfStake, nValueIn, chainActive.Tip(), block.nBits)) {
             return error("CheckProofOfStake() : INFO: old bnStakeModifierV2 check kernel failed on coinstake %s, hashProof=%s \n",
                   tx.GetHash().ToString(), hashProofOfStake.ToString());
         }
@@ -532,8 +521,6 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
 bool CheckCoinStakeTimestamp(int64_t nTimeBlock, int64_t nTimeTx)
 {
     // v0.3 protocol
-    int64_t mask = (nTimeTx & STAKE_TIMESTAMP_MASK);
-    LogPrintf("CheckCoinStakeTimestamp(): %u \n", mask);
     return (nTimeBlock == nTimeTx) && ((nTimeTx & STAKE_TIMESTAMP_MASK) == 0);
 }
 
@@ -559,32 +546,4 @@ bool CheckStakeModifierCheckpoints(int nHeight, unsigned int nStakeModifierCheck
         return nStakeModifierChecksum == mapStakeModifierCheckpoints[nHeight];
     }
     return true;
-}
-void DeleteTip()
-{
-    CValidationState state;
-    {
-        LOCK(cs_main);
-        ReprocessBlocks(3);
-    }
-}
-void DeleteBlockAndInputs(CTransaction txLock)
-{
-    CValidationState state;
-    {
-        LOCK(cs_main);
-        DisconnectBlockAndInputs(state, txLock);
-    }
-}
-
-void DeleteCache(){
-//        mapBlockIndex.clear();
-//    setBlockIndexCandidates.clear();
-    CValidationState state;
-    {
-        LOCK(cs_main);
-        DeleteDirtyBlockIndex();
-    }
-//        chainActive.SetTip(NULL);
-//        pindexBestInvalid = NULL;
 }
