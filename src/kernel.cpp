@@ -380,7 +380,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
 
 
     bool fSuccess = false;
-    unsigned int nTryTime = 0;
+    unsigned int nTryTime = GetAdjustedTime();
     int nHeightStart = chainActive.Height();
     unsigned int nHashDrift = 60;
     CDataStream ssUniqueID = stakeInput->GetUniqueness();
@@ -410,8 +410,8 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
             "nTimeTx=%u prevoutHash=%s \n", __func__,
              stakeInput->GetPosition(), nTimeTx, prev.hash.ToString());
     nTryTime &= ~STAKE_TIMESTAMP_MASK;
-    int64_t nSearchInterval = 1;
-    static int nMaxStakeSearchInterval = 60;
+//    int64_t nSearchInterval = 1;
+//    static int nMaxStakeSearchInterval = 60;
     for (unsigned int i = 0; i<nHashDrift; i++) //iterate the hashing
     {
         //new block came in, move on
@@ -430,7 +430,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
                 continue;
         } else {
             nTryTime = nTimeTx - i;
-            if (!CheckStakeV1(txPrev.nTime, prev, nTimeTx - i, hashProofOfStake, nValueIn, chainActive.Tip(),
+            if (((nTryTime & STAKE_TIMESTAMP_MASK) != 0) && !CheckStakeV1(txPrev.nTime, prev, nTryTime, hashProofOfStake, nValueIn, chainActive.Tip(),
                               nBits, true)) {
 //                LogPrintf("%s: No stake found proof of hash hashproof=%s\n", __func__, hashProofOfStake.ToString());
                 continue;
