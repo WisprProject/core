@@ -413,7 +413,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
     nTryTime &= ~STAKE_TIMESTAMP_MASK;
     int64_t nSearchInterval = 1;
     static int nMaxStakeSearchInterval = 60;
-    for (unsigned int i = 0; n<min(nSearchInterval,(int64_t)nMaxStakeSearchInterval); i++) //iterate the hashing
+    for (unsigned int i = 0; i<min(nSearchInterval,(int64_t)nMaxStakeSearchInterval); i++) //iterate the hashing
     {
         //new block came in, move on
         if (chainActive.Height() != nHeightStart)
