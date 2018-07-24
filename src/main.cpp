@@ -312,10 +312,7 @@ void FinalizeNode(NodeId nodeid)
 
     mapNodeState.erase(nodeid);
 }
-void DeleteDirtyBlockIndex(){
-    setBlockIndexCandidates.clear();
-    setDirtyBlockIndex.clear();
-}
+
 // Requires cs_main.
 void MarkBlockAsReceived(const uint256& hash)
 {
@@ -3202,7 +3199,10 @@ bool static ConnectTip(CValidationState& state, CBlockIndex* pindexNew, CBlock* 
     LogPrint("bench", "- Connect block: %.2fms [%.2fs]\n", (nTime6 - nTime1) * 0.001, nTimeTotal * 0.000001);
     return true;
 }
-
+void DeleteDirtyBlockIndex(){
+    setBlockIndexCandidates.clear();
+    setDirtyBlockIndex.clear();
+}
 bool DisconnectBlocksAndReprocess(int blocks)
 {
     LOCK(cs_main);
