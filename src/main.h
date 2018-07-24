@@ -180,8 +180,8 @@ void SyncWithWallets(const CTransaction& tx, const CBlock* pblock = NULL);
 void RegisterNodeSignals(CNodeSignals& nodeSignals);
 /** Unregister a network node */
 void UnregisterNodeSignals(CNodeSignals& nodeSignals);
-struct COrphanBlock;
-extern std::map<uint256, COrphanBlock*> mapOrphanBlocks;
+//struct COrphanBlock;
+//extern std::map<uint256, COrphanBlock*> mapOrphanBlocks;
 uint256 WantedByOrphan(const COrphanBlock* pblockOrphan);
 
 /**
