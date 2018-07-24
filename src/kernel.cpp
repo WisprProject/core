@@ -314,8 +314,8 @@ bool CheckStakeV1(unsigned int nTxPrevTime, const COutPoint &prevout,
                   unsigned int nBits, bool fDebug = false) {
 
     string function = __func__;
-    LogPrintf(
-            "%s :nTimeTxPrev=%u nTimeTx=%u\n", function, nTxPrevTime, nTimeTx);
+//    LogPrintf(
+//            "%s :nTimeTxPrev=%u nTimeTx=%u\n", function, nTxPrevTime, nTimeTx);
 
     if (nTimeTx < nTxPrevTime)  // Transaction timestamp violation
         return error("CheckStakeV1() : nTime violation");
