@@ -182,7 +182,7 @@ void RegisterNodeSignals(CNodeSignals& nodeSignals);
 void UnregisterNodeSignals(CNodeSignals& nodeSignals);
 //struct COrphanBlock;
 //extern std::map<uint256, COrphanBlock*> mapOrphanBlocks;
-uint256 WantedByOrphan(const COrphanBlock* pblockOrphan);
+//uint256 WantedByOrphan(const COrphanBlock* pblockOrphan);
 
 /**
  * Process an incoming block. This only returns after the best known valid
