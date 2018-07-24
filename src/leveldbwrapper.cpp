@@ -13,18 +13,19 @@
 #include <leveldb/filter_policy.h>
 #include <memenv.h>
 
-void HandleError(const leveldb::Status& status) throw(leveldb_error)
+void HandleError(const leveldb::Status& status) //throw(leveldb_error)
 {
     if (status.ok())
         return;
     LogPrintf("%s\n", status.ToString());
     if (status.IsCorruption())
-        throw leveldb_error("Database corrupted");
+        throw std::runtime_error("Database corrupted");
     if (status.IsIOError())
-        throw leveldb_error("Database I/O error");
+        throw std::runtime_error("Database I/O error");
     if (status.IsNotFound())
-        throw leveldb_error("Database entry missing");
-    throw leveldb_error("Unknown database error");
+        throw std::runtime_error("Database entry missing");
+    throw std::runtime_error("Unknown database error");
+
 }
 
 static leveldb::Options GetOptions(size_t nCacheSize)
@@ -80,7 +81,7 @@ CLevelDBWrapper::~CLevelDBWrapper()
     options.env = NULL;
 }
 
-bool CLevelDBWrapper::WriteBatch(CLevelDBBatch& batch, bool fSync) throw(leveldb_error)
+bool CLevelDBWrapper::WriteBatch(CLevelDBBatch& batch, bool fSync) //throw(leveldb_error)
 {
     leveldb::Status status = pdb->Write(fSync ? syncoptions : writeoptions, &batch.batch);
     HandleError(status);
