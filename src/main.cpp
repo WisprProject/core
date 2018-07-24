@@ -4521,12 +4521,13 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
 void PushGetBlocks(CNode* pnode, CBlockIndex* pindexBegin, uint256 hashEnd)
 {
     // Filter out duplicate requests
-    if (pindexBegin == pnode->pindexLastGetBlocksBegin && hashEnd == pnode->hashLastGetBlocksEnd)
-        return;
-    pnode->pindexLastGetBlocksBegin = pindexBegin;
-    pnode->hashLastGetBlocksEnd = hashEnd;
+//    if (pindexBegin == pnode->pindexLastGetBlocksBegin && hashEnd == pnode->hashLastGetBlocksEnd)
+//        return;
+//
+//    pnode->pindexLastGetBlocksBegin = pindexBegin;
+//    pnode->hashLastGetBlocksEnd = hashEnd;
 
-    pnode->PushMessage("getblocks", GetLocator(pindexBegin), hashEnd);
+    pnode->PushMessage("getblocks", chainActive.GetLocator(pindexBegin), hashEnd);
 }
 bool TestBlockValidity(CValidationState& state, const CBlock& block, CBlockIndex* const pindexPrev, bool fCheckPOW, bool fCheckMerkleRoot)
 {
