@@ -4481,7 +4481,8 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
                 ss >> block;
             }
             block.BuildMerkleTree();
-            if (block.AcceptBlock())
+            CBlockIndex* pindex = NULL;
+            if (AcceptBlock(block, state, &pindex, dbp, checked))
                 vWorkQueue.push_back(mi->second->hashBlock);
             mapOrphanBlocks.erase(mi->second->hashBlock);
             setStakeSeenOrphan.erase(block.GetProofOfStake());
