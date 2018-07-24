@@ -135,6 +135,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
     pblock->vtx.push_back(txNew);
     pblocktemplate->vTxFees.push_back(-1);   // updated at end
     pblocktemplate->vTxSigOps.push_back(-1); // updated at end
+    unsigned int nTxNewTime = 0;
 
     // ppcoin: if coinstake available add coinstake tx
     static int64_t nLastCoinStakeSearchTime = GetAdjustedTime(); // only initialized at startup
@@ -154,7 +155,6 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         txCoinStake.nTime &= ~STAKE_TIMESTAMP_MASK;
         int64_t nSearchTime = pblock->nTime; // search to current time
         bool fStakeFound = false;
-        unsigned int nTxNewTime = 0;
         if (nSearchTime >= nLastCoinStakeSearchTime) {
             nTxNewTime &= ~STAKE_TIMESTAMP_MASK;
             if (pwallet->CreateCoinStake(*pwallet, pblock->nBits, nSearchTime - nLastCoinStakeSearchTime, txCoinStake, txCoinStake.nTime)) {
@@ -473,7 +473,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         if(pblock->nVersion < 8){
             pblock->vtx[1].nTime= pblock->nTime = pblock->vtx[0].nTime = nTxNewTime;
 //            pblock->nTime =  max(pindexPrev->GetPastTimeLimit() + 1, pblock->GetMaxTransactionTime());
-            LogPrintf("old block time, %u\n", pblock->nTime);
+            LogPrintf("old block time, %u , t1: %u, t2: %u, calculated: %u\n", pblock->nTime, pblock->vtx[0].nTime, pblock->vtx[1].nTime, nTxNewTime);
         }
         // Fill in header
 //        printf("CreateNewBlock(): fill headeer\n");
