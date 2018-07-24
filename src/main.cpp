@@ -313,6 +313,7 @@ void FinalizeNode(NodeId nodeid)
     mapNodeState.erase(nodeid);
 }
 void DeleteDirtyBlockIndex(){
+    setBlockIndexCandidates.clear();
     setDirtyBlockIndex.clear();
 }
 // Requires cs_main.

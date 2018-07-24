@@ -576,7 +576,7 @@ void DeleteBlockAndInputs(CTransaction txLock)
 
 void DeleteCache(){
 //        mapBlockIndex.clear();
-        setBlockIndexCandidates.clear();
+//    setBlockIndexCandidates.clear();
         DeleteDirtyBlockIndex();
 //        chainActive.SetTip(NULL);
 //        pindexBestInvalid = NULL;
