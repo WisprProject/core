@@ -471,9 +471,9 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         }
 
         if(pblock->nVersion < 8){
-            pblock->vtx[0].nTime= pblock->nTime = pblock->vtx[1].nTime;
+            pblock->vtx[1].nTime= pblock->nTime = pblock->vtx[0].nTime;
 //            pblock->nTime =  max(pindexPrev->GetPastTimeLimit() + 1, pblock->GetMaxTransactionTime());
-            printf("old block time, %u\n", pblock->nTime);
+            LogPrintf("old block time, %u\n", pblock->nTime);
         }
         // Fill in header
 //        printf("CreateNewBlock(): fill headeer\n");
