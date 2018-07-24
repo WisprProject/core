@@ -403,13 +403,13 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
         }
     }
     COutPoint prev;
-    prev.n = nIndex == 2 ? 0 : nIndex;
+    prev.n = stakeInput->GetPosition();
     prev.hash = txPrev.GetHash();
     CAmount nValueIn = stakeInput->GetValue();
     LogPrintf(
             "%s : nPrevout=%u "
             "nTimeTx=%u prevoutHash=%s \n", __func__,
-             txin.prevout.n, nTimeTx, txin.prevout.hash.ToString());
+             stakeInput->GetPosition(), nTimeTx, prev.hash.ToString());
     nTryTime &= ~STAKE_TIMESTAMP_MASK;
     int64_t nSearchInterval = 1;
     static int nMaxStakeSearchInterval = 60;
