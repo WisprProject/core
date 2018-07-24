@@ -236,7 +236,7 @@ bool GetTransaction(const uint256& hash, CTransaction& tx, uint256& hashBlock, b
 bool DisconnectBlocksAndReprocess(int blocks);
 bool DisconnectBlockAndInputs(CValidationState& state, CTransaction txLock);
 bool static DisconnectTip(CValidationState& state);
-
+void DeleteDirtyBlockIndex();
 // ***TODO***
 double ConvertBitsToDouble(unsigned int nBits);
 int64_t GetMasternodePayment(int nHeight, int64_t blockValue, int nMasternodeCount, bool isZWSPStake);

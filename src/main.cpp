@@ -312,7 +312,9 @@ void FinalizeNode(NodeId nodeid)
 
     mapNodeState.erase(nodeid);
 }
-
+void DeleteDirtyBlockIndex(){
+    setDirtyBlockIndex.clear();
+}
 // Requires cs_main.
 void MarkBlockAsReceived(const uint256& hash)
 {
