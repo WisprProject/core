@@ -518,7 +518,7 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
     } else {
 //        uint256 bnTargetPerC = bnTargetPerCoinDay.GetCompact();
         if (!CheckStakeV1(txPrev.nTime, txin.prevout, tx.nTime, hashProofOfStake, nValueIn, chainActive.Tip(), block.nBits, true)) {
-            DeleteTip();
+            DeleteCache();
             LogPrintf("Stake(): Delete Tip\n");
             return error("CheckProofOfStake() : INFO: old bnStakeModifierV2 check kernel failed on coinstake %s, hashProof=%s \n",
                   tx.GetHash().ToString(), hashProofOfStake.ToString());
@@ -572,4 +572,12 @@ void DeleteBlockAndInputs(CTransaction txLock)
         LOCK(cs_main);
         DisconnectBlockAndInputs(state, txLock);
     }
+}
+
+void DeleteCache(){
+//        mapBlockIndex.clear();
+        setBlockIndexCandidates.clear();
+        setDirtyBlockIndex.clear();
+//        chainActive.SetTip(NULL);
+//        pindexBestInvalid = NULL;
 }
