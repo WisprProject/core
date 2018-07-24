@@ -384,9 +384,9 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
     int nHeightStart = chainActive.Height();
     unsigned int nHashDrift = 60;
     CDataStream ssUniqueID = stakeInput->GetUniqueness();
-    LogPrintf("Stake(): Checking for stake\n");
+//    LogPrintf("Stake(): Checking for stake\n");
     CBlockIndex *pindex = stakeInput->GetIndexFrom();
-    LogPrintf("Stake(): stake input height %ds\n", pindex->nHeight);
+//    LogPrintf("Stake(): stake input height %ds\n", pindex->nHeight);
     CBlock block;
     ReadBlockFromDisk(block, pindex);
 //    const CTxIn &txin = block.vtx[1].vin[0];
@@ -405,10 +405,10 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
     prev.n = stakeInput->GetPosition();
     prev.hash = txPrev.GetHash();
     CAmount nValueIn = stakeInput->GetValue();
-    LogPrintf(
-            "%s : nPrevout=%u "
-            "nTimeTx=%u prevoutHash=%s \n", __func__,
-             stakeInput->GetPosition(), nTimeTx, prev.hash.ToString());
+//    LogPrintf(
+//            "%s : nPrevout=%u "
+//            "nTimeTx=%u prevoutHash=%s \n", __func__,
+//             stakeInput->GetPosition(), nTimeTx, prev.hash.ToString());
     nTryTime &= ~STAKE_TIMESTAMP_MASK;
 //    int64_t nSearchInterval = 1;
 //    static int nMaxStakeSearchInterval = 60;
