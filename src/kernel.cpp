@@ -411,7 +411,9 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
             "nTimeTx=%u prevoutHash=%s \n", __func__,
              txin.prevout.n, nTimeTx, txin.prevout.hash.ToString());
     nTryTime &= ~STAKE_TIMESTAMP_MASK;
-    for (unsigned int i = 0; i < nHashDrift; i++) //iterate the hashing
+    int64_t nSearchInterval = 1;
+    static int nMaxStakeSearchInterval = 60;
+    for (unsigned int i = 0; n<min(nSearchInterval,(int64_t)nMaxStakeSearchInterval); i++) //iterate the hashing
     {
         //new block came in, move on
         if (chainActive.Height() != nHeightStart)
@@ -428,8 +430,8 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
              if (!CheckStakeV2(ssUniqueID, nValueIn, nStakeModifier, bnTargetPerCoinDay, nTimeBlockFrom, nTryTime, hashProofOfStake))
                 continue;
         } else {
-            nTryTime = nTimeTx + nHashDrift - i;
-            if (!CheckStakeV1(txPrev.nTime, prev, nTryTime, hashProofOfStake, nValueIn, chainActive.Tip(),
+            nTryTime = nTimeTx - i;
+            if (!CheckStakeV1(txPrev.nTime, prev, nTimeTx - i, hashProofOfStake, nValueIn, chainActive.Tip(),
                               nBits, true)) {
 //                LogPrintf("%s: No stake found proof of hash hashproof=%s\n", __func__, hashProofOfStake.ToString());
                 continue;
