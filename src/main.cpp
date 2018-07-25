@@ -3484,14 +3484,17 @@ static bool ActivateBestChainStep(CValidationState& state, CBlockIndex* pindexMo
 
     return true;
 }
-//bool static Reorganize(CTxDB& txdb, CBlockIndex* pindexNew)
+//bool static Reorganize(CBlockIndex* pindexNew)
 //{
 //    LogPrintf("REORGANIZE\n");
 //
 //    // Find the fork
+//    CCoinsViewDB& txdb = pcoinsdbview;
 //    CBlockIndex* pindexBest = chainActive.Tip();
-//    CBlockIndex* pfork = pindexBestForkTip;
+//    CBlockIndex* pfork = pindexBest;
 //    CBlockIndex* plonger = pindexNew;
+//    CCoinsViewCache& coins = *pcoinsTip;
+//    CValidationState state;
 //    while (pfork != plonger)
 //    {
 //        while (plonger->nHeight > pfork->nHeight)
@@ -3522,9 +3525,9 @@ static bool ActivateBestChainStep(CValidationState& state, CBlockIndex* pindexMo
 //    BOOST_FOREACH(CBlockIndex* pindex, vDisconnect)
 //    {
 //        CBlock block;
-//        if (!block.ReadFromDisk(pindex))
+//        if (!ReadBlockFromDisk(block, pindex))
 //            return error("Reorganize() : ReadFromDisk for disconnect failed");
-//        if (!block.DisconnectBlock(txdb, pindex))
+//        if (!DisconnectBlock(block, state, pindex, coins, &fClean))
 //            return error("Reorganize() : DisconnectBlock %s failed", pindex->GetBlockHash().ToString());
 //
 //        // Queue memory transactions to resurrect.
@@ -3541,9 +3544,9 @@ static bool ActivateBestChainStep(CValidationState& state, CBlockIndex* pindexMo
 //    {
 //        CBlockIndex* pindex = vConnect[i];
 //        CBlock block;
-//        if (!block.ReadFromDisk(pindex))
+//        if (!ReadBlockFromDisk(block, pindex))
 //            return error("Reorganize() : ReadFromDisk for connect failed");
-//        if (!block.ConnectBlock(txdb, pindex))
+//        if (!ConnectBlock(block, state, pindex, coins, false))
 //        {
 //            // Invalid block
 //            return error("Reorganize() : ConnectBlock %s failed", pindex->GetBlockHash().ToString());
@@ -3553,11 +3556,12 @@ static bool ActivateBestChainStep(CValidationState& state, CBlockIndex* pindexMo
 //        BOOST_FOREACH(const CTransaction& tx, block.vtx)
 //        vDelete.push_back(tx);
 //    }
-//    if (!txdb.WriteHashBestChain(pindexNew->GetBlockHash()))
+//    //coinsview
+//    if (!txdb.BatchWrite(pindexNew->GetBlockHash()))
 //        return error("Reorganize() : WriteHashBestChain failed");
 //
 //    // Make sure it's successfully written to disk before changing memory structure
-//    if (!txdb.TxnCommit())
+//    if (!TxnCommit())
 //        return error("Reorganize() : TxnCommit failed");
 //
 //    // Disconnect shorter branch
@@ -3594,12 +3598,7 @@ bool ActivateBestChain(CValidationState& state, CBlock* pblock, bool fAlreadyChe
     CBlockIndex* pindexNewTip = NULL;
     CBlockIndex* pindexMostWork = NULL;
     // Switch to new best branch
-//    if (!Reorganize(txdb, pindexIntermediate))
-//    {
-//        txdb.TxnAbort();
-//        InvalidChainFound(pindexNew);
-//        return error("SetBestChain() : Reorganize failed");
-//    }
+
     do {
         boost::this_thread::interruption_point();
 
@@ -3624,49 +3623,6 @@ bool ActivateBestChain(CValidationState& state, CBlock* pblock, bool fAlreadyChe
             fInitialDownload = IsInitialBlockDownload();
             break;
         }
-//        // the first block in the new chain that will cause it to become the new best chain
-//        CBlockIndex *pindexIntermediate = pindexNew;
-//
-//        // list of blocks that need to be connected afterwards
-//        std::vector<CBlockIndex*> vpindexSecondary;
-//
-//        // Reorganize is costly in terms of db load, as it works in a single db transaction.
-//        // Try to limit how much needs to be done inside
-//        while (pindexIntermediate->pprev && pindexIntermediate->pprev->nChainTrust > pindexBest->nChainTrust)
-//        {
-//            vpindexSecondary.push_back(pindexIntermediate);
-//            pindexIntermediate = pindexIntermediate->pprev;
-//        }
-//
-//        if (!vpindexSecondary.empty())
-//            LogPrintf("Postponing %u reconnects\n", vpindexSecondary.size());
-//
-//        // Switch to new best branch
-//        if (!Reorganize(txdb, pindexIntermediate))
-//        {
-//            txdb.TxnAbort();
-//            InvalidChainFound(pindexNew);
-//            return error("SetBestChain() : Reorganize failed");
-//        }
-//
-//        // Connect further blocks
-//        BOOST_REVERSE_FOREACH(CBlockIndex *pindex, vpindexSecondary)
-//        {
-//            CBlock block;
-//            if (!block.ReadFromDisk(pindex))
-//            {
-//                LogPrintf("SetBestChain() : ReadFromDisk failed\n");
-//                break;
-//            }
-//            if (!txdb.TxnBegin()) {
-//                LogPrintf("SetBestChain() : TxnBegin 2 failed\n");
-//                break;
-//            }
-//            // errors now are not fatal, we still did a reorganisation to a new chain in a valid way
-//            if (!block.SetBestChainInner(txdb, pindex))
-//                break;
-//        }
-        // When we reach this point, we switched to a new tip (stored in pindexNewTip).
 
         // Notifications/callbacks that can run without cs_main
         if (!fInitialDownload) {
@@ -4611,14 +4567,11 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
         }
 
         // Store to disk
-//        printf("Store to disk\n");
         CBlockIndex* pindex = NULL;
         bool ret = AcceptBlock (*pblock, state, &pindex, dbp, checked);
         if (pindex && pfrom) {
-//            printf("Map block source\n");
             mapBlockSource[pindex->GetBlockHash ()] = pfrom->GetId ();
         }
-//        printf("Check block index\n");
         CheckBlockIndex ();
         if (!ret)
             return error ("%s : AcceptBlock FAILED", __func__);
@@ -4639,9 +4592,26 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
                 ss >> block;
             }
             block.BuildMerkleTree();
-            CBlockIndex* pindex = NULL;
-            if (AcceptBlock(block, state, &pindex, dbp, checked))
-                vWorkQueue.push_back(mi->second->hashBlock);
+            {
+                LOCK(cs_main);   // Replaces the former TRY_LOCK loop because busy waiting wastes too much resources
+
+                MarkBlockAsReceived (block.GetHash());
+                if (!checked) {
+                    return error ("%s : CheckBlock FAILED for block %s", __func__, block.GetHash().GetHex());
+                }
+
+                // Store to disk
+                CBlockIndex* pindex = NULL;
+                bool ret = AcceptBlock (block, state, &pindex, dbp, checked);
+                if (pindex && pfrom) {
+                    mapBlockSource[pindex->GetBlockHash ()] = pfrom->GetId ();
+                }
+                CheckBlockIndex ();
+                if (!ret)
+                    return error ("%s : AcceptBlock FAILED", __func__);
+            }
+
+            vWorkQueue.push_back(mi->second->hashBlock);
             mapOrphanBlocks.erase(mi->second->hashBlock);
             setStakeSeenOrphan.erase(block.GetProofOfStake());
             nOrphanBlocksSize -= mi->second->vchBlock.size();
@@ -4649,7 +4619,6 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
         }
         mapOrphanBlocksByPrev.erase(hashPrev);
     }
-//    printf("Activate best chain\n");
     if (!ActivateBestChain(state, pblock, checked))
         return error("%s : ActivateBestChain failed", __func__);
 
