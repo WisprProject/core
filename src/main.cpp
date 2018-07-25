@@ -4586,19 +4586,19 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
              mi != mapOrphanBlocksByPrev.upper_bound(hashPrev);
              ++mi)
         {
-            CBlock block;
+            CBlock* block;
             {
                 CDataStream ss(mi->second->vchBlock, SER_DISK, CLIENT_VERSION);
                 ss >> block;
             }
-            block.BuildMerkleTree();
+            block->BuildMerkleTree();
             bool checked = CheckBlock(block, state);
             {
                 LOCK(cs_main);   // Replaces the former TRY_LOCK loop because busy waiting wastes too much resources
 
-                MarkBlockAsReceived (block.GetHash());
+                MarkBlockAsReceived (block->GetHash());
                 if (!checked) {
-                    return error ("%s : CheckBlock FAILED for block %s", __func__, block.GetHash().GetHex());
+                    return error ("%s : CheckBlock FAILED for block %s", __func__, block->GetHash().GetHex());
                 }
 
                 // Store to disk
@@ -4614,7 +4614,7 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
 
             vWorkQueue.push_back(mi->second->hashBlock);
             mapOrphanBlocks.erase(mi->second->hashBlock);
-            setStakeSeenOrphan.erase(block.GetProofOfStake());
+            setStakeSeenOrphan.erase(block->GetProofOfStake());
             nOrphanBlocksSize -= mi->second->vchBlock.size();
             delete mi->second;
             if (!ActivateBestChain(state, block, checked))
