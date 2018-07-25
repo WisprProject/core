@@ -526,6 +526,10 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
             LogPrintf("CreateNewBlock() : coinstake timestamp violation nTimeBlock=%d nTimeTx=%u\n", pblock->GetBlockTime(), pblock->vtx[1].nTime);
             return NULL;
         }
+        // Check timestamp against prev
+        if (pblock->GetBlockTime() <= pindexPrev->GetPastTimeLimit() || FutureDrift(pblock->GetBlockTime(), nHeight) < pindexPrev->GetBlockTime())
+            LogPrintf("CreateNewBlock() : block's timestamp is too early");
+            return NULL;
 //        if (pblock->IsZerocoinStake()) {
 //            CWalletTx wtx(pwalletMain, pblock->vtx[1]);
 //            pwalletMain->AddToWallet(wtx);
