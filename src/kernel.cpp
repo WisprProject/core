@@ -395,10 +395,10 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
     stakeInput->GetTxFrom(txPrev);
     const CTxIn &txin = txPrev.vin[0];
     // Locate the transaction
-
+    CAmount nValueIn = stakeInput->GetValue();
     int nIndex;
     for (nIndex = 0; nIndex < (int)txPrev.vout.size(); nIndex++) {
-        if (txPrev.vout[nIndex].nValue == stakeInput->GetValue()) {
+        if (txPrev.vout[nIndex].nValue == nValueIn) {
             break;
         }
     }
