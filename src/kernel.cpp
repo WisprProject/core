@@ -395,15 +395,20 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
     stakeInput->GetTxFrom(txPrev);
     const CTxIn &txin = txPrev.vin[0];
     // Locate the transaction
+    //int64_t nValueIn = txPrev.vout[prevout.n].nValue;
+
+    int64_t nValueInC = stakeInput->GetValue();
+
     int nIndex;
-    for (nIndex = 0; nIndex < (int)block.vtx.size(); nIndex++) {
-        if (block.vtx[nIndex] == txPrev) {
+    for (nIndex = 0; nIndex < (int)txPrev.vout.size(); nIndex++) {
+        if (txPrev.vout[nIndex].nValue == nValueInC) {
             break;
         }
     }
     COutPoint prev;
-    prev.n = stakeInput->GetPosition();
+    prev.n = nIndex;
     prev.hash = txPrev.GetHash();
+    int64_t nValueInOld = txPrev.vout[nIndex].nValue;
     CAmount nValueIn = stakeInput->GetValue();
 //    LogPrintf(
 //            "%s : nPrevout=%u "
@@ -430,7 +435,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
                 continue;
         } else {
             nTryTime = nTimeTx - i;
-            if (!CheckStakeV1(txPrev.nTime, prev, nTryTime, hashProofOfStake, nValueIn, chainActive.Tip(),
+            if (!CheckStakeV1(txPrev.nTime, prev, nTryTime, hashProofOfStake, nValueInOld, chainActive.Tip(),
                               nBits) || !((nTryTime & STAKE_TIMESTAMP_MASK) == 0)) {
 //                LogPrintf("%s: No stake found proof of hash hashproof=%s\n", __func__, hashProofOfStake.ToString());
                 continue;
