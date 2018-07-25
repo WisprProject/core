@@ -4645,7 +4645,6 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
 
     LogPrintf("%s : ACCEPTED Block %ld in %ld milliseconds with size=%d\n", __func__, GetHeight(), GetTimeMillis() - nStartTime,
               pblock->GetSerializeSize(SER_DISK, CLIENT_VERSION));
-//    printf("End of process new block\n");
     return true;
 }
 
