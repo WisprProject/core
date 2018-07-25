@@ -523,7 +523,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
             return NULL;
         }
         // Check timestamp against prev
-        if (pblock->IsProofOfStake() && (pblock->GetBlockTime() <= pindexPrev->GetPastTimeLimit() || FutureDrift(pblock->GetBlockTime(), nHeight) < pindexPrev->GetBlockTime())) {
+        if (pblock->IsProofOfStake() && (block.GetBlockTime() <= pindexPrev->GetPastTimeLimit() || FutureDrift(pblock->GetBlockTime(), nHeight) < pindexPrev->GetBlockTime())){
             LogPrintf("CreateNewBlock() : block's timestamp is too early");
             return NULL;
         }
