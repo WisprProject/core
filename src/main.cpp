@@ -4617,7 +4617,11 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
             setStakeSeenOrphan.erase(block.GetProofOfStake());
             nOrphanBlocksSize -= mi->second->vchBlock.size();
             delete mi->second;
-            CBlock* p2block = block;
+            CBlock* p2block = &block;
+//            unique_ptr<CBlockTemplate> pblocktemplate(new CBlockTemplate());
+//            &pblocktemplate->block = block; // pointer for convenience
+//            CBlock* pblock = &pblocktemplate->block; // pointer for convenience
+
             if (!ActivateBestChain(state, p2block, checked))
                 return error("%s : ActivateBestChain failed", __func__);
         }
