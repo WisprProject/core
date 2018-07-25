@@ -4592,7 +4592,7 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
                 ss >> block;
             }
             block.BuildMerkleTree();
-            bool checked = CheckBlock(*block, state);
+            bool checked = CheckBlock(block, state);
             {
                 LOCK(cs_main);   // Replaces the former TRY_LOCK loop because busy waiting wastes too much resources
 
@@ -4603,7 +4603,7 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
 
                 // Store to disk
                 CBlockIndex* pindex = NULL;
-                bool ret = AcceptBlock(*block, state, &pindex, dbp, checked);
+                bool ret = AcceptBlock(block, state, &pindex, dbp, checked);
                 if (pindex && pfrom) {
                     mapBlockSource[pindex->GetBlockHash ()] = pfrom->GetId ();
                 }
