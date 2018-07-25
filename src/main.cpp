@@ -4357,8 +4357,8 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
     if (block.IsProofOfStake() && !CheckCoinStakeTimestamp(block.GetBlockTime(), (int64_t)block.vtx[1].nTime))
         return state.DoS(50, error("AcceptBlock() : coinstake timestamp violation nTimeBlock=%d nTimeTx=%u\n", block.GetBlockTime(), block.vtx[1].nTime));
     // Check timestamp against prev
-    if (block.IsProofOfStake() && (block.GetBlockTime() <= pindexPrev->GetPastTimeLimit() || FutureDrift(block.GetBlockTime(), pindex->nHeight) < pindexPrev->GetBlockTime()))
-        return state.DoS(50, error("AcceptBlock() : block's timestamp is too early"));
+//    if (block.IsProofOfStake() && (block.GetBlockTime() <= pindexPrev->GetPastTimeLimit() || FutureDrift(block.GetBlockTime(), pindex->nHeight) < pindexPrev->GetBlockTime()))
+//        return state.DoS(50, error("AcceptBlock() : block's timestamp is too early"));
 
     if (block.GetHash() != Params().HashGenesisBlock() && !CheckWork(block, pindexPrev))
         return false;
