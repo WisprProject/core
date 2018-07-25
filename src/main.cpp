@@ -4617,7 +4617,8 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
             setStakeSeenOrphan.erase(block.GetProofOfStake());
             nOrphanBlocksSize -= mi->second->vchBlock.size();
             delete mi->second;
-            if (!ActivateBestChain(state, block, checked))
+            CBlock* p2block = block;
+            if (!ActivateBestChain(state, p2block, checked))
                 return error("%s : ActivateBestChain failed", __func__);
         }
         mapOrphanBlocksByPrev.erase(hashPrev);
