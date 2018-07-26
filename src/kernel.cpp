@@ -496,7 +496,7 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
     bnTargetPerCoinDay.SetCompact(block.nBits);
 
     uint64_t nStakeModifier = 0;
-
+    CValidationState state;
     int64_t nValueIn = txPrev.vout[txin.prevout.n].nValue;
     unsigned int nBlockFromTime = blockprev.nTime;
     unsigned int nTxTime = block.nTime;
@@ -511,6 +511,7 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
 
     } else {
         if (!CheckStakeV1(txPrev.nTime, txin.prevout, tx.nTime, hashProofOfStake, nValueIn, chainActive.Tip(), block.nBits)) {
+            InvalidBlockFound(pindex, state);
             return error("CheckProofOfStake() : INFO: old bnStakeModifierV2 check kernel failed on coinstake %s, hashProof=%s \n",
                   tx.GetHash().ToString(), hashProofOfStake.ToString());
         }

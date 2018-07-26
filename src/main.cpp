@@ -4605,7 +4605,7 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
 
                 // Store to disk
                 CBlockIndex* pindex = NULL;
-                bool ret = AcceptBlock(block, state, &pindex, dbp, checked);
+                bool ret = AcceptBlock(block, state, &pindex, NULL, checked);
                 if (pindex && pfrom) {
                     mapBlockSource[pindex->GetBlockHash ()] = pfrom->GetId ();
                 }
@@ -4620,9 +4620,6 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
             nOrphanBlocksSize -= mi->second->vchBlock.size();
             delete mi->second;
             CBlock* p2block = &block;
-//            unique_ptr<CBlockTemplate> pblocktemplate(new CBlockTemplate());
-//            &pblocktemplate->block = block; // pointer for convenience
-//            CBlock* pblock = &pblocktemplate->block; // pointer for convenience
             if (!ActivateBestChain(state, p2block, checked))
                 return error("%s : ActivateBestChain failed", __func__);
         }
