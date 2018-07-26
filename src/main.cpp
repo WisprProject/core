@@ -4612,6 +4612,7 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
                 CheckBlockIndex ();
                 if (!ret)
                     return error ("%s : AcceptBlock FAILED", __func__);
+                setBlockIndexCandidates.insert(pindex2);
             }
 
             vWorkQueue.push_back(mi->second->hashBlock);
@@ -4620,7 +4621,6 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
             nOrphanBlocksSize -= mi->second->vchBlock.size();
             delete mi->second;
             CBlock* p2block = &block;
-            setBlockIndexCandidates.insert(pindex2);
             if (!ActivateBestChain(state, p2block, checked))
                 return error("%s : ActivateBestChain failed", __func__);
         }
