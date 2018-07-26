@@ -4620,6 +4620,7 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
             nOrphanBlocksSize -= mi->second->vchBlock.size();
             delete mi->second;
             CBlock* p2block = &block;
+            setBlockIndexCandidates.insert(pindex);
             if (!ActivateBestChain(state, p2block, checked))
                 return error("%s : ActivateBestChain failed", __func__);
         }
