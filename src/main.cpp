@@ -4588,40 +4588,41 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
              mi != mapOrphanBlocksByPrev.upper_bound(hashPrev);
              ++mi)
         {
-            CBlock block;
+            CBlock blockOrphan;
             {
                 CDataStream ss(mi->second->vchBlock, SER_DISK, CLIENT_VERSION);
-                ss >> block;
+                ss >> blockOrphan;
             }
-            block.BuildMerkleTree();
-            bool checked = CheckBlock(block, state);
+            blockOrphan.BuildMerkleTree();
+            CValidationState orphan;
+            bool checked = CheckBlock(blockOrphan, orphan);
             {
                 LOCK(cs_main);   // Replaces the former TRY_LOCK loop because busy waiting wastes too much resources
 
-                MarkBlockAsReceived (block.GetHash());
+                MarkBlockAsReceived (blockOrphan.GetHash());
                 if (!checked) {
-                    return error ("%s : CheckBlock FAILED for block %s", __func__, block.GetHash().GetHex());
+                    return error ("%s : CheckBlock FAILED for block %s", __func__, blockOrphan.GetHash().GetHex());
                 }
 
                 // Store to disk
-                CBlockIndex* pindex2 = NULL;
-                bool ret = AcceptBlock(block, state, &pindex2, NULL, checked);
-                if (pindex && pfrom) {
+                CBlockIndex* pindexOrphan = NULL;
+                bool ret = AcceptBlock(blockOrphan, orphan, &pindexOrphan, NULL, checked);
+                if (pindexOrphan && pfrom) {
                     mapBlockSource[pindex->GetBlockHash ()] = pfrom->GetId ();
                 }
                 CheckBlockIndex ();
                 if (!ret)
                     return error ("%s : AcceptBlock FAILED", __func__);
-                setBlockIndexCandidates.insert(pindex2);
+                setBlockIndexCandidates.insert(pindexOrphan);
             }
 
             vWorkQueue.push_back(mi->second->hashBlock);
             mapOrphanBlocks.erase(mi->second->hashBlock);
-            setStakeSeenOrphan.erase(block.GetProofOfStake());
+            setStakeSeenOrphan.erase(blockOrphan.GetProofOfStake());
             nOrphanBlocksSize -= mi->second->vchBlock.size();
             delete mi->second;
-            CBlock* p2block = &block;
-            if (!ActivateBestChain(state, p2block, checked))
+            CBlock* p2block = &blockOrphan;
+            if (!ActivateBestChain(orphan, p2block, checked))
                 return error("%s : ActivateBestChain failed", __func__);
         }
         mapOrphanBlocksByPrev.erase(hashPrev);
