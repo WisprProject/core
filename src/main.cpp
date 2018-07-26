@@ -4365,7 +4365,7 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
         unique_ptr<CStakeInput> stake;
 
         if (!CheckProofOfStake(block, hashProofOfStake, stake))
-            return state.DoS(20, error("%s: proof of stake check failed", __func__));
+            return state.DoS(100, error("%s: proof of stake check failed", __func__));
 
         if (!stake)
             return error("%s: null stake ptr", __func__);
@@ -4576,6 +4576,9 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
         if (!ret)
             return error ("%s : AcceptBlock FAILED", __func__);
     }
+    if (!ActivateBestChain(state, pblock, checked))
+        return error("%s : ActivateBestChain failed", __func__);
+
     // Recursively process any orphan blocks that depended on this one
     vector<uint256> vWorkQueue;
     vWorkQueue.push_back(hash);
@@ -4621,14 +4624,11 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
 //            unique_ptr<CBlockTemplate> pblocktemplate(new CBlockTemplate());
 //            &pblocktemplate->block = block; // pointer for convenience
 //            CBlock* pblock = &pblocktemplate->block; // pointer for convenience
-
             if (!ActivateBestChain(state, p2block, checked))
                 return error("%s : ActivateBestChain failed", __func__);
         }
         mapOrphanBlocksByPrev.erase(hashPrev);
     }
-    if (!ActivateBestChain(state, pblock, checked))
-        return error("%s : ActivateBestChain failed", __func__);
 
     if (!fLiteMode) {
         if (masternodeSync.RequestedMasternodeAssets > MASTERNODE_SYNC_LIST) {
