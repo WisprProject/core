@@ -4608,7 +4608,7 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
                 CBlockIndex* pindexOrphan = NULL;
                 bool ret = AcceptBlock(blockOrphan, orphan, &pindexOrphan, NULL, checked);
                 if (pindexOrphan && pfrom) {
-                    mapBlockSource[pindex->GetBlockHash ()] = pfrom->GetId ();
+                    mapBlockSource[pindexOrphan->GetBlockHash ()] = pfrom->GetId ();
                 }
                 CheckBlockIndex ();
                 if (!ret)
