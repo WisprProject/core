@@ -4622,7 +4622,7 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
                  ni != mapOrphanBlocksByNode.upper_bound(hashPrev);
                  ++ni)
             {
-                CNode* orphanNode = mapOrphanBlocksByNode.find(mi->second->hashBlock)->second;
+                CNode* orphanNode = ni->second;
                 CNetAddr addr(orphanNode->addr.ToStringIP());
                 orphanNode->Unban(addr);
                 LogPrintf("Node that provided an orphan block is unbanned\n");
