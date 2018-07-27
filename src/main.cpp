@@ -4366,7 +4366,7 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
         unique_ptr<CStakeInput> stake;
 
         if (!CheckProofOfStake(block, hashProofOfStake, stake))
-            return state.DoS(100, error("%s: proof of stake check failed", __func__));
+            return state.DoS(100, error("%s: proof of stake check failed", __func__), REJECT_INVALID, "bad-hashproof");
 
         if (!stake)
             return error("%s: null stake ptr", __func__);
@@ -4576,8 +4576,10 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
             mapBlockSource[pindex->GetBlockHash ()] = pfrom->GetId ();
         }
         CheckBlockIndex ();
-        if (!ret)
-            return error ("%s : AcceptBlock FAILED", __func__);
+        if (!ret) {
+            ReprocessBlocks(15);
+            return error("%s : AcceptBlock FAILED", __func__);
+        }
     }
     if (!ActivateBestChain(state, pblock, checked))
         return error("%s : ActivateBestChain failed", __func__);
