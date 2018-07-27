@@ -6673,7 +6673,7 @@ bool SendMessages(CNode* pto, bool fSendTrickle)
             if (!vAddr.empty())
                 pto->PushMessage("addr", vAddr);
         }
-
+        int64_t banTime = pto->nVersion < ActiveProtocol() ? 60*15 : 60*15;
         CNodeState& state = *State(pto->GetId());
         if (state.fShouldBan) {
             if (pto->fWhitelisted)
@@ -6683,7 +6683,7 @@ bool SendMessages(CNode* pto, bool fSendTrickle)
                 if (pto->addr.IsLocal())
                     LogPrintf("Warning: not banning local peer %s!\n", pto->addr.ToString());
                 else {
-                    CNode::Ban(pto->addr, BanReasonNodeMisbehaving, (pto->nVersion < ActiveProtocol() ? 60*15 : 0));
+                    CNode::Ban(pto->addr, BanReasonNodeMisbehaving, banTime);
                 }
             }
             state.fShouldBan = false;
