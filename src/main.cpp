@@ -4618,7 +4618,7 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
                 setBlockIndexCandidates.insert(pindexOrphan);
             }
 
-            for (multimap<uint256, COrphanBlock*>::iterator ni = mapOrphanBlocksByNode.lower_bound(hashPrev);
+            for (multimap<uint256, CNode*>::iterator ni = mapOrphanBlocksByNode.lower_bound(hashPrev);
                  ni != mapOrphanBlocksByNode.upper_bound(hashPrev);
                  ++ni)
             {
