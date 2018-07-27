@@ -4546,10 +4546,10 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
             nOrphanBlocksSize += pblock2->vchBlock.size();
             mapOrphanBlocks.insert(make_pair(hash, pblock2));
             mapOrphanBlocksByPrev.insert(make_pair(pblock2->hashPrev, pblock2));
+            mapOrphanBlocksByNode.insert(make_pair(pblock2->hashPrev, pfrom));
             if (pblock->IsProofOfStake())
                 setStakeSeenOrphan.insert(pblock->GetProofOfStake());
 
-            mapOrphanBlocksByNode.inser(make_pair(pblock2->hashPrev, pfrom));
             // Ask this node to fill in what we're missing
             PushGetBlocks(pfrom, chainActive.Tip(), GetOrphanRoot(hash));
             // ppcoin: getblocks may not obtain the ancestor block rejected
