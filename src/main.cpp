@@ -4599,7 +4599,7 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
             }
             blockOrphan.BuildMerkleTree();
             CValidationState orphanState;
-            CDiskBlockPos* dbpOrphan = mi->second->dbp;
+            CDiskBlockPos* dbpOrphan = $mi->second->dbp;
             bool checked = CheckBlock(blockOrphan, orphanState);
             {
                 LOCK(cs_main);   // Replaces the former TRY_LOCK loop because busy waiting wastes too much resources
