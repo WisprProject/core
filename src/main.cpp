@@ -158,6 +158,7 @@ struct COrphanBlock {
     vector<unsigned char> vchBlock;
 };
 map<uint256, COrphanBlock*> mapOrphanBlocks;
+multimap<uint256, CNode*> mapOrphanBlocksByNode;
 multimap<uint256, COrphanBlock*> mapOrphanBlocksByPrev;
 set<pair<COutPoint, unsigned int> > setStakeSeenOrphan;
 size_t nOrphanBlocksSize = 0;
@@ -4548,7 +4549,8 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
             if (pblock->IsProofOfStake())
                 setStakeSeenOrphan.insert(pblock->GetProofOfStake());
 
-            // Ask this guy to fill in what we're missing
+            mapOrphanBlocksByNode.inser(make_pair(pblock2->hashPrev, pfrom));
+            // Ask this node to fill in what we're missing
             PushGetBlocks(pfrom, chainActive.Tip(), GetOrphanRoot(hash));
             // ppcoin: getblocks may not obtain the ancestor block rejected
             // earlier by duplicate-stake check so we ask for it again directly
@@ -4616,6 +4618,16 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
                 setBlockIndexCandidates.insert(pindexOrphan);
             }
 
+            for (multimap<uint256, COrphanBlock*>::iterator ni = mapOrphanBlocksByNode.lower_bound(hashPrev);
+                 ni != mapOrphanBlocksByNode.upper_bound(hashPrev);
+                 ++ni)
+            {
+                CNode* orphanNode = mapOrphanBlocksByNode.find(mi->second->hashBlock);
+                CNetAddr addr(orphanNode->addr.ToStringIP());
+                orphanNode->Unban(addr);
+                LogPrintf("Node that provided an orphan block is unbanned\n");
+            }
+
             vWorkQueue.push_back(mi->second->hashBlock);
             mapOrphanBlocks.erase(mi->second->hashBlock);
             setStakeSeenOrphan.erase(blockOrphan.GetProofOfStake());
@@ -4626,6 +4638,7 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
                 return error("%s : ActivateBestChain failed", __func__);
         }
         mapOrphanBlocksByPrev.erase(hashPrev);
+        mapOrphanBlocksByNode.erase(hashPrev);
     }
 
     if (!fLiteMode) {
