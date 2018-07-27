@@ -4544,7 +4544,7 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
             pblock2->hashBlock = hash;
             pblock2->hashPrev = pblock->hashPrevBlock;
             pblock2->stake = pblock->GetProofOfStake();
-            pblock2->dbp = CDiskBlockPos(&dbp);
+            pblock2->dbp = *dbp;
             nOrphanBlocksSize += pblock2->vchBlock.size();
             mapOrphanBlocks.insert(make_pair(hash, pblock2));
             mapOrphanBlocksByPrev.insert(make_pair(pblock2->hashPrev, pblock2));
