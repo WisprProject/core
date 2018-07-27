@@ -156,6 +156,7 @@ struct COrphanBlock {
     uint256 hashPrev;
     std::pair<COutPoint, unsigned int> stake;
     vector<unsigned char> vchBlock;
+    CDiskBlockPos dbp;
 };
 map<uint256, COrphanBlock*> mapOrphanBlocks;
 multimap<uint256, CNode*> mapOrphanBlocksByNode;
@@ -4543,6 +4544,7 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
             pblock2->hashBlock = hash;
             pblock2->hashPrev = pblock->hashPrevBlock;
             pblock2->stake = pblock->GetProofOfStake();
+            pblock2->dbp = dbp;
             nOrphanBlocksSize += pblock2->vchBlock.size();
             mapOrphanBlocks.insert(make_pair(hash, pblock2));
             mapOrphanBlocksByPrev.insert(make_pair(pblock2->hashPrev, pblock2));
@@ -4596,8 +4598,9 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
                 ss >> blockOrphan;
             }
             blockOrphan.BuildMerkleTree();
-            CValidationState orphan;
-            bool checked = CheckBlock(blockOrphan, orphan);
+            CValidationState orphanState;
+            CDiskBlockPos* dbpOrphan = mi->second->dbp;
+            bool checked = CheckBlock(blockOrphan, orphanState);
             {
                 LOCK(cs_main);   // Replaces the former TRY_LOCK loop because busy waiting wastes too much resources
 
@@ -4608,7 +4611,7 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
 
                 // Store to disk
                 CBlockIndex* pindexOrphan = NULL;
-                bool ret = AcceptBlock(blockOrphan, orphan, &pindexOrphan, NULL, checked);
+                bool ret = AcceptBlock(blockOrphan, orphanState, &pindexOrphan, dbpOrphan, checked);
                 if (pindexOrphan && pfrom) {
                     mapBlockSource[pindexOrphan->GetBlockHash ()] = pfrom->GetId ();
                 }
@@ -4634,7 +4637,7 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
             nOrphanBlocksSize -= mi->second->vchBlock.size();
             delete mi->second;
             CBlock* p2block = &blockOrphan;
-            if (!ActivateBestChain(orphan, p2block, checked))
+            if (!ActivateBestChain(orphanState, p2block, checked))
                 return error("%s : ActivateBestChain failed", __func__);
         }
         mapOrphanBlocksByPrev.erase(hashPrev);
