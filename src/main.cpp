@@ -4520,47 +4520,47 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
     }
     uint256 hash = pblock->GetHash();
     // If we don't already have its previous block, shunt it off to holding area until we get it
-//    if (!mapBlockIndex.count(pblock->hashPrevBlock))
-//    {
-//        LogPrintf("ProcessBlock: ORPHAN BLOCK %lu, prev=%s\n", (unsigned long)mapOrphanBlocks.size(), pblock->hashPrevBlock.ToString());
-//
-//        // Accept orphans as long as there is a node to request its parents from
-//        if (pfrom) {
-//            // ppcoin: check proof-of-stake
-//            if (pblock->IsProofOfStake())
-//            {
-//                // Limited duplicity on stake: prevents block flood attack
-//                // Duplicate stake allowed only when there is orphan child block
-//                if (setStakeSeenOrphan.count(pblock->GetProofOfStake()) && !mapOrphanBlocksByPrev.count(hash))
-//                    return error("ProcessBlock() : duplicate proof-of-stake (%s, %d) for orphan block %s", pblock->GetProofOfStake().first.ToString(), pblock->GetProofOfStake().second, hash.ToString());
-//            }
-//            PruneOrphanBlocks();
-//            COrphanBlock* pblock2 = new COrphanBlock();
-//            {
-//                CDataStream ss(SER_DISK, CLIENT_VERSION);
-//                ss << *pblock;
-//                pblock2->vchBlock = std::vector<unsigned char>(ss.begin(), ss.end());
-//            }
-//            pblock2->hashBlock = hash;
-//            pblock2->hashPrev = pblock->hashPrevBlock;
-//            pblock2->stake = pblock->GetProofOfStake();
-//            pblock2->dbp = *dbp;
-//            nOrphanBlocksSize += pblock2->vchBlock.size();
-//            mapOrphanBlocks.insert(make_pair(hash, pblock2));
-//            mapOrphanBlocksByPrev.insert(make_pair(pblock2->hashPrev, pblock2));
-//            mapOrphanBlocksByNode.insert(make_pair(pblock2->hashPrev, pfrom));
-//            if (pblock->IsProofOfStake())
-//                setStakeSeenOrphan.insert(pblock->GetProofOfStake());
-//
-//            // Ask this node to fill in what we're missing
-//            PushGetBlocks(pfrom, chainActive.Tip(), GetOrphanRoot(hash));
-//            // ppcoin: getblocks may not obtain the ancestor block rejected
-//            // earlier by duplicate-stake check so we ask for it again directly
-//            if (!IsInitialBlockDownload())
-//                pfrom->AskFor(CInv(MSG_BLOCK, WantedByOrphan(pblock2)));
-//        }
-//        return true;
-//    }
+    if (!mapBlockIndex.count(pblock->hashPrevBlock))
+    {
+        LogPrintf("ProcessBlock: ORPHAN BLOCK %lu, prev=%s\n", (unsigned long)mapOrphanBlocks.size(), pblock->hashPrevBlock.ToString());
+
+        // Accept orphans as long as there is a node to request its parents from
+        if (pfrom) {
+            // ppcoin: check proof-of-stake
+            if (pblock->IsProofOfStake())
+            {
+                // Limited duplicity on stake: prevents block flood attack
+                // Duplicate stake allowed only when there is orphan child block
+                if (setStakeSeenOrphan.count(pblock->GetProofOfStake()) && !mapOrphanBlocksByPrev.count(hash))
+                    return error("ProcessBlock() : duplicate proof-of-stake (%s, %d) for orphan block %s", pblock->GetProofOfStake().first.ToString(), pblock->GetProofOfStake().second, hash.ToString());
+            }
+            PruneOrphanBlocks();
+            COrphanBlock* pblock2 = new COrphanBlock();
+            {
+                CDataStream ss(SER_DISK, CLIENT_VERSION);
+                ss << *pblock;
+                pblock2->vchBlock = std::vector<unsigned char>(ss.begin(), ss.end());
+            }
+            pblock2->hashBlock = hash;
+            pblock2->hashPrev = pblock->hashPrevBlock;
+            pblock2->stake = pblock->GetProofOfStake();
+            pblock2->dbp = *dbp;
+            nOrphanBlocksSize += pblock2->vchBlock.size();
+            mapOrphanBlocks.insert(make_pair(hash, pblock2));
+            mapOrphanBlocksByPrev.insert(make_pair(pblock2->hashPrev, pblock2));
+            mapOrphanBlocksByNode.insert(make_pair(pblock2->hashPrev, pfrom));
+            if (pblock->IsProofOfStake())
+                setStakeSeenOrphan.insert(pblock->GetProofOfStake());
+
+            // Ask this node to fill in what we're missing
+            PushGetBlocks(pfrom, chainActive.Tip(), GetOrphanRoot(hash));
+            // ppcoin: getblocks may not obtain the ancestor block rejected
+            // earlier by duplicate-stake check so we ask for it again directly
+            if (!IsInitialBlockDownload())
+                pfrom->AskFor(CInv(MSG_BLOCK, WantedByOrphan(pblock2)));
+        }
+        return true;
+    }
     {
         LOCK(cs_main);   // Replaces the former TRY_LOCK loop because busy waiting wastes too much resources
 
@@ -4577,7 +4577,7 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
         }
         CheckBlockIndex ();
         if (!ret) {
-            ReprocessBlocks(15);
+//            ReprocessBlocks(15);
             return error("%s : AcceptBlock FAILED", __func__);
         }
     }
@@ -4585,66 +4585,67 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
         return error("%s : ActivateBestChain failed", __func__);
 
     // Recursively process any orphan blocks that depended on this one
-//    vector<uint256> vWorkQueue;
-//    vWorkQueue.push_back(hash);
-//    for (unsigned int i = 0; i < vWorkQueue.size(); i++)
-//    {
-//        uint256 hashPrev = vWorkQueue[i];
-//        for (multimap<uint256, COrphanBlock*>::iterator mi = mapOrphanBlocksByPrev.lower_bound(hashPrev);
-//             mi != mapOrphanBlocksByPrev.upper_bound(hashPrev);
-//             ++mi)
-//        {
-//            CBlock blockOrphan;
-//            {
-//                CDataStream ss(mi->second->vchBlock, SER_DISK, CLIENT_VERSION);
-//                ss >> blockOrphan;
-//            }
-//            blockOrphan.BuildMerkleTree();
-//            CValidationState orphanState;
-//            CDiskBlockPos* dbpOrphan = &mi->second->dbp;
-//            bool checked = CheckBlock(blockOrphan, orphanState);
-//            {
-//                LOCK(cs_main);   // Replaces the former TRY_LOCK loop because busy waiting wastes too much resources
-//
-//                MarkBlockAsReceived (blockOrphan.GetHash());
-//                if (!checked) {
-//                    return error ("%s : CheckBlock FAILED for block %s", __func__, blockOrphan.GetHash().GetHex());
-//                }
-//
-//                // Store to disk
-//                CBlockIndex* pindexOrphan = NULL;
-//                bool ret = AcceptBlock(blockOrphan, orphanState, &pindexOrphan, dbpOrphan, checked);
-//                if (pindexOrphan && pfrom) {
-//                    mapBlockSource[pindexOrphan->GetBlockHash ()] = pfrom->GetId ();
-//                }
-//                CheckBlockIndex ();
-//                if (!ret)
-//                    return error ("%s : AcceptBlock FAILED", __func__);
-//                setBlockIndexCandidates.insert(pindexOrphan);
-//            }
-//
-//            for (multimap<uint256, CNode*>::iterator ni = mapOrphanBlocksByNode.lower_bound(hashPrev);
-//                 ni != mapOrphanBlocksByNode.upper_bound(hashPrev);
-//                 ++ni)
-//            {
-//                CNode* orphanNode = ni->second;
-//                CNetAddr addr(orphanNode->addr.ToStringIP());
-//                orphanNode->Unban(addr);
-//                LogPrintf("Node that provided an orphan block is unbanned\n");
-//            }
-//
-//            vWorkQueue.push_back(mi->second->hashBlock);
-//            mapOrphanBlocks.erase(mi->second->hashBlock);
-//            setStakeSeenOrphan.erase(blockOrphan.GetProofOfStake());
-//            nOrphanBlocksSize -= mi->second->vchBlock.size();
-//            delete mi->second;
-//            CBlock* p2block = &blockOrphan;
-//            if (!ActivateBestChain(orphanState, p2block, checked))
-//                return error("%s : ActivateBestChain failed", __func__);
-//        }
-//        mapOrphanBlocksByPrev.erase(hashPrev);
-//        mapOrphanBlocksByNode.erase(hashPrev);
-//    }
+    vector<uint256> vWorkQueue;
+    vWorkQueue.push_back(hash);
+    for (unsigned int i = 0; i < vWorkQueue.size(); i++)
+    {
+        uint256 hashPrev = vWorkQueue[i];
+        LogPrintf("Process work queu\n");
+        for (multimap<uint256, COrphanBlock*>::iterator mi = mapOrphanBlocksByPrev.lower_bound(hashPrev);
+             mi != mapOrphanBlocksByPrev.upper_bound(hashPrev);
+             ++mi)
+        {
+            CBlock blockOrphan;
+            {
+                CDataStream ss(mi->second->vchBlock, SER_DISK, CLIENT_VERSION);
+                ss >> blockOrphan;
+            }
+            blockOrphan.BuildMerkleTree();
+            CValidationState orphanState;
+            CDiskBlockPos* dbpOrphan = &mi->second->dbp;
+            bool checked = CheckBlock(blockOrphan, orphanState);
+            {
+                LOCK(cs_main);   // Replaces the former TRY_LOCK loop because busy waiting wastes too much resources
+
+                MarkBlockAsReceived (blockOrphan.GetHash());
+                if (!checked) {
+                    return error ("%s : CheckBlock FAILED for block %s", __func__, blockOrphan.GetHash().GetHex());
+                }
+
+                // Store to disk
+                CBlockIndex* pindexOrphan = NULL;
+                bool ret = AcceptBlock(blockOrphan, orphanState, &pindexOrphan, dbpOrphan, checked);
+                if (pindexOrphan && pfrom) {
+                    mapBlockSource[pindexOrphan->GetBlockHash ()] = pfrom->GetId ();
+                }
+                CheckBlockIndex ();
+                if (!ret)
+                    return error ("%s : AcceptBlock FAILED", __func__);
+                setBlockIndexCandidates.insert(pindexOrphan);
+            }
+
+            for (multimap<uint256, CNode*>::iterator ni = mapOrphanBlocksByNode.lower_bound(hashPrev);
+                 ni != mapOrphanBlocksByNode.upper_bound(hashPrev);
+                 ++ni)
+            {
+                CNode* orphanNode = ni->second;
+                CNetAddr addr(orphanNode->addr.ToStringIP());
+                orphanNode->Unban(addr);
+                LogPrintf("Node that provided an orphan block is unbanned\n");
+            }
+
+            vWorkQueue.push_back(mi->second->hashBlock);
+            mapOrphanBlocks.erase(mi->second->hashBlock);
+            setStakeSeenOrphan.erase(blockOrphan.GetProofOfStake());
+            nOrphanBlocksSize -= mi->second->vchBlock.size();
+            delete mi->second;
+            CBlock* p2block = &blockOrphan;
+            if (!ActivateBestChain(orphanState, p2block, checked))
+                return error("%s : ActivateBestChain failed", __func__);
+        }
+        mapOrphanBlocksByPrev.erase(hashPrev);
+        mapOrphanBlocksByNode.erase(hashPrev);
+    }
 
     if (!fLiteMode) {
         if (masternodeSync.RequestedMasternodeAssets > MASTERNODE_SYNC_LIST) {
