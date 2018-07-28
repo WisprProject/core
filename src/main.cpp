@@ -156,7 +156,7 @@ struct COrphanBlock {
     uint256 hashPrev;
     std::pair<COutPoint, unsigned int> stake;
     vector<unsigned char> vchBlock;
-    CNode pfrom;
+    CNode* pfrom;
     CInv inv;
 };
 map<uint256, COrphanBlock*> mapOrphanBlocks;
@@ -4511,7 +4511,7 @@ bool StoreOrphanBlock(CNode* pfrom, CBlock* pblock, CInv inv){
             pblock2->hashBlock = hash;
             pblock2->hashPrev = pblock->hashPrevBlock;
             pblock2->stake = pblock->GetProofOfStake();
-            pblock2->pfrom = *pfrom;
+            pblock2->pfrom = pfrom;
             pblock2->inv = inv;
             nOrphanBlocksSize += pblock2->vchBlock.size();
             mapOrphanBlocks.insert(make_pair(hash, pblock2));
