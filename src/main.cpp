@@ -6221,7 +6221,6 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
             }
         } else {
             pfrom->AddInventoryKnown(inv);
-            ProcessOrphanBlocks(block.GetHash());
             CValidationState state;
             if (!mapBlockIndex.count(block.GetHash())) {
                 ProcessNewBlock(state, pfrom, &block);
@@ -6234,6 +6233,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
                         if(lockMain) Misbehaving(pfrom->GetId(), nDoS);
                     }
                 }
+                ProcessOrphanBlocks(block.GetHash());
                 //disconnect this node if its old protocol version
                 pfrom->DisconnectOldProtocol(ActiveProtocol(), strCommand);
             } else {
