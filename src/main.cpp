@@ -4549,7 +4549,7 @@ bool ProcessOrphanBlocks(uint256 hash){
                 ss >> blockOrphan;
             }
             blockOrphan.BuildMerkleTree();
-            CNode* pfrom = &mi->second->pfrom;
+            CNode* pfrom = mi->second->pfrom;
             CInv inv = mi->second->inv;
             pfrom->AddInventoryKnown(inv);
             CValidationState state;
