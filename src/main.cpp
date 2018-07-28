@@ -4572,16 +4572,6 @@ bool ProcessOrphanBlocks(uint256 hash, string strCommand){
             } else {
                 LogPrint("net", "%s : Already processed block %s, skipping ProcessNewBlock()\n", __func__, blockOrphan.GetHash().GetHex());
             }
-//
-//            for (multimap<uint256, CNode*>::iterator ni = mapOrphanBlocksByNode.lower_bound(hashPrev);
-//                 ni != mapOrphanBlocksByNode.upper_bound(hashPrev);
-//                 ++ni)
-//            {
-//                CNode* orphanNode = ni->second;
-//                CNetAddr addr(orphanNode->addr.ToStringIP());
-//                CNode::Unban(addr);
-//                LogPrintf("Node that provided an orphan block is unbanned\n");
-//            }
             vOrphanQueue.push_back(mi->second->hashBlock);
             mapOrphanBlocks.erase(mi->second->hashBlock);
             setStakeSeenOrphan.erase(blockOrphan.GetProofOfStake());
@@ -4591,7 +4581,10 @@ bool ProcessOrphanBlocks(uint256 hash, string strCommand){
         }
         mapOrphanBlocksByPrev.erase(hashPrev);
         mapOrphanBlocksByNode.erase(hashPrev);
+        LogPrintf("Removed blocks from queue\n");
     }
+    LogPrintf("Processed orphan queu\n");
+    return true;
 }
 bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDiskBlockPos* dbp)
 {
@@ -6233,9 +6226,11 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
                         if(lockMain) Misbehaving(pfrom->GetId(), nDoS);
                     }
                 }
-                ProcessOrphanBlocks(block.GetHash(), strCommand);
                 //disconnect this node if its old protocol version
                 pfrom->DisconnectOldProtocol(ActiveProtocol(), strCommand);
+                if(ProcessOrphanBlocks(block.GetHash(), strCommand)){
+                    LogPrintf("Processed all orphan blocks\n");
+                }
             } else {
                 LogPrint("net", "%s : Already processed block %s, skipping ProcessNewBlock()\n", __func__, block.GetHash().GetHex());
             }
