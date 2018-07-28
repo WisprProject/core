@@ -156,9 +156,8 @@ struct COrphanBlock {
     uint256 hashPrev;
     std::pair<COutPoint, unsigned int> stake;
     vector<unsigned char> vchBlock;
-    CDiskBlockPos dbp;
-    CValidationState state;
     CNode pfrom;
+    CInv inv;
 };
 map<uint256, COrphanBlock*> mapOrphanBlocks;
 multimap<uint256, CNode*> mapOrphanBlocksByNode;
@@ -4485,7 +4484,7 @@ void CBlockIndex::BuildSkip()
     if (pprev)
         pskip = pprev->GetAncestor(GetSkipHeight(nHeight));
 }
-bool StoreOrphanBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDiskBlockPos* dbp){
+bool StoreOrphanBlock(CNode* pfrom, CBlock* pblock, CInv inv){
     // If we don't already have its previous block, shunt it off to holding area until we get it
     uint256 hash = pblock->GetHash();
     if (!mapBlockIndex.count(pblock->hashPrevBlock))
@@ -4512,9 +4511,8 @@ bool StoreOrphanBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDi
             pblock2->hashBlock = hash;
             pblock2->hashPrev = pblock->hashPrevBlock;
             pblock2->stake = pblock->GetProofOfStake();
-            pblock2->dbp = *dbp;
-            pblock2->state = state;
-            pblock2->pfrom = pfrom;
+            pblock2->pfrom = &pfrom;
+            pblock2->inv = inv;
             nOrphanBlocksSize += pblock2->vchBlock.size();
             mapOrphanBlocks.insert(make_pair(hash, pblock2));
             mapOrphanBlocksByPrev.insert(make_pair(pblock2->hashPrev, pblock2));
@@ -4554,13 +4552,13 @@ bool ProcessOrphanBlocks(uint256 hash){
             CValidationState orphanState = mi->second->state;
             CDiskBlockPos* dbpOrphan = &mi->second->dbp;
             CNode* pfrom = &mi->second->pfrom;
-            pfrom->AddInventoryKnown(inv);
+            pfrom->AddInventoryKnown(mi->second->inv);
             CValidationState state;
-            if (!mapBlockIndex.count(block.GetHash())) {
+            if (!mapBlockIndex.count(blockOrphan.GetHash())) {
                 ProcessNewBlock(state, pfrom, &blockOrphan);
                 int nDoS;
                 if(state.IsInvalid(nDoS)) {
-                    pfrom->PushMessage("reject", strCommand, state.GetRejectCode(),
+                    pfrom->PushMessage("reject", "block", state.GetRejectCode(),
                                        state.GetRejectReason().substr(0, MAX_REJECT_MESSAGE_LENGTH), inv.hash);
                     if(nDoS > 0) {
                         TRY_LOCK(cs_main, lockMain);
@@ -4571,7 +4569,7 @@ bool ProcessOrphanBlocks(uint256 hash){
                 CNode::Unban(addr);
                 LogPrintf("Unbanned node\n");
                 //disconnect this node if its old protocol version
-                pfrom->DisconnectOldProtocol(ActiveProtocol(), strCommand);
+                pfrom->DisconnectOldProtocol(ActiveProtocol(), "block");
             } else {
                 LogPrint("net", "%s : Already processed block %s, skipping ProcessNewBlock()\n", __func__, block.GetHash().GetHex());
             }
@@ -6212,7 +6210,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
 
         //sometimes we will be sent their most recent block and its not the one we want, in that case tell where we are
         if (!mapBlockIndex.count(block.hashPrevBlock)) {
-            StoreOrphanBlock(state, pfrom, &block);
+            StoreOrphanBlock(pfrom, &block, inv);
             if (find(pfrom->vBlockRequested.begin(), pfrom->vBlockRequested.end(), hashBlock) != pfrom->vBlockRequested.end()) {
                 //we already asked for this block, so lets work backwards and ask for the previous block
                 pfrom->PushMessage("getblocks", chainActive.GetLocator(), block.hashPrevBlock);
