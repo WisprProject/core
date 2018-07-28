@@ -4530,7 +4530,7 @@ bool StoreOrphanBlock(CNode* pfrom, CBlock* pblock, CInv inv){
         return true;
     }
 }
-bool ProcessOrphanBlocks(uint256 hash){
+bool ProcessOrphanBlocks(uint256 hash, string strCommand){
     // Recursively process any orphan blocks that depended on this one
     vector<uint256> vOrphanQueue;
     vOrphanQueue.push_back(hash);
@@ -4557,7 +4557,7 @@ bool ProcessOrphanBlocks(uint256 hash){
                 ProcessNewBlock(state, pfrom, &blockOrphan);
                 int nDoS;
                 if(state.IsInvalid(nDoS)) {
-                    pfrom->PushMessage("reject", "block", state.GetRejectCode(),
+                    pfrom->PushMessage("reject", strCommand, state.GetRejectCode(),
                                        state.GetRejectReason().substr(0, MAX_REJECT_MESSAGE_LENGTH), inv.hash);
                     if(nDoS > 0) {
                         TRY_LOCK(cs_main, lockMain);
@@ -4568,7 +4568,7 @@ bool ProcessOrphanBlocks(uint256 hash){
                 CNode::Unban(addr);
                 LogPrintf("Unbanned node\n");
                 //disconnect this node if its old protocol version
-                pfrom->DisconnectOldProtocol(ActiveProtocol(), "block");
+                pfrom->DisconnectOldProtocol(ActiveProtocol(), strCommand);
             } else {
                 LogPrint("net", "%s : Already processed block %s, skipping ProcessNewBlock()\n", __func__, blockOrphan.GetHash().GetHex());
             }
