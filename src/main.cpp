@@ -6233,7 +6233,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
                         if(lockMain) Misbehaving(pfrom->GetId(), nDoS);
                     }
                 }
-                ProcessOrphanBlocks(block.GetHash());
+                ProcessOrphanBlocks(block.GetHash(), strCommand);
                 //disconnect this node if its old protocol version
                 pfrom->DisconnectOldProtocol(ActiveProtocol(), strCommand);
             } else {
