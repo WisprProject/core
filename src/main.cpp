@@ -4511,7 +4511,7 @@ bool StoreOrphanBlock(CNode* pfrom, CBlock* pblock, CInv inv){
             pblock2->hashBlock = hash;
             pblock2->hashPrev = pblock->hashPrevBlock;
             pblock2->stake = pblock->GetProofOfStake();
-            pblock2->pfrom = &pfrom;
+            pblock2->pfrom = *pfrom;
             pblock2->inv = inv;
             nOrphanBlocksSize += pblock2->vchBlock.size();
             mapOrphanBlocks.insert(make_pair(hash, pblock2));
@@ -4549,10 +4549,9 @@ bool ProcessOrphanBlocks(uint256 hash){
                 ss >> blockOrphan;
             }
             blockOrphan.BuildMerkleTree();
-            CValidationState orphanState = mi->second->state;
-            CDiskBlockPos* dbpOrphan = &mi->second->dbp;
             CNode* pfrom = &mi->second->pfrom;
-            pfrom->AddInventoryKnown(mi->second->inv);
+            CInv = mi->second->inv;
+            pfrom->AddInventoryKnown(inv);
             CValidationState state;
             if (!mapBlockIndex.count(blockOrphan.GetHash())) {
                 ProcessNewBlock(state, pfrom, &blockOrphan);
@@ -4571,7 +4570,7 @@ bool ProcessOrphanBlocks(uint256 hash){
                 //disconnect this node if its old protocol version
                 pfrom->DisconnectOldProtocol(ActiveProtocol(), "block");
             } else {
-                LogPrint("net", "%s : Already processed block %s, skipping ProcessNewBlock()\n", __func__, block.GetHash().GetHex());
+                LogPrint("net", "%s : Already processed block %s, skipping ProcessNewBlock()\n", __func__, blockOrphan.GetHash().GetHex());
             }
 //
 //            for (multimap<uint256, CNode*>::iterator ni = mapOrphanBlocksByNode.lower_bound(hashPrev);
