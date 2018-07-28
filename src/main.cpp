@@ -157,6 +157,7 @@ struct COrphanBlock {
     std::pair<COutPoint, unsigned int> stake;
     vector<unsigned char> vchBlock;
     CDiskBlockPos dbp;
+    CValidationState state;
 };
 map<uint256, COrphanBlock*> mapOrphanBlocks;
 multimap<uint256, CNode*> mapOrphanBlocksByNode;
@@ -4545,6 +4546,7 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
             pblock2->hashPrev = pblock->hashPrevBlock;
             pblock2->stake = pblock->GetProofOfStake();
             pblock2->dbp = *dbp;
+            pblock2->state = state;
             nOrphanBlocksSize += pblock2->vchBlock.size();
             mapOrphanBlocks.insert(make_pair(hash, pblock2));
             mapOrphanBlocksByPrev.insert(make_pair(pblock2->hashPrev, pblock2));
@@ -4585,23 +4587,24 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
         return error("%s : ActivateBestChain failed", __func__);
 
     // Recursively process any orphan blocks that depended on this one
-    vector<uint256> vWorkQueue;
-    vWorkQueue.push_back(hash);
-    for (unsigned int i = 0; i < vWorkQueue.size(); i++)
+    vector<uint256> vOrphanQueue;
+    vOrphanQueue.push_back(hash);
+    for (unsigned int i = 0; i < vOrphanQueue.size(); i++)
     {
-        uint256 hashPrev = vWorkQueue[i];
-        LogPrintf("Process work queu\n");
+        uint256 hashPrev = vOrphanQueue[i];
+        LogPrintf("Process orphan queu\n");
         for (multimap<uint256, COrphanBlock*>::iterator mi = mapOrphanBlocksByPrev.lower_bound(hashPrev);
              mi != mapOrphanBlocksByPrev.upper_bound(hashPrev);
              ++mi)
         {
+            LogPrintf("Process orphan block\n");
             CBlock blockOrphan;
             {
                 CDataStream ss(mi->second->vchBlock, SER_DISK, CLIENT_VERSION);
                 ss >> blockOrphan;
             }
             blockOrphan.BuildMerkleTree();
-            CValidationState orphanState;
+            CValidationState orphanState = mi->second->state;
             CDiskBlockPos* dbpOrphan = &mi->second->dbp;
             bool checked = CheckBlock(blockOrphan, orphanState);
             {
@@ -4630,15 +4633,15 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
             {
                 CNode* orphanNode = ni->second;
                 CNetAddr addr(orphanNode->addr.ToStringIP());
-                orphanNode->Unban(addr);
+                CNode::Unban(addr);
                 LogPrintf("Node that provided an orphan block is unbanned\n");
             }
-
-            vWorkQueue.push_back(mi->second->hashBlock);
+            vOrphanQueue.push_back(mi->second->hashBlock);
             mapOrphanBlocks.erase(mi->second->hashBlock);
             setStakeSeenOrphan.erase(blockOrphan.GetProofOfStake());
             nOrphanBlocksSize -= mi->second->vchBlock.size();
             delete mi->second;
+            LogPrintf("Processed orphan block\n");
             CBlock* p2block = &blockOrphan;
             if (!ActivateBestChain(orphanState, p2block, checked))
                 return error("%s : ActivateBestChain failed", __func__);
