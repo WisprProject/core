@@ -4527,6 +4527,7 @@ bool StoreOrphanBlock(CNode* pfrom, CBlock* pblock, CInv inv){
         }
         return true;
     }
+    return true;
 }
 bool ProcessOrphanBlocks(uint256 hash, string strCommand, CNode* pfrom){
     // Recursively process any orphan blocks that depended on this one
