@@ -160,7 +160,6 @@ struct COrphanBlock {
     CInv inv;
 };
 map<uint256, COrphanBlock*> mapOrphanBlocks;
-multimap<uint256, CNode*> mapOrphanBlocksByNode;
 multimap<uint256, COrphanBlock*> mapOrphanBlocksByPrev;
 set<pair<COutPoint, unsigned int> > setStakeSeenOrphan;
 size_t nOrphanBlocksSize = 0;
@@ -4516,7 +4515,6 @@ bool StoreOrphanBlock(CNode* pfrom, CBlock* pblock, CInv inv){
             nOrphanBlocksSize += pblock2->vchBlock.size();
             mapOrphanBlocks.insert(make_pair(hash, pblock2));
             mapOrphanBlocksByPrev.insert(make_pair(pblock2->hashPrev, pblock2));
-            mapOrphanBlocksByNode.insert(make_pair(pblock2->hashPrev, pfrom));
             if (pblock->IsProofOfStake())
                 setStakeSeenOrphan.insert(pblock->GetProofOfStake());
 
@@ -4563,8 +4561,7 @@ bool ProcessOrphanBlocks(uint256 hash, string strCommand, CNode* pfrom){
                         if(lockMain) Misbehaving(pfrom->GetId(), nDoS);
                     }
                 }
-                CNetAddr addr(mi->second->addr);
-                CNode::Unban(addr);
+                CNode::Unban(mi->second->addr);
                 LogPrintf("Unbanned node\n");
                 //disconnect this node if its old protocol version
                 pfrom->DisconnectOldProtocol(ActiveProtocol(), strCommand);
@@ -4579,7 +4576,6 @@ bool ProcessOrphanBlocks(uint256 hash, string strCommand, CNode* pfrom){
             LogPrintf("Processed orphan block\n");
         }
         mapOrphanBlocksByPrev.erase(hashPrev);
-        mapOrphanBlocksByNode.erase(hashPrev);
         LogPrintf("Removed blocks from queue\n");
     }
     LogPrintf("Processed orphan queu\n");
