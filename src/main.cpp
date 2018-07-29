@@ -4549,7 +4549,6 @@ bool ProcessOrphanBlocks(uint256 hash, string strCommand, CNode* pfrom){
                 ss >> blockOrphan;
             }
             blockOrphan.BuildMerkleTree();
-            CNetAddr addr(mi->second->addr);
             CInv inv = mi->second->inv;
             pfrom->AddInventoryKnown(inv);
             CValidationState state;
@@ -4564,7 +4563,7 @@ bool ProcessOrphanBlocks(uint256 hash, string strCommand, CNode* pfrom){
                         if(lockMain) Misbehaving(pfrom->GetId(), nDoS);
                     }
                 }
-                CNetAddr addr(pfrom->addr);
+                CNetAddr addr(mi->second->addr);
                 CNode::Unban(addr);
                 LogPrintf("Unbanned node\n");
                 //disconnect this node if its old protocol version
