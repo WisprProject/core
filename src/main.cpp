@@ -4564,7 +4564,7 @@ bool ProcessOrphanBlocks(uint256 hash, string strCommand, CNode* pfrom){
                         if(lockMain) Misbehaving(pfrom->GetId(), nDoS);
                     }
                 }
-                CNetAddr addr(pfrom->addr);Y
+                CNetAddr addr(pfrom->addr);
                 CNode::Unban(addr);
                 LogPrintf("Unbanned node\n");
                 //disconnect this node if its old protocol version
