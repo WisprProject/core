@@ -156,7 +156,7 @@ struct COrphanBlock {
     uint256 hashPrev;
     std::pair<COutPoint, unsigned int> stake;
     vector<unsigned char> vchBlock;
-    CNode* pfrom;
+    CAddress addr;
     CInv inv;
 };
 map<uint256, COrphanBlock*> mapOrphanBlocks;
@@ -4511,7 +4511,7 @@ bool StoreOrphanBlock(CNode* pfrom, CBlock* pblock, CInv inv){
             pblock2->hashBlock = hash;
             pblock2->hashPrev = pblock->hashPrevBlock;
             pblock2->stake = pblock->GetProofOfStake();
-            pblock2->pfrom = pfrom;
+            pblock2->addr = pfrom->addr;
             pblock2->inv = inv;
             nOrphanBlocksSize += pblock2->vchBlock.size();
             mapOrphanBlocks.insert(make_pair(hash, pblock2));
@@ -4530,7 +4530,7 @@ bool StoreOrphanBlock(CNode* pfrom, CBlock* pblock, CInv inv){
         return true;
     }
 }
-bool ProcessOrphanBlocks(uint256 hash, string strCommand){
+bool ProcessOrphanBlocks(uint256 hash, string strCommand, CNode* pfrom){
     // Recursively process any orphan blocks that depended on this one
     vector<uint256> vOrphanQueue;
     vOrphanQueue.push_back(hash);
@@ -4549,7 +4549,7 @@ bool ProcessOrphanBlocks(uint256 hash, string strCommand){
                 ss >> blockOrphan;
             }
             blockOrphan.BuildMerkleTree();
-            CNode* pfrom = mi->second->pfrom;
+            CNetAddr addr(mi->second->addr);
             CInv inv = mi->second->inv;
             pfrom->AddInventoryKnown(inv);
             CValidationState state;
@@ -4564,7 +4564,7 @@ bool ProcessOrphanBlocks(uint256 hash, string strCommand){
                         if(lockMain) Misbehaving(pfrom->GetId(), nDoS);
                     }
                 }
-                CNetAddr addr(pfrom->addr);
+                CNetAddr addr(pfrom->addr);Y
                 CNode::Unban(addr);
                 LogPrintf("Unbanned node\n");
                 //disconnect this node if its old protocol version
@@ -6228,7 +6228,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
                 }
                 //disconnect this node if its old protocol version
                 pfrom->DisconnectOldProtocol(ActiveProtocol(), strCommand);
-                if(ProcessOrphanBlocks(block.GetHash(), strCommand)){
+                if(ProcessOrphanBlocks(block.GetHash(), strCommand, pfrom)){
                     LogPrintf("Processed all orphan blocks\n");
                 }
             } else {
