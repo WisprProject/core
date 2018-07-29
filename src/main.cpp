@@ -4366,7 +4366,7 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
         unique_ptr<CStakeInput> stake;
 
         if (!CheckProofOfStake(block, hashProofOfStake, stake))
-            return state.DoS(100, error("%s: proof of stake check failed", __func__), REJECT_INVALID, "bad-hashproof");
+            return state.DoS(20, error("%s: proof of stake check failed", __func__), REJECT_INVALID, "bad-hashproof");
 
         if (!stake)
             return error("%s: null stake ptr", __func__);
@@ -6197,9 +6197,9 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
 
         //sometimes we will be sent their most recent block and its not the one we want, in that case tell where we are
         if (!mapBlockIndex.count(block.hashPrevBlock)) {
-            if(!mapOrphanBlocks.count(hashBlock)){
-                StoreOrphanBlock(pfrom, &block, inv);
-            }
+//            if(!mapOrphanBlocks.count(hashBlock)){
+//                StoreOrphanBlock(pfrom, &block, inv);
+//            }
             if (find(pfrom->vBlockRequested.begin(), pfrom->vBlockRequested.end(), hashBlock) != pfrom->vBlockRequested.end()) {
                 //we already asked for this block, so lets work backwards and ask for the previous block
                 pfrom->PushMessage("getblocks", chainActive.GetLocator(), block.hashPrevBlock);
@@ -6219,15 +6219,22 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
                     pfrom->PushMessage("reject", strCommand, state.GetRejectCode(),
                                        state.GetRejectReason().substr(0, MAX_REJECT_MESSAGE_LENGTH), inv.hash);
                     if(nDoS > 0) {
-                        TRY_LOCK(cs_main, lockMain);
-                        if(lockMain) Misbehaving(pfrom->GetId(), nDoS);
+                        if(state.GetRejectReason() == "bad-hashproof" && pfrom->nVersion < 70914){
+                            TRY_LOCK(cs_main, lockMain);
+                            if(lockMain) Misbehaving(pfrom->GetId(), nDoS);
+                            CValidationState dummy;
+                            DisconnectTip(dummy);
+                        }else {
+                            TRY_LOCK(cs_main, lockMain);
+                            if (lockMain) Misbehaving(pfrom->GetId(), nDoS);
+                        }
                     }
                 }
                 //disconnect this node if its old protocol version
                 pfrom->DisconnectOldProtocol(ActiveProtocol(), strCommand);
-                if(ProcessOrphanBlocks(block.GetHash(), strCommand, pfrom)){
-                    LogPrintf("Processed all orphan blocks\n");
-                }
+//                if(ProcessOrphanBlocks(block.GetHash(), strCommand, pfrom)){
+//                    LogPrintf("Processed all orphan blocks\n");
+//                }
             } else {
                 LogPrint("net", "%s : Already processed block %s, skipping ProcessNewBlock()\n", __func__, block.GetHash().GetHex());
             }
