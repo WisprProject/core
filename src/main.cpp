@@ -6201,7 +6201,9 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
 
         //sometimes we will be sent their most recent block and its not the one we want, in that case tell where we are
         if (!mapBlockIndex.count(block.hashPrevBlock)) {
-            StoreOrphanBlock(pfrom, &block, inv);
+            if(!mapOrphanBlocks.count(hashBlock)){
+                StoreOrphanBlock(pfrom, &block, inv);
+            }
             if (find(pfrom->vBlockRequested.begin(), pfrom->vBlockRequested.end(), hashBlock) != pfrom->vBlockRequested.end()) {
                 //we already asked for this block, so lets work backwards and ask for the previous block
                 pfrom->PushMessage("getblocks", chainActive.GetLocator(), block.hashPrevBlock);
