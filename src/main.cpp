@@ -6220,15 +6220,15 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
                     pfrom->PushMessage("reject", strCommand, state.GetRejectCode(),
                                        state.GetRejectReason().substr(0, MAX_REJECT_MESSAGE_LENGTH), inv.hash);
                     if(nDoS > 0) {
-                        if(state.GetRejectReason() == "bad-hashproof" && pfrom->nVersion < 70914){
+//                        if(state.GetRejectReason() == "bad-hashproof" && pfrom->nVersion < 70914){
                             TRY_LOCK(cs_main, lockMain);
                             if(lockMain) Misbehaving(pfrom->GetId(), 0);
 //                            CValidationState dummy;
 //                            DisconnectTip(dummy);
-                        }else {
-                            TRY_LOCK(cs_main, lockMain);
-                            if (lockMain) Misbehaving(pfrom->GetId(), nDoS);
-                        }
+//                        }else {
+//                            TRY_LOCK(cs_main, lockMain);
+//                            if (lockMain) Misbehaving(pfrom->GetId(), nDoS);
+//                        }
                     }
                 }
                 //disconnect this node if its old protocol version
