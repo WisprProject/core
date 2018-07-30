@@ -4519,7 +4519,7 @@ bool StoreOrphanBlock(CNode* pfrom, CBlock* pblock, CInv inv){
                 setStakeSeenOrphan.insert(pblock->GetProofOfStake());
 
             // Ask this node to fill in what we're missing
-            PushGetBlocks(pfrom, chainActive.Tip(), GetOrphanRoot(hash));
+            pfrom->PushMessage("getblocks", chainActive.GetLocator(), GetOrphanRoot(hash));
             // ppcoin: getblocks may not obtain the ancestor block rejected
             // earlier by duplicate-stake check so we ask for it again directly
             if (!IsInitialBlockDownload())
@@ -4582,6 +4582,7 @@ bool ProcessOrphanBlocks(uint256 hash, string strCommand, CNode* pfrom){
     LogPrintf("Processed orphan queu\n");
     return true;
 }
+
 bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDiskBlockPos* dbp)
 {
     // Preliminary checks
@@ -4603,7 +4604,7 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
         }
     }
     if (nMints || nSpends)
-        LogPrintf("%s : block contains %d zWSP mints and %d zWSP spends\n", __func__, nMints, nSpends);
+        LogPrintf("%s : block contains %d zPIV mints and %d zPIV spends\n", __func__, nMints, nSpends);
 
     if (!CheckBlockSignature(*pblock))
         return error("ProcessNewBlock() : bad proof-of-stake block signature");
@@ -4616,7 +4617,7 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
             return false;
         }
     }
-    uint256 hash = pblock->GetHash();
+
     {
         LOCK(cs_main);   // Replaces the former TRY_LOCK loop because busy waiting wastes too much resources
 
@@ -4627,15 +4628,15 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
 
         // Store to disk
         CBlockIndex* pindex = NULL;
-        bool ret = AcceptBlock(*pblock, state, &pindex, dbp, checked);
+        bool ret = AcceptBlock (*pblock, state, &pindex, dbp, checked);
         if (pindex && pfrom) {
             mapBlockSource[pindex->GetBlockHash ()] = pfrom->GetId ();
         }
         CheckBlockIndex ();
-        if (!ret) {
-            return error("%s : AcceptBlock FAILED", __func__);
-        }
+        if (!ret)
+            return error ("%s : AcceptBlock FAILED", __func__);
     }
+
     if (!ActivateBestChain(state, pblock, checked))
         return error("%s : ActivateBestChain failed", __func__);
 
@@ -4659,6 +4660,7 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
 
     LogPrintf("%s : ACCEPTED Block %ld in %ld milliseconds with size=%d\n", __func__, GetHeight(), GetTimeMillis() - nStartTime,
               pblock->GetSerializeSize(SER_DISK, CLIENT_VERSION));
+
     return true;
 }
 
@@ -6198,9 +6200,9 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
 
         //sometimes we will be sent their most recent block and its not the one we want, in that case tell where we are
         if (!mapBlockIndex.count(block.hashPrevBlock)) {
-//            if(!mapOrphanBlocks.count(hashBlock)){
-//                StoreOrphanBlock(pfrom, &block, inv);
-//            }
+            if(!mapOrphanBlocks.count(hashBlock)){
+                StoreOrphanBlock(pfrom, &block, inv);
+            }
             if (find(pfrom->vBlockRequested.begin(), pfrom->vBlockRequested.end(), hashBlock) != pfrom->vBlockRequested.end()) {
                 //we already asked for this block, so lets work backwards and ask for the previous block
                 pfrom->PushMessage("getblocks", chainActive.GetLocator(), block.hashPrevBlock);
@@ -6233,9 +6235,9 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
                 }
                 //disconnect this node if its old protocol version
                 pfrom->DisconnectOldProtocol(ActiveProtocol(), strCommand);
-//                if(ProcessOrphanBlocks(block.GetHash(), strCommand, pfrom)){
-//                    LogPrintf("Processed all orphan blocks\n");
-//                }
+                if(ProcessOrphanBlocks(block.GetHash(), strCommand, pfrom)){
+                    LogPrintf("Processed all orphan blocks\n");
+                }
             } else {
                 LogPrint("net", "%s : Already processed block %s, skipping ProcessNewBlock()\n", __func__, block.GetHash().GetHex());
             }
