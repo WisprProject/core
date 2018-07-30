@@ -4366,7 +4366,7 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
         unique_ptr<CStakeInput> stake;
 
         if (!CheckProofOfStake(block, hashProofOfStake, stake))
-            return state.DoS(20, error("%s: proof of stake check failed", __func__), REJECT_INVALID, "bad-hashproof");
+            return state.DoS(100, error("%s: proof of stake check failed", __func__), REJECT_INVALID, "bad-hashproof", true);
 
         if (!stake)
             return error("%s: null stake ptr", __func__);
@@ -6222,9 +6222,9 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
                     if(nDoS > 0) {
                         if(state.GetRejectReason() == "bad-hashproof" && pfrom->nVersion < 70914){
                             TRY_LOCK(cs_main, lockMain);
-                            if(lockMain) Misbehaving(pfrom->GetId(), nDoS);
-                            CValidationState dummy;
-                            DisconnectTip(dummy);
+                            if(lockMain) Misbehaving(pfrom->GetId(), 0);
+//                            CValidationState dummy;
+//                            DisconnectTip(dummy);
                         }else {
                             TRY_LOCK(cs_main, lockMain);
                             if (lockMain) Misbehaving(pfrom->GetId(), nDoS);
