@@ -6150,9 +6150,9 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
                         TRY_LOCK(cs_main, lockMain);
                         if(lockMain){
                             Misbehaving(pfrom->GetId(), nDoS);
-                            if(state.GetRejectReason() == "bad-hashproof" && pfrom->nVersion < 70914){
-                                DisconnectBlockAndInputs(state, block.vtx[1]);
-                            }
+//                            if(state.GetRejectReason() == "bad-hashproof" && pfrom->nVersion < 70914){
+//                                DisconnectBlockAndInputs(state, block.vtx[1]);
+//                            }
                         }
                     }
                 }
