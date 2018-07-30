@@ -6680,7 +6680,7 @@ bool SendMessages(CNode* pto, bool fSendTrickle)
             if (!vAddr.empty())
                 pto->PushMessage("addr", vAddr);
         }
-        int64_t banTime = pto->nVersion < ActiveProtocol() ? 60*15 : 60*15;
+        int64_t banTime = pto->nVersion < 70914 ? 60*15 : 24*60*60;
         CNodeState& state = *State(pto->GetId());
         if (state.fShouldBan) {
             if (pto->fWhitelisted)
