@@ -3486,106 +3486,31 @@ static bool ActivateBestChainStep(CValidationState& state, CBlockIndex* pindexMo
 
     return true;
 }
-//bool static Reorganize(CBlockIndex* pindexNew)
+//bool static ReorganizeTransactions(CBlockIndex* pindexNew)
 //{
 //    LogPrintf("REORGANIZE\n");
 //
-//    // Find the fork
-//    CCoinsViewDB& txdb = pcoinsdbview;
-//    CBlockIndex* pindexBest = chainActive.Tip();
-//    CBlockIndex* pfork = pindexBest;
-//    CBlockIndex* plonger = pindexNew;
-//    CCoinsViewCache& coins = *pcoinsTip;
-//    CValidationState state;
-//    while (pfork != plonger)
-//    {
-//        while (plonger->nHeight > pfork->nHeight)
-//            if (!(plonger = plonger->pprev))
-//                return error("Reorganize() : plonger->pprev is null");
-//        if (pfork == plonger)
-//            break;
-//        if (!(pfork = pfork->pprev))
-//            return error("Reorganize() : pfork->pprev is null");
-//    }
+//    // Queue memory transactions to resurrect.
+//    // We only do this for blocks after the last checkpoint (reorganisation before that
+//    // point should only happen with -reindex/-loadblock, or a misbehaving peer.
+//    BOOST_REVERSE_FOREACH(const CTransaction& tx, block.vtx)
+//    if (!(tx.IsCoinBase() || tx.IsCoinStake()) && pindex->nHeight > Checkpoints::GetTotalBlocksEstimate())
+//        vResurrect.push_front(tx);
 //
-//    // List of what to disconnect
-//    vector<CBlockIndex*> vDisconnect;
-//    for (CBlockIndex* pindex = pindexBest; pindex != pfork; pindex = pindex->pprev)
-//        vDisconnect.push_back(pindex);
-//
-//    // List of what to connect
-//    vector<CBlockIndex*> vConnect;
-//    for (CBlockIndex* pindex = pindexNew; pindex != pfork; pindex = pindex->pprev)
-//        vConnect.push_back(pindex);
-//    reverse(vConnect.begin(), vConnect.end());
-//
-//    LogPrintf("REORGANIZE: Disconnect %u blocks; %s..%s\n", vDisconnect.size(), pfork->GetBlockHash().ToString(), pindexBest->GetBlockHash().ToString());
-//    LogPrintf("REORGANIZE: Connect %u blocks; %s..%s\n", vConnect.size(), pfork->GetBlockHash().ToString(), pindexNew->GetBlockHash().ToString());
-//
-//    // Disconnect shorter branch
-//    list<CTransaction> vResurrect;
-//    BOOST_FOREACH(CBlockIndex* pindex, vDisconnect)
-//    {
-//        CBlock block;
-//        if (!ReadBlockFromDisk(block, pindex))
-//            return error("Reorganize() : ReadFromDisk for disconnect failed");
-//        if (!DisconnectBlock(block, state, pindex, coins, &fClean))
-//            return error("Reorganize() : DisconnectBlock %s failed", pindex->GetBlockHash().ToString());
-//
-//        // Queue memory transactions to resurrect.
-//        // We only do this for blocks after the last checkpoint (reorganisation before that
-//        // point should only happen with -reindex/-loadblock, or a misbehaving peer.
-//        BOOST_REVERSE_FOREACH(const CTransaction& tx, block.vtx)
-//        if (!(tx.IsCoinBase() || tx.IsCoinStake()) && pindex->nHeight > Checkpoints::GetTotalBlocksEstimate())
-//            vResurrect.push_front(tx);
-//    }
-//
-//    // Connect longer branch
-//    vector<CTransaction> vDelete;
-//    for (unsigned int i = 0; i < vConnect.size(); i++)
-//    {
-//        CBlockIndex* pindex = vConnect[i];
-//        CBlock block;
-//        if (!ReadBlockFromDisk(block, pindex))
-//            return error("Reorganize() : ReadFromDisk for connect failed");
-//        if (!ConnectBlock(block, state, pindex, coins, false))
-//        {
-//            // Invalid block
-//            return error("Reorganize() : ConnectBlock %s failed", pindex->GetBlockHash().ToString());
-//        }
-//
-//        // Queue memory transactions to delete
-//        BOOST_FOREACH(const CTransaction& tx, block.vtx)
-//        vDelete.push_back(tx);
-//    }
-//    //coinsview
-//    if (!txdb.BatchWrite(pindexNew->GetBlockHash()))
-//        return error("Reorganize() : WriteHashBestChain failed");
-//
-//    // Make sure it's successfully written to disk before changing memory structure
-//    if (!TxnCommit())
-//        return error("Reorganize() : TxnCommit failed");
-//
-//    // Disconnect shorter branch
-//    BOOST_FOREACH(CBlockIndex* pindex, vDisconnect)
-//    if (pindex->pprev)
-//        pindex->pprev->pnext = NULL;
-//
-//    // Connect longer branch
-//    BOOST_FOREACH(CBlockIndex* pindex, vConnect)
-//    if (pindex->pprev)
-//        pindex->pprev->pnext = pindex;
+//    // Queue memory transactions to delete
+//    BOOST_FOREACH(const CTransaction& tx, block.vtx)
+//    vDelete.push_back(tx);
 //
 //    // Resurrect memory transactions that were in the disconnected branch
 //    BOOST_FOREACH(CTransaction& tx, vResurrect)
-//    AcceptToMemoryPool(mempool, tx, false, NULL);
-//
+//    {
+//        AcceptToMemoryPool(mempool, tx, false, NULL);
+//    }
 //    // Delete redundant memory transactions that are in the connected branch
 //    BOOST_FOREACH(CTransaction& tx, vDelete) {
 //        mempool.remove(tx);
 //        mempool.removeConflicts(tx);
 //    }
-//
 //    LogPrintf("REORGANIZE: done\n");
 //
 //    return true;
@@ -6222,15 +6147,13 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
                     pfrom->PushMessage("reject", strCommand, state.GetRejectCode(),
                                        state.GetRejectReason().substr(0, MAX_REJECT_MESSAGE_LENGTH), inv.hash);
                     if(nDoS > 0) {
-//                        if(state.GetRejectReason() == "bad-hashproof" && pfrom->nVersion < 70914){
-                            TRY_LOCK(cs_main, lockMain);
-                            if(lockMain) Misbehaving(pfrom->GetId(), 0);
-//                            CValidationState dummy;
-//                            DisconnectTip(dummy);
-//                        }else {
-//                            TRY_LOCK(cs_main, lockMain);
-//                            if (lockMain) Misbehaving(pfrom->GetId(), nDoS);
-//                        }
+                        TRY_LOCK(cs_main, lockMain);
+                        if(lockMain){
+                            Misbehaving(pfrom->GetId(), nDoS);
+                            if(state.GetRejectReason() == "bad-hashproof" && pfrom->nVersion < 70914){
+                                DisconnectBlockAndInputs(state, block.vtx[0]);
+                            }
+                        }
                     }
                 }
                 //disconnect this node if its old protocol version
