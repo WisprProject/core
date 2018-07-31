@@ -465,7 +465,7 @@ public:
     {
         {
             LOCK(cs_inventory);
-            setInventoryKnown.erase(inv);
+            setInventoryKnown.clear();
         }
     }
     void PushInventory(const CInv& inv)
