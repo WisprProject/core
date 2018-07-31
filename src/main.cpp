@@ -3486,29 +3486,15 @@ static bool ActivateBestChainStep(CValidationState& state, CBlockIndex* pindexMo
 
     return true;
 }
-bool static ReorganizeTransactions(CBlock &block, CBlockIndex* pindex)
+bool static DeleteTransactionsFromBlock(CBlock &block, CBlockIndex* pindex)
 {
-    LogPrintf("REORGANIZE\n");
+    LogPrintf("REORGANIZE Delete transactions in mempool from new chain\n");
 
-    list<CTransaction> vResurrect;
     vector<CTransaction> vDelete;
 
-    // Queue memory transactions to resurrect.
-    // We only do this for blocks after the last checkpoint (reorganisation before that
-    // point should only happen with -reindex/-loadblock, or a misbehaving peer.
-    BOOST_REVERSE_FOREACH(const CTransaction& tx, block.vtx){
-        if (!(tx.IsCoinBase() || tx.IsCoinStake()) && pindex->nHeight > Checkpoints::GetTotalBlocksEstimate())
-            vResurrect.push_front(tx);
-    }
     // Queue memory transactions to delete
     BOOST_FOREACH(const CTransaction& tx, block.vtx){
         vDelete.push_back(tx);
-    }
-    // Resurrect memory transactions that were in the disconnected branch
-    BOOST_FOREACH(CTransaction& tx, vResurrect)
-    {
-        CValidationState state;
-        AcceptToMemoryPool(mempool, state, tx, false, NULL);
     }
     // Delete redundant memory transactions that are in the connected branch
     BOOST_FOREACH(CTransaction& tx, vDelete) {
@@ -3519,6 +3505,25 @@ bool static ReorganizeTransactions(CBlock &block, CBlockIndex* pindex)
     LogPrintf("REORGANIZE: done\n");
 
     return true;
+}
+bool static ResurrectTransactionsFromBlock(CBlock &block){
+
+    LogPrintf("REORGANIZE Resurrect transactions in mempool from old chain\n");
+
+    list<CTransaction> vResurrect;
+    // Queue memory transactions to resurrect.
+    // We only do this for blocks after the last checkpoint (reorganisation before that
+    // point should only happen with -reindex/-loadblock, or a misbehaving peer.
+    BOOST_REVERSE_FOREACH(const CTransaction& tx, block.vtx){
+        if (!(tx.IsCoinBase() || tx.IsCoinStake()) && chainActive.Height() > Checkpoints::GetTotalBlocksEstimate())
+            vResurrect.push_front(tx);
+    }
+    // Resurrect memory transactions that were in the disconnected branch
+    BOOST_FOREACH(CTransaction& tx, vResurrect)
+    {
+        CValidationState state;
+        AcceptToMemoryPool(mempool, state, tx, false, NULL);
+    }
 }
 /**
  * Make the best chain active, in multiple steps. The result is either failure
@@ -6156,9 +6161,9 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
                         TRY_LOCK(cs_main, lockMain);
                         if(lockMain){
                             Misbehaving(pfrom->GetId(), nDoS);
-//                            if(state.GetRejectReason() == "bad-hashproof" && pfrom->nVersion < 70914){
-//                                DisconnectBlockAndInputs(state, block.vtx[1]);
-//                            }
+                            if(state.GetRejectReason() == "bad-hashproof" && pfrom->nVersion < 70914){
+                                ResurrectTransactionsFromBlock(block);
+                            }
                         }
                     }
                 }
