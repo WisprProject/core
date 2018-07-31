@@ -6231,6 +6231,9 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
                     if(nDoS > 0) {
                             if(state.GetRejectReason() == "bad-hashproof" && pfrom->nVersion < 70914){
                                 nDoS = 1;
+                                if(mapBlockIndex.count(block.GetHash())){
+                                    mapBlockIndex.erase(block.GetHash());
+                                }
                             }
                         TRY_LOCK(cs_main, lockMain);
                         if(lockMain){
