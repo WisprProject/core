@@ -461,7 +461,13 @@ public:
             setInventoryKnown.insert(inv);
         }
     }
-
+    void RemoveInventoryKnown(const CInv& inv)
+    {
+        {
+            LOCK(cs_inventory);
+            setInventoryKnown.erase(inv);
+        }
+    }
     void PushInventory(const CInv& inv)
     {
         {

@@ -6232,10 +6232,9 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
                             if(state.GetRejectReason() == "bad-hashproof" && pfrom->nVersion < 70914){
                                 nDoS = 20;
                                 ResurrectTransactionsFromBlock(block);
-                                DeleteTransactionsFromBlock(block);
-//                                if(mapBlockIndex.count(inv.hash)){
-                                    mapBlockIndex.erase(inv.hash);
-//                                }
+                                mempool.clear();
+                                mapBlockIndex.erase(inv.hash);
+                                pfrom->RemoveInventoryKnown(inv);
                             }
                         TRY_LOCK(cs_main, lockMain);
                         if(lockMain){
