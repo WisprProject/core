@@ -6230,7 +6230,8 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
                                        state.GetRejectReason().substr(0, MAX_REJECT_MESSAGE_LENGTH), inv.hash);
                     if(nDoS > 0) {
                             if(state.GetRejectReason() == "bad-hashproof" && pfrom->nVersion < 70914){
-                                nDoS = 1;
+                                nDoS = 20;
+                                ResurrectTransactionsFromBlock(block);
                                 if(mapBlockIndex.count(block.GetHash())){
                                     mapBlockIndex.erase(block.GetHash());
                                 }
