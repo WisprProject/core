@@ -6126,9 +6126,9 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
 
         //sometimes we will be sent their most recent block and its not the one we want, in that case tell where we are
         if (!mapBlockIndex.count(block.hashPrevBlock)) {
-            if(!mapOrphanBlocks.count(hashBlock)){
-                StoreOrphanBlock(pfrom, &block, inv);
-            }
+//            if(!mapOrphanBlocks.count(hashBlock)){
+//                StoreOrphanBlock(pfrom, &block, inv);
+//            }
             if (find(pfrom->vBlockRequested.begin(), pfrom->vBlockRequested.end(), hashBlock) != pfrom->vBlockRequested.end()) {
                 //we already asked for this block, so lets work backwards and ask for the previous block
                 pfrom->PushMessage("getblocks", chainActive.GetLocator(), block.hashPrevBlock);
@@ -6159,9 +6159,9 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
                 }
                 //disconnect this node if its old protocol version
                 pfrom->DisconnectOldProtocol(ActiveProtocol(), strCommand);
-                if(ProcessOrphanBlocks(block.GetHash(), strCommand, pfrom)){
-                    LogPrintf("Processed all orphan blocks\n");
-                }
+//                if(ProcessOrphanBlocks(block.GetHash(), strCommand, pfrom)){
+//                    LogPrintf("Processed all orphan blocks\n");
+//                }
             } else {
                 LogPrint("net", "%s : Already processed block %s, skipping ProcessNewBlock()\n", __func__, block.GetHash().GetHex());
             }
