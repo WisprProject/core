@@ -4645,8 +4645,10 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
         }
         mapOrphanBlocksByPrev.erase(hashPrev);
         LogPrintf("Removed blocks from queue, activating state.\n");
-        if (!ActivateBestChain(lastOrphanState, porphanBlock, checkedOrphan)) {
-            return error("%s : ActivateBestChain failed", __func__);
+        if(porphanBlock != NULL){
+            if (!ActivateBestChain(lastOrphanState, porphanBlock, checkedOrphan)) {
+                return error("%s : ActivateBestChain failed", __func__);
+            }
         }
     }
     if (!fLiteMode) {
