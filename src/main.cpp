@@ -3486,35 +3486,40 @@ static bool ActivateBestChainStep(CValidationState& state, CBlockIndex* pindexMo
 
     return true;
 }
-//bool static ReorganizeTransactions(CBlockIndex* pindexNew)
-//{
-//    LogPrintf("REORGANIZE\n");
-//
-//    // Queue memory transactions to resurrect.
-//    // We only do this for blocks after the last checkpoint (reorganisation before that
-//    // point should only happen with -reindex/-loadblock, or a misbehaving peer.
-//    BOOST_REVERSE_FOREACH(const CTransaction& tx, block.vtx)
-//    if (!(tx.IsCoinBase() || tx.IsCoinStake()) && pindex->nHeight > Checkpoints::GetTotalBlocksEstimate())
-//        vResurrect.push_front(tx);
-//
-//    // Queue memory transactions to delete
-//    BOOST_FOREACH(const CTransaction& tx, block.vtx)
-//    vDelete.push_back(tx);
-//
-//    // Resurrect memory transactions that were in the disconnected branch
-//    BOOST_FOREACH(CTransaction& tx, vResurrect)
-//    {
-//        AcceptToMemoryPool(mempool, tx, false, NULL);
-//    }
-//    // Delete redundant memory transactions that are in the connected branch
-//    BOOST_FOREACH(CTransaction& tx, vDelete) {
-//        mempool.remove(tx);
-//        mempool.removeConflicts(tx);
-//    }
-//    LogPrintf("REORGANIZE: done\n");
-//
-//    return true;
-//}
+bool static ReorganizeTransactions(CBlock &block, CBlockIndex* pindex)
+{
+    LogPrintf("REORGANIZE\n");
+
+    list<CTransaction> vResurrect;
+    vector<CTransaction> vDelete;
+
+    // Queue memory transactions to resurrect.
+    // We only do this for blocks after the last checkpoint (reorganisation before that
+    // point should only happen with -reindex/-loadblock, or a misbehaving peer.
+    BOOST_REVERSE_FOREACH(const CTransaction& tx, block.vtx){
+        if (!(tx.IsCoinBase() || tx.IsCoinStake()) && pindex->nHeight > Checkpoints::GetTotalBlocksEstimate())
+            vResurrect.push_front(tx);
+    }
+    // Queue memory transactions to delete
+    BOOST_FOREACH(const CTransaction& tx, block.vtx){
+        vDelete.push_back(tx);
+    }
+    // Resurrect memory transactions that were in the disconnected branch
+    BOOST_FOREACH(CTransaction& tx, vResurrect)
+    {
+        CValidationState state;
+        AcceptToMemoryPool(mempool, state, tx, false, NULL);
+    }
+    // Delete redundant memory transactions that are in the connected branch
+    BOOST_FOREACH(CTransaction& tx, vDelete) {
+        list<CTransaction> removed;
+        mempool.remove(tx, removed);
+        mempool.removeConflicts(tx, removed);
+    }
+    LogPrintf("REORGANIZE: done\n");
+
+    return true;
+}
 /**
  * Make the best chain active, in multiple steps. The result is either failure
  * or an activated best chain. pblock is either NULL or a pointer to a block
