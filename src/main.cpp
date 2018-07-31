@@ -4575,7 +4575,7 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
         return error("%s : ActivateBestChain failed", __func__);
     // Recursively process any orphan blocks that depended on this one
     vector<uint256> vOrphanQueue;
-    vOrphanQueue.push_back(hash);
+    vOrphanQueue.push_back(pblock->GetHash());
     CValidationState lastOrphanState;
     CBlock* porphanBlock = NULL;
     bool checkedOrphan = false;
