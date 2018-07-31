@@ -4646,7 +4646,7 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
         mapOrphanBlocksByPrev.erase(hashPrev);
         LogPrintf("Removed blocks from queue\n");
     }
-    if(porphanBlock && lastOrphanState && checkedOrphan){
+    if(porphanBlock != NULL && checkedOrphan == true){
         if (!ActivateBestChain(lastOrphanState, porphanBlock, checkedOrphan))
             return error("%s : ActivateBestChain failed", __func__);
     }
