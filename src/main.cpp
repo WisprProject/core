@@ -4301,7 +4301,7 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
         unique_ptr<CStakeInput> stake;
 
         if (!CheckProofOfStake(block, hashProofOfStake, stake)) {
-            return state.DoS(100, error("%s: proof of stake check failed", __func__), REJECT_INVALID, "bad-hashproof");
+            return state.DoS(100, error("%s: proof of stake check failed", __func__), REJECT_INVALID, "bad-hashproof", true);
         }
         if (!stake)
             return error("%s: null stake ptr", __func__);
@@ -4563,7 +4563,7 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
 
         // Store to disk
         CBlockIndex* pindex = NULL;
-        bool ret = AcceptBlock (*pblock, state, &pindex, dbp, checked);
+        bool ret = AcceptBlock(*pblock, state, &pindex, dbp, checked);
         if (pindex && pfrom) {
             mapBlockSource[pindex->GetBlockHash ()] = pfrom->GetId ();
         }
