@@ -4291,7 +4291,6 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
         unique_ptr<CStakeInput> stake;
 
         if (!CheckProofOfStake(block, hashProofOfStake, stake)) {
-            pindex->nStatus |= BLOCK_HAVE_UNDO;
             return state.DoS(100, error("%s: proof of stake check failed", __func__), REJECT_INVALID, "bad-hashproof");
         }
         if (!stake)
