@@ -4576,8 +4576,8 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
     // Recursively process any orphan blocks that depended on this one
     vector<uint256> vOrphanQueue;
     vOrphanQueue.push_back(hash);
-    CBlock blockOrphan;
     CValidationState lastOrphanState;
+    CBlock* porphanBlock = NULL;
     bool checkedOrphan = false;
     for (unsigned int i = 0; i < vOrphanQueue.size(); i++)
     {
@@ -4588,6 +4588,7 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
              ++mi)
         {
             LogPrintf("Process orphan block\n");
+            CBlock blockOrphan;
             {
                 CDataStream ss(mi->second->vchBlock, SER_DISK, CLIENT_VERSION);
                 ss >> blockOrphan;
@@ -4596,7 +4597,7 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
             CInv inv = mi->second->inv;
             pfrom->AddInventoryKnown(inv);
             CValidationState orphanState;
-            CBlock* porphanBlock = &blockOrphan;
+            porphanBlock = &blockOrphan;
             uint256 orphanHash = porphanBlock->GetHash();
             if (!mapBlockIndex.count(orphanHash)) {
                 int64_t nStartTime = GetTimeMillis();
