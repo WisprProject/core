@@ -4570,11 +4570,11 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
     if (!ActivateBestChain(state, pblock, checked))
         return error("%s : ActivateBestChain failed", __func__);
 
-    CValidationState orphanState;
-    if(ProcessOrphanBlocks(pblock->GetHash(), pfrom)){
-        if (!ActivateBestChain(orphanState))
-            return error("%s : ActivateBestChain failed", __func__);
-    }
+//    CValidationState orphanState;
+//    if(ProcessOrphanBlocks(pblock->GetHash(), pfrom)){
+//        if (!ActivateBestChain(orphanState))
+//            return error("%s : ActivateBestChain failed", __func__);
+//    }
 
     if (!fLiteMode) {
         if (masternodeSync.RequestedMasternodeAssets > MASTERNODE_SYNC_LIST) {
@@ -6135,9 +6135,9 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
         LogPrint("net", "received block %s peer=%d\n", inv.hash.ToString(), pfrom->id);
         //sometimes we will be sent their most recent block and its not the one we want, in that case tell where we are
         if (!mapBlockIndex.count(block.hashPrevBlock)) {
-            if(!mapOrphanBlocks.count(block.GetHash())){
-                StoreOrphanBlock(pfrom, &block);
-            }
+//            if(!mapOrphanBlocks.count(block.GetHash())){
+//                StoreOrphanBlock(pfrom, &block);
+//            }
             if (find(pfrom->vBlockRequested.begin(), pfrom->vBlockRequested.end(), hashBlock) != pfrom->vBlockRequested.end()) {
                 //we already asked for this block, so lets work backwards and ask for the previous block
                 pfrom->PushMessage("getblocks", chainActive.GetLocator(), block.hashPrevBlock);
@@ -6158,27 +6158,14 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
                     pfrom->PushMessage("reject", strCommand, state.GetRejectCode(),
                                        state.GetRejectReason().substr(0, MAX_REJECT_MESSAGE_LENGTH), inv.hash);
                     if(nDoS > 0) {
-                            if(state.GetRejectReason() == "bad-hashproof" && pfrom->nVersion < 70914){
-                                nDoS = 20;
-//                                ResurrectTransactionsFromBlock(block);
-                                mempool.clear();
-                                mapBlockIndex.erase(inv.hash);
-                                pfrom->RemoveInventoryKnown(inv);
-                            }
                         TRY_LOCK(cs_main, lockMain);
                         if(lockMain){
                             Misbehaving(pfrom->GetId(), nDoS);
-//                            if(state.GetRejectReason() == "bad-hashproof" && pfrom->nVersion < 70914){
-//                                ResurrectTransactionsFromBlock(block);
-//                            }
                         }
                     }
                 }
                 //disconnect this node if its old protocol version
                 pfrom->DisconnectOldProtocol(ActiveProtocol(), strCommand);
-//                if(ProcessOrphanBlocks(block.GetHash(), strCommand, pfrom)){
-//                    LogPrintf("Processed all orphan blocks\n");
-//                }
             } else {
                 LogPrint("net", "%s : Already processed block %s, skipping ProcessNewBlock()\n", __func__, block.GetHash().GetHex());
             }
