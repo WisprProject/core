@@ -4464,59 +4464,57 @@ bool StoreOrphanBlock(CNode* pfrom, CBlock* pblock){
     }
     return true;
 }
-//bool ProcessOrphanBlocks(uint256 hash, string strCommand, CNode* pfrom){
-//    // Recursively process any orphan blocks that depended on this one
-//    vector<uint256> vOrphanQueue;
-//    vOrphanQueue.push_back(hash);
-//    for (unsigned int i = 0; i < vOrphanQueue.size(); i++)
-//    {
-//        uint256 hashPrev = vOrphanQueue[i];
-//        LogPrintf("Process orphan queu\n");
-//        for (multimap<uint256, COrphanBlock*>::iterator mi = mapOrphanBlocksByPrev.lower_bound(hashPrev);
-//             mi != mapOrphanBlocksByPrev.upper_bound(hashPrev);
-//             ++mi)
-//        {
-//            LogPrintf("Process orphan block\n");
-//            CBlock blockOrphan;
-//            {
-//                CDataStream ss(mi->second->vchBlock, SER_DISK, CLIENT_VERSION);
-//                ss >> blockOrphan;
-//            }
-//            blockOrphan.BuildMerkleTree();
-//            CInv inv = mi->second->inv;
-//            pfrom->AddInventoryKnown(inv);
-//            CValidationState state;
-//            if (!mapBlockIndex.count(blockOrphan.GetHash())) {
-//                ProcessNewBlock(state, pfrom, &blockOrphan);
-//                int nDoS;
-//                if(state.IsInvalid(nDoS)) {
-//                    pfrom->PushMessage("reject", strCommand, state.GetRejectCode(),
-//                                       state.GetRejectReason().substr(0, MAX_REJECT_MESSAGE_LENGTH), inv.hash);
-//                    if(nDoS > 0) {
-//                        TRY_LOCK(cs_main, lockMain);
-//                        if(lockMain) Misbehaving(pfrom->GetId(), nDoS);
-//                    }
-//                }
-//                CNode::Unban(mi->second->addr);
-//                LogPrintf("Unbanned node\n");
-//                //disconnect this node if its old protocol version
-//                pfrom->DisconnectOldProtocol(ActiveProtocol(), strCommand);
-//            } else {
-//                LogPrint("net", "%s : Already processed block %s, skipping ProcessNewBlock()\n", __func__, blockOrphan.GetHash().GetHex());
-//            }
-//            vOrphanQueue.push_back(mi->second->hashBlock);
-//            mapOrphanBlocks.erase(mi->second->hashBlock);
-//            setStakeSeenOrphan.erase(blockOrphan.GetProofOfStake());
-//            nOrphanBlocksSize -= mi->second->vchBlock.size();
-//            delete mi->second;
-//            LogPrintf("Processed orphan block\n");
-//        }
-//        mapOrphanBlocksByPrev.erase(hashPrev);
-//        LogPrintf("Removed blocks from queue\n");
-//    }
-//    LogPrintf("Processed orphan queu\n");
-//    return true;
-//}
+bool ProcessOrphanBlocks(uint256 hash, CNode* pfrom){
+
+    // Recursively process any orphan blocks that depended on this one
+    vector<uint256> vOrphanQueue;
+    vOrphanQueue.push_back(hash);
+    for (unsigned int i = 0; i < vOrphanQueue.size(); i++)
+    {
+        uint256 hashPrev = vOrphanQueue[i];
+        LogPrintf("Process orphan queu\n");
+        for (multimap<uint256, COrphanBlock*>::iterator mi = mapOrphanBlocksByPrev.lower_bound(hashPrev);
+             mi != mapOrphanBlocksByPrev.upper_bound(hashPrev);
+             ++mi)
+        {
+            LogPrintf("Process orphan block\n");
+            CBlock blockOrphan;
+            {
+                CDataStream ss(mi->second->vchBlock, SER_DISK, CLIENT_VERSION);
+                ss >> blockOrphan;
+            }
+            blockOrphan.BuildMerkleTree();
+            CValidationState orphanState;
+            CBlock* porphanBlock = &blockOrphan;
+            uint256 orphanHash = porphanBlock->GetHash();
+            int64_t nStartTime = GetTimeMillis();
+            {
+                LOCK(cs_main);   // Replaces the former TRY_LOCK loop because busy waiting wastes too much resources
+                MarkBlockAsReceived (orphanHash);
+                // Store to disk
+                CBlockIndex* pindexOrphan = NULL;
+                bool ret = AcceptBlock(*porphanBlock, orphanState, &pindexOrphan, NULL, checked);
+                if (pindexOrphan && pfrom) {
+                    mapBlockSource[pindexOrphan->GetBlockHash ()] = pfrom->GetId ();
+                }
+                CheckBlockIndex ();
+                if (!ret)
+                    return error ("%s : AcceptBlock FAILED", __func__);
+            }
+            CNode::Unban(mi->second->addr);
+            LogPrintf("Unbanned node\n");
+            vOrphanQueue.push_back(mi->second->hashBlock);
+            mapOrphanBlocks.erase(mi->second->hashBlock);
+            setStakeSeenOrphan.erase(porphanBlock->GetProofOfStake());
+            nOrphanBlocksSize -= mi->second->vchBlock.size();
+            delete mi->second;
+            LogPrintf("Processed orphan block\n");
+        }
+        mapOrphanBlocksByPrev.erase(hashPrev);
+        LogPrintf("Removed blocks from queue.\n");
+    }
+    return true;
+}
 
 bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDiskBlockPos* dbp)
 {
@@ -4571,53 +4569,13 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
     }
     if (!ActivateBestChain(state, pblock, checked))
         return error("%s : ActivateBestChain failed", __func__);
-    // Recursively process any orphan blocks that depended on this one
-    vector<uint256> vOrphanQueue;
-    vOrphanQueue.push_back(pblock->GetHash());
-    for (unsigned int i = 0; i < vOrphanQueue.size(); i++)
-    {
-        uint256 hashPrev = vOrphanQueue[i];
-        LogPrintf("Process orphan queu\n");
-        for (multimap<uint256, COrphanBlock*>::iterator mi = mapOrphanBlocksByPrev.lower_bound(hashPrev);
-             mi != mapOrphanBlocksByPrev.upper_bound(hashPrev);
-             ++mi)
-        {
-            LogPrintf("Process orphan block\n");
-            CBlock blockOrphan;
-            {
-                CDataStream ss(mi->second->vchBlock, SER_DISK, CLIENT_VERSION);
-                ss >> blockOrphan;
-            }
-            blockOrphan.BuildMerkleTree();
-            CValidationState orphanState;
-            CBlock* porphanBlock = &blockOrphan;
-            uint256 orphanHash = porphanBlock->GetHash();
-            int64_t nStartTime = GetTimeMillis();
-            {
-                LOCK(cs_main);   // Replaces the former TRY_LOCK loop because busy waiting wastes too much resources
-                MarkBlockAsReceived (orphanHash);
-                // Store to disk
-                CBlockIndex* pindexOrphan = NULL;
-                bool ret = AcceptBlock(*porphanBlock, orphanState, &pindexOrphan, NULL, checked);
-                if (pindexOrphan && pfrom) {
-                    mapBlockSource[pindexOrphan->GetBlockHash ()] = pfrom->GetId ();
-                }
-                CheckBlockIndex ();
-                if (!ret)
-                    return error ("%s : AcceptBlock FAILED", __func__);
-            }
-            CNode::Unban(mi->second->addr);
-            LogPrintf("Unbanned node\n");
-            vOrphanQueue.push_back(mi->second->hashBlock);
-            mapOrphanBlocks.erase(mi->second->hashBlock);
-            setStakeSeenOrphan.erase(porphanBlock->GetProofOfStake());
-            nOrphanBlocksSize -= mi->second->vchBlock.size();
-            delete mi->second;
-            LogPrintf("Processed orphan block\n");
-        }
-        mapOrphanBlocksByPrev.erase(hashPrev);
-        LogPrintf("Removed blocks from queue.\n");
+
+    CValidationState orphanState;
+    if(ProcessOrphanBlocks(pblock->GetHash(), pfrom)){
+        if (!ActivateBestChain(orphanState))
+            return error("%s : ActivateBestChain failed", __func__);
     }
+
     if (!fLiteMode) {
         if (masternodeSync.RequestedMasternodeAssets > MASTERNODE_SYNC_LIST) {
             obfuScationPool.NewBlock();
