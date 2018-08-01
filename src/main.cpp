@@ -157,7 +157,7 @@ struct COrphanBlock {
     std::pair<COutPoint, unsigned int> stake;
     vector<unsigned char> vchBlock;
     CAddress addr;
-    CInv inv;
+//    CInv inv;
 };
 map<uint256, COrphanBlock*> mapOrphanBlocks;
 multimap<uint256, COrphanBlock*> mapOrphanBlocksByPrev;
@@ -4418,7 +4418,7 @@ void CBlockIndex::BuildSkip()
     if (pprev)
         pskip = pprev->GetAncestor(GetSkipHeight(nHeight));
 }
-bool StoreOrphanBlock(CNode* pfrom, CBlock* pblock, CInv inv){
+bool StoreOrphanBlock(CNode* pfrom, CBlock* pblock){
     // If we don't already have its previous block, shunt it off to holding area until we get it
     uint256 hash = pblock->GetHash();
     if (!mapBlockIndex.count(pblock->hashPrevBlock))
@@ -4446,7 +4446,7 @@ bool StoreOrphanBlock(CNode* pfrom, CBlock* pblock, CInv inv){
             pblock2->hashPrev = pblock->hashPrevBlock;
             pblock2->stake = pblock->GetProofOfStake();
             pblock2->addr = pfrom->addr;
-            pblock2->inv = inv;
+//            pblock2->inv = inv;
             nOrphanBlocksSize += pblock2->vchBlock.size();
             mapOrphanBlocks.insert(make_pair(hash, pblock2));
             mapOrphanBlocksByPrev.insert(make_pair(pblock2->hashPrev, pblock2));
@@ -4543,7 +4543,9 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
 
     if (!CheckBlockSignature(*pblock))
         return error("ProcessNewBlock() : bad proof-of-stake block signature");
-
+    if(mapBlockIndex.count(pblock->hashPrevBlock) && !mapOrphanBlocks.count(pblock->GetHash())){
+        StoreOrphanBlock(pfrom, &pblock);
+    }
     if (pblock->GetHash() != Params().HashGenesisBlock() && pfrom != NULL) {
         //if we get this far, check if the prev block is our prev block, if not then request sync and return false
         BlockMap::iterator mi = mapBlockIndex.find(pblock->hashPrevBlock);
@@ -4552,7 +4554,6 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
             return false;
         }
     }
-
     {
         LOCK(cs_main);   // Replaces the former TRY_LOCK loop because busy waiting wastes too much resources
 
@@ -4576,9 +4577,6 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
     // Recursively process any orphan blocks that depended on this one
     vector<uint256> vOrphanQueue;
     vOrphanQueue.push_back(pblock->GetHash());
-    CValidationState lastOrphanState;
-    CBlock* porphanBlock = NULL;
-    bool checkedOrphan = false;
     for (unsigned int i = 0; i < vOrphanQueue.size(); i++)
     {
         uint256 hashPrev = vOrphanQueue[i];
@@ -4594,48 +4592,25 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
                 ss >> blockOrphan;
             }
             blockOrphan.BuildMerkleTree();
-            CInv inv = mi->second->inv;
-            pfrom->AddInventoryKnown(inv);
             CValidationState orphanState;
-            porphanBlock = &blockOrphan;
+            CBlock* porphanBlock = &blockOrphan;
             uint256 orphanHash = porphanBlock->GetHash();
-            if (!mapBlockIndex.count(orphanHash)) {
-                int64_t nStartTime = GetTimeMillis();
-                checkedOrphan = CheckBlock(*porphanBlock, orphanState);
-                if (!CheckBlockSignature(*porphanBlock))
-                    return error("ProcessNewBlock() : bad proof-of-stake block signature");
-
-                if (porphanBlock->GetHash() != Params().HashGenesisBlock() && pfrom != NULL) {
-                    //if we get this far, check if the prev block is our prev block, if not then request sync and return false
-                    BlockMap::iterator mi = mapBlockIndex.find(porphanBlock->hashPrevBlock);
-                    if (mi == mapBlockIndex.end()) {
-                        pfrom->PushMessage("getblocks", chainActive.GetLocator(), uint256(0));
-                        return false;
-                    }
+            int64_t nStartTime = GetTimeMillis();
+            {
+                LOCK(cs_main);   // Replaces the former TRY_LOCK loop because busy waiting wastes too much resources
+                MarkBlockAsReceived (orphanHash);
+                // Store to disk
+                CBlockIndex* pindexOrphan = NULL;
+                bool ret = AcceptBlock(*porphanBlock, orphanState, &pindexOrphan, NULL, checked);
+                if (pindexOrphan && pfrom) {
+                    mapBlockSource[pindexOrphan->GetBlockHash ()] = pfrom->GetId ();
                 }
-                {
-                    LOCK(cs_main);   // Replaces the former TRY_LOCK loop because busy waiting wastes too much resources
-
-                    MarkBlockAsReceived (orphanHash);
-                    if (!checked) {
-                        return error ("%s : CheckBlock FAILED for block %s", __func__, orphanHash.GetHex());
-                    }
-
-                    // Store to disk
-                    CBlockIndex* pindexOrphan = NULL;
-                    bool ret = AcceptBlock (*porphanBlock, orphanState, &pindexOrphan, NULL, checkedOrphan);
-                    if (pindexOrphan && pfrom) {
-                        mapBlockSource[pindexOrphan->GetBlockHash ()] = pfrom->GetId ();
-                    }
-                    CheckBlockIndex ();
-                    if (!ret)
-                        return error ("%s : AcceptBlock FAILED", __func__);
-                }
-
-                CNode::Unban(mi->second->addr);
-                LogPrintf("Unbanned node\n");
-                lastOrphanState = orphanState;
+                CheckBlockIndex ();
+                if (!ret)
+                    return error ("%s : AcceptBlock FAILED", __func__);
             }
+            CNode::Unban(mi->second->addr);
+            LogPrintf("Unbanned node\n");
             vOrphanQueue.push_back(mi->second->hashBlock);
             mapOrphanBlocks.erase(mi->second->hashBlock);
             setStakeSeenOrphan.erase(porphanBlock->GetProofOfStake());
@@ -6203,12 +6178,8 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
         uint256 hashBlock = block.GetHash();
         CInv inv(MSG_BLOCK, hashBlock);
         LogPrint("net", "received block %s peer=%d\n", inv.hash.ToString(), pfrom->id);
-
         //sometimes we will be sent their most recent block and its not the one we want, in that case tell where we are
         if (!mapBlockIndex.count(block.hashPrevBlock)) {
-            if(!mapOrphanBlocks.count(hashBlock)){
-                StoreOrphanBlock(pfrom, &block, inv);
-            }
             if (find(pfrom->vBlockRequested.begin(), pfrom->vBlockRequested.end(), hashBlock) != pfrom->vBlockRequested.end()) {
                 //we already asked for this block, so lets work backwards and ask for the previous block
                 pfrom->PushMessage("getblocks", chainActive.GetLocator(), block.hashPrevBlock);
@@ -6221,7 +6192,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
         } else {
             pfrom->AddInventoryKnown(inv);
             CValidationState state;
-            if (!mapBlockIndex.count(block.GetHash())) {
+            if (!mapBlockIndex.count(block.GetHash()) && !mapOrphanBlocks.count(block.GetHash())) {
                 ProcessNewBlock(state, pfrom, &block);
                 int nDoS;
                 if(state.IsInvalid(nDoS)) {
