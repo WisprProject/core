@@ -406,7 +406,6 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
     prev.n = nIndex;
     prev.hash = txPrev.GetHash();
     int64_t nValueInOld = txPrev.vout[nIndex].nValue;
-
 //    LogPrintf(
 //            "%s : nPrevout=%u "
 //            "nTimeTx=%u prevoutHash=%s valueOld=%u valueStakeInput=%u  \n", __func__,
@@ -432,7 +431,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
                 continue;
         } else {
             nTryTime = nTimeTx - i;
-            if (!CheckStakeV1(txPrev.nTime, prev, nTryTime, hashProofOfStake, nValueInOld, pindex->pprev,
+            if (!CheckStakeV1(txPrev.nTime, prev, nTryTime, hashProofOfStake, nValueInOld, chainActive.Tip(),
                               nBits) || !((nTryTime & STAKE_TIMESTAMP_MASK) == 0)) {
                 continue;
             }
@@ -510,7 +509,7 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
         }
 
     } else {
-        if (!CheckStakeV1(txPrev.nTime, txin.prevout, tx.nTime, hashProofOfStake, nValueIn, pindexOld, block.nBits, true)) {
+        if (!CheckStakeV1(txPrev.nTime, txin.prevout, tx.nTime, hashProofOfStake, nValueIn, pindexOld, block.nBits)) {
             return error("CheckProofOfStake() : INFO: old bnStakeModifierV2 check kernel failed on coinstake %s, hashProof=%s \n",
                   tx.GetHash().ToString(), hashProofOfStake.ToString());
         }
