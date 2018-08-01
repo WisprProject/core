@@ -4493,7 +4493,7 @@ bool ProcessOrphanBlocks(uint256 hash, CNode* pfrom){
                 MarkBlockAsReceived (orphanHash);
                 // Store to disk
                 CBlockIndex* pindexOrphan = NULL;
-                bool ret = AcceptBlock(*porphanBlock, orphanState, &pindexOrphan, NULL, checked);
+                bool ret = AcceptBlock(*porphanBlock, orphanState, &pindexOrphan, NULL, false);
                 if (pindexOrphan && pfrom) {
                     mapBlockSource[pindexOrphan->GetBlockHash ()] = pfrom->GetId ();
                 }
