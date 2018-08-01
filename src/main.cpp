@@ -4543,9 +4543,6 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
 
     if (!CheckBlockSignature(*pblock))
         return error("ProcessNewBlock() : bad proof-of-stake block signature");
-    if(mapBlockIndex.count(pblock->hashPrevBlock) && !mapOrphanBlocks.count(pblock->GetHash())){
-        StoreOrphanBlock(pfrom, &pblock);
-    }
     if (pblock->GetHash() != Params().HashGenesisBlock() && pfrom != NULL) {
         //if we get this far, check if the prev block is our prev block, if not then request sync and return false
         BlockMap::iterator mi = mapBlockIndex.find(pblock->hashPrevBlock);
@@ -6180,6 +6177,9 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
         LogPrint("net", "received block %s peer=%d\n", inv.hash.ToString(), pfrom->id);
         //sometimes we will be sent their most recent block and its not the one we want, in that case tell where we are
         if (!mapBlockIndex.count(block.hashPrevBlock)) {
+            if(!mapOrphanBlocks.count(block.GetHash())){
+                StoreOrphanBlock(pfrom, &block);
+            }
             if (find(pfrom->vBlockRequested.begin(), pfrom->vBlockRequested.end(), hashBlock) != pfrom->vBlockRequested.end()) {
                 //we already asked for this block, so lets work backwards and ask for the previous block
                 pfrom->PushMessage("getblocks", chainActive.GetLocator(), block.hashPrevBlock);
@@ -6202,7 +6202,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
                     if(nDoS > 0) {
                             if(state.GetRejectReason() == "bad-hashproof" && pfrom->nVersion < 70914){
                                 nDoS = 20;
-                                ResurrectTransactionsFromBlock(block);
+//                                ResurrectTransactionsFromBlock(block);
                                 mempool.clear();
                                 mapBlockIndex.erase(inv.hash);
                                 pfrom->RemoveInventoryKnown(inv);
