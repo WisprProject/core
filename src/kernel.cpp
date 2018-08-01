@@ -267,7 +267,7 @@ bool GetKernelStakeModifier(uint256 hashBlockFrom, uint64_t& nStakeModifier, int
     CBlockIndex* pindexNext = chainActive[pindexFrom->nHeight + 1];
 
     // loop to find the stake modifier later by a selection interval
-    while (nStakeModifierTime < pindexFrom->GetBlockTime() + nStakeModifierSelectionInterval && (pindexNext->nHeight + 1) < chainActive.Height()) {
+    while (nStakeModifierTime < pindexFrom->GetBlockTime() + nStakeModifierSelectionInterval) {
         if (!pindexNext) {
             // Should never happen
             return error("Null pindexNext\n");
@@ -432,7 +432,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
                 continue;
         } else {
             nTryTime = nTimeTx - i;
-            if (!CheckStakeV1(txPrev.nTime, prev, nTryTime, hashProofOfStake, nValueInOld, chainActive.Tip(),
+            if (!CheckStakeV1(txPrev.nTime, prev, nTryTime, hashProofOfStake, nValueInOld, pindex->pprev,
                               nBits) || !((nTryTime & STAKE_TIMESTAMP_MASK) == 0)) {
                 continue;
             }
@@ -510,7 +510,7 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
         }
 
     } else {
-        if (!CheckStakeV1(txPrev.nTime, txin.prevout, tx.nTime, hashProofOfStake, nValueIn, chainActive.Tip(), block.nBits, true)) {
+        if (!CheckStakeV1(txPrev.nTime, txin.prevout, tx.nTime, hashProofOfStake, nValueIn, pindex->pprev, block.nBits, true)) {
             return error("CheckProofOfStake() : INFO: old bnStakeModifierV2 check kernel failed on coinstake %s, hashProof=%s \n",
                   tx.GetHash().ToString(), hashProofOfStake.ToString());
         }
