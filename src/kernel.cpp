@@ -384,12 +384,9 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
     int nHeightStart = chainActive.Height();
     unsigned int nHashDrift = 60;
     CDataStream ssUniqueID = stakeInput->GetUniqueness();
-//    LogPrintf("Stake(): Checking for stake\n");
     CBlockIndex *pindex = stakeInput->GetIndexFrom();
-//    LogPrintf("Stake(): stake input height %ds\n", pindex->nHeight);
     CBlock block;
     ReadBlockFromDisk(block, pindex);
-//    const CTxIn &txin = block.vtx[1].vin[0];
     uint256 hashBlock;
     CTransaction txPrev;
     stakeInput->GetTxFrom(txPrev);
@@ -406,13 +403,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
     prev.n = nIndex;
     prev.hash = txPrev.GetHash();
     int64_t nValueInOld = txPrev.vout[nIndex].nValue;
-//    LogPrintf(
-//            "%s : nPrevout=%u "
-//            "nTimeTx=%u prevoutHash=%s valueOld=%u valueStakeInput=%u  \n", __func__,
-//             stakeInput->GetPosition(), nTimeTx, prev.hash.ToString(), nValueInOld, nValueIn);
     nTryTime &= ~STAKE_TIMESTAMP_MASK;
-//    int64_t nSearchInterval = 1;
-//    static int nMaxStakeSearchInterval = 60;
     for (unsigned int i = 0; i<nHashDrift; i++) //iterate the hashing
     {
         //new block came in, move on
@@ -420,7 +411,7 @@ bool Stake(CStakeInput* stakeInput, unsigned int nBits, unsigned int nTimeBlockF
             break;
 
         //hash this iteration
-        if (stakeInput->GetIndexFrom()->nHeight > Params().NEW_PROTOCOLS_STARTHEIGHT()) {
+        if (chainActive.Height() > Params().NEW_PROTOCOLS_STARTHEIGHT()) {
             //grab stake modifier
             uint64_t nStakeModifier = 0;
             if (!stakeInput->GetModifier(nStakeModifier))
