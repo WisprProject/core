@@ -139,8 +139,8 @@ public:
 
         /** Height or Time Based Activations **/
         nLastPOWBlock = 450;
-        nNewProtocolStartHeight = 300000;
-        nNewProtocolStartTime = 1533241426;
+        nNewProtocolStartHeight = 400000;
+        nNewProtocolStartTime = 1538567022;
         nZerocoinStartHeight = nNewProtocolStartHeight;
         nZerocoinStartTime = nNewProtocolStartTime;
         /**
