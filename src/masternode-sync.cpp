@@ -261,11 +261,6 @@ void CMasternodeSync::Process()
     if (Params().NetworkID() != CBaseChainParams::REGTEST &&
         !IsBlockchainSynced() && RequestedMasternodeAssets > MASTERNODE_SYNC_SPORKS) return;
 
-    if(chainActive.Height() < Params().NEW_PROTOCOLS_STARTHEIGHT()){
-        RequestedMasternodeAssets = MASTERNODE_SYNC_FINISHED;
-        return;
-    }
-
     TRY_LOCK(cs_vNodes, lockRecv);
     if (!lockRecv) return;
 
