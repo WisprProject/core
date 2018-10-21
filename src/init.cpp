@@ -1836,12 +1836,7 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
     }
 
     bool newProtocolStart = GetAdjustedTime() >= Params().NEW_PROTOCOLS_STARTTIME();
-    if(newProtocolStart){
-        fEnableZeromint = GetBoolArg("-enablezeromint", true);
-    }else{
-        fEnableZeromint = false;
-    }
-
+    fEnableZeromint = GetBoolArg("-enablezeromint", true);
     nZeromintPercentage = GetArg("-zeromintpercentage", 10);
     if (nZeromintPercentage > 100) nZeromintPercentage = 100;
     if (nZeromintPercentage < 1) nZeromintPercentage = 1;

@@ -83,11 +83,7 @@ void OptionsModel::Init()
 
     bool newProtocolStart = GetAdjustedTime() >= Params().NEW_PROTOCOLS_STARTTIME();
     if (!settings.contains("fZeromintEnable")) {
-        if(newProtocolStart){
-            settings.setValue("fZeromintEnable", true);
-        }else{
-            settings.setValue("fZeromintEnable", false);
-        }
+        settings.setValue("fZeromintEnable", true);
     }
     fEnableZeromint = settings.value("fZeromintEnable").toBool();
 
