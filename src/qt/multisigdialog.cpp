@@ -138,28 +138,28 @@ void MultisigDialog::deleteFrame()
         for (int i = 0; i < ui->addressList->count(); i++) {
             QWidget *input = qobject_cast<QWidget *>(ui->addressList->itemAt(i)->widget());
             QLabel *addressLabel = input->findChild<QLabel *>("addressLabel");
-            addressLabel->setText(QApplication::translate("MultisigDialog", strprintf("Address / Key %i:", i + 1).c_str(), 0));
+            addressLabel->setText(strprintf(QApplication::translate("MultisigDialog", "Address / Key %i: ", 0).toStdString(), i + 1).c_str());
         }
     }
     else if (destinationFrame) {
         for (int i = 0; i < ui->destinationsList->count(); i++) {
             QWidget *input = qobject_cast<QWidget *>(ui->destinationsList->itemAt(i)->widget());
             QLabel *destinationAddressLabel = input->findChild<QLabel *>("destinationAddressLabel");
-            destinationAddressLabel->setText(QApplication::translate("MultisigDialog", strprintf("%i. Address: ", i + 1).c_str(), 0));
+            destinationAddressLabel->setText(strprintf(QApplication::translate("MultisigDialog", "%i. Address: ", 0).toStdString(), i + 1).c_str());
         }
     }
     else if (keyFrame) {
         for (int i = 0; i < ui->keyList->count(); i++) {
             QWidget *input = qobject_cast<QWidget *>(ui->keyList->itemAt(i)->widget());
             QLabel *keyListLabel = input->findChild<QLabel *>("keyLabel");
-            keyListLabel->setText(QApplication::translate("MultisigDialog", strprintf("Key %i: ", i + 1).c_str(), 0));
+            keyListLabel->setText(strprintf(QApplication::translate("MultisigDialog", "Key %i: ", 0).toStdString(), i + 1).c_str());
         }
     }
     else if (txInputFrame) {
         for (int i = 0; i < ui->inputsList->count(); i++) {
             QWidget *input = qobject_cast<QWidget *>(ui->inputsList->itemAt(i)->widget());
             QLabel *txInputIdLabel = input->findChild<QLabel *>("txInputIdLabel");
-            txInputIdLabel->setText(QApplication::translate("MultisigDialog", strprintf("%i. Tx Hash: ", i + 1).c_str(), 0));
+            txInputIdLabel->setText(strprintf(QApplication::translate("MultisigDialog", "%i. Tx Hash: ", 0).toStdString(), i + 1).c_str());
         }
     }
 }
@@ -864,7 +864,7 @@ void MultisigDialog::on_addAddressButton_clicked()
 
     QLabel* addressLabel = new QLabel(addressFrame);
     addressLabel->setObjectName(QStringLiteral("addressLabel"));
-    addressLabel->setText(QApplication::translate("MultisigDialog", strprintf("Address / Key %i:", ui->addressList->count()+1).c_str() , 0));
+    addressLabel->setText(strprintf(QApplication::translate("MultisigDialog", "Address / Key %i: ", 0).toStdString(), ui->addressList->count()+1).c_str());
     addressLayout->addWidget(addressLabel);
 
     QValidatedLineEdit* address = new QValidatedLineEdit(addressFrame);
@@ -936,7 +936,7 @@ void MultisigDialog::on_addInputButton_clicked()
 
     QLabel* txInputIdLabel = new QLabel(txInputFrame);
     txInputIdLabel->setObjectName(QStringLiteral("txInputIdLabel"));
-    txInputIdLabel->setText(QApplication::translate("MultisigDialog", strprintf("%i. Tx Hash: ", ui->inputsList->count()+1).c_str(), 0));
+    txInputIdLabel->setText(strprintf(QApplication::translate("MultisigDialog", "%i. Tx Hash: ", 0).toStdString(), ui->inputsList->count()+1).c_str());
     txInputLayout->addWidget(txInputIdLabel);
 
     QLineEdit* txInputId = new QLineEdit(txInputFrame);
@@ -1005,7 +1005,7 @@ void MultisigDialog::on_addDestinationButton_clicked()
     BitcoinAmountField* destinationAmount = new BitcoinAmountField(destinationFrame);
     destinationAmount->setObjectName(QStringLiteral("destinationAmount"));
 
-    destinationAddressLabel->setText(QApplication::translate("MultisigDialog", strprintf("%i. Address: ", ui->destinationsList->count()+1).c_str(), 0));
+    destinationAddressLabel->setText(strprintf(QApplication::translate("MultisigDialog", "%i. Address: ", 0).toStdString(), ui->destinationsList->count()+1).c_str());
     destinationAmountLabel->setText(QApplication::translate("MultisigDialog", "Amount: ", 0));
 
     destinationLayout->addWidget(destinationAmount);
@@ -1047,7 +1047,7 @@ void MultisigDialog::on_addPrivKeyButton_clicked()
 
     QLabel* keyLabel = new QLabel(keyFrame);
     keyLabel->setObjectName(QStringLiteral("keyLabel"));
-    keyLabel->setText(QApplication::translate("MultisigDialog", strprintf("Key %i: ", (ui->keyList->count()+1)).c_str(), 0));
+    keyLabel->setText(strprintf(QApplication::translate("MultisigDialog", "Key %i: ", 0).toStdString(), (ui->keyList->count()+1)).c_str());
     keyLayout->addWidget(keyLabel);
 
     QLineEdit* key = new QLineEdit(keyFrame);
