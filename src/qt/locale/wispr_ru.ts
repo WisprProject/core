@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>Copy the currently selected address to the system clipboard</source>
-        <translation>Скопировать текущий выбранный адрес в буфер обмена системы</translation>
+        <translation>Копировать выбранный адрес в буфер обмена</translation>
     </message>
     <message>
         <source>&amp;Copy</source>
@@ -23,7 +23,7 @@
     </message>
     <message>
         <source>Delete the currently selected address from the list</source>
-        <translation>Удалить текущий выбранный адрес из списка</translation>
+        <translation>Удалить выбранный адрес из списка</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
@@ -51,7 +51,7 @@
     </message>
     <message>
         <source>C&amp;hoose</source>
-        <translation>В&amp;ыберите</translation>
+        <translation>В&amp;ыбрать</translation>
     </message>
     <message>
         <source>Sending addresses</source>
@@ -71,19 +71,19 @@
     </message>
     <message>
         <source>&amp;Copy Address</source>
-        <translation>&amp;Копировать Адрес</translation>
+        <translation>&amp;Копировать адрес</translation>
     </message>
     <message>
         <source>Copy &amp;Label</source>
-        <translation>Копировать &amp;Метку</translation>
+        <translation>Копировать &amp;метку</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>&amp;Редактировать</translation>
+        <translation>&amp;Правка</translation>
     </message>
     <message>
         <source>Export Address List</source>
-        <translation>Экспорт списка адресов</translation>
+        <translation>Экспортировать список адресов</translation>
     </message>
     <message>
         <source>Comma separated file (*.csv)</source>
@@ -117,23 +117,23 @@
     <name>AskPassphraseDialog</name>
     <message>
         <source>Passphrase Dialog</source>
-        <translation>Диалоговое окно кодовой фразы</translation>
+        <translation>Диалог ввода пароля</translation>
     </message>
     <message>
         <source>Enter passphrase</source>
-        <translation>Введите кодовую фразу</translation>
+        <translation>Введите пароль</translation>
     </message>
     <message>
         <source>New passphrase</source>
-        <translation>Новая кодовая фраза</translation>
+        <translation>Новый пароль</translation>
     </message>
     <message>
         <source>Repeat new passphrase</source>
-        <translation>Повторить новую кодовую фразу</translation>
+        <translation>Повторите новый пароль</translation>
     </message>
     <message>
         <source>Serves to disable the trivial sendmoney when OS account compromised. Provides no real security.</source>
-        <translation>Служит для отключения тривиальных сендмонэй, когда учетная запись ОС скомпрометирована. Не обеспечивает реальной безопасности. </translation>
+        <translation>Служит для отключения тривиальных сендмонэй, когда учетная запись ОС скомпрометирована. Не обеспечивает реальной безопасности.</translation>
     </message>
     <message>
         <source>For anonymization, automint, and staking only</source>
@@ -141,7 +141,7 @@
     </message>
     <message>
         <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
-        <translation>Введите новый пароль к кошельку. &lt;br/&gt;Используйте при этом десять &lt;/b&gt;или болле случайных символов &lt;/b&gt;или восем и более слов.</translation>
+        <translation>Введите новый пароль кошелька.&lt;br/&gt;Используйте пароль, состоящий из &lt;b&gt;десяти или более случайных символов&lt;/b&gt; или &lt;b&gt;восьми или более слов&lt;/b&gt;.</translation>
     </message>
     <message>
         <source>Encrypt wallet</source>
@@ -149,15 +149,15 @@
     </message>
     <message>
         <source>This operation needs your wallet passphrase to unlock the wallet.</source>
-        <translation>Для этой операции требуется кодовая фраза вашего кошелька, чтобы разблокировать кошелек.</translation>
+        <translation>Для этой операции требуется пароль, чтобы разблокировать кошелек.</translation>
     </message>
     <message>
         <source>Unlock wallet</source>
-        <translation>Снятие блокировки кошелька</translation>
+        <translation>Разблокировать кошелек</translation>
     </message>
     <message>
         <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
-        <translation>Для операции дешифрования вашего кошелька нужна кодовая фраза.</translation>
+        <translation>Для выполнения операции расшифровки требуется пароль вашего кошелька.</translation>
     </message>
     <message>
         <source>Decrypt wallet</source>
@@ -165,15 +165,15 @@
     </message>
     <message>
         <source>Change passphrase</source>
-        <translation>Изменить кодовую фразу</translation>
+        <translation>Сменить пароль</translation>
     </message>
     <message>
         <source>Enter the old and new passphrase to the wallet.</source>
-        <translation>Введите старую и новую кодовую фразу для кошелька.</translation>
+        <translation>Введите старый пароль и новый пароль для кошелька.</translation>
     </message>
     <message>
         <source>Confirm wallet encryption</source>
-        <translation>Подтверждение шифрования кошелька</translation>
+        <translation>Подтвердите шифрование кошелька</translation>
     </message>
     <message>
         <source>WISPR will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your WSPs from being stolen by malware infecting your computer.</source>
@@ -181,11 +181,11 @@
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
-        <translation>Вы действительно хотите зашифровать свой кошелек?</translation>
+        <translation>Вы уверены, что хотите зашифровать ваш кошелёк?</translation>
     </message>
     <message>
         <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR WSP&lt;/b&gt;!</source>
-        <translation>Внимание: если вы зашифруете свой кошелёк и потеряете от него пароль, то вы &lt;b&gt;ПОТЕРЯЕТЕ ВСЕ СВОИ WSP&lt;/b&gt;!</translation>
+        <translation>Внимание: если Вы зашифруете кошелёк и потеряете пароль, вы &lt;b&gt;ПОТЕРЯЕТЕ ВСЕ СВОИ WSP&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Wallet encrypted</source>
@@ -193,19 +193,19 @@
     </message>
     <message>
         <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
-        <translation>ВАЖНО: все предыдущие резервные копии вашего файла кошелька должны быть заменены вновь созданным зашифрованным файлом кошелька. Из соображений безопасности предыдущие резервные копии незашифрованного файла кошелька станут бесполезными, как только вы начнете использовать новый зашифрованный кошелек.</translation>
+        <translation>ВАЖНО: все предыдущие резервные копии вашего кошелька должны быть заменены новым зашифрованным файлом. В целях безопасности предыдущие резервные копии незашифрованного кошелька станут бесполезны, как только вы начнёте использовать новый зашифрованный кошелёк.</translation>
     </message>
     <message>
         <source>Wallet encryption failed</source>
-        <translation>Сбой шифрования кошелька</translation>
+        <translation>Не удалось зашифровать кошелек</translation>
     </message>
     <message>
         <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
-        <translation>Шифрование кошелька не удалось из-за внутренней ошибки. Ваш кошелек не был зашифрован.</translation>
+        <translation>Шифрование кошелька не удалось из-за внутренней ошибки. Ваш кошелёк не был зашифрован.</translation>
     </message>
     <message>
         <source>The supplied passphrases do not match.</source>
-        <translation>Введенные парольные фразы не совпадают.</translation>
+        <translation>Введённые пароли не совпадают.</translation>
     </message>
     <message>
         <source>Wallet unlock failed</source>
@@ -213,7 +213,7 @@
     </message>
     <message>
         <source>The passphrase entered for the wallet decryption was incorrect.</source>
-        <translation>Кодовая фраза, введенная для расшифровки кошелька, была неверной.</translation>
+        <translation>Указанный пароль не подходит.</translation>
     </message>
     <message>
         <source>Wallet decryption failed</source>
@@ -221,7 +221,7 @@
     </message>
     <message>
         <source>Wallet passphrase was successfully changed.</source>
-        <translation>Кодовая фраза кошелька успешно изменена.</translation>
+        <translation>Пароль кошелька успешно изменён.</translation>
     </message>
     <message>
         <source>Warning: The Caps Lock key is on!</source>
@@ -236,7 +236,7 @@
     </message>
     <message>
         <source>Banned Until</source>
-        <translation>Запрещено до</translation>
+        <translation>Заблокирован до</translation>
     </message>
 </context>
 <context>
@@ -255,7 +255,7 @@
     </message>
     <message>
         <source>Enter a WISPR Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</source>
-        <translation>Введите WISPR адрес, которым вы хотите зашифровать, используя BIP 38. Введите пароль в среднем поле. Нажмите "Зашифровать", чтобы создать зашиврованный секретный ключ.</translation>
+        <translation>Введите WISPR адрес, которым вы хотите зашифровать, используя BIP 38. Введите пароль в среднем поле. Нажмите "Зашифровать", чтобы создать зашифрованный приватный ключ.</translation>
     </message>
     <message>
         <source>The WISPR address to encrypt</source>
@@ -291,7 +291,7 @@
     </message>
     <message>
         <source>Encrypt the private key for this WISPR address</source>
-        <translation>Зашифровать личные ключи для этого WISPR адреса </translation>
+        <translation>Зашифровать приватный ключ для этого WISPR адреса</translation>
     </message>
     <message>
         <source>Reset all fields</source>
@@ -299,15 +299,15 @@
     </message>
     <message>
         <source>The encrypted private key</source>
-        <translation>Зашифрованные личные ключи</translation>
+        <translation>Зашифрованный приватный ключ</translation>
     </message>
     <message>
         <source>Decrypt the entered key using the passphrase</source>
-        <translation>Дешифрование введенных ключей с использованием кодовой фразы</translation>
+        <translation>Дешифрование введенного ключа с использованием пароля</translation>
     </message>
     <message>
         <source>Encrypt &amp;Key</source>
-        <translation>Зашифровать &amp;Ключ</translation>
+        <translation>Зашифровать &amp;ключ</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>
@@ -323,23 +323,23 @@
     </message>
     <message>
         <source>Decrypt &amp;Key</source>
-        <translation>Дешифровать &amp;Ключ</translation>
+        <translation>Дешифровать &amp;ключ</translation>
     </message>
     <message>
         <source>Decrypted Key:</source>
-        <translation>Дешифрованный Ключ</translation>
+        <translation>Дешифрованный ключ</translation>
     </message>
     <message>
         <source>Import Address</source>
-        <translation>Импортировать Адрес</translation>
+        <translation>Импортировать адрес</translation>
     </message>
     <message>
         <source>Click "Decrypt Key" to compute key</source>
-        <translation>Нажмите "Дешифровать Ключ" для генерации ключа</translation>
+        <translation>Нажмите "Дешифровать ключ" для генерации ключа</translation>
     </message>
     <message>
         <source>The entered passphrase is invalid. </source>
-        <translation>Неправильно введена кодовая фраза.</translation>
+        <translation>Неверный пароль.</translation>
     </message>
     <message>
         <source>Allowed: 0-9,a-z,A-Z,</source>
@@ -363,7 +363,7 @@
     </message>
     <message>
         <source>Private key for the entered address is not available.</source>
-        <translation>Персональный ключ для введенного адреса недоступен.</translation>
+        <translation>Приватный ключ для введенного адреса недоступен.</translation>
     </message>
     <message>
         <source>Failed to decrypt.</source>
@@ -371,7 +371,7 @@
     </message>
     <message>
         <source>Please check the key and passphrase and try again.</source>
-        <translation>Пожалуйста, проверьте ключ и кодовую фразу и попробуйте снова.</translation>
+        <translation>Пожалуйста, проверьте ключ и пароль и попробуйте снова.</translation>
     </message>
     <message>
         <source>Data Not Valid.</source>
@@ -395,7 +395,7 @@
     </message>
     <message>
         <source>Successfully Added Private Key To Wallet</source>
-        <translation>Персональный ключ успешно добавлен к кошельку</translation>
+        <translation>Приватный ключ успешно добавлен к кошельку</translation>
     </message>
 </context>
 <context>
@@ -430,11 +430,11 @@
     </message>
     <message>
         <source>Browse transaction history</source>
-        <translation>Просмотр истории транзакций</translation>
+        <translation>Показать историю транзакций</translation>
     </message>
     <message>
         <source>Privacy Actions for zWSP</source>
-        <translation>Действия конфиденциальности для зпив</translation>
+        <translation>Действия конфиденциальности для zWSP</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -454,7 +454,7 @@
     </message>
     <message>
         <source>&amp;Options...</source>
-        <translation>&amp;Опции...</translation>
+        <translation>&amp;Параметры...</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>
@@ -462,7 +462,7 @@
     </message>
     <message>
         <source>Show or hide the main Window</source>
-        <translation>Показать или скрыть основное Окно</translation>
+        <translation>Показать или скрыть главное окно</translation>
     </message>
     <message>
         <source>&amp;Encrypt Wallet...</source>
@@ -470,11 +470,11 @@
     </message>
     <message>
         <source>Encrypt the private keys that belong to your wallet</source>
-        <translation>Зашифровать личные ключи, принадлежащие вашему кошельку</translation>
+        <translation>Зашифровать приватные ключи, содержащиеся в вашем кошельке</translation>
     </message>
     <message>
         <source>&amp;Backup Wallet...</source>
-        <translation>&amp;Резервная копия кошелька...</translation>
+        <translation>&amp;Сделать резервную копию кошелька...</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -482,11 +482,11 @@
     </message>
     <message>
         <source>&amp;Change Passphrase...</source>
-        <translation>&amp;Изменить кодовую фразу</translation>
+        <translation>&amp;Изменить пароль...</translation>
     </message>
     <message>
         <source>Change the passphrase used for wallet encryption</source>
-        <translation>Изменение кодовой фразы, используемой для шифрования кошелька</translation>
+        <translation>Изменить пароль шифрования кошелька</translation>
     </message>
     <message>
         <source>&amp;Unlock Wallet...</source>
@@ -494,7 +494,7 @@
     </message>
     <message>
         <source>Unlock wallet</source>
-        <translation>Снятие блокировки кошелька</translation>
+        <translation>Разблокировать кошелек</translation>
     </message>
     <message>
         <source>&amp;Lock Wallet</source>
@@ -566,7 +566,7 @@
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
-        <translation>Показать список использованых адресов отправки </translation>
+        <translation>Показать список использованых адресов отправки</translation>
     </message>
     <message>
         <source>&amp;Receiving addresses...</source>
@@ -578,27 +578,27 @@
     </message>
     <message>
         <source>&amp;Multisignature creation...</source>
-        <translation>СОздание многоподписей...</translation>
+        <translation>Создание мультиподписи...</translation>
     </message>
     <message>
         <source>Create a new multisignature address and add it to this wallet</source>
-        <translation>Создание нового адреса многоадресной подписи и добавление его в бумажник</translation>
+        <translation>Создание нового мультиподписного адреса и добавление его в бумажник</translation>
     </message>
     <message>
         <source>&amp;Multisignature spending...</source>
-        <translation>&amp;Многоподписная трата...</translation>
+        <translation>&amp;Мультиподписная трата...</translation>
     </message>
     <message>
         <source>Spend from a multisignature address</source>
-        <translation>Потратить из многоподписного адреса</translation>
+        <translation>Потратить из мультиподписного адреса</translation>
     </message>
     <message>
         <source>&amp;Multisignature signing...</source>
-        <translation>&amp;Многоподписная подпись...</translation>
+        <translation>&amp;Подписать мультиподписью...</translation>
     </message>
     <message>
         <source>Sign with a multisignature address</source>
-        <translation>Подпишись с многоподписным адресом</translation>
+        <translation>Подпишись с мультиподписным адресом</translation>
     </message>
     <message>
         <source>Open &amp;URI...</source>
@@ -654,11 +654,11 @@
     </message>
     <message>
         <source>Request payments (generates QR codes and wispr: URIs)</source>
-        <translation>Запросить платежи (генерирует QR-код и WISPR: URI)</translation>
+        <translation>Запросить платежи (создать QR-коды и WISPR: URI)</translation>
     </message>
     <message>
         <source>&amp;Privacy</source>
-        <translation>&amp;Конфиденциальность</translation>
+        <translation>&amp;Приватность</translation>
     </message>
     <message>
         <source>&amp;Masternodes</source>
@@ -694,7 +694,7 @@
     </message>
     <message>
         <source>Encrypt and decrypt private keys using a passphrase</source>
-        <translation>Шифрование и дешифрование личных ключей с использованием кодовой фразы</translation>
+        <translation>Шифрование и дешифрование приватных ключей с использованием кодовой фразы</translation>
     </message>
     <message>
         <source>&amp;MultiSend</source>
@@ -915,7 +915,7 @@ MultiSend: %1</translation>
     </message>
     <message>
         <source>Bytes:</source>
-        <translation>Байты:</translation>
+        <translation>Байт:</translation>
     </message>
     <message>
         <source>Amount:</source>
@@ -931,7 +931,7 @@ MultiSend: %1</translation>
     </message>
     <message>
         <source>Coin Selection</source>
-        <translation>Выбор монеты</translation>
+        <translation>Выбор монет</translation>
     </message>
     <message>
         <source>Dust:</source>
@@ -943,7 +943,7 @@ MultiSend: %1</translation>
     </message>
     <message>
         <source>Change:</source>
-        <translation>Изменить:</translation>
+        <translation>Сдача:</translation>
     </message>
     <message>
         <source>(un)select all</source>
@@ -951,7 +951,7 @@ MultiSend: %1</translation>
     </message>
     <message>
         <source>toggle lock state</source>
-        <translation>поменять статус блокировки</translation>
+        <translation>сменить блокировку</translation>
     </message>
     <message>
         <source>Tree mode</source>
@@ -971,11 +971,11 @@ MultiSend: %1</translation>
     </message>
     <message>
         <source>Received with label</source>
-        <translation>Получено с меткой</translation>
+        <translation>Получено на метку</translation>
     </message>
     <message>
         <source>Received with address</source>
-        <translation>Полученно на адрес</translation>
+        <translation>Получено на адрес</translation>
     </message>
     <message>
         <source>Type</source>
@@ -987,7 +987,7 @@ MultiSend: %1</translation>
     </message>
     <message>
         <source>Confirmations</source>
-        <translation>Подтверждения</translation>
+        <translation>Подтверждений</translation>
     </message>
     <message>
         <source>Confirmed</source>
@@ -1019,7 +1019,7 @@ MultiSend: %1</translation>
     </message>
     <message>
         <source>Unlock unspent</source>
-        <translation>Разблокировать неистраченные</translation>
+        <translation>Разблокировать непотраченное</translation>
     </message>
     <message>
         <source>Copy quantity</source>
@@ -1031,7 +1031,7 @@ MultiSend: %1</translation>
     </message>
     <message>
         <source>Copy after fee</source>
-        <translation>Копировать после вознаграждения </translation>
+        <translation>Копировать после комиссии</translation>
     </message>
     <message>
         <source>Copy bytes</source>
@@ -1047,7 +1047,7 @@ MultiSend: %1</translation>
     </message>
     <message>
         <source>Copy change</source>
-        <translation>Копировать изменение</translation>
+        <translation>Копировать сдачу</translation>
     </message>
     <message>
         <source>Please switch to "List mode" to use this function.</source>
@@ -1071,7 +1071,7 @@ MultiSend: %1</translation>
     </message>
     <message>
         <source>medium</source>
-        <translation>промежуточный</translation>
+        <translation>средний</translation>
     </message>
     <message>
         <source>low-medium</source>
@@ -1131,7 +1131,7 @@ MultiSend: %1</translation>
     </message>
     <message>
         <source>Can vary +/- %1 uwsp per input.</source>
-        <translation>Может вариироваться +/- %1 uwsp при вводе</translation>
+        <translation>Может отличаться +/- %1 uwsp при вводе</translation>
     </message>
     <message>
         <source>(no label)</source>
@@ -1139,11 +1139,11 @@ MultiSend: %1</translation>
     </message>
     <message>
         <source>change from %1 (%2)</source>
-        <translation>изменить с %1 (%2)</translation>
+        <translation>сдача с %1 (%2)</translation>
     </message>
     <message>
         <source>(change)</source>
-        <translation>(изменить)</translation>
+        <translation>(сдача)</translation>
     </message>
 </context>
 <context>
@@ -1166,7 +1166,7 @@ MultiSend: %1</translation>
     </message>
     <message>
         <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation>Адрес ассоциирован с этим элемнтом списка адресов. Это может быть изменнено только для адресов отправления.</translation>
+        <translation>Адрес, связанный с этой записью списка адресов. Он может быть изменён только для адресов отправки.</translation>
     </message>
     <message>
         <source>New receiving address</source>
@@ -1256,7 +1256,7 @@ MultiSend: %1</translation>
     </message>
     <message>
         <source>UI Options:</source>
-        <translation>Опции интерфейса</translation>
+        <translation>Настройки интерфейса</translation>
     </message>
     <message>
         <source>Choose data directory on startup (default: %u)</source>
@@ -1342,7 +1342,7 @@ MultiSend: %1</translation>
     </message>
     <message>
         <source>Alias</source>
-        <translation>Алиас</translation>
+        <translation>Имя</translation>
     </message>
     <message>
         <source>Address</source>
@@ -1362,7 +1362,7 @@ MultiSend: %1</translation>
     </message>
     <message>
         <source>Last Seen (UTC)</source>
-        <translation>Последний визит (UTC)</translation>
+        <translation>Последняя активность (UTC)</translation>
     </message>
     <message>
         <source>Pubkey</source>
@@ -1370,7 +1370,7 @@ MultiSend: %1</translation>
     </message>
     <message>
         <source>S&amp;tart alias</source>
-        <translation>З&amp;апуск алиаса</translation>
+        <translation>Запуск по &amp;имени</translation>
     </message>
     <message>
         <source>Start &amp;all</source>
@@ -1394,7 +1394,7 @@ MultiSend: %1</translation>
     </message>
     <message>
         <source>Start alias</source>
-        <translation>Запуск алиаса</translation>
+        <translation>Запуск по имени</translation>
     </message>
     <message>
         <source>Confirm masternode start</source>
@@ -1406,7 +1406,7 @@ MultiSend: %1</translation>
     </message>
     <message>
         <source>Confirm all masternodes start</source>
-        <translation>Подтвердить старт всех мастернод</translation>
+        <translation>Подтверждение запуска всех мастернод</translation>
     </message>
     <message>
         <source>Are you sure you want to start ALL masternodes?</source>
@@ -1414,7 +1414,7 @@ MultiSend: %1</translation>
     </message>
     <message>
         <source>Command is not available right now</source>
-        <translation>Команда сейчас недоступна</translation>
+        <translation>Команда в данный момент недоступна</translation>
     </message>
     <message>
         <source>You can't use this command until masternode list is synced</source>
@@ -1590,19 +1590,19 @@ Please check the address and try again.</source>
     <name>MultisigDialog</name>
     <message>
         <source>Multisignature Address Interactions</source>
-        <translation> Многоподписные адресные взаимодействия</translation>
+        <translation>Мультиподписные адресные взаимодействия</translation>
     </message>
     <message>
         <source>Create MultiSignature &amp;Address</source>
-        <translation>Создать Мультиподпись &amp;Адрес</translation>
+        <translation>Создать мультиподписной &amp;адрес</translation>
     </message>
     <message>
         <source>How many people must sign to verify a transaction</source>
-        <translation>Сколько людей должны подписать чтобы подтвердить транзакцию</translation>
+        <translation>Сколько людей должны подписать, чтобы подтвердить транзакцию</translation>
     </message>
     <message>
         <source>Enter the minimum number of signatures required to sign transactions</source>
-        <translation>Введите минимальное число подписей необходимое для подписания транзакций</translation>
+        <translation>Введите минимальное число подписей, необходимое для подписания транзакций</translation>
     </message>
     <message>
         <source>Address Label:</source>
@@ -1610,7 +1610,7 @@ Please check the address and try again.</source>
     </message>
     <message>
         <source>Add another address that could sign to verify a transaction from the multisig address.</source>
-        <translation>Добавьте еще один адрес, который может подписать, подтвержденную транзакцию с многоподписного адреса.</translation>
+        <translation>Добавьте еще один адрес, который может подписать, подтвержденную транзакцию с мультиподписного адреса.</translation>
     </message>
     <message>
         <source>&amp;Add Address / Key</source>
@@ -1619,6 +1619,10 @@ Please check the address and try again.</source>
     <message>
         <source>Local addresses or public keys that can sign:</source>
         <translation>Локальные адреса или публичные ключи кторые могут подписать:</translation>
+    </message>
+    <message>
+        <source>Address / Key %i</source>
+        <translation>Адрес / Ключ %i</translation>
     </message>
     <message>
         <source>Create a new multisig address</source>
@@ -1646,7 +1650,7 @@ Please be patient after clicking import.</source>
     </message>
     <message>
         <source>&amp;Create MultiSignature Tx</source>
-        <translation>&amp;Создать МультиПодписное Сообщение</translation>
+        <translation>&amp;Создать мультиподписную транзакцию</translation>
     </message>
     <message>
         <source>Inputs:</source>
@@ -1654,15 +1658,19 @@ Please be patient after clicking import.</source>
     </message>
     <message>
         <source>Coin Control</source>
-        <translation>Контроль Монеты</translation>
+        <translation>Контроль монет</translation>
     </message>
     <message>
         <source>Quantity Selected:</source>
-        <translation>Выбранное Количество:</translation>
+        <translation>Выбранное количество:</translation>
     </message>
     <message>
         <source>0</source>
         <translation>0</translation>
+    </message>
+    <message>
+        <source>Address:</source>
+        <translation>Адрес:</translation>
     </message>
     <message>
         <source>Amount:</source>
@@ -1678,7 +1686,7 @@ Please be patient after clicking import.</source>
     </message>
     <message>
         <source>Address / Amount:</source>
-        <translation>Адрес/ Сумма:</translation>
+        <translation>Адрес / Сумма:</translation>
     </message>
     <message>
         <source>Add destinations to send WSP to</source>
@@ -1686,7 +1694,19 @@ Please be patient after clicking import.</source>
     </message>
     <message>
         <source>Add &amp;Destination</source>
-        <translation>Добавить &amp; Назначение</translation>
+        <translation>Добавить &amp;назначение</translation>
+    </message>
+    <message>
+        <source>%i. Address: </source>
+        <translation>%i. Адрес: </translation>
+    </message>
+    <message>
+        <source>Address / Key %i: </source>
+        <translation>Адрес / Ключ %i: </translation>
+    </message>
+    <message>
+        <source>Key %i: </source>
+        <translation>Ключ %i: </translation>
     </message>
     <message>
         <source>Create a transaction object using the given inputs to the given outputs</source>
@@ -1698,19 +1718,19 @@ Please be patient after clicking import.</source>
     </message>
     <message>
         <source>&amp;Sign MultiSignature Tx</source>
-        <translation>&amp; Sign MultiSignature Tx</translation>
+        <translation>&amp;Подписать мультиподписную транзакцию</translation>
     </message>
     <message>
         <source>Transaction Hex:</source>
-        <translation>Транзакция Hex:</translation>
+        <translation>Hex транзакции:</translation>
     </message>
     <message>
         <source>Sign the transaction from this wallet or from provided private keys</source>
-        <translation>Подпишите транзакцию из этого кошелька или из предоставленных личных ключей</translation>
+        <translation>Подпишите транзакцию из этого кошелька или из предоставленных приватный ключей</translation>
     </message>
     <message>
         <source>S&amp;ign</source>
-        <translation>П&amp;одпись</translation>
+        <translation>П&amp;одписать</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;DISABLED until transaction has been signed enough times.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -1722,15 +1742,15 @@ Please be patient after clicking import.</source>
     </message>
     <message>
         <source>Add private keys to sign the transaction with</source>
-        <translation>Добавьте личные ключи для подписания транзакции с помощью</translation>
+        <translation>Добавьте приватные ключи для подписания транзакции с помощью</translation>
     </message>
     <message>
         <source>Add Private &amp;Key</source>
-        <translation>Добавьте личный &amp; ключ</translation>
+        <translation>Добавьте приватный &amp; ключ</translation>
     </message>
     <message>
         <source>Sign with only private keys (Not Recommened)</source>
-        <translation>Подписать только личными ключами ( не рекомедуется)</translation>
+        <translation>Подписать только приватными ключами (не рекомедуется)</translation>
     </message>
     <message>
         <source>Invalid Tx Hash.</source>
@@ -1750,7 +1770,7 @@ Please be patient after clicking import.</source>
     </message>
     <message>
         <source>Amount: </source>
-        <translation>Сумма:</translation>
+        <translation>Сумма: </translation>
     </message>
     <message>
         <source>Maximum (15)</source>
@@ -1761,7 +1781,7 @@ Please be patient after clicking import.</source>
     <name>ObfuscationConfig</name>
     <message>
         <source>Configure Obfuscation</source>
-        <translation>Параметры Перемешивания</translation>
+        <translation>Параметры перемешивания</translation>
     </message>
     <message>
         <source>Basic Privacy</source>
@@ -1809,7 +1829,7 @@ Please be patient after clicking import.</source>
     </message>
     <message>
         <source>Obfuscation Configuration</source>
-        <translation>Настройка Перемешивания</translation>
+        <translation>Настройка перемешивания</translation>
     </message>
     <message>
         <source>Obfuscation was successfully set to basic (%1 and 2 rounds). You can change this at any time by opening WISPR's configuration screen.</source>
@@ -1855,7 +1875,7 @@ Please be patient after clicking import.</source>
     </message>
     <message>
         <source>&amp;Main</source>
-        <translation>&amp;Основной</translation>
+        <translation>&amp;Основное</translation>
     </message>
     <message>
         <source>Size of &amp;database cache</source>
@@ -1863,11 +1883,11 @@ Please be patient after clicking import.</source>
     </message>
     <message>
         <source>MB</source>
-        <translation>MB</translation>
+        <translation>МБ</translation>
     </message>
     <message>
         <source>Number of script &amp;verification threads</source>
-        <translation>Количество сценариев &amp;проверочных потоков</translation>
+        <translation>Число потоков проверки &amp;сценария</translation>
     </message>
     <message>
         <source>(0 = auto, &lt;0 = leave that many cores free)</source>
@@ -1911,23 +1931,23 @@ Please be patient after clicking import.</source>
     </message>
     <message>
         <source>Whether to show coin control features or not.</source>
-        <translation>Показывает или скрывает особенности управления монетами.</translation>
+        <translation>Показывать ли функции контроля монет или нет.</translation>
     </message>
     <message>
         <source>Enable coin &amp;control features</source>
-        <translation>Включить функции &amp;управления монет</translation>
+        <translation>Включить функции &amp;контроля монет</translation>
     </message>
     <message>
         <source>Show additional tab listing all your masternodes in first sub-tab&lt;br/&gt;and all masternodes on the network in second sub-tab.</source>
-        <translation>Показать список всех ваших мастернод в первой вкладке&lt;br/&gt;и всех мастернод в сети во второй вкладке.</translation>
+        <translation>Показывать дополнительную вкладку со списком своих мастернод&lt;br/&gt;в одной таблице и списком всех мастернод в другой.</translation>
     </message>
     <message>
         <source>Show Masternodes Tab</source>
-        <translation>Показать вкладку Мастернод</translation>
+        <translation>Показывать вкладку с мастернодами</translation>
     </message>
     <message>
         <source>&amp;Spend unconfirmed change</source>
-        <translation>&amp;Проведение неподтвержденных изменений</translation>
+        <translation>&amp;Тратить неподтверждённую сдачу</translation>
     </message>
     <message>
         <source>&amp;Network</source>
@@ -1945,23 +1965,23 @@ https://www.transifex.com/WisprProject/WisprProject-translations</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
-        <translation>Карта порта, использующего &amp;UPnP</translation>
+        <translation>Пробросить порт через &amp;UPnP</translation>
     </message>
     <message>
         <source>Enable automatic minting of WSP units to zWSP</source>
-        <translation>Невозможно автоматически отчеканить единицы WSP для zWSP</translation>
+        <translation>Включить автоматическую чеканку WSP в zWSP</translation>
     </message>
     <message>
         <source>Enable zWSP Automint</source>
-        <translation>Невозможно авточеканка  zWSP</translation>
+        <translation>Включить авточеканку zWSP</translation>
     </message>
     <message>
         <source>Percentage of incoming WSP which get automatically converted to zWSP via Zerocoin Protocol (min: 10%)</source>
-        <translation>Процент приходящих WSP, которые автоматически конвертируются в zWSP благодаря Zerocoin протоколу (min: 10%)</translation>
+        <translation>Процент приходящих WSP, которые автоматически конвертируются в zWSP с помощью протокола Zerocoin (min: 10%)</translation>
     </message>
     <message>
         <source>Percentage of autominted zWSP</source>
-        <translation>Процент  авточеканненых zWSP</translation>
+        <translation>Процент авточеканненых zWSP</translation>
     </message>
     <message>
         <source>Wait with automatic conversion to Zerocoin until enough WSP for this denomination is available</source>
@@ -1969,7 +1989,7 @@ https://www.transifex.com/WisprProject/WisprProject-translations</translation>
     </message>
     <message>
         <source>Preferred Automint zWSP Denomination</source>
-        <translation>Предпочитаемый номинал авточеканной  монеты  zWSP</translation>
+        <translation>Предпочитаемый номинал авточеканной монеты zWSP</translation>
     </message>
     <message>
         <source>Stake split threshold:</source>
@@ -1977,7 +1997,7 @@ https://www.transifex.com/WisprProject/WisprProject-translations</translation>
     </message>
     <message>
         <source>Connect to the WISPR network through a SOCKS5 proxy.</source>
-        <translation>Подключиться к сети WISPR через SOCKS5 прокси.</translation>
+        <translation>Подключаться к сети WISPR через SOCKS5 прокси.</translation>
     </message>
     <message>
         <source>Proxy &amp;IP:</source>
@@ -2021,27 +2041,35 @@ https://www.transifex.com/WisprProject/WisprProject-translations</translation>
     </message>
     <message>
         <source>User Interface &amp;language:</source>
-        <translation>&amp;Язык Интерфейса</translation>
+        <translation>&amp;Язык интерфейса</translation>
     </message>
     <message>
         <source>User Interface Theme:</source>
-        <translation>Тема Интерфейса</translation>
+        <translation>Тема интерфейса</translation>
     </message>
     <message>
         <source>&amp;Unit to show amounts in:</source>
-        <translation>В каких единицах показывать сумму:</translation>
+        <translation>Отображать суммы в единицах:</translation>
     </message>
     <message>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Выберите стандарную дробную величину, которая будет показываться в графическом интерфейсе и при отправке монет.</translation>
+        <translation>Выберите единицу измерения монет при отображении и отправке.</translation>
     </message>
     <message>
         <source>Decimal digits</source>
-        <translation>Десятичная разрядность</translation>
+        <translation>Знаков после запятой</translation>
     </message>
     <message>
         <source>Hide empty balances</source>
         <translation>Скрыть пустые балансы</translation>
+    </message>
+    <message>
+        <source>Hide orphan stakes in transaction lists</source>
+        <translation>Скрыть неполученные награды за хранение в списке транзакций</translation>
+    </message>
+    <message>
+        <source>Hide orphan stakes</source>
+        <translation>Скрыть неполученные награды за хранение</translation>
     </message>
     <message>
         <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
@@ -2049,19 +2077,19 @@ https://www.transifex.com/WisprProject/WisprProject-translations</translation>
     </message>
     <message>
         <source>Third party transaction URLs</source>
-        <translation>Сторонние ссылки</translation>
+        <translation>Сторонние URL для транзакций</translation>
     </message>
     <message>
         <source>Active command-line options that override above options:</source>
-        <translation>Активные опции коммандной строки, которые переписывают опции выше:</translation>
+        <translation>Активные параметры командной строки, которые перекрывают вышеуказанные настройки:</translation>
     </message>
     <message>
         <source>Reset all client options to default.</source>
-        <translation>Вернуть стандартные настройки клиента</translation>
+        <translation>Сбросить все настройки клиента на значения по умолчанию.</translation>
     </message>
     <message>
         <source>&amp;Reset Options</source>
-        <translation>&amp;Сбросить Настройки</translation>
+        <translation>&amp;Сбросить настройки</translation>
     </message>
     <message>
         <source>&amp;OK</source>
@@ -2077,15 +2105,15 @@ https://www.transifex.com/WisprProject/WisprProject-translations</translation>
     </message>
     <message>
         <source>default</source>
-        <translation>по-умолчанию</translation>
+        <translation>по умолчанию</translation>
     </message>
     <message>
         <source>none</source>
-        <translation>ничего</translation>
+        <translation>нет</translation>
     </message>
     <message>
         <source>Confirm options reset</source>
-        <translation>Подтвердить сброс настроек</translation>
+        <translation>Подтвердите сброс настроек</translation>
     </message>
     <message>
         <source>Client restart required to activate changes.</source>
@@ -2144,7 +2172,7 @@ https://www.transifex.com/WisprProject/WisprProject-translations</translation>
     </message>
     <message>
         <source>Immature:</source>
-        <translation>Дозревают:</translation>
+        <translation>Незрелые:</translation>
     </message>
     <message>
         <source>Staked or masternode rewards that has not yet matured</source>
@@ -2156,7 +2184,7 @@ https://www.transifex.com/WisprProject/WisprProject-translations</translation>
     </message>
     <message>
         <source>Your current WISPR balance, unconfirmed and immature transactions included</source>
-        <translation>Ваш текущий WISPR  баланс, включая неподтвержденные и незрелые транзакции</translation>
+        <translation>Ваш текущий WISPR баланс, включая неподтвержденные и незрелые транзакции</translation>
     </message>
     <message>
         <source>zWSP Balance</source>
@@ -2223,11 +2251,11 @@ Immature: confirmed, but less than 1 mint of the same denomination after it was 
     </message>
     <message>
         <source>Locked:</source>
-        <translation>Заперто</translation>
+        <translation>Заблокировано:</translation>
     </message>
     <message>
         <source>Unconfirmed:</source>
-        <translation>Неподтвержденный:</translation>
+        <translation>Неподтверждено:</translation>
     </message>
     <message>
         <source>Your current zWSP balance, unconfirmed and immature zWSP included.</source>
@@ -2246,7 +2274,7 @@ Immature: confirmed, but less than 1 mint of the same denomination after it was 
 If AutoMint is enabled this percentage will settle around the configured AutoMint percentage (default = 10%).
 </source>
         <translation>Текущий процент от zWSP.
-Если АвтоЧеканка включена, этот процент будет располагаться на настроенном проценте АвтоЧеканка  (по умолчанию = 10%).
+Если Авточеканка включена, этот процент будет располагаться на настроенном проценте Авточеканка (по умолчанию = 10%).
 </translation>
     </message>
     <message>
@@ -2260,7 +2288,7 @@ If AutoMint is enabled this percentage will settle around the configured AutoMin
     <message>
         <source>AutoMint is currently disabled.
 To enable AutoMint change 'enablezeromint=0' to 'enablezeromint=1' in wispr.conf</source>
-        <translation>Авточеканка  в настоящее время отключена.
+        <translation>Авточеканка в настоящее время отключена.
 Чтобы включить Авточеканку, измените 'enablezeromint = 0' на 'enablezeromint = 1' в файле wispr.conf</translation>
     </message>
 </context>
@@ -2268,7 +2296,7 @@ To enable AutoMint change 'enablezeromint=0' to 'enablezeromint=1' in wispr.conf
     <name>PaymentServer</name>
     <message>
         <source>Payment request error</source>
-        <translation>Ошибка при запросе на оплату</translation>
+        <translation>Ошибка запроса платежа</translation>
     </message>
     <message>
         <source>URI handling</source>
@@ -2276,11 +2304,11 @@ To enable AutoMint change 'enablezeromint=0' to 'enablezeromint=1' in wispr.conf
     </message>
     <message>
         <source>Payment request fetch URL is invalid: %1</source>
-        <translation> Недопустимый URL-адрес запроса платежа: %1</translation>
+        <translation>Неверный URL запроса платежа: %1</translation>
     </message>
     <message>
         <source>Payment request file handling</source>
-        <translation>Обработка файла запроса на оплату</translation>
+        <translation>Обработка файла запроса платежа</translation>
     </message>
     <message>
         <source>Invalid payment address %1</source>
@@ -2288,39 +2316,39 @@ To enable AutoMint change 'enablezeromint=0' to 'enablezeromint=1' in wispr.conf
     </message>
     <message>
         <source>Cannot start wispr: click-to-pay handler</source>
-        <translation>Не удалось запустить wispr: обработчик click-to-pay </translation>
+        <translation>Не удалось запустить wispr: обработчик click-to-pay</translation>
     </message>
     <message>
         <source>URI cannot be parsed! This can be caused by an invalid WISPR address or malformed URI parameters.</source>
-        <translation>URI не интерпретируется! Причиной этому может быть неверный WISPR адрес или неверные параметеры URI.</translation>
+        <translation>Не удалось разобрать URI! Возможно указан некорректный WISPR адрес либо параметры URI сформированы неверно.</translation>
     </message>
     <message>
         <source>Payment request file cannot be read! This can be caused by an invalid payment request file.</source>
-        <translation>Файл запроса оплаты нечитается! Причиной может быть неверный файл запроса оплаты.</translation>
+        <translation>Не удается прочесть либо разобрать файл запроса платежа! Возможно это некоректный файл.</translation>
     </message>
     <message>
         <source>Payment request rejected</source>
-        <translation>Запрос на оплату отклонен</translation>
+        <translation>Запрос платежа отклонен</translation>
     </message>
     <message>
         <source>Payment request network doesn't match client network.</source>
-        <translation>Сеть запроса на оплату отличается от сети клиента.</translation>
+        <translation>Сеть запроса платежа не соответствует сети клиента.</translation>
     </message>
     <message>
         <source>Payment request has expired.</source>
-        <translation>Запрос на оплату просрочен.</translation>
+        <translation>Время этого запроса платежа истекло.</translation>
     </message>
     <message>
         <source>Payment request is not initialized.</source>
-        <translation>Запрос на оплату не инициализирован.</translation>
+        <translation>Запрос платежа не инициализирован.</translation>
     </message>
     <message>
         <source>Unverified payment requests to custom payment scripts are unsupported.</source>
-        <translation>Неверифицированные запросы на оплату к пользовательским скриптам оплаты не поддерживается.</translation>
+        <translation>Непроверенные запросы платежей с нестандартными платёжными сценариями не поддерживаются.</translation>
     </message>
     <message>
         <source>Requested payment amount of %1 is too small (considered dust).</source>
-        <translation>Запрашиваемая сумма оплаты %1 слишком мала (considered dust).</translation>
+        <translation>Запрошенная сумма платежа %1 слишком мала (считается "пылью").</translation>
     </message>
     <message>
         <source>Refund from %1</source>
@@ -2328,7 +2356,7 @@ To enable AutoMint change 'enablezeromint=0' to 'enablezeromint=1' in wispr.conf
     </message>
     <message>
         <source>Payment request %1 is too large (%2 bytes, allowed %3 bytes).</source>
-        <translation>Запрос на оплату %1 слишком велик (%2 байт, разрешено %3 байт).</translation>
+        <translation>Запрос платежа %1 слишком большой (%2 байт, разрешено %3 байт).</translation>
     </message>
     <message>
         <source>Payment request DoS protection</source>
@@ -2336,11 +2364,11 @@ To enable AutoMint change 'enablezeromint=0' to 'enablezeromint=1' in wispr.conf
     </message>
     <message>
         <source>Error communicating with %1: %2</source>
-        <translation>Ошибка коммуникации с %1: %2</translation>
+        <translation>Ошибка связи с %1: %2</translation>
     </message>
     <message>
         <source>Payment request cannot be parsed!</source>
-        <translation>Запрос на оплату непонятен!</translation>
+        <translation>Не могу разобрать запрос платежа!</translation>
     </message>
     <message>
         <source>Bad response from server %1</source>
@@ -2348,11 +2376,11 @@ To enable AutoMint change 'enablezeromint=0' to 'enablezeromint=1' in wispr.conf
     </message>
     <message>
         <source>Network request error</source>
-        <translation>Ошибка обращения к сети</translation>
+        <translation>Ошибка сетевого запроса</translation>
     </message>
     <message>
         <source>Payment acknowledged</source>
-        <translation>Оплата принята к обработке</translation>
+        <translation>Платёж принят</translation>
     </message>
 </context>
 <context>
@@ -2374,7 +2402,7 @@ To enable AutoMint change 'enablezeromint=0' to 'enablezeromint=1' in wispr.conf
     <name>PrivacyDialog</name>
     <message>
         <source>Zerocoin Actions:</source>
-        <translation>Действия Zerocoin </translation>
+        <translation>Действия Zerocoin:</translation>
     </message>
     <message>
         <source>The displayed information may be out of date. Your wallet automatically synchronizes with the WISPR network after a connection is established, but this process has not completed yet.</source>
@@ -2398,7 +2426,7 @@ To enable AutoMint change 'enablezeromint=0' to 'enablezeromint=1' in wispr.conf
     </message>
     <message>
         <source>Available for Minting:</source>
-        <translation>Доступный для чеканки</translation>
+        <translation>Доступно для чеканки</translation>
     </message>
     <message>
         <source>0.000 000 00 WSP</source>
@@ -2414,7 +2442,7 @@ To enable AutoMint change 'enablezeromint=0' to 'enablezeromint=1' in wispr.conf
     </message>
     <message>
         <source>Coin Control...</source>
-        <translation>Контроль Монеты...</translation>
+        <translation>Управление...</translation>
     </message>
     <message>
         <source>Quantity:</source>
@@ -2426,11 +2454,19 @@ To enable AutoMint change 'enablezeromint=0' to 'enablezeromint=1' in wispr.conf
     </message>
     <message>
         <source>Rescan the complete blockchain for  Zerocoin mints and their meta-data.</source>
-        <translation>Пересканировать  завершенную блокчейн для Zerocoin  чеканки и мета данных</translation>
+        <translation>Пересканировать завершенную блокчейн для Zerocoin чеканки и мета данных</translation>
     </message>
     <message>
         <source>ReScan</source>
-        <translation>Пересканирование</translation>
+        <translation>Обновить</translation>
+    </message>
+    <message>
+        <source>Show Denominations</source>
+        <translation>Показать номиналы</translation>
+    </message>
+    <message>
+        <source>Hide Denominations</source>
+        <translation>Скрыть номиналы</translation>
     </message>
     <message>
         <source>Status and/or Mesages from the last Mint Action.</source>
@@ -2438,11 +2474,11 @@ To enable AutoMint change 'enablezeromint=0' to 'enablezeromint=1' in wispr.conf
     </message>
     <message>
         <source>PRIVACY</source>
-        <translation>КОНФИДЕНЦИАЛЬНОСТЬ</translation>
+        <translation>ПРИВАТНОСТЬ</translation>
     </message>
     <message>
         <source>Enter an amount of Wsp to convert to zWSP</source>
-        <translation>Введите сумму в Wsp для  конвертации в zWSP</translation>
+        <translation>Введите сумму в Wsp для конвертации в zWSP</translation>
     </message>
     <message>
         <source>zWSP Control</source>
@@ -2454,11 +2490,11 @@ To enable AutoMint change 'enablezeromint=0' to 'enablezeromint=1' in wispr.conf
     </message>
     <message>
         <source>Quantity Selected:</source>
-        <translation>Выбранное Количество:</translation>
+        <translation>Выбранное количество:</translation>
     </message>
     <message>
         <source>Spend Zerocoin. Without 'Pay To:' address creates payments to yourself.</source>
-        <translation>Потратить Zerocoin. Без адреса «Оплатить кому» вы сами создаете платежи.</translation>
+        <translation>Потратить Zerocoin. Без «Адреса получателя» вы сами создаете платеж самому себе.</translation>
     </message>
     <message>
         <source>Spend Zerocoin</source>
@@ -2466,11 +2502,11 @@ To enable AutoMint change 'enablezeromint=0' to 'enablezeromint=1' in wispr.conf
     </message>
     <message>
         <source>Available (mature and spendable) zWSP for spending</source>
-        <translation>Доступный (зрелый и расходуемый) zWSP для расходов</translation>
+        <translation>Доступно (зрелые и расходуемые) zWSP для расходов</translation>
     </message>
     <message>
         <source>Available Balance:</source>
-        <translation>Доступный Баланс :</translation>
+        <translation>Доступный баланс:</translation>
     </message>
     <message>
         <source>Available (mature and spendable) zWSP for spending
@@ -2494,11 +2530,11 @@ zWSP are mature when they have more than 20 confirmations AND more than 2 mints 
     </message>
     <message>
         <source>Security Level 1 - 100 (default: 42)</source>
-        <translation>Уровень безопасности 1-100 ( по умолчанию: 42)</translation>
+        <translation>Уровень безопасности 1 - 100 (по умолчанию: 42)</translation>
     </message>
     <message>
         <source>Pay &amp;To:</source>
-        <translation>Оплатить &amp;кому:</translation>
+        <translation>Адрес &amp;получателя:</translation>
     </message>
     <message>
         <source>The WISPR address to send the payment to. Creates local payment to yourself when empty.</source>
@@ -2534,19 +2570,19 @@ zWSP are mature when they have more than 20 confirmations AND more than 2 mints 
     </message>
     <message>
         <source>Convert Change to Zerocoin (might cost additional fees)</source>
-        <translation>Преобразование изменений в Zerocoin (может стоить дополнительные сборы)</translation>
+        <translation>Преобразование сдачи в Zerocoin (может стоить дополнительные сборы)</translation>
     </message>
     <message>
         <source>If checked, the wallet tries to minimize the returning change instead of minimizing the number of spent denominations.</source>
-        <translation>Если этот флажок установлен, кошелек пытается минимизировать возвращаемое изменение, а не минимизировать количество потраченных купюр.</translation>
+        <translation>Если этот флажок установлен, кошелек пытается минимизировать возвращаемую сдачу, а не минимизировать количество потраченных номиналов.</translation>
     </message>
     <message>
         <source>Minimize Change</source>
-        <translation>Сведение к минимуму изменений</translation>
+        <translation>Минимизировать сдачу</translation>
     </message>
     <message>
         <source>Information about the available Zerocoin funds.</source>
-        <translation>Информация о доступных фондах Зерокоина.</translation>
+        <translation>Информация о доступных фондах Zerocoin.</translation>
     </message>
     <message>
         <source>Zerocoin Stats:</source>
@@ -2572,7 +2608,7 @@ zWSP are mature when they have more than 20 confirmations AND more than 2 mints 
         <source>Unconfirmed: less than 20 confirmations
 Immature: confirmed, but less than 1 mint of the same denomination after it was minted</source>
         <translation>Неподтверждено: менее 20 подтверждений
-Незрелый: подтвержден, но менее 1 чеканок того же наименования после того, как он был отчеканен</translation>
+Незрелые: подтвержден, но менее 1 чеканок того же наименования после того, как он был отчеканен</translation>
     </message>
     <message>
         <source>Show the current status of automatic zWSP minting.
@@ -2592,15 +2628,15 @@ To change the percentage (no restart required):
 - отключить: добавить 'enablezeromint = 0' в wispr.conf
 
 Чтобы изменить процент (не требуется перезагрузка):
-- меню Настройки-&gt; Параметры-&gt; Процент авторизованного zWSP</translation>
+- меню Настройки-&gt; Параметры-&gt; Процент авточеканенных zWSP</translation>
     </message>
     <message>
         <source>AutoMint Status</source>
-        <translation>Состояние автообмена</translation>
+        <translation>Состояние авточеканки</translation>
     </message>
     <message>
         <source>Global Supply:</source>
-        <translation>Общая поставка</translation>
+        <translation>Общее снабжение</translation>
     </message>
     <message>
         <source>Denom. 1:</source>
@@ -2724,7 +2760,7 @@ To change the percentage (no restart required):
     </message>
     <message>
         <source>Coins automatically selected</source>
-        <translation>Монеты автоматически выбираются</translation>
+        <translation>Монеты выбираются автоматически</translation>
     </message>
     <message>
         <source>medium</source>
@@ -2740,7 +2776,7 @@ To change the percentage (no restart required):
     </message>
     <message>
         <source>Custom change address</source>
-        <translation>Пользовательский адрес изменения</translation>
+        <translation>Свой адрес для сдачи</translation>
     </message>
     <message>
         <source>Amount After Fee:</source>
@@ -2748,7 +2784,7 @@ To change the percentage (no restart required):
     </message>
     <message>
         <source>Change:</source>
-        <translation>Изменить:</translation>
+        <translation>Сдача:</translation>
     </message>
     <message>
         <source>out of sync</source>
@@ -2756,7 +2792,7 @@ To change the percentage (no restart required):
     </message>
     <message>
         <source>Mint Status: Okay</source>
-        <translation>Статус чеканки  ОК</translation>
+        <translation>Статус чеканки: ОК</translation>
     </message>
     <message>
         <source>Copy quantity</source>
@@ -2848,7 +2884,7 @@ Maximum allowed: </source>
     </message>
     <message>
         <source>AutoMint Status:</source>
-        <translation>Статус АвтоЧеканки:</translation>
+        <translation>Статус авточеканки:</translation>
     </message>
     <message>
         <source>Denom. &lt;b&gt;1&lt;/b&gt;:</source>
@@ -2856,7 +2892,7 @@ Maximum allowed: </source>
     </message>
     <message>
         <source>Denom. &lt;b&gt;5&lt;/b&gt;:</source>
-        <translation>Номинал&lt;b&gt;5&lt;/b&gt;:</translation>
+        <translation>Номинал &lt;b&gt;5&lt;/b&gt;:</translation>
     </message>
     <message>
         <source>Denom. &lt;b&gt;10&lt;/b&gt;:</source>
@@ -2880,11 +2916,11 @@ Maximum allowed: </source>
     </message>
     <message>
         <source>Denom. &lt;b&gt;5000&lt;/b&gt;:</source>
-        <translation>Номинал&lt;b&gt;5000&lt;/b&gt;:</translation>
+        <translation>Номинал &lt;b&gt;5000&lt;/b&gt;:</translation>
     </message>
     <message>
         <source>Error: Your wallet is locked. Please enter the wallet passphrase first.</source>
-        <translation>Ошибка. Ваш кошелек заблокирован. Сначала введите кодовую фразу кошелька.</translation>
+        <translation>Ошибка. Ваш кошелек заблокирован. Сначала введите пароль кошелька.</translation>
     </message>
     <message>
         <source>Message: Enter an amount &gt; 0.</source>
@@ -2892,25 +2928,25 @@ Maximum allowed: </source>
     </message>
     <message>
         <source>Minting </source>
-        <translation>Создание</translation>
+        <translation>Чеканка </translation>
     </message>
     <message>
         <source>Successfully minted </source>
-        <translation>Создан успешно</translation>
+        <translation>Успешно отчеканено </translation>
     </message>
     <message>
         <source> zWSP in </source>
-        <translation> zWSP в</translation>
+        <translation> zWSP в </translation>
     </message>
     <message>
         <source> sec. Used denominations:
 </source>
-        <translation>сек. Испльзованы номинации:
+        <translation>сек. Использованы номинации:
 </translation>
     </message>
     <message>
         <source>Duration: </source>
-        <translation>Продолжительность:</translation>
+        <translation>Продолжительность: </translation>
     </message>
     <message>
         <source> sec.
@@ -2924,11 +2960,11 @@ Maximum allowed: </source>
     </message>
     <message>
         <source>No 'Pay To' address provided, creating local payment</source>
-        <translation>Не предоставляется адрес «Pay To», создающий местный платеж</translation>
+        <translation>Не указан адрес получателя, платеж будет отправлен самому себе</translation>
     </message>
     <message>
         <source>Invalid Wispr Address</source>
-        <translation>неправильный WISPR адрес</translation>
+        <translation>Неправильный WISPR адрес</translation>
     </message>
     <message>
         <source>Invalid Send Amount</source>
@@ -2948,7 +2984,7 @@ Maximum allowed: </source>
     </message>
     <message>
         <source> to a newly generated (unused and therefore anonymous) local address &lt;br /&gt;</source>
-        <translation>к вновь созданному (неиспользуемому и поэтому анонимному) локальному адресу &lt;br /&gt;</translation>
+        <translation> к вновь созданному (неиспользуемому и поэтому анонимному) локальному адресу &lt;br /&gt;</translation>
     </message>
     <message>
         <source>with Security Level </source>
@@ -2995,7 +3031,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>serial: </source>
-        <translation>последовательный:</translation>
+        <translation>последовательный: </translation>
     </message>
     <message>
         <source>Spend is 1 of : </source>
@@ -3003,15 +3039,15 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>value out: </source>
-        <translation>ценность:</translation>
+        <translation>ценность: </translation>
     </message>
     <message>
         <source>address: </source>
-        <translation>Адрес:</translation>
+        <translation>адрес: </translation>
     </message>
     <message>
         <source>Sending successful, return code: </source>
-        <translation>Отправка успешного кода возврата:</translation>
+        <translation>Отправка успешного кода возврата: </translation>
     </message>
     <message>
         <source>txid: </source>
@@ -3019,7 +3055,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>fee: </source>
-        <translation>Комиссия:</translation>
+        <translation>комиссия: </translation>
     </message>
 </context>
 <context>
@@ -3316,7 +3352,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Attempt to recover private keys from a corrupt wallet.dat.</source>
-        <translation>Попытка востановить секрентые ключи битого wallet.dat.</translation>
+        <translation>Попытка востановить приватные ключи битого wallet.dat.</translation>
     </message>
     <message>
         <source>Rescan blockchain files</source>
@@ -3364,7 +3400,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Wallet repair options.</source>
-        <translation>Опции ремонта кошелька.</translation>
+        <translation>Варианты ремонта кошелька.</translation>
     </message>
     <message>
         <source>Upgrade wallet to latest format on startup. (Note: this is NOT an update of the wallet itself!)</source>
@@ -3496,11 +3532,11 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     <name>ReceiveCoinsDialog</name>
     <message>
         <source>Reuse one of the previously used receiving addresses.&lt;br&gt;Reusing addresses has security and privacy issues.&lt;br&gt;Do not use this unless re-generating a payment request made before.</source>
-        <translation>Повторное использование одного из ранее использованных принимающих адресов.&lt;br&gt;Реализация адресов имеет проблемы с безопасностью и конфиденциальностью.&lt;br&gt;Не используйте это, если повторно не генерируете запрос на платеж, сделанный ранее.</translation>
+        <translation>Повторно использовать один из ранее использованных адресов.&lt;br&gt;Повторное использование адресов несёт риски безопасности и приватности.&lt;br&gt;Не используйте эту опцию, если вы не создаёте повторно ранее сделанный запрос платежа.</translation>
     </message>
     <message>
         <source>R&amp;euse an existing receiving address (not recommended)</source>
-        <translation>R &amp; euse существующего адреса получателя (не рекомендуется)</translation>
+        <translation>&amp;Повторно использовать существующий адрес получения (не рекомендуется)</translation>
     </message>
     <message>
         <source>&amp;Message:</source>
@@ -3508,11 +3544,11 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>An optional label to associate with the new receiving address.</source>
-        <translation>Дополнительный ярлык для связи с новым адресом приема.</translation>
+        <translation>Необязательная метка для нового адреса получения.</translation>
     </message>
     <message>
         <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the WISPR network.</source>
-        <translation>Необязательное сообщение для присоединения к платежному запросу, которое будет отображаться при открытии запроса. Примечание. Сообщение не будет отправлено с оплатой через сеть WISPR.</translation>
+        <translation>Необязательное сообщение для запроса платежа, которое будет показано при открытии запроса. Обратите внимание: сообщение не будет отправлено вместе с платежом через сеть WISPR.</translation>
     </message>
     <message>
         <source>RECEIVE</source>
@@ -3520,31 +3556,43 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>An optional message to attach to the payment request, which will be displayed when the request is opened.&lt;br&gt;Note: The message will not be sent with the payment over the WISPR network.</source>
-        <translation>Необязательное сообщение для присоединения к платежному запросу, которое будет отображаться при открытии запроса. &lt;br&gt;Примечание. Сообщение не будет отправлено с оплатой через сеть WISPR.</translation>
+        <translation>Необязательное сообщение для запроса платежа, которое будет показано при открытии запроса. &lt;br&gt;Обратите внимание: сообщение не будет отправлено вместе с платежом через сеть WISPR.</translation>
     </message>
     <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</source>
-        <translation>Используйте эту форму для запроса платежей. Все поля являются  &lt;b&gt;необязательными&lt;/b&gt;.</translation>
+        <translation>Заполните форму для запроса платежей. Все поля &lt;b&gt;необязательны&lt;/b&gt;.</translation>
+    </message>
+    <message>
+        <source>&amp;Address:</source>
+        <translation>&amp;Адрес:</translation>
+    </message>
+    <message>
+        <source>Your receiving address. You can copy and use it to receive coins on this wallet. A new one will be generated once it is used.</source>
+        <translation>Ваш адрес получения. Вы можете скопировать и использовать его для получения монет. После использования этого адреса получения будет сгенерирован новый.</translation>
     </message>
     <message>
         <source>&amp;Label:</source>
         <translation>&amp;Метка:</translation>
     </message>
     <message>
-        <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
-        <translation>Необязательная сумма для запроса. Оставьте это пустое или ноль, чтобы не запрашивать определенную сумму.</translation>
+        <source>A&amp;mount:</source>
+        <translation>С&amp;умма:</translation>
     </message>
     <message>
-        <source>&amp;Amount:</source>
-        <translation>&amp;Количество:</translation>
+        <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
+        <translation>Необязательная сумма для запроса. Оставьте пустым или укажите ноль, чтобы запросить неопределённую сумму.</translation>
+    </message>
+    <message>
+        <source>Receiving Addresses</source>
+        <translation>Адреса получения</translation>
     </message>
     <message>
         <source>&amp;Request payment</source>
-        <translation>&amp;Запрос платежа</translation>
+        <translation>&amp;Запросить платёж</translation>
     </message>
     <message>
         <source>Clear all fields of the form.</source>
-        <translation>Очистить все поля этой формы.</translation>
+        <translation>Очистить все поля формы.</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -3552,11 +3600,11 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Requested payments history</source>
-        <translation>Запрос истории платежей</translation>
+        <translation>История запрошенных платежей</translation>
     </message>
     <message>
         <source>Show the selected request (does the same as double clicking an entry)</source>
-        <translation>Показать этот выбранный запрос (или просто сделайте двойной клик за запись)</translation>
+        <translation>Показать выбранный запрос (то же самое, что и двойной клик по записи)</translation>
     </message>
     <message>
         <source>Show</source>
@@ -3564,7 +3612,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Remove the selected entries from the list</source>
-        <translation>Удалить эти выбранные записи из этого списка</translation>
+        <translation>Удалить выбранные записи из списка</translation>
     </message>
     <message>
         <source>Remove</source>
@@ -3587,15 +3635,15 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     <name>ReceiveRequestDialog</name>
     <message>
         <source>QR Code</source>
-        <translation>QR код</translation>
+        <translation>QR-код</translation>
     </message>
     <message>
         <source>Copy &amp;URI</source>
-        <translation>Скопировать &amp;URI</translation>
+        <translation>Копировать &amp;URI</translation>
     </message>
     <message>
         <source>Copy &amp;Address</source>
-        <translation>Скопировать &amp;Адрес</translation>
+        <translation>Копировать &amp;адрес</translation>
     </message>
     <message>
         <source>&amp;Save Image...</source>
@@ -3603,7 +3651,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Request payment to %1</source>
-        <translation>Запрос платежа в %1</translation>
+        <translation>Запросить платёж на %1</translation>
     </message>
     <message>
         <source>Payment information</source>
@@ -3635,7 +3683,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Error encoding URI into QR Code.</source>
-        <translation>Ошибка при кодировании URI в QR код.</translation>
+        <translation>Ошибка кодирования URI в QR-код.</translation>
     </message>
 </context>
 <context>
@@ -3673,7 +3721,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     <name>SendCoinsDialog</name>
     <message>
         <source>Send Coins</source>
-        <translation>Отправить Монеты</translation>
+        <translation>Отправка</translation>
     </message>
     <message>
         <source>SEND</source>
@@ -3681,11 +3729,11 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Coin Control Features</source>
-        <translation>Особенности управления монетами</translation>
+        <translation>Функции контроля монет</translation>
     </message>
     <message>
         <source>Insufficient funds!</source>
-        <translation>Недостаточно средств</translation>
+        <translation>Недостаточно средств!</translation>
     </message>
     <message>
         <source>Quantity:</source>
@@ -3693,7 +3741,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Bytes:</source>
-        <translation>Байты:</translation>
+        <translation>Байт:</translation>
     </message>
     <message>
         <source>Amount:</source>
@@ -3725,15 +3773,15 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Change:</source>
-        <translation>Изменить:</translation>
+        <translation>Сдача:</translation>
     </message>
     <message>
         <source>If this is activated, but the change address is empty or invalid, change will be sent to a newly generated address.</source>
-        <translation>Если это активировано, но адрес изменения пуст или недействителен, изменение будет отправлено на вновь сгенерированный адрес.</translation>
+        <translation>Если это выбрано, но адрес сдачи пустой или неверный, сдача будет отправлена на новый сгенерированный адрес.</translation>
     </message>
     <message>
         <source>Custom change address</source>
-        <translation>Пользовательский адрес изменения</translation>
+        <translation>Свой адрес для сдачи</translation>
     </message>
     <message>
         <source>Split UTXO</source>
@@ -3745,7 +3793,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>UTXO Size:</source>
-        <translation>UTXO Размер:</translation>
+        <translation>UTXO размер:</translation>
     </message>
     <message>
         <source>0 WSP</source>
@@ -3753,15 +3801,15 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Transaction Fee:</source>
-        <translation>Комиссия за транзакцию:</translation>
+        <translation>Комиссия транзакции:</translation>
     </message>
     <message>
         <source>Choose...</source>
-        <translation>Выберите:</translation>
+        <translation>Выбрать...</translation>
     </message>
     <message>
         <source>collapse fee-settings</source>
-        <translation>коллапс</translation>
+        <translation>свернуть настройки комиссии</translation>
     </message>
     <message>
         <source>Minimize</source>
@@ -3773,15 +3821,15 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>total at least</source>
-        <translation>не менее</translation>
+        <translation>итого минимум</translation>
     </message>
     <message>
         <source>(read the tooltip)</source>
-        <translation>(читать всплывающую подсказку)</translation>
+        <translation>(прочтите всплывающую подсказку)</translation>
     </message>
     <message>
         <source>Custom:</source>
-        <translation>Таможня:</translation>
+        <translation>Вручную:</translation>
     </message>
     <message>
         <source>(Smart fee not initialized yet. This usually takes a few blocks...)</source>
@@ -3829,7 +3877,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Send as zero-fee transaction if possible</source>
-        <translation>Отправляйте  транзакции с нулевой оплатой, если возможно</translation>
+        <translation>Отправлять транзакции с нулевой оплатой, если возможно</translation>
     </message>
     <message>
         <source>(confirmation may take longer)</source>
@@ -3989,11 +4037,11 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Pay only the minimum fee of %1</source>
-        <translation>Платите только минимальный взнос %1</translation>
+        <translation>Платить только минимальный взнос %1</translation>
     </message>
     <message>
         <source>Warning: Unknown change address</source>
-        <translation>Предупреждение: Неизвестный адрес </translation>
+        <translation>Внимание: неизвестный адрес для сдачи</translation>
     </message>
     <message>
         <source>(no label)</source>
@@ -4008,7 +4056,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Pay &amp;To:</source>
-        <translation>Оплатить &amp;кому:</translation>
+        <translation>Полу&amp;чатель:</translation>
     </message>
     <message>
         <source>The WISPR address to send the payment to</source>
@@ -4090,11 +4138,11 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     <name>SignVerifyMessageDialog</name>
     <message>
         <source>Signatures - Sign / Verify a Message</source>
-        <translation>Подписи - Подпишите / подтвердите сообщение</translation>
+        <translation>Подписи - подписать/проверить сообщение</translation>
     </message>
     <message>
         <source>&amp;Sign Message</source>
-        <translation>&amp;Вход в систему</translation>
+        <translation>&amp;Подписать сообщение</translation>
     </message>
     <message>
         <source>You can sign messages with your addresses to prove you own them. Be careful not to sign anything vague, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
@@ -4102,7 +4150,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>The WISPR address to sign the message with</source>
-        <translation>Адрес WISPR для подписи сообщения с помощью</translation>
+        <translation>Адрес WISPR, которым Вы хотите подписать сообщение</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -4122,7 +4170,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Enter the message you want to sign here</source>
-        <translation>Введите сообщение, которое вы хотите подписать здесь.</translation>
+        <translation>Введите сообщение для подписи</translation>
     </message>
     <message>
         <source>Signature</source>
@@ -4130,11 +4178,11 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Copy the current signature to the system clipboard</source>
-        <translation>Копировать текущую подпись в системный буфер обмена</translation>
+        <translation>Копировать текущую подпись в буфер обмена</translation>
     </message>
     <message>
         <source>Sign the message to prove you own this WISPR address</source>
-        <translation>Подпишите сообщение, чтобы подтвердить свой адрес WISPR</translation>
+        <translation>Подписать сообщение, чтобы доказать владение этим WISPR адресом</translation>
     </message>
     <message>
         <source>The WISPR address the message was signed with</source>
@@ -4142,11 +4190,11 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Verify the message to ensure it was signed with the specified WISPR address</source>
-        <translation>Проверте сообщение, чтобы убедиться, что оно было подписано указанным WISPR адресом </translation>
+        <translation>Проверить сообщение, чтобы убедиться, что оно было подписано указанным WISPR адресом</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>
-        <translation>Подпись &amp;Сообщение</translation>
+        <translation>Подпись &amp;сообщение</translation>
     </message>
     <message>
         <source>Reset all sign message fields</source>
@@ -4166,39 +4214,39 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Verify &amp;Message</source>
-        <translation>Проверить  &amp;сообщение</translation>
+        <translation>Проверить &amp;сообщение</translation>
     </message>
     <message>
         <source>Reset all verify message fields</source>
-        <translation>Сбросить все поля подтверждения</translation>
+        <translation>Сбросить все поля формы проверки сообщения</translation>
     </message>
     <message>
         <source>Click "Sign Message" to generate signature</source>
-        <translation>Нажмите «Sign Message» для создания подписи</translation>
+        <translation>Нажмите "Подписать сообщение" для создания подписи</translation>
     </message>
     <message>
         <source>The entered address is invalid.</source>
-        <translation>Неправильно введен адрес.</translation>
+        <translation>Введённый адрес неверен.</translation>
     </message>
     <message>
         <source>Please check the address and try again.</source>
-        <translation>Пожалуйста, проверьте адрес и попробуйте снова.</translation>
+        <translation>Пожалуйста, проверьте адрес и попробуйте ещё раз.</translation>
     </message>
     <message>
         <source>The entered address does not refer to a key.</source>
-        <translation>Введенный адрес не связан с ключом.</translation>
+        <translation>Введённый адрес не связан с ключом.</translation>
     </message>
     <message>
         <source>Wallet unlock was cancelled.</source>
-        <translation>Снятие блокировки кошелька было отменено.</translation>
+        <translation>Разблокировка кошелька была отменена.</translation>
     </message>
     <message>
         <source>Private key for the entered address is not available.</source>
-        <translation>Персональный ключ для введенного адреса недоступен.</translation>
+        <translation>Приватный ключ для введённого адреса недоступен.</translation>
     </message>
     <message>
         <source>Message signing failed.</source>
-        <translation>Ошибка подписания сообщения.</translation>
+        <translation>Не удалось подписать сообщение.</translation>
     </message>
     <message>
         <source>Message signed.</source>
@@ -4210,11 +4258,11 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Please check the signature and try again.</source>
-        <translation>Пожалуйста, проверьте эту подпись и попробуйте снова.</translation>
+        <translation>Пожалуйста, проверьте подпись и попробуйте ещё раз.</translation>
     </message>
     <message>
         <source>The signature did not match the message digest.</source>
-        <translation>Подпись не соответствовала дайджесту сообщения.</translation>
+        <translation>Подпись не соответствует отпечатку сообщения.</translation>
     </message>
     <message>
         <source>Message verification failed.</source>
@@ -4222,7 +4270,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Message verified.</source>
-        <translation>Сообщение подтверждено.</translation>
+        <translation>Сообщение проверено.</translation>
     </message>
 </context>
 <context>
@@ -4267,23 +4315,23 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     <name>TransactionDesc</name>
     <message numerus="yes">
         <source>Open for %n more block(s)</source>
-        <translation><numerusform>Открыть для  %n блоков</numerusform><numerusform>Открыть для  %n блоков</numerusform><numerusform>Открыть для  %n блоков</numerusform><numerusform>Открыть для  %n блоков</numerusform></translation>
+        <translation><numerusform>Будет открыто ещё %n блок</numerusform><numerusform>Будет открыто ещё %n блока</numerusform><numerusform>Будет открыто ещё %n блоков</numerusform><numerusform>Будет открыто ещё %n блоков</numerusform></translation>
     </message>
     <message>
         <source>Open until %1</source>
-        <translation>Открыть до %1</translation>
+        <translation>Открыто до %1</translation>
     </message>
     <message>
         <source>conflicted</source>
-        <translation>противоречивый</translation>
+        <translation>в противоречии</translation>
     </message>
     <message>
         <source>%1/offline</source>
-        <translation>%1/ не в сети</translation>
+        <translation>%1/не в сети</translation>
     </message>
     <message>
         <source>%1/unconfirmed</source>
-        <translation>%1/ неподтвержденный</translation>
+        <translation>%1/не подтверждено</translation>
     </message>
     <message>
         <source>%1 confirmations</source>
@@ -4291,11 +4339,11 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>%1/offline (verified via SwiftX)</source>
-        <translation>%1 / офлайн (проверено через SwiftX)</translation>
+        <translation>%1/офлайн (проверено через SwiftX)</translation>
     </message>
     <message>
         <source>%1/confirmed (verified via SwiftX)</source>
-        <translation>%1 / подтверждено (проверено через SwiftX)</translation>
+        <translation>%1/подтверждено (проверено через SwiftX)</translation>
     </message>
     <message>
         <source>%1 confirmations (verified via SwiftX)</source>
@@ -4303,11 +4351,11 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>%1/offline (SwiftX verification in progress - %2 of %3 signatures)</source>
-        <translation>%1 / офлайн (проверка SwiftX - %2 %3 подписей)</translation>
+        <translation>%1/офлайн (проверка SwiftX - %2 %3 подписей)</translation>
     </message>
     <message>
         <source>%1/confirmed (SwiftX verification in progress - %2 of %3 signatures )</source>
-        <translation>%1 / подтверждено (выполняется проверка SwiftX - %2 %3 подписей)</translation>
+        <translation>%1/подтверждено (выполняется проверка SwiftX - %2 %3 подписей)</translation>
     </message>
     <message>
         <source>%1 confirmations (SwiftX verification in progress - %2 of %3 signatures)</source>
@@ -4315,11 +4363,11 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>%1/offline (SwiftX verification failed)</source>
-        <translation>%1 / офлайн (проверка SwiftX не выполнена)</translation>
+        <translation>%1/офлайн (проверка SwiftX не выполнена)</translation>
     </message>
     <message>
         <source>%1/confirmed (SwiftX verification failed)</source>
-        <translation>%1 / подтверждено (проверка SwiftX не выполнена)</translation>
+        <translation>%1/подтверждено (проверка SwiftX не выполнена)</translation>
     </message>
     <message>
         <source>Status</source>
@@ -4327,11 +4375,11 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>, has not been successfully broadcast yet</source>
-        <translation>, еще не была успешно передана</translation>
+        <translation>, ещё не было успешно разослано</translation>
     </message>
     <message numerus="yes">
         <source>, broadcast through %n node(s)</source>
-        <translation><numerusform>, передается через %n узлов</numerusform><numerusform>, передается через %n узлов</numerusform><numerusform>, передается через %n узлов</numerusform><numerusform>, передается через %n узлов</numerusform></translation>
+        <translation><numerusform>, разослано через %n узел</numerusform><numerusform>, разослано через %n узла</numerusform><numerusform>, разослано через %n узлов</numerusform><numerusform>, разослано через %n узлов</numerusform></translation>
     </message>
     <message>
         <source>Date</source>
@@ -4343,7 +4391,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Generated</source>
-        <translation>Сформировано</translation>
+        <translation>Сгенерированно</translation>
     </message>
     <message>
         <source>From</source>
@@ -4355,15 +4403,15 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>To</source>
-        <translation>Кому</translation>
+        <translation>Для</translation>
     </message>
     <message>
         <source>own address</source>
-        <translation>собственный адрес</translation>
+        <translation>свой адрес</translation>
     </message>
     <message>
         <source>watch-only</source>
-        <translation>смотреть только</translation>
+        <translation>для просмотра</translation>
     </message>
     <message>
         <source>label</source>
@@ -4375,15 +4423,15 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message numerus="yes">
         <source>matures in %n more block(s)</source>
-        <translation><numerusform>созревает в %n блоков</numerusform><numerusform>созревает в %n блоков</numerusform><numerusform>созревает в %n блоков</numerusform><numerusform>созревает в %n блоков</numerusform></translation>
+        <translation><numerusform>будет доступно через %n блок</numerusform><numerusform>будет доступно через %n блока</numerusform><numerusform>будет доступно через %n блоков</numerusform><numerusform>будет доступно через %n блоков</numerusform></translation>
     </message>
     <message>
         <source>not accepted</source>
-        <translation>не принимаются</translation>
+        <translation>не принято</translation>
     </message>
     <message>
         <source>Debit</source>
-        <translation>Дебит</translation>
+        <translation>Дебет</translation>
     </message>
     <message>
         <source>Total debit</source>
@@ -4411,7 +4459,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Transaction ID</source>
-        <translation>Номер транзакции</translation>
+        <translation>ID транзакции</translation>
     </message>
     <message>
         <source>Output index</source>
@@ -4419,7 +4467,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Merchant</source>
-        <translation>коммерсант</translation>
+        <translation>Продавец</translation>
     </message>
     <message>
         <source>Generated coins must mature %1 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to "not accepted" and it won't be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
@@ -4435,7 +4483,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Inputs</source>
-        <translation>входы</translation>
+        <translation>Входы</translation>
     </message>
     <message>
         <source>Amount</source>
@@ -4458,7 +4506,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>This pane shows a detailed description of the transaction</source>
-        <translation>На этой панели отображается подробное описание транзакции</translation>
+        <translation>Эта панель отображает детальное описание транзакции</translation>
     </message>
 </context>
 <context>
@@ -4481,47 +4529,47 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Open until %1</source>
-        <translation>Открыть до %1</translation>
+        <translation>Открыто до %1</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation>не в сети</translation>
+        <translation>Нет активных соединений с сетью</translation>
     </message>
     <message>
         <source>Unconfirmed</source>
-        <translation>неподтвержденный</translation>
+        <translation>Неподтверждено</translation>
     </message>
     <message>
         <source>Confirming (%1 of %2 recommended confirmations)</source>
-        <translation>Подтверждение (%1 %2 рекомендованных подтверждений)</translation>
+        <translation>Подтверждается (%1 из %2 рекомендованных подтверждений)</translation>
     </message>
     <message>
         <source>Confirmed (%1 confirmations)</source>
-        <translation>Подтверждено (подтверждение %1)</translation>
+        <translation>Подтверждено (%1 подтверждений)</translation>
     </message>
     <message>
         <source>Conflicted</source>
-        <translation>Конфликтующий</translation>
+        <translation>В противоречии</translation>
     </message>
     <message>
         <source>Immature (%1 confirmations, will be available after %2)</source>
-        <translation>Незрелые (%1 подтверждения будут доступны после %2)</translation>
+        <translation>Незрелый (%1 подтверждений, будет доступен после %2)</translation>
     </message>
     <message>
         <source>This block was not received by any other nodes and will probably not be accepted!</source>
-        <translation>Этот блок не был принят никакими другими узлами и, вероятно, не будет принят!</translation>
+        <translation>Этот блок не был получен другими узлами и, возможно, не будет принят!</translation>
     </message>
     <message>
         <source>Received with</source>
-        <translation>Получено с</translation>
+        <translation>Получено</translation>
     </message>
     <message>
         <source>Masternode Reward</source>
-        <translation>Вознаграждение Мастерноды</translation>
+        <translation>Вознаграждение мастерноды</translation>
     </message>
     <message>
         <source>Received from</source>
-        <translation>Получен от</translation>
+        <translation>Получено от</translation>
     </message>
     <message>
         <source>Received via Obfuscation</source>
@@ -4553,35 +4601,35 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Converted WSP to zWSP</source>
-        <translation>Преобразованный WSP в zWSP</translation>
+        <translation>Преобразовано WSP в zWSP</translation>
     </message>
     <message>
         <source>Spent zWSP</source>
-        <translation>потраченный zWSP</translation>
+        <translation>Потрачено zWSP</translation>
     </message>
     <message>
         <source>Received WSP from zWSP</source>
-        <translation>Полученный WSP от zWSP</translation>
+        <translation>Получено WSP из zWSP</translation>
     </message>
     <message>
         <source>Minted Change as zWSP from zWSP Spend</source>
-        <translation>созданная  замена  zWSP из потраенного zWSP </translation>
+        <translation>Отчеканено zWSP-сдачи из потраченных zWSP</translation>
     </message>
     <message>
         <source>Converted zWSP to WSP</source>
-        <translation>Преобразованный zWSP to WSP</translation>
+        <translation>Преобразовано zWSP to WSP</translation>
     </message>
     <message>
         <source>Anonymous (zWSP Transaction)</source>
-        <translation>Анонимный (транзакция zWSP)</translation>
+        <translation>Анонимно (транзакция zWSP)</translation>
     </message>
     <message>
         <source>Anonymous (zWSP Stake)</source>
-        <translation>Анонимный (ставка zWSP)</translation>
+        <translation>Анонимно (доля zWSP)</translation>
     </message>
     <message>
         <source>Sent to</source>
-        <translation>Отправить</translation>
+        <translation>Отправлено</translation>
     </message>
     <message>
         <source>Orphan Block - Generated but not accepted. This does not impact your holdings.</source>
@@ -4593,11 +4641,11 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Mined</source>
-        <translation>заминированный</translation>
+        <translation>Добыто</translation>
     </message>
     <message>
         <source>Obfuscated</source>
-        <translation>затемненный</translation>
+        <translation>Затемненный</translation>
     </message>
     <message>
         <source>watch-only</source>
@@ -4609,7 +4657,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Transaction status. Hover over this field to show number of confirmations.</source>
-        <translation>Статус транзакции. Наведите указатель мыши на это поле, чтобы показать количество подтверждений.</translation>
+        <translation>Статус транзакции. Подведите курсор к нужному полю для того, чтобы увидеть количество подтверждений.</translation>
     </message>
     <message>
         <source>Date and time that the transaction was received.</source>
@@ -4636,7 +4684,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     <name>TransactionView</name>
     <message>
         <source>All</source>
-        <translation>все</translation>
+        <translation>Все</translation>
     </message>
     <message>
         <source>Today</source>
@@ -4644,43 +4692,43 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>This week</source>
-        <translation>Эта неделя</translation>
+        <translation>На этой неделе</translation>
     </message>
     <message>
         <source>This month</source>
-        <translation>Этот месяц</translation>
+        <translation>В этом месяце</translation>
     </message>
     <message>
         <source>Last month</source>
-        <translation>Последний месяц</translation>
+        <translation>В прошлом месяце</translation>
     </message>
     <message>
         <source>This year</source>
-        <translation>Этот год</translation>
+        <translation>В этом году</translation>
     </message>
     <message>
         <source>Range...</source>
-        <translation>Диапазон...</translation>
+        <translation>Промежуток...</translation>
     </message>
     <message>
         <source>Most Common</source>
-        <translation>наиболее общий</translation>
+        <translation>Наиболее общие</translation>
     </message>
     <message>
         <source>Received with</source>
-        <translation>Получено с</translation>
+        <translation>Получено на</translation>
     </message>
     <message>
         <source>Sent to</source>
-        <translation>Отправить</translation>
+        <translation>Отправлено на</translation>
     </message>
     <message>
         <source>To yourself</source>
-        <translation>Самому себе</translation>
+        <translation>Отправлено себе</translation>
     </message>
     <message>
         <source>Mined</source>
-        <translation>заминированный</translation>
+        <translation>Добытые</translation>
     </message>
     <message>
         <source>Minted</source>
@@ -4688,31 +4736,31 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Masternode Reward</source>
-        <translation>Вознаграждение Мастерноды</translation>
+        <translation>Вознаграждение мастерноды</translation>
     </message>
     <message>
         <source>Zerocoin Mint</source>
-        <translation>чеканка Zerocoin</translation>
+        <translation>Чеканка Zerocoin</translation>
     </message>
     <message>
         <source>Zerocoin Spend</source>
-        <translation>Потратить Zerocoin </translation>
+        <translation>Потрачено Zerocoin</translation>
     </message>
     <message>
         <source>Zerocoin Spend to Self</source>
-        <translation>Потратить Zerocoin  на себя</translation>
+        <translation>Потрачено Zerocoin на себя</translation>
     </message>
     <message>
         <source>Other</source>
-        <translation>другие</translation>
+        <translation>Другое</translation>
     </message>
     <message>
         <source>Enter address or label to search</source>
-        <translation>Введите адрес или имя для поиска</translation>
+        <translation>Введите адрес или метку для поиска</translation>
     </message>
     <message>
         <source>Min amount</source>
-        <translation>Минимальная сумма</translation>
+        <translation>Мин. сумма</translation>
     </message>
     <message>
         <source>Copy address</source>
@@ -4732,15 +4780,15 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Edit label</source>
-        <translation>Редактировать имя</translation>
+        <translation>Изменить метку</translation>
     </message>
     <message>
         <source>Show transaction details</source>
-        <translation>Детали транзакции</translation>
+        <translation>Показать подробности транзакции</translation>
     </message>
     <message>
         <source>Export Transaction History</source>
-        <translation>Экспорт истории транзакций</translation>
+        <translation>Экспортировать историю транзакций</translation>
     </message>
     <message>
         <source>Comma separated file (*.csv)</source>
@@ -4752,7 +4800,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Watch-only</source>
-        <translation>смотреть только</translation>
+        <translation>Для просмотра</translation>
     </message>
     <message>
         <source>Date</source>
@@ -4784,15 +4832,15 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Exporting Successful</source>
-        <translation>Экспортирование произошло успешно</translation>
+        <translation>Экспорт успешно завершён</translation>
     </message>
     <message>
         <source>Received WSP from zWSP</source>
-        <translation>Полученный WSP от zWSP</translation>
+        <translation>Полученно WSP из zWSP</translation>
     </message>
     <message>
         <source>Zerocoin Spend, Change in zWSP</source>
-        <translation>Потратить Zerocoin, Преобразовать в zWSP</translation>
+        <translation>Потрачено Zerocoin, Сдача в zWSP</translation>
     </message>
     <message>
         <source>The transaction history was successfully saved to %1.</source>
@@ -4800,36 +4848,36 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Range:</source>
-        <translation>диапазон</translation>
+        <translation>Промежуток от:</translation>
     </message>
     <message>
         <source>to</source>
-        <translation>в</translation>
+        <translation>до</translation>
     </message>
 </context>
 <context>
     <name>UnitDisplayStatusBarControl</name>
     <message>
         <source>Unit to show amounts in. Click to select another unit.</source>
-        <translation>Блок , чтобы отобразить суммы. Нажмите, чтобы выбрать другое устройство.</translation>
+        <translation>Размерность для показа сумм. Кликните для выбора другой размерности.</translation>
     </message>
 </context>
 <context>
     <name>WalletFrame</name>
     <message>
         <source>No wallet has been loaded.</source>
-        <translation>Кошелек не загружен.</translation>
+        <translation>>Не был загружен ни один кошелёк.</translation>
     </message>
 </context>
 <context>
     <name>WalletModel</name>
     <message>
         <source>Send Coins</source>
-        <translation>Отправить Монеты</translation>
+        <translation>Отправка</translation>
     </message>
     <message>
         <source>SwiftX doesn't support sending values that high yet. Transactions are currently limited to %1 WSP.</source>
-        <translation>SwiftX не поддерживает отправку значений, которые еще высоки. В настоящее время транзакции ограничены %1 WSP.</translation>
+        <translation>SwiftX пока что не поддерживает такие большие суммы. На данный момент транзакции ограничены суммами до %1 WSP.</translation>
     </message>
 </context>
 <context>
@@ -4852,7 +4900,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Backup Wallet</source>
-        <translation>Резервная копия кошелька</translation>
+        <translation>Сделать резервную копию кошелька</translation>
     </message>
     <message>
         <source>Wallet Data (*.dat)</source>
@@ -4880,6 +4928,22 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     <message>
         <source>Select/Deselect All</source>
         <translation>Выбрать / Отменить выбор</translation>
+    </message>
+    <message>
+        <source>Select</source>
+        <translation>Выбор</translation>
+    </message>
+    <message>
+        <source>Denomination</source>
+        <translation>Номинал</translation>
+    </message>
+    <message>
+        <source>zWSP Version</source>
+        <translation>Версия zWSP</translation>
+    </message>
+    <message>
+        <source>Confirmations</source>
+        <translation>Подтверждения</translation>
     </message>
     <message>
         <source>Is Spendable</source>
@@ -4954,7 +5018,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Enable spork administration functionality with the appropriate private key.</source>
-        <translation>Включите функцию администрирования spork с помощью соответствующего закрытого ключа.</translation>
+        <translation>Включите функцию администрирования spork с помощью соответствующего приватного ключа.</translation>
     </message>
     <message>
         <source>Enter regression test mode, which uses a special chain in which blocks can be solved instantly.</source>
@@ -5194,7 +5258,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Attempt to recover private keys from a corrupt wallet.dat</source>
-        <translation>Попытка восстановить секретные ключи из поврежденного файла wallet.dat</translation>
+        <translation>Попытка восстановить приватные ключи из поврежденного файла wallet.dat</translation>
     </message>
     <message>
         <source>Automatically create Tor hidden service (default: %d)</source>
@@ -5202,7 +5266,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Block creation options:</source>
-        <translation>Варианты создания блока:</translation>
+        <translation>Параметры создания блоков:</translation>
     </message>
     <message>
         <source>Calculating missing accumulators...</source>
@@ -5258,7 +5322,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Connection options:</source>
-        <translation>Варианты подключения:</translation>
+        <translation>Параметры подключения:</translation>
     </message>
     <message>
         <source>Copyright (C) 2009-%i The Bitcoin Core Developers</source>
@@ -5286,7 +5350,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Debugging/Testing options:</source>
-        <translation>Параметры отладки / тестирования:</translation>
+        <translation>Параметры отладки/тестирования:</translation>
     </message>
     <message>
         <source>Delete blockchain folders and resync from scratch</source>
@@ -5538,7 +5602,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Invalid private key.</source>
-        <translation>Недопустимый закрытый ключ.</translation>
+        <translation>Недопустимый приватный ключ.</translation>
     </message>
     <message>
         <source>Invalid script detected.</source>
@@ -5846,7 +5910,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Node relay options:</source>
-        <translation>Варианты реле узла:</translation>
+        <translation>Параметры ретрансляции узла:</translation>
     </message>
     <message>
         <source>Non-standard public key detected.</source>
@@ -5894,7 +5958,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Options:</source>
-        <translation>Опции:</translation>
+        <translation>Параметры:</translation>
     </message>
     <message>
         <source>Password for JSON-RPC connections</source>
@@ -6010,7 +6074,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <source>Set the masternode private key</source>
-        <translation>Задайте личный ключ масштаба</translation>
+        <translation>Задайте приватный ключ масштаба</translation>
     </message>
     <message>
         <source>Set the number of threads to service RPC calls (default: %d)</source>
