@@ -147,27 +147,27 @@
        </attribute>
        <column>
         <property name="text">
-         <string notr="true">Select</string>
+         <string>Select</string>
         </property>
        </column>
        <column>
         <property name="text">
-         <string notr="true">Denomination</string>
+         <string>Denomination</string>
         </property>
        </column>
        <column>
         <property name="text">
-         <string notr="true">zWSP ID</string>
+         <string>zWSP ID</string>
         </property>
        </column>
        <column>
         <property name="text">
-         <string notr="true">zWSP Version</string>
+         <string>zWSP Version</string>
         </property>
        </column>
        <column>
         <property name="text">
-         <string notr="true">Confirmations</string>
+         <string>Confirmations</string>
         </property>
        </column>
        <column>
