@@ -6,6 +6,7 @@
 
 #include "txmempool.h"
 
+#include "consensus/consensus.h"
 #include "consensus/tx_verify.h"
 #include "clientversion.h"
 #include "main.h"
