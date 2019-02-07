@@ -13,6 +13,14 @@ typedef int64_t CAmount;
 
 static const CAmount COIN = 100000000;
 static const CAmount CENT = 1000000;
-
+/** No amount larger than this (in satoshi) is valid.
+ *
+ * Note that this constant is *not* the total money supply, but
+ * rather a sanity check. As this sanity check is used by consensus-critical
+ * validation code, the exact value of the MAX_MONEY constant is consensus
+ * critical; in unusual circumstances like a(nother) overflow bug that allowed
+ * for the creation of coins out of thin air modification could lead to a fork.
+ * */
+static const CAmount MAX_MONEY = 120000000 * COIN;
 
 #endif //  BITCOIN_AMOUNT_H

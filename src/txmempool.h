@@ -46,9 +46,11 @@ private:
     int64_t nTime;        //! Local time when entering the mempool
     double dPriority;     //! Priority when entering the mempool
     unsigned int nHeight; //! Chain height when entering the mempool
+    bool hadNoDependencies; //! Not dependent on any other txs when it entered the mempool
 
 public:
-    CTxMemPoolEntry(const CTransaction& _tx, const CAmount& _nFee, int64_t _nTime, double _dPriority, unsigned int _nHeight);
+    CTxMemPoolEntry(const CTransaction& _tx, const CAmount& _nFee,
+                    int64_t _nTime, double _dPriority, unsigned int _nHeight, bool poolHasNoInputsOf = false);
     CTxMemPoolEntry();
     CTxMemPoolEntry(const CTxMemPoolEntry& other);
 
@@ -58,9 +60,11 @@ public:
     size_t GetTxSize() const { return nTxSize; }
     int64_t GetTime() const { return nTime; }
     unsigned int GetHeight() const { return nHeight; }
+    bool WasClearAtEntry() const { return hadNoDependencies; }
+
 };
 
-class CMinerPolicyEstimator;
+class CBlockPolicyEstimator;
 
 /** An inpoint - a combination of a transaction and an index n into its vin */
 class CInPoint
@@ -98,9 +102,7 @@ class CTxMemPool
 private:
     bool fSanityCheck; //! Normally false, true if -checkmempool or -regtest
     unsigned int nTransactionsUpdated;
-    CMinerPolicyEstimator* minerPolicyEstimator;
-
-    CFeeRate minRelayFee; //! Passed to constructor to avoid dependency on main
+    CBlockPolicyEstimator* minerPolicyEstimator;
     uint64_t totalTxSize; //! sum of all mempool tx' byte sizes
 
 public:
@@ -121,18 +123,23 @@ public:
     void check(const CCoinsViewCache* pcoins) const;
     void setSanityCheck(bool _fSanityCheck) { fSanityCheck = _fSanityCheck; }
 
-    bool addUnchecked(const uint256& hash, const CTxMemPoolEntry& entry);
+    bool addUnchecked(const uint256& hash, const CTxMemPoolEntry &entry, bool fCurrentEstimate = true);
     void remove(const CTransaction& tx, std::list<CTransaction>& removed, bool fRecursive = false);
     void removeCoinbaseSpends(const CCoinsViewCache* pcoins, unsigned int nMemPoolHeight);
     void removeConflicts(const CTransaction& tx, std::list<CTransaction>& removed);
-    void removeForBlock(const std::vector<CTransaction>& vtx, unsigned int nBlockHeight, std::list<CTransaction>& conflicts);
+    void removeForBlock(const std::vector<CTransaction>& vtx, unsigned int nBlockHeight,
+                        std::list<CTransaction>& conflicts, bool fCurrentEstimate = true);
     void clear();
     void queryHashes(std::vector<uint256>& vtxid);
     void getTransactions(std::set<uint256>& setTxid);
     void pruneSpent(const uint256& hash, CCoins& coins);
     unsigned int GetTransactionsUpdated() const;
     void AddTransactionsUpdated(unsigned int n);
-
+    /**
+     * Check that none of this transactions inputs are in the mempool, and thus
+     * the tx is not dependent on other mempool transactions to be included in a block.
+     */
+    bool HasNoInputsOf(const CTransaction& tx) const;
     /** Affect CreateNewBlock prioritisation of transactions */
     void PrioritiseTransaction(const uint256 hash, const std::string strHash, double dPriorityDelta, const CAmount& nFeeDelta);
     void ApplyDeltas(const uint256 hash, double& dPriorityDelta, CAmount& nFeeDelta);
@@ -149,7 +156,7 @@ public:
         return totalTxSize;
     }
 
-    bool exists(uint256 hash)
+    bool exists(uint256 hash) const
     {
         LOCK(cs);
         return (mapTx.count(hash) != 0);
