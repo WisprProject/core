@@ -11,6 +11,7 @@
 #include "optionsmodel.h"
 
 #include "base58.h"
+#include "policy/policy.h"
 #include "chainparams.h"
 #include "ui_interface.h"
 #include "util.h"
@@ -525,7 +526,7 @@ bool PaymentServer::processPaymentRequest(PaymentRequestPlus& request, SendCoins
 
         // Extract and check amounts
         CTxOut txOut(sendingTo.second, sendingTo.first);
-        if (txOut.IsDust(::minRelayTxFee)) {
+        if (IsDust(txOut, ::minRelayTxFee)) {
             emit message(tr("Payment request error"), tr("Requested payment amount of %1 is too small (considered dust).").arg(BitcoinUnits::formatWithUnit(optionsModel->getDisplayUnit(), sendingTo.second)),
                 CClientUIInterface::MSG_ERROR);
 
