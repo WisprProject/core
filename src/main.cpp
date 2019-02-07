@@ -329,7 +329,7 @@ namespace
     }
 
 // Requires cs_main.
-    void MarkBlockAsReceived(const uint256& hash)
+    bool MarkBlockAsReceived(const uint256& hash)
     {
         map<uint256, pair<NodeId, list<QueuedBlock>::iterator> >::iterator itInFlight = mapBlocksInFlight.find(hash);
         if (itInFlight != mapBlocksInFlight.end()) {
@@ -339,7 +339,9 @@ namespace
             state->nBlocksInFlight--;
             state->nStallingSince = 0;
             mapBlocksInFlight.erase(itInFlight);
+            return true;
         }
+        return false;
     }
 
 // Requires cs_main.
@@ -1414,7 +1416,7 @@ bool GetTransaction(const uint256& hash, CTransaction& txOut, uint256& hashBlock
 // CBlock and CBlockIndex
 //
 
-bool WriteBlockToDisk(CBlock& block, CDiskBlockPos& pos)
+bool WriteBlockToDisk(const CBlock& block, CDiskBlockPos& pos)
 {
     // Open history file to append
     CAutoFile fileout(OpenBlockFile(pos), SER_DISK, CLIENT_VERSION);
@@ -2843,7 +2845,7 @@ static int64_t nTimePostConnect = 0;
  * Connect a new block to chainActive. pblock is either NULL or a pointer to a CBlock
  * corresponding to pindexNew, to bypass loading it again from disk.
  */
-bool static ConnectTip(CValidationState& state, CBlockIndex* pindexNew, CBlock* pblock, bool fAlreadyChecked)
+bool static ConnectTip(CValidationState& state, CBlockIndex* pindexNew, const CBlock* pblock, bool fAlreadyChecked)
 {
     assert(pindexNew->pprev == chainActive.Tip());
     mempool.check(pcoinsTip);
@@ -3078,7 +3080,7 @@ static void PruneBlockIndexCandidates()
  * Try to make some progress towards making pindexMostWork the active block.
  * pblock is either NULL or a pointer to a CBlock corresponding to pindexMostWork.
  */
-static bool ActivateBestChainStep(CValidationState& state, CBlockIndex* pindexMostWork, CBlock* pblock, bool fAlreadyChecked)
+static bool ActivateBestChainStep(CValidationState& state, CBlockIndex* pindexMostWork, const CBlock* pblock, bool fAlreadyChecked)
 {
     AssertLockHeld(cs_main);
     if (pblock == nullptr)
@@ -3150,7 +3152,7 @@ static bool ActivateBestChainStep(CValidationState& state, CBlockIndex* pindexMo
  * or an activated best chain. pblock is either NULL or a pointer to a block
  * that is already loaded (to avoid loading it again from disk).
  */
-bool ActivateBestChain(CValidationState& state, CBlock* pblock, bool fAlreadyChecked)
+bool ActivateBestChain(CValidationState& state, const CBlock* pblock, bool fAlreadyChecked)
 {
     CBlockIndex* pindexNewTip = nullptr;
     CBlockIndex* pindexMostWork = nullptr;
@@ -3874,7 +3876,7 @@ bool ContextualCheckZerocoinStake(int nHeight, CStakeInput* stake)
     return true;
 }
 
-bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, CDiskBlockPos* dbp, bool fAlreadyCheckedBlock)
+bool AcceptBlock(const CBlock& block, CValidationState& state, CBlockIndex** ppindex, const CDiskBlockPos* dbp, bool fAlreadyCheckedBlock)
 {
     AssertLockHeld(cs_main);
 
@@ -4083,11 +4085,9 @@ void CBlockIndex::BuildSkip()
         pskip = pprev->GetAncestor(GetSkipHeight(nHeight));
 }
 
-bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDiskBlockPos* dbp)
+bool ProcessNewBlock(const CChainParams& chainparams, const CBlock* pblock, bool fForceProcessing, const CDiskBlockPos* dbp, bool *fNewBlock)
 {
-    // Preliminary checks
     int64_t nStartTime = GetTimeMillis();
-    bool checked = CheckBlock(*pblock, state);
 
     int nMints = 0;
     int nSpends = 0;
@@ -4109,35 +4109,35 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
     if (!CheckBlockSignature(*pblock))
         return error("ProcessNewBlock() : bad proof-of-stake block signature");
 
-    if (pblock->GetHash() != Params().HashGenesisBlock() && pfrom != NULL) {
-        //if we get this far, check if the prev block is our prev block, if not then request sync and return false
-        BlockMap::iterator mi = mapBlockIndex.find(pblock->hashPrevBlock);
-        if (mi == mapBlockIndex.end()) {
-            pfrom->PushMessage("getblocks", chainActive.GetLocator(), uint256(0));
-            return false;
-        }
-    }
+//    if (pblock->GetHash() != Params().HashGenesisBlock() && pfrom != NULL) {
+//        //if we get this far, check if the prev block is our prev block, if not then request sync and return false
+//        BlockMap::iterator mi = mapBlockIndex.find(pblock->hashPrevBlock);
+//        if (mi == mapBlockIndex.end()) {
+//            pfrom->PushMessage("getblocks", chainActive.GetLocator(), uint256(0));
+//            return false;
+//        }
+//    }
 
     {
-        LOCK(cs_main);   // Replaces the former TRY_LOCK loop because busy waiting wastes too much resources
-
-        MarkBlockAsReceived (pblock->GetHash ());
-        if (!checked) {
-            return error ("%s : CheckBlock FAILED for block %s", __func__, pblock->GetHash().GetHex());
-        }
+        LOCK(cs_main);
 
         // Store to disk
-        CBlockIndex* pindex = nullptr;
-        bool ret = AcceptBlock (*pblock, state, &pindex, dbp, checked);
-        if (pindex && pfrom) {
-            mapBlockSource[pindex->GetBlockHash ()] = pfrom->GetId ();
+        CBlockIndex *pindex = NULL;
+        if (fNewBlock) *fNewBlock = false;
+        CValidationState state;
+        bool ret = AcceptBlock(*pblock, state, &pindex, dbp, fNewBlock);
+//        bool ret = AcceptBlock(*pblock, state, &pindex, fForceProcessing, dbp, fNewBlock);
+        CheckBlockIndex();
+        if (!ret) {
+            GetMainSignals().BlockChecked(*pblock, state);
+            return error("%s: AcceptBlock FAILED", __func__);
         }
-        CheckBlockIndex ();
-        if (!ret)
-            return error ("%s : AcceptBlock FAILED", __func__);
     }
 
-    if (!ActivateBestChain(state, pblock, checked))
+//    NotifyHeaderTip();
+
+    CValidationState state; // Only used to report errors, not invalidity - ignore it
+    if (!ActivateBestChain(state, pblock))
         return error("%s : ActivateBestChain failed", __func__);
 
     if (!fLiteMode) {
@@ -4512,7 +4512,7 @@ bool InitBlockIndex()
 }
 
 
-bool LoadExternalBlockFile(FILE* fileIn, CDiskBlockPos* dbp)
+bool LoadExternalBlockFile(const CChainParams& chainparams, FILE* fileIn, CDiskBlockPos* dbp)
 {
     // Map of disk positions for blocks with unknown parent (only used for reindex)
     static std::multimap<uint256, CDiskBlockPos> mapBlocksUnknownParent;
@@ -4569,13 +4569,14 @@ bool LoadExternalBlockFile(FILE* fileIn, CDiskBlockPos* dbp)
 
                 // process in case the block isn't known yet
                 if (mapBlockIndex.count(hash) == 0 || (mapBlockIndex[hash]->nStatus & BLOCK_HAVE_DATA) == 0) {
+                    LOCK(cs_main);
                     CValidationState state;
-                    if (ProcessNewBlock(state, nullptr, &block, dbp))
+                    if (AcceptBlock(block, state, NULL, dbp, NULL))
                         nLoaded++;
                     if (state.IsError())
                         break;
-                } else if (hash != Params().HashGenesisBlock() && mapBlockIndex[hash]->nHeight % 1000 == 0) {
-                    LogPrintf("Block Import: already had block %s at height %d\n", hash.ToString(), mapBlockIndex[hash]->nHeight);
+                } else if (hash != chainparams.GetConsensus().hashGenesisBlock && mapBlockIndex[hash]->nHeight % 1000 == 0) {
+                    LogPrint("reindex", "Block Import: already had block %s at height %d\n", hash.ToString(), mapBlockIndex[hash]->nHeight);
                 }
 
                 // Recursively process earlier encountered successors of this block
@@ -4591,7 +4592,7 @@ bool LoadExternalBlockFile(FILE* fileIn, CDiskBlockPos* dbp)
                             LogPrintf("%s: Processing out of order child %s of %s\n", __func__, block.GetHash().ToString(),
                                       head.ToString());
                             CValidationState dummy;
-                            if (ProcessNewBlock(dummy, NULL, &block, &it->second)) {
+                            if (AcceptBlock(block, dummy, NULL, &it->second, NULL)){
                                 nLoaded++;
                                 queue.push_back(block.GetHash());
                             }
@@ -5154,7 +5155,7 @@ void static ProcessGetData(CNode* pfrom)
 }
 
 bool fRequestedSporksIDB = false;
-bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, int64_t nTimeReceived)
+bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, int64_t nTimeReceived, const CChainParams& chainparams)
 {
     RandAddSeedPerfmon();
     LogPrint("net", "received: %s (%u bytes) peer=%d\n", SanitizeString(strCommand), vRecv.size(), pfrom->id);
@@ -5742,19 +5743,26 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
             }
         } else {
             pfrom->AddInventoryKnown(inv);
-
-            CValidationState state;
             if (!mapBlockIndex.count(block.GetHash())) {
-                ProcessNewBlock(state, pfrom, &block);
-                int nDoS;
-                if(state.IsInvalid(nDoS)) {
-                    pfrom->PushMessage("reject", strCommand, state.GetRejectCode(),
-                                       state.GetRejectReason().substr(0, MAX_REJECT_MESSAGE_LENGTH), inv.hash);
-                    if(nDoS > 0) {
-                        TRY_LOCK(cs_main, lockMain);
-                        if (lockMain) Misbehaving(pfrom->GetId(), nDoS);
-                    }
+                // Process all blocks from whitelisted peers, even if not requested,
+                // unless we're still syncing with the network.
+                // Such an unrequested block may still be processed, subject to the
+                // conditions in AcceptBlock().
+                bool forceProcessing = pfrom->fWhitelisted && !IsInitialBlockDownload();
+                const uint256 hash(block.GetHash());
+                {
+                    LOCK(cs_main);
+                    // Also always process if we requested the block explicitly, as we may
+                    // need it even though it is not a candidate for a new best tip.
+                    forceProcessing |= MarkBlockAsReceived(hash);
+                    // mapBlockSource is only used for sending reject messages and DoS scores,
+                    // so the race between here and cs_main in ProcessNewBlock is fine.
+                    mapBlockSource.emplace(hash, pfrom->GetId());
                 }
+                bool fNewBlock = false;
+                ProcessNewBlock(chainparams, &block, forceProcessing, NULL, &fNewBlock);
+                if (fNewBlock)
+                    pfrom->nLastBlockTime = GetTime();
                 //disconnect this node if its old protocol version
                 pfrom->DisconnectOldProtocol(ActiveProtocol(), strCommand);
             } else {
@@ -6070,6 +6078,7 @@ int ActiveProtocol()
 // requires LOCK(cs_vRecvMsg)
 bool ProcessMessages(CNode* pfrom)
 {
+    const CChainParams& chainparams = Params();
     //if (fDebug)
     //    LogPrintf("ProcessMessages(%u messages)\n", pfrom->vRecvMsg.size());
 
@@ -6142,7 +6151,7 @@ bool ProcessMessages(CNode* pfrom)
         // Process message
         bool fRet = false;
         try {
-            fRet = ProcessMessage(pfrom, strCommand, vRecv, msg.nTime);
+            fRet = ProcessMessage(pfrom, strCommand, vRecv, msg.nTime, chainparams);
             boost::this_thread::interruption_point();
         } catch (std::ios_base::failure& e) {
             pfrom->PushMessage("reject", strCommand, REJECT_MALFORMED, string("error parsing message"));
