@@ -5,6 +5,7 @@
 
 #include "init.h"
 #include "main.h"
+#include "consensus/tx_verify.h"
 #include "miner.h"
 #include "pubkey.h"
 #include "uint256.h"

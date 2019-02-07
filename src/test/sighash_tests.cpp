@@ -4,6 +4,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "data/sighash.json.h"
+#include "consensus/tx_verify.h"
 #include "main.h"
 #include "random.h"
 #include "serialize.h"
