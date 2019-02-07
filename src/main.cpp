@@ -15,6 +15,8 @@
 #include "chainparams.h"
 #include "checkpoints.h"
 #include "checkqueue.h"
+#include "consensus/consensus.h"
+#include "consensus/tx_verify.h"
 #include "init.h"
 #include "kernel.h"
 #include "masternode-budget.h"

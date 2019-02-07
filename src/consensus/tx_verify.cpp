@@ -146,11 +146,13 @@ int64_t GetTransactionSigOpCost(const CTransaction& tx, const CCoinsViewCache& i
         nSigOps += GetP2SHSigOpCount(tx, inputs) * WITNESS_SCALE_FACTOR;
     }
 
-    for (unsigned int i = 0; i < tx.vin.size(); i++)
-    {
-        const CTxOut &prevout = inputs.GetOutputFor(tx.vin[i]);
-        nSigOps += CountWitnessSigOps(tx.vin[i].scriptSig, prevout.scriptPubKey, &tx.vin[i].scriptWitness, flags);
-    }
+    // TODO uncomment after implementing function and transaction witnesses
+
+    //    for (unsigned int i = 0; i < tx.vin.size(); i++)
+    //    {
+    //        const CTxOut &prevout = inputs.GetOutputFor(tx.vin[i]);
+    //        nSigOps += CountWitnessSigOps(tx.vin[i].scriptSig, prevout.scriptPubKey, &tx.vin[i].scriptWitness, flags);
+    //    }
     return nSigOps;
 }
 
@@ -250,7 +252,7 @@ bool Consensus::CheckTxInputs(const CTransaction& tx, CValidationState& state, c
     // This doesn't trigger the DoS code on purpose; if it did, it would make it easier
     // for an attacker to attempt to split the network.
     if (!inputs.HaveInputs(tx))
-        return state.Invalid(false, 0, "", "Inputs unavailable");
+        return state.Invalid(error("%s : %s inputs unavailable", __func__, tx.GetHash().ToString()));
 
     CAmount nValueIn = 0;
     CAmount nFees = 0;
@@ -263,9 +265,9 @@ bool Consensus::CheckTxInputs(const CTransaction& tx, CValidationState& state, c
         // If prev is coinbase, check that it's matured
         if (coins->IsCoinBase()) {
             if (nSpendHeight - coins->nHeight < COINBASE_MATURITY)
-                return state.Invalid(false,
-                                     REJECT_INVALID, "bad-txns-premature-spend-of-coinbase",
-                                     strprintf("tried to spend coinbase at depth %d", nSpendHeight - coins->nHeight));
+                return state.Invalid(error("%s: tried to spend coinbase at depth %d", __func__,
+                                           nSpendHeight - coins->nHeight),
+                                     REJECT_INVALID, "bad-txns-premature-spend-of-coinbase");
         }
 
         // Check for negative or overflow input values
@@ -276,8 +278,9 @@ bool Consensus::CheckTxInputs(const CTransaction& tx, CValidationState& state, c
     }
 
     if (nValueIn < tx.GetValueOut())
-        return state.DoS(100, false, REJECT_INVALID, "bad-txns-in-belowout", false,
-                         strprintf("value in (%s) < value out (%s)", FormatMoney(nValueIn), FormatMoney(tx.GetValueOut())));
+        return state.DoS(100, error("%s : %s value in (%s) < value out (%s)", __func__,
+                                    tx.GetHash().ToString(), FormatMoney(nValueIn), FormatMoney(tx.GetValueOut())),
+                         REJECT_INVALID, "bad-txns-in-belowout");
 
     // Tally transaction fees
     CAmount nTxFee = nValueIn - tx.GetValueOut();
