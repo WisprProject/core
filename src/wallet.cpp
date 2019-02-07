@@ -15,6 +15,7 @@
 #include "kernel.h"
 #include "masternode-budget.h"
 #include "net.h"
+#include "policy/policy.h"
 #include "primitives/transaction.h"
 #include "script/script.h"
 #include "script/sign.h"

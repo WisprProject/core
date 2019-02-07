@@ -143,6 +143,7 @@ BITCOIN_CORE_H = \
   netbase.h \
   net.h \
   noui.h \
+  policy/policy.h \
   pow.h \
   protocol.h \
   pubkey.h \

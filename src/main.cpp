@@ -24,6 +24,7 @@
 #include "masternodeman.h"
 #include "merkleblock.h"
 #include "net.h"
+#include "policy/policy.h"
 #include "obfuscation.h"
 #include "pow.h"
 #include "spork.h"

@@ -14,6 +14,7 @@
 #include "main.h"
 #include "masternode-sync.h"
 #include "net.h"
+#include "policy/policy.h"
 #include "pow.h"
 #include "primitives/block.h"
 #include "primitives/transaction.h"
