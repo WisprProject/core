@@ -8,12 +8,13 @@
 #include "policy/policy.h"
 
 #include "consensus/tx_verify.h"
+#include "consensus/validation.h"
 #include "main.h"
 #include "tinyformat.h"
 #include "util.h"
 #include "utilstrencodings.h"
 
-bool IsDust(const CTxOut& txout, const CFeeRate minRelayTxFee)
+bool IsDust(const CTxOut& txout, const CFeeRate& dustRelayFeeIn)
 {
     // "Dust" is defined in terms of CTransaction::minRelayTxFee, which has units uwsp-per-kilobyte.
     // If you'd pay more than 1/3 in fees to spend something, then we consider it dust.
@@ -22,8 +23,8 @@ bool IsDust(const CTxOut& txout, const CFeeRate minRelayTxFee)
     // and that means that fee per txout is 182 * 10000 / 1000 = 1820 uwsp.
     // So dust is a txout less than 1820 *3 = 5460 uwsp
     // with default -minrelaytxfee = minRelayTxFee = 10000 uwsp per kB.
-    size_t nSize = GetSerializeSize(SER_DISK,0)+148u;
-    return (txout.nValue < 3*minRelayTxFee.GetFee(nSize));
+    size_t nSize = GetSerializeSize(txout,0)+148u;
+    return (txout.nValue < 3*dustRelayFeeIn.GetFee(nSize));
 }
 
 bool IsStandard(const CScript& scriptPubKey, txnouttype& whichType)

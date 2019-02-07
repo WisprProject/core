@@ -936,4 +936,10 @@ public:
     }
 };
 
+template <typename T>
+size_t GetSerializeSize(const T& t, int nVersion = 0)
+{
+    return (CSizeComputer(SER_DISK, nVersion) << t).size();
+}
+
 #endif // WISPR_SERIALIZE_H

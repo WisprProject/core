@@ -46,7 +46,7 @@ static const unsigned int STANDARD_SCRIPT_VERIFY_FLAGS = MANDATORY_SCRIPT_VERIFY
 /** For convenience, standard but not mandatory verify flags. */
 static const unsigned int STANDARD_NOT_MANDATORY_VERIFY_FLAGS = STANDARD_SCRIPT_VERIFY_FLAGS & ~MANDATORY_SCRIPT_VERIFY_FLAGS;
 
-bool IsDust(const CTxOut& txout, const CFeeRate minRelayTxFee);
+bool IsDust(const CTxOut& txout, const CFeeRate& dustRelayFeeIn);
 
 bool IsStandard(const CScript& scriptPubKey, txnouttype& whichType);
 
