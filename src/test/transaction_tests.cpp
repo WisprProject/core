@@ -7,6 +7,7 @@
 #include "data/tx_valid.json.h"
 
 #include "consensus/tx_verify.h"
+#include "consensus/validation.h"
 #include "clientversion.h"
 #include "key.h"
 #include "keystore.h"

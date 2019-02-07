@@ -5,6 +5,7 @@
 
 #include "data/sighash.json.h"
 #include "consensus/tx_verify.h"
+#include "consensus/validation.h"
 #include "main.h"
 #include "random.h"
 #include "serialize.h"

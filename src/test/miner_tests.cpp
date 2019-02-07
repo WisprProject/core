@@ -7,6 +7,7 @@
 #include "main.h"
 #include "consensus/merkle.h"
 #include "consensus/tx_verify.h"
+#include "consensus/validation.h"
 #include "miner.h"
 #include "pubkey.h"
 #include "uint256.h"

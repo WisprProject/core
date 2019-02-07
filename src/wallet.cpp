@@ -10,6 +10,7 @@
 #include "accumulators.h"
 #include "base58.h"
 #include "consensus/consensus.h"
+#include "consensus/validation.h"
 #include "checkpoints.h"
 #include "coincontrol.h"
 #include "kernel.h"
