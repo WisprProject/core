@@ -182,7 +182,7 @@ std::string CMasternodeSync::GetSyncStatus()
 
 void CMasternodeSync::ProcessMessage(CNode* pfrom, std::string& strCommand, CDataStream& vRecv)
 {
-    if (strCommand == "ssc") { //Sync status count
+    if (strCommand == NetMsgType::SYNCSTATUSCOUNT) { //Sync status count
         int nItemID;
         int nCount;
         vRecv >> nItemID >> nCount;
@@ -272,14 +272,14 @@ void CMasternodeSync::Process()
     for (CNode* pnode: vNodes) {
         if (Params().NetworkID() == CBaseChainParams::REGTEST) {
             if (RequestedMasternodeAttempt <= 2) {
-                pnode->PushMessage("getsporks"); //get current network sporks
+                pnode->PushMessage(NetMsgType::GETSPORKS); //get current network sporks
             } else if (RequestedMasternodeAttempt < 4) {
                 mnodeman.DsegUpdate(pnode);
             } else if (RequestedMasternodeAttempt < 6) {
                 int nMnCount = mnodeman.CountEnabled();
-                pnode->PushMessage("mnget", nMnCount); //sync payees
+                pnode->PushMessage(NetMsgType::MASTERNODEPAYMENTSYNC, nMnCount); //sync payees
                 uint256 n = 0;
-                pnode->PushMessage("mnvs", n); //sync masternode votes
+                pnode->PushMessage(NetMsgType::MNBUDGETSYNC, n); //sync masternode votes
             } else {
                 RequestedMasternodeAssets = MASTERNODE_SYNC_FINISHED;
             }
@@ -292,7 +292,7 @@ void CMasternodeSync::Process()
             if (pnode->HasFulfilledRequest("getspork")) continue;
             pnode->FulfilledRequest("getspork");
 
-            pnode->PushMessage("getsporks"); //get current network sporks
+            pnode->PushMessage(NetMsgType::GETSPORKS); //get current network sporks
             if (RequestedMasternodeAttempt >= 2) GetNextAsset();
             RequestedMasternodeAttempt++;
 
@@ -362,7 +362,7 @@ void CMasternodeSync::Process()
                 if (pindexPrev == NULL) return;
 
                 int nMnCount = mnodeman.CountEnabled();
-                pnode->PushMessage("mnget", nMnCount); //sync payees
+                pnode->PushMessage(NetMsgType::MASTERNODEPAYMENTSYNC, nMnCount); //sync payees
                 RequestedMasternodeAttempt++;
 
                 return;
@@ -399,7 +399,7 @@ void CMasternodeSync::Process()
                 if (RequestedMasternodeAttempt >= MASTERNODE_SYNC_THRESHOLD * 3) return;
 
                 uint256 n = 0;
-                pnode->PushMessage("mnvs", n); //sync masternode votes
+                pnode->PushMessage(NetMsgType::MNBUDGETSYNC, n); //sync masternode votes
                 RequestedMasternodeAttempt++;
 
                 return;

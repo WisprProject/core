@@ -464,7 +464,7 @@ bool CNode::DisconnectOldProtocol(int nVersionRequired, string strLastCommand)
     fDisconnect = false;
     if (nVersion < nVersionRequired) {
         LogPrintf("%s : peer=%d using obsolete version %i; disconnecting\n", __func__, id, nVersion);
-        PushMessage("reject", strLastCommand, REJECT_OBSOLETE, strprintf("Version must be %d or greater", ActiveProtocol()));
+        PushMessage(NetMsgType::REJECT, strLastCommand, REJECT_OBSOLETE, strprintf("Version must be %d or greater", ActiveProtocol()));
         fDisconnect = true;
     }
 
@@ -484,7 +484,7 @@ void CNode::PushVersion()
         LogPrint("net", "send version message: version %d, blocks=%d, us=%s, them=%s, peer=%d\n", PROTOCOL_VERSION, nBestHeight, addrMe.ToString(), addrYou.ToString(), id);
     else
         LogPrint("net", "send version message: version %d, blocks=%d, us=%s, peer=%d\n", PROTOCOL_VERSION, nBestHeight, addrMe.ToString(), id);
-    PushMessage("version", PROTOCOL_VERSION, nLocalServices, nTime, addrYou, addrMe,
+    PushMessage(NetMsgType::VERSION, PROTOCOL_VERSION, nLocalServices, nTime, addrYou, addrMe,
         nLocalHostNonce, strSubVersion, nBestHeight, true);
 }
 
@@ -1883,7 +1883,7 @@ void RelayTransactionLockReq(const CTransaction& tx, bool relayToAll)
         if (!relayToAll && !pnode->fRelayTxes)
             continue;
 
-        pnode->PushMessage("ix", tx);
+        pnode->PushMessage(NetMsgType::TXLOCKREQUEST, tx);
     }
 }
 

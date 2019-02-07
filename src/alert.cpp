@@ -136,7 +136,7 @@ bool CAlert::RelayTo(CNode* pnode) const
         if (AppliesTo(pnode->nVersion, pnode->strSubVer) ||
             AppliesToMe() ||
             GetAdjustedTime() < nRelayUntil) {
-            pnode->PushMessage("alert", *this);
+            pnode->PushMessage(NetMsgType::ALERT, *this);
             return true;
         }
     }

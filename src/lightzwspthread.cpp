@@ -85,7 +85,7 @@ void CLightWorker::ThreadLightZWSPSimplified() {
                         ss << heightStop;
                         if (genWit.getPfrom()) {
                             LogPrintf("%s pushing message to %s \n", "pivx-light-thread", genWit.getPfrom()->addrName);
-                            genWit.getPfrom()->PushMessage("pubcoins", ss);
+                            genWit.getPfrom()->PushMessage(NetMsgType::PUBCOINS, ss);
                         } else
                             LogPrintf("%s NOT pushing message to %s \n", "pivx-light-thread", genWit.getPfrom()->addrName);
                     }
@@ -111,7 +111,7 @@ void CLightWorker::rejectWork(CGenWit& wit, int blockHeight, uint32_t errorNumbe
         CDataStream ss(SER_NETWORK, PROTOCOL_VERSION);
         ss << wit.getRequestNum();
         ss << errorNumber;
-        wit.getPfrom()->PushMessage("pubcoins", ss);
+        wit.getPfrom()->PushMessage(NetMsgType::PUBCOINS, ss);
     } else {
         requestsQueue.push(wit);
     }

@@ -1042,18 +1042,18 @@ void CBudgetManager::ProcessMessage(CNode* pfrom, std::string& strCommand, CData
 
     LOCK(cs_budget);
 
-    if (strCommand == "mnvs") { //Masternode vote sync
+    if (strCommand == NetMsgType::MNBUDGETSYNC) { //Masternode vote sync
         uint256 nProp;
         vRecv >> nProp;
 
         if (Params().NetworkID() == CBaseChainParams::MAIN) {
             if (nProp == 0) {
-                if (pfrom->HasFulfilledRequest("mnvs")) {
+                if (pfrom->HasFulfilledRequest(NetMsgType::MNBUDGETSYNC)) {
                     LogPrint("mnbudget","mnvs - peer already asked me for the list\n");
                     Misbehaving(pfrom->GetId(), 20);
                     return;
                 }
-                pfrom->FulfilledRequest("mnvs");
+                pfrom->FulfilledRequest(NetMsgType::MNBUDGETSYNC);
             }
         }
 
@@ -1061,7 +1061,7 @@ void CBudgetManager::ProcessMessage(CNode* pfrom, std::string& strCommand, CData
         LogPrint("mnbudget", "mnvs - Sent Masternode votes to peer %i\n", pfrom->GetId());
     }
 
-    if (strCommand == "mprop") { //Masternode Proposal
+    if (strCommand == NetMsgType::MNBUDGETPROPOSAL) { //Masternode Proposal
         CBudgetProposalBroadcast budgetProposalBroadcast;
         vRecv >> budgetProposalBroadcast;
 
@@ -1097,7 +1097,7 @@ void CBudgetManager::ProcessMessage(CNode* pfrom, std::string& strCommand, CData
         CheckOrphanVotes();
     }
 
-    if (strCommand == "mvote") { //Masternode Vote
+    if (strCommand == NetMsgType::MNBUDGETVOTE) { //Masternode Vote
         CBudgetVote vote;
         vRecv >> vote;
         vote.fValid = true;
@@ -1135,7 +1135,7 @@ void CBudgetManager::ProcessMessage(CNode* pfrom, std::string& strCommand, CData
         LogPrint("mnbudget","mvote - new budget vote for budget %s - %s\n", vote.nProposalHash.ToString(),  vote.GetHash().ToString());
     }
 
-    if (strCommand == "fbs") { //Finalized Budget Suggestion
+    if (strCommand == NetMsgType::MNBUDGETFINAL) { //Finalized Budget Suggestion
         CFinalizedBudgetBroadcast finalizedBudgetBroadcast;
         vRecv >> finalizedBudgetBroadcast;
 
@@ -1172,7 +1172,7 @@ void CBudgetManager::ProcessMessage(CNode* pfrom, std::string& strCommand, CData
         CheckOrphanVotes();
     }
 
-    if (strCommand == "fbvote") { //Finalized Budget Vote
+    if (strCommand == NetMsgType::MNBUDGETFINALVOTE) { //Finalized Budget Vote
         CFinalizedBudgetVote vote;
         vRecv >> vote;
         vote.fValid = true;
@@ -1331,7 +1331,7 @@ void CBudgetManager::Sync(CNode* pfrom, uint256 nProp, bool fPartial)
         ++it1;
     }
 
-    pfrom->PushMessage("ssc", MASTERNODE_SYNC_BUDGET_PROP, nInvCount);
+    pfrom->PushMessage(NetMsgType::SYNCSTATUSCOUNT, MASTERNODE_SYNC_BUDGET_PROP, nInvCount);
 
     LogPrint("mnbudget", "CBudgetManager::Sync - sent %d items\n", nInvCount);
 
@@ -1359,7 +1359,7 @@ void CBudgetManager::Sync(CNode* pfrom, uint256 nProp, bool fPartial)
         ++it3;
     }
 
-    pfrom->PushMessage("ssc", MASTERNODE_SYNC_BUDGET_FIN, nInvCount);
+    pfrom->PushMessage(NetMsgType::SYNCSTATUSCOUNT, MASTERNODE_SYNC_BUDGET_FIN, nInvCount);
     LogPrint("mnbudget", "CBudgetManager::Sync - sent %d items\n", nInvCount);
 }
 
@@ -1377,7 +1377,7 @@ bool CBudgetManager::UpdateProposal(CBudgetVote& vote, CNode* pfrom, std::string
             mapOrphanMasternodeBudgetVotes[vote.nProposalHash] = vote;
 
             if (!askedForSourceProposalOrBudget.count(vote.nProposalHash)) {
-                pfrom->PushMessage("mnvs", vote.nProposalHash);
+                pfrom->PushMessage(NetMsgType::MNBUDGETSYNC, vote.nProposalHash);
                 askedForSourceProposalOrBudget[vote.nProposalHash] = GetTime();
             }
         }
@@ -1404,7 +1404,7 @@ bool CBudgetManager::UpdateFinalizedBudget(CFinalizedBudgetVote& vote, CNode* pf
             mapOrphanFinalizedBudgetVotes[vote.nBudgetHash] = vote;
 
             if (!askedForSourceProposalOrBudget.count(vote.nBudgetHash)) {
-                pfrom->PushMessage("mnvs", vote.nBudgetHash);
+                pfrom->PushMessage(NetMsgType::MNBUDGETSYNC, vote.nBudgetHash);
                 askedForSourceProposalOrBudget[vote.nBudgetHash] = GetTime();
             }
         }
