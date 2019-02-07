@@ -5,6 +5,7 @@
 
 #include <boost/assign/list_of.hpp>
 
+#include "consensus/validation.h"
 #include "db.h"
 #include "kernel.h"
 #include "spork.h"
