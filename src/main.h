@@ -18,6 +18,7 @@
 #include "coins.h"
 #include "consensus/consensus.h"
 #include "net.h"
+#include "policy/feerate.h"
 #include "pow.h"
 #include "primitives/block.h"
 #include "primitives/transaction.h"

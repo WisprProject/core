@@ -15,6 +15,7 @@
 #include "main.h"
 #include "masternode-sync.h"
 #include "net.h"
+#include "policy/feerate.h"
 #include "policy/policy.h"
 #include "pow.h"
 #include "primitives/block.h"

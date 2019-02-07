@@ -9,6 +9,7 @@
 #define BITCOIN_WALLET_H
 
 #include "amount.h"
+#include "policy/feerate.h"
 #include "base58.h"
 #include "consensus/tx_verify.h"
 #include "crypter.h"

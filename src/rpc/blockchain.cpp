@@ -9,6 +9,8 @@
 #include "checkpoints.h"
 #include "clientversion.h"
 #include "main.h"
+#include "policy/feerate.h"
+#include "policy/policy.h"
 #include "rpc/server.h"
 #include "sync.h"
 #include "txdb.h"

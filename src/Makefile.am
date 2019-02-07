@@ -144,6 +144,7 @@ BITCOIN_CORE_H = \
   netbase.h \
   net.h \
   noui.h \
+  policy/feerate.h \
   policy/policy.h \
   pow.h \
   protocol.h \
@@ -346,7 +347,6 @@ libbitcoin_common_a_SOURCES = \
   accumulatorcheckpoints.cpp \
   accumulatormap.cpp \
   allocators.cpp \
-  amount.cpp \
   base58.cpp \
   bip38.cpp \
   chainparams.cpp \
@@ -363,6 +363,7 @@ libbitcoin_common_a_SOURCES = \
   invalid.cpp \
   key.cpp \
   keystore.cpp \
+  policy/feerate.cpp \
   netbase.cpp \
   protocol.cpp \
   pubkey.cpp \
