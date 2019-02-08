@@ -127,5 +127,4 @@ qa/pull-tester/test.*/*
 /nbproject/
 libbitcoinconsensus.pc
 .idea
-CMakeLists.txt
 cmake-build-debug
