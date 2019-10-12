@@ -1,5 +1,5 @@
 // Copyright (c) 2014 The Bitcoin developers
-// Copyright (c) 2017 The PIVX developers
+// Copyright (c) 2017-2018 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -54,8 +54,8 @@ bool WinShutdownMonitor::nativeEventFilter(const QByteArray& eventType, void* pM
 void WinShutdownMonitor::registerShutdownBlockReason(const QString& strReason, const HWND& mainWinId)
 {
     typedef BOOL(WINAPI * PSHUTDOWNBRCREATE)(HWND, LPCWSTR);
-    PSHUTDOWNBRCREATE shutdownBRCreate = (PSHUTDOWNBRCREATE)GetProcAddress(GetModuleHandleA("User32.dll"), "ShutdownBlockReasonCreate");
-    if (shutdownBRCreate == NULL) {
+    auto shutdownBRCreate = (PSHUTDOWNBRCREATE)GetProcAddress(GetModuleHandleA("User32.dll"), "ShutdownBlockReasonCreate");
+    if (shutdownBRCreate == nullptr) {
         qWarning() << "registerShutdownBlockReason: GetProcAddress for ShutdownBlockReasonCreate failed";
         return;
     }

@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The PIVX developers
+// Copyright (c) 2015-2018 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -105,7 +105,7 @@ void FreespaceChecker::check()
 
 Intro::Intro(QWidget* parent) : QDialog(parent, Qt::WindowSystemMenuHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint),
                                 ui(new Ui::Intro),
-                                thread(0),
+                                thread(nullptr),
                                 signalled(false)
 {
     ui->setupUi(this);
@@ -248,7 +248,7 @@ void Intro::on_dataDirCustom_clicked()
 void Intro::startThread()
 {
     thread = new QThread(this);
-    FreespaceChecker* executor = new FreespaceChecker(this);
+    auto* executor = new FreespaceChecker(this);
     executor->moveToThread(thread);
 
     connect(executor, SIGNAL(reply(int, QString, quint64)), this, SLOT(setStatus(int, QString, quint64)));

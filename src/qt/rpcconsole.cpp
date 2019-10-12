@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2018 The PIVX developers
+// Copyright (c) 2015-2019 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -18,7 +18,7 @@
 #include "rpc/server.h"
 #include "util.h"
 #ifdef ENABLE_WALLET
-#include "wallet.h"
+#include "wallet/wallet.h"
 #endif // ENABLE_WALLET
 
 #include <openssl/crypto.h>
@@ -65,7 +65,7 @@ const struct {
     {"cmd-reply", ":/icons/tx_output"},
     {"cmd-error", ":/icons/tx_output"},
     {"misc", ":/icons/tx_inout"},
-    {NULL, NULL}};
+    {nullptr, nullptr}};
 
 /* Object for executing console RPC commands in a separate thread.
 */
@@ -140,7 +140,7 @@ bool parseCommandLine(std::vector<std::string>& args, const std::string& strComm
         STATE_ESCAPE_DOUBLEQUOTED
     } state = STATE_EATING_SPACES;
     std::string curarg;
-    foreach (char ch, strCommand) {
+    for (char ch: strCommand) {
         switch (state) {
         case STATE_ARGUMENT:      // In or after argument
         case STATE_EATING_SPACES: // Handle runs of whitespace
@@ -256,11 +256,11 @@ void RPCExecutor::request(const QString& command)
 
 RPCConsole::RPCConsole(QWidget* parent) : QDialog(parent, Qt::WindowSystemMenuHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint),
                                           ui(new Ui::RPCConsole),
-                                          clientModel(0),
+                                          clientModel(nullptr),
                                           historyPtr(0),
                                           cachedNodeid(-1),
-                                          peersTableContextMenu(0),
-                                          banTableContextMenu(0)
+                                          peersTableContextMenu(nullptr),
+                                          banTableContextMenu(nullptr)
 {
     ui->setupUi(this);
     GUIUtil::restoreWindowGeometry("nRPCConsoleWindow", this->size(), this);
@@ -344,7 +344,7 @@ bool RPCConsole::eventFilter(QObject* obj, QEvent* event)
 {
     if (event->type() == QEvent::KeyPress) // Special key handling
     {
-        QKeyEvent* keyevt = static_cast<QKeyEvent*>(event);
+        auto* keyevt = static_cast<QKeyEvent*>(event);
         int key = keyevt->key();
         Qt::KeyboardModifiers mod = keyevt->modifiers();
         switch (key) {
@@ -438,7 +438,7 @@ void RPCConsole::setClientModel(ClientModel* model)
         // Add a signal mapping to allow dynamic context menu arguments.
         // We need to use int (instead of int64_t), because signal mapper only supports
         // int or objects, which is okay because max bantime (1 year) is < int_max.
-        QSignalMapper* signalMapper = new QSignalMapper(this);
+        auto* signalMapper = new QSignalMapper(this);
         signalMapper->setMapping(banAction1h, 60*60);
         signalMapper->setMapping(banAction24h, 60*60*24);
         signalMapper->setMapping(banAction7d, 60*60*24*7);
@@ -491,6 +491,7 @@ void RPCConsole::setClientModel(ClientModel* model)
         ui->clientVersion->setText(model->formatFullVersion());
         ui->clientName->setText(model->clientName());
         ui->buildDate->setText(model->formatBuildDate());
+        ui->dataDir->setText(model->dataDir());
         ui->startupTime->setText(model->formatClientStartupTime());
         ui->networkName->setText(QString::fromStdString(Params().NetworkIDString()));
 
@@ -630,12 +631,22 @@ void RPCConsole::clear()
         "td.message { font-family: Courier, Courier New, Lucida Console, monospace; font-size: 12px; } " // Todo: Remove fixed font-size
         "td.cmd-request { color: #006060; } "
         "td.cmd-error { color: red; } "
+        ".secwarning { color: red; }"
         "b { color: #006060; } ");
 
+#ifdef Q_OS_MAC
+    QString clsKey = "(⌘)-L";
+#else
+    QString clsKey = "Ctrl-L";
+#endif
+
     message(CMD_REPLY, (tr("Welcome to the WISPR RPC console.") + "<br>" +
-                           tr("Use up and down arrows to navigate history, and <b>Ctrl-L</b> to clear screen.") + "<br>" +
-                           tr("Type <b>help</b> for an overview of available commands.")),
-        true);
+                        tr("Use up and down arrows to navigate history, and %1 to clear screen.").arg("<b>"+clsKey+"</b>") + "<br>" +
+                        tr("Type <b>help</b> for an overview of available commands.") +
+                        "<br><span class=\"secwarning\"><br>" +
+                        tr("WARNING: Scammers have been active, telling users to type commands here, stealing their wallet contents. Do not use this console without fully understanding the ramifications of a command.") +
+                        "</span>"),
+                        true);
 }
 
 void RPCConsole::reject()
@@ -676,8 +687,10 @@ void RPCConsole::setNumConnections(int count)
 void RPCConsole::setNumBlocks(int count)
 {
     ui->numberOfBlocks->setText(QString::number(count));
-    if (clientModel)
+    if (clientModel) {
         ui->lastBlockTime->setText(clientModel->getLastBlockDate().toString());
+        ui->lastBlockHash->setText(clientModel->getLastBlockHash());
+    }
 }
 
 void RPCConsole::setMasternodeCount(const QString& strMasternodes)
@@ -722,8 +735,8 @@ void RPCConsole::browseHistory(int offset)
 
 void RPCConsole::startExecutor()
 {
-    QThread* thread = new QThread;
-    RPCExecutor* executor = new RPCExecutor();
+    auto* thread = new QThread;
+    auto* executor = new RPCExecutor();
     executor->moveToThread(thread);
 
     // Replies from executor object must go to this object
@@ -852,7 +865,7 @@ void RPCConsole::peerLayoutChanged()
     if (!clientModel || !clientModel->getPeerTableModel())
         return;
 
-    const CNodeCombinedStats* stats = NULL;
+    const CNodeCombinedStats* stats = nullptr;
     bool fUnselect = false;
     bool fReselect = false;
 

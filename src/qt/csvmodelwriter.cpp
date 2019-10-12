@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2013 The Bitcoin developers
-// Copyright (c) 2017 The PIVX developers
+// Copyright (c) 2017-2018 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -8,9 +8,10 @@
 #include <QAbstractItemModel>
 #include <QFile>
 #include <QTextStream>
+#include <utility>
 
-CSVModelWriter::CSVModelWriter(const QString& filename, QObject* parent) : QObject(parent),
-                                                                           filename(filename), model(0)
+CSVModelWriter::CSVModelWriter(QString  filename, QObject* parent) : QObject(parent),
+                                                                           filename(std::move(filename)), model(nullptr)
 {
 }
 

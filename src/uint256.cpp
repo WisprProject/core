@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
-// Copyright (c) 2017 The PIVX developers
+// Copyright (c) 2017-2018 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -8,8 +8,8 @@
 
 #include "utilstrencodings.h"
 
-#include <stdio.h>
-#include <string.h>
+#include <cstdio>
+#include <cstring>
 
 template <unsigned int BITS>
 base_uint<BITS>::base_uint(const std::string& str)
@@ -178,7 +178,7 @@ void base_uint<BITS>::SetHex(const char* psz)
     while (::HexDigit(*psz) != -1)
         psz++;
     psz--;
-    unsigned char* p1 = (unsigned char*)pn;
+    auto* p1 = (unsigned char*)pn;
     unsigned char* pend = p1 + WIDTH * 4;
     while (psz >= pbegin && p1 < pend) {
         *p1 = ::HexDigit(*psz--);

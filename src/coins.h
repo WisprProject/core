@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
-// Copyright (c) 2016-2017 The PIVX developers
+// Copyright (c) 2016-2019 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -13,10 +13,9 @@
 #include "uint256.h"
 #include "undo.h"
 
-#include <assert.h>
-#include <stdint.h>
+#include <cassert>
+#include <cstdint>
 
-#include <boost/foreach.hpp>
 #include <boost/unordered_map.hpp>
 
 /** 
@@ -128,7 +127,7 @@ public:
 
     void ClearUnspendable()
     {
-        BOOST_FOREACH (CTxOut& txout, vout) {
+        for (CTxOut& txout : vout) {
             if (txout.scriptPubKey.IsUnspendable())
                 txout.SetNull();
         }
@@ -189,9 +188,9 @@ public:
         // spentness bitmask
         nSize += nMaskSize;
         // txouts themself
-        for (unsigned int i = 0; i < vout.size(); i++)
-            if (!vout[i].IsNull())
-                nSize += ::GetSerializeSize(CTxOutCompressor(REF(vout[i])), nType, nVersion);
+        for (const auto & i : vout)
+            if (!i.IsNull())
+                nSize += ::GetSerializeSize(CTxOutCompressor(REF(i)), nType, nVersion);
         // height
         nSize += ::GetSerializeSize(VARINT(nHeight), nType, nVersion);
         return nSize;
@@ -272,14 +271,14 @@ public:
     //! check whether a particular output is still available
     bool IsAvailable(unsigned int nPos) const
     {
-        return (nPos < vout.size() && !vout[nPos].IsNull() && !vout[nPos].scriptPubKey.IsZerocoinMint());
+        return (nPos < vout.size() && !vout[nPos].IsNull() && !vout[nPos].IsZerocoinMint());
     }
 
     //! check whether the entire CCoins is spent
     //! note that only !IsPruned() CCoins can be serialized
     bool IsPruned() const
     {
-        BOOST_FOREACH (const CTxOut& out, vout)
+        for (const CTxOut& out : vout)
             if (!out.IsNull())
                 return false;
         return true;
@@ -354,7 +353,7 @@ public:
     virtual bool GetStats(CCoinsStats& stats) const;
 
     //! As we use CCoinsViews polymorphically, have a virtual destructor
-    virtual ~CCoinsView() {}
+    virtual ~CCoinsView() = default;
 };
 
 

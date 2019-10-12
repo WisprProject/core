@@ -1,20 +1,20 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2016-2017 The PIVX developers
+// Copyright (c) 2016-2019 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef BITCOIN_SCRIPT_SCRIPT_H
 #define BITCOIN_SCRIPT_SCRIPT_H
 
-#include <assert.h>
+#include <cassert>
 #include <climits>
 #include <limits>
 #include "pubkey.h"
 #include <stdexcept>
-#include <stdint.h>
-#include <string.h>
+#include <cstdint>
+#include <cstring>
 #include <string>
 #include <vector>
 
@@ -171,6 +171,7 @@ enum opcodetype
     // zerocoin
     OP_ZEROCOINMINT = 0xc1,
     OP_ZEROCOINSPEND = 0xc2,
+    OP_ZEROCOINPUBLICSPEND = 0xc3,
 
     // template matching params
     OP_SMALLINTEGER = 0xfa,
@@ -374,7 +375,7 @@ protected:
         return *this;
     }
 public:
-    CScript() { }
+    CScript() = default;
     CScript(const CScript& b) : std::vector<unsigned char>(b.begin(), b.end()) { }
     CScript(const_iterator pbegin, const_iterator pend) : std::vector<unsigned char>(pbegin, pend) { }
     CScript(const unsigned char* pbegin, const unsigned char* pend) : std::vector<unsigned char>(pbegin, pend) { }
@@ -469,7 +470,7 @@ public:
     bool GetOp(iterator& pc, opcodetype& opcodeRet)
     {
          const_iterator pc2 = pc;
-         bool fRet = GetOp2(pc2, opcodeRet, NULL);
+         bool fRet = GetOp2(pc2, opcodeRet, nullptr);
          pc = begin() + (pc2 - begin());
          return fRet;
     }
@@ -481,7 +482,7 @@ public:
 
     bool GetOp(const_iterator& pc, opcodetype& opcodeRet) const
     {
-        return GetOp2(pc, opcodeRet, NULL);
+        return GetOp2(pc, opcodeRet, nullptr);
     }
 
     bool GetOp2(const_iterator& pc, opcodetype& opcodeRet, std::vector<unsigned char>* pvchRet) const
@@ -558,7 +559,7 @@ public:
         int nFound = 0;
         if (b.empty())
             return nFound;
-        iterator pc = begin();
+        auto pc = begin();
         opcodetype opcode;
         do
         {
@@ -575,7 +576,7 @@ public:
     {
         int nFound = 0;
         opcodetype opcode;
-        for (const_iterator pc = begin(); pc != end() && GetOp(pc, opcode);)
+        for (auto pc = begin(); pc != end() && GetOp(pc, opcode);)
             if (opcode == op)
                 ++nFound;
         return nFound;
@@ -598,8 +599,10 @@ public:
 
     bool IsNormalPaymentScript() const;
     bool IsPayToScriptHash() const;
+    bool StartsWithOpcode(const opcodetype opcode) const;
     bool IsZerocoinMint() const;
     bool IsZerocoinSpend() const;
+    bool IsZerocoinPublicSpend() const;
 
     /** Called by IsStandardTx and P2SH/BIP62 VerifyScript (which makes it consensus-critical). */
     bool IsPushOnly(const_iterator pc) const;

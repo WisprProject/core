@@ -1,5 +1,5 @@
 // Copyright (c) 2015 The Bitcoin Core developers
-// Copyright (c) 2016-2017 The PIVX developers
+// Copyright (c) 2016-2018 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -13,6 +13,7 @@
 #include <QImage>
 #include <QPalette>
 #include <QPixmap>
+#include <utility>
 
 static const struct {
     const char* platformId;
@@ -48,7 +49,7 @@ QIcon ColorizeIcon(const QIcon& ico, const QColor& colorbase)
 {
     QIcon new_ico;
     QSize sz;
-    Q_FOREACH (sz, ico.availableSizes()) {
+    for (const QSize sz: ico.availableSizes()) {
         QImage img(ico.pixmap(sz).toImage());
         MakeSingleColorImage(img, colorbase);
         new_ico.addPixmap(QPixmap::fromImage(img));
@@ -70,7 +71,7 @@ QIcon ColorizeIcon(const QString& filename, const QColor& colorbase)
 }
 
 
-PlatformStyle::PlatformStyle(const QString& name, bool imagesOnButtons, bool colorizeIcons, bool useExtraSpacing) : name(name),
+PlatformStyle::PlatformStyle(QString  name, bool imagesOnButtons, bool colorizeIcons, bool useExtraSpacing) : name(std::move(name)),
                                                                                                                     imagesOnButtons(imagesOnButtons),
                                                                                                                     colorizeIcons(colorizeIcons),
                                                                                                                     useExtraSpacing(useExtraSpacing),
@@ -127,14 +128,14 @@ QIcon PlatformStyle::TextColorIcon(const QIcon& icon) const
 
 const PlatformStyle* PlatformStyle::instantiate(const QString& platformId)
 {
-    for (unsigned x = 0; x < platform_styles_count; ++x) {
-        if (platformId == platform_styles[x].platformId) {
+    for (auto platform_style : platform_styles) {
+        if (platformId == platform_style.platformId) {
             return new PlatformStyle(
-                platform_styles[x].platformId,
-                platform_styles[x].imagesOnButtons,
-                platform_styles[x].colorizeIcons,
-                platform_styles[x].useExtraSpacing);
+                platform_style.platformId,
+                platform_style.imagesOnButtons,
+                platform_style.colorizeIcons,
+                platform_style.useExtraSpacing);
         }
     }
-    return 0;
+    return nullptr;
 }

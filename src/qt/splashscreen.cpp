@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The PIVX developers
+// Copyright (c) 2015-2019 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -9,12 +9,12 @@
 #include "clientversion.h"
 #include "init.h"
 #include "networkstyle.h"
-#include "ui_interface.h"
+#include "guiinterface.h"
 #include "util.h"
 #include "version.h"
 
 #ifdef ENABLE_WALLET
-#include "wallet.h"
+#include "wallet/wallet.h"
 #endif
 
 #include <QApplication>
@@ -22,7 +22,7 @@
 #include <QDesktopWidget>
 #include <QPainter>
 
-SplashScreen::SplashScreen(Qt::WindowFlags f, const NetworkStyle* networkStyle) : QWidget(0, f), curAlignment(0)
+SplashScreen::SplashScreen(Qt::WindowFlags f, const NetworkStyle* networkStyle) : QWidget(nullptr, f), curAlignment(0)
 {
     // set reference point, paddings
     int paddingLeft = 14;
@@ -39,7 +39,7 @@ SplashScreen::SplashScreen(Qt::WindowFlags f, const NetworkStyle* networkStyle) 
     QString copyrightTextDash = QChar(0xA9) + QString(" 2014-%1 ").arg(COPYRIGHT_YEAR) + QString(tr("The Dash Core developers"));
     QString copyrightTextPIVX = QChar(0xA9) + QString(" 2015-%1 ").arg(COPYRIGHT_YEAR) + QString(tr("The PIVX Core developers"));
     QString copyrightTextWISPR = QChar(0xA9) + QString(" 2017-%1 ").arg(COPYRIGHT_YEAR) + QString(tr("The WISPR Core developers"));
-    QString titleAddText = networkStyle->getTitleAddText();
+    const QString& titleAddText = networkStyle->getTitleAddText();
 
     QString font = QApplication::font().toString();
 

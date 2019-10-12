@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2013 The Bitcoin developers
-// Copyright (c) 2017-2018 The PIVX developers
+// Copyright (c) 2017-2019 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -17,7 +17,7 @@
 #include "transactiontablemodel.h"
 #include "walletmodel.h"
 
-#include "ui_interface.h"
+#include "guiinterface.h"
 
 #include <QComboBox>
 #include <QDateTimeEdit>
@@ -36,14 +36,14 @@
 #include <QUrl>
 #include <QVBoxLayout>
 
-TransactionView::TransactionView(QWidget* parent) : QWidget(parent), model(0), transactionProxyModel(0),
-                                                    transactionView(0)
+TransactionView::TransactionView(QWidget* parent) : QWidget(parent), model(nullptr), transactionProxyModel(nullptr),
+                                                    transactionView(nullptr)
 {
     QSettings settings;
     // Build filter row
     setContentsMargins(0, 0, 0, 0);
 
-    QHBoxLayout* hlayout = new QHBoxLayout();
+    auto* hlayout = new QHBoxLayout();
     hlayout->setContentsMargins(0, 0, 0, 0);
 #ifdef Q_OS_MAC
     hlayout->setSpacing(5);
@@ -125,11 +125,11 @@ TransactionView::TransactionView(QWidget* parent) : QWidget(parent), model(0), t
     amountWidget->setValidator(new QDoubleValidator(0, 1e20, 8, this));
     hlayout->addWidget(amountWidget);
 
-    QVBoxLayout* vlayout = new QVBoxLayout(this);
+    auto* vlayout = new QVBoxLayout(this);
     vlayout->setContentsMargins(0, 0, 0, 0);
     vlayout->setSpacing(0);
 
-    QTableView* view = new QTableView(this);
+    auto* view = new QTableView(this);
     vlayout->addLayout(hlayout);
     vlayout->addWidget(createDateRangeWidget());
     vlayout->addWidget(view);
@@ -157,6 +157,10 @@ TransactionView::TransactionView(QWidget* parent) : QWidget(parent), model(0), t
     QAction* copyTxIDAction = new QAction(tr("Copy transaction ID"), this);
     QAction* editLabelAction = new QAction(tr("Edit label"), this);
     QAction* showDetailsAction = new QAction(tr("Show transaction details"), this);
+    hideOrphansAction = new QAction(tr("Hide orphan stakes"), this);
+
+    hideOrphansAction->setCheckable(true);
+    hideOrphansAction->setChecked(settings.value("fHideOrphans", false).toBool());
 
     contextMenu = new QMenu();
     contextMenu->addAction(copyAddressAction);
@@ -165,6 +169,7 @@ TransactionView::TransactionView(QWidget* parent) : QWidget(parent), model(0), t
     contextMenu->addAction(copyTxIDAction);
     contextMenu->addAction(editLabelAction);
     contextMenu->addAction(showDetailsAction);
+    contextMenu->addAction(hideOrphansAction);
 
     mapperThirdPartyTxUrls = new QSignalMapper(this);
 
@@ -187,6 +192,7 @@ TransactionView::TransactionView(QWidget* parent) : QWidget(parent), model(0), t
     connect(copyTxIDAction, SIGNAL(triggered()), this, SLOT(copyTxID()));
     connect(editLabelAction, SIGNAL(triggered()), this, SLOT(editLabel()));
     connect(showDetailsAction, SIGNAL(triggered()), this, SLOT(showDetails()));
+    connect(hideOrphansAction, SIGNAL(toggled(bool)), this, SLOT(updateHideOrphans(bool)));
 }
 
 void TransactionView::setModel(WalletModel* model)
@@ -228,7 +234,7 @@ void TransactionView::setModel(WalletModel* model)
             for (int i = 0; i < listUrls.size(); ++i) {
                 QString host = QUrl(listUrls[i].trimmed(), QUrl::StrictMode).host();
                 if (!host.isEmpty()) {
-                    QAction* thirdPartyTxUrlAction = new QAction(host, this); // use host as menu item label
+                    auto* thirdPartyTxUrlAction = new QAction(host, this); // use host as menu item label
                     if (i == 0)
                         contextMenu->addSeparator();
                     contextMenu->addAction(thirdPartyTxUrlAction);
@@ -236,7 +242,8 @@ void TransactionView::setModel(WalletModel* model)
                     mapperThirdPartyTxUrls->setMapping(thirdPartyTxUrlAction, listUrls[i].trimmed());
                 }
             }
-            connect(model->getOptionsModel(), SIGNAL(hideOrphansChanged(bool)), this, SLOT(hideOrphans(bool)));
+
+            connect(model->getOptionsModel(), SIGNAL(hideOrphansChanged(bool)), this, SLOT(updateHideOrphans(bool)));
         }
 
         // show/hide column Watch-only
@@ -324,6 +331,22 @@ void TransactionView::hideOrphans(bool fHide)
     transactionProxyModel->setHideOrphans(fHide);
 }
 
+void TransactionView::updateHideOrphans(bool fHide)
+{
+    QSettings settings;
+    if (settings.value("fHideOrphans", false).toBool() != fHide) {
+        settings.setValue("fHideOrphans", fHide);
+        if (model && model->getOptionsModel())
+            emit model->getOptionsModel()->hideOrphansChanged(fHide);
+    }
+    hideOrphans(fHide);
+    // retain consistency with other checkboxes
+    if (hideOrphansAction->isChecked() != fHide)
+        hideOrphansAction->setChecked(fHide);
+
+}
+
+
 void TransactionView::chooseWatchonly(int idx)
 {
     if (!transactionProxyModel)
@@ -363,7 +386,7 @@ void TransactionView::exportClicked()
     // CSV is currently the only supported format
     QString filename = GUIUtil::getSaveFileName(this,
         tr("Export Transaction History"), QString(),
-        tr("Comma separated file (*.csv)"), NULL);
+        tr("Comma separated file (*.csv)"), nullptr);
 
     if (filename.isNull())
         return;
@@ -484,7 +507,7 @@ void TransactionView::computeSum()
         return;
     QModelIndexList selection = transactionView->selectionModel()->selectedRows();
 
-    foreach (QModelIndex index, selection) {
+    for (QModelIndex index: selection) {
         amount += index.data(TransactionTableModel::AmountRole).toLongLong();
     }
     QString strAmount(BitcoinUnits::formatWithUnit(nDisplayUnit, amount, true, BitcoinUnits::separatorAlways));
@@ -506,7 +529,7 @@ QWidget* TransactionView::createDateRangeWidget()
     dateRangeWidget = new QFrame();
     dateRangeWidget->setFrameStyle(QFrame::Panel | QFrame::Raised);
     dateRangeWidget->setContentsMargins(1, 1, 1, 1);
-    QHBoxLayout* layout = new QHBoxLayout(dateRangeWidget);
+    auto* layout = new QHBoxLayout(dateRangeWidget);
     layout->setContentsMargins(0, 0, 0, 0);
     layout->addSpacing(23);
     layout->addWidget(new QLabel(tr("Range:")));
@@ -570,7 +593,7 @@ void TransactionView::resizeEvent(QResizeEvent* event)
 bool TransactionView::eventFilter(QObject* obj, QEvent* event)
 {
     if (event->type() == QEvent::KeyPress) {
-        QKeyEvent* ke = static_cast<QKeyEvent*>(event);
+        auto* ke = static_cast<QKeyEvent*>(event);
         if (ke->key() == Qt::Key_C && ke->modifiers().testFlag(Qt::ControlModifier)) {
             QModelIndex i = this->transactionView->currentIndex();
             if (i.isValid() && i.column() == TransactionTableModel::Amount) {

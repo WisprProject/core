@@ -1,10 +1,11 @@
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2018 The PIVX developers
+// Copyright (c) 2015-2019 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "masternode-payments.h"
 #include "addrman.h"
+#include "chainparams.h"
 #include "masternode-budget.h"
 #include "masternode-sync.h"
 #include "masternodeman.h"
@@ -80,7 +81,7 @@ CMasternodePaymentDB::ReadResult CMasternodePaymentDB::Read(CMasternodePayments&
     // Don't try to resize to a negative number if file is small
     if (dataSize < 0)
         dataSize = 0;
-    vector<unsigned char> vchData;
+    std::vector<unsigned char> vchData;
     vchData.resize(dataSize);
     uint256 hashIn;
 
@@ -175,7 +176,7 @@ void DumpMasternodePayments()
 bool IsBlockValueValid(const CBlock& block, CAmount nExpectedValue, CAmount nMinted)
 {
     CBlockIndex* pindexPrev = chainActive.Tip();
-    if (pindexPrev == NULL) return true;
+    if (pindexPrev == nullptr) return true;
 
     int nHeight = 0;
     if (pindexPrev->GetBlockHash() == block.hashPrevBlock) {
@@ -196,7 +197,7 @@ bool IsBlockValueValid(const CBlock& block, CAmount nExpectedValue, CAmount nMin
     }
     if (!masternodeSync.IsSynced()) { //there is no budget data to use to check anything
         //super blocks will always be on these blocks, max 100 per budgeting
-        if (nHeight % GetBudgetPaymentCycleBlocks() < 100) {
+        if (nHeight % Params().GetBudgetCycleBlocks() < 100) {
             return true;
         } else {
             if (nMinted > nExpectedValue) {
@@ -327,8 +328,22 @@ void CMasternodePayments::FillBlockPayee(CMutableTransaction& txNew, int64_t nFe
             txNew.vout[i].nValue = masternodePayment;
 
             //subtract mn payment from the stake reward
-            if (!txNew.vout[1].IsZerocoinMint())
-                txNew.vout[i - 1].nValue -= masternodePayment;
+            if (!txNew.vout[1].IsZerocoinMint()) {
+                if (i == 2) {
+                    // Majority of cases; do it quick and move on
+                    txNew.vout[i - 1].nValue -= masternodePayment;
+                } else if (i > 2) {
+                    // special case, stake is split between (i-1) outputs
+                    unsigned int outputs = i - 1;
+                    CAmount mnPaymentSplit = masternodePayment / outputs;
+                    CAmount mnPaymentRemainder = masternodePayment - (mnPaymentSplit * outputs);
+                    for (unsigned int j = 1; j <= outputs; j++) {
+                        txNew.vout[j].nValue -= mnPaymentSplit;
+                    }
+                    // in case it's not an even division, take the last bit of dust from the last one
+                    txNew.vout[outputs].nValue -= mnPaymentRemainder;
+                }
+            }
         } else {
             txNew.vout.resize(2);
             txNew.vout[1].scriptPubKey = payee;
@@ -386,7 +401,7 @@ void CMasternodePayments::ProcessMessageMasternodePayments(CNode* pfrom, std::st
         int nHeight;
         {
             TRY_LOCK(cs_main, locked);
-            if (!locked || chainActive.Tip() == NULL) return;
+            if (!locked || chainActive.Tip() == nullptr) return;
             nHeight = chainActive.Tip()->nHeight;
         }
 
@@ -474,7 +489,7 @@ bool CMasternodePayments::IsScheduled(CMasternode& mn, int nNotBlockHeight)
     int nHeight;
     {
         TRY_LOCK(cs_main, locked);
-        if (!locked || chainActive.Tip() == NULL) return false;
+        if (!locked || chainActive.Tip() == nullptr) return false;
         nHeight = chainActive.Tip()->nHeight;
     }
 
@@ -545,19 +560,19 @@ bool CMasternodeBlockPayees::IsTransactionValid(const CTransaction& txNew)
         nMasternode_Drift_Count = mnodeman.size() + Params().MasternodeCountDrift();
     }
 
-    CAmount requiredMasternodePayment = GetMasternodePayment(nBlockHeight, nReward, nMasternode_Drift_Count, txNew.IsZerocoinSpend());
+    CAmount requiredMasternodePayment = GetMasternodePayment(nBlockHeight, nReward, nMasternode_Drift_Count, txNew.HasZerocoinSpendInputs());
 
     //require at least 6 signatures
-    BOOST_FOREACH (CMasternodePayee& payee, vecPayments)
+    for (CMasternodePayee& payee : vecPayments)
         if (payee.nVotes >= nMaxSignatures && payee.nVotes >= MNPAYMENTS_SIGNATURES_REQUIRED)
             nMaxSignatures = payee.nVotes;
 
     // if we don't have at least 6 signatures on a payee, approve whichever is the longest chain
     if (nMaxSignatures < MNPAYMENTS_SIGNATURES_REQUIRED) return true;
 
-    BOOST_FOREACH (CMasternodePayee& payee, vecPayments) {
+    for (CMasternodePayee& payee : vecPayments) {
         bool found = false;
-        BOOST_FOREACH (CTxOut out, txNew.vout) {
+        for (const CTxOut& out : txNew.vout) {
             if (payee.scriptPubKey == out.scriptPubKey) {
                 if(out.nValue >= requiredMasternodePayment)
                     found = true;
@@ -591,7 +606,7 @@ std::string CMasternodeBlockPayees::GetRequiredPaymentsString()
 
     std::string ret = "Unknown";
 
-    BOOST_FOREACH (CMasternodePayee& payee, vecPayments) {
+    for (CMasternodePayee& payee : vecPayments) {
         CTxDestination address1;
         ExtractDestination(payee.scriptPubKey, address1);
         CBitcoinAddress address2(address1);
@@ -635,14 +650,14 @@ void CMasternodePayments::CleanPaymentList()
     int nHeight;
     {
         TRY_LOCK(cs_main, locked);
-        if (!locked || chainActive.Tip() == NULL) return;
+        if (!locked || chainActive.Tip() == nullptr) return;
         nHeight = chainActive.Tip()->nHeight;
     }
 
     //keep up to five cycles for historical sake
     int nLimit = std::max(int(mnodeman.size() * 1.25), 1000);
 
-    std::map<uint256, CMasternodePaymentWinner>::iterator it = mapMasternodePayeeVotes.begin();
+    auto it = mapMasternodePayeeVotes.begin();
     while (it != mapMasternodePayeeVotes.end()) {
         CMasternodePaymentWinner winner = (*it).second;
 
@@ -721,7 +736,7 @@ bool CMasternodePayments::ProcessBlock(int nBlockHeight)
         int nCount = 0;
         CMasternode* pmn = mnodeman.GetNextMasternodeInQueueForPayment(nBlockHeight, true, nCount);
 
-        if (pmn != NULL) {
+        if (pmn != nullptr) {
             LogPrint("masternode","CMasternodePayments::ProcessBlock() Found by FindOldestNotInVec \n");
 
             newWinner.nBlockHeight = nBlockHeight;
@@ -772,7 +787,7 @@ bool CMasternodePaymentWinner::SignatureValid()
 {
     CMasternode* pmn = mnodeman.Find(vinMasternode);
 
-    if (pmn != NULL) {
+    if (pmn != nullptr) {
         std::string strMessage = vinMasternode.prevout.ToStringShort() + std::to_string(nBlockHeight) + payee.ToString();
 
         std::string errorMessage = "";
@@ -793,7 +808,7 @@ void CMasternodePayments::Sync(CNode* node, int nCountNeeded)
     int nHeight;
     {
         TRY_LOCK(cs_main, locked);
-        if (!locked || chainActive.Tip() == NULL) return;
+        if (!locked || chainActive.Tip() == nullptr) return;
         nHeight = chainActive.Tip()->nHeight;
     }
 
@@ -801,7 +816,7 @@ void CMasternodePayments::Sync(CNode* node, int nCountNeeded)
     if (nCountNeeded > nCount) nCountNeeded = nCount;
 
     int nInvCount = 0;
-    std::map<uint256, CMasternodePaymentWinner>::iterator it = mapMasternodePayeeVotes.begin();
+    auto it = mapMasternodePayeeVotes.begin();
     while (it != mapMasternodePayeeVotes.end()) {
         CMasternodePaymentWinner winner = (*it).second;
         if (winner.nBlockHeight >= nHeight - nCountNeeded && winner.nBlockHeight <= nHeight + 20) {
@@ -829,7 +844,7 @@ int CMasternodePayments::GetOldestBlock()
 
     int nOldestBlock = std::numeric_limits<int>::max();
 
-    std::map<int, CMasternodeBlockPayees>::iterator it = mapMasternodeBlocks.begin();
+    auto it = mapMasternodeBlocks.begin();
     while (it != mapMasternodeBlocks.end()) {
         if ((*it).first < nOldestBlock) {
             nOldestBlock = (*it).first;
@@ -847,7 +862,7 @@ int CMasternodePayments::GetNewestBlock()
 
     int nNewestBlock = 0;
 
-    std::map<int, CMasternodeBlockPayees>::iterator it = mapMasternodeBlocks.begin();
+    auto it = mapMasternodeBlocks.begin();
     while (it != mapMasternodeBlocks.end()) {
         if ((*it).first > nNewestBlock) {
             nNewestBlock = (*it).first;

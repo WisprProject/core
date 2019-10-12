@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2013 The Bitcoin developers
-// Copyright (c) 2017 The PIVX developers
+// Copyright (c) 2017-2018 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -21,7 +21,7 @@ class CSVModelWriter : public QObject
     Q_OBJECT
 
 public:
-    explicit CSVModelWriter(const QString& filename, QObject* parent = 0);
+    explicit CSVModelWriter(QString  filename, QObject* parent = nullptr);
 
     void setModel(const QAbstractItemModel* model);
     void addColumn(const QString& title, int column, int role = Qt::EditRole);

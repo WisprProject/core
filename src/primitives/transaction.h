@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
-// Copyright (c) 2015-2017 The PIVX developers
+// Copyright (c) 2015-2019 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -9,12 +9,14 @@
 
 #include "amount.h"
 #include "util.h"
+#include "libzerocoin/CoinSpend.h"
 #include "script/script.h"
 #include "serialize.h"
 #include "uint256.h"
 #include "timedata.h"
 
 #include <list>
+#include <utility>
 
 class CTransaction;
 
@@ -25,8 +27,8 @@ public:
     uint256 hash;
     uint32_t n;
 
-    COutPoint() { SetNull(); }
-    COutPoint(uint256 hashIn, uint32_t nIn) { hash = hashIn; n = nIn; }
+    COutPoint() { hash.SetNull(); n = (uint32_t) -1; }
+    COutPoint(const uint256& hashIn, uint32_t nIn) { hash = std::move(hashIn); n = nIn; }
 
     ADD_SERIALIZE_METHODS;
 
@@ -78,8 +80,9 @@ public:
         nSequence = std::numeric_limits<unsigned int>::max();
     }
 
-    explicit CTxIn(COutPoint prevoutIn, CScript scriptSigIn=CScript(), uint32_t nSequenceIn=std::numeric_limits<unsigned int>::max());
-    CTxIn(uint256 hashPrevTx, uint32_t nOut, CScript scriptSigIn=CScript(), uint32_t nSequenceIn=std::numeric_limits<uint32_t>::max());
+    explicit CTxIn(const COutPoint& prevoutIn, const CScript& scriptSigIn=CScript(), uint32_t nSequenceIn=std::numeric_limits<unsigned int>::max());
+    CTxIn(const uint256& hashPrevTx, uint32_t nOut, const CScript& scriptSigIn=CScript(), uint32_t nSequenceIn=std::numeric_limits<uint32_t>::max());
+    CTxIn(const libzerocoin::CoinSpend& spend, libzerocoin::CoinDenomination denom);
 
     ADD_SERIALIZE_METHODS;
 
@@ -94,7 +97,11 @@ public:
     {
         return (nSequence == std::numeric_limits<uint32_t>::max());
     }
+
     uint256 GetHash() const;
+
+    bool IsZerocoinSpend() const;
+    bool IsZerocoinPublicSpend() const;
 
     friend bool operator==(const CTxIn& a, const CTxIn& b)
     {
@@ -123,10 +130,12 @@ public:
 
     CTxOut()
     {
-        SetNull();
+        nValue = -1;
+        scriptPubKey.clear();
+        nRounds = -10; // an initial value, should be no way to get this by calculations
     }
 
-    CTxOut(const CAmount& nValueIn, CScript scriptPubKeyIn);
+    CTxOut(const CAmount& nValueIn, const CScript& scriptPubKeyIn);
 
     ADD_SERIALIZE_METHODS;
 
@@ -161,7 +170,7 @@ public:
 
     uint256 GetHash() const;
 
-    bool IsDust(CFeeRate minRelayTxFee) const
+    bool IsDust(const CFeeRate& minRelayTxFee) const
     {
         // "Dust" is defined in terms of CTransaction::minRelayTxFee, which has units uwsp-per-kilobyte.
         // If you'd pay more than 1/3 in fees to spend something, then we consider it dust.
@@ -174,10 +183,8 @@ public:
         return (nValue < 3*minRelayTxFee.GetFee(nSize));
     }
 
-    bool IsZerocoinMint() const
-    {
-        return !scriptPubKey.empty() && scriptPubKey.IsZerocoinMint();
-    }
+    bool IsZerocoinMint() const;
+    CAmount GetZerocoinMinted() const;
 
     friend bool operator==(const CTxOut& a, const CTxOut& b)
     {
@@ -201,11 +208,6 @@ struct CMutableTransaction;
  */
 class CTransaction
 {
-private:
-    /** Memory only. */
-    const uint256 hash;
-    void UpdateHash() const;
-
 public:
     static const int32_t CURRENT_VERSION = 2;
 
@@ -220,6 +222,12 @@ public:
     std::vector<CTxOut> vout;
     const uint32_t nLockTime;
 
+private:
+    /** Memory only. */
+    const uint256 hash;
+    uint256 ComputeHash() const;
+
+public:
     /** Construct a CTransaction that qualifies as IsNull() */
     CTransaction();
 
@@ -231,19 +239,18 @@ public:
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion) {
+    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int _nVersion) {
         READWRITE(*const_cast<int32_t*>(&this->nVersion));
-        nVersion = this->nVersion;
-//        int newProtocolTime = !GetBoolArg("-testnet", false) ? 1538567022 : 1537448663;
-//        nVersion = GetAdjustedTime() >= newProtocolTime ? this->nVersion : 1;
-        if(nVersion < 2){
+        _nVersion = this->nVersion;
+        if(_nVersion < 2){
             READWRITE(*const_cast<unsigned int *>(&nTime));
         }
         READWRITE(*const_cast<std::vector<CTxIn>*>(&vin));
         READWRITE(*const_cast<std::vector<CTxOut>*>(&vout));
         READWRITE(*const_cast<uint32_t*>(&nLockTime));
-        if (ser_action.ForRead())
-            UpdateHash();
+        if (ser_action.ForRead()){
+            *const_cast<uint256*>(&hash) = SerializeHash(*this);
+        }
     }
 
     bool IsNull() const {
@@ -265,30 +272,21 @@ public:
     // Compute modified tx size for priority calculation (optionally given tx size)
     unsigned int CalculateModifiedSize(unsigned int nTxSize=0) const;
 
-    bool IsZerocoinSpend() const
-    {
-        return (vin.size() > 0 && vin[0].prevout.hash == 0 && vin[0].scriptSig[0] == OP_ZEROCOINSPEND);
-    }
+    bool HasZerocoinSpendInputs() const;
+    bool HasZerocoinPublicSpendInputs() const;
 
-    bool IsZerocoinMint() const
-    {
-        for(const CTxOut& txout : vout) {
-            if (txout.scriptPubKey.IsZerocoinMint())
-                return true;
-        }
-        return false;
-    }
+    bool HasZerocoinMintOutputs() const;
 
     bool ContainsZerocoins() const
     {
-        return IsZerocoinSpend() || IsZerocoinMint();
+        return HasZerocoinSpendInputs() || HasZerocoinPublicSpendInputs() || HasZerocoinMintOutputs();
     }
 
     CAmount GetZerocoinMinted() const;
     CAmount GetZerocoinSpent() const;
     int GetZerocoinMintCount() const;
 
-    bool UsesUTXO(const COutPoint out);
+    bool UsesUTXO(const COutPoint& out);
     std::list<COutPoint> GetOutPoints() const;
 
     bool IsCoinBase() const
@@ -326,10 +324,10 @@ struct CMutableTransaction
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion) {
+    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int _nVersion) {
         READWRITE(this->nVersion);
-        nVersion = this->nVersion;
-        if(nVersion < 2){
+        _nVersion = this->nVersion;
+        if(_nVersion < 2){
             READWRITE(nTime);
         }
         READWRITE(vin);
@@ -343,17 +341,6 @@ struct CMutableTransaction
     uint256 GetHash() const;
 
     std::string ToString() const;
-
-    friend bool operator==(const CMutableTransaction& a, const CMutableTransaction& b)
-    {
-        return a.GetHash() == b.GetHash();
-    }
-
-    friend bool operator!=(const CMutableTransaction& a, const CMutableTransaction& b)
-    {
-        return !(a == b);
-    }
-
 };
 
 #endif // BITCOIN_PRIMITIVES_TRANSACTION_H

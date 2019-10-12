@@ -1,7 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2018 The PIVX developers
+// Copyright (c) 2015-2019 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -14,17 +14,15 @@
 #include "allocators.h"
 #include "chainparamsbase.h"
 #include "random.h"
-#include "serialize.h"
 #include "sync.h"
 #include "utilstrencodings.h"
 #include "utiltime.h"
 
-#include <stdarg.h>
+#include <cstdarg>
 
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <openssl/bio.h>
 #include <openssl/buffer.h>
-#include <openssl/crypto.h> // for OPENSSL_cleanse()
 #include <openssl/evp.h>
 
 
@@ -82,7 +80,6 @@
 #include <boost/algorithm/string/predicate.hpp> // for startswith() and endswith()
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
-#include <boost/foreach.hpp>
 #include <boost/program_options/detail/config_file.hpp>
 #include <boost/program_options/parsers.hpp>
 #include <boost/thread.hpp>
@@ -90,53 +87,38 @@
 #include <openssl/crypto.h>
 #include <openssl/rand.h>
 
-// Work around clang compilation problem in Boost 1.46:
-// /usr/include/boost/program_options/detail/config_file.hpp:163:17: error: call to function 'to_internal' that is neither visible in the template definition nor found by argument-dependent lookup
-// See also: http://stackoverflow.com/questions/10020179/compilation-fail-in-boost-librairies-program-options
-//           http://clang.debian.net/status.php?version=3.0&key=CANNOT_FIND_FUNCTION
-namespace boost
-{
-namespace program_options
-{
-std::string to_internal(const std::string&);
-}
-
-} // namespace boost
-
-using namespace std;
 
 // WISPR only features
 // Masternode
 bool fMasterNode = false;
-string strMasterNodePrivKey = "";
-string strMasterNodeAddr = "";
+std::string strMasterNodePrivKey = "";
+std::string strMasterNodeAddr = "";
 bool fLiteMode = false;
 // SwiftX
 bool fEnableSwiftTX = true;
 int nSwiftTXDepth = 5;
 // Automatic Zerocoin minting
 bool fEnableZeromint = false;
+bool fEnableAutoConvert = false;
 int nZeromintPercentage = 10;
 int nPreferredDenom = 0;
 const int64_t AUTOMINT_DELAY = (60 * 5); // Wait at least 5 minutes until Automint starts
 
-int nAnonymizeWisprAmount = 1000;
-int nLiquidityProvider = 0;
 /** Spork enforcement enabled time */
 int64_t enforceMasternodePaymentsTime = 4085657524;
 bool fSucessfullyLoaded = false;
 /** All denominations used by obfuscation */
 std::vector<int64_t> obfuScationDenominations;
-string strBudgetMode = "";
+std::string strBudgetMode = "";
 
-map<string, string> mapArgs;
-map<string, vector<string> > mapMultiArgs;
+std::map<std::string, std::string> mapArgs;
+std::map<std::string, std::vector<std::string> > mapMultiArgs;
 bool fDebug = false;
 bool fPrintToConsole = false;
 bool fPrintToDebugLog = true;
 bool fDaemon = false;
 bool fServer = false;
-string strMiscWarning;
+std::string strMiscWarning;
 bool fLogTimestamps = false;
 bool fLogIPs = false;
 volatile bool fReopenDebugLog = false;
@@ -184,7 +166,7 @@ public:
         // Securely erase the memory used by the PRNG
         RAND_cleanup();
         // Shutdown OpenSSL library multithreading support
-        CRYPTO_set_locking_callback(NULL);
+        CRYPTO_set_locking_callback(nullptr);
         for (int i = 0; i < CRYPTO_num_locks(); i++)
             delete ppmutexOpenSSL[i];
         OPENSSL_free(ppmutexOpenSSL);
@@ -207,24 +189,24 @@ static boost::once_flag debugPrintInitFlag = BOOST_ONCE_INIT;
  * We use boost::call_once() to make sure these are initialized
  * in a thread-safe manner the first time called:
  */
-static FILE* fileout = NULL;
-static boost::mutex* mutexDebugLog = NULL;
+static FILE* fileout = nullptr;
+static boost::mutex* mutexDebugLog = nullptr;
 
 static void DebugPrintInit()
 {
-    assert(fileout == NULL);
-    assert(mutexDebugLog == NULL);
+    assert(fileout == nullptr);
+    assert(mutexDebugLog == nullptr);
 
     boost::filesystem::path pathDebug = GetDataDir() / "debug.log";
     fileout = fopen(pathDebug.string().c_str(), "a");
-    if (fileout) setbuf(fileout, NULL); // unbuffered
+    if (fileout) setbuf(fileout, nullptr); // unbuffered
 
     mutexDebugLog = new boost::mutex();
 }
 
 bool LogAcceptCategory(const char* category)
 {
-    if (category != NULL) {
+    if (category != nullptr) {
         if (!fDebug)
             return false;
 
@@ -232,26 +214,28 @@ bool LogAcceptCategory(const char* category)
         // This helps prevent issues debugging global destructors,
         // where mapMultiArgs might be deleted before another
         // global destructor calls LogPrint()
-        static boost::thread_specific_ptr<set<string> > ptrCategory;
-        if (ptrCategory.get() == NULL) {
-            const vector<string>& categories = mapMultiArgs["-debug"];
-            ptrCategory.reset(new set<string>(categories.begin(), categories.end()));
+        static boost::thread_specific_ptr<std::set<std::string> > ptrCategory;
+        if (ptrCategory.get() == nullptr) {
+            const std::vector<std::string>& categories = mapMultiArgs["-debug"];
+            ptrCategory.reset(new std::set<std::string>(categories.begin(), categories.end()));
             // thread_specific_ptr automatically deletes the set when the thread ends.
             // "wispr" is a composite category enabling all WISPR-related debug output
-            if (ptrCategory->count(string("wispr"))) {
-                ptrCategory->insert(string("obfuscation"));
-                ptrCategory->insert(string("swiftx"));
-                ptrCategory->insert(string("masternode"));
-                ptrCategory->insert(string("mnpayments"));
-                ptrCategory->insert(string("zero"));
-                ptrCategory->insert(string("mnbudget"));
+            if (ptrCategory->count(std::string("wispr"))) {
+                ptrCategory->insert(std::string("obfuscation"));
+                ptrCategory->insert(std::string("swiftx"));
+                ptrCategory->insert(std::string("masternode"));
+                ptrCategory->insert(std::string("mnpayments"));
+                ptrCategory->insert(std::string("zero"));
+                ptrCategory->insert(std::string("mnbudget"));
+                ptrCategory->insert(std::string("precompute"));
+                ptrCategory->insert(std::string("staking"));
             }
         }
-        const set<string>& setCategories = *ptrCategory.get();
+        const std::set<std::string>& setCategories = *ptrCategory.get();
 
         // if not debugging everything and not debugging specific category, LogPrint does nothing.
-        if (setCategories.count(string("")) == 0 &&
-            setCategories.count(string(category)) == 0)
+        if (setCategories.count(std::string("")) == 0 &&
+            setCategories.count(std::string(category)) == 0)
             return false;
     }
     return true;
@@ -268,7 +252,7 @@ int LogPrintStr(const std::string& str)
         static bool fStartedNewLine = true;
         boost::call_once(&DebugPrintInit, debugPrintInitFlag);
 
-        if (fileout == NULL)
+        if (fileout == nullptr)
             return ret;
 
         boost::mutex::scoped_lock scoped_lock(*mutexDebugLog);
@@ -277,8 +261,8 @@ int LogPrintStr(const std::string& str)
         if (fReopenDebugLog) {
             fReopenDebugLog = false;
             boost::filesystem::path pathDebug = GetDataDir() / "debug.log";
-            if (freopen(pathDebug.string().c_str(), "a", fileout) != NULL)
-                setbuf(fileout, NULL); // unbuffered
+            if (freopen(pathDebug.string().c_str(), "a", fileout) != nullptr)
+                setbuf(fileout, nullptr); // unbuffered
         }
 
         // Debug print useful for profiling
@@ -401,7 +385,7 @@ static std::string FormatException(std::exception* pex, const char* pszThread)
 {
 #ifdef WIN32
     char pszModule[MAX_PATH] = "";
-    GetModuleFileNameA(NULL, pszModule, sizeof(pszModule));
+    GetModuleFileNameA(nullptr, pszModule, sizeof(pszModule));
 #else
     const char* pszModule = "wispr";
 #endif
@@ -506,25 +490,25 @@ boost::filesystem::path GetMasternodeConfigFile()
     return pathConfigFile;
 }
 
-void ReadConfigFile(map<string, string>& mapSettingsRet,
-    map<string, vector<string> >& mapMultiSettingsRet)
+void ReadConfigFile(std::map<std::string, std::string>& mapSettingsRet,
+                    std::map<std::string, std::vector<std::string> >& mapMultiSettingsRet)
 {
     boost::filesystem::ifstream streamConfig(GetConfigFile());
     if (!streamConfig.good()) {
         // Create empty wispr.conf if it does not exist
         FILE* configFile = fopen(GetConfigFile().string().c_str(), "a");
-        if (configFile != NULL)
+        if (configFile != nullptr)
             fclose(configFile);
         return; // Nothing to read, so just return
     }
 
-    set<string> setOptions;
+    std::set<std::string> setOptions;
     setOptions.insert("*");
 
     for (boost::program_options::detail::config_file_iterator it(streamConfig, setOptions), end; it != end; ++it) {
         // Don't overwrite existing settings so command line settings override wispr.conf
-        string strKey = string("-") + it->string_key;
-        string strValue = it->value[0];
+        std::string strKey = std::string("-") + it->string_key;
+        std::string strValue = it->value[0];
         InterpretNegativeSetting(strKey, strValue);
         if (mapSettingsRet.count(strKey) == 0)
             mapSettingsRet[strKey] = strValue;
@@ -552,7 +536,7 @@ void CreatePidFile(const boost::filesystem::path& path, pid_t pid)
 }
 #endif
 
-bool RenameOver(boost::filesystem::path src, boost::filesystem::path dest)
+bool RenameOver(const boost::filesystem::path& src, const boost::filesystem::path& dest)
 {
 #ifdef WIN32
     return MoveFileExA(src.string().c_str(), dest.string().c_str(),
@@ -585,12 +569,12 @@ void FileCommit(FILE* fileout)
 {
     fflush(fileout); // harmless if redundantly called
 #ifdef WIN32
-    HANDLE hFile = (HANDLE)_get_osfhandle(_fileno(fileout));
+    auto hFile = (HANDLE)_get_osfhandle(_fileno(fileout));
     FlushFileBuffers(hFile);
 #else
 #if defined(__linux__) || defined(__NetBSD__)
     fdatasync(fileno(fileout));
-#elif defined(__APPLE__) && defined(F_FULLFSYNC)
+#elif defined(MAC_OSX) && defined(F_FULLFSYNC)
     fcntl(fileno(fileout), F_FULLFSYNC, 0);
 #else
     fsync(fileno(fileout));
@@ -639,12 +623,12 @@ void AllocateFileRange(FILE* file, unsigned int offset, unsigned int length)
 {
 #if defined(WIN32)
     // Windows-specific version
-    HANDLE hFile = (HANDLE)_get_osfhandle(_fileno(file));
+    auto hFile = (HANDLE)_get_osfhandle(_fileno(file));
     LARGE_INTEGER nFileSize;
     int64_t nEndPos = (int64_t)offset + length;
     nFileSize.u.LowPart = nEndPos & 0xFFFFFFFF;
     nFileSize.u.HighPart = nEndPos >> 32;
-    SetFilePointerEx(hFile, nFileSize, 0, FILE_BEGIN);
+    SetFilePointerEx(hFile, nFileSize, nullptr, FILE_BEGIN);
     SetEndOfFile(hFile);
 #elif defined(MAC_OSX)
     // OSX specific version
@@ -687,15 +671,15 @@ void ShrinkDebugFile()
         // Restart the file with some of the end
         std::vector<char> vch(200000, 0);
         fseek(file, -((long)vch.size()), SEEK_END);
-        int nBytes = fread(begin_ptr(vch), 1, vch.size(), file);
+        int nBytes = fread(vch.data(), 1, vch.size(), file);
         fclose(file);
 
         file = fopen(pathLog.string().c_str(), "w");
         if (file) {
-            fwrite(begin_ptr(vch), 1, nBytes, file);
+            fwrite(vch.data(), 1, nBytes, file);
             fclose(file);
         }
-    } else if (file != NULL)
+    } else if (file != nullptr)
         fclose(file);
 }
 
@@ -706,7 +690,7 @@ boost::filesystem::path GetSpecialFolderPath(int nFolder, bool fCreate)
 
     char pszPath[MAX_PATH] = "";
 
-    if (SHGetSpecialFolderPathA(NULL, pszPath, nFolder, fCreate)) {
+    if (SHGetSpecialFolderPathA(nullptr, pszPath, nFolder, fCreate)) {
         return fs::path(pszPath);
     }
 
@@ -758,7 +742,7 @@ double double_safe_multiplication(double fValue, double fmultiplicator)
         return std::numeric_limits<double>::max();
 }
 
-void runCommand(std::string strCommand)
+void runCommand(const std::string& strCommand)
 {
     int nErr = ::system(strCommand.c_str());
     if (nErr)

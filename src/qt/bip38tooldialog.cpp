@@ -1,4 +1,4 @@
-// Copyright (c) 2017-2018 The PIVX developers
+// Copyright (c) 2017-2019 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -12,7 +12,7 @@
 #include "base58.h"
 #include "bip38.h"
 #include "init.h"
-#include "wallet.h"
+#include "wallet/wallet.h"
 #include "askpassphrasedialog.h"
 
 #include <string>
@@ -22,7 +22,7 @@
 
 Bip38ToolDialog::Bip38ToolDialog(QWidget* parent) : QDialog(parent, Qt::WindowSystemMenuHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint),
                                                     ui(new Ui::Bip38ToolDialog),
-                                                    model(0)
+                                                    model(nullptr)
 {
     ui->setupUi(this);
 
@@ -93,12 +93,12 @@ QString specialChar = "\"@!#$%&'()*+,-./:;<=>?`{|}~^_[]\\";
 QString validChar = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" + specialChar;
 bool isValidPassphrase(QString strPassphrase, QString& strInvalid)
 {
-    for (int i = 0; i < strPassphrase.size(); i++) {
-        if (!validChar.contains(strPassphrase[i], Qt::CaseSensitive)) {
-            if (QString("\"'").contains(strPassphrase[i]))
+    for (auto && i : strPassphrase) {
+        if (!validChar.contains(i, Qt::CaseSensitive)) {
+            if (QString("\"'").contains(i))
                 continue;
 
-            strInvalid = strPassphrase[i];
+            strInvalid = i;
             return false;
         }
     }
@@ -176,8 +176,8 @@ void Bip38ToolDialog::on_pasteButton_DEC_clicked()
 
 void Bip38ToolDialog::on_decryptKeyButton_DEC_clicked()
 {
-    string strPassphrase = ui->passphraseIn_DEC->text().toStdString();
-    string strKey = ui->encryptedKeyIn_DEC->text().toStdString();
+    std::string strPassphrase = ui->passphraseIn_DEC->text().toStdString();
+    std::string strKey = ui->encryptedKeyIn_DEC->text().toStdString();
 
     uint256 privKey;
     bool fCompressed;

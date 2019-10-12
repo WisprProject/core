@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The PIVX developers
+// Copyright (c) 2015-2019 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -12,13 +12,12 @@
 
 #include "base58.h"
 #include "chainparams.h"
-#include "ui_interface.h"
+#include "guiinterface.h"
 #include "util.h"
-#include "wallet.h"
+#include "wallet/wallet.h"
 
 #include <cstdlib>
 
-#include <openssl/x509.h>
 #include <openssl/x509_vfy.h>
 
 #include <QApplication>
@@ -43,8 +42,6 @@
 #include <QTextDocument>
 #include <QUrlQuery>
 
-using namespace boost;
-using namespace std;
 
 const int BITCOIN_IPC_CONNECT_TIMEOUT = 1000; // milliseconds
 const QString BITCOIN_IPC_PREFIX("wispr:");
@@ -136,7 +133,7 @@ void PaymentServer::LoadRootCAs(X509_STORE* _store)
 
     int nRootCerts = 0;
     const QDateTime currentTime = QDateTime::currentDateTime();
-    foreach (const QSslCertificate& cert, certList) {
+    for (const QSslCertificate& cert: certList) {
         if (currentTime < cert.effectiveDate() || currentTime > cert.expiryDate()) {
             ReportInvalidCertificate(cert);
             continue;
@@ -235,7 +232,7 @@ void PaymentServer::ipcParseCommandLine(int argc, char* argv[])
 bool PaymentServer::ipcSendCommandLine()
 {
     bool fResult = false;
-    foreach (const QString& r, savedPaymentRequests) {
+    for (const QString& r: savedPaymentRequests) {
         QLocalSocket* socket = new QLocalSocket();
         socket->connectToServer(ipcServerName(), QIODevice::WriteOnly);
         if (!socket->waitForConnected(BITCOIN_IPC_CONNECT_TIMEOUT)) {
@@ -265,9 +262,9 @@ bool PaymentServer::ipcSendCommandLine()
 
 PaymentServer::PaymentServer(QObject* parent, bool startLocalServer) : QObject(parent),
                                                                        saveURIs(true),
-                                                                       uriServer(0),
-                                                                       netManager(0),
-                                                                       optionsModel(0)
+                                                                       uriServer(nullptr),
+                                                                       netManager(nullptr),
+                                                                       optionsModel(nullptr)
 {
     // Verify that the version of the library that we linked against is
     // compatible with the version of the headers we compiled against.
@@ -311,7 +308,7 @@ bool PaymentServer::eventFilter(QObject* object, QEvent* event)
 {
     // clicking on wispr: URIs creates FileOpen events on the Mac
     if (event->type() == QEvent::FileOpen) {
-        QFileOpenEvent* fileEvent = static_cast<QFileOpenEvent*>(event);
+        auto* fileEvent = dynamic_cast<QFileOpenEvent*>(event);
         if (!fileEvent->file().isEmpty())
             handleURIOrFile(fileEvent->file());
         else if (!fileEvent->url().isEmpty())
@@ -327,7 +324,7 @@ void PaymentServer::initNetManager()
 {
     if (!optionsModel)
         return;
-    if (netManager != NULL)
+    if (netManager != nullptr)
         delete netManager;
 
     // netManager is used to fetch paymentrequests given in wispr: URIs
@@ -354,7 +351,7 @@ void PaymentServer::uiReady()
     initNetManager();
 
     saveURIs = false;
-    foreach (const QString& s, savedPaymentRequests) {
+    for (const QString& s: savedPaymentRequests) {
         handleURIOrFile(s);
     }
     savedPaymentRequests.clear();
@@ -398,10 +395,11 @@ void PaymentServer::handleURIOrFile(const QString& s)
                         CClientUIInterface::MSG_ERROR);
                 } else
                     emit receivedPaymentRequest(recipient);
-            } else
+            } else {
                 emit message(tr("URI handling"),
                     tr("URI cannot be parsed! This can be caused by an invalid WISPR address or malformed URI parameters."),
                     CClientUIInterface::ICON_WARNING);
+}
 
             return;
         }
@@ -472,8 +470,9 @@ bool PaymentServer::readPaymentRequestFromFile(const QString& filename, PaymentR
 
 bool PaymentServer::processPaymentRequest(PaymentRequestPlus& request, SendCoinsRecipient& recipient)
 {
-    if (!optionsModel)
+    if (!optionsModel) {
         return false;
+}
 
     if (request.IsInitialized()) {
         const payments::PaymentDetails& details = request.getDetails();
@@ -508,7 +507,7 @@ bool PaymentServer::processPaymentRequest(PaymentRequestPlus& request, SendCoins
     QList<std::pair<CScript, CAmount> > sendingTos = request.getPayTo();
     QStringList addresses;
 
-    foreach (const PAIRTYPE(CScript, CAmount) & sendingTo, sendingTos) {
+    for (const std::pair<CScript, CAmount> & sendingTo: sendingTos) {
         // Extract and check destination addresses
         CTxDestination dest;
         if (ExtractDestination(sendingTo.first, dest)) {
@@ -557,7 +556,7 @@ void PaymentServer::fetchRequest(const QUrl& url)
     netManager->get(netRequest);
 }
 
-void PaymentServer::fetchPaymentACK(CWallet* wallet, SendCoinsRecipient recipient, QByteArray transaction)
+void PaymentServer::fetchPaymentACK(CWallet* wallet, const SendCoinsRecipient& recipient, const QByteArray& transaction)
 {
     const payments::PaymentDetails& details = recipient.paymentRequest.getDetails();
     if (!details.has_payment_url())
@@ -577,7 +576,7 @@ void PaymentServer::fetchPaymentACK(CWallet* wallet, SendCoinsRecipient recipien
     // Create a new refund address, or re-use:
     QString account = tr("Refund from %1").arg(recipient.authenticatedMerchant);
     std::string strAccount = account.toStdString();
-    set<CTxDestination> refundAddresses = wallet->GetAccountAddresses(strAccount);
+    std::set<CTxDestination> refundAddresses = wallet->GetAccountAddresses(strAccount);
     if (!refundAddresses.empty()) {
         CScript s = GetScriptForDestination(*refundAddresses.begin());
         payments::Output* refund_to = payment.add_refund_to();
@@ -669,7 +668,7 @@ void PaymentServer::reportSslErrors(QNetworkReply* reply, const QList<QSslError>
     Q_UNUSED(reply);
 
     QString errString;
-    foreach (const QSslError& err, errs) {
+    for (const QSslError& err: errs) {
         qWarning() << "PaymentServer::reportSslErrors : " << err;
         errString += err.errorString() + "\n";
     }

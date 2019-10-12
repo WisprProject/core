@@ -1,5 +1,5 @@
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2018 The PIVX developers
+// Copyright (c) 2015-2019 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -15,7 +15,6 @@
 #include "sync.h"
 #include "util.h"
 
-using namespace std;
 
 extern CCriticalSection cs_budget;
 
@@ -41,7 +40,7 @@ static const CAmount PROPOSAL_FEE_TX = (50 * COIN);
 static const CAmount BUDGET_FEE_TX_OLD = (50 * COIN);
 static const CAmount BUDGET_FEE_TX = (5 * COIN);
 static const int64_t BUDGET_VOTE_UPDATE_MIN = 60 * 60;
-static map<uint256, int> mapPayment_History;
+static std::map<uint256, int> mapPayment_History;
 
 extern std::vector<CBudgetProposalBroadcast> vecImmatureBudgetProposals;
 extern std::vector<CFinalizedBudgetBroadcast> vecImmatureFinalizedBudgets;
@@ -49,11 +48,8 @@ extern std::vector<CFinalizedBudgetBroadcast> vecImmatureFinalizedBudgets;
 extern CBudgetManager budget;
 void DumpBudgets();
 
-// Define amount of blocks in budget payment cycle
-int GetBudgetPaymentCycleBlocks();
-
 //Check the collateral transaction for the budget proposal/finalized budget
-bool IsBudgetCollateralValid(uint256 nTxCollateralHash, uint256 nExpectedHash, std::string& strError, int64_t& nTime, int& nConf, bool fBudgetFinalization=false);
+bool IsBudgetCollateralValid(const uint256& nTxCollateralHash, const uint256& nExpectedHash, std::string& strError, int64_t& nTime, int& nConf, bool fBudgetFinalization=false);
 
 //
 // CBudgetVote - Allow a masternode node to vote and broadcast throughout the network
@@ -182,16 +178,16 @@ class CBudgetManager
 {
 private:
     //hold txes until they mature enough to use
-    // XX42    map<uint256, CTransaction> mapCollateral;
-    map<uint256, uint256> mapCollateralTxids;
+    // XX42    std::map<uint256, CTransaction> mapCollateral;
+    std::map<uint256, uint256> mapCollateralTxids;
 
 public:
     // critical section to protect the inner data structures
     mutable CCriticalSection cs;
 
     // keep track of the scanning errors I've seen
-    map<uint256, CBudgetProposal> mapProposals;
-    map<uint256, CFinalizedBudget> mapFinalizedBudgets;
+    std::map<uint256, CBudgetProposal> mapProposals;
+    std::map<uint256, CFinalizedBudget> mapFinalizedBudgets;
 
     std::map<uint256, CBudgetProposalBroadcast> mapSeenMasternodeBudgetProposals;
     std::map<uint256, CBudgetVote> mapSeenMasternodeBudgetVotes;
@@ -219,14 +215,14 @@ public:
 
     void ResetSync();
     void MarkSynced();
-    void Sync(CNode* node, uint256 nProp, bool fPartial = false);
+    void Sync(CNode* node, const uint256& nProp, bool fPartial = false);
 
     void Calculate();
     void ProcessMessage(CNode* pfrom, std::string& strCommand, CDataStream& vRecv);
     void NewBlock();
     CBudgetProposal* FindProposal(const std::string& strProposalName);
-    CBudgetProposal* FindProposal(uint256 nHash);
-    CFinalizedBudget* FindFinalizedBudget(uint256 nHash);
+    CBudgetProposal* FindProposal(const uint256& nHash);
+    CFinalizedBudget* FindFinalizedBudget(const uint256& nHash);
     std::pair<std::string, std::string> GetVotes(std::string strProposalName);
 
     CAmount GetTotalBudget(int nHeight);
@@ -240,7 +236,7 @@ public:
 
     bool UpdateProposal(CBudgetVote& vote, CNode* pfrom, std::string& strError);
     bool UpdateFinalizedBudget(CFinalizedBudgetVote& vote, CNode* pfrom, std::string& strError);
-    bool PropExists(uint256 nHash);
+    bool PropExists(const uint256& nHash);
     TrxValidationStatus IsTransactionValid(const CTransaction& txNew, int nBlockHeight);
     std::string GetRequiredPaymentsString(int nBlockHeight);
     void FillBlockPayee(CMutableTransaction& txNew, CAmount nFees, bool fProofOfStake);
@@ -324,7 +320,7 @@ public:
     std::string strBudgetName;
     int nBlockStart;
     std::vector<CTxBudgetPayment> vecBudgetPayments;
-    map<uint256, CFinalizedBudgetVote> mapVotes;
+    std::map<uint256, CFinalizedBudgetVote> mapVotes;
     uint256 nFeeTXHash;
     int64_t nTime;
 
@@ -343,7 +339,7 @@ public:
     int GetBlockStart() { return nBlockStart; }
     int GetBlockEnd() { return nBlockStart + (int)(vecBudgetPayments.size() - 1); }
     int GetVoteCount() { return (int)mapVotes.size(); }
-    bool IsPaidAlready(uint256 nProposalHash, int nBlockHeight);
+    bool IsPaidAlready(const uint256& nProposalHash, int nBlockHeight);
     TrxValidationStatus IsTransactionValid(const CTransaction& txNew, int nBlockHeight);
     bool GetBudgetPaymentByBlock(int64_t nBlockHeight, CTxBudgetPayment& payment)
     {
@@ -367,15 +363,15 @@ public:
         return true;
     }
 
-    //check to see if we should vote on this
-    void AutoCheck();
+    // Verify and vote on finalized budget
+    void CheckAndVote();
     //total wispr paid out by this budget
     CAmount GetTotalPayout();
     //vote on this finalized budget as a masternode
     void SubmitVote();
 
     //checks the hashes to make sure we know about them
-    string GetStatus();
+    std::string GetStatus();
 
     uint256 GetHash()
     {
@@ -414,7 +410,7 @@ private:
 public:
     CFinalizedBudgetBroadcast();
     CFinalizedBudgetBroadcast(const CFinalizedBudget& other);
-    CFinalizedBudgetBroadcast(std::string strBudgetNameIn, int nBlockStartIn, std::vector<CTxBudgetPayment> vecBudgetPaymentsIn, uint256 nFeeTXHashIn);
+    CFinalizedBudgetBroadcast(std::string strBudgetNameIn, int nBlockStartIn, const std::vector<CTxBudgetPayment>& vecBudgetPaymentsIn, uint256 nFeeTXHashIn);
 
     void swap(CFinalizedBudgetBroadcast& first, CFinalizedBudgetBroadcast& second) // nothrow
     {
@@ -481,12 +477,12 @@ public:
     int64_t nTime;
     uint256 nFeeTXHash;
 
-    map<uint256, CBudgetVote> mapVotes;
+    std::map<uint256, CBudgetVote> mapVotes;
     //cache object
 
     CBudgetProposal();
     CBudgetProposal(const CBudgetProposal& other);
-    CBudgetProposal(std::string strProposalNameIn, std::string strURLIn, int nBlockStartIn, int nBlockEndIn, CScript addressIn, CAmount nAmountIn, uint256 nFeeTXHashIn);
+    CBudgetProposal(std::string strProposalNameIn, std::string strURLIn, int nBlockStartIn, int nBlockEndIn, const CScript& addressIn, CAmount nAmountIn, uint256 nFeeTXHashIn);
 
     void Calculate();
     bool AddOrUpdateVote(CBudgetVote& vote, std::string& strError);
@@ -495,14 +491,8 @@ public:
 
     bool IsValid(std::string& strError, bool fCheckCollateral = true);
 
-    bool IsEstablished()
-    {
-        // Proposals must be at least a day old to make it into a budget
-        if (Params().NetworkID() == CBaseChainParams::MAIN) return (nTime < GetTime() - (60 * 60 * 24));
-
-        // For testing purposes - 5 minutes
-        return (nTime < GetTime() - (60 * 5));
-    }
+    bool IsEstablished();
+    bool IsPassing(const CBlockIndex* pindexPrev, int nBlockStartBudget, int nBlockEndBudget, int mnCount);
 
     std::string GetName() { return strProposalName; }
     std::string GetURL() { return strURL; }
@@ -515,16 +505,16 @@ public:
     int GetBlockCurrentCycle();
     int GetBlockEndCycle();
     double GetRatio();
-    int GetYeas();
-    int GetNays();
-    int GetAbstains();
+    int GetYeas() const;
+    int GetNays() const;
+    int GetAbstains() const;
     CAmount GetAmount() { return nAmount; }
     void SetAllotted(CAmount nAllotedIn) { nAlloted = nAllotedIn; }
     CAmount GetAllotted() { return nAlloted; }
 
     void CleanAndRemove(bool fSignatureCheck);
 
-    uint256 GetHash()
+    uint256 GetHash() const
     {
         CHashWriter ss(SER_GETHASH, PROTOCOL_VERSION);
         ss << strProposalName;
@@ -565,8 +555,8 @@ class CBudgetProposalBroadcast : public CBudgetProposal
 public:
     CBudgetProposalBroadcast() : CBudgetProposal() {}
     CBudgetProposalBroadcast(const CBudgetProposal& other) : CBudgetProposal(other) {}
-    CBudgetProposalBroadcast(const CBudgetProposalBroadcast& other) : CBudgetProposal(other) {}
-    CBudgetProposalBroadcast(std::string strProposalNameIn, std::string strURLIn, int nPaymentCount, CScript addressIn, CAmount nAmountIn, int nBlockStartIn, uint256 nFeeTXHashIn);
+    CBudgetProposalBroadcast(const CBudgetProposalBroadcast& other) = default;
+    CBudgetProposalBroadcast(std::string strProposalNameIn, std::string strURLIn, int nPaymentCount, const CScript& addressIn, CAmount nAmountIn, int nBlockStartIn, uint256 nFeeTXHashIn);
 
     void swap(CBudgetProposalBroadcast& first, CBudgetProposalBroadcast& second) // nothrow
     {

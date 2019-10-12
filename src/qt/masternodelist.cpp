@@ -1,5 +1,5 @@
 // Copyright (c) 2014-2016 The Dash Developers
-// Copyright (c) 2016-2018 The PIVX developers
+// Copyright (c) 2016-2019 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -14,7 +14,7 @@
 #include "masternodeconfig.h"
 #include "masternodeman.h"
 #include "sync.h"
-#include "wallet.h"
+#include "wallet/wallet.h"
 #include "walletmodel.h"
 #include "askpassphrasedialog.h"
 
@@ -25,8 +25,8 @@ CCriticalSection cs_masternodes;
 
 MasternodeList::MasternodeList(QWidget* parent) : QWidget(parent),
                                                   ui(new Ui::MasternodeList),
-                                                  clientModel(0),
-                                                  walletModel(0)
+                                                  clientModel(nullptr),
+                                                  walletModel(nullptr)
 {
     ui->setupUi(this);
 
@@ -90,7 +90,7 @@ void MasternodeList::StartAlias(std::string strAlias)
     std::string strStatusHtml;
     strStatusHtml += "<center>Alias: " + strAlias;
 
-    BOOST_FOREACH (CMasternodeConfig::CMasternodeEntry mne, masternodeConfig.getEntries()) {
+    for (CMasternodeConfig::CMasternodeEntry mne: masternodeConfig.getEntries()) {
         if (mne.getAlias() == strAlias) {
             std::string strError;
             CMasternodeBroadcast mnb;
@@ -122,7 +122,7 @@ void MasternodeList::StartAll(std::string strCommand)
     int nCountFailed = 0;
     std::string strFailedHtml;
 
-    BOOST_FOREACH (CMasternodeConfig::CMasternodeEntry mne, masternodeConfig.getEntries()) {
+    for (CMasternodeConfig::CMasternodeEntry mne: masternodeConfig.getEntries()) {
         std::string strError;
         CMasternodeBroadcast mnb;
 
@@ -180,11 +180,11 @@ void MasternodeList::updateMyMasternodeInfo(QString strAlias, QString strAddr, C
         ui->tableWidgetMyMasternodes->insertRow(nNewRow);
     }
 
-    QTableWidgetItem* aliasItem = new QTableWidgetItem(strAlias);
+    auto* aliasItem = new QTableWidgetItem(strAlias);
     QTableWidgetItem* addrItem = new QTableWidgetItem(pmn ? QString::fromStdString(pmn->addr.ToString()) : strAddr);
     QTableWidgetItem* protocolItem = new QTableWidgetItem(QString::number(pmn ? pmn->protocolVersion : -1));
     QTableWidgetItem* statusItem = new QTableWidgetItem(QString::fromStdString(pmn ? pmn->GetStatus() : "MISSING"));
-    GUIUtil::DHMSTableWidgetItem* activeSecondsItem = new GUIUtil::DHMSTableWidgetItem(pmn ? (pmn->lastPing.sigTime - pmn->sigTime) : 0);
+    auto* activeSecondsItem = new GUIUtil::DHMSTableWidgetItem(pmn ? (pmn->lastPing.sigTime - pmn->sigTime) : 0);
     QTableWidgetItem* lastSeenItem = new QTableWidgetItem(QString::fromStdString(DateTimeStrFormat("%Y-%m-%d %H:%M", pmn ? pmn->lastPing.sigTime : 0)));
     QTableWidgetItem* pubkeyItem = new QTableWidgetItem(QString::fromStdString(pmn ? CBitcoinAddress(pmn->pubKeyCollateralAddress.GetID()).ToString() : ""));
 
@@ -210,7 +210,7 @@ void MasternodeList::updateMyNodeList(bool fForce)
     nTimeMyListUpdated = GetTime();
 
     ui->tableWidgetMyMasternodes->setSortingEnabled(false);
-    BOOST_FOREACH (CMasternodeConfig::CMasternodeEntry mne, masternodeConfig.getEntries()) {
+    for (CMasternodeConfig::CMasternodeEntry mne: masternodeConfig.getEntries()) {
         int nIndex;
         if(!mne.castOutputIndex(nIndex))
             continue;

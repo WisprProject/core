@@ -1,5 +1,5 @@
-// Copyright (c) 2009-2014 The Bitcoin Core developers
-// Copyright (c) 2016-2017 The PIVX developers
+// Copyright (c) 2009-2017 The Bitcoin Core developers
+// Copyright (c) 2016-2018 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -31,14 +31,16 @@ bool sanity_test_memcpy()
 {
     unsigned int memcpy_test[T];
     unsigned int memcpy_verify[T] = {};
-    for (unsigned int i = 0; i != T; ++i)
+    for (unsigned int i = 0; i != T; ++i) {
         memcpy_test[i] = i;
+     }
 
     memcpy_int(memcpy_verify, memcpy_test, sizeof(memcpy_test));
 
     for (unsigned int i = 0; i != T; ++i) {
-        if (memcpy_verify[i] != i)
+        if (memcpy_verify[i] != i) {
             return false;
+        }
     }
     return true;
 }
@@ -57,7 +59,7 @@ bool sanity_test_fdelt()
 }
 #endif
 
-} // anon namespace
+} // namespace
 
 bool glibc_sanity_test()
 {

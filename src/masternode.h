@@ -22,12 +22,11 @@
 #define MASTERNODE_REMOVAL_SECONDS (130 * 60)
 #define MASTERNODE_CHECK_SECONDS 5
 
-using namespace std;
 
 class CMasternode;
 class CMasternodeBroadcast;
 class CMasternodePing;
-extern map<int64_t, uint256> mapCacheBlockHashes;
+extern std::map<int64_t, uint256> mapCacheBlockHashes;
 
 bool GetBlockHash(uint256& hash, int nBlockHeight);
 
@@ -256,7 +255,7 @@ public:
 
     int GetMasternodeInputAge()
     {
-        if (chainActive.Tip() == NULL) return 0;
+        if (chainActive.Tip() == nullptr) return 0;
 
         if (cacheInputAge == 0) {
             cacheInputAge = GetInputAge(vin);
@@ -331,8 +330,8 @@ public:
 
     /// Create Masternode broadcast, needs to be relayed manually after that
     static bool Create(CTxIn vin, CService service, CKey keyCollateralAddressNew, CPubKey pubKeyCollateralAddressNew, CKey keyMasternodeNew, CPubKey pubKeyMasternodeNew, std::string& strErrorRet, CMasternodeBroadcast& mnbRet);
-    static bool Create(std::string strService, std::string strKey, std::string strTxHash, std::string strOutputIndex, std::string& strErrorRet, CMasternodeBroadcast& mnbRet, bool fOffline = false);
-    static bool CheckDefaultPort(std::string strService, std::string& strErrorRet, std::string strContext);
+    static bool Create(const std::string& strService, const std::string& strKey, const std::string& strTxHash, const std::string& strOutputIndex, std::string& strErrorRet, CMasternodeBroadcast& mnbRet, bool fOffline = false);
+    static bool CheckDefaultPort(const std::string& strService, std::string& strErrorRet, const std::string& strContext);
 };
 
 #endif

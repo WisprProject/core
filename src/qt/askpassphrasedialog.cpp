@@ -75,7 +75,7 @@ AskPassphraseDialog::AskPassphraseDialog(Mode mode, QWidget* parent, WalletModel
     }
 
     // Set checkbox "For anonymization, automint, and staking only" depending on from where we were called
-    if (context == Context::Unlock_Menu || context == Context::Mint_zWSP || context == Context::BIP_38) {
+    if (context == Context::Unlock_Menu || context == Context::Mint_zWSP || context == Context::BIP_38 || context == Context::UI_Vote) {
         ui->anonymizationCheckBox->setChecked(true);
     }
     else {
@@ -213,7 +213,7 @@ bool AskPassphraseDialog::event(QEvent* event)
 {
     // Detect Caps Lock key press.
     if (event->type() == QEvent::KeyPress) {
-        QKeyEvent* ke = static_cast<QKeyEvent*>(event);
+        auto* ke = static_cast<QKeyEvent*>(event);
         if (ke->key() == Qt::Key_CapsLock) {
             fCapsLock = !fCapsLock;
         }
@@ -235,7 +235,7 @@ bool AskPassphraseDialog::eventFilter(QObject* object, QEvent* event)
      * Shift key is not down and the result is an upper case character.
      */
     if (event->type() == QEvent::KeyPress) {
-        QKeyEvent* ke = static_cast<QKeyEvent*>(event);
+        auto* ke = static_cast<QKeyEvent*>(event);
         QString str = ke->text();
         if (str.length() != 0) {
             const QChar* psz = str.unicode();

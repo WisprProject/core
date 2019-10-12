@@ -9,7 +9,7 @@
 
 #include "leveldbwrapper.h"
 #include "main.h"
-#include "primitives/zerocoin.h"
+#include "zpiv/zerocoin.h"
 
 #include <map>
 #include <string>
@@ -54,10 +54,9 @@ private:
 
 public:
     bool WriteBlockIndex(const CDiskBlockIndex& blockindex);
+    bool WriteBatchSync(const std::vector<std::pair<int, const CBlockFileInfo*> >& fileInfo, int nLastFile, const std::vector<const CBlockIndex*>& blockinfo);
     bool ReadBlockFileInfo(int nFile, CBlockFileInfo& fileinfo);
-    bool WriteBlockFileInfo(int nFile, const CBlockFileInfo& fileinfo);
     bool ReadLastBlockFile(int& nFile);
-    bool WriteLastBlockFile(int nFile);
     bool WriteReindexing(bool fReindex);
     bool ReadReindexing(bool& fReindex);
     bool ReadTxIndex(const uint256& txid, CDiskTxPos& pos);
@@ -90,7 +89,7 @@ public:
     bool ReadCoinSpend(const uint256& hashSerial, uint256 &txHash);
     bool EraseCoinMint(const CBigNum& bnPubcoin);
     bool EraseCoinSpend(const CBigNum& bnSerial);
-    bool WipeCoins(std::string strType);
+    bool WipeCoins(const std::string& strType);
     bool WriteAccumulatorValue(const uint32_t& nChecksum, const CBigNum& bnValue);
     bool ReadAccumulatorValue(const uint32_t& nChecksum, CBigNum& bnValue);
     bool EraseAccumulatorValue(const uint32_t& nChecksum);

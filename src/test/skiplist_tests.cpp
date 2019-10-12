@@ -1,11 +1,12 @@
 // Copyright (c) 2014 The Bitcoin Core developers
-// Copyright (c) 2017 The PIVX developers
+// Copyright (c) 2017-2018 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "main.h"
 #include "random.h"
 #include "util.h"
+#include "test/test_wispr.h"
 
 #include <vector>
 
@@ -13,7 +14,7 @@
 
 #define SKIPLIST_LENGTH 300000
 
-BOOST_AUTO_TEST_SUITE(skiplist_tests)
+BOOST_FIXTURE_TEST_SUITE(skiplist_tests, BasicTestingSetup)
 
 BOOST_AUTO_TEST_CASE(skiplist_test)
 {
@@ -21,7 +22,7 @@ BOOST_AUTO_TEST_CASE(skiplist_test)
 
     for (int i=0; i<SKIPLIST_LENGTH; i++) {
         vIndex[i].nHeight = i;
-        vIndex[i].pprev = (i == 0) ? NULL : &vIndex[i - 1];
+        vIndex[i].pprev = (i == 0) ? nullptr : &vIndex[i - 1];
         vIndex[i].BuildSkip();
     }
 
@@ -30,7 +31,7 @@ BOOST_AUTO_TEST_CASE(skiplist_test)
             BOOST_CHECK(vIndex[i].pskip == &vIndex[vIndex[i].pskip->nHeight]);
             BOOST_CHECK(vIndex[i].pskip->nHeight < i);
         } else {
-            BOOST_CHECK(vIndex[i].pskip == NULL);
+            BOOST_CHECK(vIndex[i].pskip == nullptr);
         }
     }
 
@@ -52,11 +53,11 @@ BOOST_AUTO_TEST_CASE(getlocator_test)
     for (unsigned int i=0; i<vBlocksMain.size(); i++) {
         vHashMain[i] = i; // Set the hash equal to the height, so we can quickly check the distances.
         vBlocksMain[i].nHeight = i;
-        vBlocksMain[i].pprev = i ? &vBlocksMain[i - 1] : NULL;
+        vBlocksMain[i].pprev = i ? &vBlocksMain[i - 1] : nullptr;
         vBlocksMain[i].phashBlock = &vHashMain[i];
         vBlocksMain[i].BuildSkip();
         BOOST_CHECK_EQUAL((int)vBlocksMain[i].GetBlockHash().GetLow64(), vBlocksMain[i].nHeight);
-        BOOST_CHECK(vBlocksMain[i].pprev == NULL || vBlocksMain[i].nHeight == vBlocksMain[i].pprev->nHeight + 1);
+        BOOST_CHECK(vBlocksMain[i].pprev == nullptr || vBlocksMain[i].nHeight == vBlocksMain[i].pprev->nHeight + 1);
     }
 
     // Build a branch that splits off at block 49999, 50000 blocks long.
@@ -69,7 +70,7 @@ BOOST_AUTO_TEST_CASE(getlocator_test)
         vBlocksSide[i].phashBlock = &vHashSide[i];
         vBlocksSide[i].BuildSkip();
         BOOST_CHECK_EQUAL((int)vBlocksSide[i].GetBlockHash().GetLow64(), vBlocksSide[i].nHeight);
-        BOOST_CHECK(vBlocksSide[i].pprev == NULL || vBlocksSide[i].nHeight == vBlocksSide[i].pprev->nHeight + 1);
+        BOOST_CHECK(vBlocksSide[i].pprev == nullptr || vBlocksSide[i].nHeight == vBlocksSide[i].pprev->nHeight + 1);
     }
 
     // Build a CChain for the main branch.

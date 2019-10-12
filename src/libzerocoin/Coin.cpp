@@ -1,7 +1,7 @@
 /**
  * @file       Coin.cpp
  *
- * @brief      PublicCoin and PrivateCoin classes for the Zerocoin library.
+ * @brief      libzerocoin::PublicCoin and PrivateCoin classes for the Zerocoin library.
  *
  * @author     Ian Miers, Christina Garman and Matthew Green
  * @date       June 2013
@@ -9,7 +9,7 @@
  * @copyright  Copyright 2013 Ian Miers, Christina Garman and Matthew Green
  * @license    This project is released under the MIT license.
  **/
-// Copyright (c) 2017-2018 The PIVX developers
+// Copyright (c) 2017-2019 The PIVX developers
 
 #include <stdexcept>
 #include <iostream>
@@ -20,27 +20,27 @@
 namespace libzerocoin {
 
 //PublicCoin class
-PublicCoin::PublicCoin(const ZerocoinParams* p):
+PublicCoin::PublicCoin(const libzerocoin::ZerocoinParams* p):
 	params(p) {
 	if (this->params->initialized == false) {
 		throw std::runtime_error("Params are not initialized");
 	}
     // Assume this will get set by another method later
-    denomination = ZQ_ERROR;
+    denomination = libzerocoin::ZQ_ERROR;
 };
 
-PublicCoin::PublicCoin(const ZerocoinParams* p, const CBigNum& coin, const CoinDenomination d):
+PublicCoin::PublicCoin(const libzerocoin::ZerocoinParams* p, const CBigNum& coin, const libzerocoin::CoinDenomination d):
 	params(p), value(coin) {
 	if (this->params->initialized == false) {
 		throw std::runtime_error("Params are not initialized");
 	}
 
 	denomination = d;
-	for(const CoinDenomination denom : zerocoinDenomList) {
+	for(const libzerocoin::CoinDenomination denom : libzerocoin::zerocoinDenomList) {
 		if(denom == d)
 			denomination = d;
 	}
-    if(denomination == 0){
+    if (denomination == 0) {
 		std::cout << "denom does not exist\n";
 		throw std::runtime_error("Denomination does not exist");
 	}
@@ -49,25 +49,24 @@ PublicCoin::PublicCoin(const ZerocoinParams* p, const CBigNum& coin, const CoinD
 bool PublicCoin::validate() const
 {
     if (this->params->accumulatorParams.minCoinValue >= value) {
-        cout << "PublicCoin::validate value is too low\n";
-        return false;
+        return error("%s: ERROR: PublicCoin::validate value is too low: %s", __func__, value.GetDec());
     }
 
     if (value > this->params->accumulatorParams.maxCoinValue) {
-        cout << "PublicCoin::validate value is too high\n";
-        return false;
+        return error("%s: ERROR: PublicCoin::validate value is too high, max: %s, received: %s",
+                __func__, this->params->accumulatorParams.maxCoinValue, value.GetDec());
     }
 
     if (!value.isPrime(params->zkp_iterations)) {
-        cout << "PublicCoin::validate value is not prime\n";
-        return false;
+        return error("%s: ERROR: PublicCoin::validate value is not prime. Value: %s, Iterations: %d",
+                __func__, value.GetDec(), params->zkp_iterations);
     }
 
     return true;
 }
 
 //PrivateCoin class
-PrivateCoin::PrivateCoin(const ZerocoinParams* p, const CoinDenomination denomination, bool fMintNew): params(p), publicCoin(p) {
+PrivateCoin::PrivateCoin(const libzerocoin::ZerocoinParams* p, const libzerocoin::CoinDenomination denomination, bool fMintNew): params(p), publicCoin(p) {
 	// Verify that the parameters are valid
 	if(this->params->initialized == false) {
 		throw std::runtime_error("Params are not initialized");
@@ -88,7 +87,7 @@ PrivateCoin::PrivateCoin(const ZerocoinParams* p, const CoinDenomination denomin
     this->version = CURRENT_VERSION;
 }
 
-PrivateCoin::PrivateCoin(const ZerocoinParams* p, const CoinDenomination denomination, const CBigNum& bnSerial,
+PrivateCoin::PrivateCoin(const libzerocoin::ZerocoinParams* p, const libzerocoin::CoinDenomination denomination, const CBigNum& bnSerial,
                          const CBigNum& bnRandomness): params(p), publicCoin(p)
 {
         // Verify that the parameters are valid
@@ -98,14 +97,14 @@ PrivateCoin::PrivateCoin(const ZerocoinParams* p, const CoinDenomination denomin
     this->serialNumber = bnSerial;
     this->randomness = bnRandomness;
 
-    Commitment commitment(&p->coinCommitmentGroup, bnSerial, bnRandomness);
+    libzerocoin::Commitment commitment(&p->coinCommitmentGroup, bnSerial, bnRandomness);
     this->publicCoin = PublicCoin(p, commitment.getCommitmentValue(), denomination);
 }
 
 bool PrivateCoin::IsValid()
 {
     if (!IsValidSerial(params, serialNumber)) {
-        cout << "Serial not valid\n";
+        std::cout << "Serial not valid\n";
         return false;
     }
 
@@ -151,14 +150,14 @@ const CPubKey PrivateCoin::getPubKey() const
 	return key.GetPubKey();
 }
 
-bool PrivateCoin::sign(const uint256& hash, vector<unsigned char>& vchSig) const
+bool PrivateCoin::sign(const uint256& hash, std::vector<unsigned char>& vchSig) const
 {
 	CKey key;
 	key.SetPrivKey(privkey, true);
 	return key.Sign(hash, vchSig);
 }
 
-void PrivateCoin::mintCoin(const CoinDenomination denomination) {
+void PrivateCoin::mintCoin(const libzerocoin::CoinDenomination denomination) {
 	// Repeat this process up to MAX_COINMINT_ATTEMPTS times until
 	// we obtain a prime number
 	for(uint32_t attempt = 0; attempt < MAX_COINMINT_ATTEMPTS; attempt++) {
@@ -199,7 +198,7 @@ void PrivateCoin::mintCoin(const CoinDenomination denomination) {
 	throw std::runtime_error("Unable to mint a new Zerocoin (too many attempts)");
 }
 
-void PrivateCoin::mintCoinFast(const CoinDenomination denomination) {
+void PrivateCoin::mintCoinFast(const libzerocoin::CoinDenomination denomination) {
 
 	// Generate a random serial number in the range 0...{q-1} where
 	// "q" is the order of the commitment group.
@@ -254,10 +253,16 @@ void PrivateCoin::mintCoinFast(const CoinDenomination denomination) {
 
 int ExtractVersionFromSerial(const CBigNum& bnSerial)
 {
-	//Serial is marked as v2 only if the first byte is 0xF
-	uint256 nMark = bnSerial.getuint256() >> (256 - PrivateCoin::V2_BITSHIFT);
-	if (nMark == 0xf)
-		return PrivateCoin::PUBKEY_VERSION;
+    try {
+        //Serial is marked as v2 only if the first byte is 0xF
+        uint256 nMark = bnSerial.getuint256() >> (256 - PrivateCoin::V2_BITSHIFT);
+        if (nMark == 0xf)
+            return PrivateCoin::PUBKEY_VERSION;
+    } catch (std::range_error &e) {
+        //std::cout << "ExtractVersionFromSerial(): " << e.what() << std::endl;
+        // Only serial version 2 appeared with this range error..
+        return 2;
+    }
 
 	return 1;
 }
@@ -273,7 +278,7 @@ CBigNum GetAdjustedSerial(const CBigNum& bnSerial)
 }
 
 
-bool IsValidSerial(const ZerocoinParams* params, const CBigNum& bnSerial)
+bool IsValidSerial(const libzerocoin::ZerocoinParams* params, const CBigNum& bnSerial)
 {
     if (bnSerial <= 0)
         return false;
@@ -281,9 +286,17 @@ bool IsValidSerial(const ZerocoinParams* params, const CBigNum& bnSerial)
     if (ExtractVersionFromSerial(bnSerial) < PrivateCoin::PUBKEY_VERSION)
         return bnSerial < params->coinCommitmentGroup.groupOrder;
 
-    //If V2, the serial is marked with 0xF in the first 4 bits. This is removed for the actual serial.
-    CBigNum bnAdjustedSerial = GetAdjustedSerial(bnSerial);
-    return bnAdjustedSerial > 0 && bnAdjustedSerial < params->coinCommitmentGroup.groupOrder;
+    // If V2, the serial is marked with 0xF in the first 4 bits. So It's always > groupOrder.
+    // This is removed for the adjusted serial - so it's always < groupOrder.
+    // So we check only the bitsize here.
+    return bnSerial.bitSize() <= 256;
 }
+
+
+bool IsValidCommitmentToCoinRange(const libzerocoin::ZerocoinParams* params, const CBigNum& bnCommitment)
+{
+    return bnCommitment > CBigNum(0) && bnCommitment < params->serialNumberSoKCommitmentGroup.modulus;
+}
+
 
 } /* namespace libzerocoin */

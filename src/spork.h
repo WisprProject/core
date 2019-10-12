@@ -16,8 +16,6 @@
 #include "obfuscation.h"
 #include "protocol.h"
 
-using namespace std;
-using namespace boost;
 
 /*
     Don't ever reuse these IDs for other sporks
@@ -108,11 +106,10 @@ private:
 
 public:
     CSporkManager()
-    {
-    }
+    = default;
 
     std::string GetSporkNameByID(int id);
-    int GetSporkIDByName(std::string strName);
+    int GetSporkIDByName(const std::string& strName);
     bool UpdateSpork(int nSporkID, int64_t nValue);
     bool SetPrivKey(std::string strPrivKey);
     bool CheckSignature(CSporkMessage& spork, bool fCheckSigner = false);

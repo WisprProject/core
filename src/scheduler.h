@@ -1,5 +1,5 @@
 // Copyright (c) 2015 The Bitcoin Core developers
-// Copyright (c) 2017 The PIVX developers
+// Copyright (c) 2017-2018 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -43,7 +43,7 @@ public:
     typedef boost::function<void(void)> Function;
 
     // Call func at/after time t
-    void schedule(Function f, boost::chrono::system_clock::time_point t);
+    void schedule(const Function& f, boost::chrono::system_clock::time_point t);
 
     // Convenience method: call f once deltaSeconds from now
     void scheduleFromNow(Function f, int64_t deltaSeconds);

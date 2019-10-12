@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2015 The Bitcoin developers
-// Copyright (c) 2016-2018 The PIVX developers
+// Copyright (c) 2016-2019 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -10,6 +10,7 @@
 #include "bitcoingui.h"
 #include "blockexplorer.h"
 #include "clientmodel.h"
+#include "governancepage.h"
 #include "guiutil.h"
 #include "masternodeconfig.h"
 #include "multisenddialog.h"
@@ -24,7 +25,7 @@
 #include "transactionview.h"
 #include "walletmodel.h"
 
-#include "ui_interface.h"
+#include "guiinterface.h"
 
 #include <QAction>
 #include <QActionGroup>
@@ -37,8 +38,8 @@
 #include <QVBoxLayout>
 
 WalletView::WalletView(QWidget* parent) : QStackedWidget(parent),
-                                          clientModel(0),
-                                          walletModel(0)
+                                          clientModel(nullptr),
+                                          walletModel(nullptr)
 {   
     // Create tabs
     overviewPage = new OverviewPage();
@@ -49,11 +50,11 @@ WalletView::WalletView(QWidget* parent) : QStackedWidget(parent),
     QFrame *frame_Header = new QFrame(transactionsPage);
     frame_Header->setObjectName(QStringLiteral("frame_Header"));
 
-    QVBoxLayout* verticalLayout_8 = new QVBoxLayout(frame_Header);
+    auto* verticalLayout_8 = new QVBoxLayout(frame_Header);
     verticalLayout_8->setObjectName(QStringLiteral("verticalLayout_8"));
     verticalLayout_8->setContentsMargins(0, 0, 0, 0);
 
-    QHBoxLayout* horizontalLayout_Header = new QHBoxLayout();
+    auto* horizontalLayout_Header = new QHBoxLayout();
     horizontalLayout_Header->setObjectName(QStringLiteral("horizontalLayout_Header"));
 
     QLabel* labelOverviewHeaderLeft = new QLabel(frame_Header);
@@ -68,7 +69,7 @@ WalletView::WalletView(QWidget* parent) : QStackedWidget(parent),
     labelOverviewHeaderLeft->setFont(fontHeaderLeft);
 
     horizontalLayout_Header->addWidget(labelOverviewHeaderLeft);
-    QSpacerItem* horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+    auto* horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
     horizontalLayout_Header->addItem(horizontalSpacer_3);
 
     QLabel* labelOverviewHeaderRight = new QLabel(frame_Header);
@@ -86,8 +87,8 @@ WalletView::WalletView(QWidget* parent) : QStackedWidget(parent),
     horizontalLayout_Header->setStretch(2, 1);
     verticalLayout_8->addLayout(horizontalLayout_Header);
 
-    QVBoxLayout* vbox = new QVBoxLayout();
-    QHBoxLayout* hbox_buttons = new QHBoxLayout();
+    auto* vbox = new QVBoxLayout();
+    auto* hbox_buttons = new QHBoxLayout();
     vbox->addWidget(frame_Header);
 
     transactionView = new TransactionView(this);
@@ -116,12 +117,14 @@ WalletView::WalletView(QWidget* parent) : QStackedWidget(parent),
     transactionsPage->setLayout(vbox);
 
     privacyPage = new PrivacyDialog();
+    governancePage = new GovernancePage();
     receiveCoinsPage = new ReceiveCoinsDialog();
     sendCoinsPage = new SendCoinsDialog();
 
     addWidget(overviewPage);
     addWidget(transactionsPage);
     addWidget(privacyPage);
+    addWidget(governancePage);
     addWidget(receiveCoinsPage);
     addWidget(sendCoinsPage);
     addWidget(explorerWindow);
@@ -182,6 +185,7 @@ void WalletView::setClientModel(ClientModel* clientModel)
     if (settings.value("fShowMasternodesTab").toBool()) {
         masternodeListPage->setClientModel(clientModel);
     }
+    governancePage->setClientModel(clientModel);
 }
 
 void WalletView::setWalletModel(WalletModel* walletModel)
@@ -198,6 +202,7 @@ void WalletView::setWalletModel(WalletModel* walletModel)
     privacyPage->setModel(walletModel);
     receiveCoinsPage->setModel(walletModel);
     sendCoinsPage->setModel(walletModel);
+    governancePage->setWalletModel(walletModel);
 
     if (walletModel) {
         // Receive and pass through messages from wallet model
@@ -249,6 +254,10 @@ void WalletView::gotoHistoryPage()
     setCurrentWidget(transactionsPage);
 }
 
+void WalletView::gotoGovernancePage()
+{
+    setCurrentWidget(governancePage);
+}
 
 void WalletView::gotoBlockExplorerPage()
 {
@@ -275,7 +284,7 @@ void WalletView::gotoPrivacyPage()
     walletModel->emitBalanceChanged();
 }
 
-void WalletView::gotoSendCoinsPage(QString addr)
+void WalletView::gotoSendCoinsPage(const QString& addr)
 {
     setCurrentWidget(sendCoinsPage);
 
@@ -283,10 +292,10 @@ void WalletView::gotoSendCoinsPage(QString addr)
         sendCoinsPage->setAddress(addr);
 }
 
-void WalletView::gotoSignMessageTab(QString addr)
+void WalletView::gotoSignMessageTab(const QString& addr)
 {
     // calls show() in showTab_SM()
-    SignVerifyMessageDialog* signVerifyMessageDialog = new SignVerifyMessageDialog(this);
+    auto* signVerifyMessageDialog = new SignVerifyMessageDialog(this);
     signVerifyMessageDialog->setAttribute(Qt::WA_DeleteOnClose);
     signVerifyMessageDialog->setModel(walletModel);
     signVerifyMessageDialog->showTab_SM(true);
@@ -295,10 +304,10 @@ void WalletView::gotoSignMessageTab(QString addr)
         signVerifyMessageDialog->setAddress_SM(addr);
 }
 
-void WalletView::gotoVerifyMessageTab(QString addr)
+void WalletView::gotoVerifyMessageTab(const QString& addr)
 {
     // calls show() in showTab_VM()
-    SignVerifyMessageDialog* signVerifyMessageDialog = new SignVerifyMessageDialog(this);
+    auto* signVerifyMessageDialog = new SignVerifyMessageDialog(this);
     signVerifyMessageDialog->setAttribute(Qt::WA_DeleteOnClose);
     signVerifyMessageDialog->setModel(walletModel);
     signVerifyMessageDialog->showTab_VM(true);
@@ -309,7 +318,7 @@ void WalletView::gotoVerifyMessageTab(QString addr)
 
 void WalletView::gotoBip38Tool()
 {
-    Bip38ToolDialog* bip38ToolDialog = new Bip38ToolDialog(this);
+    auto* bip38ToolDialog = new Bip38ToolDialog(this);
     //bip38ToolDialog->setAttribute(Qt::WA_DeleteOnClose);
     bip38ToolDialog->setModel(walletModel);
     bip38ToolDialog->showTab_ENC(true);
@@ -317,14 +326,14 @@ void WalletView::gotoBip38Tool()
 
 void WalletView::gotoMultiSendDialog()
 {
-    MultiSendDialog* multiSendDialog = new MultiSendDialog(this);
+    auto* multiSendDialog = new MultiSendDialog(this);
     multiSendDialog->setModel(walletModel);
     multiSendDialog->show();
 }
 
 void WalletView::gotoMultisigDialog(int index)
 {
-    MultisigDialog* multisig = new MultisigDialog(this);
+    auto* multisig = new MultisigDialog(this);
     multisig->setModel(walletModel);
     multisig->showTab(index);
 }
@@ -360,7 +369,7 @@ void WalletView::backupWallet()
 {
     QString filename = GUIUtil::getSaveFileName(this,
         tr("Backup Wallet"), QString(),
-        tr("Wallet Data (*.dat)"), NULL);
+        tr("Wallet Data (*.dat)"), nullptr);
 
     if (filename.isEmpty())
         return;
@@ -415,7 +424,7 @@ void WalletView::usedSendingAddresses()
 {
     if (!walletModel)
         return;
-    AddressBookPage* dlg = new AddressBookPage(AddressBookPage::ForEditing, AddressBookPage::SendingTab, this);
+    auto* dlg = new AddressBookPage(AddressBookPage::ForEditing, AddressBookPage::SendingTab, this);
     dlg->setAttribute(Qt::WA_DeleteOnClose);
     dlg->setModel(walletModel->getAddressTableModel());
     dlg->show();
@@ -425,7 +434,7 @@ void WalletView::usedReceivingAddresses()
 {
     if (!walletModel)
         return;
-    AddressBookPage* dlg = new AddressBookPage(AddressBookPage::ForEditing, AddressBookPage::ReceivingTab, this);
+    auto* dlg = new AddressBookPage(AddressBookPage::ForEditing, AddressBookPage::ReceivingTab, this);
     dlg->setAttribute(Qt::WA_DeleteOnClose);
     dlg->setModel(walletModel->getAddressTableModel());
     dlg->show();
@@ -437,7 +446,7 @@ void WalletView::showProgress(const QString& title, int nProgress)
         progressDialog = new QProgressDialog(title, "", 0, 100);
         progressDialog->setWindowModality(Qt::ApplicationModal);
         progressDialog->setMinimumDuration(0);
-        progressDialog->setCancelButton(0);
+        progressDialog->setCancelButton(nullptr);
         progressDialog->setAutoClose(false);
         progressDialog->setValue(0);
     } else if (nProgress == 100) {
@@ -450,7 +459,7 @@ void WalletView::showProgress(const QString& title, int nProgress)
 }
 
 /** Update wallet with the sum of the selected transactions */
-void WalletView::trxAmount(QString amount)
+void WalletView::trxAmount(const QString& amount)
 {
     transactionSum->setText(amount);
 }

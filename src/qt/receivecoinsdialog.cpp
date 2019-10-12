@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
-// Copyright (c) 2017 The PIVX developers
+// Copyright (c) 2017-2018 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -25,7 +25,7 @@
 
 ReceiveCoinsDialog::ReceiveCoinsDialog(QWidget* parent) : QDialog(parent, Qt::WindowSystemMenuHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint),
                                                           ui(new Ui::ReceiveCoinsDialog),
-                                                          model(0)
+                                                          model(nullptr)
 {
     ui->setupUi(this);
 
@@ -91,7 +91,9 @@ void ReceiveCoinsDialog::setModel(WalletModel* model)
         address = settings.value("current_receive_address").toString();
         if (address.isEmpty())
             address = getAddress();
-        ui->reqAddress->setText(address);
+//        ui->reqAddress->setText(address);
+        ui->reqAddress->setPlaceholderText(QObject::tr("A new address will be generated in this field or you can use the reuse option and enter an address yourself."));
+
 
         connect(model, SIGNAL(notifyReceiveAddressChanged()), this, SLOT(receiveAddressUsed()));
     }
@@ -162,7 +164,7 @@ void ReceiveCoinsDialog::on_receiveButton_clicked()
     }
     SendCoinsRecipient info(address, label,
         ui->reqAmount->value(), ui->reqMessage->text());
-    ReceiveRequestDialog* dialog = new ReceiveRequestDialog(this);
+    auto* dialog = new ReceiveRequestDialog(this);
     dialog->setAttribute(Qt::WA_DeleteOnClose);
     dialog->setModel(model->getOptionsModel());
     dialog->setInfo(info);
@@ -185,7 +187,7 @@ void ReceiveCoinsDialog::on_receivingAddressesButton_clicked()
 void ReceiveCoinsDialog::on_recentRequestsView_doubleClicked(const QModelIndex& index)
 {
     const RecentRequestsTableModel* submodel = model->getRecentRequestsTableModel();
-    ReceiveRequestDialog* dialog = new ReceiveRequestDialog(this);
+    auto* dialog = new ReceiveRequestDialog(this);
     dialog->setModel(model->getOptionsModel());
     dialog->setInfo(submodel->entry(index.row()).recipient);
     dialog->setAttribute(Qt::WA_DeleteOnClose);
@@ -206,7 +208,7 @@ void ReceiveCoinsDialog::on_showRequestButton_clicked()
         return;
     QModelIndexList selection = ui->recentRequestsView->selectionModel()->selectedRows();
 
-    foreach (QModelIndex index, selection) {
+    for (QModelIndex index: selection) {
         on_recentRequestsView_doubleClicked(index);
     }
 }

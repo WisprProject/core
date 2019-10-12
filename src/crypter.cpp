@@ -1,5 +1,5 @@
 // Copyright (c) 2009-2013 The Bitcoin developers
-// Copyright (c) 2017-2018 The PIVX developers
+// Copyright (c) 2017-2019 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -11,10 +11,9 @@
 #include "init.h"
 #include "uint256.h"
 
-#include <boost/foreach.hpp>
 #include <openssl/aes.h>
 #include <openssl/evp.h>
-#include "wallet.h"
+#include "wallet/wallet.h"
 
 bool CCrypter::SetKeyFromPassphrase(const SecureString& strKeyData, const std::vector<unsigned char>& chSalt, const unsigned int nRounds, const unsigned int nDerivationMethod)
 {
@@ -27,8 +26,8 @@ bool CCrypter::SetKeyFromPassphrase(const SecureString& strKeyData, const std::v
             (unsigned char*)&strKeyData[0], strKeyData.size(), nRounds, chKey, chIV);
 
     if (i != (int)WALLET_CRYPTO_KEY_SIZE) {
-        OPENSSL_cleanse(chKey, sizeof(chKey));
-        OPENSSL_cleanse(chIV, sizeof(chIV));
+        memory_cleanse(chKey, sizeof(chKey));
+        memory_cleanse(chIV, sizeof(chIV));
         return false;
     }
 
@@ -62,7 +61,7 @@ bool CCrypter::Encrypt(const CKeyingMaterial& vchPlaintext, std::vector<unsigned
     bool fOk = true;
 
     EVP_CIPHER_CTX* ctx = EVP_CIPHER_CTX_new();
-    if (fOk) fOk = EVP_EncryptInit_ex(ctx, EVP_aes_256_cbc(), NULL, chKey, chIV) != 0;
+    if (fOk) fOk = EVP_EncryptInit_ex(ctx, EVP_aes_256_cbc(), nullptr, chKey, chIV) != 0;
     if (fOk) fOk = EVP_EncryptUpdate(ctx, &vchCiphertext[0], &nCLen, &vchPlaintext[0], nLen) != 0;
     if (fOk) fOk = EVP_EncryptFinal_ex(ctx, (&vchCiphertext[0]) + nCLen, &nFLen) != 0;
     EVP_CIPHER_CTX_free(ctx);
@@ -87,7 +86,7 @@ bool CCrypter::Decrypt(const std::vector<unsigned char>& vchCiphertext, CKeyingM
     bool fOk = true;
 
     EVP_CIPHER_CTX* ctx = EVP_CIPHER_CTX_new();
-    if (fOk) fOk = EVP_DecryptInit_ex(ctx, EVP_aes_256_cbc(), NULL, chKey, chIV) != 0;
+    if (fOk) fOk = EVP_DecryptInit_ex(ctx, EVP_aes_256_cbc(), nullptr, chKey, chIV) != 0;
     if (fOk) fOk = EVP_DecryptUpdate(ctx, &vchPlaintext[0], &nPLen, &vchCiphertext[0], nLen) != 0;
     if (fOk) fOk = EVP_DecryptFinal_ex(ctx, (&vchPlaintext[0]) + nPLen, &nFLen) != 0;
     EVP_CIPHER_CTX_free(ctx);
@@ -134,7 +133,7 @@ bool EncryptAES256(const SecureString& sKey, const SecureString& sPlaintext, con
     bool fOk = true;
 
     ctx = EVP_CIPHER_CTX_new();
-    if (fOk) fOk = EVP_EncryptInit_ex(ctx, EVP_aes_256_cbc(), NULL, (const unsigned char*)&sKey[0], (const unsigned char*)&sIV[0]);
+    if (fOk) fOk = EVP_EncryptInit_ex(ctx, EVP_aes_256_cbc(), nullptr, (const unsigned char*)&sKey[0], (const unsigned char*)&sIV[0]);
     if (fOk) fOk = EVP_EncryptUpdate(ctx, (unsigned char*)&sCiphertext[0], &nCLen, (const unsigned char*)&sPlaintext[0], nLen);
     if (fOk) fOk = EVP_EncryptFinal_ex(ctx, (unsigned char*)(&sCiphertext[0]) + nCLen, &nFLen);
     EVP_CIPHER_CTX_free(ctx);
@@ -175,7 +174,7 @@ bool DecryptAES256(const SecureString& sKey, const std::string& sCiphertext, con
     bool fOk = true;
 
     ctx = EVP_CIPHER_CTX_new();
-    if (fOk) fOk = EVP_DecryptInit_ex(ctx, EVP_aes_256_cbc(), NULL, (const unsigned char*)&sKey[0], (const unsigned char*)&sIV[0]);
+    if (fOk) fOk = EVP_DecryptInit_ex(ctx, EVP_aes_256_cbc(), nullptr, (const unsigned char*)&sKey[0], (const unsigned char*)&sIV[0]);
     if (fOk) fOk = EVP_DecryptUpdate(ctx, (unsigned char*)&sPlaintext[0], &nPLen, (const unsigned char*)&sCiphertext[0], nLen);
     if (fOk) fOk = EVP_DecryptFinal_ex(ctx, (unsigned char*)(&sPlaintext[0]) + nPLen, &nFLen);
     EVP_CIPHER_CTX_free(ctx);
@@ -256,7 +255,6 @@ bool CCryptoKeyStore::Unlock(const CKeyingMaterial& vMasterKeyIn)
 
         uint256 hashSeed;
         if (CWalletDB(pwalletMain->strWalletFile).ReadCurrentSeedHash(hashSeed)) {
-
             uint256 nSeed;
             if (!GetDeterministicSeed(hashSeed, nSeed)) {
                 return error("Failed to read zWSP seed from DB. Wallet is probably corrupt.");
@@ -319,7 +317,7 @@ bool CCryptoKeyStore::GetKey(const CKeyID& address, CKey& keyOut) const
         if (!IsCrypted())
             return CBasicKeyStore::GetKey(address, keyOut);
 
-        CryptedKeyMap::const_iterator mi = mapCryptedKeys.find(address);
+        auto mi = mapCryptedKeys.find(address);
         if (mi != mapCryptedKeys.end()) {
             const CPubKey& vchPubKey = (*mi).second.first;
             const std::vector<unsigned char>& vchCryptedSecret = (*mi).second.second;
@@ -342,7 +340,7 @@ bool CCryptoKeyStore::GetPubKey(const CKeyID& address, CPubKey& vchPubKeyOut) co
         if (!IsCrypted())
             return CKeyStore::GetPubKey(address, vchPubKeyOut);
 
-        CryptedKeyMap::const_iterator mi = mapCryptedKeys.find(address);
+        auto mi = mapCryptedKeys.find(address);
         if (mi != mapCryptedKeys.end()) {
             vchPubKeyOut = (*mi).second.first;
             return true;
@@ -359,7 +357,7 @@ bool CCryptoKeyStore::EncryptKeys(CKeyingMaterial& vMasterKeyIn)
             return false;
 
         fUseCrypto = true;
-        BOOST_FOREACH (KeyMap::value_type& mKey, mapKeys) {
+        for (KeyMap::value_type& mKey : mapKeys) {
             const CKey& key = mKey.second;
             CPubKey vchPubKey = key.GetPubKey();
             CKeyingMaterial vchSecret(key.begin(), key.end());
@@ -377,14 +375,14 @@ bool CCryptoKeyStore::EncryptKeys(CKeyingMaterial& vMasterKeyIn)
 bool CCryptoKeyStore::AddDeterministicSeed(const uint256& seed)
 {
     CWalletDB db(pwalletMain->strWalletFile);
-    string strErr;
+    std::string strErr;
     uint256 hashSeed = Hash(seed.begin(), seed.end());
 
     if(IsCrypted()) {
         if (!IsLocked()) { //if we have password
 
             CKeyingMaterial kmSeed(seed.begin(), seed.end());
-            vector<unsigned char> vchSeedSecret;
+            std::vector<unsigned char> vchSeedSecret;
 
 
             //attempt encrypt
@@ -412,11 +410,11 @@ bool CCryptoKeyStore::GetDeterministicSeed(const uint256& hashSeed, uint256& see
 {
 
     CWalletDB db(pwalletMain->strWalletFile);
-    string strErr;
+    std::string strErr;
     if (IsCrypted()) {
         if(!IsLocked()) { //if we have password
 
-            vector<unsigned char> vchCryptedSeed;
+            std::vector<unsigned char> vchCryptedSeed;
             //read encrypted seed
             if (db.ReadZWSPSeed(hashSeed, vchCryptedSeed)) {
                 uint256 seedRetrieved = uint256(ReverseEndianString(HexStr(vchCryptedSeed)));
@@ -437,7 +435,7 @@ bool CCryptoKeyStore::GetDeterministicSeed(const uint256& hashSeed, uint256& see
             } else { strErr = "read seed from wallet"; }
         } else { strErr = "read seed; wallet is locked"; }
     } else {
-        vector<unsigned char> vchSeed;
+        std::vector<unsigned char> vchSeed;
         // wallet not crypted
         if (db.ReadZWSPSeed(hashSeed, vchSeed)) {
             seedOut = uint256(ReverseEndianString(HexStr(vchSeed)));

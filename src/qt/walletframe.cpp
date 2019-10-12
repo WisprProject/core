@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2013 The Bitcoin developers
-// Copyright (c) 2016-2018 The PIVX developers
+// Copyright (c) 2016-2019 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -17,7 +17,7 @@ WalletFrame::WalletFrame(BitcoinGUI* _gui) : QFrame(_gui),
                                              gui(_gui)
 {
     // Leave HBox hook for adding a list view later
-    QHBoxLayout* walletFrameLayout = new QHBoxLayout(this);
+    auto* walletFrameLayout = new QHBoxLayout(this);
     setContentsMargins(0, 0, 0, 0);
     walletStack = new QStackedWidget(this);
     walletFrameLayout->setContentsMargins(0, 0, 0, 0);
@@ -42,7 +42,7 @@ bool WalletFrame::addWallet(const QString& name, WalletModel* walletModel)
     if (!gui || !clientModel || !walletModel || mapWalletViews.count(name) > 0)
         return false;
 
-    WalletView* walletView = new WalletView(this);
+    auto* walletView = new WalletView(walletStack);
     walletView->setBitcoinGUI(gui);
     walletView->setClientModel(clientModel);
     walletView->setWalletModel(walletModel);
@@ -117,6 +117,13 @@ void WalletFrame::gotoHistoryPage()
     QMap<QString, WalletView*>::const_iterator i;
     for (i = mapWalletViews.constBegin(); i != mapWalletViews.constEnd(); ++i)
         i.value()->gotoHistoryPage();
+}
+
+void WalletFrame::gotoGovernancePage()
+{
+    QMap<QString, WalletView*>::const_iterator i;
+    for (i = mapWalletViews.constBegin(); i != mapWalletViews.constEnd(); ++i)
+        i.value()->gotoGovernancePage();
 }
 
 void WalletFrame::gotoMasternodePage() // Masternode list

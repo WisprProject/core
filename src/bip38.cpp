@@ -1,4 +1,4 @@
-// Copyright (c) 2017 The PIVX developers
+// Copyright (c) 2017-2018 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -14,6 +14,7 @@
 #include <openssl/sha.h>
 #include <secp256k1.h>
 #include <string>
+#include <utility>
 
 
 /** 39 bytes - 78 characters
@@ -32,14 +33,14 @@ void DecryptAES(uint256 encryptedIn, uint256 decryptionKey, uint256& output)
     AES_decrypt(encryptedIn.begin(), output.begin(), &key);
 }
 
-void ComputePreFactor(std::string strPassphrase, std::string strSalt, uint256& prefactor)
+void ComputePreFactor(const std::string& strPassphrase, const std::string& strSalt, uint256& prefactor)
 {
     //passfactor is the scrypt hash of passphrase and ownersalt (NOTE this needs to handle alt cases too in the future)
     uint64_t s = uint256(ReverseEndianString(strSalt)).Get64();
     scrypt_hash(strPassphrase.c_str(), strPassphrase.size(), BEGIN(s), strSalt.size() / 2, BEGIN(prefactor), 16384, 8, 8, 32);
 }
 
-void ComputePassfactor(std::string ownersalt, uint256 prefactor, uint256& passfactor)
+void ComputePassfactor(const std::string& ownersalt, const uint256& prefactor, uint256& passfactor)
 {
     //concat prefactor and ownersalt
     uint512 temp(ReverseEndianString(HexStr(prefactor) + ownersalt));
@@ -79,10 +80,10 @@ bool ComputePasspoint(uint256 passfactor, CPubKey& passpoint)
     return true;
 }
 
-void ComputeSeedBPass(CPubKey passpoint, std::string strAddressHash, std::string strOwnerSalt, uint512& seedBPass)
+void ComputeSeedBPass(CPubKey passpoint, const std::string& strAddressHash, const std::string& strOwnerSalt, uint512& seedBPass)
 {
     // Derive decryption key for seedb using scrypt with passpoint, addresshash, and ownerentropy
-    string salt = ReverseEndianString(strAddressHash + strOwnerSalt);
+    std::string salt = ReverseEndianString(strAddressHash + strOwnerSalt);
     uint256 s2(salt);
     scrypt_hash(BEGIN(passpoint), HexStr(passpoint).size() / 2, BEGIN(s2), salt.size() / 2, BEGIN(seedBPass), 1024, 1, 1, 64);
 }
@@ -94,7 +95,7 @@ void ComputeFactorB(uint256 seedB, uint256& factorB)
     Hash(factorB.begin(), 32, factorB.begin());
 }
 
-std::string AddressToBip38Hash(std::string address)
+std::string AddressToBip38Hash(const std::string& address)
 {
     uint256 addrCheck;
     Hash((void*)address.c_str(), address.size(), addrCheck.begin());
@@ -103,9 +104,9 @@ std::string AddressToBip38Hash(std::string address)
     return HexStr(addrCheck).substr(0, 8);
 }
 
-std::string BIP38_Encrypt(std::string strAddress, std::string strPassphrase, uint256 privKey, bool fCompressed)
+std::string BIP38_Encrypt(const std::string& strAddress, const std::string& strPassphrase, const uint256& privKey, bool fCompressed)
 {
-    string strAddressHash = AddressToBip38Hash(strAddress);
+    std::string strAddressHash = AddressToBip38Hash(strAddress);
 
     uint512 hashed;
     uint64_t salt = uint256(ReverseEndianString(strAddressHash)).Get64();
@@ -132,7 +133,7 @@ std::string BIP38_Encrypt(std::string strAddress, std::string strPassphrase, uin
     uint512 encrypted2;
     AES_encrypt(block2.begin(), encrypted2.begin(), &key);
 
-    string strPrefix = "0142";
+    std::string strPrefix = "0142";
     strPrefix += (fCompressed ? "E0" : "C0");
 
     uint512 encryptedKey(ReverseEndianString(strPrefix + strAddressHash));
@@ -154,7 +155,7 @@ std::string BIP38_Encrypt(std::string strAddress, std::string strPassphrase, uin
     return EncodeBase58(encryptedKey.begin(), encryptedKey.begin() + 43);
 }
 
-bool BIP38_Decrypt(std::string strPassphrase, std::string strEncryptedKey, uint256& privKey, bool& fCompressed)
+bool BIP38_Decrypt(const std::string& strPassphrase, const std::string& strEncryptedKey, uint256& privKey, bool& fCompressed)
 {
     std::string strKey = DecodeBase58(strEncryptedKey.c_str());
 
@@ -273,7 +274,7 @@ bool BIP38_Decrypt(std::string strPassphrase, std::string strEncryptedKey, uint2
     CKey k;
     k.Set(privKey.begin(), privKey.end(), fCompressed);
     CPubKey pubkey = k.GetPubKey();
-    string address = CBitcoinAddress(pubkey.GetID()).ToString();
+    std::string address = CBitcoinAddress(pubkey.GetID()).ToString();
 
     return strAddressHash == AddressToBip38Hash(address);
 }

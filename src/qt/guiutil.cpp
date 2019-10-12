@@ -109,7 +109,7 @@ void setupAddressWidget(QValidatedLineEdit* widget, QWidget* parent)
 
 void setupAmountWidget(QLineEdit* widget, QWidget* parent)
 {
-    QDoubleValidator* amountValidator = new QDoubleValidator(parent);
+    auto* amountValidator = new QDoubleValidator(parent);
     amountValidator->setDecimals(8);
     amountValidator->setBottom(0.0);
     widget->setValidator(amountValidator);
@@ -417,7 +417,7 @@ ToolTipToRichTextFilter::ToolTipToRichTextFilter(int size_threshold, QObject* pa
 bool ToolTipToRichTextFilter::eventFilter(QObject* obj, QEvent* evt)
 {
     if (evt->type() == QEvent::ToolTipChange) {
-        QWidget* widget = static_cast<QWidget*>(obj);
+        auto* widget = static_cast<QWidget*>(obj);
         QString tooltip = widget->toolTip();
         if (tooltip.size() > size_threshold && !tooltip.startsWith("<qt")) {
             // Escape the current message as HTML and replace \n by <br> if it's not rich text
@@ -558,7 +558,7 @@ DHMSTableWidgetItem::DHMSTableWidgetItem(const int64_t seconds) : QTableWidgetIt
  */
 bool DHMSTableWidgetItem::operator<(QTableWidgetItem const& item) const
 {
-    DHMSTableWidgetItem const* rhs =
+    auto const* rhs =
         dynamic_cast<DHMSTableWidgetItem const*>(&item);
 
     if (!rhs)
@@ -585,18 +585,18 @@ bool SetStartOnSystemStartup(bool fAutoStart)
     boost::filesystem::remove(StartupShortcutPath());
 
     if (fAutoStart) {
-        CoInitialize(NULL);
+        CoInitialize(nullptr);
 
         // Get a pointer to the IShellLink interface.
-        IShellLink* psl = NULL;
-        HRESULT hres = CoCreateInstance(CLSID_ShellLink, NULL,
+        IShellLink* psl = nullptr;
+        HRESULT hres = CoCreateInstance(CLSID_ShellLink, nullptr,
             CLSCTX_INPROC_SERVER, IID_IShellLink,
             reinterpret_cast<void**>(&psl));
 
         if (SUCCEEDED(hres)) {
             // Get the current executable path
             TCHAR pszExePath[MAX_PATH];
-            GetModuleFileName(NULL, pszExePath, sizeof(pszExePath));
+            GetModuleFileName(nullptr, pszExePath, sizeof(pszExePath));
 
             TCHAR pszArgs[5] = TEXT("-min");
 
@@ -609,7 +609,7 @@ bool SetStartOnSystemStartup(bool fAutoStart)
 
             // Query IShellLink for the IPersistFile interface for
             // saving the shortcut in persistent storage.
-            IPersistFile* ppf = NULL;
+            IPersistFile* ppf = nullptr;
             hres = psl->QueryInterface(IID_IPersistFile,
                 reinterpret_cast<void**>(&ppf));
             if (SUCCEEDED(hres)) {
@@ -901,6 +901,9 @@ QString formatServicesStr(quint64 mask)
             case NODE_BLOOM:
             case NODE_BLOOM_WITHOUT_MN:
                 strList.append(QObject::tr("BLOOM"));
+                break;
+            case NODE_BLOOM_LIGHT_ZC:
+                strList.append(QObject::tr("ZK_BLOOM"));
                 break;
             default:
                 strList.append(QString("%1[%2]").arg(QObject::tr("UNKNOWN")).arg(check));

@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
-// Copyright (c) 2015-2018 The PIVX developers
+// Copyright (c) 2015-2019 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -21,14 +21,13 @@
 #include "utilstrencodings.h"
 
 #include <deque>
-#include <stdint.h>
+#include <cstdint>
 
 #ifndef WIN32
 #include <arpa/inet.h>
 #endif
 
 #include <boost/filesystem/path.hpp>
-#include <boost/foreach.hpp>
 #include <boost/signals2/signal.hpp>
 
 class CAddrMan;
@@ -67,15 +66,15 @@ static const size_t MAPASKFOR_MAX_SZ = MAX_INV_SZ;
 unsigned int ReceiveFloodSize();
 unsigned int SendBufferSize();
 
-void AddOneShot(std::string strDest);
+void AddOneShot(const std::string& strDest);
 bool RecvLine(SOCKET hSocket, std::string& strLine);
 void AddressCurrentlyConnected(const CService& addr);
 CNode* FindNode(const CNetAddr& ip);
 CNode* FindNode(const CSubNet& subNet);
 CNode* FindNode(const std::string& addrName);
 CNode* FindNode(const CService& ip);
-CNode* ConnectNode(CAddress addrConnect, const char* pszDest = NULL, bool obfuScationMaster = false);
-bool OpenNetworkConnection(const CAddress& addrConnect, CSemaphoreGrant* grantOutbound = NULL, const char* strDest = NULL, bool fOneShot = false);
+CNode* ConnectNode(CAddress addrConnect, const char* pszDest = nullptr, bool obfuScationMaster = false);
+bool OpenNetworkConnection(const CAddress& addrConnect, CSemaphoreGrant* grantOutbound = nullptr, const char* strDest = nullptr, bool fOneShot = false);
 void MapPort(bool fUseUPnP);
 unsigned short GetListenPort();
 bool BindListenPort(const CService& bindAddr, std::string& strError, bool fWhitelisted = false);
@@ -109,7 +108,7 @@ enum {
 };
 
 bool IsPeerAddrLocalGood(CNode* pnode);
-void AdvertizeLocal(CNode* pnode);
+void AdvertiseLocal(CNode* pnode);
 void SetLimited(enum Network net, bool fLimited = true);
 bool IsLimited(enum Network net);
 bool IsLimited(const CNetAddr& addr);
@@ -118,10 +117,10 @@ bool AddLocal(const CNetAddr& addr, int nScore = LOCAL_NONE);
 bool RemoveLocal(const CService& addr);
 bool SeenLocal(const CService& addr);
 bool IsLocal(const CService& addr);
-bool GetLocal(CService& addr, const CNetAddr* paddrPeer = NULL);
+bool GetLocal(CService& addr, const CNetAddr* paddrPeer = nullptr);
 bool IsReachable(enum Network net);
 bool IsReachable(const CNetAddr& addr);
-CAddress GetLocalAddress(const CNetAddr* paddrPeer = NULL);
+CAddress GetLocalAddress(const CNetAddr* paddrPeer = nullptr);
 
 
 extern bool fDiscover;
@@ -382,7 +381,7 @@ public:
     // Whether a ping is requested.
     bool fPingQueued;
 
-    CNode(SOCKET hSocketIn, CAddress addrIn, std::string addrNameIn = "", bool fInboundIn = false);
+    CNode(SOCKET hSocketIn, CAddress addrIn, const std::string& addrNameIn = "", bool fInboundIn = false);
     ~CNode();
 
 private:
@@ -411,7 +410,7 @@ public:
     unsigned int GetTotalRecvSize()
     {
         unsigned int total = 0;
-        BOOST_FOREACH (const CNetMessage& msg, vRecvMsg)
+        for (const CNetMessage& msg : vRecvMsg)
             total += msg.vRecv.size() + 24;
         return total;
     }
@@ -423,7 +422,7 @@ public:
     void SetRecvVersion(int nVersionIn)
     {
         nRecvVersion = nVersionIn;
-        BOOST_FOREACH (CNetMessage& msg, vRecvMsg)
+        for (CNetMessage& msg : vRecvMsg)
             msg.SetVersion(nVersionIn);
     }
 
@@ -657,17 +656,17 @@ public:
         }
     }
 
-    bool HasFulfilledRequest(std::string strRequest)
+    bool HasFulfilledRequest(const std::string& strRequest)
     {
-        BOOST_FOREACH (std::string& type, vecRequestsFulfilled) {
+        for (std::string& type : vecRequestsFulfilled) {
             if (type == strRequest) return true;
         }
         return false;
     }
 
-    void ClearFulfilledRequest(std::string strRequest)
+    void ClearFulfilledRequest(const std::string& strRequest)
     {
-        std::vector<std::string>::iterator it = vecRequestsFulfilled.begin();
+        auto it = vecRequestsFulfilled.begin();
         while (it != vecRequestsFulfilled.end()) {
             if ((*it) == strRequest) {
                 vecRequestsFulfilled.erase(it);
@@ -677,7 +676,7 @@ public:
         }
     }
 
-    void FulfilledRequest(std::string strRequest)
+    void FulfilledRequest(const std::string& strRequest)
     {
         if (HasFulfilledRequest(strRequest)) return;
         vecRequestsFulfilled.push_back(strRequest);
@@ -687,7 +686,7 @@ public:
     void Subscribe(unsigned int nChannel, unsigned int nHops = 0);
     void CancelSubscribe(unsigned int nChannel);
     void CloseSocketDisconnect();
-    bool DisconnectOldProtocol(int nVersionRequired, std::string strLastCommand = "");
+    bool DisconnectOldProtocol(int nVersionRequired, const std::string& strLastCommand = "");
 
     // Denial-of-service detection/prevention
     // The idea is to detect peers that are behaving

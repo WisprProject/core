@@ -62,7 +62,7 @@ bool CZMQAbstractPublishNotifier::Initialize(void *pcontext)
     assert(!psocket);
 
     // check if address is being used by other publish notifier
-    std::multimap<std::string, CZMQAbstractPublishNotifier*>::iterator i = mapPublishNotifiers.find(address);
+    auto i = mapPublishNotifiers.find(address);
 
     if (i==mapPublishNotifiers.end())
     {
@@ -106,7 +106,7 @@ void CZMQAbstractPublishNotifier::Shutdown()
     typedef std::multimap<std::string, CZMQAbstractPublishNotifier*>::iterator iterator;
     std::pair<iterator, iterator> iterpair = mapPublishNotifiers.equal_range(address);
 
-    for (iterator it = iterpair.first; it != iterpair.second; ++it)
+    for (auto it = iterpair.first; it != iterpair.second; ++it)
     {
         if (it->second==this)
         {
@@ -123,7 +123,7 @@ void CZMQAbstractPublishNotifier::Shutdown()
         zmq_close(psocket);
     }
 
-    psocket = 0;
+    psocket = nullptr;
 }
 
 bool CZMQAbstractPublishNotifier::SendMessage(const char *command, const void* data, size_t size)
@@ -133,7 +133,7 @@ bool CZMQAbstractPublishNotifier::SendMessage(const char *command, const void* d
     /* send three parts, command & data & a LE 4byte sequence number */
     unsigned char msgseq[sizeof(uint32_t)];
     WriteLE32(&msgseq[0], nSequence);
-    int rc = zmq_send_multipart(psocket, command, strlen(command), data, size, msgseq, (size_t)sizeof(uint32_t), (void*)0);
+    int rc = zmq_send_multipart(psocket, command, strlen(command), data, size, msgseq, (size_t)sizeof(uint32_t), (void*) nullptr);
     if (rc == -1)
         return false;
 
@@ -197,7 +197,7 @@ bool CZMQPublishRawBlockNotifier::NotifyBlock(const CBlockIndex *pindex)
 
 bool CZMQPublishRawTransactionNotifier::NotifyTransaction(const CTransaction &transaction)
 {
-    uint256 hash = transaction.GetHash();
+    const uint256& hash = transaction.GetHash();
     LogPrint("zmq", "zmq: Publish rawtx %s\n", hash.GetHex());
     CDataStream ss(SER_NETWORK, PROTOCOL_VERSION);
     ss << transaction;
@@ -206,7 +206,7 @@ bool CZMQPublishRawTransactionNotifier::NotifyTransaction(const CTransaction &tr
 
 bool CZMQPublishRawTransactionLockNotifier::NotifyTransactionLock(const CTransaction &transaction)
 {
-    uint256 hash = transaction.GetHash();
+    const uint256& hash = transaction.GetHash();
     LogPrint("zmq", "zmq: Publish rawtxlock %s\n", hash.GetHex());
     CDataStream ss(SER_NETWORK, PROTOCOL_VERSION);
     ss << transaction;

@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
-// Copyright (c) 2016-2017 The PIVX developers
+// Copyright (c) 2016-2018 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -10,16 +10,14 @@
 
 #include <cstdlib>
 #include <cstring>
-#include <errno.h>
+#include <cerrno>
 #include <limits>
 
 #include <openssl/bio.h>
 #include <openssl/buffer.h>
-#include <openssl/crypto.h> // for OPENSSL_cleanse()
 #include <openssl/evp.h>
 
 
-using namespace std;
 
 static const std::string CHARS_ALPHA_NUM = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
@@ -33,12 +31,39 @@ static const std::string SAFE_CHARS[] =
 std::string SanitizeString(const std::string& str, int rule)
 {
     std::string strResult;
-    for (std::string::size_type i = 0; i < str.size(); i++)
+    for (char i : str)
     {
-        if (SAFE_CHARS[rule].find(str[i]) != std::string::npos)
-            strResult.push_back(str[i]);
+        if (SAFE_CHARS[rule].find(i) != std::string::npos)
+            strResult.push_back(i);
     }
     return strResult;
+}
+
+bool validateURL(const std::string& strURL, std::string& strErr, unsigned int maxSize) {
+
+    // Check URL size
+    if (strURL.size() > maxSize) {
+        strErr = strprintf("Invalid URL: %d exceeds limit of %d characters.", strURL.size(), maxSize);
+        return false;
+    }
+
+    std::vector<std::string> reqPre;
+
+    // Required initial strings; URL must contain one
+    reqPre.push_back("http://");
+    reqPre.push_back("https://");
+
+    // check fronts
+    bool found = false;
+    for (int i=0; i < reqPre.size() && !found; i++) {
+        if (strURL.find(reqPre[i]) == 0) found = true;
+    }
+    if ((!found) && (reqPre.size() > 0)) {
+        strErr = "Invalid URL, check scheme (e.g. https://)";
+        return false;
+    }
+
+    return true;
 }
 
 const signed char p_util_hexdigit[256] =
@@ -66,19 +91,19 @@ signed char HexDigit(char c)
     return p_util_hexdigit[(unsigned char)c];
 }
 
-bool IsHex(const string& str)
+bool IsHex(const std::string& str)
 {
-    for (std::string::const_iterator it(str.begin()); it != str.end(); ++it) {
-        if (HexDigit(*it) < 0)
+    for (char it : str) {
+        if (HexDigit(it) < 0)
             return false;
     }
     return (str.size() > 0) && (str.size() % 2 == 0);
 }
 
-vector<unsigned char> ParseHex(const char* psz)
+std::vector<unsigned char> ParseHex(const char* psz)
 {
     // convert hex dump to vector
-    vector<unsigned char> vch;
+    std::vector<unsigned char> vch;
     while (true) {
         while (isspace(*psz))
             psz++;
@@ -95,16 +120,16 @@ vector<unsigned char> ParseHex(const char* psz)
     return vch;
 }
 
-vector<unsigned char> ParseHex(const string& str)
+std::vector<unsigned char> ParseHex(const std::string& str)
 {
     return ParseHex(str.c_str());
 }
 
-string EncodeBase64(const unsigned char* pch, size_t len)
+std::string EncodeBase64(const unsigned char* pch, size_t len)
 {
     static const char* pbase64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
-    string strRet = "";
+    std::string strRet = "";
     strRet.reserve((len + 2) / 3 * 4);
 
     int mode = 0, left = 0;
@@ -143,12 +168,12 @@ string EncodeBase64(const unsigned char* pch, size_t len)
     return strRet;
 }
 
-string EncodeBase64(const string& str)
+std::string EncodeBase64(const std::string& str)
 {
     return EncodeBase64((const unsigned char*)str.c_str(), str.size());
 }
 
-vector<unsigned char> DecodeBase64(const char* p, bool* pfInvalid)
+std::vector<unsigned char> DecodeBase64(const char* p, bool* pfInvalid)
 {
     static const int decode64_table[256] =
         {
@@ -169,13 +194,13 @@ vector<unsigned char> DecodeBase64(const char* p, bool* pfInvalid)
     if (pfInvalid)
         *pfInvalid = false;
 
-    vector<unsigned char> vchRet;
+    std::vector<unsigned char> vchRet;
     vchRet.reserve(strlen(p) * 3 / 4);
 
     int mode = 0;
     int left = 0;
 
-    while (1) {
+    while (true) {
         int dec = decode64_table[(unsigned char)*p];
         if (dec == -1) break;
         p++;
@@ -227,10 +252,10 @@ vector<unsigned char> DecodeBase64(const char* p, bool* pfInvalid)
     return vchRet;
 }
 
-string DecodeBase64(const string& str)
+std::string DecodeBase64(const std::string& str)
 {
-    vector<unsigned char> vchRet = DecodeBase64(str.c_str());
-    return (vchRet.size() == 0) ? string() : string((const char*)&vchRet[0], vchRet.size());
+    std::vector<unsigned char> vchRet = DecodeBase64(str.c_str());
+    return (vchRet.size() == 0) ? std::string() : std::string((const char*)&vchRet[0], vchRet.size());
 }
 
 // Base64 decoding with secure memory allocation
@@ -247,7 +272,7 @@ SecureString DecodeBase64Secure(const SecureString& input)
 
     // Prepare buffer to receive decoded data
     if (input.size() % 4 != 0) {
-        throw runtime_error("Input length should be a multiple of 4");
+        throw std::runtime_error("Input length should be a multiple of 4");
     }
     size_t nMaxLen = input.size() / 4 * 3; // upper bound, guaranteed divisible by 4
     output.resize(nMaxLen);
@@ -282,18 +307,18 @@ SecureString EncodeBase64Secure(const SecureString& input)
     SecureString output(bptr->data, bptr->length);
 
     // Cleanse secure data buffer from memory
-    OPENSSL_cleanse((void*)bptr->data, bptr->length);
+    memory_cleanse((void*)bptr->data, bptr->length);
 
     // Free memory
     BIO_free_all(b64);
     return output;
 }
 
-string EncodeBase32(const unsigned char* pch, size_t len)
+std::string EncodeBase32(const unsigned char* pch, size_t len)
 {
     static const char* pbase32 = "abcdefghijklmnopqrstuvwxyz234567";
 
-    string strRet = "";
+    std::string strRet = "";
     strRet.reserve((len + 4) / 5 * 8);
 
     int mode = 0, left = 0;
@@ -345,12 +370,12 @@ string EncodeBase32(const unsigned char* pch, size_t len)
     return strRet;
 }
 
-string EncodeBase32(const string& str)
+std::string EncodeBase32(const std::string& str)
 {
     return EncodeBase32((const unsigned char*)str.c_str(), str.size());
 }
 
-vector<unsigned char> DecodeBase32(const char* p, bool* pfInvalid)
+std::vector<unsigned char> DecodeBase32(const char* p, bool* pfInvalid)
 {
     static const int decode32_table[256] =
         {
@@ -371,13 +396,13 @@ vector<unsigned char> DecodeBase32(const char* p, bool* pfInvalid)
     if (pfInvalid)
         *pfInvalid = false;
 
-    vector<unsigned char> vchRet;
+    std::vector<unsigned char> vchRet;
     vchRet.reserve((strlen(p)) * 5 / 8);
 
     int mode = 0;
     int left = 0;
 
-    while (1) {
+    while (true) {
         int dec = decode32_table[(unsigned char)*p];
         if (dec == -1) break;
         p++;
@@ -463,10 +488,10 @@ vector<unsigned char> DecodeBase32(const char* p, bool* pfInvalid)
     return vchRet;
 }
 
-string DecodeBase32(const string& str)
+std::string DecodeBase32(const std::string& str)
 {
-    vector<unsigned char> vchRet = DecodeBase32(str.c_str());
-    return (vchRet.size() == 0) ? string() : string((const char*)&vchRet[0], vchRet.size());
+    std::vector<unsigned char> vchRet = DecodeBase32(str.c_str());
+    return (vchRet.size() == 0) ? std::string() : std::string((const char*)&vchRet[0], vchRet.size());
 }
 
 static bool ParsePrechecks(const std::string& str)
@@ -484,7 +509,7 @@ bool ParseInt32(const std::string& str, int32_t *out)
 {
     if (!ParsePrechecks(str))
         return false;
-    char *endp = NULL;
+    char *endp = nullptr;
     errno = 0; // strtol will not set errno if valid
     long int n = strtol(str.c_str(), &endp, 10);
     if(out) *out = (int32_t)n;
@@ -500,7 +525,7 @@ bool ParseInt64(const std::string& str, int64_t *out)
 {
     if (!ParsePrechecks(str))
         return false;
-    char *endp = NULL;
+    char *endp = nullptr;
     errno = 0; // strtoll will not set errno if valid
     long long int n = strtoll(str.c_str(), &endp, 10);
     if(out) *out = (int64_t)n;
@@ -525,7 +550,7 @@ bool ParseDouble(const std::string& str, double *out)
     return text.eof() && !text.fail();
 }
 
-std::string FormatParagraph(const std::string in, size_t width, size_t indent)
+std::string FormatParagraph(const std::string& in, size_t width, size_t indent)
 {
     std::stringstream out;
     size_t col = 0;
@@ -572,7 +597,7 @@ int64_t atoi64(const char* psz)
 #ifdef _MSC_VER
     return _atoi64(psz);
 #else
-    return strtoll(psz, NULL, 10);
+    return strtoll(psz, nullptr, 10);
 #endif
 }
 
@@ -581,7 +606,7 @@ int64_t atoi64(const std::string& str)
 #ifdef _MSC_VER
     return _atoi64(str.c_str());
 #else
-    return strtoll(str.c_str(), NULL, 10);
+    return strtoll(str.c_str(), nullptr, 10);
 #endif
 }
 

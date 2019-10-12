@@ -4,6 +4,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "masternode.h"
+ #include <utility>
 #include "addrman.h"
 #include "masternodeman.h"
 #include "obfuscation.h"
@@ -11,14 +12,14 @@
 #include "util.h"
 
 // keep track of the scanning errors I've seen
-map<uint256, int> mapSeenMasternodeScanningErrors;
+std::map<uint256, int> mapSeenMasternodeScanningErrors;
 // cache block hashes as we calculate them
 std::map<int64_t, uint256> mapCacheBlockHashes;
 
 //Get the last hash that matches the modulus given. Processed in reverse order
 bool GetBlockHash(uint256& hash, int nBlockHeight)
 {
-    if (chainActive.Tip() == NULL) return false;
+    if (chainActive.Tip() == nullptr) return false;
 
     if (nBlockHeight == 0)
         nBlockHeight = chainActive.Tip()->nHeight;
@@ -31,7 +32,7 @@ bool GetBlockHash(uint256& hash, int nBlockHeight)
     const CBlockIndex* BlockLastSolved = chainActive.Tip();
     const CBlockIndex* BlockReading = chainActive.Tip();
 
-    if (BlockLastSolved == NULL || BlockLastSolved->nHeight == 0 || chainActive.Tip()->nHeight + 1 < nBlockHeight) return false;
+    if (BlockLastSolved == nullptr || BlockLastSolved->nHeight == 0 || chainActive.Tip()->nHeight + 1 < nBlockHeight) return false;
 
     int nBlocksAgo = 0;
     if (nBlockHeight > 0) nBlocksAgo = (chainActive.Tip()->nHeight + 1) - nBlockHeight;
@@ -46,7 +47,7 @@ bool GetBlockHash(uint256& hash, int nBlockHeight)
         }
         n++;
 
-        if (BlockReading->pprev == NULL) {
+        if (BlockReading->pprev == nullptr) {
             assert(BlockReading);
             break;
         }
@@ -147,7 +148,7 @@ bool CMasternode::UpdateFromNewBroadcast(CMasternodeBroadcast& mnb)
         int nDoS = 0;
         if (mnb.lastPing == CMasternodePing() || (mnb.lastPing != CMasternodePing() && mnb.lastPing.CheckAndUpdate(nDoS, false))) {
             lastPing = mnb.lastPing;
-            mnodeman.mapSeenMasternodePing.insert(make_pair(lastPing.GetHash(), lastPing));
+            mnodeman.mapSeenMasternodePing.insert(std::make_pair(lastPing.GetHash(), lastPing));
         }
         return true;
     }
@@ -161,7 +162,7 @@ bool CMasternode::UpdateFromNewBroadcast(CMasternodeBroadcast& mnb)
 //
 uint256 CMasternode::CalculateScore(int mod, int64_t nBlockHeight)
 {
-    if (chainActive.Tip() == NULL) return 0;
+    if (chainActive.Tip() == nullptr) return 0;
 
     uint256 hash = 0;
     uint256 aux = vin.prevout.hash + vin.prevout.n;
@@ -223,7 +224,7 @@ void CMasternode::Check(bool forceCheck)
             TRY_LOCK(cs_main, lockMain);
             if (!lockMain) return;
 
-            if (!AcceptableInputs(mempool, state, CTransaction(tx), false, NULL)) {
+            if (!AcceptableInputs(mempool, state, CTransaction(tx), false, nullptr)) {
                 activeState = MASTERNODE_VIN_SPENT;
                 return;
             }
@@ -254,7 +255,7 @@ int64_t CMasternode::SecondsSincePayment()
 int64_t CMasternode::GetLastPaid()
 {
     CBlockIndex* pindexPrev = chainActive.Tip();
-    if (pindexPrev == NULL) return false;
+    if (pindexPrev == nullptr) return false;
 
     CScript mnpayee;
     mnpayee = GetScriptForDestination(pubKeyCollateralAddress.GetID());
@@ -267,7 +268,7 @@ int64_t CMasternode::GetLastPaid()
     // use a deterministic offset to break a tie -- 2.5 minutes
     int64_t nOffset = hash.GetCompact(false) % 150;
 
-    if (chainActive.Tip() == NULL) return false;
+    if (chainActive.Tip() == nullptr) return false;
 
     const CBlockIndex* BlockReading = chainActive.Tip();
 
@@ -289,7 +290,7 @@ int64_t CMasternode::GetLastPaid()
             }
         }
 
-        if (BlockReading->pprev == NULL) {
+        if (BlockReading->pprev == nullptr) {
             assert(BlockReading);
             break;
         }
@@ -351,7 +352,7 @@ CMasternodeBroadcast::CMasternodeBroadcast()
 
 CMasternodeBroadcast::CMasternodeBroadcast(CService newAddr, CTxIn newVin, CPubKey pubKeyCollateralAddressNew, CPubKey pubKeyMasternodeNew, int protocolVersionIn)
 {
-    vin = newVin;
+    vin = std::move(newVin);
     addr = newAddr;
     pubKeyCollateralAddress = pubKeyCollateralAddressNew;
     pubKeyMasternode = pubKeyMasternodeNew;
@@ -389,7 +390,7 @@ CMasternodeBroadcast::CMasternodeBroadcast(const CMasternode& mn)
     nLastScanningErrorBlockHeight = mn.nLastScanningErrorBlockHeight;
 }
 
-bool CMasternodeBroadcast::Create(std::string strService, std::string strKeyMasternode, std::string strTxHash, std::string strOutputIndex, std::string& strErrorRet, CMasternodeBroadcast& mnbRet, bool fOffline)
+bool CMasternodeBroadcast::Create(const std::string& strService, const std::string& strKeyMasternode, const std::string& strTxHash, const std::string& strOutputIndex, std::string& strErrorRet, CMasternodeBroadcast& mnbRet, bool fOffline)
 {
     CTxIn txin;
     CPubKey pubKeyCollateralAddressNew;
@@ -460,7 +461,7 @@ bool CMasternodeBroadcast::Create(CTxIn txin, CService service, CKey keyCollater
     return true;
 }
 
-bool CMasternodeBroadcast::CheckDefaultPort(std::string strService, std::string& strErrorRet, std::string strContext)
+bool CMasternodeBroadcast::CheckDefaultPort(const std::string& strService, std::string& strErrorRet, const std::string& strContext)
 {
     CService service = CService(strService);
     int nDefaultPort = Params().GetDefaultPort();
@@ -534,7 +535,7 @@ bool CMasternodeBroadcast::CheckAndUpdate(int& nDos)
     CMasternode* pmn = mnodeman.Find(vin);
 
     // no such masternode, nothing to update
-    if (pmn == NULL) return true;
+    if (pmn == nullptr) return true;
 
     // this broadcast is older or equal than the one that we already have - it's bad and should never happen
 	// unless someone is doing something fishy
@@ -575,7 +576,7 @@ bool CMasternodeBroadcast::CheckInputsAndAdd(int& nDoS)
     // search existing Masternode list
     CMasternode* pmn = mnodeman.Find(vin);
 
-    if (pmn != NULL) {
+    if (pmn != nullptr) {
         // nothing to do here if we already know about this masternode and it's enabled
         if (pmn->IsEnabled()) return true;
         // if it's not enabled, remove old MN first and continue
@@ -598,7 +599,7 @@ bool CMasternodeBroadcast::CheckInputsAndAdd(int& nDoS)
             return false;
         }
 
-        if (!AcceptableInputs(mempool, state, CTransaction(tx), false, NULL)) {
+        if (!AcceptableInputs(mempool, state, CTransaction(tx), false, nullptr)) {
             //set nDos
             state.IsInvalid(nDoS);
             return false;
@@ -697,7 +698,7 @@ std::string CMasternodeBroadcast::GetOldStrMessage()
     return strMessage;
 }
 
-std:: string CMasternodeBroadcast::GetNewStrMessage()
+std::string CMasternodeBroadcast::GetNewStrMessage()
 {
     std::string strMessage;
 
@@ -780,7 +781,7 @@ bool CMasternodePing::CheckAndUpdate(int& nDos, bool fRequireEnabled, bool fChec
 
     // see if we have this Masternode
     CMasternode* pmn = mnodeman.Find(vin);
-    if (pmn != NULL && pmn->protocolVersion >= masternodePayments.GetMinMasternodePaymentsProto()) {
+    if (pmn != nullptr && pmn->protocolVersion >= masternodePayments.GetMinMasternodePaymentsProto()) {
         if (fRequireEnabled && !pmn->IsEnabled()) return false;
 
         // LogPrint("masternode","mnping - Found corresponding mn for vin: %s\n", vin.ToString());

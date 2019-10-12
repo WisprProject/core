@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
-// Copyright (c) 2017 The PIVX developers
+// Copyright (c) 2017-2018 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -12,14 +12,12 @@
 
 #include <stdexcept>
 
-#include <openssl/x509.h>
 #include <openssl/x509_vfy.h>
 
 #include <QDateTime>
 #include <QDebug>
 #include <QSslCertificate>
 
-using namespace std;
 
 class SSLVerifyError : public std::runtime_error
 {
@@ -48,7 +46,7 @@ bool PaymentRequestPlus::parse(const QByteArray& data)
     return true;
 }
 
-bool PaymentRequestPlus::SerializeToString(string* output) const
+bool PaymentRequestPlus::SerializeToString(std::string* output) const
 {
     return paymentRequest.SerializeToString(output);
 }
@@ -60,7 +58,8 @@ bool PaymentRequestPlus::IsInitialized() const
 
 QString PaymentRequestPlus::getPKIType() const
 {
-    if (!IsInitialized()) return QString("none");
+    if (!IsInitialized()) { return QString("none");
+}
     return QString::fromStdString(paymentRequest.pki_type());
 }
 
@@ -68,12 +67,13 @@ bool PaymentRequestPlus::getMerchant(X509_STORE* certStore, QString& merchant) c
 {
     merchant.clear();
 
-    if (!IsInitialized())
+    if (!IsInitialized()) {
         return false;
+    }
 
     // One day we'll support more PKI types, but just
     // x509 for now:
-    const EVP_MD* digestAlgorithm = NULL;
+    const EVP_MD* digestAlgorithm = nullptr;
     if (paymentRequest.pki_type() == "x509+sha256") {
         digestAlgorithm = EVP_sha256();
     } else if (paymentRequest.pki_type() == "x509+sha1") {
@@ -131,7 +131,7 @@ bool PaymentRequestPlus::getMerchant(X509_STORE* certStore, QString& merchant) c
         return false;
     }
 
-    char* website = NULL;
+    char* website = nullptr;
     bool fResult = true;
     try {
         if (!X509_STORE_CTX_init(store_ctx, certStore, signing_cert, chain)) {
@@ -173,7 +173,7 @@ bool PaymentRequestPlus::getMerchant(X509_STORE* certStore, QString& merchant) c
 #endif
 
         // OpenSSL API for getting human printable strings from certs is baroque.
-        int textlen = X509_NAME_get_text_by_NID(certname, NID_commonName, NULL, 0);
+        int textlen = X509_NAME_get_text_by_NID(certname, NID_commonName, nullptr, 0);
         website = new char[textlen + 1];
         if (X509_NAME_get_text_by_NID(certname, NID_commonName, website, textlen + 1) == textlen && textlen > 0) {
             merchant = website;
@@ -186,8 +186,9 @@ bool PaymentRequestPlus::getMerchant(X509_STORE* certStore, QString& merchant) c
         qWarning() << "PaymentRequestPlus::getMerchant : SSL error: " << err.what();
     }
 
-    if (website)
+    if (website) {
         delete[] website;
+    }
     X509_STORE_CTX_free(store_ctx);
     for (unsigned int i = 0; i < certs.size(); i++)
         X509_free(certs[i]);
@@ -202,7 +203,7 @@ QList<std::pair<CScript, CAmount> > PaymentRequestPlus::getPayTo() const
         const unsigned char* scriptStr = (const unsigned char*)details.outputs(i).script().data();
         CScript s(scriptStr, scriptStr + details.outputs(i).script().size());
 
-        result.append(make_pair(s, details.outputs(i).amount()));
+        result.append(std::make_pair(s, details.outputs(i).amount()));
     }
     return result;
 }

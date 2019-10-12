@@ -15,15 +15,15 @@ class CObfuScationRelay
 {
 public:
     CTxIn vinMasternode;
-    vector<unsigned char> vchSig;
-    vector<unsigned char> vchSig2;
+    std::vector<unsigned char> vchSig;
+    std::vector<unsigned char> vchSig2;
     int nBlockHeight;
     int nRelayType;
     CTxIn in;
     CTxOut out;
 
     CObfuScationRelay();
-    CObfuScationRelay(CTxIn& vinMasternodeIn, vector<unsigned char>& vchSigIn, int nBlockHeightIn, int nRelayTypeIn, CTxIn& in2, CTxOut& out2);
+    CObfuScationRelay(CTxIn& vinMasternodeIn, std::vector<unsigned char>& vchSigIn, int nBlockHeightIn, int nRelayTypeIn, CTxIn& in2, CTxOut& out2);
 
     ADD_SERIALIZE_METHODS;
 
@@ -41,8 +41,8 @@ public:
 
     std::string ToString();
 
-    bool Sign(std::string strSharedKey);
-    bool VerifyMessage(std::string strSharedKey);
+    bool Sign(const std::string& strSharedKey);
+    bool VerifyMessage(const std::string& strSharedKey);
     void Relay();
     void RelayThroughNode(int nRank);
 };

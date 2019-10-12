@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The PIVX developers
+// Copyright (c) 2015-2018 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -95,7 +95,7 @@ HelpMessageDialog::HelpMessageDialog(QWidget* parent, bool about) : QDialog(pare
         QTextCharFormat bold;
         bold.setFontWeight(QFont::Bold);
 
-        Q_FOREACH (const QString &line, coreOptions.split("\n")) {
+        for (const QString &line: coreOptions.split("\n")) {
             if (line.startsWith("  -"))
             {
                 cursor.currentTable()->appendRows(1);
@@ -152,7 +152,7 @@ void HelpMessageDialog::on_okButton_accepted()
 /** "Shutdown" window */
 ShutdownWindow::ShutdownWindow(QWidget* parent, Qt::WindowFlags f) : QWidget(parent, f)
 {
-    QVBoxLayout* layout = new QVBoxLayout();
+    auto* layout = new QVBoxLayout();
     layout->addWidget(new QLabel(
         tr("WISPR Core is shutting down...") + "<br /><br />" +
         tr("Do not shut down the computer until this window disappears.")));

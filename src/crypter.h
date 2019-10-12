@@ -84,8 +84,8 @@ public:
 
     void CleanKey()
     {
-        OPENSSL_cleanse(chKey, sizeof(chKey));
-        OPENSSL_cleanse(chIV, sizeof(chIV));
+        memory_cleanse(chKey, sizeof(chKey));
+        memory_cleanse(chIV, sizeof(chIV));
         fKeySet = false;
     }
 
@@ -186,7 +186,7 @@ public:
             return;
         }
         setAddress.clear();
-        CryptedKeyMap::const_iterator mi = mapCryptedKeys.begin();
+        auto mi = mapCryptedKeys.begin();
         while (mi != mapCryptedKeys.end()) {
             setAddress.insert((*mi).first);
             mi++;

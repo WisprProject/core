@@ -9,14 +9,14 @@
 * @copyright  Copyright 2013 Ian Miers, Christina Garman and Matthew Green
 * @license    This project is released under the MIT license.
 **/
-// Copyright (c) 2017 The PIVX developers
+// Copyright (c) 2017-2018 The PIVX developers
 
 #include "Params.h"
 #include "ParamGeneration.h"
 
 namespace libzerocoin {
 
-ZerocoinParams::ZerocoinParams(CBigNum N, uint32_t securityLevel) {
+ZerocoinParams::ZerocoinParams(const CBigNum& N, uint32_t securityLevel) {
 	this->zkp_hash_len = securityLevel;
 	this->zkp_iterations = securityLevel;
 

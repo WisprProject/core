@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
-// Copyright (c) 2015-2017 The PIVX developers
+// Copyright (c) 2015-2019 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -70,8 +70,9 @@ uint256 CBlock::BuildMerkleTree(bool* fMutated) const
     */
     vMerkleTree.clear();
     vMerkleTree.reserve(vtx.size() * 2 + 16); // Safe upper bound for the number of total nodes.
-    for (std::vector<CTransaction>::const_iterator it(vtx.begin()); it != vtx.end(); ++it)
-        vMerkleTree.push_back(it->GetHash());
+    for (const auto & it : vtx){
+        vMerkleTree.push_back(it.GetHash());
+    }
     int j = 0;
     bool mutated = false;
     for (int nSize = vtx.size(); nSize > 1; nSize = (nSize + 1) / 2)
@@ -112,9 +113,10 @@ std::vector<uint256> CBlock::GetMerkleBranch(int nIndex) const
 
 uint256 CBlock::CheckMerkleBranch(uint256 hash, const std::vector<uint256>& vMerkleBranch, int nIndex)
 {
-    if (nIndex == -1)
-		return uint256();
-    for (std::vector<uint256>::const_iterator it(vMerkleBranch.begin()); it != vMerkleBranch.end(); ++it)
+    if (nIndex == -1){
+        return {};
+    }
+    for (auto it(vMerkleBranch.begin()); it != vMerkleBranch.end(); ++it)
     {
         if (nIndex & 1)
             hash = Hash(BEGIN(*it), END(*it), BEGIN(hash), END(hash));
@@ -135,13 +137,14 @@ std::string CBlock::ToString() const
         hashMerkleRoot.ToString(),
         nTime, nBits, nNonce,
         vtx.size());
-    for (unsigned int i = 0; i < vtx.size(); i++)
+    for (const auto & i : vtx)
     {
-        s << "  " << vtx[i].ToString() << "\n";
+        s << "  " << i.ToString() << "\n";
     }
     s << "  vMerkleTree: ";
-    for (unsigned int i = 0; i < vMerkleTree.size(); i++)
-        s << " " << vMerkleTree[i].ToString();
+    for (auto & i : vMerkleTree){
+        s << " " << i.ToString();
+    }
     s << "\n";
     return s.str();
 }
@@ -153,5 +156,5 @@ void CBlock::print() const
 
 bool CBlock::IsZerocoinStake() const
 {
-    return IsProofOfStake() && vtx[1].IsZerocoinSpend();
+    return IsProofOfStake() && vtx[1].HasZerocoinSpendInputs();
 }

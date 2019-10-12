@@ -1,16 +1,14 @@
-// Copyright (c) 2017-2018 The PIVX developers
+// Copyright (c) 2017-2019 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "zwspcontroldialog.h"
 #include "ui_zwspcontroldialog.h"
 
-#include "accumulators.h"
+#include "zpiv/accumulators.h"
 #include "main.h"
 #include "walletmodel.h"
 
-using namespace std;
-using namespace libzerocoin;
 
 std::set<std::string> ZWspControlDialog::setSelectedMints;
 std::set<CMintMeta> ZWspControlDialog::setMints;
@@ -26,7 +24,7 @@ bool CZWspControlWidgetItem::operator<(const QTreeWidgetItem &other) const {
 ZWspControlDialog::ZWspControlDialog(QWidget *parent) :
     QDialog(parent, Qt::WindowSystemMenuHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint),
     ui(new Ui::ZWspControlDialog),
-    model(0)
+    model(nullptr)
 {
     ui->setupUi(this);
     setMints.clear();
@@ -60,7 +58,7 @@ void ZWspControlDialog::updateList()
 
     // add a top level item for each denomination
     QFlags<Qt::ItemFlag> flgTristate = Qt::ItemIsEnabled | Qt::ItemIsUserCheckable | Qt::ItemIsTristate;
-    map<libzerocoin::CoinDenomination, int> mapDenomPosition;
+    std::map<libzerocoin::CoinDenomination, int> mapDenomPosition;
     for (auto denom : libzerocoin::zerocoinDenomList) {
         CZWspControlWidgetItem* itemDenom(new CZWspControlWidgetItem);
         ui->treeWidget->addTopLevelItem(itemDenom);
@@ -73,14 +71,14 @@ void ZWspControlDialog::updateList()
         itemDenom->setData(COLUMN_DENOMINATION, Qt::UserRole, QVariant((qlonglong) denom));
     }
 
-    // select all unused coins - including not mature. Update status of coins too.
+    // select all unused coins - including not mature and mismatching seed. Update status of coins too.
     std::set<CMintMeta> set;
-    model->listZerocoinMints(set, true, false, true);
+    model->listZerocoinMints(set, true, false, true, true);
     this->setMints = set;
 
     //populate rows with mint info
     int nBestHeight = chainActive.Height();
-    map<CoinDenomination, int> mapMaturityHeight = GetMintMaturityHeight();
+    //map<libzerocoin::CoinDenomination, int> mapMaturityHeight = GetMintMaturityHeight();
     for (const CMintMeta& mint : setMints) {
         // assign this mint to the correct denomination in the tree view
         libzerocoin::CoinDenomination denom = mint.denom;
@@ -109,13 +107,27 @@ void ZWspControlDialog::updateList()
         itemMint->setText(COLUMN_CONFIRMATIONS, QString::number(nConfirmations));
         itemMint->setData(COLUMN_CONFIRMATIONS, Qt::UserRole, QVariant((qlonglong) nConfirmations));
 
+        {
+            LOCK(pwalletMain->zwspTracker->cs_spendcache);
+
+            CoinWitnessData *witnessData = pwalletMain->zwspTracker->GetSpendCache(mint.hashStake);
+            if (witnessData->nHeightAccStart > 0  && witnessData->nHeightAccEnd > 0) {
+                int nPercent = std::max(0, std::min(100, (int)((double)(witnessData->nHeightAccEnd - witnessData->nHeightAccStart) / (double)(nBestHeight - witnessData->nHeightAccStart - 220) * 100)));
+                QString percent = QString::number(nPercent) + QString("%");
+                itemMint->setText(COLUMN_PRECOMPUTE, percent);
+            } else {
+                itemMint->setText(COLUMN_PRECOMPUTE, QString("0%"));
+            }
+        }
+
         // check for maturity
-        bool isMature = false;
-        if (mapMaturityHeight.count(mint.denom))
-            isMature = mint.nHeight < mapMaturityHeight.at(denom);
+        // Always mature, public spends doesn't require any new accumulation.
+        bool isMature = true;
+        //if (mapMaturityHeight.count(mint.denom))
+        //    isMature = mint.nHeight < mapMaturityHeight.at(denom);
 
         // disable selecting this mint if it is not spendable - also display a reason why
-        bool fSpendable = isMature && nConfirmations >= Params().Zerocoin_MintRequiredConfirmations();
+        bool fSpendable = isMature && nConfirmations >= Params().Zerocoin_MintRequiredConfirmations() && mint.isSeedCorrect;
         if(!fSpendable) {
             itemMint->setDisabled(true);
             itemMint->setCheckState(COLUMN_CHECKBOX, Qt::Unchecked);
@@ -124,9 +136,13 @@ void ZWspControlDialog::updateList()
             if (setSelectedMints.count(strPubCoinHash))
                 setSelectedMints.erase(strPubCoinHash);
 
-            string strReason = "";
+            std::string strReason = "";
             if(nConfirmations < Params().Zerocoin_MintRequiredConfirmations())
                 strReason = strprintf("Needs %d more confirmations", Params().Zerocoin_MintRequiredConfirmations() - nConfirmations);
+            else if (model->getEncryptionStatus() == WalletModel::EncryptionStatus::Locked)
+                strReason = "Your wallet is locked. Impossible to precompute or spend zWSP.";
+            else if (!mint.isSeedCorrect)
+                strReason = "The zWSP seed used to mint this zWSP is not the same as currently hold in the wallet";
             else
                 strReason = strprintf("Needs %d more mints added to network", Params().Zerocoin_RequiredAccumulation());
 

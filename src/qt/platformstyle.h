@@ -1,5 +1,5 @@
 // Copyright (c) 2015 The Bitcoin Core developers
-// Copyright (c) 2016-2017 The PIVX developers
+// Copyright (c) 2016-2018 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -41,7 +41,7 @@ public:
     QIcon TextColorIcon(const QIcon& icon) const;
 
 private:
-    PlatformStyle(const QString& name, bool imagesOnButtons, bool colorizeIcons, bool useExtraSpacing);
+    PlatformStyle(QString  name, bool imagesOnButtons, bool colorizeIcons, bool useExtraSpacing);
 
     QString name;
     bool imagesOnButtons;

@@ -1,6 +1,6 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
-// Copyright (c) 2016-2017 The PIVX developers
+// Copyright (c) 2016-2018 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -8,11 +8,10 @@
 
 #include "util.h"
 
-#include <assert.h>
+#include <cassert>
 
 #include <boost/assign/list_of.hpp>
 
-using namespace boost::assign;
 
 /**
  * Main network
@@ -71,7 +70,7 @@ public:
 };
 static CBaseUnitTestParams unitTestParams;
 
-static CBaseChainParams* pCurrentBaseParams = 0;
+static CBaseChainParams* pCurrentBaseParams = nullptr;
 
 const CBaseChainParams& BaseParams()
 {
@@ -126,5 +125,5 @@ bool SelectBaseParamsFromCommandLine()
 
 bool AreBaseParamsConfigured()
 {
-    return pCurrentBaseParams != NULL;
+    return pCurrentBaseParams != nullptr;
 }

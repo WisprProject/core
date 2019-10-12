@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2013 The Bitcoin developers
-// Copyright (c) 2017-2018 The PIVX developers
+// Copyright (c) 2017-2019 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -25,7 +25,7 @@ class OptionsModel : public QAbstractListModel
     Q_OBJECT
 
 public:
-    explicit OptionsModel(QObject* parent = 0);
+    explicit OptionsModel(QObject* parent = nullptr);
 
     enum OptionID {
         StartAtStartup,      // bool
@@ -45,6 +45,7 @@ public:
         DatabaseCache,       // int
         SpendZeroConfChange, // bool
         ZeromintEnable,      // bool
+        ZeromintAddresses,   // bool
         ZeromintPercentage,  // int
         ZeromintPrefDenom,   // int
         HideZeroBalances,    // bool
@@ -100,6 +101,7 @@ private:
 signals:
     void displayUnitChanged(int unit);
     void zeromintEnableChanged(bool);
+    void zeromintAddressesChanged(bool);
     void zeromintPercentageChanged(int);
     void preferredDenomChanged(int);
     void anonymizeWisprAmountChanged(int);

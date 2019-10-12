@@ -1,5 +1,5 @@
 // Copyright (c) 2014-2016 The Dash Developers
-// Copyright (c) 2016-2017 The PIVX developers
+// Copyright (c) 2016-2018 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -37,7 +37,7 @@ class MasternodeList : public QWidget
     Q_OBJECT
 
 public:
-    explicit MasternodeList(QWidget* parent = 0);
+    explicit MasternodeList(QWidget* parent = nullptr);
     ~MasternodeList();
 
     void setClientModel(ClientModel* clientModel);

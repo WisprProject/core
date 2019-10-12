@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
-// Copyright (c) 2015-2018 The PIVX developers
+// Copyright (c) 2015-2019 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -8,13 +8,13 @@
 #define WISPR_SERIALIZE_H
 
 #include <algorithm>
-#include <assert.h>
+#include <cassert>
 #include <ios>
 #include <limits>
 #include <map>
 #include <set>
-#include <stdint.h>
-#include <string.h>
+#include <cstdint>
+#include <cstring>
 #include <string>
 #include <utility>
 #include <vector>
@@ -43,35 +43,6 @@ template <typename T>
 inline T* NCONST_PTR(const T* val)
 {
     return const_cast<T*>(val);
-}
-
-/**
- * Get begin pointer of vector (non-const version).
- * @note These functions avoid the undefined case of indexing into an empty
- * vector, as well as that of indexing after the end of the vector.
- */
-template <class T, class TAl>
-inline T* begin_ptr(std::vector<T, TAl>& v)
-{
-    return v.empty() ? NULL : &v[0];
-}
-/** Get begin pointer of vector (const version) */
-template <class T, class TAl>
-inline const T* begin_ptr(const std::vector<T, TAl>& v)
-{
-    return v.empty() ? NULL : &v[0];
-}
-/** Get end pointer of vector (non-const version) */
-template <class T, class TAl>
-inline T* end_ptr(std::vector<T, TAl>& v)
-{
-    return v.empty() ? NULL : (&v[0] + v.size());
-}
-/** Get end pointer of vector (const version) */
-template <class T, class TAl>
-inline const T* end_ptr(const std::vector<T, TAl>& v)
-{
-    return v.empty() ? NULL : (&v[0] + v.size());
 }
 
 /////////////////////////////////////////////////////////////////
@@ -483,8 +454,8 @@ public:
     template <class T, class TAl>
     explicit CFlatData(std::vector<T, TAl>& v)
     {
-        pbegin = (char*)begin_ptr(v);
-        pend = (char*)end_ptr(v);
+        pbegin = (char*)v.data();
+        pend = (char*)(v.data() + v.size());
     }
     char* begin() { return pbegin; }
     const char* begin() const { return pbegin; }
@@ -582,7 +553,7 @@ CVarInt<I> WrapVarInt(I& n)
  */
 
 /**
- *  string
+ *  std::string
  */
 template <typename C>
 unsigned int GetSerializeSize(const std::basic_string<C>& str, int, int = 0);

@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2013 The Bitcoin developers
-// Copyright (c) 2017 The PIVX developers
+// Copyright (c) 2017-2018 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -27,7 +27,7 @@
 #include <qrencode.h>
 #endif
 
-QRImageWidget::QRImageWidget(QWidget* parent) : QLabel(parent), contextMenu(0)
+QRImageWidget::QRImageWidget(QWidget* parent) : QLabel(parent), contextMenu(nullptr)
 {
     contextMenu = new QMenu();
     QAction* saveImageAction = new QAction(tr("&Save Image..."), this);
@@ -49,10 +49,10 @@ void QRImageWidget::mousePressEvent(QMouseEvent* event)
 {
     if (event->button() == Qt::LeftButton && pixmap()) {
         event->accept();
-        QMimeData* mimeData = new QMimeData;
+        auto* mimeData = new QMimeData;
         mimeData->setImageData(exportImage());
 
-        QDrag* drag = new QDrag(this);
+        auto* drag = new QDrag(this);
         drag->setMimeData(mimeData);
         drag->exec();
     } else {
@@ -64,7 +64,7 @@ void QRImageWidget::saveImage()
 {
     if (!pixmap())
         return;
-    QString fn = GUIUtil::getSaveFileName(this, tr("Save QR Code"), QString(), tr("PNG Image (*.png)"), NULL);
+    QString fn = GUIUtil::getSaveFileName(this, tr("Save QR Code"), QString(), tr("PNG Image (*.png)"), nullptr);
     if (!fn.isEmpty()) {
         exportImage().save(fn);
     }
@@ -86,7 +86,7 @@ void QRImageWidget::contextMenuEvent(QContextMenuEvent* event)
 
 ReceiveRequestDialog::ReceiveRequestDialog(QWidget* parent) : QDialog(parent, Qt::WindowSystemMenuHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint),
                                                               ui(new Ui::ReceiveRequestDialog),
-                                                              model(0)
+                                                              model(nullptr)
 {
     ui->setupUi(this);
 

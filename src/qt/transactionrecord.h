@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
 // Copyright (c) 2014-2016 The Dash developers
-// Copyright (c) 2016-2017 The PIVX developers
+// Copyright (c) 2016-2018 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -12,6 +12,7 @@
 
 #include <QList>
 #include <QString>
+#include <utility>
 
 class CWallet;
 class CWalletTx;
@@ -104,12 +105,12 @@ public:
     {
     }
 
-    TransactionRecord(uint256 hash, qint64 time) : hash(hash), time(time), type(Other), address(""), debit(0),
+    TransactionRecord(uint256 hash, qint64 time) : hash(std::move(hash)), time(time), type(Other), address(""), debit(0),
                                                    credit(0), idx(0)
     {
     }
 
-    TransactionRecord(uint256 hash, qint64 time, Type type, const std::string& address, const CAmount& debit, const CAmount& credit) : hash(hash), time(time), type(type), address(address), debit(debit), credit(credit),
+    TransactionRecord(uint256 hash, qint64 time, Type type, std::string  address, const CAmount& debit, const CAmount& credit) : hash(std::move(hash)), time(time), type(type), address(std::move(address)), debit(debit), credit(credit),
                                                                                                                                        idx(0)
     {
     }

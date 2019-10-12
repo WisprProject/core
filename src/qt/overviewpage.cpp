@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2018 The PIVX developers
+// Copyright (c) 2015-2019 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -13,7 +13,6 @@
 #include "guiutil.h"
 #include "init.h"
 #include "obfuscation.h"
-#include "obfuscationconfig.h"
 #include "optionsmodel.h"
 #include "transactionfilterproxy.h"
 #include "transactionrecord.h"
@@ -103,8 +102,8 @@ public:
 
 OverviewPage::OverviewPage(QWidget* parent) : QWidget(parent),
                                               ui(new Ui::OverviewPage),
-                                              clientModel(0),
-                                              walletModel(0),
+                                              clientModel(nullptr),
+                                              walletModel(nullptr),
                                               currentBalance(-1),
                                               currentUnconfirmedBalance(-1),
                                               currentImmatureBalance(-1),
@@ -115,7 +114,7 @@ OverviewPage::OverviewPage(QWidget* parent) : QWidget(parent),
                                               currentWatchUnconfBalance(-1),
                                               currentWatchImmatureBalance(-1),
                                               txdelegate(new TxViewDelegate()),
-                                              filter(0)
+                                              filter(nullptr)
 {
     nDisplayUnit = 0; // just make sure it's not unitialized
     ui->setupUi(this);
@@ -242,13 +241,8 @@ void OverviewPage::setBalance(const CAmount& balance, const CAmount& unconfirmed
 
     // Adjust bubble-help according to AutoMint settings
     QString automintHelp = tr("Current percentage of zWSP.\nIf AutoMint is enabled this percentage will settle around the configured AutoMint percentage (default = 10%).\n");
-    bool newProtocolStart = GetAdjustedTime() >= Params().NEW_PROTOCOLS_STARTTIME();
-    if(newProtocolStart){
-        bool fEnableZeromint = GetBoolArg("-enablezeromint", true);
-    }else{
-        bool fEnableZeromint = false;
-    }
-//    bool fEnableZeromint = GetBoolArg("-enablezeromint", false);
+//    bool fEnableZeromint = GetBoolArg("-enablezeromint", true);
+    bool fEnableZeromint = false;
     int nZeromintPercentage = GetArg("-zeromintpercentage", 10);
     if (fEnableZeromint) {
         automintHelp += tr("AutoMint is currently enabled and set to ") + QString::number(nZeromintPercentage) + "%.\n";
@@ -419,5 +413,6 @@ void OverviewPage::showOutOfSyncWarning(bool fShow)
 
 void OverviewPage::hideOrphans(bool fHide)
 {
-    filter->setHideOrphans(fHide);
+    if (filter)
+        filter->setHideOrphans(fHide);
 }

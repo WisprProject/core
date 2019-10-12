@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
-// Copyright (c) 2017 The PIVX developers
+// Copyright (c) 2017-2018 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -11,7 +11,7 @@
 #define BITCOIN_UTILSTRENCODINGS_H
 
 #include "allocators.h"
-#include <stdint.h>
+#include <cstdint>
 #include <string>
 #include <vector>
 
@@ -22,7 +22,7 @@
 #define ARRAYLEN(array) (sizeof(array) / sizeof((array)[0]))
 
 /** This is needed because the foreach macro can't get over the comma in pair<t1, t2> */
-#define PAIRTYPE(t1, t2) std::pair<t1, t2>
+//#define PAIRTYPE(t1, t2) std::pair<t1, t2>
 
 /** Used by SanitizeString() */
 enum SafeChars
@@ -40,17 +40,27 @@ enum SafeChars
 * @return           A new string without unsafe chars
 */
 std::string SanitizeString(const std::string& str, int rule = SAFE_CHARS_DEFAULT);
+
+/**
+* Check URL format for conformance for validity to a defined pattern
+* @param[in] strURL   The string to be processed for validity
+* @param[in] stdErr   A string that will be loaded with any validation error message
+* @param[in] maxSize  An unsigned int, defaulted to 64, to restrict the length
+* @return             A bool, true if valid, false if not (reason in stdErr)
+*/
+bool validateURL(const std::string& strURL, std::string& strErr, unsigned int maxSize = 64);
+
 std::vector<unsigned char> ParseHex(const char* psz);
 std::vector<unsigned char> ParseHex(const std::string& str);
 signed char HexDigit(char c);
 bool IsHex(const std::string& str);
-std::vector<unsigned char> DecodeBase64(const char* p, bool* pfInvalid = NULL);
+std::vector<unsigned char> DecodeBase64(const char* p, bool* pfInvalid = nullptr);
 std::string DecodeBase64(const std::string& str);
 std::string EncodeBase64(const unsigned char* pch, size_t len);
 std::string EncodeBase64(const std::string& str);
 SecureString DecodeBase64Secure(const SecureString& input);
 SecureString EncodeBase64Secure(const SecureString& input);
-std::vector<unsigned char> DecodeBase32(const char* p, bool* pfInvalid = NULL);
+std::vector<unsigned char> DecodeBase32(const char* p, bool* pfInvalid = nullptr);
 std::string DecodeBase32(const std::string& str);
 std::string EncodeBase32(const unsigned char* pch, size_t len);
 std::string EncodeBase32(const std::string& str);
@@ -107,7 +117,7 @@ inline std::string HexStr(const T& vch, bool fSpaces = false)
 }
 
 /** Reverse the endianess of a string */
-inline std::string ReverseEndianString(std::string in)
+inline std::string ReverseEndianString(const std::string& in)
 {
     std::string out = "";
     unsigned int s = in.size();
@@ -122,7 +132,7 @@ inline std::string ReverseEndianString(std::string in)
  * Format a paragraph of text to a fixed width, adding spaces for
  * indentation to any added line.
  */
-std::string FormatParagraph(const std::string in, size_t width = 79, size_t indent = 0);
+std::string FormatParagraph(const std::string& in, size_t width = 79, size_t indent = 0);
 
 /**
  * Timing-attack-resistant comparison.

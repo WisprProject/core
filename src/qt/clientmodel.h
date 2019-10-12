@@ -7,6 +7,7 @@
 #ifndef BITCOIN_QT_CLIENTMODEL_H
 #define BITCOIN_QT_CLIENTMODEL_H
 
+#include "uint256.h"
 #include <QObject>
 #include <QDateTime>
 
@@ -43,7 +44,7 @@ class ClientModel : public QObject
     Q_OBJECT
 
 public:
-    explicit ClientModel(OptionsModel* optionsModel, QObject* parent = 0);
+    explicit ClientModel(OptionsModel* optionsModel, QObject* parent = nullptr);
     ~ClientModel();
 
     OptionsModel* getOptionsModel();
@@ -62,6 +63,8 @@ public:
     double getVerificationProgress() const;
     QDateTime getLastBlockDate() const;
 
+    QString getLastBlockHash() const;
+
     //! Return true if core is doing initial block download
     bool inInitialBlockDownload() const;
     //! Return true if core is importing blocks
@@ -74,6 +77,7 @@ public:
     bool isReleaseVersion() const;
     QString clientName() const;
     QString formatClientStartupTime() const;
+    QString dataDir() const;
 
     bool getTorInfo(std::string& ip_port) const;
 

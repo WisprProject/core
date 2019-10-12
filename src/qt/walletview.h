@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
-// Copyright (c) 2017-2018 The PIVX developers
+// Copyright (c) 2017-2019 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -11,13 +11,14 @@
 #include "masternodelist.h"
 
 #include <QStackedWidget>
-#include <ui_interface.h>
+#include <guiinterface.h>
 
 class BitcoinGUI;
 class ClientModel;
 class OverviewPage;
 class ReceiveCoinsDialog;
 class PrivacyDialog;
+class GovernancePage;
 class SendCoinsDialog;
 class SendCoinsRecipient;
 class TransactionView;
@@ -67,6 +68,7 @@ private:
     QWidget* transactionsPage;
     ReceiveCoinsDialog* receiveCoinsPage;
     PrivacyDialog* privacyPage;
+    GovernancePage* governancePage;
     SendCoinsDialog* sendCoinsPage;
     BlockExplorer* explorerWindow;
     MasternodeList* masternodeListPage;
@@ -81,6 +83,8 @@ public slots:
     void gotoOverviewPage();
     /** Switch to history (transactions) page */
     void gotoHistoryPage();
+    /** Switch to governance page */
+    void gotoGovernancePage();
     /** Switch to masternode page */
     void gotoMasternodePage();
     /** Switch to explorer page */
@@ -90,12 +94,12 @@ public slots:
     /** Switch to receive coins page */
     void gotoReceiveCoinsPage();
     /** Switch to send coins page */
-    void gotoSendCoinsPage(QString addr = "");
+    void gotoSendCoinsPage(const QString& addr = "");
 
     /** Show Sign/Verify Message dialog and switch to sign message tab */
-    void gotoSignMessageTab(QString addr = "");
+    void gotoSignMessageTab(const QString& addr = "");
     /** Show Sign/Verify Message dialog and switch to verify message tab */
-    void gotoVerifyMessageTab(QString addr = "");
+    void gotoVerifyMessageTab(const QString& addr = "");
     /** Show MultiSend Dialog */
     void gotoMultiSendDialog();
     /** Show a multisig tab **/
@@ -133,7 +137,7 @@ public slots:
     void showProgress(const QString& title, int nProgress);
 
     /** Update selected WSP amount from transactionview */
-    void trxAmount(QString amount);
+    void trxAmount(const QString& amount);
 
 signals:
     /** Signal that we want to show the main window */

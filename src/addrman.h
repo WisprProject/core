@@ -1,6 +1,6 @@
 // Copyright (c) 2012 Pieter Wuille
 // Copyright (c) 2012-2014 The Bitcoin developers
-// Copyright (c) 2017 The PIVX developers
+// Copyright (c) 2017-2018 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -16,23 +16,26 @@
 
 #include <map>
 #include <set>
-#include <stdint.h>
+#include <cstdint>
 #include <vector>
 
-/** 
- * Extended statistics about a CAddress 
+/**
+ * Extended statistics about a CAddress
  */
 class CAddrInfo : public CAddress
 {
+
+
+public:
+    //! last try whatsoever by us (memory only)
+    int64_t nLastTry;
+
 private:
     //! where knowledge about this address first came from
     CNetAddr source;
 
     //! last successful connection by us
     int64_t nLastSuccess;
-
-    //! last try whatsoever by us:
-    // int64_t CAddress::nLastTry
 
     //! connection attempts since last successful attempt
     int nAttempts;
@@ -164,17 +167,14 @@ public:
 //! the maximum number of nodes to return in a getaddr call
 #define ADDRMAN_GETADDR_MAX 2500
 
-/** 
- * Stochastical (IP) address manager 
+/**
+ * Stochastical (IP) address manager
  */
 class CAddrMan
 {
 private:
     //! critical section to protect the inner data structures
     mutable CCriticalSection cs;
-
-    //! secret key to randomize bucket select with
-    uint256 nKey;
 
     //! last used nId
     int nIdCount;
@@ -201,12 +201,15 @@ private:
     int vvNew[ADDRMAN_NEW_BUCKET_COUNT][ADDRMAN_BUCKET_SIZE];
 
 protected:
+    //! secret key to randomize bucket select with
+    uint256 nKey;
+
     //! Find an entry.
-    CAddrInfo* Find(const CNetAddr& addr, int* pnId = NULL);
+    CAddrInfo* Find(const CNetAddr& addr, int* pnId = nullptr);
 
     //! find an entry, creating it if necessary.
     //! nTime and nServices of the found node are updated, if necessary.
-    CAddrInfo* Create(const CAddress& addr, const CNetAddr& addrSource, int* pnId = NULL);
+    CAddrInfo* Create(const CAddress& addr, const CNetAddr& addrSource, int* pnId = nullptr);
 
     //! Swap two elements in vRandom.
     void SwapRandom(unsigned int nRandomPos1, unsigned int nRandomPos2);
@@ -229,9 +232,11 @@ protected:
     //! Mark an entry as attempted to connect.
     void Attempt_(const CService& addr, int64_t nTime);
 
-    //! Select an address to connect to.
-    //! nUnkBias determines how much to favor new addresses over tried ones (min=0, max=100)
-    CAddress Select_();
+    //! Select an address to connect to, if newOnly is set to true, only the new table is selected from.
+    CAddrInfo Select_(bool newOnly);
+
+    //! Wraps GetRandInt to allow tests to override RandomInt and make it determinismistic.
+    virtual int RandomInt(int nMax);
 
 #ifdef DEBUG_ADDRMAN
     //! Perform consistency check. Returns an error code or zero.
@@ -290,9 +295,9 @@ public:
         s << nUBuckets;
         std::map<int, int> mapUnkIds;
         int nIds = 0;
-        for (std::map<int, CAddrInfo>::const_iterator it = mapInfo.begin(); it != mapInfo.end(); it++) {
-            mapUnkIds[(*it).first] = nIds;
-            const CAddrInfo& info = (*it).second;
+        for (const auto & it : mapInfo) {
+            mapUnkIds[it.first] = nIds;
+            const CAddrInfo& info = it.second;
             if (info.nRefCount) {
                 assert(nIds != nNew); // this means nNew was wrong, oh ow
                 s << info;
@@ -300,24 +305,24 @@ public:
             }
         }
         nIds = 0;
-        for (std::map<int, CAddrInfo>::const_iterator it = mapInfo.begin(); it != mapInfo.end(); it++) {
-            const CAddrInfo& info = (*it).second;
+        for (const auto & it : mapInfo) {
+            const CAddrInfo& info = it.second;
             if (info.fInTried) {
                 assert(nIds != nTried); // this means nTried was wrong, oh ow
                 s << info;
                 nIds++;
             }
         }
-        for (int bucket = 0; bucket < ADDRMAN_NEW_BUCKET_COUNT; bucket++) {
+        for (const auto & bucket : vvNew) {
             int nSize = 0;
-            for (int i = 0; i < ADDRMAN_BUCKET_SIZE; i++) {
-                if (vvNew[bucket][i] != -1)
+            for (int i : bucket) {
+                if (i != -1)
                     nSize++;
             }
             s << nSize;
-            for (int i = 0; i < ADDRMAN_BUCKET_SIZE; i++) {
-                if (vvNew[bucket][i] != -1) {
-                    int nIndex = mapUnkIds[vvNew[bucket][i]];
+            for (int i : bucket) {
+                if (i != -1) {
+                    int nIndex = mapUnkIds[i];
                     s << nIndex;
                 }
             }
@@ -431,14 +436,14 @@ public:
     {
         std::vector<int>().swap(vRandom);
         nKey = GetRandHash();
-        for (size_t bucket = 0; bucket < ADDRMAN_NEW_BUCKET_COUNT; bucket++) {
-            for (size_t entry = 0; entry < ADDRMAN_BUCKET_SIZE; entry++) {
-                vvNew[bucket][entry] = -1;
+        for (auto & bucket : vvNew) {
+            for (int & entry : bucket) {
+                entry = -1;
             }
         }
-        for (size_t bucket = 0; bucket < ADDRMAN_TRIED_BUCKET_COUNT; bucket++) {
-            for (size_t entry = 0; entry < ADDRMAN_BUCKET_SIZE; entry++) {
-                vvTried[bucket][entry] = -1;
+        for (auto & bucket : vvTried) {
+            for (int & entry : bucket) {
+                entry = -1;
             }
         }
 
@@ -498,8 +503,8 @@ public:
         {
             LOCK(cs);
             Check();
-            for (std::vector<CAddress>::const_iterator it = vAddr.begin(); it != vAddr.end(); it++)
-                nAdd += Add_(*it, source, nTimePenalty) ? 1 : 0;
+            for (const auto & it : vAddr)
+                nAdd += Add_(it, source, nTimePenalty) ? 1 : 0;
             Check();
         }
         if (nAdd)
@@ -533,13 +538,13 @@ public:
      * Choose an address to connect to.
      * nUnkBias determines how much "new" entries are favored over "tried" ones (0-100).
      */
-    CAddress Select()
+    CAddrInfo Select(bool newOnly = false)
     {
-        CAddress addrRet;
+        CAddrInfo addrRet;
         {
             LOCK(cs);
             Check();
-            addrRet = Select_();
+            addrRet = Select_(newOnly);
             Check();
         }
         return addrRet;

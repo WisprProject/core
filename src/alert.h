@@ -1,6 +1,6 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2013 The Bitcoin developers
-// Copyright (c) 2017 The PIVX developers
+// Copyright (c) 2017-2018 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -12,7 +12,7 @@
 
 #include <map>
 #include <set>
-#include <stdint.h>
+#include <cstdint>
 #include <string>
 
 class CAlert;
@@ -100,7 +100,7 @@ public:
     uint256 GetHash() const;
     bool IsInEffect() const;
     bool Cancels(const CAlert& alert) const;
-    bool AppliesTo(int nVersion, std::string strSubVerIn) const;
+    bool AppliesTo(int nVersion, const std::string& strSubVerIn) const;
     bool AppliesToMe() const;
     bool RelayTo(CNode* pnode) const;
     bool CheckSignature() const;

@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2013 The Bitcoin developers
-// Copyright (c) 2017 The PIVX developers
+// Copyright (c) 2017-2018 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -17,7 +17,8 @@
 #include <QVariant>
 #ifdef USE_DBUS
 #include <QtDBus>
-#include <stdint.h>
+#include <utility>
+#include <cstdint>
 #endif
 // Include ApplicationServices.h after QtDbus to avoid redefinition of check().
 // This affects at least OSX 10.6. See /usr/include/AssertMacros.h for details.
@@ -34,14 +35,14 @@
 const int FREEDESKTOP_NOTIFICATION_ICON_SIZE = 128;
 #endif
 
-Notificator::Notificator(const QString& programName, QSystemTrayIcon* trayicon, QWidget* parent) : QObject(parent),
+Notificator::Notificator(QString  programName, QSystemTrayIcon* trayicon, QWidget* parent) : QObject(parent),
                                                                                                    parent(parent),
-                                                                                                   programName(programName),
+                                                                                                   programName(std::move(programName)),
                                                                                                    mode(None),
                                                                                                    trayIcon(trayicon)
 #ifdef USE_DBUS
                                                                                                    ,
-                                                                                                   interface(0)
+                                                                                                   interface(nullptr)
 #endif
 {
     if (trayicon && trayicon->supportsMessages()) {
@@ -110,7 +111,7 @@ FreedesktopImage::FreedesktopImage(const QImage& img) : width(img.width()),
 {
     // Convert 00xAARRGGBB to RGBA bytewise (endian-independent) format
     QImage tmp = img.convertToFormat(QImage::Format_ARGB32);
-    const uint32_t* data = reinterpret_cast<const uint32_t*>(tmp.bits());
+    const auto* data = reinterpret_cast<const uint32_t*>(tmp.bits());
 
     unsigned int num_pixels = width * height;
     image.resize(num_pixels * BYTES_PER_PIXEL);

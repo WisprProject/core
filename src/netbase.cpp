@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
-// Copyright (c) 2017 The PIVX developers
+// Copyright (c) 2017-2019 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -36,7 +36,6 @@
 #define MSG_NOSIGNAL 0
 #endif
 
-using namespace std;
 
 // Settings
 static proxyType proxyInfo[NET_MAX];
@@ -138,7 +137,7 @@ bool static LookupIntern(const char* pszName, std::vector<CNetAddr>& vIP, unsign
     aiHint.ai_flags = fAllowLookup ? AI_ADDRCONFIG : AI_NUMERICHOST;
 #endif
 
-    struct addrinfo* aiRes = NULL;
+    struct addrinfo* aiRes = nullptr;
 #ifdef HAVE_GETADDRINFO_A
     struct gaicb gcb, *query = &gcb;
     memset(query, 0, sizeof(struct gaicb));
@@ -162,13 +161,13 @@ bool static LookupIntern(const char* pszName, std::vector<CNetAddr>& vIP, unsign
             aiRes = query->ar_result;
     } while (nErr == EAI_INPROGRESS);
 #else
-    int nErr = getaddrinfo(pszName, NULL, &aiHint, &aiRes);
+    int nErr = getaddrinfo(pszName, nullptr, &aiHint, &aiRes);
 #endif
     if (nErr)
         return false;
 
     struct addrinfo* aiTrav = aiRes;
-    while (aiTrav != NULL && (nMaxSolutions == 0 || vIP.size() < nMaxSolutions)) {
+    while (aiTrav != nullptr && (nMaxSolutions == 0 || vIP.size() < nMaxSolutions)) {
         if (aiTrav->ai_family == AF_INET) {
             assert(aiTrav->ai_addrlen >= sizeof(sockaddr_in));
             vIP.push_back(CNetAddr(((struct sockaddr_in*)(aiTrav->ai_addr))->sin_addr));
@@ -275,7 +274,7 @@ bool static InterruptibleRecv(char* data, size_t len, int timeout, SOCKET& hSock
                 fd_set fdset;
                 FD_ZERO(&fdset);
                 FD_SET(hSocket, &fdset);
-                int nRet = select(hSocket + 1, &fdset, NULL, NULL, &tval);
+                int nRet = select(hSocket + 1, &fdset, nullptr, nullptr, &tval);
                 if (nRet == SOCKET_ERROR) {
                     return false;
                 }
@@ -296,7 +295,7 @@ struct ProxyCredentials
 };
 
 /** Connect using SOCKS5 (as described in RFC1928) */
-bool static Socks5(string strDest, int port, const ProxyCredentials *auth, SOCKET& hSocket)
+bool static Socks5(std::string strDest, int port, const ProxyCredentials *auth, SOCKET& hSocket)
 {
     LogPrintf("SOCKS5 connecting %s\n", strDest);
     if (strDest.size() > 255) {
@@ -314,7 +313,7 @@ bool static Socks5(string strDest, int port, const ProxyCredentials *auth, SOCKE
         vSocks5Init.push_back(0x01); // # METHODS
         vSocks5Init.push_back(0x00); // X'00' NO AUTHENTICATION REQUIRED
     }
-    ssize_t ret = send(hSocket, (const char*)begin_ptr(vSocks5Init), vSocks5Init.size(), MSG_NOSIGNAL);
+    ssize_t ret = send(hSocket, (const char*)vSocks5Init.data(), vSocks5Init.size(), MSG_NOSIGNAL);
     if (ret != (ssize_t)vSocks5Init.size()) {
         CloseSocket(hSocket);
         return error("Error sending to proxy");
@@ -338,7 +337,7 @@ bool static Socks5(string strDest, int port, const ProxyCredentials *auth, SOCKE
         vAuth.insert(vAuth.end(), auth->username.begin(), auth->username.end());
         vAuth.push_back(auth->password.size());
         vAuth.insert(vAuth.end(), auth->password.begin(), auth->password.end());
-        ret = send(hSocket, (const char*)begin_ptr(vAuth), vAuth.size(), MSG_NOSIGNAL);
+        ret = send(hSocket, (const char*)vAuth.data(), vAuth.size(), MSG_NOSIGNAL);
         if (ret != (ssize_t)vAuth.size()) {
             CloseSocket(hSocket);
             return error("Error sending authentication to proxy");
@@ -368,7 +367,7 @@ bool static Socks5(string strDest, int port, const ProxyCredentials *auth, SOCKE
     vSocks5.insert(vSocks5.end(), strDest.begin(), strDest.end());
     vSocks5.push_back((port >> 8) & 0xFF);
     vSocks5.push_back((port >> 0) & 0xFF);
-    ret = send(hSocket, (const char*)begin_ptr(vSocks5), vSocks5.size(), MSG_NOSIGNAL);
+    ret = send(hSocket, (const char*)vSocks5.data(), vSocks5.size(), MSG_NOSIGNAL);
     if (ret != (ssize_t)vSocks5.size()) {
         CloseSocket(hSocket);
         return error("Error sending to proxy");
@@ -476,7 +475,7 @@ bool static ConnectSocketDirectly(const CService& addrConnect, SOCKET& hSocketRe
             fd_set fdset;
             FD_ZERO(&fdset);
             FD_SET(hSocket, &fdset);
-            int nRet = select(hSocket + 1, NULL, &fdset, NULL, &timeout);
+            int nRet = select(hSocket + 1, nullptr, &fdset, nullptr, &timeout);
             if (nRet == 0) {
                 LogPrint("net", "connection to %s timeout\n", addrConnect.ToString());
                 CloseSocket(hSocket);
@@ -567,16 +566,16 @@ bool HaveNameProxy()
 bool IsProxy(const CNetAddr& addr)
 {
     LOCK(cs_proxyInfos);
-    for (int i = 0; i < NET_MAX; i++) {
-        if (addr == (CNetAddr)proxyInfo[i].proxy)
+    for (auto & i : proxyInfo) {
+        if (addr == (CNetAddr)i.proxy)
             return true;
     }
     return false;
 }
 
-static bool ConnectThroughProxy(const proxyType &proxy, const std::string strDest, int port, SOCKET& hSocketRet, int nTimeout, bool *outProxyConnectionFailed)
+static bool ConnectThroughProxy(const proxyType &proxy, const std::string& strDest, int port, SOCKET& hSocketRet, int nTimeout, bool *outProxyConnectionFailed)
 {
-    SOCKET hSocket = INVALID_SOCKET;
+    auto hSocket = INVALID_SOCKET;
     // first connect to proxy server
     if (!ConnectSocketDirectly(proxy.proxy, hSocket, nTimeout)) {
         if (outProxyConnectionFailed)
@@ -591,7 +590,7 @@ static bool ConnectThroughProxy(const proxyType &proxy, const std::string strDes
         if (!Socks5(strDest, (unsigned short)port, &random_auth, hSocket))
             return false;
     } else {
-        if (!Socks5(strDest, (unsigned short)port, 0, hSocket))
+        if (!Socks5(strDest, (unsigned short)port, nullptr, hSocket))
             return false;
     }
 
@@ -613,13 +612,13 @@ bool ConnectSocket(const CService &addrDest, SOCKET& hSocketRet, int nTimeout, b
 
 bool ConnectSocketByName(CService& addr, SOCKET& hSocketRet, const char* pszDest, int portDefault, int nTimeout, bool* outProxyConnectionFailed)
 {
-    string strDest;
+    std::string strDest;
     int port = portDefault;
 
     if (outProxyConnectionFailed)
         *outProxyConnectionFailed = false;
 
-    SplitHostPort(string(pszDest), port, strDest);
+    SplitHostPort(std::string(pszDest), port, strDest);
 
     proxyType nameProxy;
     GetNameProxy(nameProxy);
@@ -883,7 +882,7 @@ std::string CNetAddr::ToStringIP() const
     socklen_t socklen = sizeof(sockaddr);
     if (serv.GetSockAddr((struct sockaddr*)&sockaddr, &socklen)) {
         char name[1025] = "";
-        if (!getnameinfo((const struct sockaddr*)&sockaddr, socklen, name, sizeof(name), NULL, 0, NI_NUMERICHOST))
+        if (!getnameinfo((const struct sockaddr*)&sockaddr, socklen, name, sizeof(name), nullptr, 0, NI_NUMERICHOST))
             return std::string(name);
     }
     if (IsIPv4())
@@ -1005,7 +1004,7 @@ static const int NET_UNKNOWN = NET_MAX + 0;
 static const int NET_TEREDO = NET_MAX + 1;
 int static GetExtNetwork(const CNetAddr* addr)
 {
-    if (addr == NULL)
+    if (addr == nullptr)
         return NET_UNKNOWN;
     if (addr->IsRFC4380())
         return NET_TEREDO;
@@ -1193,7 +1192,7 @@ bool CService::GetSockAddr(struct sockaddr* paddr, socklen_t* addrlen) const
         if (*addrlen < (socklen_t)sizeof(struct sockaddr_in))
             return false;
         *addrlen = sizeof(struct sockaddr_in);
-        struct sockaddr_in* paddrin = (struct sockaddr_in*)paddr;
+        auto* paddrin = (struct sockaddr_in*)paddr;
         memset(paddrin, 0, *addrlen);
         if (!GetInAddr(&paddrin->sin_addr))
             return false;
@@ -1205,7 +1204,7 @@ bool CService::GetSockAddr(struct sockaddr* paddr, socklen_t* addrlen) const
         if (*addrlen < (socklen_t)sizeof(struct sockaddr_in6))
             return false;
         *addrlen = sizeof(struct sockaddr_in6);
-        struct sockaddr_in6* paddrin6 = (struct sockaddr_in6*)paddr;
+        auto* paddrin6 = (struct sockaddr_in6*)paddr;
         memset(paddrin6, 0, *addrlen);
         if (!GetIn6Addr(&paddrin6->sin6_addr))
             return false;
@@ -1402,8 +1401,8 @@ std::string NetworkErrorString(int err)
     char buf[256];
     buf[0] = 0;
     if (FormatMessageA(FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS | FORMAT_MESSAGE_MAX_WIDTH_MASK,
-            NULL, err, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-            buf, sizeof(buf), NULL)) {
+                       nullptr, err, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+            buf, sizeof(buf), nullptr)) {
         return strprintf("%s (%d)", buf, err);
     } else {
         return strprintf("Unknown error (%d)", err);

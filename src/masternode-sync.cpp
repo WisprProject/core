@@ -1,5 +1,5 @@
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The PIVX developers
+// Copyright (c) 2015-2019 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -49,7 +49,7 @@ bool CMasternodeSync::IsBlockchainSynced()
     if (!lockMain) return false;
 
     CBlockIndex* pindex = chainActive.Tip();
-    if (pindex == NULL) return false;
+    if (pindex == nullptr) return false;
 
 
     if (pindex->nTime + 60 * 60 < GetTime())
@@ -83,7 +83,7 @@ void CMasternodeSync::Reset()
     nAssetSyncStarted = GetTime();
 }
 
-void CMasternodeSync::AddedMasternodeList(uint256 hash)
+void CMasternodeSync::AddedMasternodeList(const uint256& hash)
 {
     if (mnodeman.mapSeenMasternodeBroadcast.count(hash)) {
         if (mapSeenSyncMNB[hash] < MASTERNODE_SYNC_THRESHOLD) {
@@ -92,11 +92,11 @@ void CMasternodeSync::AddedMasternodeList(uint256 hash)
         }
     } else {
         lastMasternodeList = GetTime();
-        mapSeenSyncMNB.insert(make_pair(hash, 1));
+        mapSeenSyncMNB.insert(std::make_pair(hash, 1));
     }
 }
 
-void CMasternodeSync::AddedMasternodeWinner(uint256 hash)
+void CMasternodeSync::AddedMasternodeWinner(const uint256& hash)
 {
     if (masternodePayments.mapMasternodePayeeVotes.count(hash)) {
         if (mapSeenSyncMNW[hash] < MASTERNODE_SYNC_THRESHOLD) {
@@ -105,11 +105,11 @@ void CMasternodeSync::AddedMasternodeWinner(uint256 hash)
         }
     } else {
         lastMasternodeWinner = GetTime();
-        mapSeenSyncMNW.insert(make_pair(hash, 1));
+        mapSeenSyncMNW.insert(std::make_pair(hash, 1));
     }
 }
 
-void CMasternodeSync::AddedBudgetItem(uint256 hash)
+void CMasternodeSync::AddedBudgetItem(const uint256& hash)
 {
     if (budget.mapSeenMasternodeBudgetProposals.count(hash) || budget.mapSeenMasternodeBudgetVotes.count(hash) ||
         budget.mapSeenFinalizedBudgets.count(hash) || budget.mapSeenFinalizedBudgetVotes.count(hash)) {
@@ -119,7 +119,7 @@ void CMasternodeSync::AddedBudgetItem(uint256 hash)
         }
     } else {
         lastBudgetItem = GetTime();
-        mapSeenSyncBudget.insert(make_pair(hash, 1));
+        mapSeenSyncBudget.insert(std::make_pair(hash, 1));
     }
 }
 
@@ -222,7 +222,7 @@ void CMasternodeSync::ClearFulfilledRequest()
     TRY_LOCK(cs_vNodes, lockRecv);
     if (!lockRecv) return;
 
-    BOOST_FOREACH (CNode* pnode, vNodes) {
+    for (CNode* pnode : vNodes) {
         pnode->ClearFulfilledRequest("getspork");
         pnode->ClearFulfilledRequest("mnsync");
         pnode->ClearFulfilledRequest("mnwsync");
@@ -269,7 +269,7 @@ void CMasternodeSync::Process()
     TRY_LOCK(cs_vNodes, lockRecv);
     if (!lockRecv) return;
 
-    BOOST_FOREACH (CNode* pnode, vNodes) {
+    for (CNode* pnode : vNodes) {
         if (Params().NetworkID() == CBaseChainParams::REGTEST) {
             if (RequestedMasternodeAttempt <= 2) {
                 pnode->PushMessage("getsporks"); //get current network sporks
@@ -359,7 +359,7 @@ void CMasternodeSync::Process()
                 if (RequestedMasternodeAttempt >= MASTERNODE_SYNC_THRESHOLD * 3) return;
 
                 CBlockIndex* pindexPrev = chainActive.Tip();
-                if (pindexPrev == NULL) return;
+                if (pindexPrev == nullptr) return;
 
                 int nMnCount = mnodeman.CountEnabled();
                 pnode->PushMessage("mnget", nMnCount); //sync payees

@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
 // Copyright (c) 2014-2016 The Dash developers
-// Copyright (c) 2017-2018 The PIVX developers
+// Copyright (c) 2017-2019 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -13,9 +13,10 @@
 
 #include "allocators.h" /* for SecureString */
 #include "swifttx.h"
-#include "wallet.h"
+#include "wallet/wallet.h"
 
 #include <map>
+#include <utility>
 #include <vector>
 
 #include <QObject>
@@ -42,7 +43,7 @@ class SendCoinsRecipient
 {
 public:
     explicit SendCoinsRecipient() : amount(0), nVersion(SendCoinsRecipient::CURRENT_VERSION) {}
-    explicit SendCoinsRecipient(const QString& addr, const QString& label, const CAmount& amount, const QString& message) : address(addr), label(label), amount(amount), message(message), nVersion(SendCoinsRecipient::CURRENT_VERSION) {}
+    explicit SendCoinsRecipient(const QString&  addr, const QString&  label, const CAmount& amount, const QString&  message) : address(std::move(addr)), label(std::move(label)), amount(amount), message(std::move(message)), nVersion(SendCoinsRecipient::CURRENT_VERSION) {}
 
     // If from an insecure payment request, this is used for storing
     // the addresses, e.g. address-A<br />address-B<br />address-C.
@@ -104,7 +105,7 @@ class WalletModel : public QObject
     Q_OBJECT
 
 public:
-    explicit WalletModel(CWallet* wallet, OptionsModel* optionsModel, QObject* parent = 0);
+    explicit WalletModel(CWallet* wallet, OptionsModel* optionsModel, QObject* parent = nullptr);
     ~WalletModel();
 
     enum StatusCode // Returned by sendCoins
@@ -133,7 +134,7 @@ public:
     TransactionTableModel* getTransactionTableModel();
     RecentRequestsTableModel* getRecentRequestsTableModel();
 
-    CAmount getBalance(const CCoinControl* coinControl = NULL) const;
+    CAmount getBalance(const CCoinControl* coinControl = nullptr) const;
     CAmount getUnconfirmedBalance() const;
     CAmount getImmatureBalance() const;
     CAmount getLockedBalance() const;
@@ -146,7 +147,7 @@ public:
     CAmount getWatchImmatureBalance() const;
     EncryptionStatus getEncryptionStatus() const;
     CKey generateNewKey() const; //for temporary paper wallet key generation
-    bool setAddressBook(const CTxDestination& address, const string& strName, const string& strPurpose);
+    bool setAddressBook(const CTxDestination& address, const std::string& strName, const std::string& strPurpose);
     void encryptKey(const CKey key, const std::string& pwd, const std::string& slt, std::vector<unsigned char>& crypted);
     void decryptKey(const std::vector<unsigned char>& crypted, const std::string& slt, const std::string& pwd, CKey& key);
     void emitBalanceChanged(); // Force update of UI-elements even when no values have changed
@@ -161,7 +162,7 @@ public:
     };
 
     // prepare transaction for getting txfee before sending coins
-    SendCoinsReturn prepareTransaction(WalletModelTransaction& transaction, const CCoinControl* coinControl = NULL);
+    SendCoinsReturn prepareTransaction(WalletModelTransaction& transaction, const CCoinControl* coinControl = nullptr);
 
     // Send coins to a list of recipients
     SendCoinsReturn sendCoins(WalletModelTransaction& transaction);
@@ -214,9 +215,9 @@ public:
     void unlockCoin(COutPoint& output);
     void listLockedCoins(std::vector<COutPoint>& vOutpts);
 
-    void listZerocoinMints(std::set<CMintMeta>& setMints, bool fUnusedOnly = false, bool fMaturedOnly = false, bool fUpdateStatus = false);
+    void listZerocoinMints(std::set<CMintMeta>& setMints, bool fUnusedOnly = false, bool fMaturedOnly = false, bool fUpdateStatus = false, bool fWrongSeed = false);
 
-    string GetUniqueWalletBackupName();
+    std::string GetUniqueWalletBackupName();
     void loadReceiveRequests(std::vector<std::string>& vReceiveRequests);
     bool saveReceiveRequest(const std::string& sAddress, const int64_t nId, const std::string& sRequest);
 
@@ -257,8 +258,8 @@ private:
 
 signals:
     // Signal that balance in wallet changed
-    void balanceChanged(const CAmount& balance, const CAmount& unconfirmedBalance, const CAmount& immatureBalance, 
-                        const CAmount& zerocoinBalance, const CAmount& unconfirmedZerocoinBalance, const CAmount& immatureZerocoinBalance, 
+    void balanceChanged(const CAmount& balance, const CAmount& unconfirmedBalance, const CAmount& immatureBalance,
+                        const CAmount& zerocoinBalance, const CAmount& unconfirmedZerocoinBalance, const CAmount& immatureZerocoinBalance,
                         const CAmount& watchOnlyBalance, const CAmount& watchUnconfBalance, const CAmount& watchImmatureBalance);
 
     // Encryption status of wallet changed
@@ -303,7 +304,7 @@ public slots:
     /* Current, immature or unconfirmed balance might have changed - emit 'balanceChanged' if so */
     void pollBalanceChanged();
     /* Update address book labels in the database */
-    void updateAddressBookLabels(const CTxDestination& address, const string& strName, const string& strPurpose);
+    void updateAddressBookLabels(const CTxDestination& address, const std::string& strName, const std::string& strPurpose);
 };
 
 #endif // BITCOIN_QT_WALLETMODEL_H

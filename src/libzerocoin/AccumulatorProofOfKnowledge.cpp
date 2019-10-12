@@ -9,7 +9,7 @@
  * @copyright  Copyright 2013 Ian Miers, Christina Garman and Matthew Green
  * @license    This project is released under the MIT license.
  **/
-// Copyright (c) 2017 The PIVX developers
+// Copyright (c) 2017-2018 The PIVX developers
 
 #include "AccumulatorProofOfKnowledge.h"
 #include "hash.h"
@@ -19,7 +19,7 @@ namespace libzerocoin {
 AccumulatorProofOfKnowledge::AccumulatorProofOfKnowledge(const AccumulatorAndProofParams* p): params(p) {}
 
 AccumulatorProofOfKnowledge::AccumulatorProofOfKnowledge(const AccumulatorAndProofParams* p,
-        const Commitment& commitmentToCoin, const AccumulatorWitness& witness): params(p) {
+        const Commitment& commitmentToCoin, const libzerocoin::AccumulatorWitness& witness): params(p) {
 
 	CBigNum sg = params->accumulatorPoKCommitmentGroup.g;
 	CBigNum sh = params->accumulatorPoKCommitmentGroup.h;
@@ -27,8 +27,8 @@ AccumulatorProofOfKnowledge::AccumulatorProofOfKnowledge(const AccumulatorAndPro
 	CBigNum g_n = params->accumulatorQRNCommitmentGroup.g;
 	CBigNum h_n = params->accumulatorQRNCommitmentGroup.h;
 
-	CBigNum e = commitmentToCoin.getContents();
-	CBigNum r = commitmentToCoin.getRandomness();
+	const CBigNum& e = commitmentToCoin.getContents();
+	const CBigNum& r = commitmentToCoin.getRandomness();
 
 	CBigNum aM_4 = params->accumulatorModulus/CBigNum((long)4);
     CBigNum aR = CBigNum(2).pow(params->k_prime + params->k_dprime);
@@ -105,7 +105,7 @@ AccumulatorProofOfKnowledge::AccumulatorProofOfKnowledge(const AccumulatorAndPro
 
 /** Verifies that a commitment c is accumulated in accumulator a
  */
-bool AccumulatorProofOfKnowledge:: Verify(const Accumulator& a, const CBigNum& valueOfCommitmentToCoin) const {
+bool AccumulatorProofOfKnowledge:: Verify(const libzerocoin::Accumulator& a, const CBigNum& valueOfCommitmentToCoin) const {
 	CBigNum sg = params->accumulatorPoKCommitmentGroup.g;
 	CBigNum sh = params->accumulatorPoKCommitmentGroup.h;
 

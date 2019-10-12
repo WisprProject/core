@@ -1,5 +1,5 @@
 // Copyright (c) 2015 The Bitcoin Core developers
-// Copyright (c) 2018 The PIVX developers
+// Copyright (c) 2018-2019 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -11,16 +11,18 @@
 #include "netbase.h"
 #include "rpc/protocol.h" // For HTTP status codes
 #include "sync.h"
-#include "ui_interface.h"
+#include "guiinterface.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <signal.h>
+#include <csignal>
 #include <future>
+#include <utility>
+#include <utility>
 
 #include <event2/event.h>
 #include <event2/http.h>
@@ -43,8 +45,8 @@ static const size_t MAX_HEADERS_SIZE = 8192;
 class HTTPWorkItem : public HTTPClosure
 {
 public:
-    HTTPWorkItem(HTTPRequest* req, const std::string &path, const HTTPRequestHandler& func):
-        req(req), path(path), func(func)
+    HTTPWorkItem(HTTPRequest* req, std::string path, const HTTPRequestHandler& func):
+        req(req), path(std::move(path)), func(func)
     {
     }
     void operator()()
@@ -164,9 +166,9 @@ public:
 
 struct HTTPPathHandler
 {
-    HTTPPathHandler() {}
+    HTTPPathHandler() = default;
     HTTPPathHandler(std::string prefix, bool exactMatch, HTTPRequestHandler handler):
-        prefix(prefix), exactMatch(exactMatch), handler(handler)
+        prefix(std::move(std::move(prefix))), exactMatch(exactMatch), handler(handler)
     {
     }
     std::string prefix;
@@ -177,13 +179,13 @@ struct HTTPPathHandler
 /** HTTP module state */
 
 //! libevent event loop
-static struct event_base* eventBase = 0;
+static struct event_base* eventBase = nullptr;
 //! HTTP server
-struct evhttp* eventHTTP = 0;
+struct evhttp* eventHTTP = nullptr;
 //! List of subnets to allow RPC connections from
 static std::vector<CSubNet> rpc_allow_subnets;
 //! Work queue for handling longer requests off the event loop thread
-static WorkQueue<HTTPClosure>* workQueue = 0;
+static WorkQueue<HTTPClosure>* workQueue = nullptr;
 //! Handlers for (sub)paths
 std::vector<HTTPPathHandler> pathHandlers;
 std::vector<evhttp_bound_socket *> boundSockets;
@@ -374,8 +376,8 @@ static void libevent_log_cb(int severity, const char *msg)
 
 bool InitHTTPServer()
 {
-    struct evhttp* http = 0;
-    struct event_base* base = 0;
+    struct evhttp* http = nullptr;
+    struct event_base* base = nullptr;
 
     if (!InitHTTPAllowList())
         return false;
@@ -497,11 +499,11 @@ void StopHTTPServer()
     }
     if (eventHTTP) {
         evhttp_free(eventHTTP);
-        eventHTTP = 0;
+        eventHTTP = nullptr;
     }
     if (eventBase) {
         event_base_free(eventBase);
-        eventBase = 0;
+        eventBase = nullptr;
     }
     LogPrint("http", "Stopped HTTP server\n");
 }
@@ -520,8 +522,8 @@ static void httpevent_callback_fn(evutil_socket_t, short, void* data)
         delete self;
 }
 
-HTTPEvent::HTTPEvent(struct event_base* base, bool deleteWhenTriggered, const std::function<void(void)>& handler):
-    deleteWhenTriggered(deleteWhenTriggered), handler(handler)
+HTTPEvent::HTTPEvent(struct event_base* base, bool deleteWhenTriggered, std::function<void(void)>  handler):
+    deleteWhenTriggered(deleteWhenTriggered), handler(std::move(handler))
 {
     ev = event_new(base, -1, 0, httpevent_callback_fn, this);
     assert(ev);
@@ -603,9 +605,9 @@ void HTTPRequest::WriteReply(int nStatus, const std::string& strReply)
     evbuffer_add(evb, strReply.data(), strReply.size());
     HTTPEvent* ev = new HTTPEvent(eventBase, true,
         std::bind(evhttp_send_reply, req, nStatus, (const char*)NULL, (struct evbuffer *)NULL));
-    ev->trigger(0);
+    ev->trigger(nullptr);
     replySent = true;
-    req = 0; // transferred back to main thread
+    req = nullptr; // transferred back to main thread
 }
 
 CService HTTPRequest::GetPeer()

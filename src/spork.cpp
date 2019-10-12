@@ -4,6 +4,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "spork.h"
+ #include <utility>
 #include "base58.h"
 #include "key.h"
 #include "main.h"
@@ -14,8 +15,6 @@
 #include "sporkdb.h"
 #include "util.h"
 
-using namespace std;
-using namespace boost;
 
 class CSporkMessage;
 class CSporkManager;
@@ -66,7 +65,7 @@ void ProcessSpork(CNode* pfrom, std::string& strCommand, CDataStream& vRecv)
         CSporkMessage spork;
         vRecv >> spork;
 
-        if (chainActive.Tip() == NULL) return;
+        if (chainActive.Tip() == nullptr) return;
 
         // Ignore spork messages about unknown/deleted sporks
         std::string strSpork = sporkManager.GetSporkNameByID(spork.nSporkID);
@@ -98,7 +97,7 @@ void ProcessSpork(CNode* pfrom, std::string& strCommand, CDataStream& vRecv)
         pSporkDB->WriteSpork(spork.nSporkID, spork);
     }
     if (strCommand == "getsporks") {
-        std::map<int, CSporkMessage>::iterator it = mapSporksActive.begin();
+        auto it = mapSporksActive.begin();
 
         while (it != mapSporksActive.end()) {
             pfrom->PushMessage("spork", it->second);
@@ -145,7 +144,7 @@ bool IsSporkActive(int nSporkID)
 
 void ReprocessBlocks(int nBlocks)
 {
-    std::map<uint256, int64_t>::iterator it = mapRejectedBlocks.begin();
+    auto it = mapRejectedBlocks.begin();
     while (it != mapRejectedBlocks.end()) {
         //use a window twice as large as is usual for the nBlocks we want to reset
         if ((*it).second > GetTime() - (nBlocks * 60 * 5)) {
@@ -249,7 +248,7 @@ bool CSporkManager::SetPrivKey(std::string strPrivKey)
     CSporkMessage msg;
 
     // Test signing successful, proceed
-    strMasterPrivKey = strPrivKey;
+    strMasterPrivKey = std::move(strPrivKey);
 
     Sign(msg);
 
@@ -261,7 +260,7 @@ bool CSporkManager::SetPrivKey(std::string strPrivKey)
     }
 }
 
-int CSporkManager::GetSporkIDByName(std::string strName)
+int CSporkManager::GetSporkIDByName(const std::string& strName)
 {
     if (strName == "SPORK_2_SWIFTTX") return SPORK_2_SWIFTTX;
     if (strName == "SPORK_3_SWIFTTX_BLOCK_FILTERING") return SPORK_3_SWIFTTX_BLOCK_FILTERING;

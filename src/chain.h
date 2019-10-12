@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
-// Copyright (c) 2015-2017 The PIVX developers
+// Copyright (c) 2015-2019 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -16,7 +16,6 @@
 
 #include <vector>
 
-#include <boost/foreach.hpp>
 
 struct CDiskBlockPos {
     int nFile;
@@ -184,9 +183,9 @@ public:
 
     void SetNull()
     {
-        phashBlock = NULL;
-        pprev = NULL;
-        pskip = NULL;
+        phashBlock = nullptr;
+        pprev = nullptr;
+        pskip = nullptr;
         nHeight = 0;
         nFile = 0;
         nDataPos = 0;
@@ -214,7 +213,7 @@ public:
         nAccumulatorCheckpoint = 0;
         // Start supply of each denomination with 0s
         for (auto& denom : libzerocoin::zerocoinDenomList) {
-            mapZerocoinSupply.insert(make_pair(denom, 0));
+            mapZerocoinSupply.insert(std::make_pair(denom, 0));
         }
         vMintDenominationsInBlock.clear();
     }
@@ -294,9 +293,29 @@ public:
     {
         int64_t nTotal = 0;
         for (auto& denom : libzerocoin::zerocoinDenomList) {
-            nTotal += libzerocoin::ZerocoinDenominationToAmount(denom) * mapZerocoinSupply.at(denom);
+            nTotal += GetZcMintsAmount(denom);
         }
         return nTotal;
+    }
+
+    /**
+     * Total of mints added to the specific accumulator.
+     * @param denom
+     * @return
+     */
+    int64_t GetZcMints(libzerocoin::CoinDenomination denom) const
+    {
+        return mapZerocoinSupply.at(denom);
+    }
+
+    /**
+     * Total available amount in an specific denom.
+     * @param denom
+     * @return
+     */
+    int64_t GetZcMintsAmount(libzerocoin::CoinDenomination denom) const
+    {
+        return libzerocoin::ZerocoinDenominationToAmount(denom) * GetZcMints(denom);
     }
 
     bool MintedDenomination(libzerocoin::CoinDenomination denom) const
@@ -436,9 +455,9 @@ public:
         hashNext = uint256();
     }
 
-    explicit CDiskBlockIndex(CBlockIndex* pindex) : CBlockIndex(*pindex)
+    explicit CDiskBlockIndex(const CBlockIndex* pindex) : CBlockIndex(*pindex)
     {
-        hashPrev = (pprev ? pprev->GetBlockHash() : uint256());
+        hashPrev = (pprev ? pprev->GetBlockHash() : uint256(0));
     }
 
     ADD_SERIALIZE_METHODS;
@@ -538,14 +557,14 @@ public:
     /** Returns the index entry for the genesis block of this chain, or NULL if none. */
     CBlockIndex* Genesis() const
     {
-        return vChain.size() > 0 ? vChain[0] : NULL;
+        return vChain.size() > 0 ? vChain[0] : nullptr;
     }
 
     /** Returns the index entry for the tip of this chain, or NULL if none. */
     CBlockIndex* Tip(bool fProofOfStake = false) const
     {
         if (vChain.size() < 1)
-            return NULL;
+            return nullptr;
 
         CBlockIndex* pindex = vChain[vChain.size() - 1];
 
@@ -560,7 +579,7 @@ public:
     CBlockIndex* operator[](int nHeight) const
     {
         if (nHeight < 0 || nHeight >= (int)vChain.size())
-            return NULL;
+            return nullptr;
         return vChain[nHeight];
     }
 
@@ -583,7 +602,7 @@ public:
         if (Contains(pindex))
             return (*this)[pindex->nHeight + 1];
         else
-            return NULL;
+            return nullptr;
     }
 
     /** Return the maximal height in the chain. Is equal to chain.Tip() ? chain.Tip()->nHeight : -1. */
@@ -596,7 +615,7 @@ public:
     void SetTip(CBlockIndex* pindex);
 
     /** Return a CBlockLocator that refers to a block in this chain (by default the tip). */
-    CBlockLocator GetLocator(const CBlockIndex* pindex = NULL) const;
+    CBlockLocator GetLocator(const CBlockIndex* pindex = nullptr) const;
 
     /** Find the last common block between this chain and a block index entry. */
     const CBlockIndex* FindFork(const CBlockIndex* pindex) const;

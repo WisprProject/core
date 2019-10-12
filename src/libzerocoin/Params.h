@@ -9,7 +9,7 @@
 * @copyright  Copyright 2013 Ian Miers, Christina Garman and Matthew Green
 * @license    This project is released under the MIT license.
 **/
-// Copyright (c) 2017 The PIVX developers
+// Copyright (c) 2017-2018 The PIVX developers
 
 #ifndef PARAMS_H_
 #define PARAMS_H_
@@ -171,7 +171,7 @@ public:
 	* compromised. The integer "N" must be a MINIMUM of 1024
 	* in length. 3072 bits is strongly recommended.
 	**/
-	ZerocoinParams(CBigNum accumulatorModulus,
+	ZerocoinParams(const CBigNum& accumulatorModulus,
 	       uint32_t securityLevel = ZEROCOIN_DEFAULT_SECURITYLEVEL);
 
 	bool initialized;
